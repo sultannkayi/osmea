@@ -59,6 +59,7 @@ import 'package:example/services/handlers/online_store_handlers/theme_handler/ge
 import 'package:example/services/handlers/online_store_handlers/theme_handler/list_themes_handler.dart';
 import 'package:example/services/handlers/online_store_handlers/theme_handler/publish_unpublished_theme_handler.dart';
 import 'package:example/services/handlers/online_store_handlers/theme_handler/update_theme_name_handler.dart';
+import 'package:example/services/handlers/products_handlers/collection_handlers/single_collection_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/receive_list_of_countries_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/retrieves_count_of_countries_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/creates_new_country_handler.dart';
@@ -191,6 +192,7 @@ enum ApiCategory {
   metafield,
   storeProperties,
   onlineStore,
+  products,
   tendertransaction,
   webhooks
 }
@@ -226,6 +228,8 @@ extension ApiCategoryExtension on ApiCategory {
         return 'Store Properties APIs';
       case ApiCategory.onlineStore:
         return 'Online Store APIs';
+      case ApiCategory.products:
+        return 'Products APIs';
       case ApiCategory.tendertransaction:
         return 'Tender Transaction APIs';
       case ApiCategory.webhooks:
@@ -330,7 +334,8 @@ class ApiServiceRegistry {
       category: ApiCategory.customer,
       subcategory: 'Customers',
       handler: CustomerUrlHandler(),
-    ),
+    )
+    ,
     ApiService(
       name: 'Customer Count',
       endpoint: '/customers/count',
@@ -1696,6 +1701,15 @@ class ApiServiceRegistry {
       handler: RetrieveListOfTenderTransactionsHandler(),
     ),
 
+    // 📋 GET SINGLE COLLECTION HANDLER  
+    ApiService(
+      name: 'Get Single Collection',
+      endpoint: '/collections/:collection_id',
+      category: ApiCategory.products,
+      subcategory: 'Collection',
+      handler: SingleCollectionHandler(),
+    ),
+
     // 🔔 Webhooks APIs
     ApiService(
       name: 'List Webhooks',
@@ -1795,6 +1809,8 @@ class ApiServiceRegistry {
         return 'Store Properties';
       case ApiCategory.onlineStore:
         return 'Online Store';
+      case ApiCategory.products:
+        return 'Products';
       case ApiCategory.tendertransaction:
         return 'Tender Transaction';
       case ApiCategory.webhooks:
