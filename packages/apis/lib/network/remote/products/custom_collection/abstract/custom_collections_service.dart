@@ -6,6 +6,7 @@ import 'package:apis/network/remote/products/custom_collection/freezed_model/req
 import 'package:apis/network/remote/products/custom_collection/freezed_model/request/create_custom_collection_uploaded_image_request.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/request/create_custom_collection_with_metafield_request.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/request/create_unpublished_custom_collection_request.dart';
+import 'package:apis/network/remote/products/custom_collection/freezed_model/request/hide_published_custom_collection_request.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/request/publish_hidden_custom_collection_request.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/request/update_custom_collection_alt_text_request.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/request/update_custom_collection_description_request.dart';
@@ -20,6 +21,7 @@ import 'package:apis/network/remote/products/custom_collection/freezed_model/res
 import 'package:apis/network/remote/products/custom_collection/freezed_model/response/create_custom_collection_uploaded_image_response.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/response/create_custom_collection_with_metafield_response.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/response/create_unpublished_custom_collection_response.dart';
+import 'package:apis/network/remote/products/custom_collection/freezed_model/response/hide_published_custom_collection_response.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/response/list_all_custom_collections_response.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/response/publish_hidden_custom_collection_response.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/response/specific_custom_collections_response.dart';
@@ -134,6 +136,13 @@ abstract class CustomCollectionsService {
     required String apiVersion,
     required int customCollectionId,
     required PublishHiddenCustomCollectionRequest model,
+  });
+
+  // 🫥 Hide Published Custom Collection
+  Future<HidePublishedCustomCollectionResponse> hidePublishedCustomCollection({
+    required String apiVersion,
+    required int customCollectionId,
+    required HidePublishedCustomCollectionRequest model,
   });
 
   // ➕ Add Collect to Collection by Product ID
