@@ -2,6 +2,7 @@ import 'package:apis/apis.dart';
 import 'package:apis/dio_config/api_dio_client.dart';
 import 'package:apis/network/remote/smart_collections/abstract/smart_collection_service.dart';
 import 'package:apis/network/remote/smart_collections/freezed_model/response/retrieves_list_of_smart_collections_response.dart';
+import 'package:apis/network/remote/smart_collections/freezed_model/response/retrieves_single_smart_collection_response.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/http.dart';
@@ -27,6 +28,15 @@ abstract class ApiSmartCollectionService implements SmartCollectionService {
     @Query('limit') int? limit,
     @Query('since_id') String? sinceId,
     @Query('fields') String? fields,
+  });
+
+  /// 📥 Retrieves a single smart collection by ID
+  @GET('/api/{api_version}/smart_collections/{id}.json')
+  @override
+  Future<RetrievesSingleSmartCollectionsResponse>
+      retrieveSingleSmartCollection({
+    @Path('api_version') required String apiVersion,
+    @Path('id') required String id,
   });
 
 

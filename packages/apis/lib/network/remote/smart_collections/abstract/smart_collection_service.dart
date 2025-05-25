@@ -1,4 +1,5 @@
 import 'package:apis/network/remote/smart_collections/freezed_model/response/retrieves_list_of_smart_collections_response.dart';
+import 'package:apis/network/remote/smart_collections/freezed_model/response/retrieves_single_smart_collection_response.dart';
 
 /// 🌐 SmartCollectionService
 abstract class SmartCollectionService {
@@ -8,5 +9,12 @@ abstract class SmartCollectionService {
     int? limit,
     String? sinceId,
     String? fields,
+  });
+
+  /// 📥 Retrieves a single smart collection by ID
+  Future<RetrievesSingleSmartCollectionsResponse>
+      retrieveSingleSmartCollection({
+    required String apiVersion,
+    required String id,
   });
 }
