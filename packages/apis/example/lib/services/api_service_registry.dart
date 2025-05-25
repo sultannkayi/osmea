@@ -1,5 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:example/services/handlers/products_handlers/collection_handlers/products_belonging_to_collection_handler.dart';
 import 'package:example/services/handlers/customers_handlers/customer/searches_for_customers_that_match_supplied_query_handler.dart';
 import 'package:example/services/handlers/online_store_handlers/article_handlers/create_article_base_image_handler.dart';
 import 'package:example/services/handlers/online_store_handlers/article_handlers/create_article_html_markup_handler.dart';
@@ -84,6 +85,7 @@ import 'package:example/services/handlers/products_handlers/product_handlers/cre
 import 'package:example/services/handlers/products_handlers/product_handlers/create_product_multi_variants_handler.dart';
 import 'package:example/services/handlers/products_handlers/product_handlers/create_product_base_image_handler.dart';
 import 'package:example/services/handlers/products_handlers/product_handlers/create_product_with_metafield_handler.dart';
+import 'package:example/services/handlers/products_handlers/collection_handlers/single_collection_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/receive_list_of_countries_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/retrieves_count_of_countries_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/creates_new_country_handler.dart';
@@ -207,6 +209,15 @@ import 'package:example/services/handlers/smart_collection_handlers/updates_exis
 import 'package:example/services/handlers/smart_collection_handlers/updates_ordering_type_of_products_smart_collection_handler.dart';
 import 'package:example/services/handlers/smart_collection_handlers/delete_smart_collection_handler.dart';
 import 'package:example/services/handlers/smart_collection_handlers/create_smart_collection_handler.dart';
+import 'package:example/services/handlers/products_handlers/collect_handlers/get_collects_handler.dart';
+import 'package:example/services/handlers/products_handlers/collect_handlers/get_single_collect_handler.dart';
+import 'package:example/services/handlers/products_handlers/collect_handlers/get_collects_count_handler.dart';
+import 'package:example/services/handlers/products_handlers/collect_handlers/create_collect_handler.dart';
+import 'package:example/services/handlers/products_handlers/collect_handlers/delete_collect_handler.dart';
+import 'package:example/services/handlers/products_handlers/collect_handlers/get_collects_by_collection_handler.dart';
+import 'package:example/services/handlers/products_handlers/collect_handlers/get_collects_by_product_handler.dart';
+import 'package:example/services/handlers/products_handlers/collect_handlers/get_collects_count_by_collection_handler.dart';
+import 'package:example/services/handlers/products_handlers/collect_handlers/get_collects_count_by_product_handler.dart';
 
 enum ApiCategory {
   access,
@@ -226,7 +237,7 @@ enum ApiCategory {
   storeProperties,
   tendertransaction,
   webhooks,
-  Products
+  Products,
 }
 
 extension ApiCategoryExtension on ApiCategory {
@@ -266,9 +277,8 @@ extension ApiCategoryExtension on ApiCategory {
         return 'Tender Transaction APIs';
       case ApiCategory.webhooks:
         return 'Webhooks APIs';
-        case ApiCategory.Products:
+      case ApiCategory.Products:
         return 'Products APIs';
-        
     }
   }
 }
@@ -369,7 +379,8 @@ class ApiServiceRegistry {
       category: ApiCategory.customer,
       subcategory: 'Customers',
       handler: CustomerUrlHandler(),
-    ),
+    )
+    ,
     ApiService(
       name: 'Customer Count',
       endpoint: '/customers/count',
@@ -1726,11 +1737,87 @@ class ApiServiceRegistry {
       handler: DeleteThemeHandler(),
     ),
 
+    // 📦 Products - Collect APIs
+    // List/Get Operations
+    ApiService(
+      name: 'List All Collects',
+      endpoint: '/collects',
+      category: ApiCategory.products,
+      subcategory: 'Collects',
+      handler: GetCollectsHandler(),
+    ),
+
+    ApiService(
+      name: 'List Collects by Collection',
+      endpoint: '/collects',
+      category: ApiCategory.products,
+      subcategory: 'Collects',
+      handler: GetCollectsByCollectionHandler(),
+    ),
+
+    ApiService(
+      name: 'List Collects by Product',
+      endpoint: '/collects',
+      category: ApiCategory.products,
+      subcategory: 'Collects',
+      handler: GetCollectsByProductHandler(),
+    ),
+    
+    ApiService(
+      name: 'Get Single Collect',
+      endpoint: '/collects/:id',
+      category: ApiCategory.products,
+      subcategory: 'Collects',
+      handler: GetSingleCollectHandler(),
+    ),
+
+    // Count Operations
+    ApiService(
+      name: 'Count All Collects',
+      endpoint: '/collects/count',
+      category: ApiCategory.products,
+      subcategory: 'Collects',
+      handler: GetCollectsCountHandler(),
+    ),
+
+    ApiService(
+      name: 'Count Collects by Collection',
+      endpoint: '/collects/count',
+      category: ApiCategory.products,
+      subcategory: 'Collects',
+      handler: GetCollectsCountByCollectionHandler(),
+    ),
+
+    ApiService(
+      name: 'Count Collects by Product',
+      endpoint: '/collects/count',
+      category: ApiCategory.products,
+      subcategory: 'Collects',
+      handler: GetCollectsCountByProductHandler(),
+    ),
+
+    // Management Operations
+    ApiService(
+      name: 'Create Collect',
+      endpoint: '/collects',
+      category: ApiCategory.products,
+      subcategory: 'Collects',
+      handler: CreateCollectHandler(),
+    ),
+
+    ApiService(
+      name: 'Delete Collect',
+      endpoint: '/collects/:id',
+      category: ApiCategory.products,
+      subcategory: 'Collects',
+      handler: DeleteCollectHandler(),
+    ),
+
     // 💰 Tender Transaction APIs
     ApiService(
       name: 'List Tender Transactions',
       endpoint: '/tender_transactions',
-      category: ApiCategory.tendertransaction, // Changed from billing
+      category: ApiCategory.tendertransaction,
       subcategory: 'Tender Transaction',
       handler: RetrieveListOfTenderTransactionsHandler(),
     ),
@@ -1958,6 +2045,23 @@ class ApiServiceRegistry {
       category: ApiCategory.products,
       subcategory: 'Product',
       handler: CreateProductWithMetafieldHandler(),
+    ),
+    // 📋 GET SINGLE COLLECTION HANDLER  
+    ApiService(
+      name: 'Get Single Collection',
+      endpoint: '/collections/:collection_id',
+      category: ApiCategory.products,
+      subcategory: 'Collection',
+      handler: SingleCollectionHandler(),
+    ),
+
+    // 📦 GET PRODUCTS BELONGING TO COLLECTION
+    ApiService(
+      name: 'Get Products Belonging to Collection',
+      endpoint: '/collections/:collection_id/products',
+      category: ApiCategory.products,
+      subcategory: 'Collection',
+      handler: ProductsBelongingToCollectionHandler(),
     ),
 
     // 🔔 Webhooks APIs
