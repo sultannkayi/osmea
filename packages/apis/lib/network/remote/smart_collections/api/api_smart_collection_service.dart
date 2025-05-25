@@ -72,6 +72,15 @@ abstract class ApiSmartCollectionService implements SmartCollectionService {
     @Body() required UpdateOrderingTypeOfProductsRequest request,
   });
 
+  /// ❌ Deletes a smart collection by ID
+  @override
+  @DELETE('/api/{api_version}/smart_collections/{id}.json')
+  Future<void> deleteSmartCollection({
+    @Path('api_version') required String apiVersion,
+    @Path('id') required String id,
+  });
+
+
   
 
 

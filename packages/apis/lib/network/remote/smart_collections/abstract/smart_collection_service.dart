@@ -43,6 +43,12 @@ abstract class SmartCollectionService {
     required UpdateOrderingTypeOfProductsRequest request,
   });
 
+  /// ❌ Deletes a smart collection by ID
+  Future<void> deleteSmartCollection({
+    required String apiVersion,
+    required String id,
+  });
+
  
 
 }
