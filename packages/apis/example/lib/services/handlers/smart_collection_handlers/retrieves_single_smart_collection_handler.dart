@@ -5,10 +5,10 @@ import 'package:example/services/api_service_registry.dart';
 import 'package:get_it/get_it.dart';
 
 ///**************************************************************
-///********* 🧠 RETRIEVE SINGLE SMART COLLECTION BY ID **********
+///****** 📄 RETRIEVE SINGLE SMART COLLECTION HANDLER **********
 ///**************************************************************
 
-class RetrieveSingleSmartCollectionHandler implements ApiRequestHandler {
+class RetrievesSingleSmartCollectionHandler implements ApiRequestHandler {
   @override
   Future<Map<String, dynamic>> handleRequest(
     String method,
@@ -23,6 +23,8 @@ class RetrieveSingleSmartCollectionHandler implements ApiRequestHandler {
     }
 
     final id = params['id'];
+    final fields = params['fields'];
+
     if (id == null || id.isEmpty) {
       return {
         'status': 'error',
@@ -36,6 +38,7 @@ class RetrieveSingleSmartCollectionHandler implements ApiRequestHandler {
           await GetIt.I<SmartCollectionService>().retrieveSingleSmartCollection(
         apiVersion: ApiNetwork.apiVersion,
         id: id,
+        fields: fields,
       );
 
       return {
@@ -63,7 +66,14 @@ class RetrieveSingleSmartCollectionHandler implements ApiRequestHandler {
             type: ApiFieldType.text,
             isRequired: true,
             label: 'Smart Collection ID',
-            hint: 'The unique identifier for the smart collection',
+            hint: 'The ID of the smart collection to retrieve',
+          ),
+          ApiField(
+            name: 'fields',
+            type: ApiFieldType.text,
+            isRequired: false,
+            label: 'Fields',
+            hint: 'Comma-separated fields to include (e.g. id,title,handle)',
           ),
         ],
       };

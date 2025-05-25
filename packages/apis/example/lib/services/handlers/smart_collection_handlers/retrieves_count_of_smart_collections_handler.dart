@@ -26,6 +26,13 @@ class RetrieveCountOfSmartCollectionsHandler implements ApiRequestHandler {
       final response =
           await GetIt.I<SmartCollectionService>().countSmartCollections(
         apiVersion: ApiNetwork.apiVersion,
+        title: params['title'],
+        productId: params['product_id'],
+        updatedAtMin: params['updated_at_min'],
+        updatedAtMax: params['updated_at_max'],
+        publishedAtMin: params['published_at_min'],
+        publishedAtMax: params['published_at_max'],
+        publishedStatus: params['published_status'],
       );
 
       return {
@@ -48,6 +55,56 @@ class RetrieveCountOfSmartCollectionsHandler implements ApiRequestHandler {
 
   @override
   Map<String, List<ApiField>> get requiredFields => {
-        'GET': [],
+        'GET': [
+          ApiField(
+            name: 'title',
+            type: ApiFieldType.text,
+            isRequired: false,
+            label: 'Title',
+            hint: 'Filter by collection title',
+          ),
+          ApiField(
+            name: 'product_id',
+            type: ApiFieldType.text,
+            isRequired: false,
+            label: 'Product ID',
+            hint: 'Filter by product ID',
+          ),
+          ApiField(
+            name: 'updated_at_min',
+            type: ApiFieldType.text,
+            isRequired: false,
+            label: 'Updated At Min',
+            hint: 'Show collections updated after this date',
+          ),
+          ApiField(
+            name: 'updated_at_max',
+            type: ApiFieldType.text,
+            isRequired: false,
+            label: 'Updated At Max',
+            hint: 'Show collections updated before this date',
+          ),
+          ApiField(
+            name: 'published_at_min',
+            type: ApiFieldType.text,
+            isRequired: false,
+            label: 'Published At Min',
+            hint: 'Show collections published after this date',
+          ),
+          ApiField(
+            name: 'published_at_max',
+            type: ApiFieldType.text,
+            isRequired: false,
+            label: 'Published At Max',
+            hint: 'Show collections published before this date',
+          ),
+          ApiField(
+            name: 'published_status',
+            type: ApiFieldType.text,
+            isRequired: false,
+            label: 'Published Status',
+            hint: 'Filter by published status (published, unpublished, any)',
+          ),
+        ],
       };
 }

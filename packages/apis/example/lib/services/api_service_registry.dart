@@ -1764,7 +1764,7 @@ ApiService(
   endpoint: '/smart_collections/:id',
   category: ApiCategory.Products,
   subcategory: 'Smart Collection', 
-  handler: RetrieveSingleSmartCollectionHandler(),
+  handler: RetrievesSingleSmartCollectionHandler(),
 ),
 
 ApiService(
