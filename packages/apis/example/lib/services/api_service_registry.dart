@@ -79,6 +79,7 @@ import 'package:example/services/handlers/orders/refund/create_refund_handler.da
 
 import 'package:example/services/handlers/orders/refund/get_list_refunds_handler.dart';
 import 'package:example/services/handlers/orders/refund/refund_handler.dart';
+import 'package:example/services/handlers/orders/transaction/create_transaction_handler.dart';
 
 import 'package:example/services/index.dart';
 import 'handlers/customers_handlers/customer/retrieves_list_of_customers_handler.dart';
@@ -845,6 +846,13 @@ class ApiServiceRegistry {
       category: ApiCategory.orders,
       subcategory: 'Refund',
       handler: CreateRefundHandler(),
+    ),
+    ApiService(
+      name: 'Create Transaction',
+      endpoint: '/orders/order/:order_id/refunds/:refund_id',
+      category: ApiCategory.orders,
+      subcategory: 'Transaction',
+      handler: CreateTransactionHandler(),
     ),
   ];
 
