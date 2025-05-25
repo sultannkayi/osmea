@@ -3,6 +3,8 @@ import 'package:apis/dio_config/api_dio_client.dart';
 import 'package:apis/network/remote/smart_collections/abstract/smart_collection_service.dart';
 import 'package:apis/network/remote/smart_collections/freezed_model/response/retrieves_list_of_smart_collections_response.dart';
 import 'package:apis/network/remote/smart_collections/freezed_model/response/retrieves_single_smart_collection_response.dart';
+import 'package:apis/network/remote/smart_collections/freezed_model/response/retrieves_count_of_smart_collections_response.dart';
+
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/http.dart';
@@ -38,6 +40,16 @@ abstract class ApiSmartCollectionService implements SmartCollectionService {
     @Path('api_version') required String apiVersion,
     @Path('id') required String id,
   });
+
+  /// 🔢 Retrieves count of smart collections
+  @GET('/api/{api_version}/smart_collections/count.json')
+  @override
+  Future<RetrievesCountOfSmartCollectionsResponse> countSmartCollections({
+    @Path('api_version') required String apiVersion,
+  });
+
+  
+
 
 
 }
