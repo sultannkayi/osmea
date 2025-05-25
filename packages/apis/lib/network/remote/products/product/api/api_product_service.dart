@@ -1,8 +1,10 @@
 import 'package:apis/apis.dart';
 import 'package:apis/dio_config/api_dio_client.dart';
 import 'package:apis/network/remote/products/product/abstract/product_service.dart';
+import 'package:apis/network/remote/products/product/freezed_model/request/create_product_base_image_request.dart';
 import 'package:apis/network/remote/products/product/freezed_model/request/create_product_multi_variants_options_request.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/count_products_collection_response.dart';
+import 'package:apis/network/remote/products/product/freezed_model/response/create_product_base_image_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/create_product_multi_variants_options_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/list_of_products_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/single_product_response.dart';
@@ -81,5 +83,13 @@ abstract class ProductServiceClient implements ProductService {
       createProductMultiVariantsOptions({
     @Path('api_version') required String apiVersion,
     @Body() required CreateProductMultiVariantsOptionsRequest request,
+  });
+
+  /// 🖼️ Create product with base image
+  @override
+  @POST('/api/{api_version}/products.json')
+  Future<CreateProductBaseImageResponse> createProductBaseImage({
+    @Path('api_version') required String apiVersion,
+    @Body() required CreateProductBaseImageRequest request,
   });
 }

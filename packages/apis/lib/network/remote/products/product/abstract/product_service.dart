@@ -1,5 +1,7 @@
+import 'package:apis/network/remote/products/product/freezed_model/request/create_product_base_image_request.dart';
 import 'package:apis/network/remote/products/product/freezed_model/request/create_product_multi_variants_options_request.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/count_products_collection_response.dart';
+import 'package:apis/network/remote/products/product/freezed_model/response/create_product_base_image_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/create_product_multi_variants_options_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/list_of_products_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/single_product_response.dart';
@@ -56,5 +58,11 @@ abstract class ProductService {
       createProductMultiVariantsOptions({
     required String apiVersion,
     required CreateProductMultiVariantsOptionsRequest request,
+  });
+
+  /// 🖼️ Create product with base image
+  Future<CreateProductBaseImageResponse> createProductBaseImage({
+    required String apiVersion,
+    required CreateProductBaseImageRequest request,
   });
 }
