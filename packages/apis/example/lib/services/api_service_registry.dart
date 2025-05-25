@@ -69,6 +69,7 @@ import 'package:example/services/handlers/products_handlers/custom_collections_h
 import 'package:example/services/handlers/products_handlers/custom_collections_handlers/list_all_custom_collections_handler.dart';
 import 'package:example/services/handlers/products_handlers/custom_collections_handlers/specific_custom_collections_handler.dart';
 import 'package:example/services/handlers/products_handlers/custom_collections_handlers/update_custom_collection_description_handler.dart';
+import 'package:example/services/handlers/products_handlers/custom_collections_handlers/update_remove_image_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/receive_list_of_countries_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/retrieves_count_of_countries_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/creates_new_country_handler.dart';
@@ -1797,6 +1798,15 @@ class ApiServiceRegistry {
       category: ApiCategory.products,
       subcategory: 'Custom Collection',
       handler: UpdateCustomCollectionDescriptionHandler(),
+    ),
+
+    // 🗑️ UPDATE REMOVE IMAGE FROM CUSTOM COLLECTION
+    ApiService(
+      name: 'Update Remove Image from Custom Collection',
+      endpoint: '/custom_collections',
+      category: ApiCategory.products,
+      subcategory: 'Custom Collection',
+      handler: UpdateRemoveImageHandler(),
     ),
 
     // 🔔 Webhooks APIs
