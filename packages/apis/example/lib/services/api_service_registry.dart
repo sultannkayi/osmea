@@ -89,6 +89,7 @@ import 'package:example/services/handlers/products_handlers/product_handlers/cre
 import 'package:example/services/handlers/products_handlers/product_handlers/create_product_downloaded_image_handler.dart';
 import 'package:example/services/handlers/products_handlers/product_handlers/create_unpublished_product_handler.dart';
 import 'package:example/services/handlers/products_handlers/product_handlers/add_metafield_to_product_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/update_product_add_image_handler.dart';
 import 'package:example/services/handlers/products_handlers/collection_handlers/single_collection_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/receive_list_of_countries_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/retrieves_count_of_countries_handler.dart';
@@ -2081,6 +2082,14 @@ class ApiServiceRegistry {
       category: ApiCategory.products,
       subcategory: 'Product',
       handler: AddMetafieldToProductHandler(),
+    ),
+    // 🖼️ UPDATE PRODUCT ADD IMAGE HANDLER
+    ApiService(
+      name: 'Update Product Add Image',
+      endpoint: '/products/:product_id',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: UpdateProductAddImageHandler(),
     ),
     // 📋 GET SINGLE COLLECTION HANDLER
     ApiService(
