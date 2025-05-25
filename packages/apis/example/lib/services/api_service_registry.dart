@@ -69,6 +69,7 @@ import 'package:example/services/handlers/products_handlers/custom_collections_h
 import 'package:example/services/handlers/products_handlers/custom_collections_handlers/list_all_custom_collections_handler.dart';
 import 'package:example/services/handlers/products_handlers/custom_collections_handlers/specific_custom_collections_handler.dart';
 import 'package:example/services/handlers/products_handlers/custom_collections_handlers/update_custom_collection_description_handler.dart';
+import 'package:example/services/handlers/products_handlers/custom_collections_handlers/update_custom_collection_new_image_handler.dart';
 import 'package:example/services/handlers/products_handlers/custom_collections_handlers/update_remove_image_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/receive_list_of_countries_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/retrieves_count_of_countries_handler.dart';
@@ -1798,6 +1799,15 @@ class ApiServiceRegistry {
       category: ApiCategory.products,
       subcategory: 'Custom Collection',
       handler: UpdateCustomCollectionDescriptionHandler(),
+    ),
+
+    // 🖼️ UPDATE CUSTOM COLLECTION NEW IMAGE
+    ApiService(
+      name: 'Update Custom Collection New Image',
+      endpoint: '/custom_collections',
+      category: ApiCategory.products,
+      subcategory: 'Custom Collection',
+      handler: UpdateCustomCollectionNewImageHandler(),
     ),
 
     // 🗑️ UPDATE REMOVE IMAGE FROM CUSTOM COLLECTION
