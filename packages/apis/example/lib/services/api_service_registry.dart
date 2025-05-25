@@ -177,6 +177,7 @@ import 'package:example/services/handlers/webhooks_handlers/webhook_handlers/upd
 import 'package:example/services/handlers/webhooks_handlers/webhook_handlers/delete_webhook_handler.dart';
 import 'package:example/services/handlers/smart_collection_handlers/retrieves_list_of_smart_collections_handler.dart';
 import 'package:example/services/handlers/smart_collection_handlers/retrieves_single_smart_collection_handler.dart';
+import 'package:example/services/handlers/smart_collection_handlers/retrieves_count_of_smart_collections_handler.dart';
 
 
 enum ApiCategory {
@@ -1761,6 +1762,14 @@ ApiService(
   category: ApiCategory.Products,
   subcategory: 'Smart Collection', 
   handler: RetrieveSingleSmartCollectionHandler(),
+),
+
+ApiService(
+  name: 'Count Smart Collections',
+  endpoint: '/smart_collections/count',
+  category: ApiCategory.Products,
+  subcategory: 'Smart Collection',
+  handler: RetrieveCountOfSmartCollectionsHandler(),
 ),
   ];
 
