@@ -67,6 +67,7 @@ import 'package:example/services/handlers/products_handlers/custom_collections_h
 import 'package:example/services/handlers/products_handlers/custom_collections_handlers/create_custom_collection_with_metafield_handler.dart';
 import 'package:example/services/handlers/products_handlers/custom_collections_handlers/create_unpublished_custom_collection_handler.dart';
 import 'package:example/services/handlers/products_handlers/custom_collections_handlers/list_all_custom_collections_handler.dart';
+import 'package:example/services/handlers/products_handlers/custom_collections_handlers/publish_hidden_custom_collection_handler.dart';
 import 'package:example/services/handlers/products_handlers/custom_collections_handlers/specific_custom_collections_handler.dart';
 import 'package:example/services/handlers/products_handlers/custom_collections_handlers/update_custom_collection_alt_text_handler.dart';
 import 'package:example/services/handlers/products_handlers/custom_collections_handlers/update_custom_collection_description_handler.dart';
@@ -1818,6 +1819,15 @@ class ApiServiceRegistry {
       category: ApiCategory.products,
       subcategory: 'Custom Collection',
       handler: UpdateCustomCollectionAltTextHandler(),
+    ),
+
+    // 📢 PUBLISH HIDDEN CUSTOM COLLECTION
+    ApiService(
+      name: 'Publish Hidden Custom Collection',
+      endpoint: '/custom_collections',
+      category: ApiCategory.products,
+      subcategory: 'Custom Collection',
+      handler: PublishHiddenCustomCollectionHandler(),
     ),
 
     // 🗑️ UPDATE REMOVE IMAGE FROM CUSTOM COLLECTION
