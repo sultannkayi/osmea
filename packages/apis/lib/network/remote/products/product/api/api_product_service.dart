@@ -7,6 +7,7 @@ import 'package:apis/network/remote/products/product/freezed_model/request/creat
 import 'package:apis/network/remote/products/product/freezed_model/request/create_product_with_metafield_request.dart';
 import 'package:apis/network/remote/products/product/freezed_model/request/create_default_product_variant_request.dart';
 import 'package:apis/network/remote/products/product/freezed_model/request/create_product_downloaded_image_request.dart';
+import 'package:apis/network/remote/products/product/freezed_model/request/create_unpublished_product_request.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/count_products_collection_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/create_product_base_image_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/create_product_multi_variants_options_response.dart';
@@ -14,6 +15,7 @@ import 'package:apis/network/remote/products/product/freezed_model/response/crea
 import 'package:apis/network/remote/products/product/freezed_model/response/create_product_with_metafield_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/create_default_product_variant_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/create_product_downloaded_image_response.dart';
+import 'package:apis/network/remote/products/product/freezed_model/response/create_unpublished_product_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/list_of_products_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/single_product_response.dart';
 import 'package:dio/dio.dart';
@@ -131,5 +133,13 @@ abstract class ProductServiceClient implements ProductService {
   Future<CreateProductDownloadedImageResponse> createProductDownloadedImage({
     @Path('api_version') required String apiVersion,
     @Body() required CreateProductDownloadedImageRequest request,
+  });
+
+  /// 🚫 Create unpublished product
+  @override
+  @POST('/api/{api_version}/products.json')
+  Future<CreateUnpublishedProductResponse> createUnpublishedProduct({
+    @Path('api_version') required String apiVersion,
+    @Body() required CreateUnpublishedProductRequest request,
   });
 }
