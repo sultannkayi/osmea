@@ -7,6 +7,7 @@ import 'package:apis/network/remote/products/custom_collection/freezed_model/req
 import 'package:apis/network/remote/products/custom_collection/freezed_model/request/create_custom_collection_uploaded_image_request.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/request/create_custom_collection_with_metafield_request.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/request/create_unpublished_custom_collection_request.dart';
+import 'package:apis/network/remote/products/custom_collection/freezed_model/request/update_custom_collection_alt_text_request.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/request/update_custom_collection_description_request.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/request/update_custom_collection_new_image_request.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/request/update_remove_image_request.dart';
@@ -19,6 +20,7 @@ import 'package:apis/network/remote/products/custom_collection/freezed_model/res
 import 'package:apis/network/remote/products/custom_collection/freezed_model/response/create_unpublished_custom_collection_response.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/response/list_all_custom_collections_response.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/response/specific_custom_collections_response.dart';
+import 'package:apis/network/remote/products/custom_collection/freezed_model/response/update_custom_collection_alt_text_response.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/response/update_custom_collection_description_response.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/response/update_custom_collection_new_image_response.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/response/update_remove_image_response.dart';
@@ -151,5 +153,13 @@ abstract class CustomCollectionsServiceClient
     @Path('api_version') required String apiVersion,
     @Path('custom_collection_id') required int customCollectionId,
     @Body() required UpdateCustomCollectionNewImageRequest model,
+  });
+
+  // 🏷️ Update Custom Collection Alt Text
+  @PUT('/api/{api_version}/custom_collections/{custom_collection_id}.json')
+  Future<UpdateCustomCollectionAltTextResponse> updateCustomCollectionAltText({
+    @Path('api_version') required String apiVersion,
+    @Path('custom_collection_id') required int customCollectionId,
+    @Body() required UpdateCustomCollectionAltTextRequest model,
   });
 }
