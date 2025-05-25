@@ -4,6 +4,12 @@ import 'package:apis/network/remote/smart_collections/abstract/smart_collection_
 import 'package:apis/network/remote/smart_collections/freezed_model/response/retrieves_list_of_smart_collections_response.dart';
 import 'package:apis/network/remote/smart_collections/freezed_model/response/retrieves_single_smart_collection_response.dart';
 import 'package:apis/network/remote/smart_collections/freezed_model/response/retrieves_count_of_smart_collections_response.dart';
+import 'package:apis/network/remote/smart_collections/freezed_model/request/updates_existing_smart_collection_request.dart';
+import 'package:apis/network/remote/smart_collections/freezed_model/response/updates_existing_smart_collection_response.dart';
+import 'package:apis/network/remote/smart_collections/freezed_model/request/updates_ordering_type_of_products_smart_collection_request.dart';
+import 'package:apis/network/remote/smart_collections/freezed_model/response/updates_ordering_type_of_products_smart_collection_response.dart';
+
+
 
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -46,6 +52,24 @@ abstract class ApiSmartCollectionService implements SmartCollectionService {
   @override
   Future<RetrievesCountOfSmartCollectionsResponse> countSmartCollections({
     @Path('api_version') required String apiVersion,
+  });
+
+  /// ✏ Updates an existing smart collection
+  @PUT('/api/{api_version}/smart_collections/{id}.json')
+  @override
+  Future<UpdatesExistingSmartCollectionResponse> updateSmartCollection({
+    @Path('api_version') required String apiVersion,
+    @Path('id') required String id,
+    @Body() required UpdateSmartCollectionRequest request,
+  });
+
+  /// 🔀 Updates ordering of products in a smart collection (manual sort)
+  @PUT('/api/{api_version}/smart_collections/{id}/order.json')
+  @override
+  Future<UpdatesOrderingTypeOfProductsSmartCollection> updateProductOrder({
+    @Path('api_version') required String apiVersion,
+    @Path('id') required String id,
+    @Body() required UpdateOrderingTypeOfProductsRequest request,
   });
 
   
