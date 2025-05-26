@@ -16,6 +16,7 @@ import 'package:apis/network/remote/orders/order/freezed_model/request/update_or
 import 'package:apis/network/remote/orders/order/freezed_model/request/update_note_attributes_request.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/request/update_shipping_address_request.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/request/update_order_tag_request.dart';
+import 'package:apis/network/remote/orders/order/freezed_model/request/update_add_note_request.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/create_cancel_order_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/create_close_order_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/create_order_comprehensive_response.dart';
@@ -39,6 +40,7 @@ import 'package:apis/network/remote/orders/order/freezed_model/response/update_o
 import 'package:apis/network/remote/orders/order/freezed_model/response/update_note_attributes_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/update_shipping_address_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/update_order_tag_response.dart';
+import 'package:apis/network/remote/orders/order/freezed_model/response/update_add_note_response.dart';
 
 abstract class OrderService {
   Future<CreateOrderResponse> createOrder({
@@ -198,5 +200,11 @@ abstract class OrderService {
     required String apiVersion,
     required String orderId,
     required UpdateOrderTagRequest model,
+  });
+
+  Future<UpdateAddNoteResponse> updateAddNote({
+    required String apiVersion,
+    required String orderId,
+    required UpdateAddNoteRequest model,
   });
 }
