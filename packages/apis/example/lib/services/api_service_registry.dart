@@ -2,6 +2,7 @@
 
 import 'package:example/services/handlers/orders/order/update_add_metafield_handler.dart';
 import 'package:example/services/handlers/orders/order/update_add_note_handler.dart';
+import 'package:example/services/handlers/orders/order/update_email_address_handler.dart';
 import 'package:example/services/handlers/orders/order/update_note_attributes_handler.dart';
 import 'package:example/services/handlers/orders/order/update_order_tag_handler.dart';
 import 'package:example/services/handlers/orders/order/update_phone_number_handler.dart';
@@ -917,6 +918,13 @@ class ApiServiceRegistry {
       category: ApiCategory.orders,
       subcategory: 'Order',
       handler: UpdatePhoneNumberHandler(),
+    ),
+    ApiService(
+      name: 'Update Order Email Address',
+      endpoint: '/orders/:order_id',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: UpdateEmailAddressHandler(),
     ),
     ApiService(
       name: 'Update Order Add Metafield',
