@@ -252,4 +252,12 @@ abstract class ProductServiceClient implements ProductService {
     @Path('product_id') required String productId,
     @Body() required UpdateProductTagsRequest request,
   });
+
+  /// 🗑️ Delete product
+  @override
+  @DELETE('/api/{api_version}/products/{product_id}.json')
+  Future<void> deleteProduct({
+    @Path('api_version') required String apiVersion,
+    @Path('product_id') required String productId,
+  });
 }

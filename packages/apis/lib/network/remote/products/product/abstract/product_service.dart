@@ -195,4 +195,10 @@ abstract class ProductService {
     required String productId,
     required UpdateProductTagsRequest request,
   });
+
+  /// 🗑️ Delete product
+  Future<void> deleteProduct({
+    required String apiVersion,
+    required String productId,
+  });
 }
