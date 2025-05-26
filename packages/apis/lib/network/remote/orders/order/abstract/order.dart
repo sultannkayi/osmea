@@ -13,6 +13,7 @@ import 'package:apis/network/remote/orders/order/freezed_model/request/create_or
 import 'package:apis/network/remote/orders/order/freezed_model/request/create_reopen_order_request.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/request/update_order_request.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/request/update_order_risk_request.dart';
+import 'package:apis/network/remote/orders/order/freezed_model/request/update_note_attributes_request.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/create_cancel_order_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/create_close_order_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/create_order_comprehensive_response.dart';
@@ -33,6 +34,7 @@ import 'package:apis/network/remote/orders/order/freezed_model/response/get_sing
 import 'package:apis/network/remote/orders/order/freezed_model/response/get_single_order_risk_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/update_order_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/update_order_risk_response.dart';
+import 'package:apis/network/remote/orders/order/freezed_model/response/update_note_attributes_response.dart';
 
 abstract class OrderService {
   Future<CreateOrderResponse> createOrder({
@@ -174,5 +176,11 @@ abstract class OrderService {
   Future<void> deleteOrder({
     required String apiVersion,
     required String orderId,
+  });
+
+  Future<UpdateNoteAttributesResponse> updateNoteAttributes({
+    required String apiVersion,
+    required String orderId,
+    required UpdateNoteAttributesRequest model,
   });
 }

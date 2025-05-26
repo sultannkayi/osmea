@@ -1,5 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:example/services/handlers/orders/order/update_note_attributes_handler.dart';
 import 'package:example/services/handlers/customers_handlers/customer/searches_for_customers_that_match_supplied_query_handler.dart';
 import 'package:example/services/handlers/customers_handlers/customer/customer_url_handler.dart';
 import 'package:example/services/handlers/customers_handlers/customer/retrieves_single_customer_handler.dart';
@@ -83,7 +84,6 @@ import 'package:example/services/handlers/orders/transaction/create_transaction_
 import 'package:example/services/handlers/orders/transaction/get_transaction_count_handler.dart';
 import 'package:example/services/handlers/orders/transaction/get_transaction_list_handler.dart';
 import 'package:example/services/handlers/orders/transaction/get_transaction_single_handler.dart';
-
 import 'package:example/services/index.dart';
 import 'handlers/customers_handlers/customer/retrieves_list_of_customers_handler.dart';
 import 'handlers/customers_handlers/customer/retrieves_all_orders_belonging_to_customer_handler.dart';
@@ -872,12 +872,19 @@ class ApiServiceRegistry {
       handler: GetTransactionListHandler(),
     ),
     ApiService(
-        name: 'Get Transaction Single',
-        endpoint:
-            '/orders/order/:order_id/refunds/:refund_id/transactions/count',
-        category: ApiCategory.orders,
-        subcategory: 'Transaction',
-        handler: GetTransactionSingleHandler()),
+      name: 'Get Transaction Single',
+      endpoint: '/orders/order/:order_id/refunds/:refund_id/transactions/count',
+      category: ApiCategory.orders,
+      subcategory: 'Transaction',
+      handler: GetTransactionSingleHandler(),
+    ),
+    ApiService(
+      name: 'Update Note Attributes',
+      endpoint: '/orders/:order_id/note_attributes',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: UpdateNoteAttributesHandler(),
+    ),
   ];
 
   static void initialize() {}

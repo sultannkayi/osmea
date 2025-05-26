@@ -16,6 +16,7 @@ import 'package:apis/network/remote/orders/order/freezed_model/request/create_or
 import 'package:apis/network/remote/orders/order/freezed_model/request/create_reopen_order_request.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/request/update_order_request.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/request/update_order_risk_request.dart';
+import 'package:apis/network/remote/orders/order/freezed_model/request/update_note_attributes_request.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/create_cancel_order_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/create_close_order_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/create_order_comprehensive_response.dart';
@@ -36,6 +37,7 @@ import 'package:apis/network/remote/orders/order/freezed_model/response/get_sing
 import 'package:apis/network/remote/orders/order/freezed_model/response/get_single_order_risk_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/update_order_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/update_order_risk_response.dart';
+import 'package:apis/network/remote/orders/order/freezed_model/response/update_note_attributes_response.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/http.dart';
@@ -236,5 +238,13 @@ abstract class OrderServiceClient implements OrderService {
     @Path('api_version') required String apiVersion,
     @Path('order_id') required String orderId,
     @Body() required CreateReopenOrderRequest model,
+  });
+
+  @override
+  @PUT('/api/{api_version}/orders/{order_id}.json')
+  Future<UpdateNoteAttributesResponse> updateNoteAttributes({
+    @Path('api_version') required String apiVersion,
+    @Path('order_id') required String orderId,
+    @Body() required UpdateNoteAttributesRequest model,
   });
 }
