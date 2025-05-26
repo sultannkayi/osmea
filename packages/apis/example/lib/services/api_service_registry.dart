@@ -60,7 +60,46 @@ import 'package:example/services/handlers/online_store_handlers/theme_handler/ge
 import 'package:example/services/handlers/online_store_handlers/theme_handler/list_themes_handler.dart';
 import 'package:example/services/handlers/online_store_handlers/theme_handler/publish_unpublished_theme_handler.dart';
 import 'package:example/services/handlers/online_store_handlers/theme_handler/update_theme_name_handler.dart';
+import 'package:example/services/handlers/products_handlers/custom_collections_handlers/count_custom_collections_handler.dart';
+import 'package:example/services/handlers/products_handlers/custom_collections_handlers/create_collection_with_collect_handler.dart';
+import 'package:example/services/handlers/products_handlers/custom_collections_handlers/create_custom_collection_base_image_handler.dart';
+import 'package:example/services/handlers/products_handlers/custom_collections_handlers/create_custom_collection_handler.dart';
+import 'package:example/services/handlers/products_handlers/custom_collections_handlers/create_custom_collection_uploaded_image_handler.dart';
+import 'package:example/services/handlers/products_handlers/custom_collections_handlers/create_custom_collection_with_metafield_handler.dart';
+import 'package:example/services/handlers/products_handlers/custom_collections_handlers/create_unpublished_custom_collection_handler.dart';
+import 'package:example/services/handlers/products_handlers/custom_collections_handlers/delete_custom_collection_handler.dart';
+import 'package:example/services/handlers/products_handlers/custom_collections_handlers/hide_published_custom_collection_handler.dart';
+import 'package:example/services/handlers/products_handlers/custom_collections_handlers/list_all_custom_collections_handler.dart';
+import 'package:example/services/handlers/products_handlers/custom_collections_handlers/publish_hidden_custom_collection_handler.dart';
+import 'package:example/services/handlers/products_handlers/custom_collections_handlers/specific_custom_collections_handler.dart';
+import 'package:example/services/handlers/products_handlers/custom_collections_handlers/add_collect_to_collection_by_product_id_handler.dart';
+import 'package:example/services/handlers/products_handlers/custom_collections_handlers/add_metafield_to_custom_collection_handler.dart';
+import 'package:example/services/handlers/products_handlers/custom_collections_handlers/update_custom_collection_alt_text_handler.dart';
+import 'package:example/services/handlers/products_handlers/custom_collections_handlers/update_custom_collection_description_handler.dart';
+import 'package:example/services/handlers/products_handlers/custom_collections_handlers/update_custom_collection_new_image_handler.dart';
+import 'package:example/services/handlers/products_handlers/custom_collections_handlers/update_remove_image_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/list_of_products_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/single_product_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/count_products_collection_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/create_product_multi_variants_options_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/create_product_multi_variants_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/create_product_base_image_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/create_product_with_metafield_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/create_default_product_variant_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/create_product_downloaded_image_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/create_unpublished_product_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/add_metafield_to_product_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/update_product_add_image_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/update_product_reorder_image_handler.dart';
 import 'package:example/services/handlers/products_handlers/collection_handlers/single_collection_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/update_product_title_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/update_product_clear_images_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/update_product_seo_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/update_product_with_variant_hadler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/update_product_reorder_variants_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/update_product_tags_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/show_hidden_product_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/delete_product_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/receive_list_of_countries_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/retrieves_count_of_countries_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/creates_new_country_handler.dart';
@@ -207,13 +246,12 @@ enum ApiCategory {
   marketingEvent,
   giftCard,
   metafield,
-  storeProperties,
   onlineStore,
   products,
+  storeProperties,
   tendertransaction,
   webhooks,
   Products,
-  products,
 }
 
 extension ApiCategoryExtension on ApiCategory {
@@ -243,18 +281,16 @@ extension ApiCategoryExtension on ApiCategory {
         return 'Gift Card APIs';
       case ApiCategory.metafield:
         return 'Metafield APIs';
-      case ApiCategory.storeProperties:
-        return 'Store Properties APIs';
       case ApiCategory.onlineStore:
         return 'Online Store APIs';
       case ApiCategory.products:
         return 'Products APIs';
+      case ApiCategory.storeProperties:
+        return 'Store Properties APIs';
       case ApiCategory.tendertransaction:
         return 'Tender Transaction APIs';
       case ApiCategory.webhooks:
         return 'Webhooks APIs';
-      case ApiCategory.products:
-        return 'Products APIs';
       case ApiCategory.Products:
         return 'Products APIs';
     }
@@ -357,8 +393,7 @@ class ApiServiceRegistry {
       category: ApiCategory.customer,
       subcategory: 'Customers',
       handler: CustomerUrlHandler(),
-    )
-    ,
+    ),
     ApiService(
       name: 'Customer Count',
       endpoint: '/customers/count',
@@ -1740,7 +1775,7 @@ class ApiServiceRegistry {
       subcategory: 'Collects',
       handler: GetCollectsByProductHandler(),
     ),
-    
+
     ApiService(
       name: 'Get Single Collect',
       endpoint: '/collects/:id',
@@ -1800,7 +1835,353 @@ class ApiServiceRegistry {
       handler: RetrieveListOfTenderTransactionsHandler(),
     ),
 
-    // 📋 GET SINGLE COLLECTION HANDLER  
+    // 📋 LIST ALL CUSTOM COLLECTIONS
+    ApiService(
+      name: 'List All Custom Collections',
+      endpoint: '/custom_collections',
+      category: ApiCategory.products,
+      subcategory: 'Custom Collection',
+      handler: ListAllCustomCollectionsHandler(),
+    ),
+
+    // 📋 SPECIFIC CUSTOM COLLECTION
+    ApiService(
+      name: 'Get Specific Custom Collection',
+      endpoint: '/custom_collections/:id',
+      category: ApiCategory.products,
+      subcategory: 'Custom Collection',
+      handler: SpecificCustomCollectionsHandler(),
+    ),
+
+    // 🔢 COUNT CUSTOM COLLECTIONS
+    ApiService(
+      name: 'Count Custom Collections',
+      endpoint: '/custom_collections/count',
+      category: ApiCategory.products,
+      subcategory: 'Custom Collection',
+      handler: CountCustomCollectionsHandler(),
+    ),
+
+    // 🆕 CREATE CUSTOM COLLECTION
+    ApiService(
+      name: 'Create Custom Collection',
+      endpoint: '/custom_collections',
+      category: ApiCategory.products,
+      subcategory: 'Custom Collection',
+      handler: CreateCustomCollectionHandler(),
+    ),
+
+    // 🆕 CREATE UNPUBLISHED CUSTOM COLLECTION
+    ApiService(
+      name: 'Create Unpublished Custom Collection',
+      endpoint: '/custom_collections',
+      category: ApiCategory.products,
+      subcategory: 'Custom Collection',
+      handler: CreateUnpublishedCustomCollectionHandler(),
+    ),
+
+    // 🆕 CREATE COLLECTION WITH COLLECT
+    ApiService(
+      name: 'Create Collection With Collect',
+      endpoint: '/custom_collections',
+      category: ApiCategory.products,
+      subcategory: 'Custom Collection',
+      handler: CreateCollectionWithCollectHandler(),
+    ),
+
+    // 🖼️ CREATE CUSTOM COLLECTION WITH IMAGE
+    ApiService(
+      name: 'Create Custom Collection With Image',
+      endpoint: '/custom_collections',
+      category: ApiCategory.products,
+      subcategory: 'Custom Collection',
+      handler: CreateCustomCollectionBaseImageHandler(),
+    ),
+
+    // 🏷️ CREATE COLLECTION WITH METAFIELD
+    ApiService(
+      name: 'Create Collection With Metafield',
+      endpoint: '/custom_collections',
+      category: ApiCategory.products,
+      subcategory: 'Custom Collection',
+      handler: CreateCustomCollectionWithMetafieldHandler(),
+    ),
+
+    // 🖼️ CREATE CUSTOM COLLECTION WITH UPLOADED IMAGE
+    ApiService(
+      name: 'Create Custom Collection With Uploaded Image',
+      endpoint: '/custom_collections',
+      category: ApiCategory.products,
+      subcategory: 'Custom Collection',
+      handler: CreateCustomCollectionUploadedImageHandler(),
+    ),
+
+    // 📝 UPDATE CUSTOM COLLECTION DESCRIPTION
+    ApiService(
+      name: 'Update Custom Collection Description',
+      endpoint: '/custom_collections',
+      category: ApiCategory.products,
+      subcategory: 'Custom Collection',
+      handler: UpdateCustomCollectionDescriptionHandler(),
+    ),
+
+    // 🖼️ UPDATE CUSTOM COLLECTION NEW IMAGE
+    ApiService(
+      name: 'Update Custom Collection New Image',
+      endpoint: '/custom_collections',
+      category: ApiCategory.products,
+      subcategory: 'Custom Collection',
+      handler: UpdateCustomCollectionNewImageHandler(),
+    ),
+
+    // 🏷️ UPDATE CUSTOM COLLECTION ALT TEXT
+    ApiService(
+      name: 'Update Custom Collection Alt Text',
+      endpoint: '/custom_collections',
+      category: ApiCategory.products,
+      subcategory: 'Custom Collection',
+      handler: UpdateCustomCollectionAltTextHandler(),
+    ),
+
+    // 📢 PUBLISH HIDDEN CUSTOM COLLECTION
+    ApiService(
+      name: 'Publish Hidden Custom Collection',
+      endpoint: '/custom_collections',
+      category: ApiCategory.products,
+      subcategory: 'Custom Collection',
+      handler: PublishHiddenCustomCollectionHandler(),
+    ),
+
+    // 🫥 HIDE PUBLISHED CUSTOM COLLECTION
+    ApiService(
+      name: 'Hide Published Custom Collection',
+      endpoint: '/custom_collections/:id',
+      category: ApiCategory.products,
+      subcategory: 'Custom Collection',
+      handler: HidePublishedCustomCollectionHandler(),
+    ),
+
+    // ➕ ADD COLLECT TO COLLECTION BY PRODUCT ID
+    ApiService(
+      name: 'Add Collect to Collection by Product ID',
+      endpoint: '/custom_collections',
+      category: ApiCategory.products,
+      subcategory: 'Custom Collection',
+      handler: AddCollectToCollectionByProductIdHandler(),
+    ),
+
+    // 🗑️ UPDATE REMOVE IMAGE FROM CUSTOM COLLECTION
+    ApiService(
+      name: 'Update Remove Image from Custom Collection',
+      endpoint: '/custom_collections',
+      category: ApiCategory.products,
+      subcategory: 'Custom Collection',
+      handler: UpdateRemoveImageHandler(),
+    ),
+
+    // 🏷️ ADD METAFIELD TO CUSTOM COLLECTION
+    ApiService(
+      name: 'Add Metafield to Custom Collection',
+      endpoint: '/custom_collections/:id',
+      category: ApiCategory.products,
+      subcategory: 'Custom Collection',
+      handler: AddMetafieldToCustomCollectionHandler(),
+    ),
+
+    // 🗑️ DELETE CUSTOM COLLECTION
+    ApiService(
+      name: 'Delete Custom Collection',
+      endpoint: '/custom_collections/:id',
+      category: ApiCategory.products,
+      subcategory: 'Custom Collection',
+      handler: DeleteCustomCollectionHandler(),
+    ),
+
+    // 📋 LIST ALL PRODUCTS HANDLER 📋
+    ApiService(
+      name: 'List All Products',
+      endpoint: '/products',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: ListOfProductsHandler(),
+    ),
+
+    // 📄 SINGLE PRODUCT HANDLER
+    ApiService(
+      name: 'Get Single Product',
+      endpoint: '/products/:id',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: SingleProductHandler(),
+    ),
+
+    // 🔢 COUNT PRODUCTS COLLECTION HANDLER
+    ApiService(
+      name: 'Count Products',
+      endpoint: '/products/count',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: CountProductsCollectionHandler(),
+    ),
+
+    // 🛍️ CREATE PRODUCT WITH MULTI VARIANTS OPTIONS HANDLER
+    ApiService(
+      name: 'Create Product Multi Variants Options',
+      endpoint: '/products',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: CreateProductMultiVariantsOptionsHandler(),
+    ),
+
+    // 🔄 CREATE PRODUCT WITH MULTI VARIANTS HANDLER
+    ApiService(
+      name: 'Create Product Multi Variants',
+      endpoint: '/products',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: CreateProductMultiVariantsHandler(),
+    ),
+
+    // 🖼️ CREATE PRODUCT WITH BASE IMAGE HANDLER
+    ApiService(
+      name: 'Create Product Base Image',
+      endpoint: '/products',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: CreateProductBaseImageHandler(),
+    ),
+
+    // 🏷️ CREATE PRODUCT WITH METAFIELD HANDLER
+    ApiService(
+      name: 'Create Product With Metafield',
+      endpoint: '/products',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: CreateProductWithMetafieldHandler(),
+    ),
+
+    // 🔧 CREATE DEFAULT PRODUCT VARIANT HANDLER
+    ApiService(
+      name: 'Create Default Product Variant',
+      endpoint: '/products',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: CreateDefaultProductVariantHandler(),
+    ),
+    // 📥 CREATE PRODUCT DOWNLOADED IMAGE HANDLER
+    ApiService(
+      name: 'Create Product Downloaded Image',
+      endpoint: '/products',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: CreateProductDownloadedImageHandler(),
+    ),
+    // 🚫 CREATE UNPUBLISHED PRODUCT HANDLER
+    ApiService(
+      name: 'Create Unpublished Product',
+      endpoint: '/products',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: CreateUnpublishedProductHandler(),
+    ),
+    // 🏷️ ADD METAFIELD TO PRODUCT HANDLER
+    ApiService(
+      name: 'Add Metafield to Product',
+      endpoint: '/products/:product_id',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: AddMetafieldToProductHandler(),
+    ),
+    // 🖼️ UPDATE PRODUCT ADD IMAGE HANDLER
+    ApiService(
+      name: 'Update Product Add Image',
+      endpoint: '/products/:product_id',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: UpdateProductAddImageHandler(),
+    ),
+    // 🔄 UPDATE PRODUCT REORDER IMAGE HANDLER
+    ApiService(
+      name: 'Update Product Reorder Image',
+      endpoint: '/products/:product_id',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: UpdateProductReorderImageHandler(),
+    ),
+
+    // 📝 UPDATE PRODUCT TITLE HANDLER
+    ApiService(
+      name: 'Update Product Title',
+      endpoint: '/products/:product_id',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: UpdateProductTitleHandler(),
+    ),
+
+    // 🗑️ UPDATE PRODUCT CLEAR IMAGES HANDLER
+    ApiService(
+      name: 'Update Product Clear Images',
+      endpoint: '/products/:product_id/clear_images',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: UpdateProductClearImagesHandler(),
+    ),
+
+    // 🔍 UPDATE PRODUCT SEO HANDLER
+    ApiService(
+      name: 'Update Product SEO',
+      endpoint: '/products/:product_id/seo',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: UpdateProductSeoHandler(),
+    ),
+
+    // 🔄 UPDATE PRODUCT WITH VARIANT HANDLER
+    ApiService(
+      name: 'Update Product With Variant',
+      endpoint: '/products/:product_id',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: UpdateProductWithVariantHandler(),
+    ),
+
+    // 🔄 UPDATE PRODUCT REORDER VARIANTS HANDLER
+    ApiService(
+      name: 'Update Product Reorder Variants',
+      endpoint: '/products/:product_id',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: UpdateProductReorderVariantsHandler(),
+    ),
+
+    // 👁️ SHOW HIDDEN PRODUCT HANDLER
+    ApiService(
+      name: 'Show Hidden Product',
+      endpoint: '/products/:product_id',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: ShowHiddenProductHandler(),
+    ),
+
+    // 🗑️ DELETE PRODUCT HANDLER
+    ApiService(
+      name: 'Delete Product',
+      endpoint: '/products/:id',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: DeleteProductHandler(),
+    ),
+
+    // 🏷️ UPDATE PRODUCT TAGS HANDLER
+    ApiService(
+      name: 'Update Product Tags',
+      endpoint: '/products/:product_id',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: UpdateProductTagsHandler(),
+    ),
+
+    // 📋 GET SINGLE COLLECTION HANDLER
     ApiService(
       name: 'Get Single Collection',
       endpoint: '/collections/:collection_id',
@@ -1863,59 +2244,59 @@ class ApiServiceRegistry {
     ),
 
     ApiService(
-  name: 'List Smart Collections',
-  endpoint: '/smart_collections',
-  category: ApiCategory.Products,
-  subcategory: 'Smart Collection',
-  handler: RetrievesAllSmartCollectionsHandler(),
-),
+      name: 'List Smart Collections',
+      endpoint: '/smart_collections',
+      category: ApiCategory.Products,
+      subcategory: 'Smart Collection',
+      handler: RetrievesAllSmartCollectionsHandler(),
+    ),
 
-ApiService(
-  name: 'Get Single Smart Collection',
-  endpoint: '/smart_collections/:id',
-  category: ApiCategory.Products,
-  subcategory: 'Smart Collection', 
-  handler: RetrievesSingleSmartCollectionHandler(),
-),
+    ApiService(
+      name: 'Get Single Smart Collection',
+      endpoint: '/smart_collections/:id',
+      category: ApiCategory.Products,
+      subcategory: 'Smart Collection',
+      handler: RetrievesSingleSmartCollectionHandler(),
+    ),
 
-ApiService(
-  name: 'Count Smart Collections',
-  endpoint: '/smart_collections/count',
-  category: ApiCategory.Products,
-  subcategory: 'Smart Collection',
-  handler: RetrieveCountOfSmartCollectionsHandler(),
-),
+    ApiService(
+      name: 'Count Smart Collections',
+      endpoint: '/smart_collections/count',
+      category: ApiCategory.Products,
+      subcategory: 'Smart Collection',
+      handler: RetrieveCountOfSmartCollectionsHandler(),
+    ),
 
-ApiService(
-  name: 'Update Smart Collection',
-  endpoint: '/smart_collections/:id',
-  category: ApiCategory.Products,
-  subcategory: 'Smart Collection',
-  handler: UpdatesSmartCollectionHandler(),
-),
-ApiService(
-  name: 'Update Product Order in Smart Collection',
-  endpoint: '/smart_collections/:id/order',
-  category: ApiCategory.Products,
-  subcategory: 'Smart Collection',
-  handler: UpdateProductOrderHandler(),
-),
+    ApiService(
+      name: 'Update Smart Collection',
+      endpoint: '/smart_collections/:id',
+      category: ApiCategory.Products,
+      subcategory: 'Smart Collection',
+      handler: UpdatesSmartCollectionHandler(),
+    ),
+    ApiService(
+      name: 'Update Product Order in Smart Collection',
+      endpoint: '/smart_collections/:id/order',
+      category: ApiCategory.Products,
+      subcategory: 'Smart Collection',
+      handler: UpdateProductOrderHandler(),
+    ),
 
-ApiService(
-  name: 'Delete Smart Collection',
-  endpoint: '/smart_collections/:id',
-  category: ApiCategory.Products,
-  subcategory: 'Smart Collection',
-  handler: DeletesSmartCollectionHandler(),
-),
+    ApiService(
+      name: 'Delete Smart Collection',
+      endpoint: '/smart_collections/:id',
+      category: ApiCategory.Products,
+      subcategory: 'Smart Collection',
+      handler: DeletesSmartCollectionHandler(),
+    ),
 
-ApiService(
-  name: 'Create Smart Collection',
-  endpoint: '/smart_collections',
-  category: ApiCategory.Products,
-  subcategory: 'Smart Collection',  
-  handler: CreatesSmartCollectionHandler(),
-),
+    ApiService(
+      name: 'Create Smart Collection',
+      endpoint: '/smart_collections',
+      category: ApiCategory.Products,
+      subcategory: 'Smart Collection',
+      handler: CreatesSmartCollectionHandler(),
+    ),
   ];
 
   static void initialize() {}
@@ -1968,20 +2349,18 @@ ApiService(
         return 'Gift Card';
       case ApiCategory.metafield:
         return 'Metafield';
-      case ApiCategory.storeProperties:
-        return 'Store Properties';
       case ApiCategory.onlineStore:
         return 'Online Store';
       case ApiCategory.products:
         return 'Products';
+      case ApiCategory.storeProperties:
+        return 'Store Properties';
       case ApiCategory.tendertransaction:
         return 'Tender Transaction';
       case ApiCategory.webhooks:
         return 'Webhooks';
-        case ApiCategory.Products:
+      case ApiCategory.Products:
         return 'Smart Collection';
-      case ApiCategory.products:
-        return 'Products';
     }
   }
 }
