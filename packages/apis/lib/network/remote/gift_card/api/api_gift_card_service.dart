@@ -13,6 +13,7 @@ import 'package:apis/network/remote/gift_card/freezed_model/response/retrieves_s
 import 'package:apis/network/remote/gift_card/freezed_model/response/searches_for_gift_cards_response.dart';
 import 'package:apis/network/remote/gift_card/freezed_model/response/updates_gift_card_response.dart';
 import 'package:apis/network/remote/gift_card/freezed_model/response/create_gift_card_with_custom_code_response.dart';
+import 'package:apis/network/remote/gift_card/freezed_model/response/automatically_create_gift_card_response.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/http.dart';
@@ -65,7 +66,7 @@ abstract class GiftCardServiceClient implements GiftCardService {
   /// 🤖 Automatically create a gift card
   @override
   @POST('/api/{api_version}/gift_cards.json')
-  Future<void> automaticallyCreateGiftCard({
+  Future<AutomaticallyCreateGiftCardResponse> automaticallyCreateGiftCard({
     @Path('api_version') required String apiVersion,
     @Body() required AutomaticallyCreateGiftCardRequest model,
   });
