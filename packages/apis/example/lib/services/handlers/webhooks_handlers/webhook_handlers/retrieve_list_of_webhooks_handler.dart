@@ -4,7 +4,6 @@ import 'package:example/services/api_service_registry.dart';
 import 'package:get_it/get_it.dart';
 import '../../../api_request_handler.dart';
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
 
 /// ******************************************************************
 /// ********** 📋 RETRIEVE LIST OF WEBHOOKS HANDLER 📋 ****
@@ -35,15 +34,15 @@ class RetrieveListOfWebhooksHandler implements ApiRequestHandler {
         
         debugPrint('🔧 Parameters: fields=$fieldsParam, address=$address, topic=$topic, since_id=$sinceId');
         
-        // When fields parameter is provided, make a direct API call
+        // Use GetIt service for consistent authentication and approach
         if (fieldsParam != null && fieldsParam.trim().isNotEmpty) {
           return await _handleFieldFiltering(fieldsParam, address, topic, sinceId, 
-            createdAtMin, createdAtMax, updatedAtMin, updatedAtMax, limit);  // Add limit here
+            createdAtMin, createdAtMax, updatedAtMin, updatedAtMax, limit);
         }
         
-        // Normal path without field filtering
+        // Standard request using the GetIt service
         return await _handleStandardRequest(address, topic, sinceId, 
-          createdAtMin, createdAtMax, updatedAtMin, updatedAtMax, limit, fieldsParam);  // Add limit here
+          createdAtMin, createdAtMax, updatedAtMin, updatedAtMax, limit, fieldsParam);
       }
       
       return {
@@ -63,111 +62,71 @@ class RetrieveListOfWebhooksHandler implements ApiRequestHandler {
     }
   }
   
-  // Handle field filtering by making a direct API call
+  // Handle field filtering with proper field filtering implementation
   Future<Map<String, dynamic>> _handleFieldFiltering(
       String fields, String? address, String? topic, String? sinceId,
       String? createdAtMin, String? createdAtMax, String? updatedAtMin, String? updatedAtMax,
-      int? limit) async {  // Added limit parameter
-    debugPrint('📌 Using direct API call for field filtering: fields=$fields');
+      int? limit) async {
+    debugPrint('📌 Using GetIt service for field filtering: fields=$fields');
     
-    final baseUrl = ApiNetwork.baseUrl;
-    final apiVersion = ApiNetwork.apiVersion;
-    final shopifyToken = ApiNetwork.shopifyAccessToken;
+    final service = GetIt.I.get<WebhookService>();
     
-    // Start building URL with no query parameters
-    String url = '$baseUrl/api/$apiVersion/webhooks.json';
+    // Only pass non-empty parameters
+    final response = await service.getWebhooks(
+      apiVersion: ApiNetwork.apiVersion,
+      address: address?.trim().isNotEmpty == true ? address : null,
+      topic: topic?.trim().isNotEmpty == true ? topic : null,
+      since_id: sinceId?.trim().isNotEmpty == true ? sinceId : null,
+      created_at_min: createdAtMin?.trim().isNotEmpty == true ? createdAtMin : null,
+      created_at_max: createdAtMax?.trim().isNotEmpty == true ? createdAtMax : null,
+      updated_at_min: updatedAtMin?.trim().isNotEmpty == true ? updatedAtMin : null,
+      updated_at_max: updatedAtMax?.trim().isNotEmpty == true ? updatedAtMax : null,
+      limit: limit,
+    );
     
-    // Create a map of query parameters, only including non-null values
-    final Map<String, dynamic> queryParams = {};
-    if (fields.trim().isNotEmpty) queryParams['fields'] = fields;
-    if (address != null && address.trim().isNotEmpty) queryParams['address'] = address;
-    if (topic != null && topic.trim().isNotEmpty) queryParams['topic'] = topic;
-    if (sinceId != null && sinceId.trim().isNotEmpty) queryParams['since_id'] = sinceId;
-    if (createdAtMin != null && createdAtMin.trim().isNotEmpty) queryParams['created_at_min'] = createdAtMin;
-    if (createdAtMax != null && createdAtMax.trim().isNotEmpty) queryParams['created_at_max'] = createdAtMax;
-    if (updatedAtMin != null && updatedAtMin.trim().isNotEmpty) queryParams['updated_at_min'] = updatedAtMin;
-    if (updatedAtMax != null && updatedAtMax.trim().isNotEmpty) queryParams['updated_at_max'] = updatedAtMax;
-    if (limit != null) queryParams['limit'] = limit.toString();  // Add this line
+    final webhooks = response.webhooks ?? [];
+    debugPrint('📊 Received ${webhooks.length} webhooks');
     
-    // Only add the query string if we have parameters
-    if (queryParams.isNotEmpty) {
-      final queryString = queryParams.entries
-          .map((entry) => '${entry.key}=${Uri.encodeComponent(entry.value)}')
-          .join('&');
-      url = '$url?$queryString';
+    if (webhooks.isEmpty) {
+      return {
+        "status": "success",
+        "webhooks": [],
+        "count": 0,
+        "message": "No webhooks found",
+        "timestamp": DateTime.now().toIso8601String(),
+      };
     }
     
-    debugPrint('🔗 Making request to: $url');
+    // Parse the fields parameter and filter each webhook
+    final requestedFields = fields.split(',').map((f) => f.trim()).toSet();
     
-    // Make direct API call
-    try {
-      final dio = Dio();
-      final response = await dio.get(
-        url,
-        options: Options(
-          headers: {
-            'Content-Type': 'application/json',
-            'X-Shopify-Access-Token': shopifyToken,
-          },
-        ),
+    final filteredWebhooks = webhooks.map((webhook) {
+      final fullJson = webhook.toJson();
+      return Map<String, dynamic>.fromEntries(
+        fullJson.entries.where((entry) => requestedFields.contains(entry.key))
       );
-      
-      debugPrint('✅ Response status: ${response.statusCode}');
-      
-      if (response.data is Map) {
-        final data = Map<String, dynamic>.from(response.data as Map);
-        
-        return {
-          "status": "success",
-          "appliedFilters": queryParams,
-          "data": data,
-          "count": (data['webhooks'] as List?)?.length ?? 0,
-          "timestamp": DateTime.now().toIso8601String(),
-        };
-      } else {
-        throw Exception('Unexpected response format: ${response.data}');
-      }
-    } catch (e) {
-      debugPrint('❌ Direct API error: $e');
-      
-      // Handle Dio errors with response data (Shopify error messages)
-      if (e is DioException && e.response != null && e.response?.data != null) {
-        final responseData = e.response!.data;
-        final statusCode = e.response!.statusCode;
-        
-        // Try to parse Shopify error messages
-        if (responseData is Map && responseData.containsKey('errors')) {
-          return {
-            "status": "error",
-            "statusCode": statusCode,
-            "shopifyErrors": responseData['errors'],
-            "message": "Shopify API Error: ${_formatShopifyErrors(responseData['errors'])}",
-            "timestamp": DateTime.now().toIso8601String(),
-          };
-        }
-        
-        // Generic response error
-        return {
-          "status": "error",
-          "statusCode": statusCode,
-          "message": "API Error: ${e.message}",
-          "responseData": responseData,
-          "timestamp": DateTime.now().toIso8601String(),
-        };
-      }
-      
-      throw e;
-    }
+    }).toList();
+    
+    debugPrint('✅ Successfully retrieved and filtered ${filteredWebhooks.length} webhooks. Fields: ${requestedFields.join(', ')}');
+    
+    return {
+      "status": "success",
+      "webhooks": filteredWebhooks,
+      "count": filteredWebhooks.length,
+      "fields_filtered": requestedFields.toList(),
+      "message": "Webhooks successfully retrieved with filtered fields",
+      "timestamp": DateTime.now().toIso8601String(),
+    };
   }
-  
-  // Standard request using the model
+
+  // Standard request using the GetIt service
   Future<Map<String, dynamic>> _handleStandardRequest(
       String? address, String? topic, String? sinceId,
       String? createdAtMin, String? createdAtMax, String? updatedAtMin, String? updatedAtMax,
-      int? limit, String? fields) async {  // Added limit parameter
-    debugPrint('📌 Using standard model-based approach');
+      int? limit, String? fields) async {
+    debugPrint('📌 Using standard GetIt service approach');
     
-    final service = GetIt.I.get<GetWebhooksService>();
+    final service = GetIt.I.get<WebhookService>();
     
     // Only pass non-empty parameters
     final response = await service.getWebhooks(
@@ -187,36 +146,14 @@ class RetrieveListOfWebhooksHandler implements ApiRequestHandler {
     
     return {
       "status": "success",
-      "appliedFilters": {
-        if (address != null) "address": address,
-        if (topic != null) "topic": topic,
-        if (sinceId != null) "since_id": sinceId,
-        if (createdAtMin != null) "created_at_min": createdAtMin,
-        if (createdAtMax != null) "created_at_max": createdAtMax,
-        if (updatedAtMin != null) "updated_at_min": updatedAtMin,
-        if (updatedAtMax != null) "updated_at_max": updatedAtMax,
-        if (limit != null) "limit": limit.toString(),  // Add this line
-      },
-      "data": {
-        "webhooks": response.webhooks?.map((c) => c.toJson()).toList() ?? []
-      },
+      "webhooks": response.webhooks?.map((c) => c.toJson()).toList() ?? [],
       "count": response.webhooks?.length ?? 0,
+      "message": "Webhooks successfully retrieved",
       "timestamp": DateTime.now().toIso8601String(),
     };
   }
 
   // Helper function to format Shopify errors
-  String _formatShopifyErrors(dynamic errors) {
-    if (errors is Map) {
-      return errors.entries
-          .map((entry) => "${entry.key}: ${entry.value}")
-          .join(", ");
-    } else if (errors is String) {
-      return errors;
-    } else {
-      return errors.toString();
-    }
-  }
 
   @override
   List<String> get supportedMethods => ['GET'];
