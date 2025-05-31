@@ -4,7 +4,6 @@ import 'package:example/services/api_service_registry.dart';
 import 'package:get_it/get_it.dart';
 import '../../../api_request_handler.dart';
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
 
 /// ******************************************************************
 /// ************* 🔍 RETRIEVE A USAGE CHARGE HANDLER 🔍 ********
@@ -81,57 +80,54 @@ class RetrieveAUsageChargeHandler implements ApiRequestHandler {
     }
   }
 
-  // Handle field filtering by making a direct API call
+  // Handle field filtering using GetIt service with proper field filtering
   Future<Map<String, dynamic>> _handleFieldFiltering(int recurringApplicationChargeId, int id, String fields) async {
-    debugPrint('📌 Using direct API call for field filtering: fields=$fields');
+    debugPrint('📌 Using GetIt service for field filtering: fields=$fields');
     
-    final baseUrl = ApiNetwork.baseUrl;
-    final apiVersion = ApiNetwork.apiVersion;
-    final shopifyToken = ApiNetwork.shopifyAccessToken;
-    
-    // Build URL with query parameters
-    String url = '$baseUrl/api/$apiVersion/recurring_application_charges/$recurringApplicationChargeId/usage_charges/$id.json?fields=$fields';
-    
-    debugPrint('🔗 Making request to: $url');
-    
-    // Make direct API call
     try {
-      final dio = Dio();
-      final response = await dio.get(
-        url,
-        options: Options(
-          headers: {
-            'Content-Type': 'application/json',
-            'X-Shopify-Access-Token': shopifyToken,
-          },
-        ),
+      final service = GetIt.I.get<UsageChargeService>();
+      final response = await service.getUsageCharge(
+        apiVersion: ApiNetwork.apiVersion,
+        recurringApplicationChargeId: recurringApplicationChargeId,
+        id: id,
       );
       
-      debugPrint('✅ Response status: ${response.statusCode}');
-      
-      if (response.data is Map) {
-        final data = Map<String, dynamic>.from(response.data as Map);
-        
+      final charge = response.usageCharge;
+      if (charge == null) {
         return {
-          "status": "success",
-          "appliedFilters": {
-            "fields": fields,
-          },
-          "data": data,
+          "status": "error",
+          "message": "Usage charge not found or no data returned",
           "timestamp": DateTime.now().toIso8601String(),
         };
-      } else {
-        throw Exception('Unexpected response format: ${response.data}');
       }
+      
+      // Parse the fields parameter and filter the response
+      final requestedFields = fields.split(',').map((f) => f.trim()).toSet();
+      final fullJson = charge.toJson();
+      
+      // Create a new map with only the requested fields
+      final filteredCharge = Map<String, dynamic>.fromEntries(
+        fullJson.entries.where((entry) => requestedFields.contains(entry.key))
+      );
+      
+      debugPrint('✅ Successfully retrieved and filtered usage charge. Fields: ${requestedFields.join(', ')}');
+      
+      return {
+        "status": "success",
+        "usage_charge": filteredCharge,
+        "fields_filtered": requestedFields.toList(),
+        "message": "Usage charge successfully retrieved with filtered fields",
+        "timestamp": DateTime.now().toIso8601String(),
+      };
     } catch (e) {
-      debugPrint('❌ Direct API error: $e');
+      debugPrint('❌ GetIt service error: $e');
       throw e;
     }
   }
   
-  // Standard request using the model
+  // Standard request using GetIt service
   Future<Map<String, dynamic>> _handleStandardRequest(int recurringApplicationChargeId, int id) async {
-    final service = GetIt.I.get<GetUsageChargeService>();
+    final service = GetIt.I.get<UsageChargeService>();
     final response = await service.getUsageCharge(
       apiVersion: ApiNetwork.apiVersion,
       recurringApplicationChargeId: recurringApplicationChargeId,
@@ -149,12 +145,10 @@ class RetrieveAUsageChargeHandler implements ApiRequestHandler {
     
     debugPrint('✅ Successfully retrieved usage charge');
     
-    // REMOVE appliedFilters - match the pattern in application_credit handler
     return {
       "status": "success",
-      "data": {
-        "usage_charge": charge.toJson()
-      },
+      "usage_charge": charge.toJson(),
+      "message": "Usage charge successfully retrieved",
       "timestamp": DateTime.now().toIso8601String(),
     };
   }
