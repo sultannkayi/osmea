@@ -23,6 +23,7 @@ abstract class RetrievesSingleEvent {
   Future<RetrievesSingleEventsResponse> retrievesSingleEvent({
     required String apiVersion,
     required int eventId,
+    String? fields,
   });
 }
 

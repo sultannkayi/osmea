@@ -51,6 +51,7 @@ abstract class RetrievesSingleEventClient implements RetrievesSingleEvent {
   Future<RetrievesSingleEventsResponse> retrievesSingleEvent({
     @Path('api_version') required String apiVersion,
     @Path('event_id') required int eventId,
+    @Query('fields') String? fields,
   });
 }
 
