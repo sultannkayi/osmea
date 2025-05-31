@@ -4,7 +4,6 @@ import 'package:example/services/api_service_registry.dart';
 import 'package:get_it/get_it.dart';
 import '../../../api_request_handler.dart';
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
 
 /// ******************************************************************
 /// ************* 📋 RETRIEVE LIST OF USAGE CHARGES HANDLER 📋 ********
@@ -72,63 +71,56 @@ class RetrieveListOfUsageChargesHandler implements ApiRequestHandler {
     }
   }
 
-  // Handle field filtering by making a direct API call
+  // Handle field filtering with proper field filtering implementation
   Future<Map<String, dynamic>> _handleFieldFiltering(int recurringApplicationChargeId, String fields) async {
-    debugPrint('📌 Using direct API call for field filtering: fields=$fields');
+    debugPrint('📌 Using GetIt service for field filtering: fields=$fields');
     
-    final baseUrl = ApiNetwork.baseUrl;
-    final apiVersion = ApiNetwork.apiVersion;
-    final shopifyToken = ApiNetwork.shopifyAccessToken;
+    final service = GetIt.I.get<UsageChargeService>();
+    final response = await service.getUsageCharges(
+      apiVersion: ApiNetwork.apiVersion,
+      recurringApplicationChargeId: recurringApplicationChargeId,
+    );
     
-    // Build URL with query parameters
-    String url = '$baseUrl/api/$apiVersion/recurring_application_charges/$recurringApplicationChargeId/usage_charges.json?fields=$fields';
+    final charges = response.usageCharges ?? [];
+    debugPrint('📊 Received ${charges.length} usage charges');
     
-    debugPrint('🔗 Making request to: $url');
-    
-    // Make direct API call
-    try {
-      final dio = Dio();
-      final response = await dio.get(
-        url,
-        options: Options(
-          headers: {
-            'Content-Type': 'application/json',
-            'X-Shopify-Access-Token': shopifyToken,
-          },
-        ),
-      );
-      
-      debugPrint('✅ Response status: ${response.statusCode}');
-      
-      if (response.data is Map) {
-        final data = Map<String, dynamic>.from(response.data as Map);
-        
-        // Safely handle possibly null usage_charges
-        final chargesList = data['usage_charges'] as List? ?? [];
-        
-        return {
-          "status": "success",
-          "appliedFilters": {
-            "fields": fields,
-          },
-          "data": data,
-          "count": chargesList.length,
-          "timestamp": DateTime.now().toIso8601String(),
-        };
-      } else {
-        throw Exception('Unexpected response format: ${response.data}');
-      }
-    } catch (e) {
-      debugPrint('❌ Direct API error: $e');
-      throw e;
+    if (charges.isEmpty) {
+      return {
+        "status": "success",
+        "usage_charges": [],
+        "count": 0,
+        "message": "No usage charges found",
+        "timestamp": DateTime.now().toIso8601String(),
+      };
     }
+    
+    // Parse the fields parameter and filter each charge
+    final requestedFields = fields.split(',').map((f) => f.trim()).toSet();
+    
+    final filteredCharges = charges.map((charge) {
+      final fullJson = charge.toJson();
+      return Map<String, dynamic>.fromEntries(
+        fullJson.entries.where((entry) => requestedFields.contains(entry.key))
+      );
+    }).toList();
+    
+    debugPrint('✅ Successfully retrieved and filtered ${filteredCharges.length} usage charges. Fields: ${requestedFields.join(', ')}');
+    
+    return {
+      "status": "success",
+      "usage_charges": filteredCharges,
+      "count": filteredCharges.length,
+      "fields_filtered": requestedFields.toList(),
+      "message": "Usage charges successfully retrieved with filtered fields",
+      "timestamp": DateTime.now().toIso8601String(),
+    };
   }
   
-  // Standard request using the model
+  // Standard request using the GetIt service
   Future<Map<String, dynamic>> _handleStandardRequest(int recurringApplicationChargeId) async {
-    debugPrint('📌 Using standard model-based approach');
+    debugPrint('📌 Using standard GetIt service approach');
     
-    final service = GetIt.I.get<GetUsageChargesService>();
+    final service = GetIt.I.get<UsageChargeService>();
     
     try {
       final response = await service.getUsageCharges(
@@ -142,10 +134,9 @@ class RetrieveListOfUsageChargesHandler implements ApiRequestHandler {
       
       return {
         "status": "success",
-        "data": {
-          "usage_charges": charges.map((c) => c.toJson()).toList()
-        },
+        "usage_charges": charges.map((c) => c.toJson()).toList(),
         "count": charges.length,
+        "message": "Usage charges successfully retrieved",
         "timestamp": DateTime.now().toIso8601String(),
       };
     } catch (e) {
