@@ -41,7 +41,7 @@ class DeleteRecurringApplicationChargeHandler implements ApiRequestHandler {
         debugPrint('🗑️ Deleting recurring application charge with ID: $id');
         
         // Call the API service
-        final service = GetIt.I.get<DeleteRecurringApplicationChargeService>();
+        final service = GetIt.I.get<RecurringApplicationChargeService>();
         await service.deleteRecurringApplicationCharge(
           apiVersion: ApiNetwork.apiVersion,
           id: id,
