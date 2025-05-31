@@ -41,13 +41,12 @@ class DisableGiftCardHandler implements ApiRequestHandler {
           final payload = DisableGiftCardRequest(
             giftCard: GiftCard(
               id: giftCardIntId,
-              disabledAt: DateTime.now().toIso8601String(),
             ),
           );
 
           debugPrint("📤 Disable Gift Card Payload: ${payload.toJson()}");
 
-          await GetIt.I.get<GiftCardService>().disableGiftCard(
+          final response = await GetIt.I.get<GiftCardService>().disableGiftCard(
                 apiVersion: ApiNetwork.apiVersion,
                 giftCardId: giftCardId,
                 model: payload,
@@ -56,10 +55,37 @@ class DisableGiftCardHandler implements ApiRequestHandler {
           return {
             "status": "success",
             "message": "Gift card disabled successfully",
-            "gift_card_id": giftCardId,
+            "giftCard": {
+              "id": response.giftCard?.id,
+              "balance": response.giftCard?.balance,
+              "created_at": response.giftCard?.createdAt,
+              "updated_at": response.giftCard?.updatedAt,
+              "currency": response.giftCard?.currency,
+              "initial_value": response.giftCard?.initialValue,
+              "disabled_at": response.giftCard?.disabledAt,
+              "line_item_id": response.giftCard?.lineItemId,
+              "api_client_id": response.giftCard?.apiClientId,
+              "user_id": response.giftCard?.userId,
+              "customer_id": response.giftCard?.customerId,
+              "note": response.giftCard?.note,
+              "expires_on": response.giftCard?.expiresOn,
+              "template_suffix": response.giftCard?.templateSuffix,
+              "last_characters": response.giftCard?.lastCharacters,
+              "order_id": response.giftCard?.orderId,
+            },
             "timestamp": DateTime.now().toIso8601String(),
           };
         } catch (e) {
+          if (e.toString().contains('session has expired') ||
+              e.toString().contains('login?errorHint=no_identity_session')) {
+            return {
+              "status": "auth_error",
+              "message":
+                  "Your session has expired. Please re-authenticate to continue.",
+              "timestamp": DateTime.now().toIso8601String(),
+            };
+          }
+
           return {
             "status": "error",
             "message": "Failed to disable gift card: ${e.toString()}",
@@ -84,9 +110,9 @@ class DisableGiftCardHandler implements ApiRequestHandler {
           const ApiField(
             name: 'gift_card_id',
             label: 'Gift Card ID',
-            hint: 'ID of the gift card to disable',
+            hint: 'ID of the gift card to disable (e.g. 123456)',
             isRequired: true,
-            type: ApiFieldType.text,
+            type: ApiFieldType.number,
           ),
         ],
       };

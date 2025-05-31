@@ -15,13 +15,14 @@ class RetrievesSingleEventHandler implements ApiRequestHandler {
     // 🔍 Validate method
     if (method == 'GET') {
       try {
-        final apiVersion = ApiNetwork.apiVersion;
-        final eventId = int.parse(params['event_id'] ?? '0');
+        final eventIdStr = params['event_id'] as String?;
+        final eventId = eventIdStr != null ? int.tryParse(eventIdStr) : null;
+        final fields = params['fields'] as String?;
 
-        if (eventId <= 0) {
+        if (eventId == null) {
           return {
             "status": "error",
-            "message": "Valid event ID is required",
+            "message": "Event ID is required and must be a valid integer.",
             "timestamp": DateTime.now().toIso8601String(),
           };
         }
@@ -29,8 +30,9 @@ class RetrievesSingleEventHandler implements ApiRequestHandler {
         // 🚀 Make API call to get single event
         final response =
             await GetIt.I.get<RetrievesSingleEvent>().retrievesSingleEvent(
-                  apiVersion: apiVersion,
+                  apiVersion: ApiNetwork.apiVersion,
                   eventId: eventId,
+                  fields: fields,
                 );
 
         final event = response.event;
@@ -130,7 +132,14 @@ class RetrievesSingleEventHandler implements ApiRequestHandler {
           const ApiField(
             name: 'event_id',
             label: 'Event ID',
-            hint: 'ID of the event you want to retrieve',
+            hint: 'ID of the event to retrieve',
+            isRequired: true,
+            type: ApiFieldType.number,
+          ),
+          const ApiField(
+            name: 'fields',
+            label: 'Fields',
+            hint: 'Comma-separated list of fields to return (optional)',
           ),
         ],
       };

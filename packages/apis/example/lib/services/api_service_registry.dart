@@ -256,6 +256,7 @@ import 'package:example/services/handlers/gift_card_handlers/retrieves_single_gi
 import 'package:example/services/handlers/gift_card_handlers/searches_for_gift_card_handler.dart';
 import 'package:example/services/handlers/gift_card_handlers/updates_gift_card_handler.dart';
 import 'package:example/services/handlers/gift_card_handlers/automatically_create_gift_card_handler.dart';
+import 'package:example/services/handlers/gift_card_handlers/create_gift_card_with_custom_code_handler.dart';
 import 'package:example/services/handlers/billing_handlers/recurring_application_charge_handlers/retrieve_list_of_recurring_application_charges_handler.dart';
 import 'package:example/services/handlers/billing_handlers/recurring_application_charge_handlers/retrieve_a_recurring_application_charge_handler.dart';
 import 'package:example/services/handlers/billing_handlers/recurring_application_charge_handlers/customize_recurring_application_charge_handler.dart';
@@ -1001,6 +1002,13 @@ class ApiServiceRegistry {
       category: ApiCategory.giftCard,
       subcategory: 'Gift Card',
       handler: CreateNewGiftCardHandler(),
+    ),
+    ApiService(
+      name: 'Create Gift Card With Custom Code',
+      endpoint: '/gift_cards/custom_code',
+      category: ApiCategory.giftCard,
+      subcategory: 'Gift Card',
+      handler: CreateGiftCardWithCustomCodeHandler(),
     ),
     ApiService(
       name: 'Automatically Create Gift Card',

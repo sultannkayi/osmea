@@ -15,16 +15,14 @@ class RetrievesListOfEventsHandler implements ApiRequestHandler {
     // 🔍 Validate method
     if (method == 'GET') {
       try {
-        // Let's properly get the parameters
         final createdAtMin = params['created_at_min'] as String?;
         final createdAtMax = params['created_at_max'] as String?;
         final limitStr = params['limit'] as String?;
         final limit = limitStr != null ? int.tryParse(limitStr) : null;
         final sinceId = params['since_id'] as String?;
         final filter = params['filter'] as String?;
-        final sortBy = params['sort_by'] as String?;
-
-        // 🚀 Make API call to get events list using ApiNetwork.apiVersion
+        final fields = params['fields'] as String?;
+        final verb = params['verb'] as String?;
         final response =
             await GetIt.I.get<RetrievesListOfEvents>().retrievesListOfEvents(
                   apiVersion: ApiNetwork.apiVersion,
@@ -33,7 +31,8 @@ class RetrievesListOfEventsHandler implements ApiRequestHandler {
                   limit: limit,
                   sinceId: sinceId,
                   filter: filter,
-                  sortBy: sortBy,
+                  fields: fields,
+                  verb: verb,
                 );
 
         final events = response.events ?? [];
@@ -158,9 +157,14 @@ class RetrievesListOfEventsHandler implements ApiRequestHandler {
             hint: 'Filter expression (optional)',
           ),
           const ApiField(
-            name: 'sort_by',
-            label: 'Sort By',
-            hint: 'Field to sort by (optional)',
+            name: 'fields',
+            label: 'Fields',
+            hint: 'Comma-separated list of fields to return (optional)',
+          ),
+          const ApiField(
+            name: 'verb',
+            label: 'Verb',
+            hint: 'Filter by event type/verb (optional)',
           ),
         ],
       };

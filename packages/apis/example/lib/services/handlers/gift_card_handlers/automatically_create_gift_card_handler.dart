@@ -1,5 +1,9 @@
+import 'package:apis/apis.dart';
+import 'package:apis/network/remote/gift_card/abstract/gift_card_service.dart';
 import 'package:apis/network/remote/gift_card/freezed_model/request/automatically_create_gift_card_request.dart';
 import 'package:example/services/api_request_handler.dart';
+import 'package:flutter/foundation.dart';
+import 'package:get_it/get_it.dart';
 import './../../api_service_registry.dart';
 
 ///*******************************************************************
@@ -13,47 +17,73 @@ class AutomaticallyCreateGiftCardHandler implements ApiRequestHandler {
     switch (method) {
       case 'POST':
         try {
-          final idStr = params['id'];
-          final balance = params['balance'];
-          final createdAt = params['created_at'];
-          final updatedAt = params['updated_at'];
-          final currency = params['currency'];
-          final initialValue = params['initial_value'];
-          final code = params['code'];
-          final lastCharacters = params['last_characters'];
+          final initialValueStr = params['initial_value'] ?? '';
 
-          if (idStr == null || initialValue == null || currency == null) {
+          // ✅ Convert initialValue to int
+          final initialValue = int.tryParse(initialValueStr);
+
+          if (initialValue == null) {
             return {
               "status": "error",
-              "message":
-                  "Fields 'id', 'initial_value' and 'currency' are required.",
+              "message": "Initial value must be a valid number.",
               "timestamp": DateTime.now().toIso8601String(),
             };
           }
 
-          final request = AutomaticallyCreateGiftCardRequest(
-            giftCard: GiftCard(
-              id: int.tryParse(idStr),
-              balance: balance,
-              createdAt: createdAt,
-              updatedAt: updatedAt,
-              currency: currency,
-              initialValue: initialValue,
-              code: code,
-              lastCharacters: lastCharacters,
-            ),
+          final giftCardModel = GiftCard(
+            initialValue: initialValue,
           );
+
+          debugPrint(
+              '🎯 JSON being sent: ${AutomaticallyCreateGiftCardRequest(giftCard: giftCardModel).toJson()}');
+
+          final response = await GetIt.I
+              .get<GiftCardService>()
+              .automaticallyCreateGiftCard(
+                apiVersion: ApiNetwork.apiVersion,
+                model:
+                    AutomaticallyCreateGiftCardRequest(giftCard: giftCardModel),
+              );
 
           return {
             "status": "success",
-            "message": "Auto-created gift card prepared (simulation).",
-            "gift_card": request.toJson(),
+            "message": "Gift card automatically created successfully",
+            "giftCard": {
+              "id": response.giftCard?.id,
+              "initial_value": response.giftCard?.initialValue,
+              "currency": response.giftCard?.currency,
+              "balance": response.giftCard?.balance,
+              "note": response.giftCard?.note,
+              "code": response.giftCard?.code,
+              "created_at": response.giftCard?.createdAt,
+              "updated_at": response.giftCard?.updatedAt,
+              "last_characters": response.giftCard?.lastCharacters,
+              "expires_on": response.giftCard?.expiresOn,
+              "template_suffix": response.giftCard?.templateSuffix,
+              "api_client_id": response.giftCard?.apiClientId,
+              "customer_id": response.giftCard?.customerId,
+              "disabled_at": response.giftCard?.disabledAt,
+              "line_item_id": response.giftCard?.lineItemId,
+              "order_id": response.giftCard?.orderId,
+              "user_id": response.giftCard?.userId,
+            },
             "timestamp": DateTime.now().toIso8601String(),
           };
         } catch (e) {
+          if (e.toString().contains('session has expired') ||
+              e.toString().contains('login?errorHint=no_identity_session')) {
+            return {
+              "status": "auth_error",
+              "message":
+                  "Your session has expired. Please re-authenticate to continue.",
+              "timestamp": DateTime.now().toIso8601String(),
+            };
+          }
+
           return {
             "status": "error",
-            "message": "Failed to auto-create gift card: ${e.toString()}",
+            "message":
+                "Failed to automatically create gift card: ${e.toString()}",
             "timestamp": DateTime.now().toIso8601String(),
           };
         }
@@ -61,7 +91,7 @@ class AutomaticallyCreateGiftCardHandler implements ApiRequestHandler {
       default:
         return {
           "error":
-              "Method $method not supported. Only POST is allowed for auto-create.",
+              "Method $method not supported for Gift Card API. Only POST is allowed.",
         };
     }
   }
@@ -73,49 +103,11 @@ class AutomaticallyCreateGiftCardHandler implements ApiRequestHandler {
   Map<String, List<ApiField>> get requiredFields => {
         'POST': [
           const ApiField(
-            name: 'id',
-            label: 'Gift Card ID',
-            hint: 'Unique gift card ID',
-            isRequired: true,
-            type: ApiFieldType.number,
-          ),
-          const ApiField(
             name: 'initial_value',
             label: 'Initial Value',
-            hint: 'Gift card value',
-            isRequired: true,
+            hint: 'Gift card value as integer (e.g. 100)',
             type: ApiFieldType.number,
-          ),
-          const ApiField(
-            name: 'currency',
-            label: 'Currency',
-            hint: 'Currency code (e.g. USD)',
             isRequired: true,
-          ),
-          const ApiField(
-            name: 'balance',
-            label: 'Balance',
-            hint: 'Remaining balance',
-          ),
-          const ApiField(
-            name: 'created_at',
-            label: 'Created At',
-            hint: 'Date created (optional)',
-          ),
-          const ApiField(
-            name: 'updated_at',
-            label: 'Updated At',
-            hint: 'Date updated (optional)',
-          ),
-          const ApiField(
-            name: 'code',
-            label: 'Code',
-            hint: 'Generated gift card code',
-          ),
-          const ApiField(
-            name: 'last_characters',
-            label: 'Last Characters',
-            hint: 'Last 4 characters of the gift card',
           ),
         ],
       };

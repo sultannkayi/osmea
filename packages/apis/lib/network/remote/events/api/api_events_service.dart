@@ -10,9 +10,6 @@ import 'package:retrofit/retrofit.dart';
 
 part 'api_events_service.g.dart';
 
-/// 🌐 RetrievesListOfEventsClient
-/// Retrofit client for retrieving a list of events.
-/// Make sure ApiNetwork.storeName and shopifyAccessToken are set before using! 🏪🔐
 @RestApi()
 @Injectable(as: RetrievesListOfEvents)
 abstract class RetrievesListOfEventsClient implements RetrievesListOfEvents {
@@ -33,13 +30,11 @@ abstract class RetrievesListOfEventsClient implements RetrievesListOfEvents {
     @Query('limit') int? limit,
     @Query('since_id') String? sinceId,
     @Query('filter') String? filter,
-    @Query('sort_by') String? sortBy,
+    @Query('fields') String? fields,
+    @Query('verb') String? verb,
   });
 }
 
-/// 🌐 RetrievesSingleEventClient
-/// Retrofit client for retrieving a single event.
-/// Make sure ApiNetwork.storeName and shopifyAccessToken are set before using! 🏪🔐
 @RestApi()
 @Injectable(as: RetrievesSingleEvent)
 abstract class RetrievesSingleEventClient implements RetrievesSingleEvent {
@@ -56,12 +51,10 @@ abstract class RetrievesSingleEventClient implements RetrievesSingleEvent {
   Future<RetrievesSingleEventsResponse> retrievesSingleEvent({
     @Path('api_version') required String apiVersion,
     @Path('event_id') required int eventId,
+    @Query('fields') String? fields,
   });
 }
 
-/// 🌐 RetrievesCountEventsClient
-/// Retrofit client for retrieving the count of events.
-/// Make sure ApiNetwork.storeName and shopifyAccessToken are set before using! 🏪🔐
 @RestApi()
 @Injectable(as: RetrievesCountEvents)
 abstract class RetrievesCountEventsClient implements RetrievesCountEvents {

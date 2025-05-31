@@ -1,16 +1,16 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/gift_card/abstract/gift_card_service.dart';
-import 'package:apis/network/remote/gift_card/freezed_model/request/create_new_gift_card_request.dart';
+import 'package:apis/network/remote/gift_card/freezed_model/request/create_gift_card_with_custom_code_request.dart';
 import 'package:example/services/api_request_handler.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 import './../../api_service_registry.dart';
 
 ///*******************************************************************
-///*************** 🎁 CREATE NEW GIFT CARD HANDLER 🎁 ***************
+///*************** 🎫 CREATE GIFT CARD WITH CUSTOM CODE HANDLER 🎫 ***************
 ///*******************************************************************
 
-class CreateNewGiftCardHandler implements ApiRequestHandler {
+class CreateGiftCardWithCustomCodeHandler implements ApiRequestHandler {
   @override
   Future<Map<String, dynamic>> handleRequest(
       String method, Map<String, String> params) async {
@@ -18,51 +18,53 @@ class CreateNewGiftCardHandler implements ApiRequestHandler {
       case 'POST':
         try {
           final initialValueStr = params['initial_value'] ?? '';
-          final currency = params['currency'] ?? '';
+          final code = params['code'] ?? '';
 
           final initialValue = int.tryParse(initialValueStr);
 
-          if (initialValue == null || currency.isEmpty) {
+          if (initialValue == null || code.isEmpty) {
             return {
               "status": "error",
               "message":
-                  "Initial value must be a valid number and currency is required.",
+                  "Initial value must be a valid number and code is required.",
               "timestamp": DateTime.now().toIso8601String(),
             };
           }
 
           // 📋 Optional fields
           final note = params['note'];
+          final templateSuffix = params['template_suffix'];
 
           final giftCardModel = GiftCard(
             initialValue: initialValue,
-            currency: currency.toUpperCase(),
+            code: code,
             note: note,
+            templateSuffix: templateSuffix,
           );
 
           debugPrint(
-              '🎯 JSON being sent: ${CreateNewGiftCardRequest(giftCard: giftCardModel).toJson()}');
+              '🎯 JSON being sent: ${CreateGiftCardWithCustomCodeRequest(giftCard: giftCardModel).toJson()}');
 
           final response =
-              await GetIt.I.get<GiftCardService>().createNewGiftCard(
+              await GetIt.I.get<GiftCardService>().createGiftCardWithCustomCode(
                     apiVersion: ApiNetwork.apiVersion,
-                    model: CreateNewGiftCardRequest(giftCard: giftCardModel),
+                    model: CreateGiftCardWithCustomCodeRequest(
+                        giftCard: giftCardModel),
                   );
 
           return {
             "status": "success",
-            "message": "Gift card created successfully",
+            "message": "Gift card with custom code created successfully",
             "giftCard": {
               "id": response.giftCard?.id,
               "initial_value": response.giftCard?.initialValue,
-              "currency": response.giftCard?.currency,
-              "balance": response.giftCard?.balance,
-              "note": response.giftCard?.note,
               "code": response.giftCard?.code,
+              "note": response.giftCard?.note,
+              "template_suffix": response.giftCard?.templateSuffix,
+              "balance": response.giftCard?.balance,
+              "currency": response.giftCard?.currency,
               "created_at": response.giftCard?.createdAt,
-              "updated_at": response.giftCard?.updatedAt,
               "last_characters": response.giftCard?.lastCharacters,
-              "expires_on": response.giftCard?.expiresOn,
             },
             "timestamp": DateTime.now().toIso8601String(),
           };
@@ -79,7 +81,8 @@ class CreateNewGiftCardHandler implements ApiRequestHandler {
 
           return {
             "status": "error",
-            "message": "Failed to create gift card: ${e.toString()}",
+            "message":
+                "Failed to create gift card with custom code: ${e.toString()}",
             "timestamp": DateTime.now().toIso8601String(),
           };
         }
@@ -106,15 +109,20 @@ class CreateNewGiftCardHandler implements ApiRequestHandler {
             isRequired: true,
           ),
           const ApiField(
-            name: 'currency',
-            label: 'Currency',
-            hint: 'Currency code (e.g. USD)',
+            name: 'code',
+            label: 'Custom Code',
+            hint: 'Custom gift card code (e.g. WELCOME2024)',
             isRequired: true,
           ),
           const ApiField(
             name: 'note',
             label: 'Note',
             hint: 'Optional note about this card',
+          ),
+          const ApiField(
+            name: 'template_suffix',
+            label: 'Template Suffix',
+            hint: 'Optional template suffix',
           ),
         ],
       };

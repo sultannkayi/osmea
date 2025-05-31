@@ -13,7 +13,8 @@ abstract class RetrievesListOfEvents {
     int? limit,
     String? sinceId,
     String? filter,
-    String? sortBy,
+    String? fields,
+    String? verb,
   });
 }
 
@@ -22,6 +23,7 @@ abstract class RetrievesSingleEvent {
   Future<RetrievesSingleEventsResponse> retrievesSingleEvent({
     required String apiVersion,
     required int eventId,
+    String? fields,
   });
 }
 
