@@ -75,7 +75,7 @@ class CreateBasicRecurringApplicationChargeHandler implements ApiRequestHandler 
         );
         
         // Call the API service
-        final service = GetIt.I.get<CreateBasicRecurringApplicationChargeService>();
+        final service = GetIt.I.get<RecurringApplicationChargeService>();
         final response = await service.createBasicRecurringApplicationCharge(
           apiVersion: ApiNetwork.apiVersion,
           request: request,
