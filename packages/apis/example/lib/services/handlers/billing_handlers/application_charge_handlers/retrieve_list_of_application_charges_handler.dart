@@ -3,7 +3,6 @@ import 'package:apis/network/remote/billing/application_charge/abstract/applicat
 import 'package:example/services/api_service_registry.dart';
 import 'package:get_it/get_it.dart';
 import '../../../api_request_handler.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class RetrieveListOfApplicationChargesHandler implements ApiRequestHandler {
@@ -14,21 +13,21 @@ class RetrieveListOfApplicationChargesHandler implements ApiRequestHandler {
       if (method == 'GET') {
         // Parse parameters and ensure empty strings are treated as null
         final fieldsParam = params['fields'] as String?;
-        String? fields = (fieldsParam?.isEmpty ?? true) ? null : fieldsParam;
+        String? fields = (fieldsParam?.trim().isEmpty ?? true) ? null : fieldsParam?.trim();
 
         String? sinceId = params['since_id'] as String?;
-        if (sinceId?.isEmpty ?? true) {
+        if (sinceId?.trim().isEmpty ?? true) {
           sinceId = null; // Convert empty string to null
         }
 
         debugPrint('🔧 Parameters: fields=$fields, since_id=$sinceId');
         
-        // APPROACH 1: When fields parameter is provided, make a direct API call
+        // Use GetIt service for consistent authentication and approach
         if (fields != null && fields.isNotEmpty) {
           return await _handleFieldFiltering(fields, sinceId);
         }
         
-        // APPROACH 2: Normal path without field filtering
+        // Standard request using the GetIt service
         return await _handleStandardRequest(sinceId);
       }
       
@@ -49,66 +48,65 @@ class RetrieveListOfApplicationChargesHandler implements ApiRequestHandler {
     }
   }
   
-  // APPROACH 1: Handle field filtering by making a direct API call
+  // Handle field filtering using GetIt service with post-processing
   Future<Map<String, dynamic>> _handleFieldFiltering(String fields, String? sinceId) async {
-    debugPrint('📌 Using direct API call for field filtering: fields=$fields');
+    debugPrint('📌 Using GetIt service for field filtering: fields=$fields');
     
-    final baseUrl = ApiNetwork.baseUrl;
-    final apiVersion = ApiNetwork.apiVersion;
-    final shopifyToken = ApiNetwork.shopifyAccessToken;
-    
-    // Build URL with query parameters
-    String url = '$baseUrl/api/$apiVersion/application_charges.json?fields=$fields';
-
-    // Only add since_id if it has a meaningful value
-    if (sinceId != null && sinceId.isNotEmpty) {
-      url += '&since_id=$sinceId';
-    }
-    
-    debugPrint('🔗 Making request to: $url');
-    
-    // Make direct API call
     try {
-      final dio = Dio();
-      final response = await dio.get(
-        url,
-        options: Options(
-          headers: {
-            'Content-Type': 'application/json',
-            'X-Shopify-Access-Token': shopifyToken,
-          },
-        ),
+      final service = GetIt.I.get<ApplicationChargeService>();
+      final response = await service.getApplicationCharges(
+        apiVersion: ApiNetwork.apiVersion,
+        sinceId: sinceId,
       );
       
-      debugPrint('✅ Response status: ${response.statusCode}');
+      final charges = response.applicationCharges ?? [];
+      debugPrint('📊 Received ${charges.length} application charges');
       
-      if (response.data is Map) {
-        final data = Map<String, dynamic>.from(response.data as Map);
-        
+      if (charges.isEmpty) {
         return {
           "status": "success",
-          "appliedFilters": {
-            "fields": fields,
-            "since_id": sinceId,
-          },
-          "data": data,
-          "count": (data['application_charges'] as List?)?.length ?? 0,
+          "application_charges": [],
+          "count": 0,
+          "message": "No application charges found",
           "timestamp": DateTime.now().toIso8601String(),
         };
-      } else {
-        throw Exception('Unexpected response format: ${response.data}');
       }
+      
+      // Parse the fields parameter and filter each charge
+      final requestedFields = fields.split(',').map((f) => f.trim()).toSet();
+      
+      final filteredCharges = charges.map((charge) {
+        final fullJson = charge.toJson();
+        return Map<String, dynamic>.fromEntries(
+          fullJson.entries.where((entry) => requestedFields.contains(entry.key))
+        );
+      }).toList();
+      
+      debugPrint('✅ Successfully retrieved and filtered ${filteredCharges.length} application charges. Fields: ${requestedFields.join(', ')}');
+      
+      return {
+        "status": "success",
+        "application_charges": filteredCharges,
+        "count": filteredCharges.length,
+        "fields_filtered": requestedFields.toList(),
+        "message": "Application charges successfully retrieved with filtered fields",
+        "timestamp": DateTime.now().toIso8601String(),
+      };
     } catch (e) {
-      debugPrint('❌ Direct API error: $e');
-      throw e;  // Re-throw to be caught by the outer handler
+      debugPrint('❌ GetIt service error: $e');
+      return {
+        "status": "error",
+        "message": "Failed to retrieve application charges with field filtering: ${e.toString()}",
+        "timestamp": DateTime.now().toIso8601String(),
+      };
     }
   }
   
-  // APPROACH 2: Standard request using the model
+  // Standard request using the GetIt service
   Future<Map<String, dynamic>> _handleStandardRequest(String? sinceId) async {
-    debugPrint('📌 Using standard model-based approach');
+    debugPrint('📌 Using standard GetIt service approach');
     
-    final service = GetIt.I.get<GetApplicationChargesService>();
+    final service = GetIt.I.get<ApplicationChargeService>();
     final response = await service.getApplicationCharges(
       apiVersion: ApiNetwork.apiVersion,
       sinceId: sinceId,
@@ -118,14 +116,9 @@ class RetrieveListOfApplicationChargesHandler implements ApiRequestHandler {
     
     return {
       "status": "success",
-      "appliedFilters": {
-        "fields": null,
-        "since_id": sinceId, // Consistently use snake_case in JSON response
-      },
-      "data": {
-        "application_charges": response.applicationCharges?.map((c) => c.toJson()).toList() ?? [],
-      },
+      "application_charges": response.applicationCharges?.map((c) => c.toJson()).toList() ?? [],
       "count": response.applicationCharges?.length ?? 0,
+      "message": "Application charges successfully retrieved",
       "timestamp": DateTime.now().toIso8601String(),
     };
   }
