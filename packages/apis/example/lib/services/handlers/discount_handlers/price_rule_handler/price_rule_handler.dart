@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/network/remote/discounts/price_rule/abstract/price_rule.dart';
+import 'package:apis/network/remote/discounts/price_rule/abstract/price_rule_service.dart';
 import 'package:apis/network/remote/discounts/price_rule/freezed_model/request/create_price_rules_request.dart'
     as create_request;
 import 'package:apis/network/remote/discounts/price_rule/freezed_model/response/price_rule_response.dart';

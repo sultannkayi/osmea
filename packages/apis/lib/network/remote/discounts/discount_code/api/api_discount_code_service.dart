@@ -1,6 +1,6 @@
 import 'package:apis/apis.dart';
 import 'package:apis/dio_config/api_dio_client.dart';
-import 'package:apis/network/remote/discounts/discount_code/abstract/discount_code.dart';
+import 'package:apis/network/remote/discounts/discount_code/abstract/discount_code_service.dart';
 import 'package:apis/network/remote/discounts/discount_code/freezed_model/request/create_discount_code_creation_request.dart';
 import 'package:apis/network/remote/discounts/discount_code/freezed_model/request/create_discount_code_request.dart';
 import 'package:apis/network/remote/discounts/discount_code/freezed_model/request/update_discount_code_request.dart';

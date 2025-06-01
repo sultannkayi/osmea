@@ -1,6 +1,6 @@
 import 'package:apis/apis.dart';
 import 'package:apis/dio_config/api_dio_client.dart';
-import 'package:apis/network/remote/discounts/price_rule/abstract/price_rule.dart';
+import 'package:apis/network/remote/discounts/price_rule/abstract/price_rule_service.dart';
 import 'package:apis/network/remote/discounts/price_rule/freezed_model/request/create_price_rule_discount_collection_request.dart';
 import 'package:apis/network/remote/discounts/price_rule/freezed_model/request/create_price_rule_discount_order_request.dart';
 import 'package:apis/network/remote/discounts/price_rule/freezed_model/request/create_price_rule_discount_selected_customers_request.dart';
