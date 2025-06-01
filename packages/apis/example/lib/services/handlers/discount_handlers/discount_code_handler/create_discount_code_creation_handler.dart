@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:apis/apis.dart';
-import 'package:apis/network/remote/discounts/discount_code/abstract/discount_code.dart';
+import 'package:apis/network/remote/discounts/discount_code/abstract/discount_code_service.dart';
 import 'package:apis/network/remote/discounts/discount_code/freezed_model/request/create_discount_code_creation_request.dart';
 import 'package:apis/network/remote/discounts/discount_code/freezed_model/response/discount_code_creation_response.dart';
 import 'package:example/services/api_request_handler.dart';

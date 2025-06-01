@@ -1,4 +1,4 @@
-import 'package:apis/network/remote/discounts/discount_code/abstract/discount_code.dart';
+import 'package:apis/network/remote/discounts/discount_code/abstract/discount_code_service.dart';
 import 'package:apis/network/remote/discounts/discount_code/freezed_model/request/create_discount_code_request.dart'
     as request;
 import 'package:apis/network/remote/discounts/discount_code/freezed_model/request/update_discount_code_request.dart'
