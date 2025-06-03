@@ -1,6 +1,6 @@
 import 'package:apis/apis.dart';
 import 'package:apis/dio_config/api_dio_client.dart';
-import 'package:apis/network/remote/orders/refund/abstract/refund.dart';
+import 'package:apis/network/remote/orders/refund/abstract/refund_service.dart';
 import 'package:apis/network/remote/orders/refund/freezed_model/request/create_refund_calculate_request.dart';
 import 'package:apis/network/remote/orders/refund/freezed_model/request/create_refund_request.dart';
 import 'package:apis/network/remote/orders/refund/freezed_model/response/create_refund_calculate_response.dart';
