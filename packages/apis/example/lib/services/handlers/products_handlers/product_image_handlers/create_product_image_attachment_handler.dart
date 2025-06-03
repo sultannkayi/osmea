@@ -126,7 +126,7 @@ class CreateProductImageAttachmentHandler implements ApiRequestHandler {
       final response = await service.createProductImage(
         apiVersion: ApiNetwork.apiVersion,
         productId: productId,
-        request: request,
+        model: request,
       );
 
       return {

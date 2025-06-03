@@ -98,7 +98,7 @@ class ModifyProductImageAddMetafieldHandler implements ApiRequestHandler {
         apiVersion: ApiNetwork.apiVersion,
         productId: productId!,
         imageId: imageId,
-        request: request,
+        model: request,
       );
 
       return {

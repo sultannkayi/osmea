@@ -90,7 +90,7 @@ class CreateProductImageMetafieldHandler implements ApiRequestHandler {
           .createProductImageMetafield(
         apiVersion: ApiNetwork.apiVersion,
         productId: productId!,
-        body: request,
+        model: request,
       );
 
       return {

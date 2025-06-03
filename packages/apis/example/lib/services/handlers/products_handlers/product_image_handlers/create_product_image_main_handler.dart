@@ -66,10 +66,10 @@ class CreateProductImageMainHandler implements ApiRequestHandler {
       final response = await GetIt.I<ProductImageService>().createProductImageMain(
         apiVersion: ApiNetwork.apiVersion,
         productId: productId,
-        body: {
-          'image': {
-            'src': src,
-            if (alt != null) 'alt': alt,
+        model: {
+          "image": {
+            "src": src,
+            if (alt != null) "alt": alt,
           }
         },
       );

@@ -58,7 +58,7 @@ class CreateANewProductImageHandler implements ApiRequestHandler {
       final response = await productImageService.createProductImage(
         apiVersion: ApiNetwork.apiVersion,
         productId: productId,
-        request: request,
+        model: request,
       );
 
       return {

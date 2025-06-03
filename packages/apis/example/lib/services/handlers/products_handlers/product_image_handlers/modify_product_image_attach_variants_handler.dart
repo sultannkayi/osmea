@@ -79,7 +79,7 @@ class ModifyProductImageAttachVariantsHandler implements ApiRequestHandler {
         apiVersion: ApiNetwork.apiVersion,
         productId: productId,
         imageId: imageId,
-        body: body,
+        model: body,
       );
 
       return {
