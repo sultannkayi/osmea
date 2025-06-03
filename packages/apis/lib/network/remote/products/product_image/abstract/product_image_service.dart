@@ -44,7 +44,7 @@ abstract class ProductImageService {
   Future<ReceiveASingleProductImageResponse> createProductImage({
     required String apiVersion,
     required String productId,
-    required CreateANewProductImageRequest request,
+    required CreateANewProductImageRequest model,
   });
 
   /// 🖼️ PUT: Modify an existing product image
@@ -52,7 +52,7 @@ abstract class ProductImageService {
     required String apiVersion,
     required String productId,
     required String imageId,
-    required ModifyAnExistingProductImageRequest request,
+    required ModifyAnExistingProductImageRequest model,
   });
 
   /// 🗑️ DELETE: Remove an existing product image
@@ -65,26 +65,26 @@ abstract class ProductImageService {
   Future<CreateANewProductImageResponse> createProductImageResponse({
   required String apiVersion,
   required String productId,
-  required CreateANewProductImageRequest request,
+  required CreateANewProductImageRequest model,
 });
 
 Future<CreateProductImageMainResponse> createProductImageMain({
   required String apiVersion,
   required String productId,
-  required Map<String, dynamic> body,
+  required Map<String, dynamic> model,
 });
 
 /// 🧬 Create product image with variant(s)
 Future<CreateProductImageVariantResponse> createProductImageVariant({
   required String apiVersion,
   required String productId,
-  required Map<String, dynamic> body,
+  required Map<String, dynamic> model,
 });
 
 Future<CreateProductImageSourceUrlResponse> createProductImageSourceUrl({
     required String apiVersion,
     required String productId,
-    required Map<String, dynamic> body,
+    required Map<String, dynamic> model,
     String? fields,
   });
 
@@ -93,7 +93,7 @@ Future<ModifyProductImagePositionAltResponse> modifyProductImagePositionAlt({
   required String apiVersion,
   required String productId,
   required String imageId,
-  required ModifyProductImagePositionAltRequest request,
+  required ModifyProductImagePositionAltRequest model,
 });
 
 /// 🔄 Attach or update variant_ids for a product image
@@ -101,14 +101,14 @@ Future<ModifyProductImagePositionAltResponse> modifyProductImagePositionAlt({
     required String apiVersion,
     required String productId,
     required String imageId,
-    required Map<String, dynamic> body,
+    required Map<String, dynamic> model,
   });
 
   /// ➕ Create product image metafield
 Future<CreateProductImageMetafieldResponse> createProductImageMetafield({
   required String apiVersion,
   required String productId,
-  required CreateProductImageMetafieldRequest body,
+  required CreateProductImageMetafieldRequest model,
 });
 
 /// 🧩 Modify product image to add metafields
@@ -116,7 +116,7 @@ Future<ModifyProductImageAddMetafieldResponse> modifyProductImageAddMetafield({
   required String apiVersion,
   required String productId,
   required String imageId,
-  required ModifyProductImageAddMetafieldRequest request,
+  required ModifyProductImageAddMetafieldRequest model,
 });
 
 
