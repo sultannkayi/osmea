@@ -1,138 +1,154 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:example/styles/app_theme.dart';
+import 'theme_toggle_button.dart';
 
-/// Modern application header with API URL display and actions
+/// Modern IDE-style application header
 class AppHeader extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final String apiUrl;
   final VoidCallback onUrlCopied;
+  final VoidCallback onThemeToggle;
+  final bool isDarkMode;
 
   const AppHeader({
     super.key,
     required this.title,
     required this.apiUrl,
     required this.onUrlCopied,
+    required this.onThemeToggle,
+    this.isDarkMode = false,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return Container(
-      color: theme.colorScheme.surface,
-      child: SafeArea(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight: 50,
-            maxHeight: apiUrl.isEmpty ? 50 : 90,
+      decoration: BoxDecoration(
+        color: colorScheme.surface, // Use theme surface color
+        border: Border(
+          bottom: BorderSide(
+            color: colorScheme.primary.withValues(alpha: 0.5),
+            width: 2,
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // App title row - settings icon removed
-              SizedBox(
-                height: 50,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+        ),
+      ),
+      child: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        leadingWidth: 0,
+        leading: const SizedBox.shrink(),
+        title: Row(
+          children: [
+            // Logo and Title
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                gradient: AppTheme.createMethodGradient(
+                  'PATCH', // Use purple gradient from AppTheme
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(AppTheme.radiusSm),
+              ),
+              child: const Icon(
+                Icons.api_rounded,
+                color: Colors.white,
+                size: 20,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface, // Use theme onSurface color
+                  ),
+                ),
+                Text(
+                  "API Testing Platform",
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: colorScheme.onSurface.withValues(alpha: 0.6),
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(width: 24),
+            // API URL Display
+            if (apiUrl.isNotEmpty) ...[
+              Expanded(
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: colorScheme
+                        .surfaceContainerHighest, // Use theme surface variant
+                    borderRadius: BorderRadius.circular(AppTheme.radiusXs),
+                    border: Border.all(
+                      color: colorScheme.primary.withValues(alpha: 0.5),
+                      width: 1.5,
+                    ),
+                  ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      // App icon
                       Icon(
-                        Icons.api_rounded,
-                        color: theme.colorScheme.primary,
-                        size: 22,
+                        Icons.link_rounded,
+                        size: 14,
+                        color: colorScheme.onSurface.withValues(alpha: 0.7),
                       ),
-                      const SizedBox(width: 12),
-                      // App title
-                      Text(
-                        title,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                          color: theme.colorScheme.onSurface,
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: Text(
+                          apiUrl,
+                          style: TextStyle(
+                            fontFamily: 'monospace',
+                            fontSize: 12,
+                            color: colorScheme.onSurface.withValues(alpha: 0.8),
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      // No settings icon or spacer
+                      const SizedBox(width: 6),
+                      GestureDetector(
+                        onTap: onUrlCopied,
+                        child: Icon(
+                          Icons.copy_rounded,
+                          size: 14,
+                          color: colorScheme.primary, // Use theme primary color
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ),
-
-              // API URL display - only if not empty
-              if (apiUrl.isNotEmpty) _buildCompactUrlDisplay(context),
+              const SizedBox(width: 16),
             ],
-          ),
+          ],
         ),
-      ),
-    );
-  }
-
-  // Simplified URL display with fixed height
-  Widget _buildCompactUrlDisplay(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return SizedBox(
-      height: 36, // Fixed height prevents overflow
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Container(
-          decoration: BoxDecoration(
-            color: theme.colorScheme.surfaceContainerLow,
-            borderRadius: BorderRadius.circular(6),
+        actions: [
+          // Theme Toggle
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: ThemeToggleButton(
+              isDarkMode: isDarkMode,
+              onToggle: onThemeToggle,
+              size: 48,
+            ),
           ),
-          child: Row(
-            children: [
-              // Icon
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Icon(
-                  Icons.link_rounded,
-                  size: 16,
-                  color: theme.colorScheme.primary,
-                ),
-              ),
-              // URL text - scrollable
-              Expanded(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: Text(
-                      apiUrl,
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontFamily: 'monospace',
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              // Copy button - compact
-              IconButton(
-                icon: Icon(
-                  Icons.copy_rounded,
-                  size: 16,
-                  color: theme.colorScheme.primary,
-                ),
-                visualDensity: VisualDensity.compact,
-                padding: EdgeInsets.zero,
-                constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
-                tooltip: 'Copy URL',
-                onPressed: () {
-                  Clipboard.setData(ClipboardData(text: apiUrl));
-                  onUrlCopied();
-                },
-              ),
-            ],
-          ),
-        ),
+        ],
       ),
     );
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(apiUrl.isEmpty ? 50 : 90);
+  Size get preferredSize => const Size.fromHeight(60);
 }

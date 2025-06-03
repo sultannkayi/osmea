@@ -15,64 +15,72 @@ class HttpMethodSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        // Determine layout based on available width
-        final double availableWidth = constraints.maxWidth;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isNarrow = screenWidth < 400;
+    final isMobile = screenWidth < 600;
 
-        // For very small screens, use compact view
-        if (availableWidth < 350) {
-          return _buildCompactSelector(context);
-        }
-
-        // For medium screens, use scrollable view
-        if (availableWidth < 500) {
-          return _buildScrollableSelector(context);
-        }
-
-        // For larger screens, use segmented control
-        return _buildSegmentedSelector(context);
-      },
-    );
+    if (isNarrow) {
+      return _buildDropdownSelector(context, isNarrow);
+    } else {
+      return _buildChipSelector(context, isMobile);
+    }
   }
 
-  // Extra compact selector for very small screens
-  Widget _buildCompactSelector(BuildContext context) {
-    final theme = Theme.of(context);
+  Widget _buildDropdownSelector(BuildContext context, bool isNarrow) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(
+          horizontal: isNarrow ? 12 : 16, vertical: isNarrow ? 8 : 12),
       decoration: BoxDecoration(
+        color: isDark
+            ? Theme.of(context).colorScheme.surface.withValues(alpha: 0.05)
+            : Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(8),
-        color: theme.brightness == Brightness.dark
-            ? Color(0xFF2A2A2A)
-            : Color(0xFFF0F0F0),
+        border: Border.all(
+          color: isDark
+              ? Theme.of(context).colorScheme.surface.withValues(alpha: 0.1)
+              : Theme.of(context).colorScheme.outline,
+        ),
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
           value: selectedMethod,
           isExpanded: true,
-          borderRadius: BorderRadius.circular(8),
-          padding: EdgeInsets.symmetric(horizontal: 12),
-          icon: Icon(Icons.arrow_drop_down),
+          style: TextStyle(
+            fontFamily: 'monospace',
+            fontSize: isNarrow ? 12 : 14,
+            fontWeight: FontWeight.w600,
+          ),
+          dropdownColor: Theme.of(context).colorScheme.surfaceContainerHighest,
           items: methods.map((method) {
-            final methodStyle = AppTheme.getMethodStyle(method, context);
-
             return DropdownMenuItem<String>(
               value: method,
               child: Row(
-                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(
-                    methodStyle.iconData,
-                    color: methodStyle.textColor,
-                    size: 16,
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: AppTheme.getMethodColor(method),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Text(
+                      method,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 10,
+                      ),
+                    ),
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Text(
                     method,
                     style: TextStyle(
-                      color: methodStyle.textColor,
-                      fontWeight: FontWeight.w600,
+                      color: Theme.of(context).colorScheme.onSurface,
+                      fontFamily: 'monospace',
                     ),
                   ),
                 ],
@@ -89,146 +97,75 @@ class HttpMethodSelector extends StatelessWidget {
     );
   }
 
-  Widget _buildSegmentedSelector(BuildContext context) {
-    final theme = Theme.of(context);
+  Widget _buildChipSelector(BuildContext context, bool isMobile) {
+    return Wrap(
+      spacing: isMobile ? 8 : 12,
+      runSpacing: 8,
+      children: methods.map((method) {
+        final isSelected = selectedMethod == method;
+        final methodColor = AppTheme.getMethodColor(method);
 
-    return Container(
-      height: 48,
-      decoration: BoxDecoration(
-        color: theme.brightness == Brightness.dark
-            ? Color(0xFF2A2A2A)
-            : Color(0xFFF0F0F0),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        children: methods.map((method) {
-          final isSelected = method == selectedMethod;
-          final methodStyle = AppTheme.getMethodStyle(method, context);
-
-          return Expanded(
-            child: GestureDetector(
-              onTap: () => onMethodSelected(method),
-              child: AnimatedContainer(
-                duration: Duration(milliseconds: 200),
-                margin: EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  color: isSelected
-                      ? methodStyle.backgroundColor
-                      : Colors.transparent,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color: isSelected
-                        ? methodStyle.borderColor
-                        : Colors.transparent,
-                    width: 1.5,
-                  ),
+        return Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () => onMethodSelected(method),
+            borderRadius: BorderRadius.circular(8),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              padding: EdgeInsets.symmetric(
+                horizontal: isMobile ? 12 : 16,
+                vertical: isMobile ? 8 : 10,
+              ),
+              decoration: BoxDecoration(
+                color: isSelected
+                    ? methodColor
+                    : methodColor.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: methodColor,
+                  width: isSelected ? 2 : 1,
                 ),
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        methodStyle.iconData,
-                        color: isSelected
-                            ? methodStyle.textColor
-                            : theme.colorScheme.onSurface
-                                .withValues(alpha: 0.6),
-                        size: 18,
-                      ),
-                      SizedBox(width: 6),
-                      Text(
-                        method,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight:
-                              isSelected ? FontWeight.w600 : FontWeight.w400,
-                          color: isSelected
-                              ? methodStyle.textColor
-                              : theme.colorScheme.onSurface
-                                  .withValues(alpha: 0.7),
+                boxShadow: isSelected
+                    ? [
+                        BoxShadow(
+                          color: methodColor.withValues(alpha: 0.3),
+                          blurRadius: 8,
+                          offset: const Offset(0, 2),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
+                      ]
+                    : null,
               ),
-            ),
-          );
-        }).toList(),
-      ),
-    );
-  }
-
-  // Scrollable selector for medium screens
-  Widget _buildScrollableSelector(BuildContext context) {
-    return SizedBox(
-      height: 50,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: methods.length,
-        itemBuilder: (context, index) {
-          final method = methods[index];
-          final isSelected = method == selectedMethod;
-          final methodStyle = AppTheme.getMethodStyle(method, context);
-
-          return Padding(
-            padding: EdgeInsets.only(
-              right: index < methods.length - 1 ? 8 : 0,
-            ),
-            child: InkWell(
-              borderRadius: BorderRadius.circular(8),
-              onTap: () => onMethodSelected(method),
-              child: AnimatedContainer(
-                duration: Duration(milliseconds: 200),
-                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(
-                  color: isSelected
-                      ? methodStyle.backgroundColor
-                      : Colors.transparent,
-                  border: Border.all(
-                    color: isSelected
-                        ? methodStyle.borderColor
-                        : Theme.of(context)
-                            .colorScheme
-                            .outline
-                            .withValues(alpha: 0.3),
-                    width: 1.5,
-                  ),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      methodStyle.iconData,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: 8,
+                    height: 8,
+                    decoration: BoxDecoration(
                       color: isSelected
-                          ? methodStyle.textColor
-                          : Theme.of(context)
-                              .colorScheme
-                              .onSurface
-                              .withValues(alpha: 0.6),
-                      size: 16, // Slightly smaller for better fit
+                          ? Theme.of(context).colorScheme.onPrimary
+                          : methodColor,
+                      shape: BoxShape.circle,
                     ),
-                    SizedBox(width: 4), // Smaller spacing
-                    Text(
-                      method,
-                      style: TextStyle(
-                        fontSize: 13, // Slightly smaller font
-                        fontWeight:
-                            isSelected ? FontWeight.w600 : FontWeight.w400,
-                        color: isSelected
-                            ? methodStyle.textColor
-                            : Theme.of(context).colorScheme.onSurface,
-                      ),
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    method,
+                    style: TextStyle(
+                      color: isSelected
+                          ? Theme.of(context).colorScheme.onPrimary
+                          : methodColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: isMobile ? 13 : 14,
+                      fontFamily: 'monospace',
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      }).toList(),
     );
   }
 }

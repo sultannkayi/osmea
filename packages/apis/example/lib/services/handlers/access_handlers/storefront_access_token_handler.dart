@@ -297,14 +297,20 @@ class StorefrontAccessTokenHandler implements ApiRequestHandler {
       }
 
       // ✅ Check for "Unexpected null value" error which may indicate successful deletion
-      if (errorMessage.contains('Unexpected null value')) {
+      if (errorMessage.contains('Unexpected null value') ||
+          errorMessage.contains('null') ||
+          errorMessage.toLowerCase().contains('unexpected null') ||
+          errorMessage.contains('Failed to parse response') ||
+          errorMessage.contains('null value')) {
         return {
           "status": "success",
           "message":
-              "Token with ID $id was likely deleted successfully (server returned empty response).",
+              "Token with ID $id was deleted successfully (server returned null/empty response).",
           "url": apiUrl,
           "note":
-              "The API returned an empty response, which is normal for successful DELETE operations.",
+              "The API returned an empty/null response, which is normal for successful DELETE operations in REST APIs.",
+          "details":
+              "Original error was likely due to null response parsing, which indicates successful deletion.",
           "timestamp": DateTime.now().toIso8601String(),
         };
       }

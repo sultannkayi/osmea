@@ -71,7 +71,7 @@ class ModifyProductImageAddMetafieldHandler implements ApiRequestHandler {
     final value = params['value'];
     final valueType = params['value_type'];
 
-    if ([productId, imageId, namespace, key, value, valueType].any((e) => e == null || e!.isEmpty)) {
+    if ([productId, imageId, namespace, key, value, valueType].any((e) => e == null || e.isEmpty)) {
       return {
         'status': 'error',
         'message': 'Missing required parameters.',
