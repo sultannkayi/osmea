@@ -78,7 +78,7 @@ class CreateUsageChargeHandler implements ApiRequestHandler {
         final response = await service.createUsageCharge(
           apiVersion: ApiNetwork.apiVersion,
           recurringApplicationChargeId: recurringApplicationChargeId,
-          request: request,
+          model: request,
         );
         
         // Extract the created charge
