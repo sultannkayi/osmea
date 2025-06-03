@@ -17,8 +17,16 @@ class CreateImageAssetBaseHandler implements ApiRequestHandler {
     if (method == 'PUT') {
       // 🔍 Check if required parameters are provided
       // Try multiple possible parameter names, including URL pattern placeholders
-      final themeId = params['theme_id'] ?? params[':theme_id'] ?? params['id'] ?? params[':id'] ?? '';
-      final key = params['key'] ?? params[':key'] ?? params['asset_key'] ?? params[':asset_key'] ?? '';
+      final themeId = params['theme_id'] ??
+          params[':theme_id'] ??
+          params['id'] ??
+          params[':id'] ??
+          '';
+      final key = params['key'] ??
+          params[':key'] ??
+          params['asset_key'] ??
+          params[':asset_key'] ??
+          '';
 
       // Validate required parameters
       if (themeId.isEmpty) {
@@ -145,11 +153,13 @@ class CreateImageAssetBaseHandler implements ApiRequestHandler {
             name: 'theme_id',
             label: 'Theme ID',
             hint: 'Enter theme ID where the asset will be created',
+            isRequired: true,
           ),
           const ApiField(
             name: 'key',
             label: 'Asset Key',
             hint: 'Enter the asset key (e.g., assets/logo.png)',
+            isRequired: true,
           ),
           const ApiField(
             name: 'attachment',
