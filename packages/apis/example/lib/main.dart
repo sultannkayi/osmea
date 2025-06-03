@@ -1,7 +1,5 @@
-// 🎨✨ Import for app theme styles
-import 'package:example/styles/app_theme.dart';
-// 🏠📱 Import for the home view widget
-import 'package:example/views/home_view.dart';
+// 🏠📱 Import for the splash view widget
+import 'package:example/views/splash_view.dart';
 // 🌐🔧 Import for API client configuration
 import 'package:apis/dio_config/api_dio_client.dart';
 // 🧩🖼️ Import for Flutter material design widgets
@@ -42,18 +40,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 🎨🎯 Get the theme without passing context
-    final appTheme = AppTheme.getTheme();
-
-    return MaterialApp(
+    return const MaterialApp(
       // 🏷️📛 App title
       title: 'OSMEA APIs Explorer',
       // 🚫👁️ Hide debug banner
       debugShowCheckedModeBanner: false,
-      // 🎨📐 Set the app theme
-      theme: appTheme,
-      // 🏠🖥️ Set the home screen
-      home: const HomeView(),
+      // 🎬🖥️ Set the splash view as home
+      home: SplashView(),
     );
   }
 }
