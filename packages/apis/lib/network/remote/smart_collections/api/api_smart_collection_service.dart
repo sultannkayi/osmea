@@ -51,7 +51,7 @@ abstract class ApiSmartCollectionService implements SmartCollectionService {
       retrieveSingleSmartCollection({
     @Path('api_version') required String apiVersion,
     @Path('id') required String id,
-    @Query('fields') String? fields, // 👈 query olarak gönderilir
+    @Query('fields') String? fields, // 👈 sent as query parameter
   });
 
   /// 🔢 Retrieves count of smart collections
