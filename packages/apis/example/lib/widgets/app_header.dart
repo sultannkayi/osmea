@@ -65,7 +65,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "OSMEA APIs",
+                  title,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
@@ -90,8 +90,8 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
-                    color:
-                        colorScheme.surfaceContainerHighest, // Use theme surface variant
+                    color: colorScheme
+                        .surfaceContainerHighest, // Use theme surface variant
                     borderRadius: BorderRadius.circular(AppTheme.radiusXs),
                     border: Border.all(
                       color: colorScheme.primary.withValues(alpha: 0.5),
