@@ -112,7 +112,7 @@ abstract class ProductServiceClient implements ProductService {
   Future<CreateProductMultiVariantsOptionsResponse>
       createProductMultiVariantsOptions({
     @Path('api_version') required String apiVersion,
-    @Body() required CreateProductMultiVariantsOptionsRequest request,
+    @Body() required CreateProductMultiVariantsOptionsRequest model,
   });
 
   /// 🖼️ Create product with base image
@@ -120,7 +120,7 @@ abstract class ProductServiceClient implements ProductService {
   @POST('/api/{api_version}/products.json')
   Future<CreateProductBaseImageResponse> createProductBaseImage({
     @Path('api_version') required String apiVersion,
-    @Body() required CreateProductBaseImageRequest request,
+    @Body() required CreateProductBaseImageRequest model,
   });
 
   /// 🔢 Create product with multiple variants
@@ -128,7 +128,7 @@ abstract class ProductServiceClient implements ProductService {
   @POST('/api/{api_version}/products.json')
   Future<CreateProductMultiVariantsResponse> createProductMultiVariants({
     @Path('api_version') required String apiVersion,
-    @Body() required CreateProductMultiVariantsRequest request,
+    @Body() required CreateProductMultiVariantsRequest model,
   });
 
   /// 🏷️ Create product with metafield
@@ -136,7 +136,7 @@ abstract class ProductServiceClient implements ProductService {
   @POST('/api/{api_version}/products.json')
   Future<CreateProductWithMetafieldResponse> createProductWithMetafield({
     @Path('api_version') required String apiVersion,
-    @Body() required CreateProductWithMetafieldRequest request,
+    @Body() required CreateProductWithMetafieldRequest model,
   });
 
   /// 🔧 Create default product variant
@@ -144,7 +144,7 @@ abstract class ProductServiceClient implements ProductService {
   @POST('/api/{api_version}/products.json')
   Future<CreateDefaultProductVariantResponse> createDefaultProductVariant({
     @Path('api_version') required String apiVersion,
-    @Body() required CreateDefaultProductVariantRequest request,
+    @Body() required CreateDefaultProductVariantRequest model,
   });
 
   /// 📥 Create product with downloaded image
@@ -152,7 +152,7 @@ abstract class ProductServiceClient implements ProductService {
   @POST('/api/{api_version}/products.json')
   Future<CreateProductDownloadedImageResponse> createProductDownloadedImage({
     @Path('api_version') required String apiVersion,
-    @Body() required CreateProductDownloadedImageRequest request,
+    @Body() required CreateProductDownloadedImageRequest model,
   });
 
   /// 🚫 Create unpublished product
@@ -160,7 +160,7 @@ abstract class ProductServiceClient implements ProductService {
   @POST('/api/{api_version}/products.json')
   Future<CreateUnpublishedProductResponse> createUnpublishedProduct({
     @Path('api_version') required String apiVersion,
-    @Body() required CreateUnpublishedProductRequest request,
+    @Body() required CreateUnpublishedProductRequest model,
   });
 
   /// 🏷️ Add metafield to existing product
@@ -169,7 +169,7 @@ abstract class ProductServiceClient implements ProductService {
   Future<AddMetafieldToProductResponse> addMetafieldToProduct({
     @Path('api_version') required String apiVersion,
     @Path('product_id') required String productId,
-    @Body() required AddMetafieldToProductRequest request,
+    @Body() required AddMetafieldToProductRequest model,
   });
 
   /// 🖼️ Update product add image
@@ -178,7 +178,7 @@ abstract class ProductServiceClient implements ProductService {
   Future<UpdateProductAddImageResponse> updateProductAddImage({
     @Path('api_version') required String apiVersion,
     @Path('product_id') required String productId,
-    @Body() required UpdateProductAddImageRequest request,
+    @Body() required UpdateProductAddImageRequest model,
   });
 
   /// 🔄 Update product reorder image
@@ -187,7 +187,7 @@ abstract class ProductServiceClient implements ProductService {
   Future<UpdateProductReorderImageResponse> updateProductReorderImage({
     @Path('api_version') required String apiVersion,
     @Path('product_id') required String productId,
-    @Body() required UpdateProductReorderImageRequest request,
+    @Body() required UpdateProductReorderImageRequest model,
   });
 
   /// 📝 Update product title
@@ -196,7 +196,7 @@ abstract class ProductServiceClient implements ProductService {
   Future<UpdateProductTitleResponse> updateProductTitle({
     @Path('api_version') required String apiVersion,
     @Path('product_id') required String productId,
-    @Body() required UpdateProductTitleRequest request,
+    @Body() required UpdateProductTitleRequest model,
   });
 
   /// 🗑️ Clear product images
@@ -205,7 +205,7 @@ abstract class ProductServiceClient implements ProductService {
   Future<UpdateProductClearImagesResponse> updateProductClearImages({
     @Path('api_version') required String apiVersion,
     @Path('product_id') required String productId,
-    @Body() required UpdateProductClearImagesRequest request,
+    @Body() required UpdateProductClearImagesRequest model,
   });
 
   /// 🔍 Update product SEO
@@ -214,7 +214,7 @@ abstract class ProductServiceClient implements ProductService {
   Future<UpdateProductSeoResponse> updateProductSeo({
     @Path('api_version') required String apiVersion,
     @Path('product_id') required String productId,
-    @Body() required UpdateProductSeoRequest request,
+    @Body() required UpdateProductSeoRequest model,
   });
 
   /// 🔄 Update product with variant
@@ -223,7 +223,7 @@ abstract class ProductServiceClient implements ProductService {
   Future<UpdateProductWithVariantResponse> updateProductWithVariant({
     @Path('api_version') required String apiVersion,
     @Path('product_id') required String productId,
-    @Body() required UpdateProductWithVariantRequest request,
+    @Body() required UpdateProductWithVariantRequest model,
   });
 
   /// 🔄 Update product reorder variants
@@ -232,7 +232,7 @@ abstract class ProductServiceClient implements ProductService {
   Future<UpdateProductReorderVariantsResponse> updateProductReorderVariants({
     @Path('api_version') required String apiVersion,
     @Path('product_id') required String productId,
-    @Body() required UpdateProductReorderVariantsRequest request,
+    @Body() required UpdateProductReorderVariantsRequest model,
   });
 
   /// 👁️ Show hidden product
@@ -241,7 +241,7 @@ abstract class ProductServiceClient implements ProductService {
   Future<ShowHiddenProductResponse> showHiddenProduct({
     @Path('api_version') required String apiVersion,
     @Path('product_id') required String productId,
-    @Body() required ShowHiddenProductRequest request,
+    @Body() required ShowHiddenProductRequest model,
   });
 
   /// 🏷️ Update product tags
@@ -250,7 +250,7 @@ abstract class ProductServiceClient implements ProductService {
   Future<UpdateProductTagsResponse> updateProductTags({
     @Path('api_version') required String apiVersion,
     @Path('product_id') required String productId,
-    @Body() required UpdateProductTagsRequest request,
+    @Body() required UpdateProductTagsRequest model,
   });
 
   /// 🗑️ Delete product

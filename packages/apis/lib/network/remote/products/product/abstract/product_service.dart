@@ -87,113 +87,113 @@ abstract class ProductService {
   Future<CreateProductMultiVariantsOptionsResponse>
       createProductMultiVariantsOptions({
     required String apiVersion,
-    required CreateProductMultiVariantsOptionsRequest request,
+    required CreateProductMultiVariantsOptionsRequest model,
   });
 
   /// 🖼️ Create product with base image
   Future<CreateProductBaseImageResponse> createProductBaseImage({
     required String apiVersion,
-    required CreateProductBaseImageRequest request,
+    required CreateProductBaseImageRequest model,
   });
 
   /// 🔢 Create product with multiple variants
   Future<CreateProductMultiVariantsResponse> createProductMultiVariants({
     required String apiVersion,
-    required CreateProductMultiVariantsRequest request,
+    required CreateProductMultiVariantsRequest model,
   });
 
   /// 🏷️ Create product with metafield
   Future<CreateProductWithMetafieldResponse> createProductWithMetafield({
     required String apiVersion,
-    required CreateProductWithMetafieldRequest request,
+    required CreateProductWithMetafieldRequest model,
   });
 
   /// ➕ Create product with default variant
   Future<CreateDefaultProductVariantResponse> createDefaultProductVariant({
     required String apiVersion,
-    required CreateDefaultProductVariantRequest request,
+    required CreateDefaultProductVariantRequest model,
   });
 
   /// 📥 Create product with downloaded image
   Future<CreateProductDownloadedImageResponse> createProductDownloadedImage({
     required String apiVersion,
-    required CreateProductDownloadedImageRequest request,
+    required CreateProductDownloadedImageRequest model,
   });
 
   /// 🚫 Create unpublished product
   Future<CreateUnpublishedProductResponse> createUnpublishedProduct({
     required String apiVersion,
-    required CreateUnpublishedProductRequest request,
+    required CreateUnpublishedProductRequest model,
   });
 
   /// 🏷️ Add metafield to existing product
   Future<AddMetafieldToProductResponse> addMetafieldToProduct({
     required String apiVersion,
     required String productId,
-    required AddMetafieldToProductRequest request,
+    required AddMetafieldToProductRequest model,
   });
 
   /// 🖼️ Update product add image
   Future<UpdateProductAddImageResponse> updateProductAddImage({
     required String apiVersion,
     required String productId,
-    required UpdateProductAddImageRequest request,
+    required UpdateProductAddImageRequest model,
   });
 
   /// 🔄 Update product reorder image
   Future<UpdateProductReorderImageResponse> updateProductReorderImage({
     required String apiVersion,
     required String productId,
-    required UpdateProductReorderImageRequest request,
+    required UpdateProductReorderImageRequest model,
   });
 
   /// 📝 Update product title
   Future<UpdateProductTitleResponse> updateProductTitle({
     required String apiVersion,
     required String productId,
-    required UpdateProductTitleRequest request,
+    required UpdateProductTitleRequest model,
   });
 
   /// 🗑️ Clear product images
   Future<UpdateProductClearImagesResponse> updateProductClearImages({
     required String apiVersion,
     required String productId,
-    required UpdateProductClearImagesRequest request,
+    required UpdateProductClearImagesRequest model,
   });
 
   /// 🔍 Update product SEO
   Future<UpdateProductSeoResponse> updateProductSeo({
     required String apiVersion,
     required String productId,
-    required UpdateProductSeoRequest request,
+    required UpdateProductSeoRequest model,
   });
 
   /// 🔄 Update product with variant
   Future<UpdateProductWithVariantResponse> updateProductWithVariant({
     required String apiVersion,
     required String productId,
-    required UpdateProductWithVariantRequest request,
+    required UpdateProductWithVariantRequest model,
   });
 
   /// 🔄 Update product reorder variants
   Future<UpdateProductReorderVariantsResponse> updateProductReorderVariants({
     required String apiVersion,
     required String productId,
-    required UpdateProductReorderVariantsRequest request,
+    required UpdateProductReorderVariantsRequest model,
   });
 
   /// 👁️ Show hidden product
   Future<ShowHiddenProductResponse> showHiddenProduct({
     required String apiVersion,
     required String productId,
-    required ShowHiddenProductRequest request,
+    required ShowHiddenProductRequest model,
   });
 
   /// 🏷️ Update product tags
   Future<UpdateProductTagsResponse> updateProductTags({
     required String apiVersion,
     required String productId,
-    required UpdateProductTagsRequest request,
+    required UpdateProductTagsRequest model,
   });
 
   /// 🗑️ Delete product
