@@ -109,7 +109,7 @@ class CreateCappedRecurringApplicationChargeHandler implements ApiRequestHandler
         final service = GetIt.I.get<RecurringApplicationChargeService>();
         final response = await service.createCappedRecurringApplicationCharge(
           apiVersion: ApiNetwork.apiVersion,
-          request: request,
+          model: request,
         );
         
         // Extract the created charge

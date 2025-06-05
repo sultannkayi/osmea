@@ -60,14 +60,14 @@ abstract class RedirectServiceClient implements RedirectService {
   @POST('/api/{api_version}/redirects.json')
   Future<CreateRedirectFullUrlResponse> createRedirectFullUrl({
     @Path('api_version') required String apiVersion,
-    @Body() required CreateRedirectFullUrlRequest body,
+    @Body() required CreateRedirectFullUrlRequest model,
   });
 
   /// 🆕 Create Redirect
   @POST('/api/{api_version}/redirects.json')
   Future<CreateRedirectResponse> createRedirect({
     @Path('api_version') required String apiVersion,
-    @Body() required CreateRedirectRequest body,
+    @Body() required CreateRedirectRequest model,
   });
 
   /// 🔄 Update Redirect Path Uri
@@ -75,7 +75,7 @@ abstract class RedirectServiceClient implements RedirectService {
   Future<UpdateRedirectPathUriResponse> updateRedirectPathUri({
     @Path('api_version') required String apiVersion,
     @Path('redirect_id') required String redirectId,
-    @Body() required UpdateRedirectPathUriRequest body,
+    @Body() required UpdateRedirectPathUriRequest model,
   });
 
   /// 🔄 Update Redirect Path And Target
@@ -83,7 +83,7 @@ abstract class RedirectServiceClient implements RedirectService {
   Future<UpdateRedirectPathAndTargetResponse> updateRedirectPathAndTarget({
     @Path('api_version') required String apiVersion,
     @Path('redirect_id') required String redirectId,
-    @Body() required UpdateRedirectPathAndTargetRequest body,
+    @Body() required UpdateRedirectPathAndTargetRequest model,
   });
 
   /// 🗑️ Delete Redirect

@@ -157,7 +157,7 @@ class UpdateProductReorderVariantsHandler implements ApiRequestHandler {
       final response = await productService.updateProductReorderVariants(
         apiVersion: ApiNetwork.apiVersion,
         productId: productId,
-        request: request,
+        model: request,
       );
 
       // Return success response

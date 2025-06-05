@@ -60,7 +60,7 @@ class CreateRedirectFullUrlHandler implements ApiRequestHandler {
       // Call the API method
       final response = await GetIt.I<RedirectService>().createRedirectFullUrl(
         apiVersion: ApiNetwork.apiVersion,
-        body: redirectRequest,
+        model: redirectRequest,
       );
 
       // Return success response

@@ -78,7 +78,7 @@ class CreateProductBaseImageHandler implements ApiRequestHandler {
       // Call the API method to create product with base image
       final response = await GetIt.I<ProductService>().createProductBaseImage(
         apiVersion: ApiNetwork.apiVersion,
-        request: productRequest,
+        model: productRequest,
       );
 
       // Return success response with created product data

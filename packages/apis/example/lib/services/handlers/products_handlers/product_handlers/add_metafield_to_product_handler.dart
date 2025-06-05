@@ -98,7 +98,7 @@ class AddMetafieldToProductHandler implements ApiRequestHandler {
       final response = await GetIt.I<ProductService>().addMetafieldToProduct(
         apiVersion: ApiNetwork.apiVersion,
         productId: productId,
-        request: metafieldRequest,
+        model: metafieldRequest,
       );
 
       // Return success response

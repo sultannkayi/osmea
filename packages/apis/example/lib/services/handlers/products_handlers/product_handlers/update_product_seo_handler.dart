@@ -85,7 +85,7 @@ class UpdateProductSeoHandler implements ApiRequestHandler {
       final response = await productService.updateProductSeo(
         apiVersion: ApiNetwork.apiVersion,
         productId: productId,
-        request: request,
+        model: request,
       );
 
       // Return success response

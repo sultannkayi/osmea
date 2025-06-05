@@ -74,7 +74,7 @@ class CreateWebhookHandler implements ApiRequestHandler {
       final service = GetIt.I.get<WebhookService>();
       final response = await service.createWebhook(
         apiVersion: ApiNetwork.apiVersion,
-        request: request,
+        model: request,
       );
       
       final webhook = response.webhook;

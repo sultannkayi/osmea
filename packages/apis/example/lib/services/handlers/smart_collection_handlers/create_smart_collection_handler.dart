@@ -41,7 +41,7 @@ class CreatesSmartCollectionHandler implements ApiRequestHandler {
       final response =
           await GetIt.I<SmartCollectionService>().createSmartCollection(
         apiVersion: ApiNetwork.apiVersion,
-        request: request,
+        model: request,
       );
 
       return {

@@ -95,7 +95,7 @@ class CreateProductWithMetafieldHandler implements ApiRequestHandler {
       final response =
           await GetIt.I<ProductService>().createProductWithMetafield(
         apiVersion: ApiNetwork.apiVersion,
-        request: productRequest,
+        model: productRequest,
       );
 
       // Return success response

@@ -98,7 +98,7 @@ class RetrieveListOfTenderTransactionsHandler implements ApiRequestHandler {
             "timestamp": DateTime.now().toIso8601String(),
           };
         }
-        throw e; // Re-throw other errors to be caught by outer try-catch
+        rethrow; // Re-throw other errors to be caught by outer try-catch
       }
       
       final transactions = response.tenderTransactions ?? [];

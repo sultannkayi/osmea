@@ -68,7 +68,7 @@ Future<ReceiveACountOfAllProductImagesResponse> getProductImageCount({
 Future<ReceiveASingleProductImageResponse> createProductImage({
   @Path('api_version') required String apiVersion,
   @Path('product_id') required String productId,
-  @Body() required CreateANewProductImageRequest request,
+  @Body() required CreateANewProductImageRequest model,
 });
 
  // 🖼 PUT: Update an existing product image
@@ -78,7 +78,7 @@ Future<ReceiveASingleProductImageResponse> createProductImage({
     @Path('api_version') required String apiVersion,
     @Path('product_id') required String productId,
     @Path('image_id') required String imageId,
-    @Body() required ModifyAnExistingProductImageRequest request,
+    @Body() required ModifyAnExistingProductImageRequest model,
   });
 
   /// 🗑 Delete a product image
@@ -96,22 +96,24 @@ Future<ReceiveASingleProductImageResponse> createProductImage({
 Future<CreateANewProductImageResponse> createProductImageResponse({
   @Path('api_version') required String apiVersion,
   @Path('product_id') required String productId,
-  @Body() required CreateANewProductImageRequest request,
+  @Body() required CreateANewProductImageRequest model,
 });
 
+@override
 @POST('/api/{api_version}/products/{product_id}/images.json')
 Future<CreateProductImageMainResponse> createProductImageMain({
   @Path('api_version') required String apiVersion,
   @Path('product_id') required String productId,
-  @Body() required Map<String, dynamic> body,
+  @Body() required Map<String, dynamic> model,
 });
 
 /// 🧩 CREATE: Product Image for Variant
+@override
 @POST('/api/{api_version}/products/{product_id}/images.json')
 Future<CreateProductImageVariantResponse> createProductImageVariant({
   @Path('api_version') required String apiVersion,
   @Path('product_id') required String productId,
-  @Body() required Map<String, dynamic> body,
+  @Body() required Map<String, dynamic> model,
 });
 
 /// ➕ Create product image with source URL
@@ -120,17 +122,18 @@ Future<CreateProductImageVariantResponse> createProductImageVariant({
   Future<CreateProductImageSourceUrlResponse> createProductImageSourceUrl({
     @Path('api_version') required String apiVersion,
     @Path('product_id') required String productId,
-    @Body() required Map<String, dynamic> body,
+    @Body() required Map<String, dynamic> model,
     @Query("fields") String? fields,
   });
 
 /// ✅ Modify product image position and alt text
-  @PUT('/api/{api_version}/products/{product_id}/images/{image_id}.json')
-  Future<ModifyProductImagePositionAltResponse> modifyProductImagePositionAlt({
+@override
+@PUT('/api/{api_version}/products/{product_id}/images/{image_id}.json')
+Future<ModifyProductImagePositionAltResponse> modifyProductImagePositionAlt({
     @Path('api_version') required String apiVersion,
     @Path('product_id') required String productId,
     @Path('image_id') required String imageId,
-    @Body() required ModifyProductImagePositionAltRequest request,
+    @Body() required ModifyProductImagePositionAltRequest model,
   });
 
 @override
@@ -139,7 +142,7 @@ Future<ModifyProductImageAttachVariantsResponse> attachVariantsToProductImage({
   @Path('api_version') required String apiVersion,
   @Path('product_id') required String productId,
   @Path('image_id') required String imageId,
-  @Body() required Map<String, dynamic> body,
+  @Body() required Map<String, dynamic> model,
 });
 
 
@@ -149,7 +152,7 @@ Future<ModifyProductImageAttachVariantsResponse> attachVariantsToProductImage({
 Future<CreateProductImageMetafieldResponse> createProductImageMetafield({
   @Path('api_version') required String apiVersion,
   @Path('product_id') required String productId,
-  @Body() required CreateProductImageMetafieldRequest body,
+  @Body() required CreateProductImageMetafieldRequest model,
 });
 
 @override
@@ -158,7 +161,7 @@ Future<ModifyProductImageAddMetafieldResponse> modifyProductImageAddMetafield({
   @Path('api_version') required String apiVersion,
   @Path('product_id') required String productId,
   @Path('image_id') required String imageId,
-  @Body() required ModifyProductImageAddMetafieldRequest request,
+  @Body() required ModifyProductImageAddMetafieldRequest model,
 });
 
 

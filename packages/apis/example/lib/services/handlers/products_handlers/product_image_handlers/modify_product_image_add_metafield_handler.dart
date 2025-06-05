@@ -1,5 +1,3 @@
-// ✅ Handler: modify_product_image_add_metafield_handler.dart
-
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/products/product_image/abstract/product_image_service.dart';
 import 'package:apis/network/remote/products/product_image/freezed_model/request/modify_product_image_add_metafield_request.dart';
@@ -98,7 +96,7 @@ class ModifyProductImageAddMetafieldHandler implements ApiRequestHandler {
         apiVersion: ApiNetwork.apiVersion,
         productId: productId!,
         imageId: imageId,
-        request: request,
+        model: request,
       );
 
       return {

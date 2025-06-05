@@ -61,7 +61,7 @@ class UpdateScriptTagUrlHandler implements ApiRequestHandler {
       final response = await GetIt.I<ScriptTagService>().updateScriptTagUrl(
         apiVersion: ApiNetwork.apiVersion,
         scriptTagId: scriptTagId,
-        body: updateRequest,
+        model: updateRequest,
       );
 
       // Return success response

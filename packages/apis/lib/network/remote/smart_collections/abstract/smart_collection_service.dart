@@ -49,7 +49,7 @@ abstract class SmartCollectionService {
   /// 🆕 Creates a new smart collection
   Future<RetrievesSingleSmartCollectionsResponse> createSmartCollection({
     required String apiVersion,
-    required CreateSmartCollectionRequest request,
+    required CreateSmartCollectionRequest model,
   });
 
   /// ❌ Deletes a smart collection by ID
@@ -62,13 +62,13 @@ abstract class SmartCollectionService {
   Future<UpdatesExistingSmartCollectionResponse> updateSmartCollection({
     required String apiVersion,
     required String id,
-    required UpdateSmartCollectionRequest request,
+    required UpdateSmartCollectionRequest model,
   });
 
   /// 🔀 Updates product order of a smart collection
   Future<UpdatesOrderingTypeOfProductsSmartCollection> updateProductOrder({
     required String apiVersion,
     required String id,
-    required UpdateOrderingTypeOfProductsRequest request,
+    required UpdateOrderingTypeOfProductsRequest model,
   });
 }

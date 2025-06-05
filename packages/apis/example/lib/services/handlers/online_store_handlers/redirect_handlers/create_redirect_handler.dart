@@ -60,7 +60,7 @@ class CreateRedirectHandler implements ApiRequestHandler {
       // Call the API method
       final response = await GetIt.I<RedirectService>().createRedirect(
         apiVersion: ApiNetwork.apiVersion,
-        body: redirectRequest,
+        model: redirectRequest,
       );
 
       // Return success response

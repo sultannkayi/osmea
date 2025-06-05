@@ -75,7 +75,7 @@ class UpdateProductTitleHandler implements ApiRequestHandler {
       final response = await GetIt.I<ProductService>().updateProductTitle(
         apiVersion: ApiNetwork.apiVersion,
         productId: productId,
-        request: request,
+        model: request,
       );
 
       // Return success response with updated product data

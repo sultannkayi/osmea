@@ -51,7 +51,7 @@ abstract class ApiSmartCollectionService implements SmartCollectionService {
       retrieveSingleSmartCollection({
     @Path('api_version') required String apiVersion,
     @Path('id') required String id,
-    @Query('fields') String? fields, // 👈 query olarak gönderilir
+    @Query('fields') String? fields, // 👈 sent as query parameter
   });
 
   /// 🔢 Retrieves count of smart collections
@@ -73,7 +73,7 @@ abstract class ApiSmartCollectionService implements SmartCollectionService {
   @override
   Future<RetrievesSingleSmartCollectionsResponse> createSmartCollection({
     @Path('api_version') required String apiVersion,
-    @Body() required CreateSmartCollectionRequest request,
+    @Body() required CreateSmartCollectionRequest model,
   });
 
   /// ❌ Deletes a smart collection by ID
@@ -90,7 +90,7 @@ abstract class ApiSmartCollectionService implements SmartCollectionService {
   Future<UpdatesExistingSmartCollectionResponse> updateSmartCollection({
     @Path('api_version') required String apiVersion,
     @Path('id') required String id,
-    @Body() required UpdateSmartCollectionRequest request,
+    @Body() required UpdateSmartCollectionRequest model,
   });
 
   /// 🔀 Updates ordering of products in a smart collection (manual sort)
@@ -99,6 +99,6 @@ abstract class ApiSmartCollectionService implements SmartCollectionService {
   Future<UpdatesOrderingTypeOfProductsSmartCollection> updateProductOrder({
     @Path('api_version') required String apiVersion,
     @Path('id') required String id,
-    @Body() required UpdateOrderingTypeOfProductsRequest request,
+    @Body() required UpdateOrderingTypeOfProductsRequest model,
   });
 }

@@ -72,7 +72,7 @@ class UpdateProductTagsHandler implements ApiRequestHandler {
       final response = await GetIt.I<ProductService>().updateProductTags(
         apiVersion: ApiNetwork.apiVersion,
         productId: productId,
-        request: updateRequest,
+        model: updateRequest,
       );
 
       // Return success response

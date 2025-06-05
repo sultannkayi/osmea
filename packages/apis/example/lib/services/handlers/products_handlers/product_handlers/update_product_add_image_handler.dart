@@ -162,7 +162,7 @@ class UpdateProductAddImageHandler implements ApiRequestHandler {
       final response = await GetIt.I<ProductService>().updateProductAddImage(
         apiVersion: ApiNetwork.apiVersion,
         productId: productId.toString(),
-        request: request,
+        model: request,
       );
 
       // Return success response with updated product data

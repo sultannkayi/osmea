@@ -50,7 +50,7 @@ abstract class RecurringApplicationChargeServiceClient implements RecurringAppli
   Future<GetARecurringApplicationChargeResponse> customizeRecurringApplicationCharge({
     @Path('api_version') required String apiVersion,
     @Path('id') required int id,
-    @Body() required CustomizeRecurringApplicationChargeRequest request,
+    @Body() required CustomizeRecurringApplicationChargeRequest model,
   });
 
   /// 🗑️ Delete a recurring application charge by ID
@@ -66,7 +66,7 @@ abstract class RecurringApplicationChargeServiceClient implements RecurringAppli
   @POST('/api/{api_version}/recurring_application_charges.json')
   Future<GetARecurringApplicationChargeResponse> createBasicRecurringApplicationCharge({
     @Path('api_version') required String apiVersion,
-    @Body() required CreateBasicRecurringApplicationChargeRequest request,
+    @Body() required CreateBasicRecurringApplicationChargeRequest model,
   });
 
   /// 🆓 Create a recurring application charge with trial period
@@ -74,7 +74,7 @@ abstract class RecurringApplicationChargeServiceClient implements RecurringAppli
   @POST('/api/{api_version}/recurring_application_charges.json')
   Future<GetARecurringApplicationChargeResponse> createTrialRecurringApplicationCharge({
     @Path('api_version') required String apiVersion,
-    @Body() required CreateTrialRecurringApplicationChargeRequest request,
+    @Body() required CreateTrialRecurringApplicationChargeRequest model,
   });
 
   /// 🧢 Create a recurring application charge with terms and capped amount
@@ -82,6 +82,6 @@ abstract class RecurringApplicationChargeServiceClient implements RecurringAppli
   @POST('/api/{api_version}/recurring_application_charges.json')
   Future<GetARecurringApplicationChargeResponse> createCappedRecurringApplicationCharge({
     @Path('api_version') required String apiVersion,
-    @Body() required CreateCappedRecurringApplicationChargeRequest request,
+    @Body() required CreateCappedRecurringApplicationChargeRequest model,
   });
 }

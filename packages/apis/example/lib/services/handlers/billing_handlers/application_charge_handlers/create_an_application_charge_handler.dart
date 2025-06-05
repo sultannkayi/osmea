@@ -82,7 +82,7 @@ class CreateAnApplicationChargeHandler implements ApiRequestHandler {
         final service = GetIt.I.get<ApplicationChargeService>();
         final response = await service.createApplicationCharge(
           apiVersion: ApiNetwork.apiVersion,
-          request: request,
+          model: request,
         );
         
         // Access the applicationCharge property correctly and handle nullability

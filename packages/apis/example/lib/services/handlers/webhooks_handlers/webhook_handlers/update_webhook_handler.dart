@@ -84,7 +84,7 @@ class UpdateWebhookHandler implements ApiRequestHandler {
       final response = await service.updateWebhook(
         apiVersion: ApiNetwork.apiVersion,
         id: id,
-        request: request,
+        model: request,
       );
       
       final webhook = response.webhook;

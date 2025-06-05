@@ -174,7 +174,7 @@ class UpdateProductReorderImageHandler implements ApiRequestHandler {
       final response = await productService.updateProductReorderImage(
         apiVersion: ApiNetwork.apiVersion,
         productId: productId.toString(),
-        request: request,
+        model: request,
       );
 
       // Return successful response

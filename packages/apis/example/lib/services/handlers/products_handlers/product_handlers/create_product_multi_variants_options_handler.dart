@@ -135,7 +135,7 @@ class CreateProductMultiVariantsOptionsHandler implements ApiRequestHandler {
       final response =
           await GetIt.I<ProductService>().createProductMultiVariantsOptions(
         apiVersion: ApiNetwork.apiVersion,
-        request: productRequest,
+        model: productRequest,
       );
 
       // Return success response with created product data

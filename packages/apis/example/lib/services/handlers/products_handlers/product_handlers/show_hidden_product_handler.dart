@@ -51,7 +51,7 @@ class ShowHiddenProductHandler implements ApiRequestHandler {
       final response = await GetIt.I<ProductService>().showHiddenProduct(
         apiVersion: ApiNetwork.apiVersion,
         productId: productId,
-        request: showRequest,
+        model: showRequest,
       );
 
       // Return success response

@@ -66,7 +66,7 @@ class UpdateProductClearImagesHandler implements ApiRequestHandler {
       final response = await productService.updateProductClearImages(
         apiVersion: ApiNetwork.apiVersion,
         productId: productId,
-        request: request,
+        model: request,
       );
 
       // Return success response

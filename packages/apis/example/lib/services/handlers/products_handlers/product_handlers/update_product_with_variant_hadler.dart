@@ -106,7 +106,7 @@ class UpdateProductWithVariantHandler implements ApiRequestHandler {
       final response = await productService.updateProductWithVariant(
         apiVersion: ApiNetwork.apiVersion,
         productId: productId,
-        request: request,
+        model: request,
       );
 
       // Return success response

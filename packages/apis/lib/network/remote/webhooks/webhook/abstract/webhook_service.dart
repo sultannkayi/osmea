@@ -36,14 +36,14 @@ abstract class WebhookService {
   /// Creates a new webhook
   Future<GetAWebhookResponse> createWebhook({
     required String apiVersion,
-    required CreateWebhookRequest request,
+    required CreateWebhookRequest model,
   });
 
   /// Updates an existing webhook
   Future<GetAWebhookResponse> updateWebhook({
     required String apiVersion,
     required int id,
-    required UpdateWebhookRequest request,
+    required UpdateWebhookRequest model,
   });
 
   /// Deletes a webhook

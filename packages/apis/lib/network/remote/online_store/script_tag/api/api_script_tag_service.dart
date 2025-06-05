@@ -60,7 +60,7 @@ abstract class ScriptTagServiceClient implements ScriptTagService {
   @POST('/api/{api_version}/script_tags.json')
   Future<CreateScriptTagResponse> createScriptTag({
     @Path('api_version') required String apiVersion,
-    @Body() required CreateScriptTagRequest body,
+    @Body() required CreateScriptTagRequest model,
   });
 
   /// 🔄 Update Script Tag Url
@@ -68,7 +68,7 @@ abstract class ScriptTagServiceClient implements ScriptTagService {
   Future<UpdateScriptTagUrlResponse> updateScriptTagUrl({
     @Path('api_version') required String apiVersion,
     @Path('script_tag_id') required String scriptTagId,
-    @Body() required UpdateScriptTagUrlRequest body,
+    @Body() required UpdateScriptTagUrlRequest model,
   });
 
   /// 🗑️ Delete Script Tag

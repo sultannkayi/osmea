@@ -47,6 +47,6 @@ abstract class UsageChargeServiceClient implements UsageChargeService {
   Future<GetAUsageChargeResponse> createUsageCharge({
     @Path('api_version') required String apiVersion,
     @Path('recurring_application_charge_id') required int recurringApplicationChargeId,
-    @Body() required CreateUsageChargeRequest request,
+    @Body() required CreateUsageChargeRequest model,
   });
 }

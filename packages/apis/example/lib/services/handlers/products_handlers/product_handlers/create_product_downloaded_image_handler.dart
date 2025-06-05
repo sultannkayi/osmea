@@ -134,7 +134,7 @@ class CreateProductDownloadedImageHandler implements ApiRequestHandler {
       final response =
           await GetIt.I<ProductService>().createProductDownloadedImage(
         apiVersion: ApiNetwork.apiVersion,
-        request: request,
+        model: request,
       );
 
       // Return successful response

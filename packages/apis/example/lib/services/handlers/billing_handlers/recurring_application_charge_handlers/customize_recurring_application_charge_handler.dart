@@ -64,7 +64,7 @@ class CustomizeRecurringApplicationChargeHandler implements ApiRequestHandler {
         final response = await service.customizeRecurringApplicationCharge(
           apiVersion: ApiNetwork.apiVersion,
           id: id,
-          request: request,
+          model: request,
         );
         
         // Extract the updated charge data

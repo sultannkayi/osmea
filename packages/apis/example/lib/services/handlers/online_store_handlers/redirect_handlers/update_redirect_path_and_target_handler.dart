@@ -71,7 +71,7 @@ class UpdateRedirectPathAndTargetHandler implements ApiRequestHandler {
       final response = await GetIt.I<RedirectService>().updateRedirectPathAndTarget(
         apiVersion: ApiNetwork.apiVersion,
         redirectId: redirectId,
-        body: updateRequest,
+        model: updateRequest,
       );
 
       // Return success response

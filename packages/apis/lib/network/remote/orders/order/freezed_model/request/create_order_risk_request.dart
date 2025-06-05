@@ -26,7 +26,7 @@ class Risk with _$Risk {
     @JsonKey(name: "message") String? message,
     @JsonKey(name: "recommendation") String? recommendation,
     @JsonKey(name: "score")
-    double? score, // Değiştirilen kısım: int? yerine double?
+    double? score, // Changed from int? to double?
     @JsonKey(name: "source") String? source,
     @JsonKey(name: "cause_cancel") bool? causeCancel,
     @JsonKey(name: "display") bool? display,

@@ -64,7 +64,7 @@ abstract class WebhookServiceClient implements WebhookService {
   @POST('/api/{api_version}/webhooks.json')
   Future<GetAWebhookResponse> createWebhook({
     @Path('api_version') required String apiVersion,
-    @Body() required CreateWebhookRequest request,
+    @Body() required CreateWebhookRequest model,
   });
 
   /// ✏️ Update an existing webhook
@@ -73,7 +73,7 @@ abstract class WebhookServiceClient implements WebhookService {
   Future<GetAWebhookResponse> updateWebhook({
     @Path('api_version') required String apiVersion,
     @Path('id') required int id,
-    @Body() required UpdateWebhookRequest request,
+    @Body() required UpdateWebhookRequest model,
   });
 
   /// 🗑️ Delete an existing webhook

@@ -24,7 +24,7 @@ abstract class RecurringApplicationChargeService {
   Future<GetARecurringApplicationChargeResponse> customizeRecurringApplicationCharge({
     required String apiVersion,
     required int id,
-    required CustomizeRecurringApplicationChargeRequest request,
+    required CustomizeRecurringApplicationChargeRequest model,
   });
 
   /// Deletes a recurring application charge
@@ -36,18 +36,18 @@ abstract class RecurringApplicationChargeService {
   /// Creates a basic recurring application charge
   Future<GetARecurringApplicationChargeResponse> createBasicRecurringApplicationCharge({
     required String apiVersion,
-    required CreateBasicRecurringApplicationChargeRequest request,
+    required CreateBasicRecurringApplicationChargeRequest model,
   });
 
   /// Creates a recurring application charge with trial period
   Future<GetARecurringApplicationChargeResponse> createTrialRecurringApplicationCharge({
     required String apiVersion,
-    required CreateTrialRecurringApplicationChargeRequest request,
+    required CreateTrialRecurringApplicationChargeRequest model,
   });
 
   /// Creates a recurring application charge with terms and capped amount
   Future<GetARecurringApplicationChargeResponse> createCappedRecurringApplicationCharge({
     required String apiVersion,
-    required CreateCappedRecurringApplicationChargeRequest request,
+    required CreateCappedRecurringApplicationChargeRequest model,
   });
 }

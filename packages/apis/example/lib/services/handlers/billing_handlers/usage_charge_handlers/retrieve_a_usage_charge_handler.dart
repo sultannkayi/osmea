@@ -121,7 +121,7 @@ class RetrieveAUsageChargeHandler implements ApiRequestHandler {
       };
     } catch (e) {
       debugPrint('❌ GetIt service error: $e');
-      throw e;
+      rethrow;
     }
   }
   

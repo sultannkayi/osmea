@@ -20,7 +20,6 @@ class GetAllApplicationChargesResponse with _$GetAllApplicationChargesResponse {
   const factory GetAllApplicationChargesResponse({
     @JsonKey(name: "application_charges") List<ApplicationCharge>? applicationCharges,
     
-    // Remove the rawData field since it's causing problems
   }) = _GetAllApplicationChargesResponse;
 
   factory GetAllApplicationChargesResponse.fromJson(Map<String, dynamic> json) =>

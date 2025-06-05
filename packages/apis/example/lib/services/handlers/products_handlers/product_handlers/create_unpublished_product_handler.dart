@@ -61,7 +61,7 @@ class CreateUnpublishedProductHandler implements ApiRequestHandler {
       // Call the API method
       final response = await GetIt.I<ProductService>().createUnpublishedProduct(
         apiVersion: ApiNetwork.apiVersion,
-        request: productRequest,
+        model: productRequest,
       );
 
       // Return success response

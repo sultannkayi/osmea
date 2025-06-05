@@ -21,6 +21,6 @@ abstract class ApplicationChargeService {
   /// Creates a new application charge
   Future<CreateApplicationChargeResponse> createApplicationCharge({
     required String apiVersion,
-    required CreateApplicationChargeRequest request,
+    required CreateApplicationChargeRequest model,
   });
 }

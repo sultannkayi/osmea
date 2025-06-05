@@ -52,7 +52,7 @@ class CreateScriptTagHandler implements ApiRequestHandler {
       // Call the API method
       final response = await GetIt.I<ScriptTagService>().createScriptTag(
         apiVersion: ApiNetwork.apiVersion,
-        body: scriptTagRequest,
+        model: scriptTagRequest,
       );
 
       // Return success response

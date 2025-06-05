@@ -22,6 +22,6 @@ abstract class UsageChargeService {
   Future<GetAUsageChargeResponse> createUsageCharge({
     required String apiVersion,
     required int recurringApplicationChargeId,
-    required CreateUsageChargeRequest request,
+    required CreateUsageChargeRequest model,
   });
 }

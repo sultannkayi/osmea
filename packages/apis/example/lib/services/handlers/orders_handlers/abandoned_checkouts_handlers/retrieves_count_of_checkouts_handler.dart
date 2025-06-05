@@ -1,6 +1,7 @@
 import 'package:apis/network/remote/orders/abandoned_checkouts/abstract/abandoned_checkouts_service.dart';
 import 'package:example/services/api_request_handler.dart';
 import 'package:example/services/api_service_registry.dart';
+import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:apis/apis.dart';
 
@@ -40,7 +41,7 @@ class GetAbandonedCheckoutsCountHandler implements ApiRequestHandler {
             "timestamp": DateTime.now().toIso8601String(),
           };
         } catch (e) {
-          print("Error fetching abandoned checkouts count: $e");
+          debugPrint("Error fetching abandoned checkouts count: $e");
           return {
             "status": "error",
             "message":

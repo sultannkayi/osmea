@@ -77,7 +77,7 @@ class CreateDefaultProductVariantHandler implements ApiRequestHandler {
       final response =
           await GetIt.I<ProductService>().createDefaultProductVariant(
         apiVersion: ApiNetwork.apiVersion,
-        request: request,
+        model: request,
       );
 
       // Return successful response

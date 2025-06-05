@@ -46,7 +46,7 @@ abstract class ThemeServiceClient implements ThemeService {
   Future<PublishUnpublishedThemeResponse> publishUnpublishedTheme({
     @Path('api_version') required String apiVersion,
     @Path('theme_id') required String themeId,
-    @Body() required PublishUnpublishedThemeRequest body,
+    @Body() required PublishUnpublishedThemeRequest model,
   });
 
   // 🔄 Update Theme Name
@@ -54,14 +54,14 @@ abstract class ThemeServiceClient implements ThemeService {
   Future<UpdateThemeNameResponse> updateThemeName({
     @Path('api_version') required String apiVersion,
     @Path('theme_id') required String themeId,
-    @Body() required UpdateThemeNameRequest body,
+    @Body() required UpdateThemeNameRequest model,
   });
 
   // 🆕 Create Theme
   @POST('/api/{api_version}/themes.json')
   Future<CreateThemeResponse> createTheme({
     @Path('api_version') required String apiVersion,
-    @Body() required CreateThemeRequest body,
+    @Body() required CreateThemeRequest model,
   });
 
   // 🗑️ Delete Theme

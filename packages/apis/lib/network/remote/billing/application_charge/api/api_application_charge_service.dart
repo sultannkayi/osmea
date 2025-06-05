@@ -47,6 +47,6 @@ abstract class ApplicationChargeServiceClient implements ApplicationChargeServic
   @POST('/api/{api_version}/application_charges.json')
   Future<CreateApplicationChargeResponse> createApplicationCharge({
     @Path('api_version') required String apiVersion,
-    @Body() required CreateApplicationChargeRequest request,
+    @Body() required CreateApplicationChargeRequest model,
   });
 }

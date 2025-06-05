@@ -26,20 +26,20 @@ abstract class ThemeService {
   Future<PublishUnpublishedThemeResponse> publishUnpublishedTheme({
     required String apiVersion,
     required String themeId,
-    required PublishUnpublishedThemeRequest body,
+    required PublishUnpublishedThemeRequest model,
   });
 
   /// 🔄 Update Theme Name
   Future<UpdateThemeNameResponse> updateThemeName({
     required String apiVersion,
     required String themeId,
-    required UpdateThemeNameRequest body,
+    required UpdateThemeNameRequest model,
   });
 
   // 🆕 Create Theme
   Future<CreateThemeResponse> createTheme({
     required String apiVersion,
-    required CreateThemeRequest body,
+    required CreateThemeRequest model,
   });
 
   /// 🗑️ Delete Theme

@@ -65,7 +65,7 @@ class CreateProductImageSourceUrlHandler implements ApiRequestHandler {
       final response = await GetIt.I<ProductImageService>().createProductImageSourceUrl(
         apiVersion: ApiNetwork.apiVersion,
         productId: productId,
-        body: {
+        model: {
           'image': {
             'src': src,
             if (alt != null) 'alt': alt,

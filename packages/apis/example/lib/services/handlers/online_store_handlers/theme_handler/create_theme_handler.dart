@@ -62,7 +62,7 @@ class CreateThemeHandler implements ApiRequestHandler {
       // Call the API method
       final response = await GetIt.I<ThemeService>().createTheme(
         apiVersion: ApiNetwork.apiVersion,
-        body: themeRequest,
+        model: themeRequest,
       );
 
       // Return success response

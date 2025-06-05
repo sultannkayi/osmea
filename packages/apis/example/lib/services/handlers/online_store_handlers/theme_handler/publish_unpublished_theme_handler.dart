@@ -52,7 +52,7 @@ class PublishUnpublishedThemeHandler implements ApiRequestHandler {
       final response = await GetIt.I<ThemeService>().publishUnpublishedTheme(
         apiVersion: ApiNetwork.apiVersion,
         themeId: themeId,
-        body: publishRequest,
+        model: publishRequest,
       );
 
       // Return success response

@@ -72,7 +72,7 @@ class CreateProductImageVariantHandler implements ApiRequestHandler {
       final response = await service.createProductImageVariant(
         apiVersion: ApiNetwork.apiVersion,
         productId: productId,
-        body: {
+        model: {
           "image": {
             "src": src,
             "variant_ids": variantIds,

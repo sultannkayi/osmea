@@ -39,14 +39,14 @@ abstract class ScriptTagService {
   /// 📋 Create a new script tag
   Future<CreateScriptTagResponse> createScriptTag({
     required String apiVersion,
-    required CreateScriptTagRequest body,
+    required CreateScriptTagRequest model,
   });
 
   /// 📋 Update Script Tag Url
   Future<UpdateScriptTagUrlResponse> updateScriptTagUrl({
     required String apiVersion,
     required String scriptTagId,
-    required UpdateScriptTagUrlRequest body,
+    required UpdateScriptTagUrlRequest model,
   });
 
   /// 🗑️ Delete Script Tag

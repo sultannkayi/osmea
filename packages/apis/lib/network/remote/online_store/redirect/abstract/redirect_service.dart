@@ -39,27 +39,27 @@ abstract class RedirectService {
   /// 🆕 Create Redirect Full Url
   Future<CreateRedirectFullUrlResponse> createRedirectFullUrl({
     required String apiVersion,
-    required CreateRedirectFullUrlRequest body,
+    required CreateRedirectFullUrlRequest model,
   });
 
   /// 🆕 Create Redirect
   Future<CreateRedirectResponse> createRedirect({
     required String apiVersion,
-    required CreateRedirectRequest body,
+    required CreateRedirectRequest model,
   });
 
   /// 🔄 Update Redirect Path URI
   Future<UpdateRedirectPathUriResponse> updateRedirectPathUri({
     required String apiVersion,
     required String redirectId,
-    required UpdateRedirectPathUriRequest body ,
+    required UpdateRedirectPathUriRequest model,
   });
 
   /// 🔄 Update Redirect Path and Target
   Future<UpdateRedirectPathAndTargetResponse> updateRedirectPathAndTarget({
     required String apiVersion,
     required String redirectId,
-    required UpdateRedirectPathAndTargetRequest body,
+    required UpdateRedirectPathAndTargetRequest model,
   });
 
   /// 🗑️ Delete Redirect

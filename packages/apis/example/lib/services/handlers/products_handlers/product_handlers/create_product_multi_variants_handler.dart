@@ -225,7 +225,7 @@ class CreateProductMultiVariantsHandler implements ApiRequestHandler {
       final productService = GetIt.instance<ProductService>();
       final response = await productService.createProductMultiVariants(
         apiVersion: '2023-10',
-        request: request,
+        model: request,
       );
 
       // Return success response

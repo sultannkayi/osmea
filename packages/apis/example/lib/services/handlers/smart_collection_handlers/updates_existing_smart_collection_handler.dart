@@ -53,7 +53,7 @@ class UpdatesSmartCollectionHandler implements ApiRequestHandler {
           await GetIt.I<SmartCollectionService>().updateSmartCollection(
         apiVersion: ApiNetwork.apiVersion,
         id: id,
-        request: request,
+        model: request,
       );
 
       return {

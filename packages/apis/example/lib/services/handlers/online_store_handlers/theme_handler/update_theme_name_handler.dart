@@ -61,7 +61,7 @@ class UpdateThemeNameHandler implements ApiRequestHandler {
       final response = await GetIt.I<ThemeService>().updateThemeName(
         apiVersion: ApiNetwork.apiVersion,
         themeId: themeId,
-        body: updateRequest,
+        model: updateRequest,
       );
 
       // Return success response

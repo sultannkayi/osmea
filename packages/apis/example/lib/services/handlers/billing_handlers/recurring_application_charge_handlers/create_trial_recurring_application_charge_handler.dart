@@ -100,7 +100,7 @@ class CreateTrialRecurringApplicationChargeHandler implements ApiRequestHandler 
         final service = GetIt.I.get<RecurringApplicationChargeService>();
         final response = await service.createTrialRecurringApplicationCharge(
           apiVersion: ApiNetwork.apiVersion,
-          request: request,
+          model: request,
         );
         
         // Extract the created charge
