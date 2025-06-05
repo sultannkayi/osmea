@@ -1,0 +1,31 @@
+name: osmea_components
+description: OSMEA UI Kit for e-commerce applications with design tokens system
+version: 0.1.0
+homepage: https://github.com/nisacolak/osmea
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+  flutter: ">=3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.0.0
+  intl: ^0.18.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  
+  # Add any assets or fonts your package needs here
+  # assets:
+  #   - assets/images/
+  # fonts:
+  #   - family: YourFont
+  #     fonts:
+  #       - asset: fonts/YourFont-Regular.ttf
+
