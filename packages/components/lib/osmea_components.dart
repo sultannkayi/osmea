@@ -1,8 +1,12 @@
 library osmea_components;
 
-// Theme
-export 'src/theme/colors.dart';
-export 'src/theme/theme.dart';
-export 'src/theme/theme_provider.dart';
-export 'src/theme/typography.dart';
-export 'src/theme/component_dimensions.dart'; 
+// Styles
+export 'src/styles/colors.dart';
+export 'src/styles/text_style.dart';
+
+
+// Buttons
+export 'src/components/buttons/text_button.dart';
+
+// Utils
+export 'src/utils/sizer_extensions.dart';
