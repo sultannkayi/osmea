@@ -1,6 +1,30 @@
 import 'package:flutter/material.dart';
 
-/// SIZER EXTENSION
+/// 📐 **OSMEA Sizer Extensions**
+///
+/// A collection of extension methods for responsive sizing and spacing
+/// in OSMEA applications.
+///
+/// **Extension Categories:**
+/// - 📱 Screen Dimensions
+/// - 🔲 Padding & Margins
+/// - ⭕ Border Radius
+/// - ⏱️ Duration Helpers
+/// - 📏 Size Constants
+/// - 🎯 Alignment Utilities
+///
+/// **Example Usage:**
+/// ```dart
+/// Container(
+///   padding: context.paddingNormal,
+///   height: context.dynamicHeight(0.5),
+/// )
+/// ```
+///
+/// @category Utils
+/// @subcategory Extensions
+
+/// 📏 SIZER EXTENSION
 extension SizerExtension on BuildContext {
   MediaQueryData get mediaQuery => MediaQuery.of(this);
 
@@ -20,10 +44,10 @@ extension SizerExtension on BuildContext {
   double get radiusMedium => 30;
   double get radiusHigh => 100;
 
-  /// Dynamically resize a width.
+  /// ↔️ Dynamically resize a width.
   double dynamicWidth(double value) => allWidth * value;
 
-  /// Dynamically resize a height.
+  /// ↕️ Dynamically resize a height.
   double dynamicHeight(double value) => allHeight * value;
 
   double get scaleLowValue => 1;
@@ -38,7 +62,7 @@ extension SizerExtension on BuildContext {
   Divider get divider3 => const Divider(thickness: 2);
 }
 
-/// BORDER EXTENSION
+/// 🟦 BORDER EXTENSION
 extension BorderRadiusExtension on BuildContext {
   BorderRadius get borderRadiusNone => BorderRadius.circular(radiusNone);
   BorderRadius get borderRadiusLow => BorderRadius.circular(radiusLow);
@@ -47,7 +71,7 @@ extension BorderRadiusExtension on BuildContext {
   BorderRadius get borderRadiusHigh => BorderRadius.circular(radiusHigh);
 }
 
-/// DURATION EXTENSION
+/// ⏱️ DURATION EXTENSION
 /// Usage: 7.seconds or 7.minutes or 7.hours or 7.days or 7.weeks
 extension DurationExtension on int {
   Duration get seconds => Duration(seconds: this);
@@ -57,7 +81,7 @@ extension DurationExtension on int {
   Duration get weeks => Duration(days: this * 7);
 }
 
-/// ALIGMENT EXTENSION
+/// 📐 ALIGMENT EXTENSION
 extension AlignmentExtension on dynamic {
   Alignment get topLeft => Alignment.topLeft;
   Alignment get topCenter => Alignment.topCenter;
@@ -99,7 +123,7 @@ extension AlignmentExtension on dynamic {
   Axis get vertical => Axis.vertical;
 }
 
-/// TEXT SIZE EXTENSION
+/// 🔠 TEXT SIZE EXTENSION
 extension TextSizeX on BuildContext {
   double get fontSizeSmall => 12;
   double get fontSizeMedium => 16;
@@ -108,7 +132,7 @@ extension TextSizeX on BuildContext {
   double get fontSizeExtraLarge => 32;
 }
 
-/// EMPTY SIZED BOX EXTENSION
+/// ➖ EMPTY SIZED BOX EXTENSION
 extension EmptyWidget on BuildContext {
   Widget get emptySizedBox => const SizedBox();
   Widget get emptySizedWidthBoxLow => SizedBox(width: lowValue);
@@ -121,7 +145,7 @@ extension EmptyWidget on BuildContext {
   Widget get emptySized => const SizedBox();
 }
 
-/// DIVIDER EXTENSION
+/// 🟫 DIVIDER EXTENSION
 extension DividerX on BuildContext {
   Widget divider({Color? color}) => Divider(
       indent: allWidth * 0.13,
@@ -130,14 +154,13 @@ extension DividerX on BuildContext {
       height: 2);
 }
 
-/// TEXT DOWN LINE EXTENSION
+/// ↩️ TEXT DOWN LINE EXTENSION
 extension TextEnterLine on BuildContext {
   String get enterLine => '\n';
 }
 
-/// IMAGE ASSET EXTENSION
+/// 🖼️ IMAGE ASSET EXTENSION
 extension ImageAssetX on BuildContext {
-
   Widget getImageFitWidth({String path = ''}) => Image.asset(
         path,
         height: allHeight * 0.1,
@@ -145,7 +168,7 @@ extension ImageAssetX on BuildContext {
       );
 }
 
-/// ICON SIZE EXTENSION
+/// 🔳 ICON SIZE EXTENSION
 extension IconSizeExtension on BuildContext {
   double get iconSizeExtraSmall => 14.0;
   double get iconSizeSmall => 20.0;
@@ -156,7 +179,7 @@ extension IconSizeExtension on BuildContext {
   double get iconSizeExtraHigh => 60.0;
 }
 
-/// PADDING EXTENSION
+/// 🧩 PADDING EXTENSION
 extension PaddingExtension on BuildContext {
   EdgeInsets get paddingLow => EdgeInsets.all(lowValue);
   EdgeInsets get paddingNormal => EdgeInsets.all(normalValue);
@@ -203,5 +226,5 @@ extension PaddingExtension on BuildContext {
   EdgeInsets get onlyTopPaddingHigh => EdgeInsets.only(top: highValue);
 
   double get smallMobileHeight => 850;
-  // New custom fields can be add to this structure
+  // 🆕 New custom fields can be add to this structure
 }

@@ -1,6 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:osmea_components/src/utils/sizer_extensions.dart';
 
+/// 🎯 **OSMEA Button Size Extensions**
+///
+/// Provides comprehensive button sizing utilities for the OSMEA Design System.
+/// This file contains extensions for:
+///
+/// - 📏 Button sizes (extra small to extra large)
+/// - 📦 Padding configurations
+/// - 🔲 Border radius utilities
+/// - 🎨 Icon size helpers
+///
+/// @author OSMEA UI Team
+/// @category Components
+/// @subcategory Utils
+
 /// 🔘 **Button Size Extensions**
 ///
 /// Provides consistent button sizing across the OSMEA UI Kit.
@@ -36,33 +50,35 @@ extension ButtonSizeExtension on BuildContext {
   /// - Height: 28px
   /// - Use for: Compact spaces, inline actions
   Size get buttonSizeExtraSmall => Size(double.infinity, allHeight * 0.035);
-  
+
   /// 📱 **Small Button**
   /// - Height: 36px
   /// - Use for: Secondary actions, form buttons
   Size get buttonSizeSmall => Size(double.infinity, allHeight * 0.045);
-  
+
   /// 🎯 **Medium Button** (Recommended)
   /// - Height: 44px
   /// - Use for: Standard actions, most common size
   Size get buttonSizeMedium => Size(double.infinity, allHeight * 0.055);
-  
+
   /// 🖱️ **Large Button**
   /// - Height: 52px
   /// - Use for: Primary actions, important buttons
   Size get buttonSizeLarge => Size(double.infinity, allHeight * 0.065);
-  
+
   /// 📺 **Extra Large Button**
   /// - Height: 60px
   /// - Use for: Hero buttons, call-to-action
   Size get buttonSizeExtraLarge => Size(double.infinity, allHeight * 0.075);
 
   /// Fixed width versions for specific layouts
-  Size buttonSizeExtraSmallFixed(double width) => Size(width, allHeight * 0.035);
+  Size buttonSizeExtraSmallFixed(double width) =>
+      Size(width, allHeight * 0.035);
   Size buttonSizeSmallFixed(double width) => Size(width, allHeight * 0.045);
   Size buttonSizeMediumFixed(double width) => Size(width, allHeight * 0.055);
   Size buttonSizeLargeFixed(double width) => Size(width, allHeight * 0.065);
-  Size buttonSizeExtraLargeFixed(double width) => Size(width, allHeight * 0.075);
+  Size buttonSizeExtraLargeFixed(double width) =>
+      Size(width, allHeight * 0.075);
 }
 
 /// 📏 **Button Padding Extensions**
@@ -71,33 +87,33 @@ extension ButtonSizeExtension on BuildContext {
 extension ButtonPaddingExtension on BuildContext {
   /// Extra Small Button Padding
   EdgeInsets get buttonPaddingExtraSmall => EdgeInsets.symmetric(
-    horizontal: normalValue * 0.8,
-    vertical: lowValue * 0.6,
-  );
-  
+        horizontal: normalValue * 0.8,
+        vertical: lowValue * 0.6,
+      );
+
   /// Small Button Padding
   EdgeInsets get buttonPaddingSmall => EdgeInsets.symmetric(
-    horizontal: normalValue,
-    vertical: lowValue * 0.8,
-  );
-  
+        horizontal: normalValue,
+        vertical: lowValue * 0.8,
+      );
+
   /// Medium Button Padding (Recommended)
   EdgeInsets get buttonPaddingMedium => EdgeInsets.symmetric(
-    horizontal: normalValue * 1.2,
-    vertical: normalValue * 0.6,
-  );
-  
+        horizontal: normalValue * 1.2,
+        vertical: normalValue * 0.6,
+      );
+
   /// Large Button Padding
   EdgeInsets get buttonPaddingLarge => EdgeInsets.symmetric(
-    horizontal: normalValue * 1.5,
-    vertical: normalValue * 0.8,
-  );
-  
+        horizontal: normalValue * 1.5,
+        vertical: normalValue * 0.8,
+      );
+
   /// Extra Large Button Padding
   EdgeInsets get buttonPaddingExtraLarge => EdgeInsets.symmetric(
-    horizontal: normalValue * 2,
-    vertical: normalValue,
-  );
+        horizontal: normalValue * 2,
+        vertical: normalValue,
+      );
 
   /// Icon button specific padding
   EdgeInsets get iconButtonPaddingSmall => EdgeInsets.all(lowValue * 0.8);
@@ -110,22 +126,28 @@ extension ButtonPaddingExtension on BuildContext {
 /// Provides consistent border radius for button sizes.
 extension ButtonBorderRadiusExtension on BuildContext {
   /// Extra Small Button Border Radius
-  BorderRadius get buttonBorderRadiusExtraSmall => BorderRadius.circular(radiusLow);
-  
+  BorderRadius get buttonBorderRadiusExtraSmall =>
+      BorderRadius.circular(radiusLow);
+
   /// Small Button Border Radius
-  BorderRadius get buttonBorderRadiusSmall => BorderRadius.circular(radiusLow * 1.5);
-  
+  BorderRadius get buttonBorderRadiusSmall =>
+      BorderRadius.circular(radiusLow * 1.5);
+
   /// Medium Button Border Radius
-  BorderRadius get buttonBorderRadiusMedium => BorderRadius.circular(radiusLow * 2);
-  
+  BorderRadius get buttonBorderRadiusMedium =>
+      BorderRadius.circular(radiusLow * 2);
+
   /// Large Button Border Radius
-  BorderRadius get buttonBorderRadiusLarge => BorderRadius.circular(radiusLow * 2.5);
-  
+  BorderRadius get buttonBorderRadiusLarge =>
+      BorderRadius.circular(radiusLow * 2.5);
+
   /// Extra Large Button Border Radius
-  BorderRadius get buttonBorderRadiusExtraLarge => BorderRadius.circular(radiusLow * 3);
+  BorderRadius get buttonBorderRadiusExtraLarge =>
+      BorderRadius.circular(radiusLow * 3);
 
   /// Rounded button (pill shape)
-  BorderRadius get buttonBorderRadiusRounded => BorderRadius.circular(radiusHigh);
+  BorderRadius get buttonBorderRadiusRounded =>
+      BorderRadius.circular(radiusHigh);
 }
 
 /// 📊 **Button Icon Size Extensions**
@@ -158,37 +180,37 @@ class ButtonSizeConfig {
 
   /// Get complete configuration for button size
   static ButtonSizeConfig extraSmall(BuildContext context) => ButtonSizeConfig(
-    size: context.buttonSizeExtraSmall,
-    padding: context.buttonPaddingExtraSmall,
-    borderRadius: context.buttonBorderRadiusExtraSmall,
-    iconSize: context.buttonIconSizeExtraSmall,
-  );
+        size: context.buttonSizeExtraSmall,
+        padding: context.buttonPaddingExtraSmall,
+        borderRadius: context.buttonBorderRadiusExtraSmall,
+        iconSize: context.buttonIconSizeExtraSmall,
+      );
 
   static ButtonSizeConfig small(BuildContext context) => ButtonSizeConfig(
-    size: context.buttonSizeSmall,
-    padding: context.buttonPaddingSmall,
-    borderRadius: context.buttonBorderRadiusSmall,
-    iconSize: context.buttonIconSizeSmall,
-  );
+        size: context.buttonSizeSmall,
+        padding: context.buttonPaddingSmall,
+        borderRadius: context.buttonBorderRadiusSmall,
+        iconSize: context.buttonIconSizeSmall,
+      );
 
   static ButtonSizeConfig medium(BuildContext context) => ButtonSizeConfig(
-    size: context.buttonSizeMedium,
-    padding: context.buttonPaddingMedium,
-    borderRadius: context.buttonBorderRadiusMedium,
-    iconSize: context.buttonIconSizeMedium,
-  );
+        size: context.buttonSizeMedium,
+        padding: context.buttonPaddingMedium,
+        borderRadius: context.buttonBorderRadiusMedium,
+        iconSize: context.buttonIconSizeMedium,
+      );
 
   static ButtonSizeConfig large(BuildContext context) => ButtonSizeConfig(
-    size: context.buttonSizeLarge,
-    padding: context.buttonPaddingLarge,
-    borderRadius: context.buttonBorderRadiusLarge,
-    iconSize: context.buttonIconSizeLarge,
-  );
+        size: context.buttonSizeLarge,
+        padding: context.buttonPaddingLarge,
+        borderRadius: context.buttonBorderRadiusLarge,
+        iconSize: context.buttonIconSizeLarge,
+      );
 
   static ButtonSizeConfig extraLarge(BuildContext context) => ButtonSizeConfig(
-    size: context.buttonSizeExtraLarge,
-    padding: context.buttonPaddingExtraLarge,
-    borderRadius: context.buttonBorderRadiusExtraLarge,
-    iconSize: context.buttonIconSizeExtraLarge,
-  );
+        size: context.buttonSizeExtraLarge,
+        padding: context.buttonPaddingExtraLarge,
+        borderRadius: context.buttonBorderRadiusExtraLarge,
+        iconSize: context.buttonIconSizeExtraLarge,
+      );
 }

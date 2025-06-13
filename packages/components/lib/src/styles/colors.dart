@@ -1,6 +1,28 @@
 import 'package:flutter/material.dart';
 
-/// OSMEA UI Kit color system
+/// 🎨 **OSMEA Color System**
+///
+/// A comprehensive color system for maintaining consistent visual design
+/// across the OSMEA UI Kit.
+///
+/// **Color Categories:**
+/// - 🌈 Primary Colors: Main brand colors
+/// - 🎯 Secondary Colors: Supporting accent colors
+/// - ⚫ Neutral Colors: Grays and background shades
+/// - 🚦 Status Colors: Success, warning, error states
+/// - 🌗 Theme Colors: Light/dark mode variations
+///
+/// **Usage:**
+/// ```dart
+/// Container(
+///   color: OsmeaColors.nordicBlue,
+///   child: Text('Colored Container'),
+/// )
+/// ```
+///
+/// @category Styles
+/// @subcategory Colors
+
 class OsmeaColors {
   static final OsmeaColors _instance = OsmeaColors._internal();
   factory OsmeaColors() => _instance;
@@ -107,5 +129,4 @@ class OsmeaColors {
   // ================== SHADOW SYSTEM ==================
   static const Color shadowLight = Color(0x1A000000);
   static const Color shadowDark = Color(0x4D000000);
-
 }

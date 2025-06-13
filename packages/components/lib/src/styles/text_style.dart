@@ -47,29 +47,29 @@ class OsmeaTextStyle {
   /// Text('Hero Title', style: OsmeaTextStyle.displayLarge)
   /// ```
   static TextStyle displayLarge(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeExtraLarge,
-    fontWeight: FontWeight.w700,
-    letterSpacing: -0.25,
-    height: 1.12,
-  );
+        fontSize: context.fontSizeExtraLarge,
+        fontWeight: FontWeight.w700,
+        letterSpacing: -0.25,
+        height: 1.12,
+      );
 
   /// - `fontSize`: 24px (fontSizeLarge)
   /// - `height`: 1.15
   static TextStyle displayMedium(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeLarge,
-    fontWeight: FontWeight.w600,
-    letterSpacing: 0,
-    height: 1.15,
-  );
+        fontSize: context.fontSizeLarge,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 0,
+        height: 1.15,
+      );
 
   /// - `fontSize`: 20px (fontSizeNormal)
   /// - `height`: 1.22
   static TextStyle displaySmall(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeNormal,
-    fontWeight: FontWeight.w600,
-    letterSpacing: 0,
-    height: 1.22,
-  );
+        fontSize: context.fontSizeNormal,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 0,
+        height: 1.22,
+      );
 
   /// 📰 **Headline Styles**
   ///
@@ -84,29 +84,29 @@ class OsmeaTextStyle {
   /// Text('Section Header', style: OsmeaTextStyle.headlineLarge)
   /// ```
   static TextStyle headlineLarge(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeLarge,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0,
-    height: 1.25,
-  );
+        fontSize: context.fontSizeLarge,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0,
+        height: 1.25,
+      );
 
   /// - `fontSize`: 20px (fontSizeNormal)
   /// - `height`: 1.28
   static TextStyle headlineMedium(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeNormal,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0,
-    height: 1.28,
-  );
+        fontSize: context.fontSizeNormal,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0,
+        height: 1.28,
+      );
 
   /// - `fontSize`: 16px (fontSizeMedium)
   /// - `height`: 1.33
   static TextStyle headlineSmall(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeMedium,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0,
-    height: 1.33,
-  );
+        fontSize: context.fontSizeMedium,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0,
+        height: 1.33,
+      );
 
   /// 🏷️ **Title Styles**
   ///
@@ -114,23 +114,23 @@ class OsmeaTextStyle {
   /// - `fontSize`: 20px / 16px / 16px (fontSizeNormal / fontSizeMedium)
   /// - `fontWeight`: w500
   static TextStyle titleLarge(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeNormal,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0,
-    height: 1.27,
-  );
+        fontSize: context.fontSizeNormal,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0,
+        height: 1.27,
+      );
   static TextStyle titleMedium(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeMedium,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0.15,
-    height: 1.2,
-  );
+        fontSize: context.fontSizeMedium,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.15,
+        height: 1.2,
+      );
   static TextStyle titleSmall(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeMedium,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0.1,
-    height: 1.33,
-  );
+        fontSize: context.fontSizeMedium,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.1,
+        height: 1.33,
+      );
 
   /// 📝 **Subtitle Styles**
   ///
@@ -138,23 +138,23 @@ class OsmeaTextStyle {
   /// - `fontSize`: 16px / 16px / 12px (fontSizeMedium / fontSizeSmall)
   /// - `fontWeight`: w500
   static TextStyle subtitleLarge(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeMedium,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0.15,
-    height: 1.5,
-  );
+        fontSize: context.fontSizeMedium,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.15,
+        height: 1.5,
+      );
   static TextStyle subtitleMedium(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeMedium,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0.1,
-    height: 1.43,
-  );
+        fontSize: context.fontSizeMedium,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.1,
+        height: 1.43,
+      );
   static TextStyle subtitleSmall(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeSmall,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0.1,
-    height: 1.33,
-  );
+        fontSize: context.fontSizeSmall,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.1,
+        height: 1.33,
+      );
 
   /// 📚 **Body Styles**
   ///
@@ -162,23 +162,23 @@ class OsmeaTextStyle {
   /// - `fontSize`: 16px / 16px / 12px (fontSizeMedium / fontSizeSmall)
   /// - `fontWeight`: w400
   static TextStyle bodyLarge(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeMedium,
-    fontWeight: FontWeight.w400,
-    letterSpacing: 0.5,
-    height: 1.5,
-  );
+        fontSize: context.fontSizeMedium,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.5,
+        height: 1.5,
+      );
   static TextStyle bodyMedium(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeMedium,
-    fontWeight: FontWeight.w400,
-    letterSpacing: 0.25,
-    height: 1.43,
-  );
+        fontSize: context.fontSizeMedium,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.25,
+        height: 1.43,
+      );
   static TextStyle bodySmall(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeSmall,
-    fontWeight: FontWeight.w400,
-    letterSpacing: 0.4,
-    height: 1.33,
-  );
+        fontSize: context.fontSizeSmall,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.4,
+        height: 1.33,
+      );
 
   /// 🏷️ **Label Styles**
   ///
@@ -186,23 +186,23 @@ class OsmeaTextStyle {
   /// - `fontSize`: 16px / 12px / 12px (fontSizeMedium / fontSizeSmall)
   /// - `fontWeight`: w500
   static TextStyle labelLarge(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeMedium,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0.1,
-    height: 1.43,
-  );
+        fontSize: context.fontSizeMedium,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.1,
+        height: 1.43,
+      );
   static TextStyle labelMedium(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeSmall,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0.5,
-    height: 1.33,
-  );
+        fontSize: context.fontSizeSmall,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.5,
+        height: 1.33,
+      );
   static TextStyle labelSmall(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeSmall,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0.5,
-    height: 1.45,
-  );
+        fontSize: context.fontSizeSmall,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.5,
+        height: 1.45,
+      );
 
   /// 💬 **Caption Styles**
   ///
@@ -210,23 +210,23 @@ class OsmeaTextStyle {
   /// - `fontSize`: 12px (fontSizeSmall)
   /// - `fontWeight`: w400
   static TextStyle captionLarge(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeSmall,
-    fontWeight: FontWeight.w400,
-    letterSpacing: 0.4,
-    height: 1.33,
-  );
+        fontSize: context.fontSizeSmall,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.4,
+        height: 1.33,
+      );
   static TextStyle captionMedium(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeSmall,
-    fontWeight: FontWeight.w400,
-    letterSpacing: 0.4,
-    height: 1.45,
-  );
+        fontSize: context.fontSizeSmall,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.4,
+        height: 1.45,
+      );
   static TextStyle captionSmall(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeSmall,
-    fontWeight: FontWeight.w400,
-    letterSpacing: 0.4,
-    height: 1.2,
-  );
+        fontSize: context.fontSizeSmall,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.4,
+        height: 1.2,
+      );
 
   /// 🔘 **Button Styles**
   ///
@@ -242,23 +242,23 @@ class OsmeaTextStyle {
   /// )
   /// ```
   static TextStyle buttonLarge(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeMedium,
-    fontWeight: FontWeight.w600,
-    letterSpacing: 0.1,
-    height: 1.5,
-  );
+        fontSize: context.fontSizeMedium,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 0.1,
+        height: 1.5,
+      );
   static TextStyle buttonMedium(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeMedium,
-    fontWeight: FontWeight.w600,
-    letterSpacing: 0.1,
-    height: 1.43,
-  );
+        fontSize: context.fontSizeMedium,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 0.1,
+        height: 1.43,
+      );
   static TextStyle buttonSmall(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeSmall,
-    fontWeight: FontWeight.w600,
-    letterSpacing: 0.1,
-    height: 1.33,
-  );
+        fontSize: context.fontSizeSmall,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 0.1,
+        height: 1.33,
+      );
 
   /// 🔗 **Link Styles**
   ///
@@ -267,26 +267,26 @@ class OsmeaTextStyle {
   /// - `fontWeight`: w400
   /// - `decoration`: underline
   static TextStyle linkLarge(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeMedium,
-    fontWeight: FontWeight.w400,
-    letterSpacing: 0.5,
-    height: 1.5,
-    decoration: TextDecoration.underline,
-  );
+        fontSize: context.fontSizeMedium,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.5,
+        height: 1.5,
+        decoration: TextDecoration.underline,
+      );
   static TextStyle linkMedium(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeMedium,
-    fontWeight: FontWeight.w400,
-    letterSpacing: 0.25,
-    height: 1.43,
-    decoration: TextDecoration.underline,
-  );
+        fontSize: context.fontSizeMedium,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.25,
+        height: 1.43,
+        decoration: TextDecoration.underline,
+      );
   static TextStyle linkSmall(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeSmall,
-    fontWeight: FontWeight.w400,
-    letterSpacing: 0.4,
-    height: 1.33,
-    decoration: TextDecoration.underline,
-  );
+        fontSize: context.fontSizeSmall,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.4,
+        height: 1.33,
+        decoration: TextDecoration.underline,
+      );
 
   /// 🆙 **Overline Style**
   ///
@@ -295,12 +295,12 @@ class OsmeaTextStyle {
   /// - `fontWeight`: w500
   /// - `letterSpacing`: 1.5px
   static TextStyle overline(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeSmall,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 1.5,
-    height: 1.6,
-    textBaseline: TextBaseline.alphabetic,
-  );
+        fontSize: context.fontSizeSmall,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 1.5,
+        height: 1.6,
+        textBaseline: TextBaseline.alphabetic,
+      );
 
   /// 💻 **Code Style**
   ///
@@ -314,10 +314,39 @@ class OsmeaTextStyle {
   /// Text('const value = 42;', style: OsmeaTextStyle.code(context))
   /// ```
   static TextStyle code(BuildContext context) => _base.copyWith(
-    fontSize: context.fontSizeMedium,
-    fontWeight: FontWeight.w400,
-    letterSpacing: 0,
-    height: 1.43,
-    fontFamily: 'Roboto Mono',
-  );
+        fontSize: context.fontSizeMedium,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0,
+        height: 1.43,
+        fontFamily: 'Roboto Mono',
+      );
 }
+
+/// 📝 **OSMEA Design System - Typography**
+/// 
+/// Copyright (c) 2025, OSMEA Team
+/// https://github.com/osmea/components
+/// 
+/// Typography system for consistent text styling.
+/// 
+/// {@category Design System}
+/// {@subCategory Typography}
+/// 
+/// Style Categories:
+/// * 📱 Display - Large headlines (H1-H3)
+/// * 📄 Body - Main content text
+/// * 🏷️ Label - Form labels and small text
+/// * 🔘 Button - Interactive element text
+/// * 💬 Caption - Supporting text
+/// 
+/// ```dart
+/// Text(
+///   'Heading',
+///   style: OsmeaTextStyle.displayLarge(context),
+/// )
+/// ```
+/// 
+/// See also:
+/// * [TextTheme] - Theme configuration
+/// * [FontWeight] - Font weight options
+/// * [TextStyle] - Flutter text styling

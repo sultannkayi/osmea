@@ -1,3 +1,33 @@
+/// 🔘 **OSMEA Components Library**
+///
+/// Copyright (c) 2025, OSMEA Team
+/// https://github.com/osmea/components
+///
+/// A text button component with extensive customization options.
+///
+/// {@category Components}
+/// {@subCategory Buttons}
+///
+/// Features:
+/// * 🎨 Theme-aware styling
+/// * 📱 Responsive sizing
+/// * ✨ Built-in animations
+/// * 🔄 Loading states
+/// * ♿ Accessibility support
+///
+/// ```dart
+/// OsmeaTextButton(
+///   text: 'Submit',
+///   onPressed: () => handleSubmit(),
+///   size: ButtonSize.medium,
+/// )
+/// ```
+///
+/// See also:
+/// * [OsmeaButton] - Base button class
+/// * [ButtonSize] - Size configurations
+/// * [ButtonTheme] - Theming options
+
 import 'package:flutter/material.dart';
 import 'package:osmea_components/src/core/container_widget.dart';
 import 'package:osmea_components/src/core/text_widget.dart';
@@ -59,23 +89,58 @@ class OsmeaTextButton extends CoreContainer {
     this.tooltip,
   });
 
+  /// 📝 The text content to be displayed within the button
   final String text;
+
+  /// 🎯 Callback function that gets called when the button is tapped
   final VoidCallback? onPressed;
+
+  /// 📏 Determines the size variant of the button (extraSmall to extraLarge)
   final ButtonSize size;
+
+  /// 🎨 Custom text style that overrides the default button text style
   final TextStyle? textStyle;
+
+  /// 🎯 Specific color for the button's text, overriding theme defaults
   final Color? textColor;
+
+  /// ✨ Color displayed when the user hovers over the button
   final Color? hoverColor;
+
+  /// 💫 Color shown during the splash animation when button is pressed
   final Color? splashColor;
+
+  /// ⬅️ Optional icon widget displayed before the button text
   final Widget? leadingIcon;
+
+  /// ➡️ Optional icon widget displayed after the button text
   final Widget? trailingIcon;
+
+  /// 🔄 When true, shows a loading spinner instead of the button content
   final bool isLoading;
+
+  /// ⚫ When true, the button becomes non-interactive and shows disabled styling
   final bool isDisabled;
+
+  /// 🔠 When true, converts the button text to uppercase
   final bool isUppercase;
+
+  /// ⏱️ Duration for button animations (hover, press effects)
   final Duration? animationDuration;
+
+  /// 👆 Callback function triggered when the button is long-pressed
   final VoidCallback? onLongPress;
+
+  /// 🖱️ Callback function triggered when hover state changes
   final ValueChanged<bool>? onHover;
+
+  /// 🎯 Node for managing the focus state of the button
   final FocusNode? focusNode;
+
+  /// 🔵 When true, the button will automatically request focus when displayed
   final bool autofocus;
+
+  /// 💭 Text displayed in a tooltip when the user hovers over the button
   final String? tooltip;
 
   @override
@@ -179,7 +244,8 @@ class OsmeaTextButton extends CoreContainer {
     final children = <Widget>[];
 
     if (leadingIcon != null) {
-      children.add(_buildIcon(leadingIcon!, config, colors, isEffectivelyDisabled));
+      children
+          .add(_buildIcon(leadingIcon!, config, colors, isEffectivelyDisabled));
       children.add(spacing);
     }
 
@@ -187,7 +253,8 @@ class OsmeaTextButton extends CoreContainer {
 
     if (trailingIcon != null) {
       children.add(spacing);
-      children.add(_buildIcon(trailingIcon!, config, colors, isEffectivelyDisabled));
+      children.add(
+          _buildIcon(trailingIcon!, config, colors, isEffectivelyDisabled));
     }
 
     return Row(
@@ -197,8 +264,8 @@ class OsmeaTextButton extends CoreContainer {
     );
   }
 
-  Widget _buildIcon(Widget iconWidget, ButtonSizeConfig config, _ButtonColors colors,
-      bool isEffectivelyDisabled) {
+  Widget _buildIcon(Widget iconWidget, ButtonSizeConfig config,
+      _ButtonColors colors, bool isEffectivelyDisabled) {
     return IconTheme(
       data: IconThemeData(
         size: config.iconSize,
