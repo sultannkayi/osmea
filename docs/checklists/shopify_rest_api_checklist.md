@@ -13,14 +13,9 @@ This document tracks the main project categories, their current status, start an
 | Inventory                  | 🟢      | 04.05.25      | 05.05.25    | Nurhayat Yurtaslan   |
 | Marketing Event            | 🟢      | 30.04.25      | 19.05.25    | Ebru Yurtdaş   |
 | Metafield                  | 🟢      | 08.05.25      | 09.05.25    | Nurhayat Yurtaslan   |
-| Mobile Support             | 🔴      | (TBD)      | (TBD)    | (To be assigned)   |
 | Online Store               | 🟢      | 11.05.25      | 18.05.25    | Nurhayat Yurtaslan   |
-| Orders                     | 🟡      | 07.05.25      | (TBD)    |  Nisa Çolak  |
-| Plus                       | 🔴      | (TBD)      | (TBD)    |  (To be assigned)   |
-| Products                   | 🟡      | 18.05.25      | (TBD)    | Ayberk Görgün,Ebru Yurtdaş, Nisa Çolak, Nurhayat Yurtaslan   |
-| Sales Channels             | 🔴      | (TBD)      | (TBD)    | (To be assigned)   |
-| Shipping and Fulfillment   | 🔴      | (TBD)      | (TBD)    | (To be assigned)   |
-| Shopify Payments           | 🔴      | (TBD)      | (TBD)    | (To be assigned)   |
+| Orders                     | 🟢      | 07.05.25      | 27.05.25    |  Nisa Çolak  |
+| Products                   | 🟢      | 18.05.25      | 30.05.25    | Ayberk Görgün,Ebru Yurtdaş, Nisa Çolak, Nurhayat Yurtaslan   |
 | Store Properties           | 🟢      | 09.05.25      | 13.05.25    | Melih Alakabak   |
 | Tender Transaction         | 🟢      | 16.05.25      | 17.05.25    | Ayberk Görgün   |
 | Webhooks                   | 🟢      | 17.05.25      | 19.05.25    | Ayberk Görgün   |
