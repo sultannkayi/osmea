@@ -299,41 +299,6 @@ class OsmeaSwitch extends CoreContainer {
           ],
         );
 
-      case SwitchStyle.neumorphism:
-        return BoxDecoration(
-          color: value ? colors.activeTrack : OsmeaColors.ash,
-          borderRadius: BorderRadius.circular(config.trackSize.height / 2),
-          boxShadow: value
-              ? [
-                  BoxShadow(
-                    color: colors.activeTrack.withValues(alpha: 0.4),
-                    offset: const Offset(-2, -2),
-                    blurRadius: 4,
-                    spreadRadius: 0,
-                  ),
-                  BoxShadow(
-                    color: colors.activeTrack.withValues(alpha: 0.2),
-                    offset: const Offset(2, 2),
-                    blurRadius: 4,
-                    spreadRadius: 0,
-                  ),
-                ]
-              : [
-                  const BoxShadow(
-                    color: OsmeaColors.white,
-                    offset: Offset(-2, -2),
-                    blurRadius: 4,
-                    spreadRadius: 0,
-                  ),
-                  BoxShadow(
-                    color: OsmeaColors.pewter.withValues(alpha: 0.3),
-                    offset: const Offset(2, 2),
-                    blurRadius: 4,
-                    spreadRadius: 0,
-                  ),
-                ],
-        );
-
       case SwitchStyle.glassmorphism:
         return BoxDecoration(
           color: (value ? colors.activeTrack : colors.inactiveTrack)
@@ -440,28 +405,6 @@ class OsmeaSwitch extends CoreContainer {
             color: OsmeaColors.white.withValues(alpha: 0.3),
             width: 0.5,
           ),
-        );
-
-      case SwitchStyle.neumorphism:
-        return BoxDecoration(
-          color: colors.thumb,
-          borderRadius: BorderRadius.circular(config.thumbSize / 2),
-          boxShadow: [
-            if (!isEffectivelyDisabled) ...[
-              const BoxShadow(
-                color: OsmeaColors.white,
-                offset: Offset(-1, -1),
-                blurRadius: 2,
-                spreadRadius: 0,
-              ),
-              BoxShadow(
-                color: OsmeaColors.pewter.withValues(alpha: 0.4),
-                offset: const Offset(1, 1),
-                blurRadius: 2,
-                spreadRadius: 0,
-              ),
-            ],
-          ],
         );
 
       case SwitchStyle.glassmorphism:

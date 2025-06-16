@@ -187,7 +187,6 @@ enum SwitchState {
 /// - `material`: Google Material Design 3 style
 /// - `cupertino`: Apple iOS style with smooth animations
 /// - `modern`: Contemporary flat design with subtle shadows
-/// - `neumorphism`: Soft UI with inset/outset effects
 /// - `glassmorphism`: Transparent glass-like appearance
 /// - `minimal`: Ultra-clean minimal design
 /// - `custom`: Full control for brand-specific designs
@@ -196,7 +195,7 @@ enum SwitchState {
 /// ```dart
 /// OsmeaSwitch(
 ///   value: isOn,
-///   style: SwitchStyle.neumorphism, // Soft UI appearance
+///   style: SwitchStyle.material, // Soft UI appearance
 ///   onChanged: (value) => _updateState(value),
 /// )
 /// ```
@@ -218,12 +217,6 @@ enum SwitchStyle {
   /// - Smooth transitions and hover effects
   /// - Balanced between minimal and rich
   modern,
-
-  /// 🌊 **Neumorphism** - Soft UI design
-  /// - Inset/outset shadow effects
-  /// - Soft, tactile appearance
-  /// - Perfect for premium interfaces
-  neumorphism,
 
   /// 💎 **Glassmorphism** - Glass-like transparency
   /// - Semi-transparent backgrounds
