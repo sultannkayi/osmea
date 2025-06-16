@@ -59,6 +59,9 @@ class OsmeaLoginButton extends CoreCubitButton<LoginButtonCubit> {
   final VoidCallback? onPasswordChangeRequired;
   final VoidCallback? onAccountSetupRequired;
 
+  // Add this static field to track last processed state
+  static CoreButtonState? _lastProcessedState;
+
   const OsmeaLoginButton({
     Key? key,
     required String text,
@@ -129,29 +132,32 @@ class OsmeaLoginButton extends CoreCubitButton<LoginButtonCubit> {
 
   @override
   Widget buildButton(BuildContext context, CoreButtonState state) {
-    // Handle login-specific state changes
-    if (state is LoginSuccess && onLoginSuccess != null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        onLoginSuccess!();
-      });
-    } else if (state is LoginTwoFactorRequired && onTwoFactorRequired != null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        onTwoFactorRequired!();
-      });
-    } else if (state is LoginPasswordChangeRequired &&
-        onPasswordChangeRequired != null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        onPasswordChangeRequired!();
-      });
-    } else if (state is LoginAccountSetupRequired &&
-        onAccountSetupRequired != null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        onAccountSetupRequired!();
-      });
-    } else if (state is ButtonError && onLoginFailure != null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        onLoginFailure!();
-      });
+    if (state != _lastProcessedState) {
+      _lastProcessedState = state;
+      if (state is LoginSuccess && onLoginSuccess != null) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          onLoginSuccess!();
+        });
+      } else if (state is LoginTwoFactorRequired &&
+          onTwoFactorRequired != null) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          onTwoFactorRequired!();
+        });
+      } else if (state is LoginPasswordChangeRequired &&
+          onPasswordChangeRequired != null) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          onPasswordChangeRequired!();
+        });
+      } else if (state is LoginAccountSetupRequired &&
+          onAccountSetupRequired != null) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          onAccountSetupRequired!();
+        });
+      } else if (state is ButtonError && onLoginFailure != null) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          onLoginFailure!();
+        });
+      }
     }
 
     // Get button style based on variant and size
