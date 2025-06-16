@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:osmea_components/src/components/buttons/button.dart';
 import 'package:osmea_components/src/components/login_button/cubit/login_button_cubit.dart';
 import 'package:osmea_components/src/components/login_button/login_button.dart';
+import 'package:osmea_components/src/components/switch_button/switch_button.dart';
 import 'package:osmea_components/src/enums/button_enums.dart';
+import 'package:osmea_components/src/enums/switch_enums.dart';
 import 'package:osmea_components/src/theme/theme.dart';
 
 class OsmeaComponents {
@@ -253,6 +255,84 @@ class OsmeaComponents {
       // Legacy support
       username: username,
       password: password,
+    );
+  }
+
+  /// 🔄 **OSMEA Switch Button** - Comprehensive switch component
+  ///
+  /// Creates a feature-rich switch component with support for:
+  /// - All switch variants (simple, labeled, toggle, slider, card, compact, extended)
+  /// - All color variants (primary, secondary, success, warning, danger, info, accent)
+  /// - All 3 sizes (small, medium, large)
+  /// - All states (enabled, disabled, focused, hovered)
+  /// - Label and description support
+  /// - Full customization options
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.switchButton(
+  ///   value: isEnabled,
+  ///   label: 'Enable notifications',
+  ///   description: 'Receive push notifications',
+  ///   variant: SwitchVariant.extended,
+  ///   colorVariant: SwitchColorVariant.success,
+  ///   size: SwitchSize.medium,
+  ///   onChanged: (value) => setState(() => isEnabled = value),
+  /// )
+  /// ```
+  static Widget switchButton({
+    Key? key,
+    CoreTheme? customTheme,
+    required bool value,
+    required ValueChanged<bool>? onChanged,
+    SwitchSize size = SwitchSize.medium,
+    SwitchVariant variant = SwitchVariant.labeled,
+    SwitchState state = SwitchState.enabled,
+    SwitchStyle style = SwitchStyle.modern,
+    String? label,
+    String? description,
+    SwitchLabelPosition labelPosition = SwitchLabelPosition.trailing,
+    Color? activeColor,
+    Color? inactiveColor,
+    Color? thumbColor,
+    Color? trackColor,
+    Color? focusColor,
+    Color? hoverColor,
+    EdgeInsetsGeometry? padding,
+    EdgeInsetsGeometry? margin,
+    Duration? animationDuration,
+    ValueChanged<bool>? onHover,
+    FocusNode? focusNode,
+    bool autofocus = false,
+    String? semanticLabel,
+    bool fullWidth = false,
+  }) {
+    return OsmeaSwitch(
+      key: key,
+      customTheme: customTheme,
+      value: value,
+      onChanged: onChanged,
+      size: size,
+      variant: variant,
+      state: state,
+      style: style,
+      label: label,
+      description: description,
+      labelPosition: labelPosition,
+      activeColor: activeColor,
+      inactiveColor: inactiveColor,
+      thumbColor: thumbColor,
+      trackColor: trackColor,
+      focusColor: focusColor,
+      hoverColor: hoverColor,
+      padding: padding,
+      margin: margin,
+      animationDuration: animationDuration,
+      onHover: onHover,
+      focusNode: focusNode,
+      autofocus: autofocus,
+      semanticLabel: semanticLabel,
+      fullWidth: fullWidth,
     );
   }
 }
