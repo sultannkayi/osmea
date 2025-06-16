@@ -22,6 +22,9 @@ export 'src/components/navbar/navbar.dart';
 // 🔄 Switches
 export 'src/components/switch_button/switch_button.dart';
 
+// 📻 Radio Buttons
+export 'src/components/radio_button/radio_button.dart';
+
 // ☑️ Checkbox
 // Checkbox component
 export 'src/components/checkbox/checkbox.dart';
