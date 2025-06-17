@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:osmea_components/src/enums/navbar_enums.dart';
 import 'package:osmea_components/src/utils/sizer_extensions.dart';
+import 'package:osmea_components/src/utils/text_extensions.dart';
 
 /// 🧭 **OSMEA Navbar Extensions**
 ///
@@ -202,14 +203,14 @@ extension NavbarPositionExtension on NavbarPosition {
 
   /// 🎯 Get main axis for layout direction
   Axis get mainAxis {
-    if (isHorizontal) return Axis.horizontal;
-    return Axis.vertical;
+    if (isHorizontal) return horizontal;
+    return vertical;
   }
 
   /// 🎯 Get cross axis for layout direction
   Axis get crossAxis {
-    if (isHorizontal) return Axis.vertical;
-    return Axis.horizontal;
+    if (isHorizontal) return vertical;
+    return horizontal;
   }
 
   /// 🎯 Get alignment for positioning
