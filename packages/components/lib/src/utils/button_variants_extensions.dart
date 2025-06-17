@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:osmea_components/src/enums/button_enums.dart';
-import 'package:osmea_components/src/styles/colors.dart';
+import 'package:osmea_components/osmea_components.dart';
+
 
 /// 🎨 **OSMEA Button Variants**
 ///
@@ -159,9 +159,9 @@ extension ButtonVariantMapper on ButtonVariant {
           backgroundColor: OsmeaColors.transparent,
           textColor: OsmeaColors.forestHeart,
           borderColor: OsmeaColors.transparent,
-          hoverColor: OsmeaColors.meadow.withValues(alpha: 0.1),
-          splashColor: OsmeaColors.meadow.withValues(alpha: 0.2),
-          focusColor: OsmeaColors.meadow.withValues(alpha: 0.12),
+          hoverColor: OsmeaColors.forestHeart.withValues(alpha: 0.1),
+          splashColor: OsmeaColors.forestHeart.withValues(alpha: 0.2),
+          focusColor: OsmeaColors.forestHeart.withValues(alpha: 0.12),
           disabledBackgroundColor: OsmeaColors.transparent,
           disabledTextColor: OsmeaColors.steel,
           disabledBorderColor: OsmeaColors.transparent,
@@ -219,8 +219,8 @@ extension ButtonVariantMapper on ButtonVariant {
           textColor: OsmeaColors.eclipse,
           borderColor: OsmeaColors.ash,
           hoverColor: OsmeaColors.silver,
-          splashColor: OsmeaColors.platinum.withValues(alpha: 0.3),
-          focusColor: OsmeaColors.platinum.withValues(alpha: 0.12),
+          splashColor: OsmeaColors.silver.withValues(alpha: 0.3),
+          focusColor: OsmeaColors.silver.withValues(alpha: 0.12),
           disabledBackgroundColor: OsmeaColors.snow,
           disabledTextColor: OsmeaColors.steel,
           disabledBorderColor: OsmeaColors.snow,
@@ -240,8 +240,8 @@ extension ButtonVariantMapper on ButtonVariant {
           textColor: OsmeaColors.white,
           borderColor: OsmeaColors.forestHeart,
           hoverColor: OsmeaColors.pineGrove,
-          splashColor: OsmeaColors.meadow.withValues(alpha: 0.3),
-          focusColor: OsmeaColors.meadow.withValues(alpha: 0.12),
+          splashColor: OsmeaColors.pineGrove.withValues(alpha: 0.3),
+          focusColor: OsmeaColors.pineGrove.withValues(alpha: 0.12),
           disabledBackgroundColor: OsmeaColors.ash,
           disabledTextColor: OsmeaColors.steel,
           disabledBorderColor: OsmeaColors.ash,
@@ -334,7 +334,7 @@ class ButtonVariantUtils {
   static ButtonVariant? getVariantByName(String name) {
     try {
       return ButtonVariant.values.firstWhere(
-        (variant) => variant.name.toLowerCase() == name.toLowerCase(),
+        (variant) => variant.name.toString().toLowerCase() == name.toLowerCase(),
       );
     } catch (e) {
       return null;
