@@ -398,7 +398,7 @@ class OsmeaComponents {
     BorderRadius? borderRadius,
     bool showLabels = true,
     bool showIcons = true,
-    bool centerItems = false,
+    bool centerItems = true,
     bool scrollable = false,
     ValueChanged<int>? onItemTap,
     int currentIndex = 0,
@@ -605,7 +605,6 @@ class OsmeaComponents {
     Color? color,
     OsmeaTextVariant variant = OsmeaTextVariant.bodyMedium,
     FontWeight? fontWeight,
-    
     double? fontSize,
     String? fontFamily,
     double? letterSpacing,

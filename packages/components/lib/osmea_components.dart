@@ -40,6 +40,7 @@ export 'src/components/login_button/login_button.dart';
 export 'src/utils/sizer_extensions.dart';
 export 'src/utils/text_extensions.dart';
 export 'src/utils/button_size_extensions.dart';
+export 'src/utils/button_shape_extensions.dart';
 export 'src/utils/icon_positions_extensions.dart';
 export 'src/utils/switch_size_extensions.dart';
 export 'src/utils/navbar_extensions.dart';
@@ -57,4 +58,3 @@ export 'src/enums/enums.dart';
 export 'src/components/login_button/cubit/login_button_cubit.dart';
 export 'src/core/cubit_button/cubit/core_button_state.dart';
 export 'src/core/cubit_button/cubit/core_button_cubit.dart';
-
