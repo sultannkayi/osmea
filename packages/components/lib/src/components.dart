@@ -5,13 +5,11 @@ import 'package:osmea_components/src/components/login_button/cubit/login_button_
 import 'package:osmea_components/src/components/login_button/login_button.dart';
 import 'package:osmea_components/src/components/navbar/navbar.dart';
 import 'package:osmea_components/src/components/switch_button/switch_button.dart';
-import 'package:osmea_components/src/enums/button_enums.dart';
-import 'package:osmea_components/src/enums/navbar_enums.dart';
 import 'package:osmea_components/src/components/radio_button/radio_button.dart';
-import 'package:osmea_components/src/enums/checkbox_enums.dart';
-import 'package:osmea_components/src/enums/radio_enums.dart';
-import 'package:osmea_components/src/enums/switch_enums.dart';
 import 'package:osmea_components/src/theme/theme.dart';
+import 'package:osmea_components/src/components/text/text.dart';
+
+import 'enums/enums.dart';
 
 class OsmeaComponents {
   /// Supported Button variants - All variants are supported
@@ -431,6 +429,7 @@ class OsmeaComponents {
       currentIndex: currentIndex,
     );
   }
+
   /// OsmeaComponents.radioButton<String>(
   ///   value: 'option1',
   ///   groupValue: selectedOption,
@@ -581,4 +580,105 @@ class OsmeaComponents {
     );
   }
 
+  /// 📝 **OSMEA Text** - Unified text component with enum variants
+  ///
+  /// Creates a comprehensive text component with support for:
+  /// - All text style variants through TextVariant enum (display, headline, title, subtitle, body, label, caption, button, link, overline, code)
+  /// - Complete text styling (font weight, size, family, spacing, decoration)
+  /// - Interactive features (tap, long press, selectable)
+  /// - Animation support
+  /// - Full customization options
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.text(
+  ///   'Hello World',
+  ///   variant: TextVariant.headlineLarge,
+  ///   color: OsmeaColors.nordicBlue,
+  ///   fontWeight: FontWeight.bold,
+  ///   onTap: () => print('Text tapped!'),
+  /// )
+  /// ```
+  static text(
+    String text, {
+    Key? key,
+    Color? color,
+    OsmeaTextVariant variant = OsmeaTextVariant.bodyMedium,
+    FontWeight? fontWeight,
+    
+    double? fontSize,
+    String? fontFamily,
+    double? letterSpacing,
+    double? wordSpacing,
+    double? lineHeight,
+    FontStyle? fontStyle,
+    TextDecoration? decoration,
+    Color? decorationColor,
+    TextDecorationStyle? decorationStyle,
+    double? decorationThickness,
+    List<Shadow>? shadows,
+    List<FontFeature>? fontFeatures,
+    List<FontVariation>? fontVariations,
+    Color? backgroundColor,
+    Paint? foreground,
+    Paint? background,
+    bool isUppercase = false,
+    bool isSelectable = false,
+    Duration? animationDuration,
+    VoidCallback? onTap,
+    VoidCallback? onLongPress,
+    TextAlign? textAlign,
+    TextDirection? textDirection,
+    TextOverflow? overflow,
+    TextStyle? textStyle,
+    int? maxLines,
+    bool? softWrap,
+    Locale? locale,
+    TextScaler? textScaler,
+    String? semanticsLabel,
+    TextWidthBasis? textWidthBasis,
+    TextHeightBehavior? textHeightBehavior,
+    Color? selectionColor,
+  }) {
+    return OsmeaText(
+      text,
+      key: key,
+      style: textStyle,
+      variant: variant,
+      color: color,
+      fontWeight: fontWeight,
+      fontSize: fontSize,
+      fontFamily: fontFamily,
+      letterSpacing: letterSpacing,
+      wordSpacing: wordSpacing,
+      lineHeight: lineHeight,
+      fontStyle: fontStyle,
+      decoration: decoration,
+      decorationColor: decorationColor,
+      decorationStyle: decorationStyle,
+      decorationThickness: decorationThickness,
+      shadows: shadows,
+      fontFeatures: fontFeatures,
+      fontVariations: fontVariations,
+      backgroundColor: backgroundColor,
+      foreground: foreground,
+      background: background,
+      isUppercase: isUppercase,
+      isSelectable: isSelectable,
+      animationDuration: animationDuration,
+      onTap: onTap,
+      onLongPress: onLongPress,
+      textAlign: textAlign,
+      textDirection: textDirection,
+      overflow: overflow,
+      maxLines: maxLines,
+      softWrap: softWrap,
+      locale: locale,
+      textScaler: textScaler,
+      semanticsLabel: semanticsLabel,
+      textWidthBasis: textWidthBasis,
+      textHeightBehavior: textHeightBehavior,
+      selectionColor: selectionColor,
+    );
+  }
 }

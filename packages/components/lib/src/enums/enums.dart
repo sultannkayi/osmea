@@ -17,23 +17,26 @@
 /// IconPosition.leading
 /// ```
 
-// 🟦 Button-related enums
+// Button enums
 export 'button_enums.dart';
 
-// 🔄 Switch-related enums
-export 'switch_enums.dart';
-
-// 📻 Radio button enums
-export 'radio_enums.dart';
-
-// ☑️ Checkbox enums
+// Checkbox enums
 export 'checkbox_enums.dart';
 
-// 🧩 General component enums
-export 'components_enum.dart';
+// Radio enums
+export 'radio_enums.dart';
 
-// 🧭 Navbar enums
+// Switch enums
+export 'switch_enums.dart';
+
+// Navbar enums
 export 'navbar_enums.dart';
+
+// Text enums
+export 'text_enums.dart';
+
+// Component enums
+export 'components_enum.dart';
 
 // ➕ Add other enum files here as they are created
 // export 'input_enums.dart';

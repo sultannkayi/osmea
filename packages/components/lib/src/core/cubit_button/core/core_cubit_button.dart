@@ -7,6 +7,8 @@ import 'package:osmea_components/src/core/cubit_button/cubit/core_button_cubit.d
 import 'package:osmea_components/src/core/cubit_button/cubit/core_button_state.dart';
 import 'package:osmea_components/src/enums/button_enums.dart';
 
+import '../../../components/text/text.dart';
+
 // 🏗️ Abstract base widget for all cubit-driven buttons in OSMEA
 abstract class CoreCubitButton<T extends CoreButtonCubit> extends OsmeaButton {
   // ⏳ Duration to show the success state before resetting
@@ -133,11 +135,11 @@ abstract class CoreCubitButton<T extends CoreButtonCubit> extends OsmeaButton {
           children: [
             icon!,
             const SizedBox(width: 8),
-            Text(text!),
+            OsmeaText(text!),
           ],
         );
       }
-      return Text(text!);
+      return OsmeaText(text!);
     }
   }
 

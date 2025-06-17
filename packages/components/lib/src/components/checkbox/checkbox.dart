@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:osmea_components/osmea_components.dart';
 import 'package:osmea_components/src/core/container_widget.dart';
-import 'package:osmea_components/src/enums/checkbox_enums.dart';
-import 'package:osmea_components/src/utils/checkbox_size_extensions.dart';
 
 /// ☑️ **OSMEA Checkbox**
 ///
@@ -189,7 +187,7 @@ class OsmeaCheckbox extends CoreContainer {
     _CheckboxColors colors,
   ) {
     return AnimatedContainer(
-      duration: animationDuration ?? const Duration(milliseconds: 200),
+      duration: animationDuration ?? context.animationMedium,
       curve: Curves.easeInOutCubic,
       width: config.size,
       height: config.size,
@@ -208,7 +206,7 @@ class OsmeaCheckbox extends CoreContainer {
     }
 
     return AnimatedOpacity(
-      duration: animationDuration ?? const Duration(milliseconds: 200),
+      duration: animationDuration ?? context.animationMedium,
       curve: Curves.easeInOutCubic,
       opacity: isChecked || isIndeterminate ? 1.0 : 0.0,
       child: Center(
@@ -241,7 +239,7 @@ class OsmeaCheckbox extends CoreContainer {
       height: config.borderWidth,
       decoration: BoxDecoration(
         color: colors.checkmark,
-        borderRadius: BorderRadius.circular(config.borderWidth / 2),
+        borderRadius: context.borderRadiusNormal,
       ),
     );
   }
@@ -279,11 +277,11 @@ class OsmeaCheckbox extends CoreContainer {
             ? EdgeInsets.only(right: context.lowValue)
             : EdgeInsets.only(left: context.lowValue),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: context.crossStart,
+          mainAxisSize: context.min,
           children: [
             if (label != null)
-              Text(
+              OsmeaText(
                 label!,
                 style: _getEffectiveLabelStyle(context).copyWith(
                   color:
@@ -291,13 +289,13 @@ class OsmeaCheckbox extends CoreContainer {
                 ),
               ),
             if (description != null) ...[
-              SizedBox(height: context.lowValue * 0.25),
-              Text(
+              context.emptySizedHeightBoxLow,
+              OsmeaText(
                 description!,
                 style: _getEffectiveDescriptionStyle(context).copyWith(
                   color: isEffectivelyDisabled
                       ? colors.disabledText
-                      : colors.text.withValues(alpha: 0.7),
+                      : colors.text.withValues(alpha: context.alpha70),
                 ),
               ),
             ],
@@ -313,7 +311,7 @@ class OsmeaCheckbox extends CoreContainer {
     _CheckboxColors colors,
   ) {
     return AnimatedContainer(
-      duration: animationDuration ?? const Duration(milliseconds: 200),
+      duration: animationDuration ?? context.animationMedium,
       curve: Curves.easeInOutCubic,
       width: fullWidth ? double.infinity : null,
       padding: variant == CheckboxVariant.tile
@@ -348,10 +346,10 @@ class OsmeaCheckbox extends CoreContainer {
           boxShadow: isFocused && !isEffectivelyDisabled
               ? [
                   BoxShadow(
-                    color: colors.focus.withValues(alpha: 0.3),
-                    offset: const Offset(0, 0),
-                    blurRadius: 8,
-                    spreadRadius: 2,
+                    color: colors.focus.withValues(alpha: context.alpha30),
+                    offset: context.offsetZero,
+                    blurRadius: context.blurRadius8,
+                    spreadRadius: context.spreadRadius2,
                   ),
                 ]
               : null,
@@ -378,10 +376,10 @@ class OsmeaCheckbox extends CoreContainer {
           boxShadow: isHovered && !isEffectivelyDisabled
               ? [
                   BoxShadow(
-                    color: colors.hover.withValues(alpha: 0.2),
-                    offset: const Offset(0, 2),
-                    blurRadius: 8,
-                    spreadRadius: 0,
+                    color: colors.hover.withValues(alpha: context.alpha20),
+                    offset: context.shadowOffsetNormal,
+                    blurRadius: context.blurRadius8,
+                    spreadRadius: context.spreadRadiusZero,
                   ),
                 ]
               : null,
@@ -389,18 +387,18 @@ class OsmeaCheckbox extends CoreContainer {
 
       case CheckboxStyle.glassmorphism:
         return BoxDecoration(
-          color: baseColor.withValues(alpha: 0.2),
+          color: baseColor.withValues(alpha: context.alpha20),
           borderRadius: config.borderRadius,
           border: Border.all(
-            color: OsmeaColors.white.withValues(alpha: 0.3),
+            color: OsmeaColors.white.withValues(alpha: context.alpha30),
             width: config.borderWidth,
           ),
           boxShadow: [
             BoxShadow(
-              color: OsmeaColors.shadowLight.withValues(alpha: 0.1),
-              offset: const Offset(0, 8),
-              blurRadius: 32,
-              spreadRadius: 0,
+              color: OsmeaColors.shadowLight.withValues(alpha: context.alpha10),
+              offset: context.shadowOffsetHigh,
+              blurRadius: context.blurRadius32,
+              spreadRadius: context.spreadRadiusZero,
             ),
           ],
         );
@@ -445,14 +443,14 @@ class OsmeaCheckbox extends CoreContainer {
             color: isChecked || isIndeterminate
                 ? colors.activeBorder
                 : colors.inactiveBorder,
-            width: 1,
+            width: context.width1,
           ),
           boxShadow: [
             BoxShadow(
-              color: OsmeaColors.shadowLight.withValues(alpha: 0.1),
-              offset: const Offset(0, 2),
-              blurRadius: 8,
-              spreadRadius: 0,
+              color: OsmeaColors.shadowLight.withValues(alpha: context.alpha10),
+              offset: context.shadowOffsetNormal,
+              blurRadius: context.blurRadius8,
+              spreadRadius: context.spreadRadiusZero,
             ),
           ],
         );
@@ -466,7 +464,7 @@ class OsmeaCheckbox extends CoreContainer {
           border: isChecked || isIndeterminate
               ? Border.all(
                   color: colors.activeBorder,
-                  width: 1,
+                  width: context.width1,
                 )
               : null,
         );
@@ -517,13 +515,13 @@ class OsmeaCheckbox extends CoreContainer {
       activeBackground: primaryColor,
       inactiveBackground: surfaceColor,
       activeBorder: primaryColor,
-      inactiveBorder: onSurfaceColor.withValues(alpha: 0.3),
+      inactiveBorder: onSurfaceColor.withValues(alpha: context.alpha30),
       checkmark: checkColor ?? surfaceColor,
       text: onSurfaceColor,
-      focus: focusColor ?? primaryColor.withValues(alpha: 0.8),
-      hover: hoverColor ?? primaryColor.withValues(alpha: 0.1),
-      disabledText: onSurfaceColor.withValues(alpha: 0.4),
-      activeContainer: primaryColor.withValues(alpha: 0.05),
+      focus: focusColor ?? primaryColor.withValues(alpha: context.alpha80),
+      hover: hoverColor ?? primaryColor.withValues(alpha: context.alpha10),
+      disabledText: onSurfaceColor.withValues(alpha: context.alpha40),
+      activeContainer: primaryColor.withValues(alpha: context.alpha10),
       inactiveContainer: surfaceColor,
     );
   }

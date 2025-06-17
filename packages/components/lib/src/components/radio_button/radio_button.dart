@@ -182,7 +182,7 @@ class OsmeaRadio<T> extends CoreContainer {
   ) {
     return AnimatedContainer(
       duration: animationDuration ?? const Duration(milliseconds: 200),
-      curve: Curves.easeInOutCubic,
+      curve: easeInOutCubic,
       width: config.outerSize,
       height: config.outerSize,
       decoration: _getOuterDecoration(context, config, colors),
@@ -190,8 +190,8 @@ class OsmeaRadio<T> extends CoreContainer {
         child: AnimatedContainer(
           duration: animationDuration ?? const Duration(milliseconds: 200),
           curve: Curves.easeInOutCubic,
-          width: isSelected ? config.innerSize : 0,
-          height: isSelected ? config.innerSize : 0,
+          width: isSelected ? config.innerSize : context.widthZero,
+          height: isSelected ? config.innerSize : context.widthZero,
           decoration: _getInnerDecoration(context, config, colors),
         ),
       ),
@@ -228,23 +228,22 @@ class OsmeaRadio<T> extends CoreContainer {
       flex: fullWidth ? 1 : 0,
       child: Padding(
         padding: labelPosition == RadioLabelPosition.leading
-            ? EdgeInsets.only(right: context.lowValue)
-            : EdgeInsets.only(left: context.lowValue),
+            ? context.onlyRightPaddingLow
+            : context.onlyLeftPaddingLow,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: crossStart,
+          mainAxisSize: min,
           children: [
             if (label != null)
               Text(
                 label!,
                 style: _getEffectiveLabelStyle(context).copyWith(
-                  color: isEffectivelyDisabled
-                      ? colors.disabledText
-                      : colors.text,
+                  color:
+                      isEffectivelyDisabled ? colors.disabledText : colors.text,
                 ),
               ),
             if (description != null) ...[
-              SizedBox(height: context.lowValue * 0.25),
+              context.emptySizedHeightBoxLow,
               Text(
                 description!,
                 style: _getEffectiveDescriptionStyle(context).copyWith(
@@ -266,12 +265,12 @@ class OsmeaRadio<T> extends CoreContainer {
     _RadioColors colors,
   ) {
     return AnimatedContainer(
-      duration: animationDuration ?? const Duration(milliseconds: 200),
+      duration: animationDuration ?? context.animationMedium,
       curve: Curves.easeInOutCubic,
       width: fullWidth ? double.infinity : null,
       padding: variant == RadioVariant.tile
-          ? EdgeInsets.all(context.normalValue)
-          : EdgeInsets.all(context.lowValue),
+          ? context.paddingNormal
+          : context.paddingLow,
       decoration: _getContainerDecoration(context, colors),
       child: content,
     );
@@ -283,13 +282,14 @@ class OsmeaRadio<T> extends CoreContainer {
     _RadioColors colors,
   ) {
     final baseColor = isSelected ? colors.activeOuter : colors.inactiveOuter;
-    final borderColor = isSelected ? colors.activeBorder : colors.inactiveBorder;
+    final borderColor =
+        isSelected ? colors.activeBorder : colors.inactiveBorder;
 
     switch (style) {
       case RadioStyle.material:
         return BoxDecoration(
           color: baseColor,
-          shape: BoxShape.circle,
+          shape: circleShape,
           border: Border.all(
             color: borderColor,
             width: config.borderWidth,
@@ -297,10 +297,10 @@ class OsmeaRadio<T> extends CoreContainer {
           boxShadow: isFocused && !isEffectivelyDisabled
               ? [
                   BoxShadow(
-                    color: colors.focus.withValues(alpha: 0.3),
-                    offset: const Offset(0, 0),
-                    blurRadius: 8,
-                    spreadRadius: 2,
+                    color: colors.focus.withValues(alpha: context.alpha30),
+                    offset: context.offsetZero,
+                    blurRadius: context.blurRadius8,
+                    spreadRadius: context.spacing2,
                   ),
                 ]
               : null,
@@ -309,7 +309,7 @@ class OsmeaRadio<T> extends CoreContainer {
       case RadioStyle.cupertino:
         return BoxDecoration(
           color: baseColor,
-          shape: BoxShape.circle,
+          shape: circleShape,
           border: Border.all(
             color: borderColor,
             width: config.borderWidth,
@@ -319,7 +319,7 @@ class OsmeaRadio<T> extends CoreContainer {
       case RadioStyle.modern:
         return BoxDecoration(
           color: baseColor,
-          shape: BoxShape.circle,
+          shape: circleShape,
           border: Border.all(
             color: borderColor,
             width: config.borderWidth,
@@ -327,28 +327,28 @@ class OsmeaRadio<T> extends CoreContainer {
           boxShadow: isHovered && !isEffectivelyDisabled
               ? [
                   BoxShadow(
-                    color: colors.hover.withValues(alpha: 0.2),
-                    offset: const Offset(0, 2),
-                    blurRadius: 8,
-                    spreadRadius: 0,
+                    color: colors.hover.withValues(alpha: context.alpha20),
+                    offset: context.shadowOffsetNormal,
+                    blurRadius: context.blurRadius8,
+                    spreadRadius: context.spacingZero,
                   ),
                 ]
               : null,
         );
       case RadioStyle.glassmorphism:
         return BoxDecoration(
-          color: baseColor.withValues(alpha: 0.2),
-          shape: BoxShape.circle,
+          color: baseColor.withValues(alpha: context.alpha20),
+          shape: circleShape,
           border: Border.all(
-            color: OsmeaColors.white.withValues(alpha: 0.3),
+            color: OsmeaColors.white.withValues(alpha: context.alpha30),
             width: config.borderWidth,
           ),
           boxShadow: [
             BoxShadow(
-              color: OsmeaColors.shadowLight.withValues(alpha: 0.1),
-              offset: const Offset(0, 8),
-              blurRadius: 32,
-              spreadRadius: 0,
+              color: OsmeaColors.shadowLight.withValues(alpha: context.alpha10),
+              offset: context.offsetVertical8,
+              blurRadius: context.blurRadius8,
+              spreadRadius: context.spacingZero,
             ),
           ],
         );
@@ -356,7 +356,7 @@ class OsmeaRadio<T> extends CoreContainer {
       case RadioStyle.minimal:
         return BoxDecoration(
           color: baseColor,
-          shape: BoxShape.circle,
+          shape: circleShape,
           border: Border.all(
             color: isFocused && !isEffectivelyDisabled
                 ? colors.focus
@@ -369,7 +369,7 @@ class OsmeaRadio<T> extends CoreContainer {
       default:
         return BoxDecoration(
           color: baseColor,
-          shape: BoxShape.circle,
+          shape: circleShape,
           border: Border.all(
             color: borderColor,
             width: config.borderWidth,
@@ -397,17 +397,17 @@ class OsmeaRadio<T> extends CoreContainer {
       case RadioVariant.card:
         return BoxDecoration(
           color: isSelected ? colors.activeContainer : colors.inactiveContainer,
-          borderRadius: BorderRadius.circular(context.radiusLow.toDouble()),
+          borderRadius: context.borderRadiusLow,
           border: Border.all(
             color: isSelected ? colors.activeBorder : colors.inactiveBorder,
-            width: 1,
+            width: context.width1,
           ),
           boxShadow: [
             BoxShadow(
-              color: OsmeaColors.shadowLight.withValues(alpha: 0.1),
-              offset: const Offset(0, 2),
-              blurRadius: 8,
-              spreadRadius: 0,
+              color: OsmeaColors.shadowLight.withValues(alpha: context.alpha10),
+              offset: context.offsetVertical2,
+              blurRadius: context.blurRadius8,
+              spreadRadius: context.spacingZero,
             ),
           ],
         );
@@ -415,11 +415,11 @@ class OsmeaRadio<T> extends CoreContainer {
       case RadioVariant.tile:
         return BoxDecoration(
           color: isSelected ? colors.activeContainer : colors.inactiveContainer,
-          borderRadius: BorderRadius.circular(context.radiusLow.toDouble()),
+          borderRadius: context.borderRadiusLow,
           border: isSelected
               ? Border.all(
                   color: colors.activeBorder,
-                  width: 1,
+                  width: context.width1,
                 )
               : null,
         );
@@ -451,16 +451,16 @@ class OsmeaRadio<T> extends CoreContainer {
     final onSurfaceColor = theme.colorScheme.onSurface;
 
     return _RadioColors(
-      activeOuter: primaryColor.withValues(alpha: 0.1),
+      activeOuter: primaryColor.withValues(alpha: context.alpha10),
       inactiveOuter: surfaceColor,
       activeBorder: primaryColor,
-      inactiveBorder: onSurfaceColor.withValues(alpha: 0.3),
+      inactiveBorder: onSurfaceColor.withValues(alpha: context.alpha30),
       innerDot: dotColor ?? primaryColor,
       text: onSurfaceColor,
-      focus: focusColor ?? primaryColor.withValues(alpha: 0.8),
-      hover: hoverColor ?? primaryColor.withValues(alpha: 0.1),
-      disabledText: onSurfaceColor.withValues(alpha: 0.4),
-      activeContainer: primaryColor.withValues(alpha: 0.05),
+      focus: focusColor ?? primaryColor.withValues(alpha: context.alpha80),
+      hover: hoverColor ?? primaryColor.withValues(alpha: context.alpha10),
+      disabledText: onSurfaceColor.withValues(alpha: context.alpha40),
+      activeContainer: primaryColor.withValues(alpha: context.alpha10),
       inactiveContainer: surfaceColor,
     );
   }

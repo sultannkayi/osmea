@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:osmea_components/osmea_components.dart';
 import 'package:osmea_components/src/components/login_button/cubit/login_button_state.dart';
 import 'package:osmea_components/src/core/cubit_button/core/core_cubit_button.dart';
-import 'package:osmea_components/src/utils/button_size_extensions.dart';
 
 /// 🔑 **OSMEA Login Button**
 ///
@@ -203,12 +202,12 @@ class OsmeaLoginButton extends CoreCubitButton<LoginButtonCubit> {
           debugPrint('🔑 Login Button Message: $loadingText');
         }
 
-        return const SizedBox(
-          width: 16,
-          height: 16,
+        return SizedBox(
+          width: context.width16,
+          height: context.height16,
           child: CircularProgressIndicator(
-            strokeWidth: 2,
-            valueColor: AlwaysStoppedAnimation<Color>(OsmeaColors.white),
+            strokeWidth: context.width2,
+            valueColor: const AlwaysStoppedAnimation<Color>(OsmeaColors.white),
           ),
         );
       },
@@ -239,17 +238,15 @@ class OsmeaLoginButton extends CoreCubitButton<LoginButtonCubit> {
     // Always show the same text regardless of state, only colors change
     if (icon != null) {
       return Row(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: min,
         children: [
           icon!,
-          const SizedBox(
-              width:
-                  8), // Replace context.emptySizedWidthBoxNormal with a direct value
-          Text(text!),
+          const SizedBox(width: 8),
+          OsmeaText(text!, variant: OsmeaTextVariant.buttonMedium),
         ],
       );
     }
-    return Text(text!);
+    return OsmeaText(text!, variant: OsmeaTextVariant.buttonMedium);
   }
 
   ButtonStyle _getButtonStyle(BuildContext context, CoreButtonState state) {

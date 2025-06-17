@@ -141,7 +141,7 @@ class OsmeaSwitch extends CoreContainer {
     _SwitchColors colors,
   ) {
     return AnimatedContainer(
-      duration: animationDuration ?? const Duration(milliseconds: 250),
+      duration: animationDuration ?? context.animationMedium,
       curve: Curves.easeInOutCubic,
       child: Focus(
         focusNode: focusNode,
@@ -153,9 +153,7 @@ class OsmeaSwitch extends CoreContainer {
         child: GestureDetector(
           onTap: isEffectivelyDisabled ? null : () => onChanged?.call(!value),
           child: MouseRegion(
-            cursor: isEffectivelyDisabled
-                ? SystemMouseCursors.forbidden
-                : SystemMouseCursors.click,
+            cursor: isEffectivelyDisabled ? forbiddenCursor : clickCursor,
             onEnter: (event) {
               // Note: Since this is now stateless, hover effects will be
               // handled through style properties rather than state
@@ -177,8 +175,8 @@ class OsmeaSwitch extends CoreContainer {
     _SwitchColors colors,
   ) {
     return AnimatedContainer(
-      duration: animationDuration ?? const Duration(milliseconds: 250),
-      curve: Curves.easeInOutCubic,
+      duration: animationDuration ?? context.animationMedium,
+      curve: easeInOutCubic,
       width: config.trackSize.width,
       height: config.trackSize.height,
       decoration: _getTrackDecoration(context, config, colors),
@@ -204,12 +202,11 @@ class OsmeaSwitch extends CoreContainer {
     return Positioned.fill(
       child: Row(
         children: [
-          // Sol taraf (kapalı durum)
           Expanded(
             child: Center(
               child: AnimatedOpacity(
-                duration: const Duration(milliseconds: 200),
-                opacity: value ? 0.3 : 0.7,
+                duration: context.animationMedium,
+                opacity: value ? context.opacity30 : context.opacity70,
                 child: Icon(
                   Icons.close,
                   size: config.trackSize.height * 0.3,
@@ -222,8 +219,8 @@ class OsmeaSwitch extends CoreContainer {
           Expanded(
             child: Center(
               child: AnimatedOpacity(
-                duration: const Duration(milliseconds: 200),
-                opacity: value ? 0.7 : 0.3,
+                duration: context.animationMedium,
+                opacity: value ? context.opacity70 : context.opacity30,
                 child: Icon(
                   Icons.check,
                   size: config.trackSize.height * 0.3,
@@ -253,8 +250,8 @@ class OsmeaSwitch extends CoreContainer {
           border: Border.all(
             color: value
                 ? colors.activeTrack
-                : OsmeaColors.pewter.withValues(alpha: 0.3),
-            width: 0.5,
+                : OsmeaColors.pewter.withValues(alpha: context.alpha30),
+            width: context.width1 / 2,
           ),
         );
 
@@ -262,19 +259,19 @@ class OsmeaSwitch extends CoreContainer {
         return BoxDecoration(
           gradient: value
               ? LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
+                  begin: centerLeft,
+                  end: centerRight,
                   colors: [
                     colors.activeTrack,
-                    colors.activeTrack.withValues(alpha: 0.8),
+                    colors.activeTrack.withValues(alpha: context.alpha60),
                   ],
                 )
               : LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
+                  begin: centerLeft,
+                  end: centerRight,
                   colors: [
                     colors.inactiveTrack,
-                    colors.inactiveTrack.withValues(alpha: 0.9),
+                    colors.inactiveTrack.withValues(alpha: context.alpha90),
                   ],
                 ),
           borderRadius: BorderRadius.circular(config.trackSize.height / 2),
@@ -282,18 +279,18 @@ class OsmeaSwitch extends CoreContainer {
             if (!isEffectivelyDisabled) ...[
               BoxShadow(
                 color: value
-                    ? colors.activeTrack.withValues(alpha: 0.3)
+                    ? colors.activeTrack.withValues(alpha: context.alpha30)
                     : OsmeaColors.shadowLight,
-                offset: const Offset(0, 2),
-                blurRadius: 4,
-                spreadRadius: 0,
+                offset: context.offsetVertical2,
+                blurRadius: context.blurRadiusNormal,
+                spreadRadius: context.spreadRadiusZero,
               ),
               if (value)
                 BoxShadow(
                   color: colors.activeTrack.withValues(alpha: 0.2),
-                  offset: const Offset(0, 0),
-                  blurRadius: 8,
-                  spreadRadius: 0,
+                  offset: context.offsetZero,
+                  blurRadius: context.blurRadiusStrong,
+                  spreadRadius: context.spreadRadiusZero,
                 ),
             ],
           ],
@@ -311,9 +308,9 @@ class OsmeaSwitch extends CoreContainer {
           boxShadow: [
             BoxShadow(
               color: OsmeaColors.shadowLight.withValues(alpha: 0.1),
-              offset: const Offset(0, 8),
-              blurRadius: 32,
-              spreadRadius: 0,
+              offset: context.offsetVertical8,
+              blurRadius: context.blurRadiusMax,
+              spreadRadius: context.spreadRadiusZero,
             ),
           ],
         );
@@ -325,8 +322,8 @@ class OsmeaSwitch extends CoreContainer {
           border: Border.all(
             color: isFocused && !isEffectivelyDisabled
                 ? colors.focus
-                : OsmeaColors.pewter.withValues(alpha: 0.3),
-            width: 1,
+                : OsmeaColors.pewter.withValues(alpha: context.alpha30),
+            width: context.width1,
           ),
         );
 
@@ -368,7 +365,7 @@ class OsmeaSwitch extends CoreContainer {
     if (variant == SwitchVariant.extended && style == SwitchStyle.modern) {
       return Center(
         child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 200),
+          duration: context.animationMedium,
           child: Icon(
             value ? Icons.check : Icons.close,
             key: ValueKey(value),
@@ -402,18 +399,18 @@ class OsmeaSwitch extends CoreContainer {
           color: colors.thumb,
           borderRadius: BorderRadius.circular(config.thumbSize / 2),
           border: Border.all(
-            color: OsmeaColors.white.withValues(alpha: 0.3),
-            width: 0.5,
+            color: OsmeaColors.white.withValues(alpha: context.alpha30),
+            width: context.width1 / 2,
           ),
         );
 
       case SwitchStyle.glassmorphism:
         return BoxDecoration(
-          color: colors.thumb.withValues(alpha: 0.9),
+          color: colors.thumb.withValues(alpha: context.alpha90),
           borderRadius: BorderRadius.circular(config.thumbSize / 2),
           border: Border.all(
-            color: OsmeaColors.white.withValues(alpha: 0.4),
-            width: 1,
+            color: OsmeaColors.white.withValues(alpha: context.alpha40),
+            width: context.width1,
           ),
         );
 
@@ -422,8 +419,8 @@ class OsmeaSwitch extends CoreContainer {
           color: colors.thumb,
           borderRadius: BorderRadius.circular(context.radiusLow.toDouble()),
           border: Border.all(
-            color: OsmeaColors.pewter.withValues(alpha: 0.3),
-            width: 1,
+            color: OsmeaColors.pewter.withValues(alpha: context.alpha40),
+            width: context.width1,
           ),
         );
 
@@ -435,10 +432,11 @@ class OsmeaSwitch extends CoreContainer {
           boxShadow: [
             if (!isEffectivelyDisabled)
               BoxShadow(
-                color: OsmeaColors.shadowDark.withValues(alpha: 0.2),
-                offset: const Offset(0, 1),
-                blurRadius: 2,
-                spreadRadius: 0,
+                color:
+                    OsmeaColors.shadowDark.withValues(alpha: context.alpha20),
+                offset: context.offsetVertical1,
+                blurRadius: context.blurRadiusSubtle,
+                spreadRadius: context.spreadRadiusZero,
               ),
           ],
         );
@@ -492,15 +490,15 @@ class OsmeaSwitch extends CoreContainer {
       mainAxisSize: context.min,
       children: [
         if (label != null)
-          Text(
+          OsmeaText(
             label!,
             style: _getEffectiveLabelStyle(context).copyWith(
               color: isEffectivelyDisabled ? colors.disabledText : colors.text,
             ),
           ),
         if (description != null) ...[
-          SizedBox(height: context.lowValue),
-          Text(
+          context.emptySizedHeightBoxLow,
+          OsmeaText(
             description!,
             style: _getEffectiveDescriptionStyle(context).copyWith(
               color: colors.disabledText,
@@ -538,7 +536,7 @@ class OsmeaSwitch extends CoreContainer {
       focus: focusColor ?? OsmeaColors.crystalBay,
       hover: hoverColor ?? OsmeaColors.deepSea,
       disabledText: OsmeaColors.steel,
-      trackIcon: OsmeaColors.white.withValues(alpha: 0.8),
+      trackIcon: OsmeaColors.white.withValues(alpha: context.alpha80),
     );
   }
 }

@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:osmea_components/osmea_components.dart';
 import 'package:osmea_components/src/core/container_widget.dart';
-import 'package:osmea_components/src/enums/navbar_enums.dart';
-import 'package:osmea_components/src/styles/text_style.dart';
-import 'package:osmea_components/src/utils/navbar_extensions.dart';
-import 'package:osmea_components/src/utils/sizer_extensions.dart';
 
 /// 🧭 **OSMEA Components Library - Navbar**
 ///
@@ -295,15 +291,15 @@ class OsmeaNavbar extends CoreContainer {
       // Horizontal navbar (top/bottom)
       if (scrollable) {
         content = SingleChildScrollView(
-          scrollDirection: context.horizontal,
+          scrollDirection: horizontal,
           child: Row(
-            mainAxisSize: context.min,
+            mainAxisSize: min,
             children: itemWidgets,
           ),
         );
       } else if (centerItems) {
         content = Row(
-          mainAxisAlignment: context.spaceEvenly,
+          mainAxisAlignment: spaceEvenly,
           children: itemWidgets
               .map((widget) => Expanded(
                     child: Center(child: widget),
@@ -312,7 +308,7 @@ class OsmeaNavbar extends CoreContainer {
         );
       } else {
         content = Row(
-          mainAxisAlignment: context.start,
+          mainAxisAlignment: start,
           children: itemWidgets
               .map((widget) => Flexible(
                     child: widget,
@@ -325,18 +321,18 @@ class OsmeaNavbar extends CoreContainer {
       if (scrollable) {
         content = SingleChildScrollView(
           child: Column(
-            mainAxisSize: context.min,
+            mainAxisSize: min,
             children: itemWidgets,
           ),
         );
       } else if (centerItems) {
         content = Column(
-          mainAxisAlignment: context.spaceEvenly,
+          mainAxisAlignment: spaceEvenly,
           children: itemWidgets,
         );
       } else {
         content = Column(
-          mainAxisAlignment: context.start,
+          mainAxisAlignment: start,
           children: itemWidgets,
         );
       }
@@ -375,7 +371,7 @@ class OsmeaNavbar extends CoreContainer {
 
     if (item.badge != null) {
       child = Stack(
-        clipBehavior: Clip.none,
+        clipBehavior: clipNone,
         children: [
           child,
           Positioned(
@@ -388,7 +384,7 @@ class OsmeaNavbar extends CoreContainer {
     }
 
     return AnimatedContainer(
-      duration: animationDuration ?? const Duration(milliseconds: 200),
+      duration: animationDuration ?? context.animationMedium,
       curve: Curves.easeInOutCubic,
       child: Material(
         color: Colors.transparent,
@@ -400,8 +396,8 @@ class OsmeaNavbar extends CoreContainer {
                   if (item.onTap != null) item.onTap!();
                 },
           borderRadius: config.borderRadius,
-          splashColor: colors.active.withValues(alpha: 0.1),
-          highlightColor: colors.active.withValues(alpha: 0.05),
+          splashColor: colors.active.withValues(alpha: context.alpha20),
+          highlightColor: colors.active.withValues(alpha: context.alpha10),
           child: child,
         ),
       ),
@@ -422,7 +418,7 @@ class OsmeaNavbar extends CoreContainer {
     if (item.icon != null && showIcons) {
       children.add(
         FittedBox(
-          fit: BoxFit.contain,
+          fit: contain,
           child: IconTheme(
             data: IconThemeData(
               size: config.iconSize,
@@ -457,26 +453,27 @@ class OsmeaNavbar extends CoreContainer {
           child: LayoutBuilder(
             builder: (context, constraints) {
               // Use FittedBox for smaller constraints to prevent overflow
-              if (constraints.maxWidth < 80 || size == NavbarSize.small) {
+              if (constraints.maxWidth < context.width80 ||
+                  size == NavbarSize.small) {
                 return FittedBox(
-                  fit: BoxFit.scaleDown,
-                  alignment: Alignment.center,
-                  child: Text(
+                  fit: scaleDown,
+                  alignment: center,
+                  child: OsmeaText(
                     item.text,
                     style: baseStyle.copyWith(
-                      fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
+                      fontWeight: isActive ? context.semiBold : context.normal,
                       color: textColor,
                     ),
                     maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
+                    overflow: ellipsis,
+                    textAlign: textCenter,
                   ),
                 );
               } else {
                 return Text(
                   item.text,
                   style: baseStyle.copyWith(
-                    fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
+                    fontWeight: isActive ? context.semiBold : context.normal,
                     color: textColor,
                   ),
                   maxLines: size == NavbarSize.large ? 2 : 1,
@@ -495,12 +492,12 @@ class OsmeaNavbar extends CoreContainer {
       children.clear();
       children.add(
         FittedBox(
-          fit: BoxFit.contain,
+          fit: contain,
           child: SizedBox(
             width: config.iconSize,
             height: config.iconSize,
             child: CircularProgressIndicator(
-              strokeWidth: 2,
+              strokeWidth: context.width2,
               valueColor: AlwaysStoppedAnimation<Color>(textColor),
             ),
           ),
@@ -511,9 +508,9 @@ class OsmeaNavbar extends CoreContainer {
     // Layout children based on navbar orientation
     if (position.isVertical || (item.icon != null && showLabels && showIcons)) {
       return Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: min,
+        mainAxisAlignment: centerMain,
+        crossAxisAlignment: crossCenter,
         children: children
             .expand((widget) => [
                   widget,
@@ -524,9 +521,9 @@ class OsmeaNavbar extends CoreContainer {
       );
     } else {
       return Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: min,
+        mainAxisAlignment: centerMain,
+        crossAxisAlignment: crossCenter,
         children: children
             .expand((widget) => [
                   widget,
@@ -575,7 +572,7 @@ class OsmeaNavbar extends CoreContainer {
         return _NavbarColors(
           background: OsmeaColors.nordicBlue,
           active: OsmeaColors.crystalBay,
-          inactive: OsmeaColors.white.withValues(alpha: 0.8),
+          inactive: OsmeaColors.white.withValues(alpha: context.alpha80),
           border: OsmeaColors.deepSea,
         );
 
@@ -597,10 +594,10 @@ class OsmeaNavbar extends CoreContainer {
 
       case NavbarVariant.glass:
         return _NavbarColors(
-          background: OsmeaColors.white.withValues(alpha: 0.1),
+          background: OsmeaColors.white.withValues(alpha: context.alpha10),
           active: OsmeaColors.nordicBlue,
           inactive: OsmeaColors.pewter,
-          border: OsmeaColors.silver.withValues(alpha: 0.3),
+          border: OsmeaColors.silver.withValues(alpha: context.alpha30),
         );
 
       case NavbarVariant.outlined:

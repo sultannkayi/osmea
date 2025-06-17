@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:osmea_components/osmea_components.dart';
 import 'package:osmea_components/src/core/container_widget.dart';
-import 'package:osmea_components/src/core/text_widget.dart';
-import 'package:osmea_components/src/utils/button_size_extensions.dart';
 import 'package:osmea_components/src/utils/button_variants_extensions.dart';
-import 'package:osmea_components/src/utils/icon_positions_extensions.dart';
 
 /// 🔘 **OSMEA Components Library**
 ///
@@ -178,7 +175,7 @@ class OsmeaTextButton extends CoreContainer {
     _ButtonColors colors,
   ) {
     return AnimatedContainer(
-      duration: animationDuration ?? const Duration(milliseconds: 200),
+      duration: animationDuration ?? context.durationMedium,
       child: Material(
         color: Colors.transparent,
         elevation: isPressed ? 0 : (isFocused || isHovered ? 1 : 0),
@@ -193,7 +190,7 @@ class OsmeaTextButton extends CoreContainer {
           splashColor: splashColor ?? colors.splash,
           highlightColor: hoverColor ?? colors.hover,
           child: AnimatedContainer(
-            duration: animationDuration ?? const Duration(milliseconds: 200),
+            duration: animationDuration ?? context.durationMedium,
             constraints: BoxConstraints(
               minWidth:
                   config.size.width == double.infinity ? 0 : config.size.width,
@@ -202,10 +199,10 @@ class OsmeaTextButton extends CoreContainer {
             padding: padding ?? config.padding,
             decoration: isFocused
                 ? BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: context.borderRadiusNormal,
                     border: Border.all(
                       color: colors.text,
-                      width: 2,
+                      width: context.width2,
                     ),
                   )
                 : null,
@@ -241,15 +238,28 @@ class OsmeaTextButton extends CoreContainer {
       return const SizedBox.shrink();
     }
 
-    final effectiveTextStyle = _getEffectiveTextStyle(context).copyWith(
-      color: _getEffectiveTextColor(colors),
-    );
-
     return OsmeaText(
       isUppercase ? text.toUpperCase() : text,
-      style: effectiveTextStyle,
-      textAlign: iconPosition.isVertical ? TextAlign.center : TextAlign.left,
+      variant: _getTextVariant(),
+      color: _getEffectiveTextColor(colors),
+      fontWeight: context.semiBold,
+      letterSpacing: context.letterSpacingWide,
+      textAlign:
+          iconPosition.isVertical ? context.textCenter : context.textLeft,
     );
+  }
+
+  OsmeaTextVariant _getTextVariant() {
+    switch (size) {
+      case ButtonSize.extraSmall:
+      case ButtonSize.small:
+        return OsmeaTextVariant.buttonSmall;
+      case ButtonSize.medium:
+        return OsmeaTextVariant.buttonMedium;
+      case ButtonSize.large:
+      case ButtonSize.extraLarge:
+        return OsmeaTextVariant.buttonLarge;
+    }
   }
 
   Color _getEffectiveTextColor(_ButtonColors colors) {
@@ -285,32 +295,19 @@ class OsmeaTextButton extends CoreContainer {
           width: config.iconSize,
           height: config.iconSize,
           child: CircularProgressIndicator(
-            strokeWidth: 2,
+            strokeWidth: context.width2,
             valueColor: AlwaysStoppedAnimation<Color>(colors.text),
           ),
         ),
         context.emptySizedWidthBoxLow,
         OsmeaText(
           'Loading...',
-          style: _getEffectiveTextStyle(context).copyWith(color: colors.text),
+          variant: _getTextVariant(),
+          color: colors.text,
+          fontWeight: context.medium,
         ),
       ],
     );
-  }
-
-  TextStyle _getEffectiveTextStyle(BuildContext context) {
-    if (textStyle != null) return textStyle!;
-
-    switch (size) {
-      case ButtonSize.extraSmall:
-      case ButtonSize.small:
-        return OsmeaTextStyle.buttonSmall(context);
-      case ButtonSize.medium:
-        return OsmeaTextStyle.buttonMedium(context);
-      case ButtonSize.large:
-      case ButtonSize.extraLarge:
-        return OsmeaTextStyle.buttonLarge(context);
-    }
   }
 
   _ButtonColors _getButtonColors(BuildContext context) {
@@ -357,27 +354,4 @@ class _ButtonColors {
     required this.disabled,
     required this.disabledText,
   });
-}
-
-/// Custom Text widget implementation
-class OsmeaText extends CoreText {
-  const OsmeaText(
-    String text, {
-    super.key,
-    super.style,
-    super.textAlign,
-    super.overflow,
-    super.maxLines,
-  }) : super(text: text);
-
-  @override
-  Widget buildWidget(BuildContext context) {
-    return Text(
-      text,
-      style: style,
-      textAlign: textAlign,
-      overflow: overflow,
-      maxLines: maxLines,
-    );
-  }
 }
