@@ -301,12 +301,9 @@ extension AnimationStatusExtension on dynamic {
 
 extension ClipBehaviorExtension on dynamic {
   Clip get clipNone => Clip.none;
-
   Clip get clipHardEdge => Clip.hardEdge;
   Clip get clipAntiAlias => Clip.antiAlias;
   Clip get clipAntiAliasWithSaveLayer => Clip.antiAliasWithSaveLayer;
-  Clip get clipFast => Clip.hardEdge;
-  Clip get clipQuality => Clip.antiAlias;
   Clip get clipPremium => Clip.antiAliasWithSaveLayer;
 }
 
