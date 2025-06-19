@@ -13,8 +13,7 @@ export 'src/styles/colors.dart';
 // Theme related file
 export 'src/theme/theme.dart';
 
-// 🔘 Buttons
-export 'src/components/buttons/button.dart';
+// 🎯 AppBar
 
 // 📝 Text
 export 'src/components/text/text.dart';
@@ -22,15 +21,8 @@ export 'src/components/text/text.dart';
 // 🧭 Navigation
 export 'src/components/navbar/navbar.dart';
 
-// 🔄 Switches
-export 'src/components/switch_button/switch_button.dart';
-
 // 📻 Radio Buttons
 export 'src/components/radio_button/radio_button.dart';
-
-// ☑️ Checkbox
-// Checkbox component
-export 'src/components/checkbox/checkbox.dart';
 
 // 🔑 Login Button
 export 'src/components/login_button/login_button.dart';
@@ -46,6 +38,7 @@ export 'src/utils/switch_size_extensions.dart';
 export 'src/utils/navbar_extensions.dart';
 export 'src/utils/radio_size_extensions.dart';
 export 'src/utils/checkbox_size_extensions.dart';
+export 'src/utils/appbar_extensions.dart';
 export 'src/utils/system_extension.dart';
 
 // Central export for all components

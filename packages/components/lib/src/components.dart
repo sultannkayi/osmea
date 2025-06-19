@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:osmea_components/src/components/appbar/appbar.dart';
 import 'package:osmea_components/src/components/buttons/button.dart';
 import 'package:osmea_components/src/components/checkbox/checkbox.dart';
 import 'package:osmea_components/src/components/login_button/cubit/login_button_cubit.dart';
@@ -678,6 +679,154 @@ class OsmeaComponents {
       textWidthBasis: textWidthBasis,
       textHeightBehavior: textHeightBehavior,
       selectionColor: selectionColor,
+    );
+  }
+
+  /// 🎯 **OSMEA AppBar** - Comprehensive application bar component
+  ///
+  /// Creates a feature-rich AppBar component with support for:
+  /// - All 8 style variants (elegant, modern, bold, minimal, glass, gradient, outlined, elevated)
+  /// - All 5 sizes (compact, standard, comfortable, large, extraLarge)
+  /// - All 6 behavior types (fixed, scrollable, collapsible, floating, pinned, expandable)
+  /// - All 8 visual styles (material, cupertino, modern, classic, minimal, bold, soft, sharp)
+  /// - All 7 interactive states (normal, scrolled, collapsed, expanded, loading, error, disabled)
+  /// - Multiple action types support with proper categorization
+  /// - Full customization and theming options
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.appBar(
+  ///   title: Text('Beautiful App'),
+  ///   subtitle: Text('Powered by OSMEA'),
+  ///   variant: AppBarVariant.elegant,
+  ///   size: AppBarSize.standard,
+  ///   style: AppBarStyle.modern,
+  ///   actions: [
+  ///     AppBarAction(
+  ///       type: AppBarActionType.search,
+  ///       icon: Icon(Icons.search),
+  ///       onPressed: () => openSearch(),
+  ///     ),
+  ///   ],
+  /// )
+  /// ```
+  static appBar({
+    Key? key,
+    CoreTheme? customTheme,
+    Widget? title,
+    Widget? subtitle,
+    Widget? leading,
+    List<AppBarAction> actions = const [],
+    PreferredSizeWidget? bottom,
+    Widget? flexibleSpace,
+    AppBarSize size = AppBarSize.standard,
+    AppBarVariant variant = AppBarVariant.primary,
+    AppBarType type = AppBarType.fixed,
+    Color? backgroundColor,
+    Color? foregroundColor,
+    Color? shadowColor,
+    Color? surfaceTintColor,
+    EdgeInsetsGeometry? padding,
+    EdgeInsetsGeometry? margin,
+    bool centerTitle = true,
+    AppBarTitleAlignment titleAlignment = AppBarTitleAlignment.auto,
+    double? titleSpacing,
+    double? elevation,
+    BorderRadius? borderRadius,
+    Clip clipBehavior = Clip.none,
+    VoidCallback? onTitleTap,
+    Duration? animationDuration,
+  }) {
+    return OsmeaAppBar(
+      key: key,
+      customTheme: customTheme,
+      title: title,
+      subtitle: subtitle,
+      leading: leading,
+      actions: actions,
+      bottom: bottom,
+      flexibleSpace: flexibleSpace,
+      size: size,
+      variant: variant,
+      type: type,
+      backgroundColor: backgroundColor,
+      foregroundColor: foregroundColor,
+      shadowColor: shadowColor,
+      surfaceTintColor: surfaceTintColor,
+      padding: padding,
+      margin: margin,
+      centerTitle: centerTitle,
+      titleAlignment: titleAlignment,
+      titleSpacing: titleSpacing,
+      elevation: elevation,
+      borderRadius: borderRadius,
+      clipBehavior: clipBehavior,
+      onTitleTap: onTitleTap,
+      animationDuration: animationDuration,
+    );
+  }
+}
+
+/// 🎯 **OSMEA AppBar Action** - Action button configuration
+///
+/// A comprehensive action button configuration class for AppBar components.
+/// Contains all necessary information for rendering and interaction.
+class AppBarAction {
+  const AppBarAction({
+    required this.icon,
+    this.onPressed,
+    this.type = AppBarActionType.secondary,
+    this.tooltip,
+    this.badge,
+    this.isEnabled = true,
+    this.color,
+    this.text,
+  });
+
+  /// 🎯 Icon for the action button
+  final Widget icon;
+
+  /// 🖱️ Callback when action is pressed
+  final VoidCallback? onPressed;
+
+  /// 🎮 Type of action for styling and positioning
+  final AppBarActionType type;
+
+  /// 💬 Tooltip text for accessibility
+  final String? tooltip;
+
+  /// 🔴 Optional badge (notification count, etc.)
+  final Widget? badge;
+
+  /// ✅ Whether the action is enabled
+  final bool isEnabled;
+
+  /// 🎨 Custom color for the action
+  final Color? color;
+
+  /// 📝 Optional text label below the icon
+  final String? text;
+
+  /// Create a copy with modified properties
+  AppBarAction copyWith({
+    Widget? icon,
+    VoidCallback? onPressed,
+    AppBarActionType? type,
+    String? tooltip,
+    Widget? badge,
+    bool? isEnabled,
+    Color? color,
+    String? text,
+  }) {
+    return AppBarAction(
+      icon: icon ?? this.icon,
+      onPressed: onPressed ?? this.onPressed,
+      type: type ?? this.type,
+      tooltip: tooltip ?? this.tooltip,
+      badge: badge ?? this.badge,
+      isEnabled: isEnabled ?? this.isEnabled,
+      color: color ?? this.color,
+      text: text ?? this.text,
     );
   }
 }
