@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:osmea_components/src/components/appbar/appbar.dart';
 import 'package:osmea_components/src/components/buttons/button.dart';
 import 'package:osmea_components/src/components/checkbox/checkbox.dart';
+import 'package:osmea_components/src/components/container/container.dart';
 import 'package:osmea_components/src/components/login_button/cubit/login_button_cubit.dart';
 import 'package:osmea_components/src/components/login_button/login_button.dart';
 import 'package:osmea_components/src/components/navbar/navbar.dart';
@@ -17,7 +18,7 @@ class OsmeaComponents {
 
   /// Supported Icon positions
 
-  /// 🔘 **OSMEA Button** - Comprehensive button with all features
+  /// 🔘 **OSMEA Button** - Comprehensive button component with all features
   ///
   /// Creates a feature-rich button component with support for:
   /// - All 7 variants (primary, secondary, outlined, ghost, success, warning, danger)
@@ -178,8 +179,80 @@ class OsmeaComponents {
     return const Text('Rich Text Component - Coming Soon');
   }
 
-  static Widget container() {
-    return Container();
+
+  /// �📦 **OSMEA Container** - Flexible container component
+  ///
+  /// Creates a flexible container component with full customization options.
+  /// This component inherits all standard container features from Flutter and adds
+  /// convenient access to commonly used properties.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.container(
+  ///   width: 300,
+  ///   height: 200,
+  ///   color: Colors.blue,
+  ///   borderRadius: BorderRadius.circular(10),
+  ///   boxShadow: [BoxShadow(blurRadius: 5, color: Colors.black26)],
+  ///   child: Text('Styled Container'),
+  /// )
+  /// ```
+  static Widget container({
+    Key? key,
+    CoreTheme? customTheme,
+    AlignmentGeometry? alignment,
+    EdgeInsetsGeometry? padding,
+    Color? color,
+    Decoration? decoration,
+    Decoration? foregroundDecoration,
+    double? width,
+    double? height,
+    BoxConstraints? constraints,
+    EdgeInsetsGeometry? margin,
+    Matrix4? transform,
+    AlignmentGeometry? transformAlignment,
+    Clip clipBehavior = Clip.none,
+    Widget? child,
+    BorderRadius? borderRadius,
+    List<BoxShadow>? boxShadow,
+    BoxBorder? border,
+    Gradient? gradient,
+    BlendMode? backgroundBlendMode,
+    DecorationImage? backgroundImage,
+    VoidCallback? onTap,
+    VoidCallback? onLongPress,
+    VoidCallback? onDoubleTap,
+    bool borderOnForeground = true,
+    BoxShape? shape,
+  }) {
+    return OsmeaContainer(
+      key: key,
+      customTheme: customTheme,
+      alignment: alignment,
+      padding: padding,
+      color: color,
+      decoration: decoration,
+      foregroundDecoration: foregroundDecoration,
+      width: width,
+      height: height,
+      constraints: constraints,
+      margin: margin,
+      transform: transform,
+      transformAlignment: transformAlignment,
+      clipBehavior: clipBehavior,
+      borderRadius: borderRadius,
+      boxShadow: boxShadow,
+      border: border,
+      gradient: gradient,
+      backgroundBlendMode: backgroundBlendMode,
+      backgroundImage: backgroundImage,
+      onTap: onTap,
+      onLongPress: onLongPress,
+      onDoubleTap: onDoubleTap,
+      borderOnForeground: borderOnForeground,
+      shape: shape,
+      child: child,
+    );
   }
 
   /// 🔑 **OSMEA Login Button**

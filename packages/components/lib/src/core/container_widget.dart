@@ -65,6 +65,8 @@ abstract class CoreContainer extends AbstractCoreWidget {
   });
 
   /// 🎨 Custom theme override for this specific component (supports dynamic for flexibility)
+  @override
+  // ignore: overridden_fields
   final CoreTheme? customTheme;
 
   /// 📐 Determines how to position the child within the container
