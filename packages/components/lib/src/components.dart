@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/gestures.dart';
 
 // Component imports
@@ -20,6 +21,9 @@ import 'package:osmea_components/src/components/single_child_scroll_view/single_
 import 'package:osmea_components/src/components/sized_box/sized_box.dart';
 import 'package:osmea_components/src/components/switch_button/switch_button.dart';
 import 'package:osmea_components/src/components/radio_button/radio_button.dart';
+import 'package:osmea_components/src/components/text_field/text_field.dart';
+import 'package:osmea_components/src/components/text_field/otp_text_field.dart';
+import 'package:osmea_components/src/components/text_field/controllers/text_field_controller.dart';
 import 'package:osmea_components/src/components/wrap/wrap.dart';
 import 'package:osmea_components/src/theme/theme.dart';
 import 'package:osmea_components/src/components/text/text.dart';
@@ -1190,6 +1194,201 @@ class OsmeaComponents {
     );
   }
 
+  /// 🔤 **OSMEA TextField** - Comprehensive text input component
+  ///
+  /// Creates a fully-featured text input field with support for:
+  /// - Multiple variants (outlined, filled, underlined, borderless)
+  /// - Size options (extraSmall to extraLarge)
+  /// - Input types (text, email, password, number, etc.)
+  /// - Built-in validation support
+  /// - Custom styling capabilities
+  /// - Responsive design
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.textField(
+  ///   label: 'Email Address',
+  ///   hint: 'Enter your email',
+  ///   type: TextFieldType.email,
+  ///   variant: TextFieldVariant.outlined,
+  ///   size: TextFieldSize.medium,
+  ///   onChanged: (value) => handleEmailChange(value),
+  /// )
+  /// ```
+  static Widget textField({
+    Key? key,
+    CoreTheme? customTheme,
+    TextEditingController? controller,
+    OsmeaTextFieldController? osmeaController,
+    FocusNode? focusNode,
+    String? label,
+    String? hint,
+    String? helperText,
+    String? errorText,
+    Widget? prefixIcon,
+    Widget? suffixIcon,
+    TextFieldSize size = TextFieldSize.medium,
+    TextFieldVariant variant = TextFieldVariant.outlined,
+    TextFieldState state = TextFieldState.enabled,
+    TextFieldType type = TextFieldType.text,
+    bool isRequired = false,
+    String? Function(String?)? validator,
+    ValueChanged<String>? onChanged,
+    ValueChanged<String>? onSubmitted,
+    GestureTapCallback? onTap,
+    VoidCallback? onEditingComplete,
+    int? maxLines = 1,
+    int? minLines,
+    int? maxLength,
+    bool obscureText = false,
+    bool readOnly = false,
+    bool autofocus = false,
+    bool? enabled,
+    TextAlign textAlign = TextAlign.start,
+    TextCapitalization textCapitalization = TextCapitalization.none,
+    TextInputType? keyboardType,
+    TextInputAction? textInputAction,
+    List<TextInputFormatter>? inputFormatters,
+    TextStyle? textStyle,
+    Color? textColor,
+    Color? backgroundColor,
+    Color? borderColor,
+    Color? focusColor,
+    Color? errorColor,
+    Color? hintColor,
+    Color? labelColor,
+    bool fullWidth = false,
+    Duration? animationDuration,
+  }) {
+    return OsmeaTextField(
+      key: key,
+      customTheme: customTheme,
+      controller: controller,
+      osmeaController: osmeaController,
+      focusNode: focusNode,
+      label: label,
+      hint: hint,
+      helperText: helperText,
+      errorText: errorText,
+      prefixIcon: prefixIcon,
+      suffixIcon: suffixIcon,
+      size: size,
+      variant: variant,
+      state: state,
+      type: type,
+      isRequired: isRequired,
+      validator: validator,
+      onChanged: onChanged,
+      onSubmitted: onSubmitted,
+      onTap: onTap,
+      onEditingComplete: onEditingComplete,
+      maxLines: maxLines,
+      minLines: minLines,
+      maxLength: maxLength,
+      obscureText: obscureText,
+      readOnly: readOnly,
+      autofocus: autofocus,
+      enabled: enabled,
+      textAlign: textAlign,
+      textCapitalization: textCapitalization,
+      keyboardType: keyboardType,
+      textInputAction: textInputAction,
+      inputFormatters: inputFormatters,
+      textStyle: textStyle,
+      textColor: textColor,
+      backgroundColor: backgroundColor,
+      borderColor: borderColor,
+      focusColor: focusColor,
+      errorColor: errorColor,
+      hintColor: hintColor,
+      labelColor: labelColor,
+      fullWidth: fullWidth,
+      animationDuration: animationDuration,
+    );
+  }
+
+  /// 🔢 **OSMEA OTP TextField** - One-Time Password input component
+  ///
+  /// Creates a specialized input for OTP codes with:
+  /// - Individual digit fields with auto-navigation
+  /// - Configurable digit count (4, 5, 6, etc.)
+  /// - Copy-paste support
+  /// - Custom styling options
+  /// - Validation support
+  /// - Responsive design
+  /// - Stateless architecture for better performance
+  ///
+  /// **Features:**
+  /// - Auto-focus navigation between fields
+  /// - Backspace handling for previous field
+  /// - Numeric keyboard input
+  /// - Obscure text option for security
+  /// - Custom spacing and styling
+  /// - Real-time validation feedback
+  /// - Accessibility support
+  ///
+  /// **Usage Examples:**
+  /// ```dart
+  /// // Basic 6-digit OTP
+  /// OsmeaComponents.otpTextField(
+  ///   digitCount: 6,
+  ///   onCompleted: (otp) => _verifyOTP(otp),
+  ///   onChanged: (otp) => _updateUI(otp),
+  /// )
+  ///
+  /// // Secure OTP with validation
+  /// OsmeaComponents.otpTextField(
+  ///   digitCount: 4,
+  ///   obscureText: true,
+  ///   variant: TextFieldVariant.filled,
+  ///   validator: (otp) => otp?.length == 4 ? null : 'Invalid OTP',
+  ///   onCompleted: (otp) => _processSecureOTP(otp),
+  /// )
+  /// ```
+  static Widget otpTextField({
+    Key? key,
+    int digitCount = 6,
+    TextFieldSize size = TextFieldSize.medium,
+    TextFieldVariant variant = TextFieldVariant.outlined,
+    double spacing = 8.0,
+    ValueChanged<String>? onChanged,
+    ValueChanged<String>? onCompleted,
+    String? Function(String?)? validator,
+    bool autoFocus = true,
+    bool obscureText = false,
+    bool enabled = true,
+    bool showCursor = true,
+    Color? backgroundColor,
+    Color? borderColor,
+    Color? focusColor,
+    Color? errorColor,
+    Color? textColor,
+    Duration? animationDuration,
+    BoxDecoration? pinInputDecoration,
+  }) {
+    return OsmeaOTPTextField(
+      key: key,
+      digitCount: digitCount,
+      size: size,
+      variant: variant,
+      spacing: spacing,
+      onOTPChanged: onChanged,
+      onOTPCompleted: onCompleted,
+      otpValidator: validator,
+      autoFocus: autoFocus,
+      obscureText: obscureText,
+      enabled: enabled,
+      showCursor: showCursor,
+      backgroundColor: backgroundColor,
+      borderColor: borderColor,
+      focusColor: focusColor,
+      errorColor: errorColor,
+      textColor: textColor,
+      animationDuration: animationDuration,
+      pinInputDecoration: pinInputDecoration,
+    );
+  }
+
   /// 📜 **OSMEA SingleChildScrollView** - Scrollable content wrapper
   ///
   /// Creates a scrollable widget that can contain a single child.
@@ -1231,7 +1430,6 @@ class OsmeaComponents {
       child: child,
     );
   }
-
 }
 
 /// 🎯 **OSMEA AppBar Action** - Action button configuration
