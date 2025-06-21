@@ -12,12 +12,6 @@ export 'src/styles/colors.dart';
 // 🎭 Theme
 // Theme related file
 export 'src/theme/theme.dart';
-
-// 🎯 AppBar
-
-// 📝 Text
-export 'src/components/text/text.dart';
-
 // 🧭 Navigation
 export 'src/components/navbar/navbar.dart';
 
@@ -39,6 +33,7 @@ export 'src/utils/navbar_extensions.dart';
 export 'src/utils/radio_size_extensions.dart';
 export 'src/utils/checkbox_size_extensions.dart';
 export 'src/utils/appbar_extensions.dart';
+export 'src/utils/badge_extensions.dart';
 export 'src/utils/system_extension.dart';
 
 // Central export for all components

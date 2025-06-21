@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
+
+// Component imports
 import 'package:osmea_components/src/components/align/align.dart';
 import 'package:osmea_components/src/components/appbar/appbar.dart';
 import 'package:osmea_components/src/components/buttons/button.dart';
@@ -12,9 +15,12 @@ import 'package:osmea_components/src/components/navbar/navbar.dart';
 import 'package:osmea_components/src/components/expanded/expanded.dart';
 import 'package:osmea_components/src/components/padding/padding.dart';
 import 'package:osmea_components/src/components/row/row.dart';
+import 'package:osmea_components/src/components/scaffold/scaffold.dart';
+import 'package:osmea_components/src/components/single_child_scroll_view/single_child_scroll_view.dart';
 import 'package:osmea_components/src/components/sized_box/sized_box.dart';
 import 'package:osmea_components/src/components/switch_button/switch_button.dart';
 import 'package:osmea_components/src/components/radio_button/radio_button.dart';
+import 'package:osmea_components/src/components/wrap/wrap.dart';
 import 'package:osmea_components/src/theme/theme.dart';
 import 'package:osmea_components/src/components/text/text.dart';
 
@@ -1062,6 +1068,170 @@ class OsmeaComponents {
       animationDuration: animationDuration,
     );
   }
+
+  /// 🧩 **OSMEA Wrap** - Flexible wrap layout component
+  ///
+  /// Creates a flexible wrap layout component that wraps children to new lines
+  /// when they exceed the available space.
+  ///
+  /// Features:
+  /// * 🎯 Multiple alignment options (start, center, end, spaceBetween, etc.)
+  /// * 📏 Customizable spacing between children
+  /// * 🔄 Wrappable children with run spacing
+  /// * 🎨 Full styling and customization support
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.wrap(
+  ///   spacing: 8.0,
+  ///   runSpacing: 4.0,
+  ///   children: [
+  ///     Container(width: 100, height: 50, color: Colors.red),
+  ///     Container(width: 100, height: 50, color: Colors.blue),
+  ///   ],
+  /// )
+  /// ```
+  static Widget wrap({
+    Key? key,
+    CoreTheme? customTheme,
+    Axis direction = Axis.horizontal,
+    WrapAlignment alignment = WrapAlignment.start,
+    double spacing = 0.0,
+    WrapAlignment runAlignment = WrapAlignment.start,
+    double runSpacing = 0.0,
+    WrapCrossAlignment crossAxisAlignment = WrapCrossAlignment.start,
+    TextDirection? textDirection,
+    VerticalDirection verticalDirection = VerticalDirection.down,
+    Clip clipBehavior = Clip.none,
+    required List<Widget> children,
+  }) {
+    return OsmeaWrap(
+      key: key,
+      customTheme: customTheme,
+      direction: direction,
+      alignment: alignment,
+      spacing: spacing,
+      runAlignment: runAlignment,
+      runSpacing: runSpacing,
+      crossAxisAlignment: crossAxisAlignment,
+      textDirection: textDirection,
+      verticalDirection: verticalDirection,
+      clipBehavior: clipBehavior,
+      children: children,
+    );
+  }
+
+  /// 🏗️ **OSMEA Scaffold** - Complete page layout structure
+  ///
+  /// Creates a complete page layout structure with support for AppBar,
+  /// body content, bottom navigation, and more.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.scaffold(
+  ///   appBar: AppBar(title: Text('My App')),
+  ///   body: Container(child: Text('Content')),
+  /// )
+  /// ```
+  static Widget scaffold({
+    Key? key,
+    PreferredSizeWidget? appBar,
+    Widget? body,
+    Widget? floatingActionButton,
+    FloatingActionButtonLocation? floatingActionButtonLocation,
+    FloatingActionButtonAnimator? floatingActionButtonAnimator,
+    List<Widget>? persistentFooterButtons,
+    AlignmentDirectional persistentFooterAlignment =
+        AlignmentDirectional.centerEnd,
+    Widget? drawer,
+    DrawerCallback? onDrawerChanged,
+    Widget? endDrawer,
+    DrawerCallback? onEndDrawerChanged,
+    Widget? bottomNavigationBar,
+    Widget? bottomSheet,
+    Color? backgroundColor,
+    bool? resizeToAvoidBottomInset,
+    bool primary = true,
+    DragStartBehavior drawerDragStartBehavior = DragStartBehavior.start,
+    bool extendBody = false,
+    bool extendBodyBehindAppBar = false,
+    Color? drawerScrimColor,
+    double? drawerEdgeDragWidth,
+    bool drawerEnableOpenDragGesture = true,
+    bool endDrawerEnableOpenDragGesture = true,
+    String? restorationId,
+  }) {
+    return OsmeaScaffold(
+      key: key,
+      appBar: appBar,
+      body: body,
+      floatingActionButton: floatingActionButton,
+      floatingActionButtonLocation: floatingActionButtonLocation,
+      floatingActionButtonAnimator: floatingActionButtonAnimator,
+      persistentFooterButtons: persistentFooterButtons,
+      persistentFooterAlignment: persistentFooterAlignment,
+      drawer: drawer,
+      onDrawerChanged: onDrawerChanged,
+      endDrawer: endDrawer,
+      onEndDrawerChanged: onEndDrawerChanged,
+      bottomNavigationBar: bottomNavigationBar,
+      bottomSheet: bottomSheet,
+      backgroundColor: backgroundColor,
+      resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+      primary: primary,
+      drawerDragStartBehavior: drawerDragStartBehavior,
+      extendBody: extendBody,
+      extendBodyBehindAppBar: extendBodyBehindAppBar,
+      drawerScrimColor: drawerScrimColor,
+      drawerEdgeDragWidth: drawerEdgeDragWidth,
+      drawerEnableOpenDragGesture: drawerEnableOpenDragGesture,
+      endDrawerEnableOpenDragGesture: endDrawerEnableOpenDragGesture,
+      restorationId: restorationId,
+    );
+  }
+
+  /// 📜 **OSMEA SingleChildScrollView** - Scrollable content wrapper
+  ///
+  /// Creates a scrollable widget that can contain a single child.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.singleChildScrollView(
+  ///   padding: EdgeInsets.all(16.0),
+  ///   child: Column(children: [...]),
+  /// )
+  /// ```
+  static Widget singleChildScrollView({
+    Key? key,
+    Axis scrollDirection = Axis.vertical,
+    bool reverse = false,
+    EdgeInsetsGeometry? padding,
+    bool? primary,
+    ScrollPhysics? physics,
+    ScrollController? controller,
+    Widget? child,
+    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+    Clip clipBehavior = Clip.hardEdge,
+    String? restorationId,
+    ScrollViewKeyboardDismissBehavior keyboardDismissBehavior =
+        ScrollViewKeyboardDismissBehavior.manual,
+  }) {
+    return OsmeaSingleChildScrollView(
+      key: key,
+      scrollDirection: scrollDirection,
+      reverse: reverse,
+      padding: padding,
+      primary: primary,
+      physics: physics,
+      controller: controller,
+      dragStartBehavior: dragStartBehavior,
+      clipBehavior: clipBehavior,
+      restorationId: restorationId,
+      keyboardDismissBehavior: keyboardDismissBehavior,
+      child: child,
+    );
+  }
+
 }
 
 /// 🎯 **OSMEA AppBar Action** - Action button configuration
