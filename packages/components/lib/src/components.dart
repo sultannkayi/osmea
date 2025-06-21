@@ -5,6 +5,7 @@ import 'package:flutter/gestures.dart';
 // Component imports
 import 'package:osmea_components/src/components/align/align.dart';
 import 'package:osmea_components/src/components/appbar/appbar.dart';
+import 'package:osmea_components/src/components/badge/badge.dart';
 import 'package:osmea_components/src/components/buttons/button.dart';
 import 'package:osmea_components/src/components/center/center.dart';
 import 'package:osmea_components/src/components/checkbox/checkbox.dart';
@@ -804,6 +805,71 @@ class OsmeaComponents {
       autofocus: autofocus,
       semanticLabel: semanticLabel,
       fullWidth: fullWidth,
+    );
+  }
+
+  /// 🏷️ **OSMEA Badge** - Comprehensive badge component
+  ///
+  /// Creates a versatile badge component with support for:
+  /// - All badge variants (primary, secondary, success, warning, danger, info, neutral, custom)
+  /// - All 6 sizes (dot, extraSmall to extraLarge)
+  /// - All shapes (circular, rounded, pill, square, rectangle)
+  /// - All states (enabled, disabled, active, clickable)
+  /// - Multiple positions (topRight, topLeft, bottomRight, bottomLeft, center, standalone)
+  /// - Full customization options
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.badge(
+  ///   content: '8',
+  ///   variant: BadgeVariant.primary,
+  ///   size: BadgeSize.medium,
+  ///   shape: BadgeShape.rounded,
+  /// )
+  /// ```
+  static Widget badge({
+    Key? key,
+    CoreTheme? customTheme,
+    dynamic content,
+    BadgeSize size = BadgeSize.medium,
+    BadgeVariant variant = BadgeVariant.primary,
+    BadgeStyle style = BadgeStyle.normal,
+    BadgeState state = BadgeState.enabled,
+    BadgeShape shape = BadgeShape.rounded,
+    BadgePosition position = BadgePosition.standalone,
+    Offset? offset,
+    int? maxCount,
+    bool showZero = false,
+    Color? backgroundColor,
+    Color? textColor,
+    Color? borderColor,
+    Widget? child,
+    VoidCallback? onTap,
+    EdgeInsetsGeometry? padding,
+    EdgeInsetsGeometry? margin,
+    Duration animationDuration = const Duration(milliseconds: 200),
+  }) {
+    return OsmeaBadge(
+      key: key,
+      customTheme: customTheme,
+      content: content,
+      size: size,
+      variant: variant,
+      style: style,
+      state: state,
+      shape: shape,
+      position: position,
+      offset: offset,
+      maxCount: maxCount,
+      showZero: showZero,
+      backgroundColor: backgroundColor,
+      textColor: textColor,
+      borderColor: borderColor,
+      onTap: onTap,
+      padding: padding,
+      margin: margin,
+      animationDuration: animationDuration,
+      child: child,
     );
   }
 

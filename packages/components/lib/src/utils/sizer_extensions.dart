@@ -73,6 +73,14 @@ extension BorderRadiusExtension on BuildContext {
   BorderRadius get borderRadiusNormal => BorderRadius.circular(radiusNormal);
   BorderRadius get borderRadiusMedium => BorderRadius.circular(radiusMedium);
   BorderRadius get borderRadiusHigh => BorderRadius.circular(radiusHigh);
+  BorderRadius get borderRadiusMinStandard => BorderRadius.circular(7);
+  BorderRadius get borderRadiusMaxStandard => BorderRadius.circular(13);
+}
+
+/// 🔲 BORDER WIDTH EXTENSION
+extension BorderWidthExtension on BuildContext {
+  // Standard border widths
+  double get borderWidth => 0.5;
 }
 
 /// ⏱️ DURATION EXTENSION
@@ -328,11 +336,6 @@ extension DividerX on BuildContext {
       endIndent: allWidth * 0.13,
       color: color ?? Colors.grey,
       height: 2);
-}
-
-/// ↩️ TEXT DOWN LINE EXTENSION
-extension TextEnterLine on BuildContext {
-  String get enterLine => '\n';
 }
 
 /// 🖼️ IMAGE ASSET EXTENSION

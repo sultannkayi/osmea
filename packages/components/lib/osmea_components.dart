@@ -43,6 +43,7 @@ export 'src/utils/navbar_extensions.dart';
 export 'src/utils/radio_size_extensions.dart';
 export 'src/utils/checkbox_size_extensions.dart';
 export 'src/utils/appbar_extensions.dart';
+export 'src/utils/badge_extensions.dart';
 export 'src/utils/system_extension.dart';
 
 // Central export for all components

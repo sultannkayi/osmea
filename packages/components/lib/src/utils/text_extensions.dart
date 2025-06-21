@@ -144,7 +144,10 @@ extension FontWeightExtension on BuildContext {
 
 /// 🔠 TEXT SIZE EXTENSION
 extension TextSizeX on BuildContext {
+  double get fontSizeTiny => 8;
+  double get fontSizeExtraSmall => 10;
   double get fontSizeSmall => 12;
+  double get fontSizeExtraSmallMedium => 14;
   double get fontSizeMedium => 16;
   double get fontSizeNormal => 20;
   double get fontSizeLarge => 24;
@@ -155,4 +158,26 @@ extension TextSizeX on BuildContext {
 extension FontStyleExtension on dynamic {
   FontStyle get italic => FontStyle.italic;
   FontStyle get normalStyle => FontStyle.normal;
+}
+
+/// 🔄 TEXT MAX LINE EXTENSION
+/// Controls the maximum number of lines for text display
+extension TextMaxLineExtension on BuildContext {
+  int get maxLineOne => 1;
+  int get maxLineTwo => 2;
+  int get maxLineThree => 3;
+  int get maxLineFour => 4;
+  int get maxLineFive => 5;
+  int get maxLineSix => 6;
+  int get maxLineEight => 8;
+  int get maxLineTen => 10;
+  int get maxLineTwelve => 12;
+  int get maxLineFifteen => 15;
+  int get maxLineTwenty => 20;
+  int get maxLineUnlimited => 999;
+}
+
+/// ↩️ TEXT DOWN LINE EXTENSION
+extension TextEnterLine on BuildContext {
+  String get enterLine => '\n';
 }

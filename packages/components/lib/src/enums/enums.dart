@@ -41,6 +41,10 @@ export 'text_enums.dart';
 // Component enums
 export 'components_enum.dart';
 
+// Badge enums
+export 'badge_enums.dart';
+
+
 // ➕ Add other enum files here as they are created
 // export 'input_enums.dart';
 // export 'layout_enums.dart';
