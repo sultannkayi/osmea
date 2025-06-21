@@ -7,6 +7,7 @@ import 'package:osmea_components_example/appbars_demo.dart';
 import 'package:osmea_components_example/switch_button_example.dart';
 import 'package:osmea_components_example/radio_button_example.dart';
 import 'package:osmea_components_example/text_example.dart';
+import 'package:osmea_components_example/text_field_example.dart';
 import 'package:osmea_components_example/colors_example.dart';
 import 'package:osmea_components_example/button_example.dart';
 import 'package:osmea_components_example/badge_example.dart';
@@ -229,6 +230,17 @@ class ComponentsScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => const TextExample(),
+                    ),
+                  ),
+                ),
+                _buildComponentCard(
+                  context,
+                  'Text Fields',
+                  Icons.input,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const TextFieldExample(),
                     ),
                   ),
                 ),

@@ -430,10 +430,223 @@ enum ComponentEmphasis {
   medium,
 
   /// 🔼 **High** - Increased emphasis
-  /// - Important elements that need attention
+  /// - Important elements, primary CTAs
   high,
 
   /// 🚨 **Critical** - Maximum emphasis
-  /// - Urgent information requiring immediate action
+  /// - Critical alerts, destructive actions
   critical,
+}
+
+/// 🔤 **TextField Size**
+///
+/// Size variants for text input fields.
+/// Controls height, padding, and font size of text fields.
+///
+/// **Size Guidelines:**
+/// - `extraSmall`: Compact text fields for tight spaces
+/// - `small`: Reduced size for secondary inputs
+/// - `medium`: Standard size for most forms (default)
+/// - `large`: Prominent size for important inputs
+/// - `extraLarge`: Hero size for primary form fields
+///
+/// **Usage:**
+/// ```dart
+/// OsmeaComponents.textField(
+///   size: TextFieldSize.medium,
+///   label: 'Email',
+/// )
+/// ```
+enum TextFieldSize {
+  /// 🔹 **Extra Small** - Compact text fields
+  /// - Height: ~32px
+  /// - Font: 12px
+  /// - Use for: Inline editing, table cells, compact forms
+  extraSmall,
+
+  /// 🔸 **Small** - Reduced size text fields
+  /// - Height: ~36px
+  /// - Font: 13px
+  /// - Use for: Secondary inputs, filter fields
+  small,
+
+  /// 🔶 **Medium** - Standard text fields (default)
+  /// - Height: ~44px
+  /// - Font: 14px
+  /// - Use for: Most form inputs, standard UI
+  medium,
+
+  /// 🔷 **Large** - Prominent text fields
+  /// - Height: ~52px
+  /// - Font: 16px
+  /// - Use for: Important inputs, mobile-first design
+  large,
+
+  /// 🔵 **Extra Large** - Hero text fields
+  /// - Height: ~60px
+  /// - Font: 18px
+  /// - Use for: Primary forms, hero sections
+  extraLarge,
+}
+
+/// 🎨 **TextField Variant**
+///
+/// Visual style variants for text input fields.
+/// Controls the appearance and styling of text fields.
+///
+/// **Variant Guidelines:**
+/// - `outlined`: Border with transparent background
+/// - `filled`: Solid background with subtle border
+/// - `underlined`: Bottom border only, minimal style
+/// - `borderless`: No border, background only
+///
+/// **Usage:**
+/// ```dart
+/// OsmeaComponents.textField(
+///   variant: TextFieldVariant.outlined,
+///   label: 'Username',
+/// )
+/// ```
+enum TextFieldVariant {
+  /// 📦 **Outlined** - Border with transparent background
+  /// - Clear boundary definition
+  /// - Good for forms and structured layouts
+  outlined,
+
+  /// 🎨 **Filled** - Solid background with subtle border
+  /// - Emphasized input area
+  /// - Good for modern, card-based designs
+  filled,
+
+  /// 📝 **Underlined** - Bottom border only
+  /// - Minimal, clean appearance
+  /// - Good for simple forms and clean designs
+  underlined,
+
+  /// 👻 **Borderless** - No border, background only
+  /// - Seamless integration
+  /// - Good for inline editing and minimal interfaces
+  borderless,
+}
+
+/// 🔄 **TextField State**
+///
+/// Interactive and validation states for text input fields.
+/// Controls appearance based on user interaction and validation.
+///
+/// **State Guidelines:**
+/// - `enabled`: Normal interactive state
+/// - `disabled`: Non-interactive state
+/// - `focused`: Has keyboard focus
+/// - `error`: Has validation error
+/// - `success`: Validation passed
+/// - `warning`: Requires attention
+///
+/// **Usage:**
+/// ```dart
+/// OsmeaComponents.textField(
+///   state: hasError ? TextFieldState.error : TextFieldState.enabled,
+///   errorText: errorMessage,
+/// )
+/// ```
+enum TextFieldState {
+  /// ✅ **Enabled** - Normal interactive state
+  /// - Ready for user input
+  /// - Default appearance
+  enabled,
+
+  /// ⚫ **Disabled** - Non-interactive state
+  /// - Grayed out appearance
+  /// - No user interaction possible
+  disabled,
+
+  /// 🎯 **Focused** - Has keyboard focus
+  /// - Highlighted border/background
+  /// - Active input state
+  focused,
+
+  /// ❌ **Error** - Has validation error
+  /// - Red/error coloring
+  /// - Shows error message
+  error,
+
+  /// ✅ **Success** - Validation passed
+  /// - Green/success coloring
+  /// - Positive feedback
+  success,
+
+  /// ⚠️ **Warning** - Requires attention
+  /// - Yellow/warning coloring
+  /// - Cautionary message
+  warning,
+}
+
+/// 🎯 **TextField Type**
+///
+/// Input types that determine keyboard and behavior.
+/// Automatically configures appropriate keyboard and validation.
+///
+/// **Type Guidelines:**
+/// - `text`: General text input
+/// - `email`: Email address with email keyboard
+/// - `password`: Password with obscured text
+/// - `number`: Numeric input with number keyboard
+/// - `phone`: Phone number with phone keyboard
+/// - `url`: URL input with URL keyboard
+/// - `search`: Search input with search keyboard
+/// - `multiline`: Multi-line text area
+///
+/// **Usage:**
+/// ```dart
+/// OsmeaComponents.textField(
+///   type: TextFieldType.email,
+///   label: 'Email Address',
+/// )
+/// ```
+enum TextFieldType {
+  /// 📝 **Text** - General text input
+  /// - Standard text keyboard
+  /// - No special formatting
+  text,
+
+  /// 📧 **Email** - Email address input
+  /// - Email keyboard with @ symbol
+  /// - Email validation support
+  email,
+
+  /// 🔒 **Password** - Password input
+  /// - Obscured text display
+  /// - Security-focused keyboard
+  password,
+
+  /// 🔢 **Number** - Numeric input
+  /// - Number keyboard
+  /// - Numeric validation
+  number,
+
+  /// 📱 **Phone** - Phone number input
+  /// - Phone keyboard
+  /// - Phone formatting support
+  phone,
+
+  /// 🌐 **URL** - URL input
+  /// - URL keyboard with shortcuts
+  /// - URL validation support
+  url,
+
+  /// 🔍 **Search** - Search input
+  /// - Search keyboard
+  /// - Search action button
+  search,
+
+  /// 📄 **Multiline** - Multi-line text area
+  /// - Multiline text input
+  /// - Expanded height support
+  multiline,
+
+  /// 🔢 **OTP** - One-Time Password input
+  /// - Numeric keyboard
+  /// - Single digit input fields
+  /// - Auto-navigation between fields
+  otp,
 }
