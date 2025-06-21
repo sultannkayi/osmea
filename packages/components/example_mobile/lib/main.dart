@@ -16,6 +16,9 @@ import 'package:osmea_components_example/column_example.dart';
 import 'package:osmea_components_example/expanded_example.dart';
 import 'package:osmea_components_example/padding_example.dart';
 import 'package:osmea_components_example/sized_box_example.dart';
+import 'package:osmea_components_example/scaffold_example.dart';
+import 'package:osmea_components_example/single_child_scroll_view_example.dart';
+import 'package:osmea_components_example/wrap_example.dart';
 
 void main() {
   runApp(const MyApp());
@@ -480,6 +483,43 @@ class ExamplesScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => const CenterExample(),
+                    ),
+                  ),
+                ),
+                _buildExampleTile(
+                  context,
+                  'Scaffold Examples',
+                  'Flexible application structure with multiple customization options',
+                  Icons.web_asset,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ScaffoldExample(),
+                    ),
+                  ),
+                ),
+                _buildExampleTile(
+                  context,
+                  'SingleChildScrollView Examples',
+                  'Scrollable container with various scroll behaviors',
+                  Icons.swipe_vertical,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const SingleChildScrollViewExample(),
+                    ),
+                  ),
+                ),
+                _buildExampleTile(
+                  context,
+                  'Wrap Examples',
+                  'Flexible layout for multiple children with wrapping behavior',
+                  Icons.wrap_text,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const WrapExample(),
                     ),
                   ),
                 ),
