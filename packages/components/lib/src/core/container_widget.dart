@@ -129,5 +129,6 @@ abstract class CoreContainer extends AbstractCoreWidget {
   }
 
   /// Abstract method that must be implemented by subclasses to build their content
+  @override
   Widget buildWidget(BuildContext context);
 }

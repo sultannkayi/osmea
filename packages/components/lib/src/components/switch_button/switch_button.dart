@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:osmea_components/osmea_components.dart';
+import 'package:osmea_components/src/components/text/text.dart';
 import 'package:osmea_components/src/core/container_widget.dart';
 
 /// 🔄 **OSMEA Switch**

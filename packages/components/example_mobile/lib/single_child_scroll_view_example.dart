@@ -1,0 +1,388 @@
+import 'package:flutter/material.dart';
+import 'package:osmea_components/osmea_components.dart';
+
+/// 📜 **OSMEA SingleChildScrollView Examples**
+///
+/// This file demonstrates various ways to use the OSMEA SingleChildScrollView component.
+/// Each example showcases different properties and customization options.
+///
+class SingleChildScrollViewExample extends StatelessWidget {
+  const SingleChildScrollViewExample({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return OsmeaComponents.scaffold(
+      appBar: AppBar(
+        title: OsmeaComponents.text('OSMEA ScrollView Examples'),
+        backgroundColor: OsmeaColors.nordicBlue,
+        foregroundColor: OsmeaColors.white,
+      ),
+      body: OsmeaComponents.singleChildScrollView(
+        child: OsmeaComponents.padding(
+          padding: const EdgeInsets.all(16),
+          child: OsmeaComponents.column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Section title
+              OsmeaComponents.text(
+                '📜 Basic Scroll Views',
+                textStyle:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              OsmeaComponents.sizedBox(height: 16),
+
+              // Vertical scroll example
+              _buildExampleCard(
+                'Vertical Scrolling',
+                'Standard vertical scroll view',
+                _buildVerticalScrollExample(context),
+              ),
+              OsmeaComponents.sizedBox(height: 16),
+
+              // Horizontal scroll example
+              _buildExampleCard(
+                'Horizontal Scrolling',
+                'Single child scroll view with horizontal axis',
+                _buildHorizontalScrollExample(context),
+              ),
+              OsmeaComponents.sizedBox(height: 16),
+
+              // Nested scroll views
+              _buildExampleCard(
+                'Nested Scroll Views',
+                'Combining horizontal and vertical scrolling',
+                _buildNestedScrollExample(context),
+              ),
+              OsmeaComponents.sizedBox(height: 16),
+
+              // Section title for advanced features
+              OsmeaComponents.text(
+                '🧰 Advanced Scroll Features',
+                textStyle:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              OsmeaComponents.sizedBox(height: 16),
+
+              // Custom physics example
+              _buildExampleCard(
+                'Custom Scroll Physics',
+                'ScrollView with custom physics behavior',
+                _buildCustomPhysicsScrollExample(context),
+              ),
+              OsmeaComponents.sizedBox(height: 16),
+
+              // Styled scroll view
+              _buildExampleCard(
+                'Styled Scroll View',
+                'ScrollView with custom styling and effects',
+                _buildStyledScrollExample(context),
+              ),
+              OsmeaComponents.sizedBox(height: 16),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildExampleCard(String title, String description, Widget example) {
+    return Card(
+      elevation: 2,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            OsmeaComponents.text(
+              title,
+              textStyle:
+                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            OsmeaComponents.sizedBox(height: 8),
+            OsmeaComponents.text(
+              description,
+              textStyle: const TextStyle(fontSize: 14),
+              color: OsmeaColors.pewter,
+            ),
+            OsmeaComponents.sizedBox(height: 16),
+            Container(
+              height: 300,
+              decoration: BoxDecoration(
+                border: Border.all(color: OsmeaColors.silver),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: example,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Basic vertical scroll view example
+  Widget _buildVerticalScrollExample(BuildContext context) {
+    return OsmeaComponents.singleChildScrollView(
+      child: OsmeaComponents.padding(
+        padding: const EdgeInsets.all(16),
+        child: OsmeaComponents.column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            OsmeaComponents.text(
+              'Vertical Scrolling Example',
+              textStyle:
+                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            OsmeaComponents.sizedBox(height: 16),
+            OsmeaComponents.text(
+              'This is a basic example of vertical scrolling with SingleChildScrollView. Scroll down to see more content.',
+            ),
+            OsmeaComponents.sizedBox(height: 16),
+            for (int i = 1; i <= 10; i++)
+              Container(
+                width: double.infinity,
+                margin: const EdgeInsets.only(bottom: 12),
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: i % 2 == 0
+                      ? OsmeaColors.oceanMist
+                      : OsmeaColors.crystalBay,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: OsmeaComponents.text('Scrollable Item #$i'),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Horizontal scroll view example
+  Widget _buildHorizontalScrollExample(BuildContext context) {
+    return OsmeaComponents.singleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: OsmeaComponents.padding(
+        padding: const EdgeInsets.all(16),
+        child: OsmeaComponents.row(
+          children: [
+            for (int i = 1; i <= 10; i++)
+              Container(
+                width: 150,
+                margin: const EdgeInsets.only(right: 12),
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color:
+                      i % 2 == 0 ? OsmeaColors.meadow : OsmeaColors.springLeaf,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Center(
+                  child: OsmeaComponents.text(
+                    'Horizontal Item #$i',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Nested scroll views example
+  Widget _buildNestedScrollExample(BuildContext context) {
+    return OsmeaComponents.singleChildScrollView(
+      child: OsmeaComponents.padding(
+        padding: const EdgeInsets.all(16),
+        child: OsmeaComponents.column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            OsmeaComponents.text(
+              'Nested Scrolling Example',
+              textStyle:
+                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            OsmeaComponents.sizedBox(height: 16),
+            OsmeaComponents.text(
+              'This example shows a vertical scroll view containing horizontal scroll views.',
+            ),
+            OsmeaComponents.sizedBox(height: 16),
+            for (int section = 1; section <= 3; section++) ...[
+              OsmeaComponents.text(
+                'Section $section',
+                textStyle:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              OsmeaComponents.sizedBox(height: 8),
+              SizedBox(
+                height: 100,
+                child: OsmeaComponents.singleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: OsmeaComponents.row(
+                    children: [
+                      for (int i = 1; i <= 10; i++)
+                        Container(
+                          width: 100,
+                          margin: const EdgeInsets.only(right: 8),
+                          decoration: BoxDecoration(
+                            color: section == 1
+                                ? OsmeaColors.sunsetGlow
+                                : section == 2
+                                    ? OsmeaColors.forestHeart
+                                    : OsmeaColors.nordicBlue,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Center(
+                            child: OsmeaComponents.text(
+                              'Item $i',
+                              textStyle:
+                                  const TextStyle(color: OsmeaColors.white),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+              OsmeaComponents.sizedBox(height: 16),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Example with custom physics
+  Widget _buildCustomPhysicsScrollExample(BuildContext context) {
+    return OsmeaComponents.singleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: OsmeaComponents.padding(
+        padding: const EdgeInsets.all(16),
+        child: OsmeaComponents.column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            OsmeaComponents.text(
+              'Custom Physics Example',
+              textStyle:
+                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            OsmeaComponents.sizedBox(height: 16),
+            OsmeaComponents.text(
+              'This scroll view uses BouncingScrollPhysics for an iOS-style bouncing effect when reaching the edges.',
+            ),
+            OsmeaComponents.sizedBox(height: 16),
+            for (int i = 1; i <= 10; i++)
+              Container(
+                width: double.infinity,
+                margin: const EdgeInsets.only(bottom: 12),
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: i % 2 == 0
+                      ? OsmeaColors.goldenHour
+                      : OsmeaColors.desertSand,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: OsmeaComponents.text('Bouncy Item #$i'),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Example with styling
+  Widget _buildStyledScrollExample(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            OsmeaColors.nordicBlue.withOpacity(0.1),
+            OsmeaColors.sunsetGlow.withOpacity(0.1),
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
+      child: OsmeaComponents.singleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: OsmeaComponents.column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            OsmeaComponents.text(
+              'Styled Scroll Example',
+              textStyle:
+                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            OsmeaComponents.sizedBox(height: 16),
+            OsmeaComponents.text(
+              'This scroll view has custom styling with a gradient background and styled items.',
+            ),
+            OsmeaComponents.sizedBox(height: 16),
+            for (int i = 1; i <= 10; i++)
+              Container(
+                width: double.infinity,
+                margin: const EdgeInsets.only(bottom: 12),
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: OsmeaColors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: OsmeaColors.shadowLight,
+                      offset: const Offset(0, 2),
+                      blurRadius: 6,
+                    ),
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: i % 3 == 0
+                            ? OsmeaColors.nordicBlue
+                            : i % 2 == 0
+                                ? OsmeaColors.forestHeart
+                                : OsmeaColors.sunsetGlow,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Center(
+                        child: OsmeaComponents.text(
+                          '$i',
+                          textStyle: const TextStyle(
+                            color: OsmeaColors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    OsmeaComponents.sizedBox(width: 16),
+                    Expanded(
+                      child: OsmeaComponents.column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          OsmeaComponents.text(
+                            'Item $i Title',
+                            textStyle:
+                                const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          OsmeaComponents.sizedBox(height: 4),
+                          OsmeaComponents.text(
+                            'This is a styled scroll item with custom design.',
+                            color: OsmeaColors.pewter,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}

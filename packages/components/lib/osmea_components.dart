@@ -12,12 +12,6 @@ export 'src/styles/colors.dart';
 // 🎭 Theme
 // Theme related file
 export 'src/theme/theme.dart';
-
-// 🎯 AppBar
-
-// 📝 Text
-export 'src/components/text/text.dart';
-
 // 🧭 Navigation
 export 'src/components/navbar/navbar.dart';
 

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:osmea_components/osmea_components.dart';
 import 'package:osmea_components/src/components/login_button/cubit/login_button_state.dart';
+import 'package:osmea_components/src/components/text/text.dart';
 import 'package:osmea_components/src/core/cubit_button/core/core_cubit_button.dart';
 
 /// 🔑 **OSMEA Login Button**
