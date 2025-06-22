@@ -43,7 +43,8 @@ export 'components_enum.dart';
 
 // Badge enums
 export 'badge_enums.dart';
-
+// Chips enums
+export 'chips_enums.dart';
 
 // ➕ Add other enum files here as they are created
 // export 'input_enums.dart';
