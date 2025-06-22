@@ -278,7 +278,6 @@ extension ChipsVariantExtension on ChipsVariant {
 extension ChipsShapeExtension on ChipsShape {
   /// Get border radius for this chip shape with modern proportions
   BorderRadius getBorderRadius(ChipsSize size, BuildContext context) {
-    size.config(context);
     switch (this) {
       case ChipsShape.rounded:
         // Fully rounded pill shape
