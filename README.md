@@ -220,7 +220,7 @@ osmea/
 <div align="center">
 
 ---
-all Progress: **65%** Complete
+all Progress: **40%** Complete
 
 </div>
 
