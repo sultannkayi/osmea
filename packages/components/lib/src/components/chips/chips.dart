@@ -182,11 +182,12 @@ class OsmeaChips extends CoreContainer {
       isDisabled,
     );
 
+    final borderRadius = shape.getBorderRadius(size, context);
     final chipWidget = Material(
       color: OsmeaColors.transparent,
       shape: customShape ??
           RoundedRectangleBorder(
-            borderRadius: shape.getBorderRadius(size, context),
+            borderRadius: borderRadius,
           ),
       clipBehavior: clipBehavior,
       child: InkWell(
