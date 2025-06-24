@@ -35,6 +35,7 @@ class OsmeaCheckbox extends CoreContainer {
     this.autofocus = false,
     this.semanticLabel,
     this.fullWidth = false,
+    this.isError = false,
   });
 
   /// ☑️ The current state of the checkbox (true = checked, false = unchecked, null = indeterminate if tristate)
@@ -102,6 +103,9 @@ class OsmeaCheckbox extends CoreContainer {
 
   /// ↔️ Whether the checkbox container should take the full width of its parent
   final bool fullWidth;
+
+  /// 🚨 Whether the checkbox is in an error state
+  final bool isError;
 
   // Computed properties based on state
   bool get isChecked => value == true;
