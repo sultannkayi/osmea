@@ -47,6 +47,8 @@ export 'src/utils/badge_extensions.dart';
 export 'src/utils/system_extension.dart';
 export 'src/utils/chips_extensions.dart';
 export 'src/utils/carousel_extensions.dart';
+export 'src/utils/list_item_extensions.dart';
+
 
 // Central export for all components
 export 'src/components.dart';
@@ -58,3 +60,4 @@ export 'src/enums/enums.dart';
 export 'src/components/login_button/cubit/login_button_cubit.dart';
 export 'src/core/cubit_button/cubit/core_button_state.dart';
 export 'src/core/cubit_button/cubit/core_button_cubit.dart';
+
