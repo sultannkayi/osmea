@@ -9,6 +9,7 @@ import 'package:osmea_components_example/switch_button_example.dart';
 import 'package:osmea_components_example/radio_button_example.dart';
 import 'package:osmea_components_example/text_example.dart';
 import 'package:osmea_components_example/text_field_example.dart';
+import 'package:osmea_components_example/card_example.dart';
 import 'package:osmea_components_example/colors_example.dart';
 import 'package:osmea_components_example/button_example.dart';
 import 'package:osmea_components_example/badge_example.dart';
@@ -280,6 +281,17 @@ class ComponentsScreen extends StatelessWidget {
                 ),
                 _buildComponentCard(
                   context,
+                  'Cards',
+                  Icons.credit_card,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CardExample(),
+                    ),
+                  ),
+                ),
+                _buildComponentCard(
+                  context,
                   'Checkboxes',
                   Icons.check_box,
                   () => Navigator.push(
@@ -545,6 +557,18 @@ class ExamplesScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => const WrapExample(),
+                    ),
+                  ),
+                ),
+                _buildExampleTile(
+                  context,
+                  'Card Examples',
+                  'Cards with actions and interactive content',
+                  Icons.touch_app,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CardExample(),
                     ),
                   ),
                 ),
