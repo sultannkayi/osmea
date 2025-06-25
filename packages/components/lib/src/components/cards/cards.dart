@@ -1157,14 +1157,22 @@ class OsmeaActionCard extends _OsmeaBaseCard {
         return OsmeaColumn(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
-          children: buttons.expand((button) sync* {
-            if (button != buttons.first) {
-              yield SizedBox(height: effectiveActionSpacing);
-            }
-            yield button;
-          }).toList(),
+          children: _buildVerticalButtonList(buttons, effectiveActionSpacing),
         );
     }
+  }
+
+  List<Widget> _buildVerticalButtonList(List<Widget> buttons, double spacing) {
+    if (buttons.isEmpty) return [];
+
+    return buttons
+        .asMap()
+        .entries
+        .expand((entry) => [
+              entry.value,
+              if (entry.key < buttons.length - 1) SizedBox(height: spacing),
+            ])
+        .toList();
   }
 
   ButtonSize _getEffectiveButtonSize() {
