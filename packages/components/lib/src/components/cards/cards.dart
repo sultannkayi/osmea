@@ -5,7 +5,6 @@ import 'package:osmea_components/src/components/column/column.dart';
 import 'package:osmea_components/src/components/row/row.dart';
 import 'package:osmea_components/src/core/container_widget.dart';
 import 'package:osmea_components/src/enums/enums.dart';
-import 'package:osmea_components/src/enums/components_enum.dart';
 import 'package:osmea_components/src/styles/colors.dart';
 import 'package:osmea_components/src/utils/card_extensions.dart';
 
@@ -110,37 +109,11 @@ class _OsmeaBaseCard extends CoreContainer {
   final double? height;
 
   /// Get effective padding based on card size
-  EdgeInsets get _cardPadding {
-    switch (size) {
-      case ComponentSize.extraSmall:
-        return const EdgeInsets.all(8.0);
-      case ComponentSize.small:
-        return const EdgeInsets.all(12.0);
-      case ComponentSize.medium:
-        return const EdgeInsets.all(16.0);
-      case ComponentSize.large:
-        return const EdgeInsets.all(20.0);
-      case ComponentSize.extraLarge:
-        return const EdgeInsets.all(24.0);
-    }
-  }
+  EdgeInsets _cardPadding(BuildContext context) => size.cardPadding(context);
 
   /// Get effective border radius
   BorderRadius _getBorderRadius(BuildContext context) {
-    if (borderRadius != null) return borderRadius!;
-
-    switch (size) {
-      case ComponentSize.extraSmall:
-        return BorderRadius.circular(2.0);
-      case ComponentSize.small:
-        return BorderRadius.circular(4.0);
-      case ComponentSize.medium:
-        return BorderRadius.circular(8.0);
-      case ComponentSize.large:
-        return BorderRadius.circular(12.0);
-      case ComponentSize.extraLarge:
-        return BorderRadius.circular(16.0);
-    }
+    return borderRadius ?? size.cardBorderRadius(context);
   }
 
   /// Get card decoration based on variant
@@ -155,7 +128,7 @@ class _OsmeaBaseCard extends CoreContainer {
           borderRadius: effectiveBorderRadius,
           boxShadow: [
             BoxShadow(
-              color: shadowColor ?? theme.shadowColor.withOpacity(0.15),
+              color: shadowColor ?? theme.shadowColor.withValues(alpha: 0.15),
               blurRadius: elevation ?? 4.0,
               offset: Offset(0, elevation ?? 2.0),
             ),
@@ -174,7 +147,7 @@ class _OsmeaBaseCard extends CoreContainer {
 
       case ComponentAppearance.filled:
         return BoxDecoration(
-          color: backgroundColor ?? theme.colorScheme.surfaceVariant,
+          color: backgroundColor ?? theme.colorScheme.surfaceContainerHighest,
           borderRadius: effectiveBorderRadius,
         );
 
@@ -198,7 +171,7 @@ class _OsmeaBaseCard extends CoreContainer {
       width: width,
       height: height,
       margin: margin,
-      padding: _cardPadding,
+      padding: _cardPadding(context),
       decoration: _getCardDecoration(context),
       child: child,
     );
@@ -256,7 +229,7 @@ class OsmeaBasicCard extends _OsmeaBaseCard {
     super.shadowColor,
     super.margin,
     super.width,
-    this.height,
+    super.height,
     this.title,
     this.subtitle,
     this.content,
@@ -302,9 +275,6 @@ class OsmeaBasicCard extends _OsmeaBaseCard {
 
   /// 🎨 Custom content widget (overrides text content)
   final Widget? customContent;
-
-  /// 📏 Custom height of the card
-  final double? height;
 
   @override
   Widget buildWidget(BuildContext context) {
@@ -473,7 +443,7 @@ class OsmeaImageCard extends _OsmeaBaseCard {
     super.shadowColor,
     super.margin,
     super.width,
-    this.height,
+    super.height,
     this.title,
     this.subtitle,
     this.content,
@@ -571,10 +541,9 @@ class OsmeaImageCard extends _OsmeaBaseCard {
   final Widget? badge;
   final BadgePosition badgePosition;
   final BorderRadius? imageBorderRadius;
-  final Widget? child;
 
-  /// 📏 Custom height of the card
-  final double? height;
+  /// 🎨 Custom child widget to display alongside content
+  final Widget? child;
 
   @override
   Widget buildWidget(BuildContext context) {
@@ -657,6 +626,17 @@ class OsmeaImageCard extends _OsmeaBaseCard {
           if (child != null) child!,
         ],
       );
+    } else if (imagePosition == ComponentPosition.center) {
+      return OsmeaRow(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (imageWidget != null) imageWidget,
+          if (imageWidget != null && textContent != null)
+            SizedBox(width: spacing ?? 16.0),
+          if (textContent != null) Expanded(child: textContent),
+          if (child != null) child!,
+        ],
+      );
     }
 
     // Fallback for other positions
@@ -723,7 +703,7 @@ class OsmeaImageCard extends _OsmeaBaseCard {
     // Add border radius for non-background images
     if (!imagePosition.isBackgroundImage) {
       final BorderRadius effectiveImageBorderRadius = imageBorderRadius ??
-          (this.borderRadius ??
+          (borderRadius ??
               (size == ComponentSize.small
                   ? BorderRadius.circular(4.0)
                   : size == ComponentSize.medium
@@ -838,7 +818,7 @@ class OsmeaImageCard extends _OsmeaBaseCard {
               end: Alignment.bottomCenter,
               colors: [
                 Colors.transparent,
-                Colors.black.withOpacity(0.7),
+                Colors.black.withValues(alpha: 0.7),
               ],
             ),
       ),
@@ -955,7 +935,7 @@ class OsmeaActionCard extends _OsmeaBaseCard {
     super.shadowColor,
     super.margin,
     super.width,
-    this.height,
+    super.height,
     this.title,
     this.subtitle,
     this.content,
@@ -983,7 +963,6 @@ class OsmeaActionCard extends _OsmeaBaseCard {
     this.leading,
     this.trailing,
     this.onCardTap,
-    this.padding,
     this.backgroundGradient,
   });
 
@@ -1018,11 +997,7 @@ class OsmeaActionCard extends _OsmeaBaseCard {
   final Widget? leading;
   final Widget? trailing;
   final VoidCallback? onCardTap;
-  final EdgeInsetsGeometry? padding;
   final Gradient? backgroundGradient;
-
-  /// 📏 Custom height of the card
-  final double? height;
 
   @override
   Widget buildWidget(BuildContext context) {
