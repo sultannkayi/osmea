@@ -1148,10 +1148,54 @@ class OsmeaActionCard extends _OsmeaBaseCard {
 
     switch (buttonLayout) {
       case ComponentOrientation.horizontal:
-        return OverflowBar(
-          alignment: buttonLayout.buttonAlignment,
-          spacing: effectiveActionSpacing,
-          children: buttons.reversed.toList(),
+        return SizedBox(
+          width: double.infinity,
+          child: OsmeaRow(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              if (secondaryAction != null && primaryAction != null) ...[
+                Expanded(
+                  child: OsmeaButton(
+                    text: secondaryAction!,
+                    variant: secondaryVariant,
+                    size: effectiveButtonSize,
+                    icon: secondaryIcon,
+                    onPressed: onSecondaryPressed,
+                  ),
+                ),
+                SizedBox(width: effectiveActionSpacing),
+                Expanded(
+                  child: OsmeaButton(
+                    text: primaryAction!,
+                    variant: primaryVariant,
+                    size: effectiveButtonSize,
+                    icon: primaryIcon,
+                    onPressed: onPrimaryPressed,
+                  ),
+                ),
+              ] else if (primaryAction != null) ...[
+                Expanded(
+                  child: OsmeaButton(
+                    text: primaryAction!,
+                    variant: primaryVariant,
+                    size: effectiveButtonSize,
+                    icon: primaryIcon,
+                    onPressed: onPrimaryPressed,
+                  ),
+                ),
+              ] else if (secondaryAction != null) ...[
+                Expanded(
+                  child: OsmeaButton(
+                    text: secondaryAction!,
+                    variant: secondaryVariant,
+                    size: effectiveButtonSize,
+                    icon: secondaryIcon,
+                    onPressed: onSecondaryPressed,
+                  ),
+                ),
+              ],
+            ],
+          ),
         );
       case ComponentOrientation.vertical:
         return OsmeaColumn(
@@ -1165,14 +1209,46 @@ class OsmeaActionCard extends _OsmeaBaseCard {
   List<Widget> _buildVerticalButtonList(List<Widget> buttons, double spacing) {
     if (buttons.isEmpty) return [];
 
-    return buttons
-        .asMap()
-        .entries
-        .expand((entry) => [
-              entry.value,
-              if (entry.key < buttons.length - 1) SizedBox(height: spacing),
-            ])
-        .toList();
+    final List<Widget> result = [];
+    
+    // Add primary button first (if exists)
+    if (primaryAction != null) {
+      result.add(
+        SizedBox(
+          width: double.infinity,
+          child: OsmeaButton(
+            text: primaryAction!,
+            variant: primaryVariant,
+            size: _getEffectiveButtonSize(),
+            icon: primaryIcon,
+            onPressed: onPrimaryPressed,
+          ),
+        ),
+      );
+    }
+    
+    // Add spacing between buttons
+    if (primaryAction != null && secondaryAction != null) {
+      result.add(SizedBox(height: spacing));
+    }
+    
+    // Add secondary button second (if exists)
+    if (secondaryAction != null) {
+      result.add(
+        SizedBox(
+          width: double.infinity,
+          child: OsmeaButton(
+            text: secondaryAction!,
+            variant: secondaryVariant,
+            size: _getEffectiveButtonSize(),
+            icon: secondaryIcon,
+            onPressed: onSecondaryPressed,
+          ),
+        ),
+      );
+    }
+
+    return result;
   }
 
   ButtonSize _getEffectiveButtonSize() {
