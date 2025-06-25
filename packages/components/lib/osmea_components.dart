@@ -21,6 +21,7 @@ export 'src/components/radio_button/radio_button.dart';
 // 🔑 Login Button
 export 'src/components/login_button/login_button.dart';
 
+export 'src/utils/avatar_extensions.dart';
 // 🖼️ Card
 export 'src/utils/card_extensions.dart';
 // 🔤 Text Field
