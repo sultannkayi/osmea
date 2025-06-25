@@ -34,6 +34,7 @@ import 'package:osmea_components/src/components/carousel/carousel.dart';
 import 'package:osmea_components/src/components/list_item/list_item.dart';
 import 'package:osmea_components/src/components/ticket_widget/ticket_widget.dart';
 import 'package:osmea_components/src/components/ticket_widget/models/ticket_models.dart';
+import 'package:osmea_components/src/components/popup/popup.dart';
 
 import 'enums/enums.dart';
 
@@ -1919,6 +1920,163 @@ class OsmeaComponents {
       backgroundColor: backgroundColor,
       showProgressIndicator: showProgressIndicator,
       enableSaveAsDraft: enableSaveAsDraft,
+    );
+  }
+
+  /// 📱 **OSMEA Popup** - Versatile popup component with multiple variants
+  ///
+  /// Creates popup dialogs with support for different sizes, animations, positions and styles.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.popup(
+  ///   size: PopupSize.medium,
+  ///   variant: PopupVariant.modal,
+  ///   title: 'Settings',
+  ///   child: SettingsContent(),
+  /// )
+  /// ```
+  static popup({
+    Key? key,
+    CoreTheme? customTheme,
+    required Widget child,
+    PopupSize size = PopupSize.medium,
+    PopupVariant variant = PopupVariant.modal,
+    PopupState state = PopupState.visible,
+    PopupPosition position = PopupPosition.center,
+    PopupAnimationType animationType = PopupAnimationType.scale,
+    String? title,
+    TextStyle? titleStyle,
+    String? subtitle,
+    TextStyle? subtitleStyle,
+    List<Widget>? headerActions,
+    Widget? footer,
+    bool isDismissible = true,
+    VoidCallback? onDismiss,
+    ValueChanged<PopupState>? onStateChanged,
+    Color? backgroundColor,
+    Color? barrierColor,
+    double? elevation,
+    EdgeInsetsGeometry? padding,
+    EdgeInsetsGeometry? margin,
+    Duration? animationDuration,
+    BoxConstraints? constraints,
+    ShapeBorder? shape,
+    bool showCloseButton = true,
+    Widget? closeButtonIcon,
+    Duration? autoDismiss,
+    double? width,
+    double? height,
+  }) {
+    return OsmeaPopup(
+      key: key,
+      customTheme: customTheme,
+      child: child,
+      size: size,
+      variant: variant,
+      state: state,
+      position: position,
+      animationType: animationType,
+      title: title,
+      titleStyle: titleStyle,
+      subtitle: subtitle,
+      subtitleStyle: subtitleStyle,
+      headerActions: headerActions,
+      footer: footer,
+      isDismissible: isDismissible,
+      onDismiss: onDismiss,
+      onStateChanged: onStateChanged,
+      backgroundColor: backgroundColor,
+      barrierColor: barrierColor,
+      elevation: elevation,
+      padding: padding,
+      margin: margin,
+      animationDuration: animationDuration,
+      constraints: constraints,
+      shape: shape,
+      showCloseButton: showCloseButton,
+      closeButtonIcon: closeButtonIcon,
+      autoDismiss: autoDismiss,
+      width: width,
+      height: height,
+    );
+  }
+
+  /// 🚀 **Show OSMEA Popup** - Static method to display popup with navigation
+  ///
+  /// Convenient method to show popup with built-in navigation and state management.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.showPopup(
+  ///   context: context,
+  ///   child: MyContent(),
+  ///   variant: PopupVariant.modal,
+  /// );
+  /// ```
+  static Future<T?> showPopup<T>({
+    required BuildContext context,
+    required Widget child,
+    PopupSize size = PopupSize.medium,
+    PopupVariant variant = PopupVariant.modal,
+    PopupPosition position = PopupPosition.center,
+    PopupAnimationType animationType = PopupAnimationType.scale,
+    String? title,
+    TextStyle? titleStyle,
+    String? subtitle,
+    TextStyle? subtitleStyle,
+    List<Widget>? headerActions,
+    Widget? footer,
+    bool isDismissible = true,
+    VoidCallback? onDismiss,
+    ValueChanged<PopupState>? onStateChanged,
+    Color? backgroundColor,
+    Color? barrierColor,
+    double? elevation,
+    EdgeInsetsGeometry? padding,
+    EdgeInsetsGeometry? margin,
+    Duration? animationDuration,
+    BoxConstraints? constraints,
+    ShapeBorder? shape,
+    bool showCloseButton = true,
+    Widget? closeButtonIcon,
+    Duration? autoDismiss,
+    double? width,
+    double? height,
+    bool useRootNavigator = false,
+    RouteSettings? routeSettings,
+  }) {
+    return OsmeaPopup.show<T>(
+      context: context,
+      child: child,
+      size: size,
+      variant: variant,
+      position: position,
+      animationType: animationType,
+      title: title,
+      titleStyle: titleStyle,
+      subtitle: subtitle,
+      subtitleStyle: subtitleStyle,
+      headerActions: headerActions,
+      footer: footer,
+      isDismissible: isDismissible,
+      onDismiss: onDismiss,
+      onStateChanged: onStateChanged,
+      backgroundColor: backgroundColor,
+      barrierColor: barrierColor,
+      elevation: elevation,
+      padding: padding,
+      margin: margin,
+      animationDuration: animationDuration,
+      constraints: constraints,
+      shape: shape,
+      showCloseButton: showCloseButton,
+      closeButtonIcon: closeButtonIcon,
+      autoDismiss: autoDismiss,
+      width: width,
+      height: height,
+      useRootNavigator: useRootNavigator,
+      routeSettings: routeSettings,
     );
   }
 }

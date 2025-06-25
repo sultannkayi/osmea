@@ -54,6 +54,9 @@ export 'list_item_enums.dart';
 // Ticket enums
 export 'ticket_enums.dart';
 
+// Popup enums
+export 'popup_enums.dart';
+
 // ➕ Add other enum files here as they are created
 // export 'input_enums.dart';
 // export 'layout_enums.dart';
