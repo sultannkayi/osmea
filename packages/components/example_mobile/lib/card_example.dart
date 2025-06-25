@@ -187,7 +187,7 @@ class _CardExampleState extends State<CardExample> {
             child: Icon(Icons.landscape, color: OsmeaColors.white, size: 48),
           ),
           imageHeight: 200,
-          imagePosition: ComponentPosition.top,
+          imagePosition: ComponentPosition.bottom,
           imageFit: BoxFit.cover,
           imageAlignment: Alignment.center,
           variant: ComponentAppearance.elevated,
@@ -334,11 +334,12 @@ class _CardExampleState extends State<CardExample> {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.favorite, color: OsmeaColors.sunsetGlow, size: 16),
+                      Icon(Icons.favorite,
+                          color: OsmeaColors.sunsetGlow, size: 16),
                       SizedBox(width: 4),
                       Text('72 BPM',
-                          style:
-                              TextStyle(color: OsmeaColors.white, fontSize: 12)),
+                          style: TextStyle(
+                              color: OsmeaColors.white, fontSize: 12)),
                     ],
                   ),
                 ),
@@ -428,15 +429,16 @@ class _CardExampleState extends State<CardExample> {
                   child: Row(
                     children: [
                       Container(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
                           color: OsmeaColors.white.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
                           '1TB Storage',
-                          style: TextStyle(color: OsmeaColors.white, fontSize: 12),
+                          style:
+                              TextStyle(color: OsmeaColors.white, fontSize: 12),
                         ),
                       ),
                       Spacer(),
@@ -1178,7 +1180,8 @@ class _CardExampleState extends State<CardExample> {
                       color: OsmeaColors.nordicBlue,
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(Icons.person, color: OsmeaColors.white, size: 32),
+                    child:
+                        Icon(Icons.person, color: OsmeaColors.white, size: 32),
                   ),
                   OsmeaComponents.sizedBox(width: 16),
                   OsmeaComponents.expanded(

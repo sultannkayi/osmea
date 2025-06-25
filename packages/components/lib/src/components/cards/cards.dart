@@ -56,8 +56,6 @@ import 'package:osmea_components/src/utils/card_extensions.dart';
 /// )
 /// ```
 
-
-
 /// 🃏 **Base OSMEA Card**
 ///
 /// Base class for all card components.
@@ -77,6 +75,7 @@ class _OsmeaBaseCard extends CoreContainer {
     this.isClickable = false,
     super.margin,
     super.width,
+    this.height,
     super.child,
   });
 
@@ -106,6 +105,9 @@ class _OsmeaBaseCard extends CoreContainer {
 
   /// 🖱️ Whether the card is clickable
   final bool isClickable;
+
+  /// 📏 Custom height of the card
+  final double? height;
 
   /// Get effective padding based on card size
   EdgeInsets get _cardPadding {
@@ -194,6 +196,7 @@ class _OsmeaBaseCard extends CoreContainer {
   Widget buildWidget(BuildContext context) {
     Widget card = Container(
       width: width,
+      height: height,
       margin: margin,
       padding: _cardPadding,
       decoration: _getCardDecoration(context),
@@ -235,6 +238,7 @@ class _OsmeaBaseCard extends CoreContainer {
 ///   content: 'This card showcases a premium feature with detailed description.',
 ///   variant: ComponentAppearance.elevated,
 ///   size: ComponentSize.medium,
+///   height: 200,
 ///   onTap: () => print('Card tapped'),
 /// )
 /// ```
@@ -252,6 +256,7 @@ class OsmeaBasicCard extends _OsmeaBaseCard {
     super.shadowColor,
     super.margin,
     super.width,
+    this.height,
     this.title,
     this.subtitle,
     this.content,
@@ -298,6 +303,9 @@ class OsmeaBasicCard extends _OsmeaBaseCard {
   /// 🎨 Custom content widget (overrides text content)
   final Widget? customContent;
 
+  /// 📏 Custom height of the card
+  final double? height;
+
   @override
   Widget buildWidget(BuildContext context) {
     return _OsmeaBaseCard(
@@ -313,6 +321,7 @@ class OsmeaBasicCard extends _OsmeaBaseCard {
       shadowColor: shadowColor,
       margin: margin,
       width: width,
+      height: height,
       isClickable: isClickable,
       child: _buildCardContent(context),
     );
@@ -444,7 +453,8 @@ class OsmeaBasicCard extends _OsmeaBaseCard {
 ///   title: 'Beautiful Landscape',
 ///   subtitle: 'Nature Photography',
 ///   imageUrl: 'https://example.com/image.jpg',
-///   height: 200,
+///   height: 250,
+///   imageHeight: 200,
 ///   imagePosition: ComponentPosition.top,
 ///   onTap: () => print('Image card tapped'),
 /// )
@@ -463,6 +473,7 @@ class OsmeaImageCard extends _OsmeaBaseCard {
     super.shadowColor,
     super.margin,
     super.width,
+    this.height,
     this.title,
     this.subtitle,
     this.content,
@@ -562,6 +573,9 @@ class OsmeaImageCard extends _OsmeaBaseCard {
   final BorderRadius? imageBorderRadius;
   final Widget? child;
 
+  /// 📏 Custom height of the card
+  final double? height;
+
   @override
   Widget buildWidget(BuildContext context) {
     return _OsmeaBaseCard(
@@ -577,6 +591,7 @@ class OsmeaImageCard extends _OsmeaBaseCard {
       shadowColor: shadowColor,
       margin: margin,
       width: width,
+      height: height,
       isClickable: isClickable,
       child: _buildCardContent(context),
     );
@@ -606,8 +621,8 @@ class OsmeaImageCard extends _OsmeaBaseCard {
         ],
       );
     } else if (imagePosition.isHorizontalImage) {
-      final isLeftPosition = imagePosition == ComponentPosition.left || 
-                            imagePosition == ComponentPosition.start;
+      final isLeftPosition = imagePosition == ComponentPosition.left ||
+          imagePosition == ComponentPosition.start;
       return OsmeaRow(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -918,6 +933,7 @@ class OsmeaImageCard extends _OsmeaBaseCard {
 /// OsmeaActionCard(
 ///   title: 'Confirm Action',
 ///   content: 'Are you sure you want to proceed with this action?',
+///   height: 180,
 ///   primaryAction: 'Confirm',
 ///   secondaryAction: 'Cancel',
 ///   onPrimaryPressed: () => print('Confirmed'),
@@ -939,6 +955,7 @@ class OsmeaActionCard extends _OsmeaBaseCard {
     super.shadowColor,
     super.margin,
     super.width,
+    this.height,
     this.title,
     this.subtitle,
     this.content,
@@ -1004,6 +1021,9 @@ class OsmeaActionCard extends _OsmeaBaseCard {
   final EdgeInsetsGeometry? padding;
   final Gradient? backgroundGradient;
 
+  /// 📏 Custom height of the card
+  final double? height;
+
   @override
   Widget buildWidget(BuildContext context) {
     return _OsmeaBaseCard(
@@ -1018,6 +1038,7 @@ class OsmeaActionCard extends _OsmeaBaseCard {
       shadowColor: shadowColor,
       margin: margin,
       width: width,
+      height: height,
       isClickable: onCardTap != null,
       onTap: onCardTap,
       child: SizedBox(
@@ -1233,5 +1254,3 @@ class OsmeaActionCard extends _OsmeaBaseCard {
     }
   }
 }
-
-
