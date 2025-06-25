@@ -172,20 +172,21 @@ class _TicketWidgetExampleState extends State<TicketWidgetExample> {
     }
   }
 
-  void _showSnackBar(String message, {bool isSuccess = false, bool isError = false}) {
+  void _showSnackBar(String message,
+      {bool isSuccess = false, bool isError = false}) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: OsmeaComponents.text(
           message,
           color: OsmeaColors.white,
         ),
-        backgroundColor: isError 
+        backgroundColor: isError
             ? OsmeaColors.amberFlame
-            : isSuccess 
+            : isSuccess
                 ? OsmeaColors.forestHeart
                 : OsmeaColors.nordicBlue,
         duration: const Duration(seconds: 3),
       ),
     );
   }
-} 
+}

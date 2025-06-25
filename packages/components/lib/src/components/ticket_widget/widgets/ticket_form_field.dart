@@ -58,7 +58,7 @@ class TicketFormField extends StatelessWidget {
             ],
           ),
         ),
-        
+
         if (question.helperText != null) ...[
           const SizedBox(height: 4),
           Text(
@@ -69,12 +69,12 @@ class TicketFormField extends StatelessWidget {
             ),
           ),
         ],
-        
+
         const SizedBox(height: 8),
-        
+
         // Input Widget
         _buildInputWidget(),
-        
+
         // Error Text
         if (errorText != null) ...[
           const SizedBox(height: 4),
@@ -157,55 +157,58 @@ class TicketFormField extends StatelessWidget {
         errorText: errorText,
       ),
       items: question.options?.map((option) {
-        return DropdownMenuItem<String>(
-          value: option.value.toString(),
-          child: Flexible(
-            child: Text(
-              option.label,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-            ),
-          ),
-        );
-      }).toList() ?? [],
+            return DropdownMenuItem<String>(
+              value: option.value.toString(),
+              child: Flexible(
+                child: Text(
+                  option.label,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+              ),
+            );
+          }).toList() ??
+          [],
     );
   }
 
   Widget _buildMultiSelect() {
     final selectedValues = (value as List<String>?) ?? [];
-    
+
     return Container(
       constraints: const BoxConstraints(maxHeight: 200), // Prevent overflow
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: question.options?.map((option) {
-            final isSelected = selectedValues.contains(option.value.toString());
-            return CheckboxListTile(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-              dense: true,
-              title: Text(
-                option.label,
-                style: const TextStyle(fontSize: 14),
-              ),
-              subtitle: option.description != null 
-                ? Text(
-                    option.description!,
-                    style: const TextStyle(fontSize: 12),
-                  ) 
-                : null,
-              value: isSelected,
-              onChanged: (checked) {
-                final newValues = List<String>.from(selectedValues);
-                if (checked == true) {
-                  newValues.add(option.value.toString());
-                } else {
-                  newValues.remove(option.value.toString());
-                }
-                onChanged(newValues);
-              },
-            );
-          }).toList() ?? [],
+                final isSelected =
+                    selectedValues.contains(option.value.toString());
+                return CheckboxListTile(
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 8),
+                  dense: true,
+                  title: Text(
+                    option.label,
+                    style: const TextStyle(fontSize: 14),
+                  ),
+                  subtitle: option.description != null
+                      ? Text(
+                          option.description!,
+                          style: const TextStyle(fontSize: 12),
+                        )
+                      : null,
+                  value: isSelected,
+                  onChanged: (checked) {
+                    final newValues = List<String>.from(selectedValues);
+                    if (checked == true) {
+                      newValues.add(option.value.toString());
+                    } else {
+                      newValues.remove(option.value.toString());
+                    }
+                    onChanged(newValues);
+                  },
+                );
+              }).toList() ??
+              [],
         ),
       ),
     );
@@ -218,24 +221,25 @@ class TicketFormField extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: question.options?.map((option) {
-            return RadioListTile<String>(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-              dense: true,
-              title: Text(
-                option.label,
-                style: const TextStyle(fontSize: 14),
-              ),
-              subtitle: option.description != null 
-                ? Text(
-                    option.description!,
-                    style: const TextStyle(fontSize: 12),
-                  ) 
-                : null,
-              value: option.value.toString(),
-              groupValue: value?.toString(),
-              onChanged: onChanged,
-            );
-          }).toList() ?? [],
+                return RadioListTile<String>(
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 8),
+                  dense: true,
+                  title: Text(
+                    option.label,
+                    style: const TextStyle(fontSize: 14),
+                  ),
+                  subtitle: option.description != null
+                      ? Text(
+                          option.description!,
+                          style: const TextStyle(fontSize: 12),
+                        )
+                      : null,
+                  value: option.value.toString(),
+                  groupValue: value?.toString(),
+                  onChanged: onChanged,
+                );
+              }).toList() ??
+              [],
         ),
       ),
     );
@@ -344,7 +348,7 @@ class TicketFormField extends StatelessWidget {
 
   Widget _buildRatingField() {
     final rating = (value as int?) ?? 0;
-    
+
     return Row(
       children: List.generate(5, (index) {
         return IconButton(
@@ -371,4 +375,4 @@ class TicketFormField extends StatelessWidget {
       ),
     );
   }
-} 
+}
