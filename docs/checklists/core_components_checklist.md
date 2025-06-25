@@ -15,7 +15,6 @@ This document tracks the status of both design styles and reusable UI components
 | Buttons (Text, Icon, etc.)    | 🟢     | 14.06.25   | 16.06.25 | Nurhayat Yurtaslan, Nisa Çolak  |
 | Bottom Sheet (S, M, L)        | 🟢     | 26.01.25   | 26.01.25 | @gurkanfikretgunak |
 | Pop Up (S, M, L)              | 🟢     | 25.06.25   | 25.06.25 | @gurkanfikretgunak |
-| Menu Item                     | 🔴     | (TBD)      | (TBD)    | (To be assigned)   |
 | Card designs (S, M, L)        | 🟢     | 22.06.25   | 25.06.25 |    Nisa Çolak      |
 | Textfields                    | 🟢     | 18.06.25   | 21.06.25 | Nisa Çolak         |
 | List Items                    | 🟢     | 23.06.25   | 24.06.25 | Nurhayat Yurtaslan |
