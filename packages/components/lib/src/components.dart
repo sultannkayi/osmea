@@ -26,6 +26,7 @@ import 'package:osmea_components/src/components/row/row.dart';
 import 'package:osmea_components/src/components/scaffold/scaffold.dart';
 import 'package:osmea_components/src/components/single_child_scroll_view/single_child_scroll_view.dart';
 import 'package:osmea_components/src/components/sized_box/sized_box.dart';
+import 'package:osmea_components/src/components/stack/stack.dart';
 import 'package:osmea_components/src/components/switch_button/switch_button.dart';
 import 'package:osmea_components/src/components/radio_button/radio_button.dart';
 import 'package:osmea_components/src/components/text_field/text_field.dart';
@@ -445,6 +446,42 @@ class OsmeaComponents {
       textDirection: textDirection,
       verticalDirection: verticalDirection,
       textBaseline: textBaseline,
+      children: children,
+    );
+  }
+
+  /// 📚 **OSMEA Stack** - Layered widget stack component
+  ///
+  /// Creates a stack layout component that positions children relative to its box edges.
+  /// A stack layout component that matches Flutter's standard Stack widget API.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.stack(
+  ///   alignment: Alignment.center,
+  ///   children: [
+  ///     Container(color: Colors.blue, width: 300, height: 300),
+  ///     Text('Overlay text'),
+  ///     Icon(Icons.star, size: 50),
+  ///   ],
+  /// )
+  /// ```
+  static Widget stack({
+    Key? key,
+    CoreTheme? customTheme,
+    AlignmentGeometry alignment = AlignmentDirectional.topStart,
+    StackFit fit = StackFit.loose,
+    Clip clipBehavior = Clip.hardEdge,
+    TextDirection? textDirection,
+    List<Widget> children = const <Widget>[],
+  }) {
+    return OsmeaStack(
+      key: key,
+      customTheme: customTheme,
+      alignment: alignment,
+      fit: fit,
+      clipBehavior: clipBehavior,
+      textDirection: textDirection,
       children: children,
     );
   }
