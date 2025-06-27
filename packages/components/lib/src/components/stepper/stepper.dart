@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart' hide StepState;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:osmea_components/osmea_components.dart';
+import 'package:osmea_components/src/components/column/column.dart';
+import 'package:osmea_components/src/components/container/container.dart';
+import 'package:osmea_components/src/components/expanded/expanded.dart';
+import 'package:osmea_components/src/components/row/row.dart';
+import 'package:osmea_components/src/components/single_child_scroll_view/single_child_scroll_view.dart';
+import 'package:osmea_components/src/components/sized_box/sized_box.dart';
 import 'package:osmea_components/src/core/container_widget.dart';
-import 'package:osmea_components/src/enums/components_enum.dart';
 import 'package:osmea_components/src/components/text/text.dart';
-import 'package:osmea_components/src/styles/colors.dart';
 
 import 'cubit/stepper_cubit.dart';
 import 'cubit/stepper_state.dart';
-import '../../utils/stepper_extension.dart';
 
 class OsmeaStep {
   final String label;
@@ -77,21 +81,21 @@ class OsmeaStepper extends CoreContainer {
       child: BlocBuilder<StepperCubit, StepperState>(
         builder: (context, stepperState) {
           if (orientation == ComponentOrientation.horizontal) {
-            return Column(
+            return OsmeaColumn(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 _buildSteps(context, stepperState),
-                const SizedBox(height: 16),
+                const OsmeaSizedBox(height: 16),
                 _buildStepContent(context, stepperState),
               ],
             );
           } else {
-            return Row(
+            return OsmeaRow(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildSteps(context, stepperState),
-                const SizedBox(width: 16),
-                Expanded(
+                const OsmeaSizedBox(width: 16),
+                OsmeaExpanded(
                   child: _buildStepContent(context, stepperState),
                 ),
               ],
@@ -114,17 +118,17 @@ class OsmeaStepper extends CoreContainer {
     final isHorizontal = orientation == ComponentOrientation.horizontal;
 
     if (isHorizontal) {
-      return SingleChildScrollView(
+      return OsmeaSingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: IntrinsicHeight(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: OsmeaRow(
+            mainAxisAlignment: centerMain,
             children: _buildHorizontalSteps(context, stepperState),
           ),
         ),
       );
     } else {
-      return Column(
+      return OsmeaColumn(
         mainAxisAlignment: MainAxisAlignment.start,
         children: _buildVerticalSteps(context, stepperState),
       );
@@ -196,8 +200,8 @@ class OsmeaStepper extends CoreContainer {
               ),
               // Show label only if style supports it
               if (stepperStyle.hasLabels) ...[
-                const SizedBox(height: 4),
-                SizedBox(
+                const OsmeaSizedBox(height: 4),
+                OsmeaSizedBox(
                   width: 80, // Constrain width to prevent overflow
                   child: OsmeaText(
                     step.label,
@@ -207,7 +211,7 @@ class OsmeaStepper extends CoreContainer {
                     style: TextStyle(
                       fontWeight:
                           isActive ? FontWeight.bold : FontWeight.normal,
-                      color: isActive ? color : Colors.black,
+                      color: isActive ? color : OsmeaColors.black,
                       fontSize: 12,
                     ),
                   ),
@@ -231,17 +235,17 @@ class OsmeaStepper extends CoreContainer {
   ) {
     // Show error icon for error state
     if (hasError) {
-      return const Icon(Icons.error, color: Colors.white, size: 16);
+      return const Icon(Icons.error, color: OsmeaColors.white, size: 16);
     }
 
     // Show warning icon for warning state
     if (stepState == StepState.warning) {
-      return const Icon(Icons.warning, color: Colors.white, size: 16);
+      return const Icon(Icons.warning, color: OsmeaColors.white, size: 16);
     }
 
     // Show check icon for completed steps
     if (isCompleted) {
-      return const Icon(Icons.check, color: Colors.white, size: 16);
+      return const Icon(Icons.check, color: OsmeaColors.white, size: 16);
     }
 
     // Show custom icon if provided
@@ -253,18 +257,19 @@ class OsmeaStepper extends CoreContainer {
     if (stepperStyle.isNumbered) {
       return OsmeaText(
         '${index + 1}',
-        color: Colors.white,
+        color: OsmeaColors.white,
         fontWeight: FontWeight.bold,
       );
     } else {
       // For dot styles, show a small dot or empty circle
-      return Container(
+      return OsmeaContainer(
         width: 8,
         height: 8,
         decoration: BoxDecoration(
-          color: isActive ? Colors.white : Colors.transparent,
+          color: isActive ? OsmeaColors.white : OsmeaColors.transparent,
           shape: BoxShape.circle,
-          border: isActive ? null : Border.all(color: Colors.white, width: 1),
+          border:
+              isActive ? null : Border.all(color: OsmeaColors.white, width: 1),
         ),
       );
     }
@@ -305,14 +310,14 @@ class OsmeaStepper extends CoreContainer {
         : stepperStyle.lineColor;
 
     if (isHorizontal) {
-      return Container(
+      return OsmeaContainer(
         width: 30, // Reduced from 40
         height: stepperStyle.lineThickness,
         color: lineColor,
         margin: const EdgeInsets.symmetric(horizontal: 2), // Reduced margin
       );
     } else {
-      return Container(
+      return OsmeaContainer(
         width: stepperStyle.lineThickness,
         height: 30,
         color: lineColor,
