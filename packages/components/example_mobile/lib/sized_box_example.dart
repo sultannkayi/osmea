@@ -7,13 +7,13 @@ class SizedBoxExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('OSMEA SizedBox Examples'),
         elevation: 0,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
-        child: Column(
+        child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildSectionTitle('Basic SizedBox'),
@@ -27,6 +27,29 @@ class SizedBoxExample extends StatelessWidget {
             OsmeaComponents.sizedBox(height: 32),
             _buildSectionTitle('Convenience Methods'),
             _buildConvenienceMethodExamples(),
+            //OsmeaComponents.sizedBox(height: 80), // Alt boşluk
+            // OsmeaComponents.loginButton örneği (authService örnek olarak null, kendi servisinizi ekleyin)
+            // OsmeaComponents.loginButton(
+            //   authService: null,
+            //   text: 'Login',
+            // ),
+            // OsmeaComponents.navbar örneği
+            // OsmeaComponents.navbar(
+            //   items: [
+            //     NavbarItem(
+            //       text: 'Home',
+            //       icon: const Icon(Icons.home),
+            //       onTap: () {},
+            //     ),
+            //     NavbarItem(
+            //       text: 'Settings',
+            //       icon: const Icon(Icons.settings),
+            //       onTap: () {},
+            //     ),
+            //   ],
+            //   currentIndex: 0,
+            //   onItemTap: (index) {},
+            // ),
           ],
         ),
       ),
@@ -34,7 +57,7 @@ class SizedBoxExample extends StatelessWidget {
   }
 
   Widget _buildSectionTitle(String title) {
-    return Padding(
+    return OsmeaComponents.padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: OsmeaComponents.text(
         title,
@@ -47,7 +70,7 @@ class SizedBoxExample extends StatelessWidget {
   }
 
   Widget _buildBasicSizedBoxExamples() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildExampleWithCaption(
@@ -78,7 +101,7 @@ class SizedBoxExample extends StatelessWidget {
         OsmeaComponents.sizedBox(height: 16),
         _buildExampleWithCaption(
           'Empty SizedBox as Spacer',
-          Column(
+          OsmeaComponents.column(
             children: [
               _buildColoredBox(color: Colors.purple, text: 'Before Spacer'),
               OsmeaComponents.sizedBox(height: 30),
@@ -91,7 +114,7 @@ class SizedBoxExample extends StatelessWidget {
   }
 
   Widget _buildStyledSizedBoxExamples() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildExampleWithCaption(
@@ -206,7 +229,7 @@ class SizedBoxExample extends StatelessWidget {
   }
 
   Widget _buildInteractiveSizedBoxExamples() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildExampleWithCaption(
@@ -259,7 +282,7 @@ class SizedBoxExample extends StatelessWidget {
   }
 
   Widget _buildExampleWithCaption(String caption, Widget child) {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
@@ -295,7 +318,7 @@ class SizedBoxExample extends StatelessWidget {
   Widget _buildConvenienceMethodExamples() {
     // Since OsmeaSizedBox now only accepts standard SizedBox properties,
     // we demonstrate these using Flutter's built-in SizedBox convenience constructors
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildExampleWithCaption(
