@@ -12,19 +12,18 @@ class ColumnExampleScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('OSMEA Column Examples'),
       ),
       body: SingleChildScrollView(
         padding: context.paddingNormal,
-        child: Column(
+        child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Section title
             OsmeaComponents.text(
               '📊 Basic Columns',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
@@ -43,8 +42,7 @@ class ColumnExampleScreen extends StatelessWidget {
             // Section title for spacing
             OsmeaComponents.text(
               '📏 Spacing & Distribution',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
@@ -63,8 +61,7 @@ class ColumnExampleScreen extends StatelessWidget {
             // Section title for wrapping
             OsmeaComponents.text(
               '🔀 Wrapping Columns',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
@@ -77,8 +74,7 @@ class ColumnExampleScreen extends StatelessWidget {
             // Section title for styling
             OsmeaComponents.text(
               '🎨 Column Styling',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
@@ -91,8 +87,7 @@ class ColumnExampleScreen extends StatelessWidget {
             // Section title for interactive columns
             OsmeaComponents.text(
               '👆 Interactive Columns',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
@@ -105,8 +100,7 @@ class ColumnExampleScreen extends StatelessWidget {
             // Section title for advanced examples
             OsmeaComponents.text(
               '🧩 Advanced Usage',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
@@ -120,7 +114,29 @@ class ColumnExampleScreen extends StatelessWidget {
             OsmeaComponents.text('OSMEA Column vs Flutter Column:'),
             OsmeaComponents.sizedBox(height: 8),
             comparisonExample(),
-            OsmeaComponents.sizedBox(height: 32),
+            //OsmeaComponents.sizedBox(height: 32),
+            // OsmeaComponents.loginButton örneği (authService örnek olarak null, kendi servisinizi ekleyin)
+            // OsmeaComponents.loginButton(
+            //   authService: null,
+            //   text: 'Login',
+            // ),
+            // OsmeaComponents.navbar örneği
+            // OsmeaComponents.navbar(
+            //   items: [
+            //     NavbarItem(
+            //       text: 'Home',
+            //       icon: const Icon(Icons.home),
+            //       onTap: () {},
+            //     ),
+            //     NavbarItem(
+            //       text: 'Settings',
+            //       icon: const Icon(Icons.settings),
+            //       onTap: () {},
+            //     ),
+            //   ],
+            //   currentIndex: 0,
+            //   onItemTap: (index) {},
+            // ),
           ],
         ),
       ),
