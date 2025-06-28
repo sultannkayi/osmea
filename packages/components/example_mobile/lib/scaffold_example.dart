@@ -20,12 +20,16 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
-        title: OsmeaComponents.text('OSMEA Scaffold Examples'),
+      appBar: OsmeaComponents.appBar(
+        title: OsmeaComponents.text(
+          'OSMEA Scaffold Examples',
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+        ),
       ),
       body: SingleChildScrollView(
         padding: context.paddingNormal,
-        child: Column(
+        child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Section title
@@ -90,6 +94,24 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
               'Scaffold with all features combined',
               _buildAdvancedScaffold(),
             ),
+            OsmeaComponents.sizedBox(height: 32),
+            // OsmeaComponents.loginButton(
+            //   authService: null, // Kendi AuthService'inizi ekleyin
+            //   text: 'Login',
+            // ),
+            // OsmeaComponents.navbar(
+            //   currentIndex: _currentIndex,
+            //   items: const [
+            //     NavbarItem(icon: Icon(Icons.home), text: 'Home'),
+            //     NavbarItem(icon: Icon(Icons.layers), text: 'Scaffold'),
+            //     NavbarItem(icon: Icon(Icons.settings), text: 'Settings'),
+            //   ],
+            //   onItemTap: (index) {
+            //     setState(() {
+            //       _currentIndex = index;
+            //     });
+            //   },
+            // ),
           ],
         ),
       ),
