@@ -26,6 +26,9 @@ dependencies:
 
   # URL Launcher
   url_launcher: ^6.2.4
+  
+  # Shared Preferences
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   # Testing

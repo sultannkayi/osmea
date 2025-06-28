@@ -4,6 +4,8 @@ import 'package:example/services/api_service_registry.dart';
 import 'package:example/widgets/modern_sidebar.dart';
 import 'package:example/widgets/app_header.dart';
 import 'package:example/widgets/home/responsive_content.dart';
+import 'package:example/widgets/config_popup_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -39,6 +41,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     super.initState();
     _initializeAnimations();
     _initializeDefaults();
+    _checkAndShowConfigPopup();
   }
 
   void _initializeAnimations() {
@@ -81,6 +84,27 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
         debugPrint('🔄 Request interceptor triggered');
       },
     );
+  }
+
+  void _checkAndShowConfigPopup() async {
+    // Widget'ın mount olmasını bekle
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (mounted) {
+        final shouldShow = await ConfigPopupDialog.shouldShow();
+        if (shouldShow && mounted) {
+          await ConfigPopupDialog.show(context);
+        }
+      }
+    });
+  }
+
+  // Debug: Config popup'ını sıfırla ve tekrar göster
+  Future<void> _resetAndShowConfigPopup() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('config_popup_shown');
+    if (mounted) {
+      await ConfigPopupDialog.show(context);
+    }
   }
 
   @override
@@ -328,6 +352,13 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
               onRawBodyChanged: _onRawBodyChanged,
               onSendRequest: _sendRequest,
               screenWidth: screenWidth,
+            ),
+            // Debug: Config popup'ını test etmek için
+            floatingActionButton: FloatingActionButton(
+              onPressed: _resetAndShowConfigPopup,
+              backgroundColor: Colors.orange,
+              child: const Icon(Icons.settings_outlined, color: Colors.white),
+              tooltip: 'Test Config Popup',
             ),
           ),
         );
