@@ -20,6 +20,7 @@ import 'package:osmea_components/src/components/expanded/expanded.dart';
 import 'package:osmea_components/src/components/flexible/flexible.dart';
 import 'package:osmea_components/src/components/padding/padding.dart';
 import 'package:osmea_components/src/components/positioned/positioned.dart';
+import 'package:osmea_components/src/components/progress/progress.dart';
 import 'package:osmea_components/src/components/row/row.dart';
 import 'package:osmea_components/src/components/scaffold/scaffold.dart';
 import 'package:osmea_components/src/components/single_child_scroll_view/single_child_scroll_view.dart';
@@ -2447,6 +2448,32 @@ class OsmeaComponents {
     LoadingCubit? cubit,
   }) {
     return type.osmeaLoading(size: size, color: color, cubit: cubit);
+  }
+
+    /// 🌀 **OSMEA Progress** - Modern animated progress bar/circular
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.progress(type: ProgressType.circular, value: 0.7)
+  /// ```
+  static Widget progress({
+    Key? key,
+    required ProgressType type,
+    required double value,
+    ProgressSize size = ProgressSize.medium,
+    Color? color,
+    bool showPercentage = false,
+    double speed = 1.0,
+  }) {
+    return OsmeaProgress(
+      key: key,
+      type: type,
+      value: value,
+      size: size,
+      color: color,
+      showPercentage: showPercentage,
+      speed: speed,
+    );
   }
 
   /// 🎫 **OSMEA Ticket Widget** - Dynamic form generator for support tickets
