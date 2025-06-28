@@ -12,8 +12,13 @@ class SingleChildScrollViewExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
-        title: OsmeaComponents.text('OSMEA ScrollView Examples'),
+      appBar: OsmeaComponents.appBar(
+        title: OsmeaComponents.text(
+          'OSMEA ScrollView Examples',
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+          color: OsmeaColors.white,
+        ),
         backgroundColor: OsmeaColors.nordicBlue,
         foregroundColor: OsmeaColors.white,
       ),
@@ -26,8 +31,8 @@ class SingleChildScrollViewExample extends StatelessWidget {
               // Section title
               OsmeaComponents.text(
                 '📜 Basic Scroll Views',
-                textStyle:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
               ),
               OsmeaComponents.sizedBox(height: 16),
 
@@ -58,8 +63,8 @@ class SingleChildScrollViewExample extends StatelessWidget {
               // Section title for advanced features
               OsmeaComponents.text(
                 '🧰 Advanced Scroll Features',
-                textStyle:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
               ),
               OsmeaComponents.sizedBox(height: 16),
 
@@ -77,7 +82,20 @@ class SingleChildScrollViewExample extends StatelessWidget {
                 'ScrollView with custom styling and effects',
                 _buildStyledScrollExample(context),
               ),
-              OsmeaComponents.sizedBox(height: 16),
+              //OsmeaComponents.sizedBox(height: 32),
+              // OsmeaComponents.loginButton(
+              //   authService: null, // Kendi AuthService'inizi ekleyin
+              //   text: 'Login',
+              // ),
+              // OsmeaComponents.navbar(
+              //   currentIndex: 0,
+              //   items: const [
+              //     NavbarItem(icon: Icon(Icons.home), text: 'Home'),
+              //     NavbarItem(icon: Icon(Icons.view_stream), text: 'ScrollView'),
+              //     NavbarItem(icon: Icon(Icons.settings), text: 'Settings'),
+              //   ],
+              //   onItemTap: (index) {},
+              // ),
             ],
           ),
         ),
