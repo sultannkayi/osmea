@@ -30,55 +30,76 @@ class _ChipsExampleState extends State<ChipsExample> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    return OsmeaComponents.scaffold(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('🪨 OSMEA Chips'),
         backgroundColor: OsmeaColors.nordicBlue,
         foregroundColor: OsmeaColors.white,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            OsmeaComponents.text(
-              '1. Category Filtering (Single Selection)',
-              textStyle:
-                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 12),
-            _buildFilterChips(),
-            const Divider(height: 32),
-            OsmeaComponents.text(
-              '2. Interests (Multiple Selection)',
-              textStyle:
-                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 12),
-            _buildMultiSelectChips(),
-            const SizedBox(height: 16),
-            OsmeaComponents.text(
-              'Selected interests: ${_selectedInterests.isEmpty ? "No selection yet" : _selectedInterests.join(", ")}',
-              fontSize: 14,
-              color: Colors.grey[600],
-            ),
-            const Divider(height: 32),
-            OsmeaComponents.text(
-              '3. Different Styles',
-              textStyle:
-                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 12),
-            _buildStyleShowcase(),
-            const Divider(height: 32),
-            OsmeaComponents.text(
-              '4. Interactive Examples',
-              textStyle:
-                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 12),
-            _buildInteractiveExamples(),
-          ],
+        child: OsmeaComponents.singleChildScrollView(
+          child: OsmeaComponents.column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              OsmeaComponents.text(
+                '1. Category Filtering (Single Selection)',
+                textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              OsmeaComponents.sizedBox(height: 12),
+              _buildFilterChips(),
+              OsmeaComponents.sizedBox(height: 32),
+              OsmeaComponents.text(
+                '2. Interests (Multiple Selection)',
+                textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              OsmeaComponents.sizedBox(height: 12),
+              _buildMultiSelectChips(),
+              OsmeaComponents.sizedBox(height: 16),
+              OsmeaComponents.text(
+                'Selected interests: \\${_selectedInterests.isEmpty ? "No selection yet" : _selectedInterests.join(", ")}',
+                fontSize: 14,
+                color: Colors.grey[600],
+              ),
+              OsmeaComponents.sizedBox(height: 32),
+              OsmeaComponents.text(
+                '3. Different Styles',
+                textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              OsmeaComponents.sizedBox(height: 12),
+              _buildStyleShowcase(),
+              OsmeaComponents.sizedBox(height: 32),
+              OsmeaComponents.text(
+                '4. Interactive Examples',
+                textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              OsmeaComponents.sizedBox(height: 12),
+              _buildInteractiveExamples(),
+              //OsmeaComponents.sizedBox(height: 32),
+              // OsmeaComponents.loginButton örneği (authService örnek olarak null, kendi servisinizi ekleyin)
+              // OsmeaComponents.loginButton(
+              //   authService: null,
+              //   text: 'Login',
+              // ),
+              // OsmeaComponents.navbar örneği
+              // OsmeaComponents.navbar(
+              //   items: [
+              //     NavbarItem(
+              //       text: 'Home',
+              //       icon: const Icon(Icons.home),
+              //       onTap: () {},
+              //     ),
+              //     NavbarItem(
+              //       text: 'Settings',
+              //       icon: const Icon(Icons.settings),
+              //       onTap: () {},
+              //     ),
+              //   ],
+              //   currentIndex: 0,
+              //   onItemTap: (index) {},
+              // ),
+            ],
+          ),
         ),
       ),
     );
