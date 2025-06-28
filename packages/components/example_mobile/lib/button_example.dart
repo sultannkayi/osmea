@@ -29,7 +29,7 @@ class _ButtonExampleState extends State<ButtonExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text(
           '🔘 OSMEA Button Examples',
           variant: OsmeaTextVariant.headlineMedium,
