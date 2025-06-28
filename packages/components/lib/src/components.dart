@@ -16,6 +16,7 @@ import 'package:osmea_components/src/components/checkbox/checkbox.dart';
 import 'package:osmea_components/src/components/chips/chips.dart';
 import 'package:osmea_components/src/components/column/column.dart';
 import 'package:osmea_components/src/components/container/container.dart';
+import 'package:osmea_components/src/components/divider/divider.dart';
 import 'package:osmea_components/src/components/expanded/expanded.dart';
 import 'package:osmea_components/src/components/flexible/flexible.dart';
 import 'package:osmea_components/src/components/padding/padding.dart';
@@ -39,7 +40,6 @@ import 'package:osmea_components/src/components/ticket_widget/ticket_widget.dart
 import 'package:osmea_components/src/components/ticket_widget/models/ticket_models.dart';
 import 'package:osmea_components/src/components/popup/popup.dart';
 import 'package:osmea_components/src/components/stepper/stepper.dart';
-
 
 class OsmeaComponents {
   /// Supported Button variants - All variants are supported
@@ -2451,7 +2451,7 @@ class OsmeaComponents {
     return type.osmeaLoading(size: size, color: color, cubit: cubit);
   }
 
-    /// 🌀 **OSMEA Progress** - Modern animated progress bar/circular
+  /// 🌀 **OSMEA Progress** - Modern animated progress bar/circular
   ///
   /// Example:
   /// ```dart
@@ -2679,7 +2679,6 @@ class OsmeaComponents {
     );
   }
 
-
   /// 📏 **OSMEA Spacer** - Flexible space distribution component
   ///
   /// Creates a spacer that can expand to fill available space in a Flex container
@@ -2704,6 +2703,42 @@ class OsmeaComponents {
       key: key,
       customTheme: customTheme,
       flex: flex,
+    );
+  }
+
+  /// ➖ **OSMEA Divider** - Divider with multiple style support
+  ///
+  /// Creates a divider with different divider styles.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.divider(variant: DividerVariant.dashed)
+  /// ```
+  static Widget divider({
+    Key? key,
+    DividerVariant variant = DividerVariant.classic,
+    Color? color,
+    double? thickness,
+    double? indent,
+    double? endIndent,
+    double? height,
+    Widget? icon,
+    String? text,
+    Gradient? gradient,
+    Axis direction = Axis.horizontal,
+  }) {
+    return OsmeaDivider(
+      key: key,
+      variant: variant,
+      color: color,
+      thickness: thickness,
+      indent: indent,
+      endIndent: endIndent,
+      height: height,
+      icon: icon,
+      text: text,
+      gradient: gradient,
+      direction: direction,
     );
   }
 
@@ -2743,7 +2778,6 @@ class OsmeaComponents {
       child: child,
     );
   }
-
 
   /// 🪜 **OSMEA Stepper** - Multi-step navigation component
   ///

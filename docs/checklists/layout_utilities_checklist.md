@@ -21,6 +21,7 @@ This section includes foundational layout widgets rewritten or extended for cons
 | Positioned             | 🟢     | 27.06.25      | 27.06.25    | Nurhayat Yurtaslan  |
 | Rich Text              | 🟢     | 27.06.25      | 27.06.25    | Nurhayat Yurtaslan  |
 | Text Span              | 🟢     | 27.06.25      | 27.06.25    | Nurhayat Yurtaslan  |
+| Divider                | 🟢     | 28.06.25      | 28.06.25    | Nurhayat Yurtaslan  |
 ---
 
 > [!NOTE]
