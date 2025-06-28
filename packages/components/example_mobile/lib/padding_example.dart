@@ -7,13 +7,13 @@ class PaddingExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('OSMEA Padding Examples'),
         elevation: 0,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
-        child: Column(
+        child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildSectionTitle('Basic Padding'),
@@ -27,6 +27,29 @@ class PaddingExample extends StatelessWidget {
             OsmeaComponents.sizedBox(height: 32),
             _buildSectionTitle('Convenience Methods'),
             _buildConvenienceMethodExamples(),
+            //OsmeaComponents.sizedBox(height: 80), // Alt boşluk
+            // OsmeaComponents.loginButton örneği (authService örnek olarak null, kendi servisinizi ekleyin)
+            // OsmeaComponents.loginButton(
+            //   authService: null,
+            //   text: 'Login',
+            // ),
+            // OsmeaComponents.navbar örneği
+            // OsmeaComponents.navbar(
+            //   items: [
+            //     NavbarItem(
+            //       text: 'Home',
+            //       icon: const Icon(Icons.home),
+            //       onTap: () {},
+            //     ),
+            //     NavbarItem(
+            //       text: 'Settings',
+            //       icon: const Icon(Icons.settings),
+            //       onTap: () {},
+            //     ),
+            //   ],
+            //   currentIndex: 0,
+            //   onItemTap: (index) {},
+            // ),
           ],
         ),
       ),
@@ -34,7 +57,7 @@ class PaddingExample extends StatelessWidget {
   }
 
   Widget _buildSectionTitle(String title) {
-    return Padding(
+    return OsmeaComponents.padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: OsmeaComponents.text(
         title,
@@ -47,7 +70,7 @@ class PaddingExample extends StatelessWidget {
   }
 
   Widget _buildBasicPaddingExamples() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildExampleWithCaption(
@@ -90,7 +113,7 @@ class PaddingExample extends StatelessWidget {
   }
 
   Widget _buildStyledPaddingExamples() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildExampleWithCaption(
@@ -169,7 +192,7 @@ class PaddingExample extends StatelessWidget {
   }
 
   Widget _buildInteractivePaddingExamples() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildExampleWithCaption(
@@ -215,7 +238,7 @@ class PaddingExample extends StatelessWidget {
   }
 
   Widget _buildConvenienceMethodExamples() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildExampleWithCaption(
