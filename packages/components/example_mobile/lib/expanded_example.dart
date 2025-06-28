@@ -7,10 +7,11 @@ class ExpandedExampleScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text(
           'OSMEA Expanded Examples',
           variant: OsmeaTextVariant.headlineMedium,
+          color: OsmeaColors.white,
         ),
         backgroundColor: OsmeaColors.nordicBlue,
         foregroundColor: OsmeaColors.white,
@@ -18,7 +19,7 @@ class ExpandedExampleScreen extends StatelessWidget {
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: SafeArea(
-          child: Column(
+          child: OsmeaComponents.column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Basic Usage Section
@@ -51,15 +52,29 @@ class ExpandedExampleScreen extends StatelessWidget {
               _buildRealWorldExample(context),
               OsmeaComponents.sizedBox(height: 24),
 
-              // Enhanced Features Section (now using composition)
-              _buildSectionTitle('Enhanced Features Using Composition'),
-              OsmeaComponents.sizedBox(height: 16),
-              _buildEnhancedFeaturesExample(context),
-              OsmeaComponents.sizedBox(height: 24),
-            ],
-          ),
+            // Enhanced Features Section (now using composition)
+            _buildSectionTitle('Enhanced Features Using Composition'),
+            OsmeaComponents.sizedBox(height: 16),
+            _buildEnhancedFeaturesExample(context),
+            OsmeaComponents.sizedBox(height: 24),
+            // OsmeaComponents.loginButton(
+            //   authService: ... // AuthService örneği ile kullanılır
+            // ),
+            // OsmeaComponents.navbar(
+            //   currentIndex: 0,
+            //   items: const [
+            //     NavbarItem(icon: Icon(Icons.home), text: 'Home'),
+            //     NavbarItem(icon: Icon(Icons.expand), text: 'Expanded'),
+            //     NavbarItem(icon: Icon(Icons.settings), text: 'Settings'),
+            //   ],
+            //   onItemTap: (index) {
+            //     // Navbar tıklama örneği
+            //   },
+            // ),
+          ],
         ),
       ),
+    )
     );
   }
 
@@ -546,32 +561,35 @@ class ExpandedExampleScreen extends StatelessWidget {
                                   ],
                                 ),
                                 OsmeaComponents.sizedBox(height: 16),
+                                // Fix: Wrap Recent Activity in Expanded + SingleChildScrollView
                                 OsmeaComponents.expanded(
                                   child: OsmeaComponents.container(
                                     borderRadius: BorderRadius.circular(8),
                                     border:
                                         Border.all(color: Colors.grey.shade300),
                                     padding: const EdgeInsets.all(12),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        OsmeaComponents.text('Recent Activity',
-                                            variant:
-                                                OsmeaTextVariant.titleMedium),
-                                        OsmeaComponents.sizedBox(height: 8),
-                                        OsmeaComponents.text(
-                                            '• User "John Smith" placed a new order'),
-                                        OsmeaComponents.sizedBox(height: 4),
-                                        OsmeaComponents.text(
-                                            '• 3 new comments on blog post "OSMEA Components"'),
-                                        OsmeaComponents.sizedBox(height: 4),
-                                        OsmeaComponents.text(
-                                            '• New feature released: OsmeaComponents.expanded component'),
-                                        OsmeaComponents.sizedBox(height: 4),
-                                        OsmeaComponents.text(
-                                            '• Server maintenance scheduled for next week'),
-                                      ],
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          OsmeaComponents.text('Recent Activity',
+                                              variant:
+                                                  OsmeaTextVariant.titleMedium),
+                                          OsmeaComponents.sizedBox(height: 8),
+                                          OsmeaComponents.text(
+                                              '• User "John Smith" placed a new order'),
+                                          OsmeaComponents.sizedBox(height: 4),
+                                          OsmeaComponents.text(
+                                              '• 3 new comments on blog post "OSMEA Components"'),
+                                          OsmeaComponents.sizedBox(height: 4),
+                                          OsmeaComponents.text(
+                                              '• New feature released: OsmeaComponents.expanded component'),
+                                          OsmeaComponents.sizedBox(height: 4),
+                                          OsmeaComponents.text(
+                                              '• Server maintenance scheduled for next week'),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
