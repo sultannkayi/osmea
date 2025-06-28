@@ -65,3 +65,5 @@ export 'stepper_enum.dart';
 // Progress enums
 export 'progress_enums.dart';
 
+// Divider enums
+export 'divider_enums.dart';
