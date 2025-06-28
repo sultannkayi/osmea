@@ -26,7 +26,7 @@ class _AvatarExampleState extends State<AvatarExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text(
           '👤 OSMEA Avatar Examples',
           variant: OsmeaTextVariant.headlineMedium,
@@ -62,7 +62,29 @@ class _AvatarExampleState extends State<AvatarExample> {
             OsmeaComponents.sizedBox(height: 32),
             _buildSectionTitle('📱 Extension Features'),
             _buildExtensionFeaturesSection(),
-            OsmeaComponents.sizedBox(height: 32),
+            OsmeaComponents.sizedBox(height: 80), // Alt boşluk
+            // OsmeaComponents.loginButton örneği (authService örnek olarak null, kendi servisinizi ekleyin)
+            // OsmeaComponents.loginButton(
+            //   authService: null,
+            //   text: 'Login',
+            // ),
+            // OsmeaComponents.navbar örneği
+            OsmeaComponents.navbar(
+              items: [
+                NavbarItem(
+                  text: 'Home',
+                  icon: const Icon(Icons.home),
+                  onTap: () {},
+                ),
+                NavbarItem(
+                  text: 'Settings',
+                  icon: const Icon(Icons.settings),
+                  onTap: () {},
+                ),
+              ],
+              currentIndex: 0,
+              onItemTap: (index) {},
+            ),
           ],
         ),
       ),
