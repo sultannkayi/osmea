@@ -5,7 +5,7 @@ import 'package:example/widgets/modern_sidebar.dart';
 import 'package:example/widgets/app_header.dart';
 import 'package:example/widgets/home/responsive_content.dart';
 import 'package:example/widgets/config_popup_dialog.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -114,14 +114,6 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     });
   }
 
-  // Debug: Config popup'ını sıfırla ve tekrar göster
-  Future<void> _resetAndShowConfigPopup() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove('config_popup_shown');
-    if (mounted) {
-      await ConfigPopupDialog.show(context);
-    }
-  }
 
   @override
   void dispose() {
@@ -395,12 +387,8 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
               screenWidth: screenWidth,
             ),
             // Debug: Config popup'ını test etmek için
-            floatingActionButton: FloatingActionButton(
-              onPressed: _resetAndShowConfigPopup,
-              backgroundColor: Colors.orange,
-              child: const Icon(Icons.warning_amber_rounded, color: Colors.white),
-              tooltip: 'Test Config Popup',
-            ),
+            
+            
           ),
         );
       },
