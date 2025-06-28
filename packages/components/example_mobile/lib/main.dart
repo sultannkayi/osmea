@@ -4,6 +4,7 @@ import 'package:osmea_components_example/align_example.dart';
 import 'package:osmea_components_example/avatar_example.dart';
 import 'package:osmea_components_example/carousel_example.dart';
 import 'package:osmea_components_example/chips_example.dart';
+import 'package:osmea_components_example/divider_example.dart';
 import 'package:osmea_components_example/loading_example.dart';
 import 'package:osmea_components_example/progress_example.dart';
 import 'package:osmea_components_example/services/mock_auth_service.dart';
@@ -328,23 +329,23 @@ class ComponentsScreen extends StatelessWidget {
                 ),
                 _buildComponentCard(
                   context,
-                  'Carousel',
-                  Icons.swipe,
-                  () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const CarouselExample(),
-                    ),
-                  ),
-                ),
-                _buildComponentCard(
-                  context,
                   'Chips',
                   Icons.local_offer,
                   () => Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => const ChipsExample(),
+                    ),
+                  ),
+                ),
+                _buildComponentCard(
+                  context,
+                  'Carousel',
+                  Icons.swipe,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CarouselExample(),
                     ),
                   ),
                 ),
@@ -378,6 +379,17 @@ class ComponentsScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => const ColorsExample(),
+                    ),
+                  ),
+                ),
+                _buildComponentCard(
+                  context,
+                  'Dividers',
+                  Icons.horizontal_rule,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DividerExample(),
                     ),
                   ),
                 ),
