@@ -142,7 +142,7 @@ class _ConfigPopupDialogState extends State<ConfigPopupDialog>
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: const Icon(
-                                  Icons.settings_outlined,
+                                  Icons.warning_amber_rounded,
                                   color: Colors.white,
                                   size: 24,
                                 ),

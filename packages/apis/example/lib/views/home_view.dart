@@ -398,7 +398,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
             floatingActionButton: FloatingActionButton(
               onPressed: _resetAndShowConfigPopup,
               backgroundColor: Colors.orange,
-              child: const Icon(Icons.settings_outlined, color: Colors.white),
+              child: const Icon(Icons.warning_amber_rounded, color: Colors.white),
               tooltip: 'Test Config Popup',
             ),
           ),
