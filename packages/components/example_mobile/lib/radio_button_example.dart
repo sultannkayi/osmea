@@ -35,14 +35,19 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
-        title: OsmeaComponents.text('🔘 OSMEA Radio Examples'),
+      appBar: OsmeaComponents.appBar(
+        title: OsmeaComponents.text(
+          '🔘 OSMEA Radio Examples',
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+          color: Colors.white,
+        ),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
         padding: context.paddingNormal,
-        child: Column(
+        child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildSectionTitle('🎨 Radio Variants'),
@@ -65,6 +70,20 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
             OsmeaComponents.sizedBox(height: 32),
             _buildSectionTitle('🎨 Custom Colors'),
             _buildCustomColorsSection(),
+            //OsmeaComponents.sizedBox(height: 32),
+            // OsmeaComponents.loginButton(
+            //   authService: null, // Kendi AuthService'inizi ekleyin
+            //   text: 'Login',
+            // ),
+            // OsmeaComponents.navbar(
+            //   currentIndex: 0,
+            //   items: const [
+            //     NavbarItem(icon: Icon(Icons.home), text: 'Home'),
+            //     NavbarItem(icon: Icon(Icons.radio_button_checked), text: 'Radio'),
+            //     NavbarItem(icon: Icon(Icons.settings), text: 'Settings'),
+            //   ],
+            //   onItemTap: (index) {},
+            // ),
           ],
         ),
       ),
