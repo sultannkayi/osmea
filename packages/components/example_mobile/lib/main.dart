@@ -5,6 +5,7 @@ import 'package:osmea_components_example/avatar_example.dart';
 import 'package:osmea_components_example/carousel_example.dart';
 import 'package:osmea_components_example/chips_example.dart';
 import 'package:osmea_components_example/loading_example.dart';
+import 'package:osmea_components_example/progress_example.dart';
 import 'package:osmea_components_example/services/mock_auth_service.dart';
 import 'package:osmea_components_example/center_example.dart';
 import 'package:osmea_components_example/appbars_demo.dart';
@@ -21,6 +22,7 @@ import 'package:osmea_components_example/container_example.dart';
 import 'package:osmea_components_example/row_example.dart';
 import 'package:osmea_components_example/column_example.dart';
 import 'package:osmea_components_example/expanded_example.dart';
+import 'package:osmea_components_example/flexible_example.dart';
 import 'package:osmea_components_example/padding_example.dart';
 import 'package:osmea_components_example/sized_box_example.dart';
 import 'package:osmea_components_example/scaffold_example.dart';
@@ -30,6 +32,11 @@ import 'package:osmea_components_example/list_item_example.dart';
 import 'package:osmea_components_example/ticket_widget_example.dart';
 import 'package:osmea_components_example/bottom_sheet_example.dart';
 import 'package:osmea_components_example/popup_example.dart';
+import 'package:osmea_components_example/stack_example.dart';
+import 'package:osmea_components_example/positioned_example.dart';
+import 'package:osmea_components_example/spacer_example.dart';
+import 'package:osmea_components_example/rich_text_example.dart';
+import 'package:osmea_components_example/stepper_example.dart';
 
 void main() {
   runApp(const MyApp());
@@ -41,7 +48,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Osmea Components Example',
+      title: 'OSMEA Components Example',
       theme: CoreTheme.lightTheme,
       darkTheme: CoreTheme.darkTheme,
       themeMode: ThemeMode.system,
@@ -255,6 +262,17 @@ class ComponentsScreen extends StatelessWidget {
                 ),
                 _buildComponentCard(
                   context,
+                  'Rich Text',
+                  Icons.format_color_text,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const RichTextExample(),
+                    ),
+                  ),
+                ),
+                _buildComponentCard(
+                  context,
                   'Text Fields',
                   Icons.input,
                   () => Navigator.push(
@@ -283,6 +301,17 @@ class ComponentsScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => const LoadingExample(),
+                    ),
+                  ),
+                ),
+                _buildComponentCard(
+                  context,
+                  'progress',
+                  Icons.timelapse,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ProgressExample(),
                     ),
                   ),
                 ),
@@ -349,6 +378,17 @@ class ComponentsScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => const ColorsExample(),
+                    ),
+                  ),
+                ),
+                _buildComponentCard(
+                  context,
+                  'Stepper',
+                  Icons.palette,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const StepperExample(),
                     ),
                   ),
                 ),
@@ -452,6 +492,30 @@ class ExamplesScreen extends StatelessWidget {
           Expanded(
             child: ListView(
               children: [
+                _buildExampleTile(
+                  context,
+                  'Positioned Examples',
+                  'Precise widget placement within a Stack',
+                  Icons.fullscreen,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PositionedExampleScreen(),
+                    ),
+                  ),
+                ),
+                _buildExampleTile(
+                  context,
+                  'Stack Examples',
+                  'Layered widget stack with alignment control',
+                  Icons.layers,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const StackExample(),
+                    ),
+                  ),
+                ),
                 _buildExampleTile(
                   context,
                   'Switch Examples',
@@ -668,6 +732,37 @@ class ExamplesScreen extends StatelessWidget {
                       builder: (context) => const ListItemExample(),
                     ),
                   ),
+                ),
+                _buildExampleTile(
+                  context,
+                  'Spacer Examples',
+                  'Flexible space distribution in layouts',
+                  Icons.space_bar,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SpacerExampleScreen(),
+                    ),
+                  ),
+                ),
+                _buildExampleTile(
+                  context,
+                  'Flexible Examples',
+                  'Flexible space allocation in layouts',
+                  Icons.aspect_ratio,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const FlexibleExampleScreen(),
+                    ),
+                  ),
+                ),
+                _buildExampleTile(
+                  context,
+                  'TabBar Examples',
+                  'Flexible tab bar with variants, sizes, and animation',
+                  Icons.tab,
+                  () => Navigator.pushNamed(context, '/tabbar-example'),
                 ),
               ],
             ),

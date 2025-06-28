@@ -16,31 +16,30 @@ import 'package:osmea_components/src/components/checkbox/checkbox.dart';
 import 'package:osmea_components/src/components/chips/chips.dart';
 import 'package:osmea_components/src/components/column/column.dart';
 import 'package:osmea_components/src/components/container/container.dart';
-import 'package:osmea_components/src/components/loading/cubit/loading_cubit.dart';
-import 'package:osmea_components/src/components/login_button/cubit/login_button_cubit.dart';
-import 'package:osmea_components/src/components/login_button/login_button.dart';
-import 'package:osmea_components/src/components/navbar/navbar.dart';
 import 'package:osmea_components/src/components/expanded/expanded.dart';
+import 'package:osmea_components/src/components/flexible/flexible.dart';
 import 'package:osmea_components/src/components/padding/padding.dart';
+import 'package:osmea_components/src/components/positioned/positioned.dart';
+import 'package:osmea_components/src/components/progress/progress.dart';
+import 'package:osmea_components/src/components/rich_text/rich_text.dart';
 import 'package:osmea_components/src/components/row/row.dart';
 import 'package:osmea_components/src/components/scaffold/scaffold.dart';
 import 'package:osmea_components/src/components/single_child_scroll_view/single_child_scroll_view.dart';
 import 'package:osmea_components/src/components/sized_box/sized_box.dart';
+import 'package:osmea_components/src/components/spacer/spacer.dart';
+import 'package:osmea_components/src/components/stack/stack.dart';
 import 'package:osmea_components/src/components/switch_button/switch_button.dart';
-import 'package:osmea_components/src/components/radio_button/radio_button.dart';
 import 'package:osmea_components/src/components/text_field/text_field.dart';
 import 'package:osmea_components/src/components/text_field/otp_text_field.dart';
-import 'package:osmea_components/src/components/text_field/controllers/text_field_controller.dart';
 import 'package:osmea_components/src/components/wrap/wrap.dart';
-import 'package:osmea_components/src/theme/theme.dart';
 import 'package:osmea_components/src/components/text/text.dart';
 import 'package:osmea_components/src/components/carousel/carousel.dart';
 import 'package:osmea_components/src/components/list_item/list_item.dart';
 import 'package:osmea_components/src/components/ticket_widget/ticket_widget.dart';
 import 'package:osmea_components/src/components/ticket_widget/models/ticket_models.dart';
 import 'package:osmea_components/src/components/popup/popup.dart';
+import 'package:osmea_components/src/components/stepper/stepper.dart';
 
-import 'enums/enums.dart';
 
 class OsmeaComponents {
   /// Supported Button variants - All variants are supported
@@ -267,8 +266,72 @@ class OsmeaComponents {
     );
   }
 
-  static Widget richText() {
-    return const Text('Rich Text Component - Coming Soon');
+  /// 📝 **OSMEA Rich Text** - Enhanced styled text component
+  ///
+  /// Creates a rich text component with support for multiple styled spans,
+  /// interactive links, and comprehensive text formatting.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.richText(
+  ///   textSpans: [
+  ///     OsmeaTextSpan(
+  ///       text: 'Hello ',
+  ///       style: TextStyle(fontWeight: FontWeight.bold),
+  ///     ),
+  ///     OsmeaTextSpan(
+  ///       text: 'World',
+  ///       style: TextStyle(color: Colors.blue),
+  ///       onTap: () => print('World tapped!'),
+  ///     ),
+  ///   ],
+  ///   variant: OsmeaTextVariant.bodyLarge,
+  ///   textAlign: TextAlign.center,
+  /// )
+  /// ```
+  static Widget richText({
+    Key? key,
+    CoreTheme? customTheme,
+    required List<InlineSpan> textSpans,
+    OsmeaTextVariant variant = OsmeaTextVariant.bodyMedium,
+    StrutStyle? strutStyle,
+    TextAlign? textAlign,
+    TextDirection? textDirection,
+    Locale? locale,
+    TextOverflow? overflow,
+    TextScaler? textScaler,
+    int? maxLines,
+    String? semanticsLabel,
+    TextWidthBasis? textWidthBasis,
+    TextHeightBehavior? textHeightBehavior,
+    Color? selectionColor,
+    bool selectable = false,
+    TextSelectionControls? selectionControls,
+    SelectionChangedCallback? onSelectionChanged,
+    GestureRecognizer? recognizer,
+    MouseCursor? mouseCursor,
+  }) {
+    return OsmeaRichText(
+      key: key,
+      textSpans: textSpans,
+      variant: variant,
+      strutStyle: strutStyle,
+      textAlign: textAlign,
+      textDirection: textDirection,
+      locale: locale,
+      overflow: overflow,
+      textScaler: textScaler,
+      maxLines: maxLines,
+      semanticsLabel: semanticsLabel,
+      textWidthBasis: textWidthBasis,
+      textHeightBehavior: textHeightBehavior,
+      selectionColor: selectionColor,
+      selectable: selectable,
+      selectionControls: selectionControls,
+      onSelectionChanged: onSelectionChanged,
+      recognizer: recognizer,
+      mouseCursor: mouseCursor,
+    );
   }
 
   /// 🔄 **OSMEA Expanded** - Standard expanded component
@@ -446,6 +509,146 @@ class OsmeaComponents {
       verticalDirection: verticalDirection,
       textBaseline: textBaseline,
       children: children,
+    );
+  }
+
+  /// 📚 **OSMEA Stack** - Layered widget stack component
+  ///
+  /// Creates a stack layout component that positions children relative to its box edges.
+  /// A stack layout component that matches Flutter's standard Stack widget API.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.stack(
+  ///   alignment: Alignment.center,
+  ///   children: [
+  ///     Container(color: Colors.blue, width: 300, height: 300),
+  ///     Text('Overlay text'),
+  ///     Icon(Icons.star, size: 50),
+  ///   ],
+  /// )
+  /// ```
+  static Widget stack({
+    Key? key,
+    CoreTheme? customTheme,
+    AlignmentGeometry alignment = AlignmentDirectional.topStart,
+    StackFit fit = StackFit.loose,
+    Clip clipBehavior = Clip.hardEdge,
+    TextDirection? textDirection,
+    List<Widget> children = const <Widget>[],
+  }) {
+    return OsmeaStack(
+      key: key,
+      customTheme: customTheme,
+      alignment: alignment,
+      fit: fit,
+      clipBehavior: clipBehavior,
+      textDirection: textDirection,
+      children: children,
+    );
+  }
+
+  /// 📍 **OSMEA Positioned** - Precise positioning within Stack
+  ///
+  /// Creates a positioned widget for precise placement within a Stack layout.
+  /// A positioned component that matches Flutter's standard Positioned widget API.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.positioned(
+  ///   top: 10,
+  ///   right: 10,
+  ///   child: Icon(Icons.close),
+  /// )
+  /// ```
+  static Widget positioned({
+    Key? key,
+    CoreTheme? customTheme,
+    double? left,
+    double? top,
+    double? right,
+    double? bottom,
+    double? width,
+    double? height,
+    required Widget child,
+  }) {
+    return OsmeaPositioned(
+      key: key,
+      customTheme: customTheme,
+      left: left,
+      top: top,
+      right: right,
+      bottom: bottom,
+      width: width,
+      height: height,
+      child: child,
+    );
+  }
+
+  /// 📍 **OSMEA Positioned.fill** - Fill all sides with custom offsets
+  ///
+  /// Creates a positioned widget that fills its parent with optional edge offsets.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.positionedFill(
+  ///   left: 5,
+  ///   top: 5,
+  ///   right: 5,
+  ///   bottom: 5,
+  ///   child: Container(color: Colors.black.withOpacity(0.5)),
+  /// )
+  /// ```
+  static Widget positionedFill({
+    Key? key,
+    double? left = 0.0,
+    double? top = 0.0,
+    double? right = 0.0,
+    double? bottom = 0.0,
+    required Widget child,
+  }) {
+    return OsmeaPositioned.fill(
+      key: key,
+      left: left,
+      top: top,
+      right: right,
+      bottom: bottom,
+      child: child,
+    );
+  }
+
+  /// 📏 **OSMEA Positioned.fractional** - Fractional positioning
+  ///
+  /// Creates a positioned widget that sizes its child to a fraction of the available space.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.positionedFractional(
+  ///   widthFactor: 0.5,
+  ///   heightFactor: 0.3,
+  ///   top: 10,
+  ///   child: Container(color: Colors.amber),
+  /// )
+  /// ```
+  static Widget positionedFractional({
+    Key? key,
+    double? left,
+    double? top,
+    double? right,
+    double? bottom,
+    double? widthFactor,
+    double? heightFactor,
+    required Widget child,
+  }) {
+    return OsmeaPositioned.fractional(
+      key: key,
+      left: left,
+      top: top,
+      right: right,
+      bottom: bottom,
+      widthFactor: widthFactor,
+      heightFactor: heightFactor,
+      child: child,
     );
   }
 
@@ -1015,7 +1218,6 @@ class OsmeaComponents {
     return OsmeaBottomSheet(
       key: key,
       customTheme: customTheme,
-      child: child,
       size: size,
       variant: variant,
       state: state,
@@ -1046,6 +1248,7 @@ class OsmeaComponents {
       showActionBorder: showActionBorder,
       actionBarBackgroundColor: actionBarBackgroundColor,
       actionBarBorderColor: actionBarBorderColor,
+      child: child,
     );
   }
 
@@ -2248,6 +2451,32 @@ class OsmeaComponents {
     return type.osmeaLoading(size: size, color: color, cubit: cubit);
   }
 
+    /// 🌀 **OSMEA Progress** - Modern animated progress bar/circular
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.progress(type: ProgressType.circular, value: 0.7)
+  /// ```
+  static Widget progress({
+    Key? key,
+    required ProgressType type,
+    required double value,
+    ProgressSize size = ProgressSize.medium,
+    Color? color,
+    bool showPercentage = false,
+    double speed = 1.0,
+  }) {
+    return OsmeaProgress(
+      key: key,
+      type: type,
+      value: value,
+      size: size,
+      color: color,
+      showPercentage: showPercentage,
+      speed: speed,
+    );
+  }
+
   /// 🎫 **OSMEA Ticket Widget** - Dynamic form generator for support tickets
   ///
   /// Creates comprehensive ticket forms from JSON configuration with multiple input types,
@@ -2341,7 +2570,6 @@ class OsmeaComponents {
     return OsmeaPopup(
       key: key,
       customTheme: customTheme,
-      child: child,
       size: size,
       variant: variant,
       state: state,
@@ -2369,6 +2597,7 @@ class OsmeaComponents {
       autoDismiss: autoDismiss,
       width: width,
       height: height,
+      child: child,
     );
   }
 
@@ -2447,6 +2676,114 @@ class OsmeaComponents {
       height: height,
       useRootNavigator: useRootNavigator,
       routeSettings: routeSettings,
+    );
+  }
+
+
+  /// 📏 **OSMEA Spacer** - Flexible space distribution component
+  ///
+  /// Creates a spacer that can expand to fill available space in a Flex container
+  /// (like Row or Column). Useful for creating flexible layouts with proper spacing.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.spacer(
+  ///   children: [
+  ///     Text('Left'),
+  ///     OsmeaComponents.spacer(), // Pushes 'Right' to the end
+  ///     Text('Right'),
+  ///   ],
+  /// )
+  /// ```
+  static Widget spacer({
+    Key? key,
+    CoreTheme? customTheme,
+    int flex = 1,
+  }) {
+    return OsmeaSpacer(
+      key: key,
+      customTheme: customTheme,
+      flex: flex,
+    );
+  }
+
+  /// 🔄 **OSMEA Flexible** - Flexible space allocation component
+  ///
+  /// Creates a flexible widget that makes its child flexible with a flexible
+  /// flex factor and flex fit. Unlike Expanded, Flexible does not
+  /// force its child to fill all the available space.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.row(
+  ///   children: [
+  ///     OsmeaComponents.flexible( // Takes up 2/3 of available space
+  ///       flex: 2,
+  ///       child: Container(color: Colors.red),
+  ///     ),
+  ///     OsmeaComponents.flexible( // Takes up 1/3 of available space
+  ///       flex: 1,
+  ///       child: Container(color: Colors.blue),
+  ///     ),
+  ///   ],
+  /// )
+  /// ```
+  static Widget flexible({
+    Key? key,
+    CoreTheme? customTheme,
+    int flex = 1,
+    FlexFit fit = FlexFit.loose,
+    required Widget child,
+  }) {
+    return OsmeaFlexible(
+      key: key,
+      customTheme: customTheme,
+      flex: flex,
+      fit: fit,
+      child: child,
+    );
+  }
+
+
+  /// 🪜 **OSMEA Stepper** - Multi-step navigation component
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.stepper(
+  ///   steps: [
+  ///     OsmeaStep(label: 'Step 1', content: OsmeaText('Content 1')),
+  ///     OsmeaStep(label: 'Step 2', content: OsmeaText('Content 2')),
+  ///   ],
+  ///   orientation: ComponentOrientation.horizontal,
+  /// )
+  /// ```
+  static Widget stepper({
+    Key? key,
+    CoreTheme? customTheme,
+    required List<OsmeaStep> steps,
+    ComponentOrientation orientation = ComponentOrientation.horizontal,
+    ComponentSize size = ComponentSize.medium,
+    ComponentState state = ComponentState.idle,
+    ComponentPosition position = ComponentPosition.top,
+    ComponentAppearance appearance = ComponentAppearance.filled,
+    int currentStep = 0,
+    ValueChanged<int>? onStepChanged,
+    bool allowStepTapping = true,
+    StepperStyle stepperStyle = StepperStyle.numberedWithLinesAndLabels,
+  }) {
+    return OsmeaStepper(
+      key: key,
+      customTheme: customTheme,
+      steps: steps,
+      orientation: orientation,
+      size: size,
+      state: state,
+      position: position,
+      appearance: appearance,
+      currentStep: currentStep,
+      onStepChanged: onStepChanged,
+      allowStepTapping: allowStepTapping,
+      stepperStyle: stepperStyle,
     );
   }
 }
