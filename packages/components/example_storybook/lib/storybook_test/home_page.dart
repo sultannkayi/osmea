@@ -18,6 +18,9 @@ List<Story> getHomeStories() {
 class ComponentOverviewPage extends StatelessWidget {
   const ComponentOverviewPage({Key? key}) : super(key: key);
 
+  // Defined the total spacing between cards (3 gaps of 12px each for 4 cards per row)
+  static const double totalSpacingBetweenCards = 36.0; // 3 * 12px
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
