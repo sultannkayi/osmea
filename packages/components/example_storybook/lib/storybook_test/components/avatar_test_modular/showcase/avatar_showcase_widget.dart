@@ -75,13 +75,7 @@ class UnifiedAvatarShowcaseWidget extends StatelessWidget {
 
   Widget _buildMainAvatar(BuildContext context) {
     // Use Picsum Photos - same as in avatar_example.dart (copyright-free)
-    final reliableImageUrls = [
-      'https://picsum.photos/200/200?random=1',
-      'https://picsum.photos/200/200?random=2',
-      'https://picsum.photos/200/200?random=3',
-      'https://picsum.photos/200/200?random=4',
-      'https://picsum.photos/200/200?random=5',
-    ];
+    final reliableImageUrls = AvatarBuilder.getSampleImageUrls();
     
     // Determine what to show based on content type selection and image toggle
     String? finalImageUrl;
