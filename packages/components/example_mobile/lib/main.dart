@@ -38,6 +38,7 @@ import 'package:osmea_components_example/positioned_example.dart';
 import 'package:osmea_components_example/spacer_example.dart';
 import 'package:osmea_components_example/rich_text_example.dart';
 import 'package:osmea_components_example/stepper_example.dart';
+import 'package:osmea_components_example/toast_example.dart';
 
 void main() {
   runApp(const MyApp());
@@ -775,6 +776,18 @@ class ExamplesScreen extends StatelessWidget {
                   'Flexible tab bar with variants, sizes, and animation',
                   Icons.tab,
                   () => Navigator.pushNamed(context, '/tabbar-example'),
+                ),
+                _buildExampleTile(
+                  context,
+                  'Toast Example',
+                  'Toast notification examples',
+                  Icons.notifications,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ToastExamplePage(),
+                    ),
+                  ),
                 ),
               ],
             ),
