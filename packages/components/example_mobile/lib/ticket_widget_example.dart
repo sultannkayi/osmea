@@ -145,20 +145,6 @@ class _TicketWidgetExampleState extends State<TicketWidgetExample> {
               enableSaveAsDraft: true,
             ),
           ),
-          //OsmeaComponents.sizedBox(height: 32),
-          // OsmeaComponents.loginButton(
-          //   authService: null, // Kendi AuthService'inizi ekleyin
-          //   text: 'Login',
-          // ),
-          // OsmeaComponents.navbar(
-          //   currentIndex: 0,
-          //   items: const [
-          //     NavbarItem(icon: Icon(Icons.home), text: 'Home'),
-          //     NavbarItem(icon: Icon(Icons.confirmation_number), text: 'Ticket'),
-          //     NavbarItem(icon: Icon(Icons.settings), text: 'Settings'),
-          //   ],
-          //   onItemTap: (index) {},
-          // ),
         ],
       ),
     );
