@@ -3,6 +3,7 @@ import 'package:storybook_flutter/storybook_flutter.dart';
 import 'package:provider/provider.dart';
 
 // Import individual component showcases directly
+import 'components/avatar_test_modular/showcase/unified_avatar_showcase.dart';
 import 'components/button_test_modular/showcase/unified_button_showcase.dart';
 import 'components/navbar_test_modular/showcase/unified_navbar_showcase.dart';
 import 'components/appbar_test_modular/showcase/unified_appbar_showcase.dart';
@@ -69,6 +70,15 @@ List<Story> getHomeStories() {
 /// Function to collect all component stories under Components folder
 List<Story> getComponentStories() {
   return [
+    // Avatar component stories
+    ...getUnifiedAvatarShowcase().map(
+      (story) => Story(
+        name: StoryConfig.buildComponentStoryName(story.name),
+        description: story.description,
+        builder: story.builder,
+      ),
+    ),
+    
     // Button component stories
     ...getUnifiedButtonShowcase().map(
       (story) => Story(
