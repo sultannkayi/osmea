@@ -72,15 +72,12 @@ class SectionContainerWidget extends StatelessWidget {
             Column(
               crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.start,
               mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
-              children: children.map((child) {
-                final index = children.indexOf(child);
-                return Column(
-                  children: [
-                    child,
-                    if (index < children.length - 1) SizedBox(height: spacing),
-                  ],
-                );
-              }).toList(),
+              children: [
+                for (int index = 0; index < children.length; index++) ...[
+                  children[index],
+                  if (index < children.length - 1) SizedBox(height: spacing),
+                ],
+              ],
             ),
         ],
       ),
