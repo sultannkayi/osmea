@@ -180,7 +180,7 @@ class _ListItemExampleState extends State<ListItemExample> {
               OsmeaComponents.listItem(
                 padding: const EdgeInsets.all(12),
                 backgroundColor: Colors.green.shade50,
-                child: Row(
+                child: OsmeaComponents.row(
                   children: [
                     const Icon(Icons.label),
                     OsmeaComponents.sizedBox(width: 8),
