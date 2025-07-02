@@ -29,6 +29,12 @@ export 'src/components/login_button/login_button.dart';
 // 🧩 Components
 export 'src/components.dart';
 
+// 📏 FittedBox Components
+export 'src/components/fitted_box/fitted_box.dart';
+
+// ✂️ ClipRRect Components
+export 'src/components/clip_r_rect/clip_r_rect.dart';
+
 // 🖼️ Avatars & Cards
 export 'src/utils/avatar_extensions.dart';
 export 'src/utils/card_extensions.dart';

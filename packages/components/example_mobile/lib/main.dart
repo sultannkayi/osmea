@@ -28,6 +28,8 @@ import 'package:osmea_components_example/padding_example.dart';
 import 'package:osmea_components_example/sized_box_example.dart';
 import 'package:osmea_components_example/scaffold_example.dart';
 import 'package:osmea_components_example/single_child_scroll_view_example.dart';
+import 'package:osmea_components_example/fitted_box_example.dart';
+import 'package:osmea_components_example/clip_r_rect_example.dart';
 import 'package:osmea_components_example/wrap_example.dart';
 import 'package:osmea_components_example/list_item_example.dart';
 import 'package:osmea_components_example/ticket_widget_example.dart';
@@ -707,6 +709,30 @@ class ExamplesScreen extends StatelessWidget {
                     MaterialPageRoute(
                       builder: (context) =>
                           const SingleChildScrollViewExample(),
+                    ),
+                  ),
+                ),
+                _buildExampleTile(
+                  context,
+                  'FittedBox Examples',
+                  'Scale and fit child widgets with various fit modes',
+                  Icons.fit_screen,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const FittedBoxExample(),
+                    ),
+                  ),
+                ),
+                _buildExampleTile(
+                  context,
+                  'ClipRRect Examples',
+                  'Clip child widgets with rounded corners and custom borders',
+                  Icons.crop,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ClipRRectExample(),
                     ),
                   ),
                 ),
