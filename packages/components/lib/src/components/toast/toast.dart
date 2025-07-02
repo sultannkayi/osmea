@@ -1,277 +1,650 @@
 import 'package:flutter/material.dart';
 import 'package:osmea_components/src/enums/toast_enums.dart';
-import 'package:osmea_components/src/components/buttons/button.dart';
 import 'package:osmea_components/src/enums/button_enums.dart';
+import 'package:osmea_components/src/styles/colors.dart';
+import 'package:osmea_components/src/utils/sizer_extensions.dart';
+import 'package:osmea_components/src/utils/text_extensions.dart';
+import 'package:osmea_components/src/utils/toast_extensions.dart';
 import 'package:osmea_components/src/components.dart';
+import 'package:osmea_components/src/styles/text_style.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:osmea_components/src/components/toast/cubit/toast_cubit.dart';
+import 'package:osmea_components/src/components/toast/cubit/toast_state.dart';
+import 'dart:async';
+import 'package:osmea_components/src/core/container_widget.dart';
 
-class OsmeaToast {
-  static void show(
-    BuildContext context, {
-    required String message,
-    ToastType type = ToastType.info,
-    ToastPosition position = ToastPosition.bottom,
-    ToastAnimation animation = ToastAnimation.slide,
-    Duration duration = const Duration(seconds: 2),
-  }) {
-    final overlay = Overlay.of(context);
-    if (overlay == null) return;
+/// Global toast overlay handler that manages toast positioning and display
+class GlobalToastOverlay {
+  /// Singleton instance for the GlobalToastOverlay
+  static final GlobalToastOverlay _instance = GlobalToastOverlay._internal();
 
-    late OverlayEntry overlayEntry;
-    overlayEntry = OverlayEntry(
-      builder: (context) => _ToastWidget(
-        message: message,
-        type: type,
-        position: position,
-        animation: animation,
-        onClose: () => overlayEntry.remove(),
-      ),
+  /// Factory constructor that returns the singleton instance
+  factory GlobalToastOverlay() => _instance;
+
+  /// Private constructor for singleton pattern
+  GlobalToastOverlay._internal();
+
+  /// Overlay entry for the toast system
+  OverlayEntry? _overlayEntry;
+
+  /// Flag to track if overlay has been initialized
+  bool _isShown = false;
+
+  /// Creates and ensures the toast overlay is present in the widget tree
+  /// This will create a single overlay entry that handles all toast notifications
+  void ensureOverlay(BuildContext context) {
+    if (_isShown && _overlayEntry != null) return;
+
+    // Create a new overlay entry if needed
+    _overlayEntry = OverlayEntry(
+      builder: (_) => const _ToastOverlayWidget(),
     );
 
-    overlay.insert(overlayEntry);
-    Future.delayed(duration, () {
-      if (overlayEntry.mounted) overlayEntry.remove();
-    });
+    // Insert into the root overlay
+    Overlay.of(context, rootOverlay: true).insert(_overlayEntry!);
+    _isShown = true;
   }
 }
 
-class _ToastWidget extends StatelessWidget {
-  final String message;
-  final ToastType type;
-  final ToastPosition position;
-  final ToastAnimation animation;
-  final VoidCallback onClose;
-
-  const _ToastWidget({
-    required this.message,
-    required this.type,
-    required this.position,
-    required this.animation,
-    required this.onClose,
-  });
-
-  Color _backgroundColor() {
-    switch (type) {
-      case ToastType.success:
-        return Colors.green.shade600;
-      case ToastType.error:
-        return Colors.red.shade600;
-      case ToastType.warning:
-        return Colors.orange.shade700;
-      case ToastType.info:
-      default:
-        return Colors.blue.shade600;
-    }
-  }
-
-  IconData _iconData() {
-    switch (type) {
-      case ToastType.success:
-        return Icons.check_circle_outline;
-      case ToastType.error:
-        return Icons.error_outline;
-      case ToastType.warning:
-        return Icons.warning_amber_rounded;
-      case ToastType.info:
-      default:
-        return Icons.info_outline;
-    }
-  }
-
-  Alignment _alignment() {
-    switch (position) {
-      case ToastPosition.top:
-        return Alignment.topCenter;
-      case ToastPosition.center:
-        return Alignment.center;
-      case ToastPosition.bottom:
-      default:
-        return Alignment.bottomCenter;
-    }
-  }
+/// Private widget that builds the toast overlay using BlocBuilder
+class _ToastOverlayWidget extends StatelessWidget {
+  const _ToastOverlayWidget();
 
   @override
   Widget build(BuildContext context) {
-    final toast = Material(
-      color: Colors.transparent,
-      child: Align(
-        alignment: _alignment(),
+    return BlocBuilder<ToastCubit, List<ToastState>>(
+      bloc: ToastCubit.instance,
+      builder: (context, toasts) {
+        if (toasts.isEmpty) return const SizedBox.shrink();
+
+        // Group toasts by position
+        final Map<ToastPosition, List<ToastState>> groupedToasts = {
+          ToastPosition.top: [],
+          ToastPosition.center: [],
+          ToastPosition.bottom: [],
+        };
+
+        // Organize toasts by position
+        for (final toast in toasts) {
+          if (toast.visible) {
+            // Only include visible toasts in the grouping
+            groupedToasts[toast.position]!.add(toast);
+          }
+        }
+
+        // Sort each group by creation time (newest at the end for proper stacking)
+        for (final position in ToastPosition.values) {
+          groupedToasts[position]!
+              .sort((a, b) => a.createdAt.compareTo(b.createdAt));
+        }
+
+        return Stack(
+          fit: StackFit.expand,
+          children: [
+            // Top positioned toasts
+            if (groupedToasts[ToastPosition.top]!.isNotEmpty)
+              _PositionedToastGroup(
+                position: ToastPosition.top,
+                toasts: groupedToasts[ToastPosition.top]!,
+              ),
+
+            // Center positioned toasts
+            if (groupedToasts[ToastPosition.center]!.isNotEmpty)
+              _PositionedToastGroup(
+                position: ToastPosition.center,
+                toasts: groupedToasts[ToastPosition.center]!,
+              ),
+
+            // Bottom positioned toasts
+            if (groupedToasts[ToastPosition.bottom]!.isNotEmpty)
+              _PositionedToastGroup(
+                position: ToastPosition.bottom,
+                toasts: groupedToasts[ToastPosition.bottom]!,
+              ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+/// Widget that displays a group of toasts at a specific position
+class _PositionedToastGroup extends StatelessWidget {
+  final ToastPosition position;
+  final List<ToastState> toasts;
+
+  const _PositionedToastGroup({
+    required this.position,
+    required this.toasts,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final List<ToastState> displayToasts =
+        position == ToastPosition.bottom ? toasts.reversed.toList() : toasts;
+    return Align(
+      alignment: position.getAlignment(),
+      child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: _backgroundColor(),
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black26,
-                  blurRadius: 8,
-                  offset: Offset(0, 4),
-                ),
-              ],
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(_iconData(), color: Colors.white, size: 24),
-                const SizedBox(width: 12),
-                Flexible(
-                  child: Text(
-                    message,
-                    style: const TextStyle(color: Colors.white, fontSize: 16),
-                    textAlign: TextAlign.left,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                OsmeaComponents.iconButton(
-                  icon: const Icon(Icons.close, size: 18, color: Colors.white),
-                  onPressed: onClose,
-                  variant: ButtonVariant.ghost,
-                  size: ButtonSize.small,
-                  tooltip: 'Close',
-                  backgroundColor: Colors.transparent,
-                ),
-              ],
-            ),
+          padding: position.getPadding(),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: displayToasts
+                .map((toast) => Padding(
+                      key: ValueKey(toast.id),
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: OsmeaToast(
+                        state: toast,
+                        onClose: () => ToastManager().hideToast(toast.id),
+                      ),
+                    ))
+                .toList(),
           ),
         ),
       ),
     );
+  }
+}
 
-    // Basit animasyon (slide/fade/scale)
-    switch (animation) {
-      case ToastAnimation.fade:
-        return _FadeInToast(child: toast);
-      case ToastAnimation.scale:
-        return _ScaleInToast(child: toast);
-      case ToastAnimation.slide:
+/// Toast component for displaying notifications
+class OsmeaToast extends CoreContainer {
+  /// The state of the toast
+  final ToastState state;
+
+  /// Callback to close the toast
+  final VoidCallback? onClose;
+
+  const OsmeaToast({
+    Key? key,
+    required this.state,
+    this.onClose,
+  }) : super(key: key);
+
+  /// Get color based on toast type using extension
+  Color _typeColor(BuildContext context) {
+    return state.type.getColor();
+  }
+
+  /// Get icon based on toast type using extension
+  IconData _iconData() {
+    return state.type.getIconData();
+  }
+
+  @override
+  Widget buildWidget(BuildContext context) {
+    // If toast is not visible, don't render anything
+    if (!state.visible) {
+      return const SizedBox.shrink();
+    }
+
+    // Calculate the maximum width for the toast
+    final maxWidth = context.width320 < context.allWidth * 0.9
+        ? context.width320
+        : context.allWidth * 0.9;
+
+    // Common style properties
+    final borderRadius = context.borderRadiusNormal;
+    final iconColor = state.style == ToastStyle.modern
+        ? _typeColor(context)
+        : OsmeaColors.white;
+    final closeColor = state.style == ToastStyle.modern
+        ? OsmeaColors.shark
+        : OsmeaColors.white;
+    final iconSize = context.iconSizeSmall;
+    final padding = context.paddingNormal;
+
+    // Build toast content based on style
+    Widget toastContent = _buildToastContentByStyle(
+      context,
+      maxWidth,
+      borderRadius,
+      iconColor,
+      closeColor,
+      iconSize,
+      padding,
+    );
+
+    // Apply animation based on type
+    Widget animatedToast = _applyAnimation(context, toastContent);
+
+    return animatedToast;
+  }
+
+  /// Build toast content based on style
+  Widget _buildToastContentByStyle(
+    BuildContext context,
+    double maxWidth,
+    BorderRadius borderRadius,
+    Color iconColor,
+    Color closeColor,
+    double iconSize,
+    EdgeInsets padding,
+  ) {
+    switch (state.style) {
+      case ToastStyle.modern:
+        return _buildModernToast(
+            context, maxWidth, borderRadius, iconColor, closeColor, iconSize);
+
+      case ToastStyle.minimal:
+        return _buildMinimalToast(context, maxWidth, iconColor, iconSize);
+
+      case ToastStyle.outline:
+        return _buildOutlineToast(
+            context, maxWidth, padding, iconColor, iconSize);
+
+      case ToastStyle.defaultStyle:
       default:
-        return _SlideInToast(child: toast, position: position);
+        return _buildDefaultToast(
+            context, maxWidth, borderRadius, padding, iconSize, closeColor);
     }
   }
-}
 
-class _FadeInToast extends StatefulWidget {
-  final Widget child;
-  const _FadeInToast({required this.child});
-  @override
-  State<_FadeInToast> createState() => _FadeInToastState();
-}
-
-class _FadeInToastState extends State<_FadeInToast>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _animation;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 250));
-    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
-    _controller.forward();
+  /// Build modern style toast
+  Widget _buildModernToast(
+    BuildContext context,
+    double maxWidth,
+    BorderRadius borderRadius,
+    Color iconColor,
+    Color closeColor,
+    double iconSize,
+  ) {
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxWidth: maxWidth,
+        minHeight: 48,
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          color: OsmeaColors.white,
+          borderRadius: borderRadius,
+          boxShadow: [
+            BoxShadow(
+              color: OsmeaColors.shadowLight,
+              blurRadius: context.blurRadiusHeavy,
+              offset: context.offsetVertical4,
+            ),
+          ],
+        ),
+        padding: EdgeInsets.symmetric(
+          vertical: context.spacing8,
+          horizontal: context.spacing12,
+        ),
+        child: IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                width: context.width4,
+                height: double.infinity,
+                decoration: BoxDecoration(
+                  color: _typeColor(context),
+                  borderRadius: context.borderRadiusLow,
+                ),
+              ),
+              SizedBox(width: context.spacing8),
+              Icon(_iconData(), color: iconColor, size: iconSize),
+              SizedBox(width: context.spacing8),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (state.title != null) ...[
+                      Text(
+                        state.title!,
+                        style: OsmeaTextStyle.labelMedium(context).copyWith(
+                          color: _typeColor(context),
+                          fontWeight: context.bold,
+                          decoration: TextDecoration.none,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                      SizedBox(height: context.spacing2),
+                    ],
+                    Text(
+                      state.message,
+                      style: OsmeaTextStyle.bodySmall(context).copyWith(
+                        color: OsmeaColors.shark,
+                        decoration: TextDecoration.none,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(width: context.spacing4),
+              _buildCloseButton(iconSize, closeColor),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
+  /// Build minimal style toast
+  Widget _buildMinimalToast(
+    BuildContext context,
+    double maxWidth,
+    Color iconColor,
+    double iconSize,
+  ) {
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: maxWidth),
+      child: Container(
+        decoration: BoxDecoration(
+          color: OsmeaColors.snow,
+          borderRadius: context.borderRadiusLow,
+        ),
+        padding: EdgeInsets.symmetric(
+          vertical: context.spacing8,
+          horizontal: context.spacing12,
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(_iconData(), color: _typeColor(context), size: iconSize),
+            SizedBox(width: context.spacing8),
+            Expanded(
+              child: Text(
+                state.message,
+                style: OsmeaTextStyle.bodySmall(context).copyWith(
+                  color: _typeColor(context),
+                  fontWeight: context.semiBold,
+                  decoration: TextDecoration.none,
+                ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              ),
+            ),
+            SizedBox(width: context.spacing4),
+            _buildCloseButton(iconSize, _typeColor(context)),
+          ],
+        ),
+      ),
+    );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return FadeTransition(
-      opacity: _animation,
-      child: widget.child,
+  /// Build outline style toast
+  Widget _buildOutlineToast(
+    BuildContext context,
+    double maxWidth,
+    EdgeInsets padding,
+    Color iconColor,
+    double iconSize,
+  ) {
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: maxWidth),
+      child: Container(
+        decoration: BoxDecoration(
+          color: OsmeaColors.white,
+          borderRadius: context.borderRadiusNormal,
+          border: Border.all(color: _typeColor(context), width: 1.5),
+          boxShadow: [
+            BoxShadow(
+              color: OsmeaColors.shadowLight,
+              blurRadius: context.blurRadiusMedium,
+              offset: context.offsetVertical2,
+            ),
+          ],
+        ),
+        padding: padding,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(_iconData(), color: _typeColor(context), size: iconSize),
+            SizedBox(width: context.spacing8),
+            Expanded(
+              child: Text(
+                state.message,
+                style: OsmeaTextStyle.bodySmall(context).copyWith(
+                  color: _typeColor(context),
+                  decoration: TextDecoration.none,
+                ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              ),
+            ),
+            SizedBox(width: context.spacing4),
+            _buildCloseButton(iconSize, _typeColor(context)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Build default style toast
+  Widget _buildDefaultToast(
+    BuildContext context,
+    double maxWidth,
+    BorderRadius borderRadius,
+    EdgeInsets padding,
+    double iconSize,
+    Color closeColor,
+  ) {
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: maxWidth),
+      child: Container(
+        decoration: BoxDecoration(
+          color: _typeColor(context),
+          borderRadius: borderRadius,
+          boxShadow: [
+            BoxShadow(
+              color: OsmeaColors.shadowDark,
+              blurRadius: context.blurRadiusMedium,
+              offset: context.offsetVertical4,
+            ),
+          ],
+        ),
+        padding: padding,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(_iconData(), color: OsmeaColors.white, size: iconSize),
+            SizedBox(width: context.spacing8),
+            Expanded(
+              child: Text(
+                state.message,
+                style: OsmeaTextStyle.bodySmall(context).copyWith(
+                  color: OsmeaColors.white,
+                  decoration: TextDecoration.none,
+                ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              ),
+            ),
+            SizedBox(width: context.spacing4),
+            _buildCloseButton(iconSize, OsmeaColors.white),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Build close button
+  Widget _buildCloseButton(double iconSize, Color color) {
+    return OsmeaComponents.iconButton(
+      icon: Icon(Icons.close, size: iconSize, color: color),
+      onPressed: onClose,
+      variant: ButtonVariant.ghost,
+      size: ButtonSize.small,
+      tooltip: 'Close',
+      backgroundColor: OsmeaColors.transparent,
+    );
+  }
+
+  /// Apply animation based on animation type using extension
+  Widget _applyAnimation(BuildContext context, Widget content) {
+    // Use the animation extension to apply the proper animation
+    Widget animatedContent = state.animation.applyAnimation(
+      child: content,
+      visible: state.visible,
+      position: state.position,
+    );
+
+    // Add a fade animation to all toasts for better UX
+    return AnimatedOpacity(
+      opacity: state.visible ? 1.0 : 0.0,
+      duration: const Duration(milliseconds: 200),
+      child: animatedContent,
     );
   }
 }
 
-class _ScaleInToast extends StatefulWidget {
-  final Widget child;
-  const _ScaleInToast({required this.child});
-  @override
-  State<_ScaleInToast> createState() => _ScaleInToastState();
-}
+Widget toastBuilder(ToastState state, VoidCallback onClose) =>
+    OsmeaToast(state: state, onClose: onClose);
 
-class _ScaleInToastState extends State<_ScaleInToast>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _animation;
+/// Toast Manager to handle toast operations and cubit interactions
+/// This separates the cubit logic from the extensions
+class ToastManager {
+  /// Singleton instance
+  static final ToastManager _instance = ToastManager._internal();
 
-  @override
-  void initState() {
-    super.initState();
-    _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 250));
-    _animation =
-        CurvedAnimation(parent: _controller, curve: Curves.easeOutBack);
-    _controller.forward();
-  }
+  /// Factory constructor
+  factory ToastManager() => _instance;
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+  /// Private constructor
+  ToastManager._internal();
 
-  @override
-  Widget build(BuildContext context) {
-    return ScaleTransition(
-      scale: _animation,
-      child: widget.child,
+  final List<_ToastEntry> _entries = [];
+  final Map<String, Timer> _timers = {};
+  static const int _defaultMaxToasts = 5;
+
+  /// Show a toast notification
+  void showToast({
+    required BuildContext context,
+    String? title,
+    required String message,
+    ToastType type = ToastType.info,
+    ToastStyle style = ToastStyle.defaultStyle,
+    ToastPosition position = ToastPosition.bottom,
+    ToastAnimation animation = ToastAnimation.slide,
+    Duration? duration,
+    bool stacked = true,
+    int maxToasts = _defaultMaxToasts,
+  }) {
+    final overlay = Overlay.of(context, rootOverlay: true);
+    final id = UniqueKey().toString();
+    final toastState = ToastState(
+      id: id,
+      visible: true,
+      title: title,
+      message: message,
+      type: type,
+      position: position,
+      animation: animation,
+      style: style,
+      duration: duration ?? const Duration(seconds: 3),
     );
-  }
-}
 
-class _SlideInToast extends StatefulWidget {
-  final Widget child;
-  final ToastPosition position;
-  const _SlideInToast({required this.child, required this.position});
-  @override
-  State<_SlideInToast> createState() => _SlideInToastState();
-}
-
-class _SlideInToastState extends State<_SlideInToast>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<Offset> _animation;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 250));
-    Offset begin;
-    switch (widget.position) {
-      case ToastPosition.top:
-        begin = Offset(0, -1);
-        break;
-      case ToastPosition.center:
-        begin = Offset(0, 0);
-        break;
-      case ToastPosition.bottom:
-      default:
-        begin = Offset(0, 1);
-        break;
+    // stacked control
+    // If stacking is disabled, remove all previous toasts
+    // If stacking is enabled and maxToasts is reached, remove the oldest toast
+    // Only start the timer for the last (topmost) toast in the list
+    // Start the timer for the next (now topmost) toast
+    if (!stacked) {
+      for (final entry in _entries) {
+        entry.overlayEntry.remove();
+        _timers[entry.id]?.cancel();
+        _timers.remove(entry.id);
+      }
+      _entries.clear();
+    } else if (_entries.length >= maxToasts) {
+      _timers[_entries.first.id]?.cancel();
+      _entries.first.overlayEntry.remove();
+      _entries.removeAt(0);
     }
-    _animation = Tween<Offset>(begin: begin, end: Offset.zero)
-        .animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
-    _controller.forward();
+
+    late OverlayEntry entry;
+    entry = OverlayEntry(
+      builder: (ctx) => _SingleToastOverlay(
+        state: toastState,
+        onClose: () => hideToast(id),
+        onAutoHide: () => hideToast(id),
+      ),
+    );
+    _entries.add(_ToastEntry(id, entry));
+    overlay.insert(entry);
+
+    // Sadece listenin sonundaki (en üstteki) toast için timer başlat
+    if (_entries.length == 1 || _entries.last.id == id) {
+      _startAutoHideTimer(_entries.last.id, toastState.duration);
+    }
   }
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
+  void _startAutoHideTimer(String id, Duration duration) {
+    _timers[id]?.cancel();
+    _timers[id] = Timer(duration, () {
+      hideToast(id);
+    });
   }
+
+  /// Hide all visible toasts
+  void hideAllToasts() {
+    for (final entry in _entries) {
+      entry.overlayEntry.remove();
+    }
+    _entries.clear();
+  }
+
+  /// Hide a specific toast by ID
+  void hideToast(String id) {
+    final idx = _entries.indexWhere((e) => e.id == id);
+    if (idx != -1) {
+      _timers[id]?.cancel();
+      _timers.remove(id);
+      _entries[idx].overlayEntry.remove();
+      _entries.removeAt(idx);
+      // Sıradaki (şimdi en üstteki) toast için timer başlat
+      if (_entries.isNotEmpty) {
+        final nextId = _entries.last.id;
+        _startAutoHideTimer(nextId, const Duration(seconds: 3));
+      }
+    }
+  }
+}
+
+class _ToastEntry {
+  final String id;
+  final OverlayEntry overlayEntry;
+  _ToastEntry(this.id, this.overlayEntry);
+}
+
+class _SingleToastOverlay extends StatelessWidget {
+  final ToastState state;
+  final VoidCallback onClose;
+  final VoidCallback onAutoHide;
+  const _SingleToastOverlay({
+    required this.state,
+    required this.onClose,
+    required this.onAutoHide,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return SlideTransition(
-      position: _animation,
-      child: widget.child,
+    Alignment alignment = state.position.getAlignment();
+    EdgeInsets padding = state.position.getPadding();
+    return IgnorePointer(
+      ignoring: false,
+      child: SafeArea(
+        child: Stack(
+          children: [
+            Align(
+              alignment: alignment,
+              child: Padding(
+                padding: padding,
+                child: OsmeaToast(
+                  state: state,
+                  onClose: onClose,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
