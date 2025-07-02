@@ -7,13 +7,13 @@ class CenterExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('OSMEA Center Examples'),
         elevation: 0,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
-        child: Column(
+        child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildSectionTitle('Basic Center'),
@@ -34,7 +34,7 @@ class CenterExample extends StatelessWidget {
   }
 
   Widget _buildSectionTitle(String title) {
-    return Padding(
+    return OsmeaComponents.padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: OsmeaComponents.text(
         title,
@@ -47,7 +47,7 @@ class CenterExample extends StatelessWidget {
   }
 
   Widget _buildBasicCenterExamples() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildExampleWithCaption(
@@ -99,13 +99,13 @@ class CenterExample extends StatelessWidget {
   }
 
   Widget _buildStyledCenterExamples() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildExampleWithCaption(
           'Center with Background (using Container)',
           _buildContainer(
-            Container(
+            OsmeaComponents.container(
               decoration: BoxDecoration(
                 color: Colors.grey.shade200,
                 borderRadius: BorderRadius.circular(8),
@@ -121,7 +121,7 @@ class CenterExample extends StatelessWidget {
         _buildExampleWithCaption(
           'Center with Border & BorderRadius (using Container)',
           _buildContainer(
-            Container(
+            OsmeaComponents.container(
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.blue, width: 2),
                 borderRadius: BorderRadius.circular(12),
@@ -137,12 +137,12 @@ class CenterExample extends StatelessWidget {
         _buildExampleWithCaption(
           'Center with Padding & Margin (using Padding and Container)',
           _buildContainer(
-            Container(
+            OsmeaComponents.container(
               margin: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: Colors.grey.shade200,
               ),
-              child: Padding(
+              child: OsmeaComponents.padding(
                 padding: const EdgeInsets.all(10),
                 child: OsmeaComponents.center(
                   child: _buildColoredBox(
@@ -156,11 +156,11 @@ class CenterExample extends StatelessWidget {
         _buildExampleWithCaption(
           'Center with BoxShadow (using Container)',
           _buildContainer(
-            Container(
+            OsmeaComponents.container(
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.3),
+                    color: Colors.black.withOpacity(0.3),
                     spreadRadius: 1,
                     blurRadius: 10,
                     offset: const Offset(0, 3),
@@ -179,7 +179,7 @@ class CenterExample extends StatelessWidget {
   }
 
   Widget _buildInteractiveCenterExamples() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildExampleWithCaption(
@@ -189,7 +189,7 @@ class CenterExample extends StatelessWidget {
               onTap: () {
                 debugPrint('Center tapped!');
               },
-              child: Container(
+              child: OsmeaComponents.container(
                 decoration: BoxDecoration(
                   color: Colors.grey.shade200,
                   borderRadius: BorderRadius.circular(8),
@@ -210,7 +210,7 @@ class CenterExample extends StatelessWidget {
               onLongPress: () {
                 debugPrint('Center long pressed!');
               },
-              child: Container(
+              child: OsmeaComponents.container(
                 decoration: BoxDecoration(
                   color: Colors.grey.shade200,
                   borderRadius: BorderRadius.circular(8),
@@ -228,7 +228,7 @@ class CenterExample extends StatelessWidget {
   }
 
   Widget _buildConvenienceMethodExamples() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildExampleWithCaption(
@@ -289,10 +289,10 @@ class CenterExample extends StatelessWidget {
   }
 
   Widget _buildExampleWithCaption(String caption, Widget child) {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
+        OsmeaComponents.padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: OsmeaComponents.text(
             caption,
@@ -307,17 +307,18 @@ class CenterExample extends StatelessWidget {
     );
   }
 
-  Widget _buildColoredBox(
-      {required Color color,
-      required String text,
-      double? width,
-      double height = 60}) {
-    return Container(
+  Widget _buildColoredBox({
+    required Color color,
+    required String text,
+    double? width,
+    double height = 60,
+  }) {
+    return OsmeaComponents.container(
       width: width,
       height: height,
       color: color,
       padding: const EdgeInsets.all(8),
-      child: Center(
+      child: OsmeaComponents.center(
         child: OsmeaComponents.text(
           text,
           textAlign: TextAlign.center,
@@ -331,7 +332,7 @@ class CenterExample extends StatelessWidget {
   }
 
   Widget _buildContainer(Widget child) {
-    return Container(
+    return OsmeaComponents.container(
       width: double.infinity,
       height: 200,
       decoration: BoxDecoration(

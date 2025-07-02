@@ -7,13 +7,13 @@ class PaddingExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('OSMEA Padding Examples'),
         elevation: 0,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
-        child: Column(
+        child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildSectionTitle('Basic Padding'),
@@ -34,7 +34,7 @@ class PaddingExample extends StatelessWidget {
   }
 
   Widget _buildSectionTitle(String title) {
-    return Padding(
+    return OsmeaComponents.padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: OsmeaComponents.text(
         title,
@@ -47,7 +47,7 @@ class PaddingExample extends StatelessWidget {
   }
 
   Widget _buildBasicPaddingExamples() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildExampleWithCaption(
@@ -90,7 +90,7 @@ class PaddingExample extends StatelessWidget {
   }
 
   Widget _buildStyledPaddingExamples() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildExampleWithCaption(
@@ -169,7 +169,7 @@ class PaddingExample extends StatelessWidget {
   }
 
   Widget _buildInteractivePaddingExamples() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildExampleWithCaption(
@@ -215,7 +215,7 @@ class PaddingExample extends StatelessWidget {
   }
 
   Widget _buildConvenienceMethodExamples() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildExampleWithCaption(
@@ -265,10 +265,10 @@ class PaddingExample extends StatelessWidget {
   }
 
   Widget _buildExampleWithCaption(String caption, Widget child) {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
+        OsmeaComponents.padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: OsmeaComponents.text(
             caption,
@@ -284,7 +284,7 @@ class PaddingExample extends StatelessWidget {
   }
 
   Widget _buildColoredBox({required Color color, required String text}) {
-    return Container(
+    return OsmeaComponents.container(
       width: double.infinity,
       color: color,
       padding: const EdgeInsets.all(12),

@@ -50,7 +50,7 @@ class _TextFieldExampleState extends State<TextFieldExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text(
           '🔤 OSMEA TextField Examples',
           variant: OsmeaTextVariant.headlineMedium,
@@ -58,7 +58,7 @@ class _TextFieldExampleState extends State<TextFieldExample> {
         backgroundColor: OsmeaColors.nordicBlue,
         foregroundColor: OsmeaColors.white,
       ),
-      body: SingleChildScrollView(
+      body: OsmeaComponents.singleChildScrollView(
         padding: context.paddingNormal,
         child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,7 +90,7 @@ class _TextFieldExampleState extends State<TextFieldExample> {
   }
 
   Widget _buildSectionTitle(String title) {
-    return Padding(
+    return OsmeaComponents.padding(
       padding: EdgeInsets.only(bottom: context.spacing16),
       child: OsmeaComponents.text(
         title,
@@ -158,7 +158,7 @@ class _TextFieldExampleState extends State<TextFieldExample> {
     return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: sizes.map((sizeData) {
-        return Padding(
+        return OsmeaComponents.padding(
           padding: EdgeInsets.only(bottom: context.spacing12),
           child: OsmeaComponents.textField(
             label: sizeData['name'] as String,
@@ -358,22 +358,22 @@ class _TextFieldExampleState extends State<TextFieldExample> {
         ),
         if (_validationMessage.isNotEmpty) ...[
           OsmeaComponents.sizedBox(height: 8),
-          Container(
+          OsmeaComponents.container(
             padding: EdgeInsets.all(context.spacing12),
             decoration: BoxDecoration(
               color: OsmeaColors.forestHeart.withOpacity(0.1),
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: OsmeaColors.forestHeart, width: 1),
             ),
-            child: Row(
+            child: OsmeaComponents.row(
               children: [
                 Icon(Icons.check_circle,
                     color: OsmeaColors.forestHeart, size: 16),
-                SizedBox(width: context.spacing8),
-                Text(
+                OsmeaComponents.sizedBox(width: context.spacing8),
+                OsmeaComponents.text(
                   _validationMessage,
-                  style:
-                      TextStyle(color: OsmeaColors.forestHeart, fontSize: 12),
+                  variant: OsmeaTextVariant.bodyMedium,
+                  color: OsmeaColors.forestHeart,
                 ),
               ],
             ),
@@ -403,7 +403,7 @@ class _TextFieldExampleState extends State<TextFieldExample> {
             print('5-digit secure OTP completed');
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: const Text('Secure OTP completed!'),
+                content: OsmeaComponents.text('Secure OTP completed!'),
                 backgroundColor: OsmeaColors.nordicBlue,
               ),
             );
@@ -414,7 +414,7 @@ class _TextFieldExampleState extends State<TextFieldExample> {
   }
 
   Widget _buildInteractiveDemoSection() {
-    return Container(
+    return OsmeaComponents.container(
       padding: EdgeInsets.all(context.spacing16),
       decoration: BoxDecoration(
         color: OsmeaColors.pewter.withOpacity(0.05),
@@ -462,7 +462,7 @@ class _TextFieldExampleState extends State<TextFieldExample> {
             spacing: 8,
             children: TextFieldSize.values.map((size) {
               return ChoiceChip(
-                label: Text(size.toString().split('.').last),
+                label: OsmeaComponents.text(size.toString().split('.').last),
                 selected: _selectedSize == size,
                 onSelected: (selected) => setState(() => _selectedSize = size),
               );

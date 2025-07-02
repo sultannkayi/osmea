@@ -141,160 +141,153 @@ class LoadingExample extends StatelessWidget {
       Colors.blue.shade900,
     ];
 
-    return Scaffold(
-      appBar: AppBar(title: const Text('OSMEA Loading Animations')),
-      body: ListView(
+    return OsmeaComponents.scaffold(
+      appBar: OsmeaComponents.appBar(
+        title: OsmeaComponents.text('OSMEA Loading Animations'),
+        centerTitle: true,
+      ),
+      body: OsmeaComponents.padding(
         padding: const EdgeInsets.all(20),
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16),
-            child: Text(
-              'Modern OSMEA Loading Animations',
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineMedium
-                  ?.copyWith(fontWeight: FontWeight.bold),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 24),
-            child: Text(
-              'Below you can see all loading animations in the OSMEA library, presented in different sizes and colors. Each animation is shown with a short description and multiple sizes for a modern, clear showcase.',
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-          ),
-          for (int i = 0; i < loadingTypes.length; i++)
-            Card(
-              elevation: 3,
-              margin: const EdgeInsets.symmetric(vertical: 12),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16)),
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(Icons.bubble_chart,
-                            color: colors[i % colors.length], size: 28),
-                        const SizedBox(width: 12),
-                        Text(
-                          loadingTypes[i]['label'],
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge
-                              ?.copyWith(fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      loadingTypes[i]['desc'],
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(color: Colors.grey[700]),
-                    ),
-                    const SizedBox(height: 16),
-                    Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            for (final size in [24.0, 36.0])
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8),
-                                child: ClipRect(
-                                  child: Container(
-                                    width: size + 32,
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10),
-                                    decoration: BoxDecoration(
-                                      color: colors[i % colors.length]
-                                          .withOpacity(0.08),
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        FittedBox(
-                                          fit: BoxFit.scaleDown,
-                                          child: OsmeaComponents.loading(
-                                            type: loadingTypes[i]['type'],
-                                            size: size,
-                                            color: colors[i % colors.length],
-                                          ),
-                                        ),
-                                        const SizedBox(height: 8),
-                                        Text(
-                                          '${size.toInt()} px',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodySmall
-                                              ?.copyWith(
-                                                  fontWeight: FontWeight.w500),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                          ],
-                        ),
-                        const SizedBox(height: 12),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            for (final size in [48.0, 64.0])
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8),
-                                child: ClipRect(
-                                  child: Container(
-                                    width: size + 32,
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10),
-                                    decoration: BoxDecoration(
-                                      color: colors[i % colors.length]
-                                          .withOpacity(0.08),
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        FittedBox(
-                                          fit: BoxFit.scaleDown,
-                                          child: OsmeaComponents.loading(
-                                            type: loadingTypes[i]['type'],
-                                            size: size,
-                                            color: colors[i % colors.length],
-                                          ),
-                                        ),
-                                        const SizedBox(height: 8),
-                                        Text(
-                                          '${size.toInt()} px',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodySmall
-                                              ?.copyWith(
-                                                  fontWeight: FontWeight.w500),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+        child: OsmeaComponents.singleChildScrollView(
+          child: OsmeaComponents.column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              OsmeaComponents.text(
+                'Modern OSMEA Loading Animations',
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
-            ),
-        ],
+              OsmeaComponents.sizedBox(height: 16),
+              OsmeaComponents.text(
+                'Below you can see all loading animations in the OSMEA library, presented in different sizes and colors. Each animation is shown with a short description and multiple sizes for a modern, clear showcase.',
+                fontSize: 16,
+                color: Colors.grey[700],
+              ),
+              OsmeaComponents.sizedBox(height: 24),
+              for (int i = 0; i < loadingTypes.length; i++)
+                Card(
+                  elevation: 3,
+                  margin: const EdgeInsets.symmetric(vertical: 12),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16)),
+                  child: OsmeaComponents.padding(
+                    padding: const EdgeInsets.all(20),
+                    child: OsmeaComponents.column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        OsmeaComponents.row(
+                          children: [
+                            Icon(Icons.bubble_chart,
+                                color: colors[i % colors.length], size: 28),
+                            OsmeaComponents.sizedBox(width: 12),
+                            OsmeaComponents.text(
+                              loadingTypes[i]['label'],
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ],
+                        ),
+                        OsmeaComponents.sizedBox(height: 8),
+                        OsmeaComponents.text(
+                          loadingTypes[i]['desc'],
+                          fontSize: 15,
+                          color: Colors.grey[700],
+                        ),
+                        OsmeaComponents.sizedBox(height: 16),
+                        OsmeaComponents.column(
+                          children: [
+                            OsmeaComponents.row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                for (final size in [24.0, 36.0])
+                                  OsmeaComponents.padding(
+                                    padding:
+                                        const EdgeInsets.symmetric(horizontal: 8),
+                                    child: ClipRect(
+                                      child: Container(
+                                        width: size + 32,
+                                        padding:
+                                            const EdgeInsets.symmetric(vertical: 10),
+                                        decoration: BoxDecoration(
+                                          color: colors[i % colors.length]
+                                              .withOpacity(0.08),
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
+                                        child: OsmeaComponents.column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            FittedBox(
+                                              fit: BoxFit.scaleDown,
+                                              child: OsmeaComponents.loading(
+                                                type: loadingTypes[i]['type'],
+                                                size: size,
+                                                color: colors[i % colors.length],
+                                              ),
+                                            ),
+                                            OsmeaComponents.sizedBox(height: 8),
+                                            OsmeaComponents.text(
+                                              '${size.toInt()} px',
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                            OsmeaComponents.sizedBox(height: 12),
+                            OsmeaComponents.row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                for (final size in [48.0, 64.0])
+                                  OsmeaComponents.padding(
+                                    padding:
+                                        const EdgeInsets.symmetric(horizontal: 8),
+                                    child: ClipRect(
+                                      child: Container(
+                                        width: size + 32,
+                                        padding:
+                                            const EdgeInsets.symmetric(vertical: 10),
+                                        decoration: BoxDecoration(
+                                          color: colors[i % colors.length]
+                                              .withOpacity(0.08),
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
+                                        child: OsmeaComponents.column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            FittedBox(
+                                              fit: BoxFit.scaleDown,
+                                              child: OsmeaComponents.loading(
+                                                type: loadingTypes[i]['type'],
+                                                size: size,
+                                                color: colors[i % colors.length],
+                                              ),
+                                            ),
+                                            OsmeaComponents.sizedBox(height: 8),
+                                            OsmeaComponents.text(
+                                              '${size.toInt()} px',
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ),
       ),
     );
   }

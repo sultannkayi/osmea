@@ -27,7 +27,7 @@ class _CardExampleState extends State<CardExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+        appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text(
           '🃏 OSMEA Card Examples',
           variant: OsmeaTextVariant.headlineMedium,
@@ -177,7 +177,7 @@ class _CardExampleState extends State<CardExample> {
           subtitle: 'Photography Collection',
           content:
               'Discover stunning landscape photography from around the world.',
-          imageWidget: Container(
+          imageWidget: OsmeaComponents.container(
             width: double.infinity,
             height: 200,
             decoration: BoxDecoration(
@@ -206,7 +206,7 @@ class _CardExampleState extends State<CardExample> {
           subtitle: 'Latest Updates',
           content:
               'Stay updated with the latest technology trends and innovations.',
-          imageWidget: Container(
+          imageWidget: OsmeaComponents.container(
             width: 100,
             height: 100,
             decoration: BoxDecoration(
@@ -238,7 +238,7 @@ class _CardExampleState extends State<CardExample> {
           title: 'Wireless Earbuds Pro',
           subtitle: 'Premium Sound Quality',
           content: '₺1,299',
-          imageWidget: Container(
+          imageWidget: OsmeaComponents.container(
             width: double.infinity,
             height: 220,
             decoration: BoxDecoration(
@@ -265,7 +265,7 @@ class _CardExampleState extends State<CardExample> {
           imageFit: BoxFit.cover,
           imageAlignment: Alignment.center,
           showOverlay: false,
-          badge: Container(
+          badge: OsmeaComponents.container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
             decoration: BoxDecoration(
               color: OsmeaColors.forestHeart,
@@ -309,14 +309,14 @@ class _CardExampleState extends State<CardExample> {
           title: 'Apple Watch Series 10',
           subtitle: 'Health & Fitness Tracking',
           content: '₺2,499',
-          imageWidget: Container(
+          imageWidget: OsmeaComponents.container(
             width: double.infinity,
             height: 200,
             decoration: BoxDecoration(
               color: OsmeaColors.thunder,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Column(
+            child: OsmeaComponents.column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
@@ -325,13 +325,13 @@ class _CardExampleState extends State<CardExample> {
                   size: 85,
                 ),
                 SizedBox(height: 16),
-                Container(
+                OsmeaComponents.container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     color: OsmeaColors.sunsetGlow.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Row(
+                  child: OsmeaComponents.row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(Icons.favorite,
@@ -351,7 +351,7 @@ class _CardExampleState extends State<CardExample> {
           imageFit: BoxFit.cover,
           imageAlignment: Alignment.center,
           showOverlay: false,
-          badge: Container(
+          badge: OsmeaComponents.container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
               color: OsmeaColors.sunsetGlow,
@@ -390,28 +390,28 @@ class _CardExampleState extends State<CardExample> {
           title: 'iPhone 16 Pro Max',
           subtitle: 'Latest Technology • 1TB',
           content: '₺15,999',
-          imageWidget: Container(
+          imageWidget: OsmeaComponents.container(
             width: double.infinity,
             height: 200,
             decoration: BoxDecoration(
               color: OsmeaColors.nordicBlue,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Column(
+            child: OsmeaComponents.column(
               children: [
-                Padding(
+                OsmeaComponents.padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Row(
+                  child: OsmeaComponents.row(
                     children: [
-                      Text(
+                      OsmeaComponents.text(
                         '5G',
-                        style: TextStyle(
+                        textStyle: const TextStyle(
                           color: OsmeaColors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                     ],
                   ),
                 ),
@@ -424,24 +424,24 @@ class _CardExampleState extends State<CardExample> {
                     ),
                   ),
                 ),
-                Padding(
+                OsmeaComponents.padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Row(
+                  child: OsmeaComponents.row(
                     children: [
-                      Container(
+                      OsmeaComponents.container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
                           color: OsmeaColors.white.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        child: Text(
+                        child: OsmeaComponents.text(
                           '1TB Storage',
-                          style:
-                              TextStyle(color: OsmeaColors.white, fontSize: 12),
+                          textStyle: const TextStyle(
+                              color: OsmeaColors.white, fontSize: 12),
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                     ],
                   ),
                 ),
@@ -453,7 +453,7 @@ class _CardExampleState extends State<CardExample> {
           imageFit: BoxFit.cover,
           imageAlignment: Alignment.center,
           showOverlay: false,
-          badge: Container(
+          badge: OsmeaComponents.container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
             decoration: BoxDecoration(
               color: OsmeaColors.amberFlame,
@@ -492,21 +492,21 @@ class _CardExampleState extends State<CardExample> {
           title: 'Gaming Headset Pro',
           subtitle: '7.1 Surround Sound',
           content: '₺899',
-          imageWidget: Container(
+          imageWidget: OsmeaComponents.container(
             width: double.infinity,
             height: 180,
             decoration: BoxDecoration(
               color: OsmeaColors.eclipse,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Column(
+            child: OsmeaComponents.column(
               children: [
-                Padding(
+                OsmeaComponents.padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: Row(
+                  child: OsmeaComponents.row(
                     children: [
-                      Spacer(),
-                      Container(
+                      const Spacer(),
+                      OsmeaComponents.container(
                         width: 8,
                         height: 8,
                         decoration: BoxDecoration(
@@ -541,7 +541,7 @@ class _CardExampleState extends State<CardExample> {
           imageFit: BoxFit.cover,
           imageAlignment: Alignment.center,
           showOverlay: false,
-          badge: Container(
+          badge: OsmeaComponents.container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
               color: OsmeaColors.azureWave,
@@ -581,7 +581,7 @@ class _CardExampleState extends State<CardExample> {
           title: 'Smart Home Hub',
           subtitle: 'Voice Control • WiFi 6',
           content: '₺599',
-          imageWidget: Container(
+          imageWidget: OsmeaComponents.container(
             width: double.infinity,
             height: 160,
             decoration: BoxDecoration(
@@ -592,13 +592,13 @@ class _CardExampleState extends State<CardExample> {
                 width: 1,
               ),
             ),
-            child: Column(
+            child: OsmeaComponents.column(
               children: [
-                Padding(
+                OsmeaComponents.padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: Row(
+                  child: OsmeaComponents.row(
                     children: [
-                      Spacer(),
+                      const Spacer(),
                       Icon(
                         Icons.wifi,
                         color: OsmeaColors.forestHeart,
@@ -616,11 +616,11 @@ class _CardExampleState extends State<CardExample> {
                     ),
                   ),
                 ),
-                Padding(
+                OsmeaComponents.padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: Row(
+                  child:OsmeaComponents.row(
                     children: [
-                      Container(
+                      OsmeaComponents.container(
                         padding: const EdgeInsets.all(4),
                         decoration: BoxDecoration(
                           color: OsmeaColors.nordicBlue.withOpacity(0.1),
@@ -632,7 +632,7 @@ class _CardExampleState extends State<CardExample> {
                           size: 16,
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                     ],
                   ),
                 ),
@@ -644,7 +644,7 @@ class _CardExampleState extends State<CardExample> {
           imageFit: BoxFit.cover,
           imageAlignment: Alignment.center,
           showOverlay: false,
-          badge: Container(
+          badge: OsmeaComponents.container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
               color: OsmeaColors.nordicBlue,
@@ -1173,7 +1173,7 @@ class _CardExampleState extends State<CardExample> {
             children: [
               OsmeaComponents.row(
                 children: [
-                  Container(
+                  OsmeaComponents.container(
                     width: 64,
                     height: 64,
                     decoration: BoxDecoration(
@@ -1209,7 +1209,7 @@ class _CardExampleState extends State<CardExample> {
                 ],
               ),
               OsmeaComponents.sizedBox(height: 16),
-              Container(
+              OsmeaComponents.container(
                 height: 1,
                 color: OsmeaColors.silver,
               ),

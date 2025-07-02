@@ -11,23 +11,31 @@ class StepperExample extends StatefulWidget {
 class _StepperExampleState extends State<StepperExample> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('OSMEA Stepper Example')),
-      body: SingleChildScrollView(
+    return OsmeaComponents.scaffold(
+      appBar: OsmeaComponents.appBar(
+        title: OsmeaComponents.text(
+          'OSMEA Stepper Example',
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+        ),
+      ),
+      body: OsmeaComponents.singleChildScrollView(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
+        child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text(
+            OsmeaComponents.text(
               'Horizontal Stepper - Click any step to navigate',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(height: 8),
-            const Text(
+            OsmeaComponents.sizedBox(height: 8),
+            OsmeaComponents.text(
               'Notice: Completed steps show check icons and green color',
-              style: TextStyle(fontSize: 14, color: Colors.grey),
+              fontSize: 14,
+              color: Colors.grey,
             ),
-            const SizedBox(height: 16),
+            OsmeaComponents.sizedBox(height: 16),
             OsmeaComponents.stepper(
               steps: [
                 OsmeaStep(
@@ -59,16 +67,17 @@ class _StepperExampleState extends State<StepperExample> {
               appearance: ComponentAppearance.filled,
               onStepChanged: (step) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Step changed to: $step')),
+                  SnackBar(content: OsmeaComponents.text('Step changed to: $step')),
                 );
               },
             ),
-            const SizedBox(height: 40),
-            const Text(
+            OsmeaComponents.sizedBox(height: 40),
+            OsmeaComponents.text(
               'Restricted Stepper - No Step Clicking',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(height: 16),
+            OsmeaComponents.sizedBox(height: 16),
             OsmeaComponents.stepper(
               steps: [
                 OsmeaStep(
@@ -98,13 +107,14 @@ class _StepperExampleState extends State<StepperExample> {
               size: ComponentSize.medium,
               appearance: ComponentAppearance.ghost,
             ),
-            const SizedBox(height: 40),
-            const Text(
+            OsmeaComponents.sizedBox(height: 40),
+            OsmeaComponents.text(
               'Vertical Stepper',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(height: 16),
-            SizedBox(
+            OsmeaComponents.sizedBox(height: 16),
+            OsmeaComponents.sizedBox(
               height: 300,
               child: OsmeaComponents.stepper(
                 steps: [
@@ -135,12 +145,13 @@ class _StepperExampleState extends State<StepperExample> {
                 appearance: ComponentAppearance.outlined,
               ),
             ),
-            const SizedBox(height: 40),
-            const Text(
+            OsmeaComponents.sizedBox(height: 40),
+            OsmeaComponents.text(
               'Dots with Lines Style',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(height: 16),
+            OsmeaComponents.sizedBox(height: 16),
             OsmeaComponents.stepper(
               steps: [
                 OsmeaStep(
@@ -168,12 +179,13 @@ class _StepperExampleState extends State<StepperExample> {
               stepperStyle: StepperStyle.dotsWithLinesAndLabels,
               allowStepTapping: true,
             ),
-            const SizedBox(height: 40),
-            const Text(
+            OsmeaComponents.sizedBox(height: 40),
+            OsmeaComponents.text(
               'Numbered Only Style',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(height: 16),
+            OsmeaComponents.sizedBox(height: 16),
             OsmeaComponents.stepper(
               steps: [
                 OsmeaStep(
@@ -201,12 +213,13 @@ class _StepperExampleState extends State<StepperExample> {
               stepperStyle: StepperStyle.numberedOnly,
               allowStepTapping: true,
             ),
-            const SizedBox(height: 40),
-            const Text(
+            OsmeaComponents.sizedBox(height: 40),
+            OsmeaComponents.text(
               'Dots with Lines Only (No Labels)',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(height: 16),
+            OsmeaComponents.sizedBox(height: 16),
             OsmeaComponents.stepper(
               steps: [
                 OsmeaStep(
@@ -234,18 +247,20 @@ class _StepperExampleState extends State<StepperExample> {
               stepperStyle: StepperStyle.dotsWithLines,
               allowStepTapping: true,
             ),
-            const SizedBox(height: 40),
-            const Text(
+            OsmeaComponents.sizedBox(height: 40),
+            OsmeaComponents.text(
               'OSMEA Colors Demo',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(height: 8),
-            const Text(
+            OsmeaComponents.sizedBox(height: 8),
+            OsmeaComponents.text(
               'Shows OSMEA Colors used in stepper states',
-              style: TextStyle(fontSize: 14, color: Colors.grey),
+              fontSize: 14,
+              color: Colors.grey,
             ),
-            const SizedBox(height: 16),
-            Row(
+            OsmeaComponents.sizedBox(height: 16),
+            OsmeaComponents.row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _buildColorDemo(
@@ -262,26 +277,26 @@ class _StepperExampleState extends State<StepperExample> {
   }
 
   Widget _buildStepContent(String description, IconData icon) {
-    return Container(
+    return OsmeaComponents.container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.grey.shade50,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: Colors.grey.shade300),
       ),
-      child: Column(
+      child: OsmeaComponents.column(
         children: [
           Icon(icon, size: 48, color: Colors.blue),
-          const SizedBox(height: 12),
-          Text(
+          OsmeaComponents.sizedBox(height: 12),
+          OsmeaComponents.text(
             description,
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 16),
+            fontSize: 16,
           ),
-          const SizedBox(height: 16),
+          OsmeaComponents.sizedBox(height: 16),
           ElevatedButton(
             onPressed: () {},
-            child: const Text('Continue'),
+            child: OsmeaComponents.text('Continue'),
           ),
         ],
       ),
@@ -289,17 +304,18 @@ class _StepperExampleState extends State<StepperExample> {
   }
 
   Widget _buildColorDemo(String label, Color color, IconData icon) {
-    return Column(
+    return OsmeaComponents.column(
       children: [
         CircleAvatar(
           backgroundColor: color,
           radius: 24,
           child: Icon(icon, color: Colors.white, size: 20),
         ),
-        const SizedBox(height: 8),
-        Text(
+        OsmeaComponents.sizedBox(height: 8),
+        OsmeaComponents.text(
           label,
-          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+          fontSize: 12,
+          fontWeight: FontWeight.bold,
         ),
       ],
     );

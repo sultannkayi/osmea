@@ -35,14 +35,19 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
-        title: OsmeaComponents.text('🔘 OSMEA Radio Examples'),
+      appBar: OsmeaComponents.appBar(
+        title: OsmeaComponents.text(
+          '🔘 OSMEA Radio Examples',
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+          color: Colors.white,
+        ),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ),
-      body: SingleChildScrollView(
+      body: OsmeaComponents.singleChildScrollView(
         padding: context.paddingNormal,
-        child: Column(
+        child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildSectionTitle('🎨 Radio Variants'),
@@ -72,7 +77,7 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
   }
 
   Widget _buildSectionTitle(String title) {
-    return Padding(
+    return OsmeaComponents.padding(
       padding: const EdgeInsets.only(bottom: 16.0),
       child: OsmeaComponents.text(
         title,
@@ -86,11 +91,11 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
   }
 
   Widget _buildVariantsSection() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSubsectionTitle('Simple Radio (No Labels)'),
-        Wrap(
+        OsmeaComponents.wrap(
           spacing: 16,
           runSpacing: 8,
           children: [
@@ -113,7 +118,7 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
         ),
         OsmeaComponents.sizedBox(height: 20),
         _buildSubsectionTitle('Labeled Radio'),
-        Column(
+        OsmeaComponents.column(
           children: [
             OsmeaComponents.radioButton<String>(
               value: 'labeled',
@@ -134,7 +139,7 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
         ),
         OsmeaComponents.sizedBox(height: 20),
         _buildSubsectionTitle('Card Radio'),
-        Column(
+        OsmeaComponents.column(
           children: [
             OsmeaCardRadio<String>(
               value: 'card1',
@@ -155,7 +160,7 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
         ),
         OsmeaComponents.sizedBox(height: 20),
         _buildSubsectionTitle('Tile Radio'),
-        Column(
+        OsmeaComponents.column(
           children: [
             OsmeaTileRadio<String>(
               value: 'tile1',
@@ -179,7 +184,7 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
   }
 
   Widget _buildSizesSection() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSubsectionTitle('Small Size'),
@@ -252,7 +257,7 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
   }
 
   Widget _buildPaymentSection() {
-    return Column(
+    return OsmeaComponents.column(
       children: [
         OsmeaCardRadio<String>(
           value: 'credit_card',
@@ -290,7 +295,7 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
   }
 
   Widget _buildPlansSection() {
-    return Column(
+    return OsmeaComponents.column(
       children: [
         OsmeaTileRadio<String>(
           value: 'basic',
@@ -320,7 +325,7 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
   }
 
   Widget _buildStateSection() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSubsectionTitle('Enabled States'),
@@ -371,7 +376,7 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
   }
 
   Widget _buildStylesSection() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSubsectionTitle('Material Style'),
@@ -414,7 +419,7 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
   }
 
   Widget _buildCustomColorsSection() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSubsectionTitle('Custom Active Colors'),
@@ -457,7 +462,7 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
   }
 
   Widget _buildSubsectionTitle(String title) {
-    return Padding(
+    return OsmeaComponents.padding(
       padding: const EdgeInsets.only(bottom: 8.0, top: 4.0),
       child: OsmeaComponents.text(
         title,

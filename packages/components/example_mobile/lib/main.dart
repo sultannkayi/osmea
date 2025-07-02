@@ -458,9 +458,9 @@ class ComponentsScreen extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(8),
-        child: Padding(
+        child: OsmeaComponents.padding(
           padding: context.paddingNormal,
-          child: Column(
+          child: OsmeaComponents.column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
@@ -490,9 +490,9 @@ class ExamplesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return OsmeaComponents.padding(
       padding: context.paddingNormal,
-      child: Column(
+      child: OsmeaComponents.column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           OsmeaComponents.text(
@@ -835,9 +835,9 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return OsmeaComponents.padding(
       padding: context.paddingNormal,
-      child: Column(
+      child: OsmeaComponents.column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           OsmeaComponents.text(
@@ -908,12 +908,12 @@ class _NavbarExampleState extends State<NavbarExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('🧭 Navbar Examples'),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ),
-      body: Column(
+      body: OsmeaComponents.column(
         children: [
           // Top Navbar Example
           OsmeaComponents.navbar(
@@ -929,9 +929,9 @@ class _NavbarExampleState extends State<NavbarExample> {
             },
           ),
           Expanded(
-            child: Padding(
+            child: OsmeaComponents.padding(
               padding: context.paddingNormal,
-              child: Column(
+              child: OsmeaComponents.column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   OsmeaComponents.text(

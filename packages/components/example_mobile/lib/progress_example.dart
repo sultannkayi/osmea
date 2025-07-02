@@ -83,20 +83,22 @@ class _ProgressExampleState extends State<ProgressExample> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Progress Examples')),
-      body: Padding(
+    return OsmeaComponents.scaffold(
+      appBar: OsmeaComponents.appBar(title: const Text('Progress Examples')),
+      body: OsmeaComponents.padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
-          child: Column(
+          child: OsmeaComponents.column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Toggle for showing percentage inside bar
-              Row(
+              OsmeaComponents.row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Show percentage inside bar',
-                      style: TextStyle(fontSize: 16)),
+                  OsmeaComponents.text(
+                    'Show percentage inside bar',
+                    fontSize: 16,
+                  ),
                   Switch(
                     value: showPercentageInBar,
                     onChanged: (v) => setState(() => showPercentageInBar = v),
@@ -119,12 +121,10 @@ class _ProgressExampleState extends State<ProgressExample> {
                 (i) => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    OsmeaComponents.text(
                       progressLabels[i],
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
                     ),
                     SizedBox(
                       height: 110,
@@ -133,7 +133,7 @@ class _ProgressExampleState extends State<ProgressExample> {
                         itemCount: progressSizes.length,
                         separatorBuilder: (_, __) => const SizedBox(width: 24),
                         itemBuilder: (context, j) {
-                          return Column(
+                          return OsmeaComponents.column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               OsmeaComponents.progress(
@@ -144,9 +144,9 @@ class _ProgressExampleState extends State<ProgressExample> {
                                 showPercentage: true,
                               ),
                               const SizedBox(height: 8),
-                              Text(
+                              OsmeaComponents.text(
                                 progressSizeLabels[j],
-                                style: const TextStyle(fontSize: 13),
+                                fontSize: 13,
                               ),
                             ],
                           );
@@ -160,27 +160,25 @@ class _ProgressExampleState extends State<ProgressExample> {
 
               // Linear progress bars section
               const Divider(height: 48, thickness: 2),
-              const Text(
+              OsmeaComponents.text(
                 'Linear Progress Bars',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                fontWeight: FontWeight.bold,
+                fontSize: 22,
               ),
               const SizedBox(height: 16),
 
               ...List.generate(
                 linearTypes.length,
-                (i) => Column(
+                (i) => OsmeaComponents.column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    OsmeaComponents.text(
                       linearLabels[i],
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                      ),
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
                     ),
-
                     // Progress bars row
-                    Padding(
+                    OsmeaComponents.padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Wrap(
                         spacing: 16,
@@ -189,7 +187,7 @@ class _ProgressExampleState extends State<ProgressExample> {
                           progressSizes.length,
                           (j) => SizedBox(
                             width: MediaQuery.of(context).size.width / 2.3,
-                            child: Column(
+                            child: OsmeaComponents.column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 OsmeaComponents.progress(

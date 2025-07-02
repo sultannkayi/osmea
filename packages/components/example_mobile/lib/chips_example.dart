@@ -30,33 +30,31 @@ class _ChipsExampleState extends State<ChipsExample> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    return OsmeaComponents.scaffold(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('🪨 OSMEA Chips'),
         backgroundColor: OsmeaColors.nordicBlue,
         foregroundColor: OsmeaColors.white,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
+        child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             OsmeaComponents.text(
               '1. Category Filtering (Single Selection)',
-              textStyle:
-                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 12),
+            OsmeaComponents.sizedBox(height: 12),
             _buildFilterChips(),
             const Divider(height: 32),
             OsmeaComponents.text(
               '2. Interests (Multiple Selection)',
-              textStyle:
-                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 12),
+            OsmeaComponents.sizedBox(height: 12),
             _buildMultiSelectChips(),
-            const SizedBox(height: 16),
+            OsmeaComponents.sizedBox(height: 16),
             OsmeaComponents.text(
               'Selected interests: ${_selectedInterests.isEmpty ? "No selection yet" : _selectedInterests.join(", ")}',
               fontSize: 14,
@@ -65,18 +63,16 @@ class _ChipsExampleState extends State<ChipsExample> {
             const Divider(height: 32),
             OsmeaComponents.text(
               '3. Different Styles',
-              textStyle:
-                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 12),
+            OsmeaComponents.sizedBox(height: 12),
             _buildStyleShowcase(),
             const Divider(height: 32),
             OsmeaComponents.text(
               '4. Interactive Examples',
-              textStyle:
-                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 12),
+            OsmeaComponents.sizedBox(height: 12),
             _buildInteractiveExamples(),
           ],
         ),
@@ -86,12 +82,12 @@ class _ChipsExampleState extends State<ChipsExample> {
 
   // 1. Category Filtering - Only one chip can be selected
   Widget _buildFilterChips() {
-    return SingleChildScrollView(
+    return OsmeaComponents.singleChildScrollView(
       scrollDirection: Axis.horizontal,
-      child: Row(
+      child: OsmeaComponents.row(
         children: List.generate(
           _categories.length,
-          (index) => Padding(
+          (index) => OsmeaComponents.padding(
             padding: const EdgeInsets.only(right: 8, bottom: 8),
             child: OsmeaComponents.chips(
               text: _categories[index],
@@ -180,7 +176,7 @@ class _ChipsExampleState extends State<ChipsExample> {
 
   // 3. Different styles
   Widget _buildStyleShowcase() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Style variations
@@ -247,7 +243,7 @@ class _ChipsExampleState extends State<ChipsExample> {
         // Size variations
         OsmeaComponents.text('● Size Variations:', fontWeight: FontWeight.w500),
         const SizedBox(height: 8),
-        Column(
+        OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             OsmeaComponents.chips(
@@ -286,7 +282,7 @@ class _ChipsExampleState extends State<ChipsExample> {
         OsmeaComponents.text('● Color Variations:',
             fontWeight: FontWeight.w500),
         const SizedBox(height: 8),
-        Column(
+        OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             OsmeaComponents.chips(
@@ -338,11 +334,10 @@ class _ChipsExampleState extends State<ChipsExample> {
 
   // 4. Interactive examples
   Widget _buildInteractiveExamples() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Closable chip
-        Container(
+        OsmeaComponents.container(
           alignment: Alignment.centerLeft,
           child: OsmeaComponents.chips(
             text: 'Closable',
@@ -369,7 +364,7 @@ class _ChipsExampleState extends State<ChipsExample> {
         const SizedBox(height: 16),
 
         // With avatar
-        Container(
+        OsmeaComponents.container(
           alignment: Alignment.centerLeft,
           child: OsmeaComponents.chips(
             text: 'With Avatar',
@@ -399,7 +394,7 @@ class _ChipsExampleState extends State<ChipsExample> {
         const SizedBox(height: 16),
 
         // With icon
-        Container(
+        OsmeaComponents.container(
           alignment: Alignment.centerLeft,
           child: OsmeaComponents.chips(
             text: 'With Icon',
@@ -420,7 +415,7 @@ class _ChipsExampleState extends State<ChipsExample> {
         const SizedBox(height: 16),
 
         // Icon-only chip
-        Container(
+        OsmeaComponents.container(
           alignment: Alignment.centerLeft,
           child: OsmeaComponents.chips(
             icon: Icons.settings,
