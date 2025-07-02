@@ -15,7 +15,8 @@ class _TextExampleState extends State<TextExample> {
       appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text(
           'OSMEA Text Examples',
-          variant: OsmeaTextVariant.headlineMedium,
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
         ),
         backgroundColor: OsmeaColors.nordicBlue,
         foregroundColor: OsmeaColors.white,

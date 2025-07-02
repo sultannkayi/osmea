@@ -22,7 +22,7 @@ class DividerExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: const Text('Divider Variants Showcase'),
         backgroundColor: Colors.deepPurple.shade50,
         elevation: 0,
@@ -38,9 +38,9 @@ class DividerExample extends StatelessWidget {
             elevation: 2,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-            child: Padding(
+            child: OsmeaComponents.padding(
               padding: const EdgeInsets.all(16),
-              child: Column(
+              child: OsmeaComponents.column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
@@ -53,10 +53,10 @@ class DividerExample extends StatelessWidget {
                   const SizedBox(height: 12),
                   const Text('Horizontal'),
                   const SizedBox(height: 8),
-                  Row(
+                  OsmeaComponents.row(
                     children: [
                       Expanded(
-                        child: Container(
+                        child: OsmeaComponents.container(
                           height: 64,
                           decoration: BoxDecoration(
                             color: Colors.grey.withAlpha(30),
@@ -75,7 +75,7 @@ class DividerExample extends StatelessWidget {
                   const SizedBox(height: 16),
                   const Text('Vertical'),
                   const SizedBox(height: 8),
-                  Container(
+                  OsmeaComponents.container(
                     width: 60,
                     height: 120,
                     decoration: BoxDecoration(

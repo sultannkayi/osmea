@@ -14,12 +14,12 @@ class PositionedExampleScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('OSMEA Positioned Examples'),
       ),
-      body: SingleChildScrollView(
+      body: OsmeaComponents.singleChildScrollView(
         padding: context.paddingNormal,
-        child: Column(
+        child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Section title
@@ -123,7 +123,7 @@ class PositionedExampleScreen extends StatelessWidget {
 
   // Basic positioning example
   Widget basicPositionedExample() {
-    return Container(
+    return OsmeaComponents.container(
       height: 200,
       color: Colors.grey.shade200,
       child: OsmeaComponents.stack(
@@ -155,7 +155,7 @@ class PositionedExampleScreen extends StatelessWidget {
 
   // Corner positioning example
   Widget cornerPositioningExample() {
-    return Container(
+    return OsmeaComponents.container(
       height: 200,
       color: Colors.grey.shade200,
       child: OsmeaComponents.stack(
@@ -193,7 +193,7 @@ class PositionedExampleScreen extends StatelessWidget {
 
   // Edge positioning example
   Widget edgePositioningExample() {
-    return Container(
+    return OsmeaComponents.container(
       height: 200,
       color: Colors.grey.shade200,
       child: OsmeaComponents.stack(
@@ -201,7 +201,7 @@ class PositionedExampleScreen extends StatelessWidget {
           // Center element for reference
           Align(
             alignment: Alignment.center,
-            child: Container(
+            child: OsmeaComponents.container(
               width: 100,
               height: 100,
               color: Colors.white,
@@ -216,7 +216,7 @@ class PositionedExampleScreen extends StatelessWidget {
             left: 50,
             right: 50,
             top: 0,
-            child: Container(
+            child: OsmeaComponents.container(
               height: 30,
               color: Colors.red.withOpacity(0.5),
               child: OsmeaComponents.center(
@@ -230,7 +230,7 @@ class PositionedExampleScreen extends StatelessWidget {
             left: 50,
             right: 50,
             bottom: 0,
-            child: Container(
+            child: OsmeaComponents.container(
               height: 30,
               color: Colors.blue.withOpacity(0.5),
               child: OsmeaComponents.center(
@@ -244,7 +244,7 @@ class PositionedExampleScreen extends StatelessWidget {
             left: 0,
             top: 50,
             bottom: 50,
-            child: Container(
+            child: OsmeaComponents.container(
               width: 30,
               color: Colors.green.withOpacity(0.5),
               child: OsmeaComponents.center(
@@ -261,7 +261,7 @@ class PositionedExampleScreen extends StatelessWidget {
             right: 0,
             top: 50,
             bottom: 50,
-            child: Container(
+            child: OsmeaComponents.container(
               width: 30,
               color: Colors.purple.withOpacity(0.5),
               child: OsmeaComponents.center(
@@ -279,14 +279,14 @@ class PositionedExampleScreen extends StatelessWidget {
 
   // Fill positioning example
   Widget fillPositioningExample() {
-    return Container(
+    return OsmeaComponents.container(
       height: 200,
       color: Colors.grey.shade200,
       child: OsmeaComponents.stack(
         children: [
           // Background element that fills the entire stack
           OsmeaComponents.positionedFill(
-            child: Container(
+            child: OsmeaComponents.container(
               color: Colors.blue.withOpacity(0.2),
             ),
           ),
@@ -297,7 +297,7 @@ class PositionedExampleScreen extends StatelessWidget {
             top: 20,
             right: 20,
             bottom: 20,
-            child: Container(
+            child: OsmeaComponents.container(
               decoration: BoxDecoration(
                 color: Colors.pink.withOpacity(0.2),
                 border: Border.all(color: Colors.pink),
@@ -316,7 +316,7 @@ class PositionedExampleScreen extends StatelessWidget {
           OsmeaComponents.positioned(
             right: 8,
             bottom: 8,
-            child: Container(
+            child: OsmeaComponents.container(
               padding: const EdgeInsets.all(6),
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -342,7 +342,7 @@ class PositionedExampleScreen extends StatelessWidget {
 
   // Size positioning example
   Widget sizePositioningExample() {
-    return Container(
+    return OsmeaComponents.container(
       height: 200,
       color: Colors.grey.shade200,
       child: OsmeaComponents.stack(
@@ -354,7 +354,7 @@ class PositionedExampleScreen extends StatelessWidget {
             top: 50,
             width: 100,
             height: 100,
-            child: Container(
+            child: OsmeaComponents.container(
               color: Colors.amber,
               child: OsmeaComponents.center(
                 child: OsmeaComponents.text(
@@ -370,7 +370,7 @@ class PositionedExampleScreen extends StatelessWidget {
             right: 20,
             bottom: 20,
             width: 120,
-            child: Container(
+            child: OsmeaComponents.container(
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
               decoration: BoxDecoration(
                 color: Colors.blue,
@@ -390,7 +390,7 @@ class PositionedExampleScreen extends StatelessWidget {
 
   // Fractional positioning example
   Widget fractionalPositioningExample() {
-    return Container(
+    return OsmeaComponents.container(
       height: 200,
       color: Colors.grey.shade200,
       child: OsmeaComponents.stack(
@@ -401,7 +401,7 @@ class PositionedExampleScreen extends StatelessWidget {
               top: 20,
               width: 180, // Use fixed width instead of infinity
               height: 60, // Use fixed height instead of infinity
-              child: Container(
+              child: OsmeaComponents.container(
                 color: Colors.green.withOpacity(0.5),
                 child: OsmeaComponents.center(
                   child: OsmeaComponents.text(
@@ -419,7 +419,7 @@ class PositionedExampleScreen extends StatelessWidget {
             bottom: 20,
             width: 100, // Use fixed width instead of infinity
             height: 40, // Use fixed height instead of infinity
-            child: Container(
+            child: OsmeaComponents.container(
               decoration: BoxDecoration(
                 color: Colors.purple.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(8),
@@ -437,7 +437,7 @@ class PositionedExampleScreen extends StatelessWidget {
           OsmeaComponents.positioned(
             left: 10,
             bottom: 10,
-            child: Container(
+            child: OsmeaComponents.container(
               padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -462,7 +462,7 @@ class PositionedExampleScreen extends StatelessWidget {
 
   // Overlay example
   Widget overlayExample() {
-    return Container(
+    return OsmeaComponents.container(
       height: 200,
       decoration: BoxDecoration(
         color:
@@ -483,7 +483,7 @@ class PositionedExampleScreen extends StatelessWidget {
         children: [
           // Dark gradient overlay
           OsmeaComponents.positionedFill(
-            child: Container(
+            child: OsmeaComponents.container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
@@ -500,7 +500,7 @@ class PositionedExampleScreen extends StatelessWidget {
             left: 20,
             right: 20,
             bottom: 20,
-            child: Column(
+            child: OsmeaComponents.column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -528,7 +528,7 @@ class PositionedExampleScreen extends StatelessWidget {
           OsmeaComponents.positioned(
             top: 16,
             right: 16,
-            child: Container(
+            child: OsmeaComponents.container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
                 color: Colors.black.withOpacity(0.6),
@@ -557,7 +557,7 @@ class PositionedExampleScreen extends StatelessWidget {
 
   // Spacer example with positioned elements
   Widget spacerExample() {
-    return Container(
+    return OsmeaComponents.container(
       height: 200,
       color: Colors.grey.shade200,
       child: OsmeaComponents.stack(
@@ -578,7 +578,7 @@ class PositionedExampleScreen extends StatelessWidget {
             left: 0,
             right: 0,
             height: 40,
-            child: Container(
+            child: OsmeaComponents.container(
               color: Colors.blue.withOpacity(0.3),
               child: OsmeaComponents.center(
                 child: OsmeaComponents.text(
@@ -595,7 +595,7 @@ class PositionedExampleScreen extends StatelessWidget {
             left: 0,
             right: 0,
             height: 40,
-            child: Container(
+            child: OsmeaComponents.container(
               color: Colors.green.withOpacity(0.3),
               child: OsmeaComponents.center(
                 child: OsmeaComponents.text(
@@ -612,7 +612,7 @@ class PositionedExampleScreen extends StatelessWidget {
             bottom: 40,
             left: 0,
             width: 40,
-            child: Container(
+            child: OsmeaComponents.container(
               color: Colors.red.withOpacity(0.3),
               child: OsmeaComponents.center(
                 child: RotatedBox(
@@ -632,7 +632,7 @@ class PositionedExampleScreen extends StatelessWidget {
             bottom: 40,
             right: 0,
             width: 40,
-            child: Container(
+            child: OsmeaComponents.container(
               color: Colors.purple.withOpacity(0.3),
               child: OsmeaComponents.center(
                 child: RotatedBox(
@@ -652,7 +652,7 @@ class PositionedExampleScreen extends StatelessWidget {
 
   // Badge example
   Widget badgeExample() {
-    return Container(
+    return OsmeaComponents.container(
       height: 150,
       padding: const EdgeInsets.all(20),
       color: Colors.grey.shade200,
@@ -660,7 +660,7 @@ class PositionedExampleScreen extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           // Main element
-          Container(
+          OsmeaComponents.container(
             width: double.infinity,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -711,7 +711,7 @@ class PositionedExampleScreen extends StatelessWidget {
           OsmeaComponents.positioned(
             top: 0,
             right: 0,
-            child: Container(
+            child: OsmeaComponents.container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: const BoxDecoration(
                 color: Colors.green,
@@ -735,7 +735,7 @@ class PositionedExampleScreen extends StatelessWidget {
           OsmeaComponents.positioned(
             bottom: 0,
             left: 0,
-            child: Container(
+            child: OsmeaComponents.container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
                 color: Colors.blue.shade700,
@@ -761,7 +761,7 @@ class PositionedExampleScreen extends StatelessWidget {
 
   // Helper for creating color boxes
   Widget _buildColorBox(Color color, String text) {
-    return Container(
+    return OsmeaComponents.container(
       width: 80,
       height: 80,
       color: color,
@@ -780,7 +780,7 @@ class PositionedExampleScreen extends StatelessWidget {
 
   // Helper for creating small color boxes
   Widget _buildSmallColorBox(Color color) {
-    return Container(
+    return OsmeaComponents.container(
       width: 30,
       height: 30,
       color: color,

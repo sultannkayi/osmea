@@ -8,7 +8,7 @@ class ColorsExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text(
           'OSMEA Colors Palette',
           variant: OsmeaTextVariant.headlineMedium,
@@ -16,10 +16,10 @@ class ColorsExample extends StatelessWidget {
         backgroundColor: OsmeaColors.nordicBlue,
         foregroundColor: OsmeaColors.white,
       ),
-      body: SingleChildScrollView(
+      body: OsmeaComponents.singleChildScrollView(
         padding: context.paddingNormal,
         child: SafeArea(
-          child: Column(
+          child: OsmeaComponents.column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               OsmeaComponents.text(
@@ -87,7 +87,7 @@ class ColorsExample extends StatelessWidget {
                     'Shadow Dark', OsmeaColors.shadowDark, 'rgba(0,0,0,0.3)'),
               ]),
               OsmeaComponents.sizedBox(height: 32),
-              Container(
+              OsmeaComponents.container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
@@ -104,7 +104,7 @@ class ColorsExample extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(color: OsmeaColors.silver),
                 ),
-                child: Column(
+                child: OsmeaComponents.column(
                   children: [
                     Icon(
                       Icons.palette,
@@ -180,21 +180,21 @@ class ColorsExample extends StatelessWidget {
         child: Stack(
           children: [
             if (colorInfo.color == OsmeaColors.transparent)
-              Container(
+              OsmeaComponents.container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
                   color: OsmeaColors.silver,
                 ),
                 child: CustomPaint(
                   painter: _CheckerboardPainter(),
-                  child: Container(),
+                  child: OsmeaComponents.container(),
                 ),
               ),
             Positioned(
               bottom: 0,
               left: 0,
               right: 0,
-              child: Container(
+              child: OsmeaComponents.container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: _getContrastColor(colorInfo.color),
@@ -203,7 +203,7 @@ class ColorsExample extends StatelessWidget {
                     bottomRight: Radius.circular(16),
                   ),
                 ),
-                child: Column(
+                child: OsmeaComponents.column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -230,7 +230,7 @@ class ColorsExample extends StatelessWidget {
             Positioned(
               top: 12,
               right: 12,
-              child: Container(
+              child: OsmeaComponents.container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   color: _getContrastColor(colorInfo.color),
@@ -250,14 +250,14 @@ class ColorsExample extends StatelessWidget {
   }
 
   Widget _buildColorUsageGuide() {
-    return Container(
+    return OsmeaComponents.container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: OsmeaColors.snow,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: OsmeaColors.ash),
       ),
-      child: Column(
+      child: OsmeaComponents.column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           OsmeaComponents.text(
@@ -292,12 +292,12 @@ class ColorsExample extends StatelessWidget {
   }
 
   Widget _buildUsageItem(String title, String description, Color color) {
-    return Padding(
+    return OsmeaComponents.padding(
       padding: const EdgeInsets.only(bottom: 12),
-      child: Row(
+      child: OsmeaComponents.row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
+          OsmeaComponents.container(
             width: 20,
             height: 20,
             decoration: BoxDecoration(
@@ -308,7 +308,7 @@ class ColorsExample extends StatelessWidget {
           ),
           OsmeaComponents.sizedBox(width: 12),
           Expanded(
-            child: Column(
+            child: OsmeaComponents.column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 OsmeaComponents.text(

@@ -12,12 +12,12 @@ class SpacerExampleScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('OSMEA Spacer Examples'),
       ),
       body: SingleChildScrollView(
         padding: context.paddingNormal,
-        child: Column(
+        child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Section title
@@ -81,7 +81,7 @@ class SpacerExampleScreen extends StatelessWidget {
 
   // Basic row with spacer example
   Widget basicRowSpacerExample() {
-    return Container(
+    return OsmeaComponents.container(
       height: 60,
       color: Colors.grey.shade200,
       child: OsmeaComponents.row(
@@ -96,7 +96,7 @@ class SpacerExampleScreen extends StatelessWidget {
 
   // Multiple spacers example
   Widget multipleSpacersExample() {
-    return Container(
+    return OsmeaComponents.container(
       height: 60,
       color: Colors.grey.shade200,
       child: OsmeaComponents.row(
@@ -113,7 +113,7 @@ class SpacerExampleScreen extends StatelessWidget {
 
   // Column with spacers example
   Widget columnSpacersExample() {
-    return Container(
+    return OsmeaComponents.container(
       height: 300,
       width: double.infinity,
       color: Colors.grey.shade200,
@@ -131,7 +131,7 @@ class SpacerExampleScreen extends StatelessWidget {
 
   // App bar layout example using spacers
   Widget appBarLayoutExample() {
-    return Container(
+    return OsmeaComponents.container(
       height: 60,
       width: double.infinity,
       color: Colors.blue,
@@ -160,9 +160,9 @@ class SpacerExampleScreen extends StatelessWidget {
   // Card with actions using spacers
   Widget cardWithActionsExample() {
     return Card(
-      child: Padding(
+      child: OsmeaComponents.padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
+        child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             OsmeaComponents.text(
@@ -200,7 +200,7 @@ class SpacerExampleScreen extends StatelessWidget {
 
   // Helper for creating color boxes
   Widget _buildColorBox(Color color, String text) {
-    return Container(
+    return OsmeaComponents.container(
       width: 80,
       height: 60,
       color: color,

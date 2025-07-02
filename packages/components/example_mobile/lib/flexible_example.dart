@@ -12,12 +12,12 @@ class FlexibleExampleScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('OSMEA Flexible Examples'),
       ),
       body: SingleChildScrollView(
         padding: context.paddingNormal,
-        child: Column(
+        child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Section title
@@ -95,7 +95,7 @@ class FlexibleExampleScreen extends StatelessWidget {
 
   // Basic row with flexible example
   Widget basicRowFlexibleExample() {
-    return Container(
+    return OsmeaComponents.container(
       height: 60,
       width: double.infinity, // Set width to prevent overflow
       color: Colors.grey.shade200,
@@ -121,7 +121,7 @@ class FlexibleExampleScreen extends StatelessWidget {
 
   // Flexible fit example
   Widget flexibleFitExample() {
-    return Container(
+    return OsmeaComponents.container(
       height: 60,
       width: double.infinity, // Set width to prevent overflow
       color: Colors.grey.shade200,
@@ -131,7 +131,7 @@ class FlexibleExampleScreen extends StatelessWidget {
           OsmeaComponents.flexible(
             flex: 1,
             fit: FlexFit.loose, // Default - takes needed space
-            child: Container(
+            child: OsmeaComponents.container(
               color: Colors.red,
               padding: const EdgeInsets.all(8),
               child: OsmeaComponents.text(
@@ -146,7 +146,7 @@ class FlexibleExampleScreen extends StatelessWidget {
           OsmeaComponents.flexible(
             flex: 1,
             fit: FlexFit.tight, // Forces to fill available space
-            child: Container(
+            child: OsmeaComponents.container(
               color: Colors.blue,
               padding: const EdgeInsets.all(8),
               child: OsmeaComponents.center(
@@ -167,7 +167,7 @@ class FlexibleExampleScreen extends StatelessWidget {
 
   // Column with flexibles example
   Widget columnFlexiblesExample() {
-    return Container(
+    return OsmeaComponents.container(
       height: 300,
       width: double.infinity,
       color: Colors.grey.shade200,
@@ -175,7 +175,7 @@ class FlexibleExampleScreen extends StatelessWidget {
         children: [
           OsmeaComponents.flexible(
             flex: 1, // 1 part of space
-            child: Container(
+            child: OsmeaComponents.container(
               color: Colors.red,
               width: double.infinity,
               child: OsmeaComponents.center(
@@ -188,7 +188,7 @@ class FlexibleExampleScreen extends StatelessWidget {
           ),
           OsmeaComponents.flexible(
             flex: 2, // 2 parts of space (twice as much)
-            child: Container(
+            child: OsmeaComponents.container(
               color: Colors.green,
               width: double.infinity,
               child: OsmeaComponents.center(
@@ -201,7 +201,7 @@ class FlexibleExampleScreen extends StatelessWidget {
           ),
           OsmeaComponents.flexible(
             flex: 1, // 1 part of space
-            child: Container(
+            child: OsmeaComponents.container(
               color: Colors.blue,
               width: double.infinity,
               child: OsmeaComponents.center(
@@ -219,7 +219,7 @@ class FlexibleExampleScreen extends StatelessWidget {
 
   // Flexible vs expanded example
   Widget flexibleVsExpandedExample() {
-    return Container(
+    return OsmeaComponents.container(
       height: 60,
       width: double.infinity, // Set width to prevent overflow
       color: Colors.grey.shade200,
@@ -228,7 +228,7 @@ class FlexibleExampleScreen extends StatelessWidget {
         children: [
           OsmeaComponents.flexible(
             flex: 1,
-            child: Container(
+            child: OsmeaComponents.container(
               color: Colors.amber,
               padding: const EdgeInsets.all(8),
               // Center text to prevent overflow
@@ -242,7 +242,7 @@ class FlexibleExampleScreen extends StatelessWidget {
           ),
           OsmeaComponents.expanded(
             flex: 1,
-            child: Container(
+            child: OsmeaComponents.container(
               color: Colors.deepPurple.withOpacity(0.7),
               child: OsmeaComponents.center(
                 child: OsmeaComponents.text(
@@ -263,15 +263,15 @@ class FlexibleExampleScreen extends StatelessWidget {
   // Form layout example using flexibles
   Widget formLayoutExample() {
     return Card(
-      child: Padding(
+      child: OsmeaComponents.padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
+        child: OsmeaComponents.column(
           children: [
             OsmeaComponents.row(
               mainAxisSize: MainAxisSize.max, // Ensure row takes full width
               children: [
                 // Fixed width container for label to prevent overflow
-                Container(
+                OsmeaComponents.container(
                   width: 60,
                   child: OsmeaComponents.text('Name:'),
                 ),
@@ -295,7 +295,7 @@ class FlexibleExampleScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.max, // Ensure row takes full width
               children: [
                 // Fixed width container for label to prevent overflow
-                Container(
+                OsmeaComponents.container(
                   width: 60,
                   child: OsmeaComponents.text('Email:'),
                 ),
@@ -323,7 +323,7 @@ class FlexibleExampleScreen extends StatelessWidget {
 
   // Dashboard layout example using flexibles
   Widget dashboardLayoutExample() {
-    return Container(
+    return OsmeaComponents.container(
       height: 200,
       width: double.infinity,
       color: Colors.grey.shade200,
@@ -333,11 +333,11 @@ class FlexibleExampleScreen extends StatelessWidget {
           // Sidebar
           OsmeaComponents.flexible(
             flex: 1,
-            child: Container(
+            child: OsmeaComponents.container(
               color: Colors.blueGrey.shade700,
-              child: Padding(
+              child: OsmeaComponents.padding(
                 padding: const EdgeInsets.all(12),
-                child: Column(
+                child: OsmeaComponents.column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     OsmeaComponents.text(
@@ -361,10 +361,10 @@ class FlexibleExampleScreen extends StatelessWidget {
           OsmeaComponents.expanded(
             // Use expanded to fill remaining space
             flex: 3, // Takes 3x the space of the sidebar
-            child: Column(
+            child: OsmeaComponents.column(
               children: [
                 // Header
-                Container(
+                OsmeaComponents.container(
                   color: Colors.white,
                   padding: const EdgeInsets.all(16),
                   child: OsmeaComponents.row(
@@ -426,7 +426,7 @@ class FlexibleExampleScreen extends StatelessWidget {
 
   // Helper for sidebar item - fix overflow
   Widget _buildSidebarItem(String label, IconData icon) {
-    return Padding(
+    return OsmeaComponents.padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: OsmeaComponents.row(
         mainAxisSize: MainAxisSize.min, // Use min size to avoid overflow
@@ -455,12 +455,12 @@ class FlexibleExampleScreen extends StatelessWidget {
   ) {
     return Card(
       margin: const EdgeInsets.all(8),
-      child: Padding(
+      child: OsmeaComponents.padding(
         padding: const EdgeInsets.all(16),
         // Use SizedBox with constrained height to prevent overflow
-        child: SizedBox(
+        child: OsmeaComponents.sizedBox(
           height: 85, // Fixed height to ensure no overflow
-          child: Column(
+          child: OsmeaComponents.column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               OsmeaComponents.row(
@@ -504,7 +504,7 @@ class FlexibleExampleScreen extends StatelessWidget {
 
   // Helper for creating color boxes
   Widget _buildColorBox(Color color, String text) {
-    return Container(
+    return OsmeaComponents.container(
       color: color,
       child: OsmeaComponents.center(
         child: OsmeaComponents.text(

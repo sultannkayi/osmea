@@ -7,13 +7,13 @@ class StackExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('OSMEA Stack Examples'),
         elevation: 0,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
-        child: Column(
+        child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildSectionTitle('Basic Stack'),
@@ -37,7 +37,7 @@ class StackExample extends StatelessWidget {
   }
 
   Widget _buildSectionTitle(String title) {
-    return Padding(
+    return OsmeaComponents.padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: OsmeaComponents.text(
         title,
@@ -50,7 +50,7 @@ class StackExample extends StatelessWidget {
   }
 
   Widget _buildBasicStackExamples() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildExampleWithCaption(
@@ -115,13 +115,13 @@ class StackExample extends StatelessWidget {
   }
 
   Widget _buildStyledStackExamples() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildExampleWithCaption(
           'Stack with ClipBehavior.none',
           _buildContainer(
-            Container(
+            OsmeaComponents.container(
               width: double.infinity,
               height: 200,
               decoration: BoxDecoration(
@@ -131,7 +131,7 @@ class StackExample extends StatelessWidget {
               child: OsmeaComponents.stack(
                 clipBehavior: Clip.none,
                 children: [
-                  Container(
+                  OsmeaComponents.container(
                     decoration: BoxDecoration(
                       color: Colors.grey.shade200,
                       borderRadius: BorderRadius.circular(12),
@@ -162,10 +162,10 @@ class StackExample extends StatelessWidget {
               child: OsmeaComponents.stack(
                 fit: StackFit.expand,
                 children: [
-                  Container(color: Colors.green.withOpacity(0.3)),
+                  OsmeaComponents.container(color: Colors.green.withOpacity(0.3)),
                   Align(
                     alignment: Alignment.center,
-                    child: Container(
+                    child: OsmeaComponents.container(
                       width: 100,
                       height: 100,
                       color: Colors.green,
@@ -189,7 +189,7 @@ class StackExample extends StatelessWidget {
   }
 
   Widget _buildInteractiveStackExamples() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildExampleWithCaption(
@@ -220,7 +220,7 @@ class StackExample extends StatelessWidget {
   }
 
   Widget _buildPositionedChildrenExamples() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildExampleWithCaption(
@@ -231,7 +231,7 @@ class StackExample extends StatelessWidget {
               height: 200,
               child: OsmeaComponents.stack(
                 children: [
-                  Container(color: Colors.grey.shade200),
+                  OsmeaComponents.container(color: Colors.grey.shade200),
                   OsmeaComponents.positioned(
                     top: 10,
                     left: 10,
@@ -256,7 +256,7 @@ class StackExample extends StatelessWidget {
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    child: Container(
+                    child: OsmeaComponents.container(
                       height: 40,
                       color: Colors.black.withOpacity(0.5),
                       alignment: Alignment.center,
@@ -282,9 +282,9 @@ class StackExample extends StatelessWidget {
               height: 200,
               child: OsmeaComponents.stack(
                 children: [
-                  Container(color: Colors.grey.shade200),
+                  OsmeaComponents.container(color: Colors.grey.shade200),
                   OsmeaComponents.positionedFill(
-                    child: Container(
+                    child: OsmeaComponents.container(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.topLeft,
@@ -302,7 +302,7 @@ class StackExample extends StatelessWidget {
                     top: 0.1,
                     widthFactor: 0.8,
                     heightFactor: 0.3,
-                    child: Container(
+                    child: OsmeaComponents.container(
                       color: Colors.amber.withOpacity(0.3),
                       child: Center(
                         child: OsmeaComponents.text(
@@ -329,7 +329,7 @@ class StackExample extends StatelessWidget {
   }
 
   Widget _buildPracticalExamples() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildExampleWithCaption(
@@ -348,7 +348,7 @@ class StackExample extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                     Positioned.fill(
-                      child: Container(
+                      child: OsmeaComponents.container(
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             begin: Alignment.topCenter,
@@ -366,7 +366,7 @@ class StackExample extends StatelessWidget {
                       left: 16,
                       right: 16,
                       bottom: 16,
-                      child: Column(
+                      child: OsmeaComponents.column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -392,7 +392,7 @@ class StackExample extends StatelessWidget {
                     Positioned(
                       top: 16,
                       right: 16,
-                      child: Container(
+                      child: OsmeaComponents.container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 8,
                           vertical: 4,
@@ -420,7 +420,7 @@ class StackExample extends StatelessWidget {
         _buildExampleWithCaption(
           'Profile Card with Badge',
           _buildContainer(
-            Container(
+            OsmeaComponents.container(
               width: double.infinity,
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -450,7 +450,7 @@ class StackExample extends StatelessWidget {
                       ),
                       OsmeaComponents.sizedBox(width: 16),
                       Expanded(
-                        child: Column(
+                        child: OsmeaComponents.column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             OsmeaComponents.text(
@@ -476,7 +476,7 @@ class StackExample extends StatelessWidget {
                   Positioned(
                     top: -8,
                     right: -8,
-                    child: Container(
+                    child: OsmeaComponents.container(
                       padding: const EdgeInsets.all(6),
                       decoration: const BoxDecoration(
                         color: Colors.green,
@@ -502,10 +502,10 @@ class StackExample extends StatelessWidget {
   }
 
   Widget _buildExampleWithCaption(String caption, Widget child) {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
+        OsmeaComponents.padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: OsmeaComponents.text(
             caption,
@@ -525,7 +525,7 @@ class StackExample extends StatelessWidget {
     required double size,
     String? text,
   }) {
-    return Container(
+    return OsmeaComponents.container(
       width: size,
       height: size,
       color: color,
@@ -545,7 +545,7 @@ class StackExample extends StatelessWidget {
   }
 
   Widget _buildContainer(Widget child) {
-    return Container(
+    return OsmeaComponents.container(
       margin: const EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),

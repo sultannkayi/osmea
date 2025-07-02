@@ -46,17 +46,19 @@ class _PopupExampleState extends State<PopupExample> {
       ),
       body: OsmeaComponents.singleChildScrollView(
         padding: context.paddingMedium,
-        child: OsmeaComponents.column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _buildWelcomeSection(),
-            OsmeaComponents.sizedBox(height: 24),
-            _buildControlsSection(),
-            OsmeaComponents.sizedBox(height: 24),
-            _buildQuickExamplesSection(),
-            OsmeaComponents.sizedBox(height: 24),
-            _buildSizeComparisonSection(),
-          ],
+        child: OsmeaComponents.singleChildScrollView(
+          child: OsmeaComponents.column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _buildWelcomeSection(),
+              OsmeaComponents.sizedBox(height: 24),
+              _buildControlsSection(),
+              OsmeaComponents.sizedBox(height: 24),
+              _buildQuickExamplesSection(),
+              OsmeaComponents.sizedBox(height: 24),
+              _buildSizeComparisonSection(),
+            ],
+          ),
         ),
       ),
     );
@@ -600,4 +602,4 @@ class _PopupExampleState extends State<PopupExample> {
       ),
     );
   }
-} 
+}

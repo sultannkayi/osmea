@@ -7,10 +7,11 @@ class ExpandedExampleScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text(
           'OSMEA Expanded Examples',
           variant: OsmeaTextVariant.headlineMedium,
+          color: OsmeaColors.white,
         ),
         backgroundColor: OsmeaColors.nordicBlue,
         foregroundColor: OsmeaColors.white,
@@ -18,7 +19,7 @@ class ExpandedExampleScreen extends StatelessWidget {
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: SafeArea(
-          child: Column(
+          child: OsmeaComponents.column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Basic Usage Section
@@ -51,15 +52,15 @@ class ExpandedExampleScreen extends StatelessWidget {
               _buildRealWorldExample(context),
               OsmeaComponents.sizedBox(height: 24),
 
-              // Enhanced Features Section (now using composition)
-              _buildSectionTitle('Enhanced Features Using Composition'),
-              OsmeaComponents.sizedBox(height: 16),
-              _buildEnhancedFeaturesExample(context),
-              OsmeaComponents.sizedBox(height: 24),
-            ],
-          ),
+            // Enhanced Features Section (now using composition)
+            _buildSectionTitle('Enhanced Features Using Composition'),
+            OsmeaComponents.sizedBox(height: 16),
+            _buildEnhancedFeaturesExample(context),
+            OsmeaComponents.sizedBox(height: 24),
+          ],
         ),
       ),
+    )
     );
   }
 
@@ -82,7 +83,7 @@ class ExpandedExampleScreen extends StatelessWidget {
           offset: const Offset(0, 2),
         ),
       ],
-      child: Column(
+      child: OsmeaComponents.column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           OsmeaComponents.text(
@@ -97,7 +98,7 @@ class ExpandedExampleScreen extends StatelessWidget {
           OsmeaComponents.sizedBox(height: 16),
           OsmeaComponents.sizedBox(
             height: 100,
-            child: Row(
+            child: OsmeaComponents.row(
               children: [
                 OsmeaComponents.expanded(
                   child: OsmeaComponents.container(
@@ -145,7 +146,7 @@ class ExpandedExampleScreen extends StatelessWidget {
           offset: const Offset(0, 2),
         ),
       ],
-      child: Column(
+      child: OsmeaComponents.column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           OsmeaComponents.text(
@@ -160,7 +161,7 @@ class ExpandedExampleScreen extends StatelessWidget {
           OsmeaComponents.sizedBox(height: 16),
           OsmeaComponents.sizedBox(
             height: 80,
-            child: Row(
+            child: OsmeaComponents.row(
               children: [
                 OsmeaComponents.expanded(
                   flex: 1,
@@ -225,7 +226,7 @@ class ExpandedExampleScreen extends StatelessWidget {
           offset: const Offset(0, 2),
         ),
       ],
-      child: Column(
+      child: OsmeaComponents.column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           OsmeaComponents.text(
@@ -240,7 +241,7 @@ class ExpandedExampleScreen extends StatelessWidget {
           OsmeaComponents.sizedBox(height: 16),
           OsmeaComponents.sizedBox(
             height: 200,
-            child: Column(
+            child: OsmeaComponents.column(
               children: [
                 OsmeaComponents.container(
                   height: 50,
@@ -302,7 +303,7 @@ class ExpandedExampleScreen extends StatelessWidget {
           offset: const Offset(0, 2),
         ),
       ],
-      child: Column(
+      child: OsmeaComponents.column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           OsmeaComponents.text(
@@ -317,7 +318,7 @@ class ExpandedExampleScreen extends StatelessWidget {
           OsmeaComponents.sizedBox(height: 16),
           OsmeaComponents.sizedBox(
             height: 80,
-            child: Row(
+            child: OsmeaComponents.row(
               children: [
                 // Using expanded method
                 OsmeaComponents.expanded(
@@ -360,7 +361,7 @@ class ExpandedExampleScreen extends StatelessWidget {
           OsmeaComponents.sizedBox(height: 8),
           OsmeaComponents.sizedBox(
             height: 60,
-            child: Row(
+            child: OsmeaComponents.row(
               children: [
                 // Using OsmeaComponents.expanded
                 OsmeaComponents.expanded(
@@ -396,7 +397,7 @@ class ExpandedExampleScreen extends StatelessWidget {
           offset: const Offset(0, 2),
         ),
       ],
-      child: Column(
+      child: OsmeaComponents.column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           OsmeaComponents.text(
@@ -416,13 +417,13 @@ class ExpandedExampleScreen extends StatelessWidget {
                 border: Border.all(color: Colors.grey.shade300),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Column(
+              child: OsmeaComponents.column(
                 children: [
                   // App Bar
                   OsmeaComponents.container(
                     padding: const EdgeInsets.all(12),
                     color: OsmeaColors.nordicBlue,
-                    child: Row(
+                    child: OsmeaComponents.row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         OsmeaComponents.text(
@@ -430,7 +431,7 @@ class ExpandedExampleScreen extends StatelessWidget {
                           color: OsmeaColors.white,
                           variant: OsmeaTextVariant.headlineSmall,
                         ),
-                        Row(
+                        OsmeaComponents.row(
                           children: [
                             const Icon(Icons.search, color: OsmeaColors.white),
                             OsmeaComponents.sizedBox(width: 8),
@@ -447,14 +448,14 @@ class ExpandedExampleScreen extends StatelessWidget {
 
                   // Content area (expanded)
                   OsmeaComponents.expanded(
-                    child: Row(
+                    child: OsmeaComponents.row(
                       children: [
                         // Sidebar
                         OsmeaComponents.container(
                           width: 80,
                           color: Colors.grey.shade100,
                           padding: const EdgeInsets.symmetric(vertical: 12),
-                          child: Column(
+                          child: OsmeaComponents.column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Icon(Icons.home, color: OsmeaColors.nordicBlue),
@@ -470,7 +471,7 @@ class ExpandedExampleScreen extends StatelessWidget {
                         OsmeaComponents.expanded(
                           child: OsmeaComponents.container(
                             padding: const EdgeInsets.all(16),
-                            child: Column(
+                            child: OsmeaComponents.column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 OsmeaComponents.text(
@@ -478,14 +479,14 @@ class ExpandedExampleScreen extends StatelessWidget {
                                   variant: OsmeaTextVariant.headlineSmall,
                                 ),
                                 OsmeaComponents.sizedBox(height: 8),
-                                Row(
+                                OsmeaComponents.row(
                                   children: [
                                     OsmeaComponents.expanded(
                                       child: OsmeaComponents.container(
                                         padding: const EdgeInsets.all(12),
                                         borderRadius: BorderRadius.circular(8),
                                         color: Colors.blue.shade100,
-                                        child: Column(
+                                        child: OsmeaComponents.column(
                                           children: [
                                             Icon(Icons.trending_up,
                                                 size: 28,
@@ -507,7 +508,7 @@ class ExpandedExampleScreen extends StatelessWidget {
                                         padding: const EdgeInsets.all(12),
                                         borderRadius: BorderRadius.circular(8),
                                         color: Colors.green.shade100,
-                                        child: Column(
+                                        child: OsmeaComponents.column(
                                           children: [
                                             const Icon(Icons.people,
                                                 size: 28, color: Colors.green),
@@ -528,7 +529,7 @@ class ExpandedExampleScreen extends StatelessWidget {
                                         padding: const EdgeInsets.all(12),
                                         borderRadius: BorderRadius.circular(8),
                                         color: Colors.orange.shade100,
-                                        child: Column(
+                                        child: OsmeaComponents.column(
                                           children: [
                                             const Icon(Icons.shopping_cart,
                                                 size: 28, color: Colors.orange),
@@ -546,32 +547,35 @@ class ExpandedExampleScreen extends StatelessWidget {
                                   ],
                                 ),
                                 OsmeaComponents.sizedBox(height: 16),
+                                // Fix: Wrap Recent Activity in Expanded + SingleChildScrollView
                                 OsmeaComponents.expanded(
                                   child: OsmeaComponents.container(
                                     borderRadius: BorderRadius.circular(8),
                                     border:
                                         Border.all(color: Colors.grey.shade300),
                                     padding: const EdgeInsets.all(12),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        OsmeaComponents.text('Recent Activity',
-                                            variant:
-                                                OsmeaTextVariant.titleMedium),
-                                        OsmeaComponents.sizedBox(height: 8),
-                                        OsmeaComponents.text(
-                                            '• User "John Smith" placed a new order'),
-                                        OsmeaComponents.sizedBox(height: 4),
-                                        OsmeaComponents.text(
-                                            '• 3 new comments on blog post "OSMEA Components"'),
-                                        OsmeaComponents.sizedBox(height: 4),
-                                        OsmeaComponents.text(
-                                            '• New feature released: OsmeaComponents.expanded component'),
-                                        OsmeaComponents.sizedBox(height: 4),
-                                        OsmeaComponents.text(
-                                            '• Server maintenance scheduled for next week'),
-                                      ],
+                                    child: SingleChildScrollView(
+                                      child: OsmeaComponents.column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          OsmeaComponents.text('Recent Activity',
+                                              variant:
+                                                  OsmeaTextVariant.titleMedium),
+                                          OsmeaComponents.sizedBox(height: 8),
+                                          OsmeaComponents.text(
+                                              '• User "John Smith" placed a new order'),
+                                          OsmeaComponents.sizedBox(height: 4),
+                                          OsmeaComponents.text(
+                                              '• 3 new comments on blog post "OSMEA Components"'),
+                                          OsmeaComponents.sizedBox(height: 4),
+                                          OsmeaComponents.text(
+                                              '• New feature released: OsmeaComponents.expanded component'),
+                                          OsmeaComponents.sizedBox(height: 4),
+                                          OsmeaComponents.text(
+                                              '• Server maintenance scheduled for next week'),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -588,12 +592,12 @@ class ExpandedExampleScreen extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     color: Colors.grey.shade200,
-                    child: Row(
+                    child: OsmeaComponents.row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         OsmeaComponents.text('© 2025 OSMEA Team',
                             variant: OsmeaTextVariant.bodySmall),
-                        Row(
+                        OsmeaComponents.row(
                           children: [
                             IconButton(
                               icon: Icon(Icons.help_outline,
@@ -630,7 +634,7 @@ class ExpandedExampleScreen extends StatelessWidget {
           offset: const Offset(0, 2),
         ),
       ],
-      child: Column(
+      child: OsmeaComponents.column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           OsmeaComponents.text(
@@ -646,7 +650,7 @@ class ExpandedExampleScreen extends StatelessWidget {
           OsmeaComponents.sizedBox(height: 8),
           OsmeaComponents.sizedBox(
             height: 100,
-            child: Row(
+            child: OsmeaComponents.row(
               children: [
                 OsmeaComponents.expanded(
                   flex: 1,
@@ -685,7 +689,7 @@ class ExpandedExampleScreen extends StatelessWidget {
           OsmeaComponents.sizedBox(height: 8),
           OsmeaComponents.sizedBox(
             height: 100,
-            child: Row(
+            child: OsmeaComponents.row(
               children: [
                 OsmeaComponents.expanded(
                   flex: 1,
@@ -749,7 +753,7 @@ class ExpandedExampleScreen extends StatelessWidget {
           OsmeaComponents.sizedBox(height: 8),
           OsmeaComponents.sizedBox(
             height: 100,
-            child: Row(
+            child: OsmeaComponents.row(
               children: [
                 OsmeaComponents.expanded(
                   flex: 1,
@@ -799,7 +803,7 @@ class ExpandedExampleScreen extends StatelessWidget {
           OsmeaComponents.sizedBox(height: 8),
           OsmeaComponents.sizedBox(
             height: 150,
-            child: Row(
+            child: OsmeaComponents.row(
               children: [
                 OsmeaComponents.expanded(
                   flex: 3,
@@ -870,7 +874,7 @@ class ExpandedExampleScreen extends StatelessWidget {
                       border: Border.all(color: OsmeaColors.silver),
                     ),
                     padding: const EdgeInsets.all(16),
-                    child: Column(
+                    child: OsmeaComponents.column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.info_outline,

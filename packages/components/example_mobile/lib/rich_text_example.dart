@@ -13,12 +13,12 @@ class RichTextExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('OSMEA Rich Text Examples'),
       ),
       body: SingleChildScrollView(
         padding: context.paddingNormal,
-        child: Column(
+        child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Section title
@@ -99,7 +99,7 @@ class RichTextExample extends StatelessWidget {
 
   // Basic rich text example
   Widget basicRichTextExample() {
-    return Container(
+    return OsmeaComponents.container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.grey.shade100,
@@ -139,7 +139,7 @@ class RichTextExample extends StatelessWidget {
 
   // Rich text with links example
   Widget linkRichTextExample(BuildContext context) {
-    return Container(
+    return OsmeaComponents.container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.grey.shade100,
@@ -182,10 +182,10 @@ class RichTextExample extends StatelessWidget {
 
   // Rich text with different variants
   Widget variantRichTextExamples() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
+        OsmeaComponents.container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Colors.grey.shade100,
@@ -199,7 +199,7 @@ class RichTextExample extends StatelessWidget {
               ),
             ],
           ),
-          child: Column(
+          child: OsmeaComponents.column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               OsmeaComponents.richText(
@@ -257,9 +257,9 @@ class RichTextExample extends StatelessWidget {
 
   // Rich text with different alignments
   Widget alignmentRichTextExamples() {
-    return Column(
+    return OsmeaComponents.column(
       children: [
-        Container(
+        OsmeaComponents.container(
           width: double.infinity,
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
@@ -281,7 +281,7 @@ class RichTextExample extends StatelessWidget {
             ],
           ),
         ),
-        Container(
+        OsmeaComponents.container(
           width: double.infinity,
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
@@ -303,7 +303,7 @@ class RichTextExample extends StatelessWidget {
             ],
           ),
         ),
-        Container(
+        OsmeaComponents.container(
           width: double.infinity,
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
@@ -330,7 +330,7 @@ class RichTextExample extends StatelessWidget {
 
   // Selectable rich text example
   Widget selectableRichTextExample() {
-    return Container(
+    return OsmeaComponents.container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.grey.shade100,
@@ -358,10 +358,10 @@ class RichTextExample extends StatelessWidget {
 
   // Advanced rich text examples
   Widget advancedRichTextExamples() {
-    return Column(
+    return OsmeaComponents.column(
       children: [
         // Code snippet example
-        Container(
+        OsmeaComponents.container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Colors.grey.shade900,
@@ -403,7 +403,7 @@ class RichTextExample extends StatelessWidget {
         ),
         
         // Notification example
-        Container(
+        OsmeaComponents.container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Colors.blue.withOpacity(0.1),
@@ -447,7 +447,7 @@ class RichTextExample extends StatelessWidget {
         ),
         
         // Price tag example
-        Container(
+        OsmeaComponents.container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Colors.grey.shade100,

@@ -65,7 +65,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text(
           '☑️ OSMEA Checkbox Examples',
           variant: OsmeaTextVariant.headlineMedium,
@@ -75,7 +75,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
       ),
       body: SingleChildScrollView(
         padding: context.paddingNormal,
-        child: Column(
+        child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildSectionTitle('🎨 Checkbox Variants'),
@@ -98,6 +98,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
             OsmeaComponents.sizedBox(height: 32),
             _buildSectionTitle('🎨 Custom Colors'),
             _buildCustomColorsSection(),
+            OsmeaComponents.sizedBox(height: 32),
           ],
         ),
       ),
@@ -105,7 +106,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
   }
 
   Widget _buildSectionTitle(String title) {
-    return Padding(
+    return OsmeaComponents.padding(
       padding: const EdgeInsets.only(bottom: 16.0),
       child: OsmeaComponents.text(
         title,
@@ -115,24 +116,24 @@ class _CheckboxExampleState extends State<CheckboxExample> {
   }
 
   Widget _buildVariantsSection() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSubsectionTitle('Simple Checkbox (No Labels)'),
-        Wrap(
-          spacing: 16,
-          runSpacing: 8,
+        OsmeaComponents.row(
           children: [
             OsmeaComponents.checkbox(
               value: _simpleCheckbox,
               variant: CheckboxVariant.simple,
               onChanged: (value) => setState(() => _simpleCheckbox = value),
             ),
+            OsmeaComponents.sizedBox(width: 16),
             OsmeaComponents.checkbox(
               value: true,
               variant: CheckboxVariant.simple,
               onChanged: (value) {},
             ),
+            OsmeaComponents.sizedBox(width: 16),
             OsmeaComponents.checkbox(
               value: false,
               variant: CheckboxVariant.simple,
@@ -142,7 +143,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
         ),
         OsmeaComponents.sizedBox(height: 20),
         _buildSubsectionTitle('Labeled Checkbox'),
-        Column(
+        OsmeaComponents.column(
           children: [
             OsmeaComponents.checkbox(
               value: _labeledCheckbox,
@@ -163,7 +164,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
         ),
         OsmeaComponents.sizedBox(height: 20),
         _buildSubsectionTitle('Card Checkbox'),
-        Column(
+        OsmeaComponents.column(
           children: [
             OsmeaComponents.checkbox(
               value: _cardCheckbox1,
@@ -186,7 +187,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
         ),
         OsmeaComponents.sizedBox(height: 20),
         _buildSubsectionTitle('Tile Checkbox'),
-        Column(
+        OsmeaComponents.column(
           children: [
             OsmeaComponents.checkbox(
               value: _tileCheckbox1,
@@ -212,13 +213,11 @@ class _CheckboxExampleState extends State<CheckboxExample> {
   }
 
   Widget _buildSizesSection() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSubsectionTitle('Small Size'),
-        Wrap(
-          spacing: 16,
-          runSpacing: 8,
+        OsmeaComponents.row(
           children: [
             OsmeaComponents.checkbox(
               value: _smallCheckbox,
@@ -227,6 +226,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
               size: CheckboxSize.small,
               onChanged: (value) => setState(() => _smallCheckbox = value),
             ),
+            OsmeaComponents.sizedBox(width: 16),
             OsmeaComponents.checkbox(
               value: false,
               variant: CheckboxVariant.labeled,
@@ -238,9 +238,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
         ),
         OsmeaComponents.sizedBox(height: 16),
         _buildSubsectionTitle('Medium Size (Default)'),
-        Wrap(
-          spacing: 16,
-          runSpacing: 8,
+        OsmeaComponents.row(
           children: [
             OsmeaComponents.checkbox(
               value: _mediumCheckbox,
@@ -249,6 +247,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
               size: CheckboxSize.medium,
               onChanged: (value) => setState(() => _mediumCheckbox = value),
             ),
+            OsmeaComponents.sizedBox(width: 16),
             OsmeaComponents.checkbox(
               value: true,
               variant: CheckboxVariant.labeled,
@@ -260,9 +259,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
         ),
         OsmeaComponents.sizedBox(height: 16),
         _buildSubsectionTitle('Large Size'),
-        Wrap(
-          spacing: 16,
-          runSpacing: 8,
+        OsmeaComponents.row(
           children: [
             OsmeaComponents.checkbox(
               value: _largeCheckbox,
@@ -271,6 +268,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
               size: CheckboxSize.large,
               onChanged: (value) => setState(() => _largeCheckbox = value),
             ),
+            OsmeaComponents.sizedBox(width: 16),
             OsmeaComponents.checkbox(
               value: false,
               variant: CheckboxVariant.labeled,
@@ -285,12 +283,12 @@ class _CheckboxExampleState extends State<CheckboxExample> {
   }
 
   Widget _buildTristateSection() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSubsectionTitle(
             'Tristate Checkboxes (3 States: checked, unchecked, indeterminate)'),
-        Column(
+        OsmeaComponents.column(
           children: [
             OsmeaComponents.checkbox(
               value: _tristateCheckbox1,
@@ -325,7 +323,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
   }
 
   Widget _buildSettingsSection() {
-    return Column(
+    return OsmeaComponents.column(
       children: [
         OsmeaComponents.checkbox(
           value: _notificationsEnabled,
@@ -377,13 +375,11 @@ class _CheckboxExampleState extends State<CheckboxExample> {
   }
 
   Widget _buildStateSection() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSubsectionTitle('Enabled States'),
-        Wrap(
-          spacing: 16,
-          runSpacing: 8,
+        OsmeaComponents.row(
           children: [
             OsmeaComponents.checkbox(
               value: true,
@@ -392,6 +388,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
               state: CheckboxState.enabled,
               onChanged: (value) {},
             ),
+            OsmeaComponents.sizedBox(width: 16),
             OsmeaComponents.checkbox(
               value: false,
               variant: CheckboxVariant.labeled,
@@ -403,9 +400,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
         ),
         OsmeaComponents.sizedBox(height: 16),
         _buildSubsectionTitle('Disabled States'),
-        Wrap(
-          spacing: 16,
-          runSpacing: 8,
+        OsmeaComponents.row(
           children: [
             OsmeaComponents.checkbox(
               value: true,
@@ -414,6 +409,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
               state: CheckboxState.disabled,
               onChanged: null, // Disabled
             ),
+            OsmeaComponents.sizedBox(width: 16),
             OsmeaComponents.checkbox(
               value: false,
               variant: CheckboxVariant.labeled,
@@ -428,7 +424,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
   }
 
   Widget _buildStylesSection() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSubsectionTitle('Material Style'),
@@ -480,13 +476,11 @@ class _CheckboxExampleState extends State<CheckboxExample> {
   }
 
   Widget _buildCustomColorsSection() {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSubsectionTitle('Custom Active Colors'),
-        Wrap(
-          spacing: 16,
-          runSpacing: 8,
+        OsmeaComponents.row(
           children: [
             OsmeaComponents.checkbox(
               value: _redCheckbox,
@@ -495,6 +489,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
               activeColor: Colors.red,
               onChanged: (value) => setState(() => _redCheckbox = value),
             ),
+            OsmeaComponents.sizedBox(width: 16),
             OsmeaComponents.checkbox(
               value: _greenCheckbox,
               variant: CheckboxVariant.labeled,
@@ -502,6 +497,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
               activeColor: Colors.green,
               onChanged: (value) => setState(() => _greenCheckbox = value),
             ),
+            OsmeaComponents.sizedBox(width: 16),
             OsmeaComponents.checkbox(
               value: _purpleCheckbox,
               variant: CheckboxVariant.labeled,
@@ -509,6 +505,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
               activeColor: Colors.purple,
               onChanged: (value) => setState(() => _purpleCheckbox = value),
             ),
+            OsmeaComponents.sizedBox(width: 16),
             OsmeaComponents.checkbox(
               value: _orangeCheckbox,
               variant: CheckboxVariant.labeled,
@@ -523,7 +520,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
   }
 
   Widget _buildSubsectionTitle(String title) {
-    return Padding(
+    return OsmeaComponents.padding(
       padding: const EdgeInsets.only(bottom: 8.0, top: 4.0),
       child: OsmeaComponents.text(
         title,

@@ -57,10 +57,11 @@ class _TicketWidgetExampleState extends State<TicketWidgetExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text(
           '🎫 OSMEA Ticket Widget',
-          variant: OsmeaTextVariant.headlineMedium,
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
         ),
         backgroundColor: OsmeaColors.nordicBlue,
         foregroundColor: OsmeaColors.white,
@@ -88,12 +89,13 @@ class _TicketWidgetExampleState extends State<TicketWidgetExample> {
             OsmeaComponents.sizedBox(height: 16),
             OsmeaComponents.text(
               'Error Loading Configuration',
-              variant: OsmeaTextVariant.headlineMedium,
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
             ),
             OsmeaComponents.sizedBox(height: 8),
             OsmeaComponents.text(
               _errorMessage!,
-              variant: OsmeaTextVariant.bodyMedium,
+              fontSize: 16,
               textAlign: TextAlign.center,
             ),
             OsmeaComponents.sizedBox(height: 24),
@@ -116,22 +118,23 @@ class _TicketWidgetExampleState extends State<TicketWidgetExample> {
   Widget _buildTicketForm() {
     if (_config == null) return const SizedBox();
 
-    return SingleChildScrollView(
+    return OsmeaComponents.singleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: OsmeaComponents.column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           OsmeaComponents.text(
             '📋 Create Support Ticket',
-            variant: OsmeaTextVariant.headlineSmall,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
           ),
           OsmeaComponents.sizedBox(height: 8),
           OsmeaComponents.text(
             'Fill out the form below to submit a technical support request.',
-            variant: OsmeaTextVariant.bodyMedium,
+            fontSize: 16,
           ),
           OsmeaComponents.sizedBox(height: 24),
-          SizedBox(
+          OsmeaComponents.sizedBox(
             height: 600,
             child: OsmeaComponents.ticketWidget(
               config: _config!,

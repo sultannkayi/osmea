@@ -12,10 +12,11 @@ class ContainerExampleScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text(
           'OSMEA Container Examples',
-          variant: OsmeaTextVariant.headlineMedium,
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
         ),
         backgroundColor: OsmeaColors.nordicBlue,
         foregroundColor: OsmeaColors.white,
@@ -28,14 +29,15 @@ class ContainerExampleScreen extends StatelessWidget {
             // Section title
             OsmeaComponents.text(
               '📦 Basic Containers',
-              variant: OsmeaTextVariant.headlineSmall,
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
             ),
             OsmeaComponents.sizedBox(height: 16),
 
             // Basic container example
             OsmeaComponents.text(
               'Simple container with color:',
-              variant: OsmeaTextVariant.bodyMedium,
+              fontSize: 16,
             ),
             OsmeaComponents.sizedBox(height: 8),
             basicContainerExample(),
@@ -44,7 +46,7 @@ class ContainerExampleScreen extends StatelessWidget {
             // Container with border radius
             OsmeaComponents.text(
               'Container with border radius:',
-              variant: OsmeaTextVariant.bodyMedium,
+              fontSize: 16,
             ),
             OsmeaComponents.sizedBox(height: 8),
             roundedContainerExample(),
@@ -53,7 +55,7 @@ class ContainerExampleScreen extends StatelessWidget {
             // Container with shadow
             OsmeaComponents.text(
               'Container with shadow:',
-              variant: OsmeaTextVariant.bodyMedium,
+              fontSize: 16,
             ),
             OsmeaComponents.sizedBox(height: 8),
             shadowContainerExample(),
@@ -62,8 +64,8 @@ class ContainerExampleScreen extends StatelessWidget {
             // Section title for layout containers
             OsmeaComponents.text(
               '📐 Layout & Positioning',
-              fontSize: 20,
               fontWeight: FontWeight.bold,
+              fontSize: 20,
             ),
             OsmeaComponents.sizedBox(height: 16),
 
@@ -88,8 +90,8 @@ class ContainerExampleScreen extends StatelessWidget {
             // Section title for styling containers
             OsmeaComponents.text(
               '🎨 Styling & Effects',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
             ),
             OsmeaComponents.sizedBox(height: 16),
 
@@ -114,8 +116,8 @@ class ContainerExampleScreen extends StatelessWidget {
             // Section title for interactive containers
             OsmeaComponents.text(
               '👆 Interactive Containers',
-              fontSize: 20,
               fontWeight: FontWeight.bold,
+              fontSize: 20,
             ),
             OsmeaComponents.sizedBox(height: 16),
 
@@ -128,8 +130,8 @@ class ContainerExampleScreen extends StatelessWidget {
             // Section title for shape variants
             OsmeaComponents.text(
               '🔳 Shape Variants',
-              fontSize: 20,
               fontWeight: FontWeight.bold,
+              fontSize: 20,
             ),
             OsmeaComponents.sizedBox(height: 16),
 
@@ -142,8 +144,8 @@ class ContainerExampleScreen extends StatelessWidget {
             // Section title for advanced examples
             OsmeaComponents.text(
               '🚀 Advanced Examples',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
             ),
             OsmeaComponents.sizedBox(height: 16),
 
@@ -152,6 +154,8 @@ class ContainerExampleScreen extends StatelessWidget {
             OsmeaComponents.sizedBox(height: 8),
             complexContainerExamples(),
             OsmeaComponents.sizedBox(height: 32),
+
+            
           ],
         ),
       ),
@@ -214,7 +218,7 @@ class ContainerExampleScreen extends StatelessWidget {
 
   // Container alignment examples
   Widget alignmentContainerExamples() {
-    return Row(
+    return OsmeaComponents.row(
       children: [
         Expanded(
           child: OsmeaComponents.container(
@@ -292,7 +296,7 @@ class ContainerExampleScreen extends StatelessWidget {
           ),
           color: Colors.amber,
           child: Center(
-            child: Padding(
+            child: OsmeaComponents.padding(
               padding: context.paddingLow,
               child:
                   OsmeaComponents.text('Constrained Size', color: Colors.white),
@@ -305,7 +309,7 @@ class ContainerExampleScreen extends StatelessWidget {
 
   // Containers with borders examples
   Widget borderedContainerExamples() {
-    return Column(
+    return OsmeaComponents.column(
       children: [
         OsmeaComponents.container(
           width: double.infinity,
@@ -330,7 +334,7 @@ class ContainerExampleScreen extends StatelessWidget {
 
   // Gradient container examples
   Widget gradientContainerExamples() {
-    return Column(
+    return OsmeaComponents.column(
       children: [
         OsmeaComponents.container(
           width: double.infinity,
@@ -394,7 +398,7 @@ class ContainerExampleScreen extends StatelessWidget {
 
   // Interactive container examples
   Widget interactiveContainerExamples(BuildContext context) {
-    return Column(
+    return OsmeaComponents.column(
       children: [
         OsmeaComponents.container(
           width: double.infinity,
@@ -499,7 +503,7 @@ class ContainerExampleScreen extends StatelessWidget {
           spreadRadius: 2,
         ),
       ],
-      child: Column(
+      child: OsmeaComponents.column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -515,7 +519,7 @@ class ContainerExampleScreen extends StatelessWidget {
             color: Colors.white70,
           ),
           OsmeaComponents.sizedBox(height: 16),
-          Row(
+          OsmeaComponents.row(
             children: [
               OsmeaComponents.container(
                 padding: const EdgeInsets.all(12),

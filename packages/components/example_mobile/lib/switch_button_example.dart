@@ -55,7 +55,7 @@ class _SwitchButtonExampleState extends State<SwitchButtonExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text(
           '🔄 OSMEA Switch Examples',
           variant: OsmeaTextVariant.headlineMedium,
@@ -63,9 +63,9 @@ class _SwitchButtonExampleState extends State<SwitchButtonExample> {
         backgroundColor: OsmeaColors.nordicBlue,
         foregroundColor: OsmeaColors.white,
       ),
-      body: SingleChildScrollView(
+      body: OsmeaComponents.singleChildScrollView(
         padding: context.paddingNormal,
-        child: Column(
+        child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildSectionTitle('🎨 Switch Variants'),
@@ -92,7 +92,7 @@ class _SwitchButtonExampleState extends State<SwitchButtonExample> {
   }
 
   Widget _buildSectionTitle(String title) {
-    return Padding(
+    return OsmeaComponents.padding(
       padding: const EdgeInsets.only(bottom: 16.0),
       child: OsmeaComponents.text(
         title,
@@ -107,9 +107,9 @@ class _SwitchButtonExampleState extends State<SwitchButtonExample> {
 
   Widget _buildVariantsSection() {
     return Card(
-      child: Padding(
+      child: OsmeaComponents.padding(
         padding: context.paddingNormal,
-        child: Column(
+        child: OsmeaComponents.column(
           children: [
             _buildSwitchRow(
               '🎯 Simple Switch',
@@ -174,9 +174,9 @@ class _SwitchButtonExampleState extends State<SwitchButtonExample> {
 
   Widget _buildSizesSection() {
     return Card(
-      child: Padding(
+      child: OsmeaComponents.padding(
         padding: context.paddingNormal,
-        child: Column(
+        child: OsmeaComponents.column(
           children: [
             _buildSwitchRow(
               '🔸 Small Switch',
@@ -209,9 +209,9 @@ class _SwitchButtonExampleState extends State<SwitchButtonExample> {
 
   Widget _buildSettingsSection() {
     return Card(
-      child: Padding(
+      child: OsmeaComponents.padding(
         padding: context.paddingNormal,
-        child: Column(
+        child: OsmeaComponents.column(
           children: [
             _buildSwitchRow(
               '🌙 Dark Mode',
@@ -272,9 +272,9 @@ class _SwitchButtonExampleState extends State<SwitchButtonExample> {
 
   Widget _buildStateSection() {
     return Card(
-      child: Padding(
+      child: OsmeaComponents.padding(
         padding: context.paddingNormal,
-        child: Column(
+        child: OsmeaComponents.column(
           children: [
             _buildSwitchRow(
               '✅ Enabled Switch',
@@ -307,9 +307,9 @@ class _SwitchButtonExampleState extends State<SwitchButtonExample> {
 
   Widget _buildCustomSection() {
     return Card(
-      child: Padding(
+      child: OsmeaComponents.padding(
         padding: context.paddingNormal,
-        child: Column(
+        child: OsmeaComponents.column(
           children: [
             // Custom colored switch
             OsmeaComponents.switchButton(
@@ -336,7 +336,7 @@ class _SwitchButtonExampleState extends State<SwitchButtonExample> {
             const Divider(),
 
             // Switch with custom padding
-            Container(
+            OsmeaComponents.container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: Colors.blue[50],
@@ -358,9 +358,9 @@ class _SwitchButtonExampleState extends State<SwitchButtonExample> {
 
   Widget _buildStylesSection() {
     return Card(
-      child: Padding(
+      child: OsmeaComponents.padding(
         padding: context.paddingNormal,
-        child: Column(
+        child: OsmeaComponents.column(
           children: [
             _buildSwitchRow(
               '✨ Modern Style',
@@ -418,7 +418,7 @@ class _SwitchButtonExampleState extends State<SwitchButtonExample> {
     SwitchStyle style = SwitchStyle.modern,
     Color? customActiveColor,
   }) {
-    return Padding(
+    return OsmeaComponents.padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: OsmeaComponents.switchButton(
         value: value,

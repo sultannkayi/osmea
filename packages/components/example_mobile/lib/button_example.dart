@@ -29,7 +29,7 @@ class _ButtonExampleState extends State<ButtonExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text(
           '🔘 OSMEA Button Examples',
           variant: OsmeaTextVariant.headlineMedium,
@@ -37,7 +37,7 @@ class _ButtonExampleState extends State<ButtonExample> {
         backgroundColor: OsmeaColors.nordicBlue,
         foregroundColor: OsmeaColors.white,
       ),
-      body: SingleChildScrollView(
+      body: OsmeaComponents.singleChildScrollView(
         padding: context.paddingNormal,
         child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -352,7 +352,7 @@ class _ButtonExampleState extends State<ButtonExample> {
         ),
         OsmeaComponents.sizedBox(height: 16),
         _buildSubsectionTitle('Button Row'),
-        Row(
+        OsmeaComponents.row(
           children: [
             Expanded(
               child: OsmeaComponents.button(

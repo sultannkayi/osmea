@@ -12,10 +12,15 @@ class WrapExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
-        title: OsmeaComponents.text('OSMEA Wrap Examples'),
+      appBar: OsmeaComponents.appBar(
         backgroundColor: OsmeaColors.nordicBlue,
         foregroundColor: OsmeaColors.white,
+        title: OsmeaComponents.text(
+          'OSMEA Wrap Examples',
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+          color: OsmeaColors.white,
+        ),
       ),
       body: OsmeaComponents.singleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -117,7 +122,7 @@ class WrapExample extends StatelessWidget {
 
   Widget _buildExampleSection(
       String title, String description, Widget example) {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         OsmeaComponents.text(
@@ -131,7 +136,7 @@ class WrapExample extends StatelessWidget {
           color: OsmeaColors.pewter,
         ),
         OsmeaComponents.sizedBox(height: 16),
-        Container(
+        OsmeaComponents.container(
           width: double.infinity,
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
@@ -149,7 +154,7 @@ class WrapExample extends StatelessWidget {
     return OsmeaComponents.wrap(
       children: [
         for (int i = 1; i <= 10; i++)
-          Container(
+          OsmeaComponents.container(
             width: 60,
             height: 60,
             margin: const EdgeInsets.all(4),
@@ -178,7 +183,7 @@ class WrapExample extends StatelessWidget {
       runSpacing: 16.0, // gap between rows
       children: [
         for (int i = 1; i <= 10; i++)
-          Container(
+          OsmeaComponents.container(
             width: 60,
             height: 60,
             decoration: BoxDecoration(
@@ -206,7 +211,7 @@ class WrapExample extends StatelessWidget {
       children: [
         OsmeaComponents.text('WrapAlignment.start:'),
         OsmeaComponents.sizedBox(height: 8),
-        Container(
+        OsmeaComponents.container(
           color: OsmeaColors.ash.withOpacity(0.2),
           width: double.infinity,
           child: OsmeaComponents.wrap(
@@ -219,7 +224,7 @@ class WrapExample extends StatelessWidget {
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.text('WrapAlignment.center:'),
         OsmeaComponents.sizedBox(height: 8),
-        Container(
+        OsmeaComponents.container(
           color: OsmeaColors.ash.withOpacity(0.2),
           width: double.infinity,
           child: OsmeaComponents.wrap(
@@ -232,7 +237,7 @@ class WrapExample extends StatelessWidget {
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.text('WrapAlignment.end:'),
         OsmeaComponents.sizedBox(height: 8),
-        Container(
+        OsmeaComponents.container(
           color: OsmeaColors.ash.withOpacity(0.2),
           width: double.infinity,
           child: OsmeaComponents.wrap(
@@ -253,7 +258,7 @@ class WrapExample extends StatelessWidget {
       children: [
         OsmeaComponents.text('runAlignment: WrapAlignment.start:'),
         OsmeaComponents.sizedBox(height: 8),
-        Container(
+        OsmeaComponents.container(
           color: OsmeaColors.ash.withOpacity(0.2),
           height: 150,
           width: double.infinity,
@@ -267,7 +272,7 @@ class WrapExample extends StatelessWidget {
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.text('runAlignment: WrapAlignment.spaceBetween:'),
         OsmeaComponents.sizedBox(height: 8),
-        Container(
+        OsmeaComponents.container(
           color: OsmeaColors.ash.withOpacity(0.2),
           height: 150,
           width: double.infinity,
@@ -287,7 +292,7 @@ class WrapExample extends StatelessWidget {
     List<Widget> getBoxesWithVaryingHeights() {
       return [
         for (int i = 0; i < 5; i++)
-          Container(
+          OsmeaComponents.container(
             width: 60,
             height: 40.0 + (i * 15),
             decoration: BoxDecoration(
@@ -313,7 +318,7 @@ class WrapExample extends StatelessWidget {
       children: [
         OsmeaComponents.text('WrapCrossAlignment.start:'),
         OsmeaComponents.sizedBox(height: 8),
-        Container(
+        OsmeaComponents.container(
           color: OsmeaColors.ash.withOpacity(0.2),
           width: double.infinity,
           child: OsmeaComponents.wrap(
@@ -326,7 +331,7 @@ class WrapExample extends StatelessWidget {
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.text('WrapCrossAlignment.center:'),
         OsmeaComponents.sizedBox(height: 8),
-        Container(
+        OsmeaComponents.container(
           color: OsmeaColors.ash.withOpacity(0.2),
           width: double.infinity,
           child: OsmeaComponents.wrap(
@@ -339,7 +344,7 @@ class WrapExample extends StatelessWidget {
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.text('WrapCrossAlignment.end:'),
         OsmeaComponents.sizedBox(height: 8),
-        Container(
+        OsmeaComponents.container(
           color: OsmeaColors.ash.withOpacity(0.2),
           width: double.infinity,
           child: OsmeaComponents.wrap(
@@ -355,7 +360,7 @@ class WrapExample extends StatelessWidget {
 
   // Vertical wrap example
   Widget _buildVerticalWrap() {
-    return SizedBox(
+    return OsmeaComponents.sizedBox(
       height: 200,
       child: OsmeaComponents.wrap(
         direction: Axis.vertical,
@@ -363,7 +368,7 @@ class WrapExample extends StatelessWidget {
         runSpacing: 8.0,
         children: [
           for (int i = 1; i <= 12; i++)
-            Container(
+            OsmeaComponents.container(
               width: 60,
               height: 40,
               decoration: BoxDecoration(
@@ -417,7 +422,7 @@ class WrapExample extends StatelessWidget {
                 ? OsmeaColors.sunsetGlow
                 : OsmeaColors.forestHeart;
 
-        return Container(
+        return OsmeaComponents.container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
             color: color.withOpacity(0.15),
@@ -452,7 +457,7 @@ class WrapExample extends StatelessWidget {
       spacing: 8.0,
       runSpacing: 8.0,
       children: colors.map((color) {
-        return Container(
+        return OsmeaComponents.container(
           width: (MediaQuery.of(context).size.width - 64) /
               3, // 3 photos per row with spacing
           height: 100,
@@ -483,7 +488,7 @@ class WrapExample extends StatelessWidget {
   List<Widget> _buildColorBoxes(int count, Color color) {
     return List.generate(
       count,
-      (index) => Container(
+      (index) => OsmeaComponents.container(
         width: 60,
         height: 40,
         decoration: BoxDecoration(
