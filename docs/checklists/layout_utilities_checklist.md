@@ -22,7 +22,9 @@ This section includes foundational layout widgets rewritten or extended for cons
 | Rich Text              | 🟢     | 27.06.25      | 27.06.25    | @NurhayatYurtaslan  |
 | Text Span              | 🟢     | 27.06.25      | 27.06.25    | @NurhayatYurtaslan  |
 | Divider                | 🟢     | 28.06.25      | 28.06.25    | @NurhayatYurtaslan  |
-| Grid                   | 🟡     | 28.01.25      | (TBD)       | @nisacolak          |
+| Grid                   | 🟡     | 28.06.25      | (TBD)       | @nisacolak          |
+| FittedBox              | 🟢     | 02.07.25      | 02.07.25    | @yuceel             |
+| ClipRRect              | 🟢     | 02.07.25      | 02.07.25    | @yuceel             |
 ---
 
 > [!NOTE]

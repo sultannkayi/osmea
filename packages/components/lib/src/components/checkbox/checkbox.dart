@@ -123,7 +123,7 @@ class OsmeaCheckbox extends CoreContainer {
 
     Widget checkboxWidget = _buildCheckbox(context, config, colors);
 
-    // Variant'a göre label gösterimi
+    // Show label according to the variant
     if ((variant == CheckboxVariant.labeled ||
             variant == CheckboxVariant.extended ||
             variant == CheckboxVariant.card ||
@@ -266,7 +266,7 @@ class OsmeaCheckbox extends CoreContainer {
       children: children,
     );
 
-    // Card ve tile variant'ları için container
+    // For card and tile variants, wrap in container
     if (variant == CheckboxVariant.card || variant == CheckboxVariant.tile) {
       content = _wrapInContainer(context, content, colors);
     }

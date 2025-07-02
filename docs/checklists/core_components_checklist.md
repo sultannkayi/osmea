@@ -19,20 +19,20 @@ This document tracks the status of both design styles and reusable UI components
 | Textfields                    | 🟢     | 18.06.25   | 21.06.25 | @nisacolak         |
 | List Items                    | 🟢     | 23.06.25   | 24.06.25 | @NurhayatYurtaslan |
 | Ticket Widget                 | 🟢     | 25.06.25   | 25.06.25 | @gurkanfikretgunak |
-| Snackbar - Toast              | 🔴     | (TBD)      | (TBD)    | (To be assigned)   |
+| Snackbar                      | 🔴     | (TBD)      | (TBD)    | (To be assigned)   |
+| Toast                         | 🟢     | 27.01.25   | 03.07.25 | @NurhayatYurtaslan |
 | Carousel                      | 🟢     | 22.06.25   | 22.06.25 | @NurhayatYurtaslan |
 | Chips                         | 🟢     | 21.06.25   | 22.06.25 | @NurhayatYurtaslan |
 | Badge                         | 🟢     | 20.06.25   | 21.06.25 | @NurhayatYurtaslan |
 | Dividers                      | 🟢     | 27.01.25   | 28.01.25 | @NurhayatYurtaslan |
 | Accordion                     | 🟡     | 27.01.25   | (TBD)    | @NurhayatYurtaslan |
 | Loading ve Progress           | 🟢     | 27.01.25   | 28.01.25 | @NurhayatYurtaslan |
-| Searchbar                     | 🔴     | (TBD)      | (TBD)    | (To be assigned)   |
 | Stepper                       | 🟢     | 27.01.25   | 27.01.25 | @nisacolak         |
 | Upload                        | 🔴     | (TBD)      | (TBD)    | (To be assigned)   |
 | Skeleton                      | 🔴     | (TBD)      | (TBD)    | (To be assigned)   |
 | Searchbar                     | 🟡     | 28.01.25   | (TBD)    | @nisacolak         |
 | Tabbar                        | 🟡     | 27.01.25   | (TBD)    | @NurhayatYurtaslan |
-| Layout Utilities              | 🟡     | 20.06.25   | (TBD)    | @NurhayatYurtaslan |
+| Layout Utilities              | 🟡     | 20.06.25   | (TBD)    | @NurhayatYurtaslan @yuceel @nisacolak |
 
 ---
 

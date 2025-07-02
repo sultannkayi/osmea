@@ -98,7 +98,7 @@ class OsmeaBottomSheet extends CoreContainer {
     this.constraints,
     this.showDragIndicator = true,
     this.shape,
-    // Action Bar özellikleri
+    // Action Bar properties
     this.leftAction,
     this.rightAction,
     this.showActionBorder = true,
@@ -178,19 +178,19 @@ class OsmeaBottomSheet extends CoreContainer {
   /// 🔲 Custom shape for the bottom sheet
   final ShapeBorder? shape;
 
-  /// 👈 **Left Action** - Sol tarafta gösterilecek aksiyon butonu (kapat, geri vb.)
+  /// 👈 **Left Action** - Action button to be shown on the left side (close, back, etc.)
   final Widget? leftAction;
 
-  /// 👉 **Right Action** - Sağ tarafta gösterilecek aksiyon butonu (ilerle, kaydet vb.)
+  /// �� **Right Action** - Action button to be shown on the right side (forward, save, etc.)
   final Widget? rightAction;
 
-  /// 🔲 **Show Action Border** - Action bar'ın altında border gösterilip gösterilmeyeceği
+  /// 🔲 **Show Action Border** - Whether to show a border under the action bar
   final bool showActionBorder;
 
-  /// 🎨 **Action Bar Background Color** - Action bar'ın arka plan rengi
+  /// 🎨 **Action Bar Background Color** - Background color of the action bar
   final Color? actionBarBackgroundColor;
 
-  /// 🎨 **Action Bar Border Color** - Action bar'ın border rengi
+  /// 🎨 **Action Bar Border Color** - Border color of the action bar
   final Color? actionBarBorderColor;
 
   // Computed properties based on state
@@ -198,8 +198,8 @@ class OsmeaBottomSheet extends CoreContainer {
   bool get isExpanded => state == BottomSheetState.expanded;
   bool get isDragging => state == BottomSheetState.dragging;
   bool get isAnimating => state == BottomSheetState.animating;
-  bool get shouldShowHandle => 
-      handle == BottomSheetHandle.visible || 
+  bool get shouldShowHandle =>
+      handle == BottomSheetHandle.visible ||
       (handle == BottomSheetHandle.auto && enableDrag && showDragIndicator);
 
   @override
@@ -218,10 +218,12 @@ class OsmeaBottomSheet extends CoreContainer {
     ShapeBorder effectiveShape,
   ) {
     Widget content = Container(
-      constraints: constraints ?? BoxConstraints(
-        maxHeight: config.height,
-        minHeight: variant == BottomSheetVariant.persistent ? config.height : 0,
-      ),
+      constraints: constraints ??
+          BoxConstraints(
+            maxHeight: config.height,
+            minHeight:
+                variant == BottomSheetVariant.persistent ? config.height : 0,
+          ),
       decoration: BoxDecoration(
         color: backgroundColor ?? colors.background,
         borderRadius: config.borderRadius,
@@ -254,15 +256,16 @@ class OsmeaBottomSheet extends CoreContainer {
       children: [
         // Drag handle
         if (shouldShowHandle) _buildDragHandle(context),
-        
-        // Action bar (sadece actionBar variant'ında)
-        if (variant == BottomSheetVariant.actionBar && (leftAction != null || rightAction != null))
+
+        // Action bar (only in actionBar variant)
+        if (variant == BottomSheetVariant.actionBar &&
+            (leftAction != null || rightAction != null))
           _buildActionBar(context, colors),
-        
+
         // Header (title, subtitle, actions)
         if (title != null || subtitle != null || headerActions != null)
           _buildHeader(context, colors),
-        
+
         // Main content
         Flexible(
           child: SingleChildScrollView(
@@ -270,7 +273,7 @@ class OsmeaBottomSheet extends CoreContainer {
             child: child,
           ),
         ),
-        
+
         // Footer
         if (footer != null) _buildFooter(context),
       ],
@@ -309,7 +312,8 @@ class OsmeaBottomSheet extends CoreContainer {
                   const SizedBox(height: 4),
                   Text(
                     subtitle!,
-                    style: subtitleStyle ?? _getDefaultSubtitleStyle(context, colors),
+                    style: subtitleStyle ??
+                        _getDefaultSubtitleStyle(context, colors),
                   ),
                 ],
               ],
@@ -325,21 +329,23 @@ class OsmeaBottomSheet extends CoreContainer {
     return Container(
       decoration: BoxDecoration(
         color: actionBarBackgroundColor ?? colors.background,
-        border: showActionBorder ? Border(
-          bottom: BorderSide(
-            color: actionBarBorderColor ?? colors.divider,
-            width: 1.0,
-          ),
-        ) : null,
+        border: showActionBorder
+            ? Border(
+                bottom: BorderSide(
+                  color: actionBarBorderColor ?? colors.divider,
+                  width: 1.0,
+                ),
+              )
+            : null,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Sol aksiyon (örn: kapat, geri)
+          // Left action (e.g., close, back)
           leftAction ?? const SizedBox.shrink(),
-          
-          // Sağ aksiyon (örn: ilerle, kaydet)
+
+          // Right action (e.g., forward, save)
           rightAction ?? const SizedBox.shrink(),
         ],
       ),
@@ -413,17 +419,19 @@ class OsmeaBottomSheet extends CoreContainer {
     return null;
   }
 
-  TextStyle _getDefaultTitleStyle(BuildContext context, _BottomSheetColors colors) {
+  TextStyle _getDefaultTitleStyle(
+      BuildContext context, _BottomSheetColors colors) {
     return Theme.of(context).textTheme.headlineSmall!.copyWith(
-      color: colors.text,
-      fontWeight: FontWeight.w600,
-    );
+          color: colors.text,
+          fontWeight: FontWeight.w600,
+        );
   }
 
-  TextStyle _getDefaultSubtitleStyle(BuildContext context, _BottomSheetColors colors) {
+  TextStyle _getDefaultSubtitleStyle(
+      BuildContext context, _BottomSheetColors colors) {
     return Theme.of(context).textTheme.bodyMedium!.copyWith(
-      color: colors.text.withOpacity(0.7),
-    );
+          color: colors.text.withOpacity(0.7),
+        );
   }
 
   void _onDragStart() {
@@ -487,8 +495,8 @@ class OsmeaBottomSheetHelpers {
       context: context,
       builder: (context) => OsmeaBottomSheet(
         size: size,
-        variant: (leftAction != null || rightAction != null) 
-            ? BottomSheetVariant.actionBar 
+        variant: (leftAction != null || rightAction != null)
+            ? BottomSheetVariant.actionBar
             : BottomSheetVariant.modal,
         title: title,
         subtitle: subtitle,
@@ -535,8 +543,8 @@ class OsmeaBottomSheetHelpers {
     return Scaffold.of(context).showBottomSheet(
       (context) => OsmeaBottomSheet(
         size: size,
-        variant: (leftAction != null || rightAction != null) 
-            ? BottomSheetVariant.actionBar 
+        variant: (leftAction != null || rightAction != null)
+            ? BottomSheetVariant.actionBar
             : BottomSheetVariant.persistent,
         title: title,
         subtitle: subtitle,
@@ -558,4 +566,4 @@ class OsmeaBottomSheetHelpers {
       backgroundColor: backgroundColor,
     );
   }
-} 
+}

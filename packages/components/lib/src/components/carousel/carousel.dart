@@ -568,7 +568,7 @@ class _OsmeaCarouselView extends StatelessWidget {
       CarouselSizeConfig config,
       CarouselVariantConfig variantConfig,
       CarouselState state) {
-    // Multi-item carousel'da göstergeleri hiç döndürme
+    // Never rotate indicators in multi-item carousel
     if (parent.variant == CarouselVariant.multi) {
       return const SizedBox.shrink();
     }

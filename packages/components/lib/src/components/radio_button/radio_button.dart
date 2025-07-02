@@ -116,7 +116,7 @@ class OsmeaRadio<T> extends CoreContainer {
 
     Widget radioWidget = _buildRadio(context, config, colors);
 
-    // Variant'a göre label gösterimi
+    // Show label according to the variant
     if ((variant == RadioVariant.labeled ||
             variant == RadioVariant.extended ||
             variant == RadioVariant.card ||
@@ -215,7 +215,7 @@ class OsmeaRadio<T> extends CoreContainer {
       children: children,
     );
 
-    // Card ve tile variant'ları için container
+    // For card and tile variants, wrap in container
     if (variant == RadioVariant.card || variant == RadioVariant.tile) {
       content = _wrapInContainer(context, content, colors);
     }

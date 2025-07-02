@@ -455,7 +455,7 @@ class OsmeaToast extends CoreContainer {
             context.emptySizedWidthBoxNormal,
             OsmeaExpanded(
               child: OsmeaText(
-                text: state.message,
+                state.message,
                 style: OsmeaTextStyle.bodySmall(context).copyWith(
                   color: OsmeaColors.white,
                   decoration: none,
@@ -552,7 +552,6 @@ class ToastManager {
     // If stacking is disabled, remove all previous toasts
     // If stacking is enabled and maxToasts is reached, remove the oldest toast
     // Only start the timer for the last (topmost) toast in the list
-    // Start the timer for the next (now topmost) toast
     if (!stacked) {
       for (final entry in _entries) {
         entry.overlayEntry.remove();
@@ -577,7 +576,6 @@ class ToastManager {
     _entries.add(_ToastEntry(id, entry));
     overlay.insert(entry);
 
-    // Sadece listenin sonundaki (en üstteki) toast için timer başlat
     if (_entries.length == 1 || _entries.last.id == id) {
       _startAutoHideTimer(_entries.last.id, toastState.duration);
     }
@@ -606,7 +604,6 @@ class ToastManager {
       _timers.remove(id);
       _entries[idx].overlayEntry.remove();
       _entries.removeAt(idx);
-      // Sıradaki (şimdi en üstteki) toast için timer başlat
       if (_entries.isNotEmpty) {
         final nextId = _entries.last.id;
         _startAutoHideTimer(nextId, const Duration(seconds: 3));

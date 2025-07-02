@@ -112,7 +112,7 @@ class OsmeaSwitch extends CoreContainer {
 
     Widget switchWidget = _buildSwitch(context, config, colors);
 
-    // Variant'a göre label gösterimi
+    // Show label according to the variant
     if ((variant == SwitchVariant.labeled ||
             variant == SwitchVariant.extended ||
             variant == SwitchVariant.card) &&
@@ -183,7 +183,7 @@ class OsmeaSwitch extends CoreContainer {
       decoration: _getTrackDecoration(context, config, colors),
       child: Stack(
         children: [
-          // Track içi içerik (sadece extended variant için)
+          // Track inner content (only for extended variant)
           if (variant == SwitchVariant.extended)
             _buildTrackContent(context, config, colors),
           // Thumb
@@ -216,7 +216,7 @@ class OsmeaSwitch extends CoreContainer {
               ),
             ),
           ),
-          // Sağ taraf (açık durum)
+          // Right side (on state)
           Expanded(
             child: Center(
               child: AnimatedOpacity(
@@ -362,7 +362,6 @@ class OsmeaSwitch extends CoreContainer {
 
   Widget? _buildThumbContent(
       BuildContext context, SwitchSizeConfig config, _SwitchColors colors) {
-    // Sadece extended variant'ında thumb içinde ikon göster
     if (variant == SwitchVariant.extended && style == SwitchStyle.modern) {
       return Center(
         child: AnimatedSwitcher(

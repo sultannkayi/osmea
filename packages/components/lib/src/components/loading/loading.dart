@@ -1188,7 +1188,7 @@ class _AtomLoading extends StatelessWidget {
       child: Stack(
         alignment: center,
         children: [
-          // Merkez nokta
+          // Center point
           OsmeaContainer(
             width: size * 0.15,
             height: size * 0.15,
