@@ -199,7 +199,7 @@ class PositionedExampleScreen extends StatelessWidget {
       child: OsmeaComponents.stack(
         children: [
           // Center element for reference
-          Align(
+          OsmeaComponents.align(
             alignment: Alignment.center,
             child: OsmeaComponents.container(
               width: 100,
@@ -683,7 +683,7 @@ class PositionedExampleScreen extends StatelessWidget {
                 ),
                 OsmeaComponents.sizedBox(width: 16),
                 Expanded(
-                  child: Column(
+                  child: OsmeaComponents.column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
