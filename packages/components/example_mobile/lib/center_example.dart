@@ -11,7 +11,7 @@ class CenterExample extends StatelessWidget {
         title: OsmeaComponents.text('OSMEA Center Examples'),
         elevation: 0,
       ),
-      body: SingleChildScrollView(
+      body: OsmeaComponents.singleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
