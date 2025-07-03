@@ -11,7 +11,7 @@ class StackExample extends StatelessWidget {
         title: OsmeaComponents.text('OSMEA Stack Examples'),
         elevation: 0,
       ),
-      body: SingleChildScrollView(
+      body: OsmeaComponents.singleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -156,14 +156,14 @@ class StackExample extends StatelessWidget {
         _buildExampleWithCaption(
           'Stack with StackFit.expand',
           _buildContainer(
-            SizedBox(
+            OsmeaComponents.sizedBox(
               width: double.infinity,
               height: 200,
               child: OsmeaComponents.stack(
                 fit: StackFit.expand,
                 children: [
                   OsmeaComponents.container(color: Colors.green.withOpacity(0.3)),
-                  Align(
+                  OsmeaComponents.align(
                     alignment: Alignment.center,
                     child: OsmeaComponents.container(
                       width: 100,
@@ -226,7 +226,7 @@ class StackExample extends StatelessWidget {
         _buildExampleWithCaption(
           'Stack with Positioned Children',
           _buildContainer(
-            SizedBox(
+            OsmeaComponents.sizedBox(
               width: double.infinity,
               height: 200,
               child: OsmeaComponents.stack(
@@ -277,7 +277,7 @@ class StackExample extends StatelessWidget {
         _buildExampleWithCaption(
           'Stack with positionedFill and positionedFractional',
           _buildContainer(
-            SizedBox(
+            OsmeaComponents.sizedBox(
               width: double.infinity,
               height: 200,
               child: OsmeaComponents.stack(
@@ -335,7 +335,7 @@ class StackExample extends StatelessWidget {
         _buildExampleWithCaption(
           'Image Card with Overlay',
           _buildContainer(
-            SizedBox(
+            OsmeaComponents.sizedBox(
               width: double.infinity,
               height: 200,
               child: ClipRRect(
