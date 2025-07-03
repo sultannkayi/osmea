@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:osmea_components/src/components/buttons/button.dart';
 import 'package:osmea_components/src/components/container/container.dart';
+import 'package:osmea_components/src/components/sized_box/sized_box.dart';
 import 'package:osmea_components/src/components/text_field/text_field.dart';
 import 'package:osmea_components/src/core/text_field_widget.dart';
 import 'package:osmea_components/src/components/searchbar/cubit/searchbar_cubit.dart';
@@ -406,7 +407,7 @@ class _OsmeaSearchbarView extends StatelessWidget {
   Widget _buildLoadingIndicator(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(8),
-      child: SizedBox(
+      child: OsmeaSizedBox(
         width: 16,
         height: 16,
         child: CircularProgressIndicator(
@@ -452,7 +453,7 @@ class _OsmeaSearchbarView extends StatelessWidget {
       return searchbar.errorBuilder!(context, state.errorMessage!);
     }
 
-    return Container(
+    return OsmeaContainer(
       margin: EdgeInsets.only(top: 4),
       padding: EdgeInsets.all(8),
       child: Text(
