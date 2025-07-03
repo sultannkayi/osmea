@@ -73,7 +73,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
         backgroundColor: OsmeaColors.forestHeart,
         foregroundColor: OsmeaColors.white,
       ),
-      body: SingleChildScrollView(
+      body: OsmeaComponents.singleChildScrollView(
         padding: context.paddingNormal,
         child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
