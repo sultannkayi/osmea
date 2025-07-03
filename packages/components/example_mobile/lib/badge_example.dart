@@ -210,7 +210,7 @@ class _BadgeExampleState extends State<BadgeExample> {
     required String description,
     required Widget badge,
   }) {
-    return SizedBox(
+    return OsmeaComponents.sizedBox(
       width: MediaQuery.of(context).size.width > 600
           ? 250
           : (MediaQuery.of(context).size.width - 60) / 2,
@@ -589,7 +589,7 @@ class _BadgeExampleState extends State<BadgeExample> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                child: const Text('Messages'),
+                child: OsmeaComponents.text('Messages'),
               ),
               content: '12',
               position: BadgePosition.topRight,
@@ -648,10 +648,11 @@ class _BadgeExampleState extends State<BadgeExample> {
         color: Colors.grey.shade200,
         borderRadius: BorderRadius.circular(4),
       ),
-      child: const Center(
-        child: Text(
+      child: OsmeaComponents.center(
+        child: OsmeaComponents.text(
           'Parent',
-          style: TextStyle(fontSize: 14, color: Colors.black54),
+          fontSize: 14,
+          color: Colors.black54,
         ),
       ),
     );
