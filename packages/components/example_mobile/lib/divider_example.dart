@@ -50,9 +50,9 @@ class DividerExample extends StatelessWidget {
                       fontSize: 16,
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  OsmeaComponents.sizedBox(height: 12),
                   const Text('Horizontal'),
-                  const SizedBox(height: 8),
+                  OsmeaComponents.sizedBox(height: 8),
                   OsmeaComponents.row(
                     children: [
                       Expanded(
@@ -72,9 +72,9 @@ class DividerExample extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
+                  OsmeaComponents.sizedBox(height: 16),
                   const Text('Vertical'),
-                  const SizedBox(height: 8),
+                  OsmeaComponents.sizedBox(height: 8),
                   OsmeaComponents.container(
                     width: 60,
                     height: 120,
