@@ -44,6 +44,8 @@ import 'package:osmea_components/src/components/ticket_widget/ticket_widget.dart
 import 'package:osmea_components/src/components/ticket_widget/models/ticket_models.dart';
 import 'package:osmea_components/src/components/popup/popup.dart';
 import 'package:osmea_components/src/components/stepper/stepper.dart';
+import 'components/snackbar/snackbar.dart';
+export 'utils/snackbar_extensions.dart';
 
 class OsmeaComponents {
   /// Supported Button variants - All variants are supported
@@ -1882,7 +1884,7 @@ class OsmeaComponents {
 
   /// 📏 **OSMEA FittedBox** - Scale and fit child widget
   ///
-  /// Creates a widget that scales and positions its child within itself 
+  /// Creates a widget that scales and positions its child within itself
   /// according to fit and alignment.
   /// Useful for scaling images, icons, or any widget to fit available space.
   ///
