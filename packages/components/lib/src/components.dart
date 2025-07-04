@@ -46,6 +46,8 @@ import 'package:osmea_components/src/components/popup/popup.dart';
 import 'package:osmea_components/src/components/stepper/stepper.dart';
 import 'components/snackbar/snackbar.dart';
 export 'utils/snackbar_extensions.dart';
+import 'package:osmea_components/src/components/searchbar/searchbar.dart';
+import 'package:osmea_components/src/components/searchbar/expandable_searchbar.dart';
 
 class OsmeaComponents {
   /// Supported Button variants - All variants are supported
@@ -1710,6 +1712,7 @@ class OsmeaComponents {
     Color? labelColor,
     bool fullWidth = false,
     Duration? animationDuration,
+    EdgeInsets? customContentPadding,
   }) {
     return OsmeaTextField(
       key: key,
@@ -1755,6 +1758,7 @@ class OsmeaComponents {
       labelColor: labelColor,
       fullWidth: fullWidth,
       animationDuration: animationDuration,
+      customContentPadding: customContentPadding,
     );
   }
 
@@ -2880,6 +2884,310 @@ class OsmeaComponents {
       onStepChanged: onStepChanged,
       allowStepTapping: allowStepTapping,
       stepperStyle: stepperStyle,
+    );
+  }
+
+  /// 🔍 **OSMEA Searchbar** - Advanced search component
+  ///
+  /// A comprehensive search component with suggestions, history, and multiple styling options.
+  /// Features advanced search functionality with debounced suggestions and search history.
+  ///
+  /// **Features:**
+  /// - Multiple variants (outlined, filled, underlined, borderless, rounded)
+  /// - Multiple styles (standard, minimal, expanded, compact, hero)
+  /// - Search suggestions and autocomplete
+  /// - Search history management
+  /// - Loading states and error handling
+  /// - Clear and back button support
+  /// - Custom search and suggestion providers
+  /// - Debounced search functionality
+  ///
+  /// **Usage:**
+  /// ```dart
+  /// OsmeaComponents.searchbar(
+  ///   hint: 'Search products...',
+  ///   searchbarVariant: SearchbarVariant.outlined,
+  ///   searchbarStyle: SearchbarStyle.standard,
+  ///   onSearch: (query) => performSearch(query),
+  ///   suggestionProvider: (query) => getSuggestions(query),
+  /// )
+  /// ```
+  static Widget searchbar({
+    Key? key,
+    CoreTheme? customTheme,
+    TextEditingController? controller,
+    FocusNode? focusNode,
+    String? hint,
+    TextFieldSize size = TextFieldSize.medium,
+    TextFieldVariant variant = TextFieldVariant.outlined,
+    TextFieldState state = TextFieldState.enabled,
+    ValueChanged<String>? onChanged,
+    ValueChanged<String>? onSubmitted,
+    GestureTapCallback? onTap,
+    TextAlign textAlign = TextAlign.start,
+    TextCapitalization textCapitalization = TextCapitalization.none,
+    TextInputType? keyboardType,
+    TextInputAction? textInputAction,
+    TextStyle? textStyle,
+    Color? textColor,
+    Color? backgroundColor,
+    Color? borderColor,
+    Color? focusColor,
+    Color? errorColor,
+    Color? hintColor,
+    bool fullWidth = true,
+    Duration? animationDuration,
+    // Searchbar-specific parameters
+    SearchbarVariant searchbarVariant = SearchbarVariant.outlined,
+    SearchbarStyle searchbarStyle = SearchbarStyle.standard,
+    ValueChanged<String>? onSearch,
+    VoidCallback? onClear,
+    VoidCallback? onBack,
+    Future<List<String>> Function(String query)? suggestionProvider,
+    Future<List<dynamic>> Function(String query)? searchProvider,
+    int maxHistoryItems = 10,
+    int minQueryLength = 2,
+    Duration debounceDuration = const Duration(milliseconds: 300),
+    bool showClearButton = true,
+    bool showBackButton = false,
+    bool showSearchIcon = true,
+    bool showSuggestions = true,
+    Widget Function(BuildContext context, List<String> suggestions,
+            Function(String) onSelect)?
+        suggestionBuilder,
+    Widget Function(BuildContext context, List<String> history,
+            Function(String) onSelect)?
+        historyBuilder,
+    Widget Function(BuildContext context)? loadingBuilder,
+    Widget Function(BuildContext context, String error)? errorBuilder,
+    Widget Function(BuildContext context)? emptyStateBuilder,
+    Widget? searchIcon,
+    Widget? clearIcon,
+    Widget? backIcon,
+    BorderRadius? customBorderRadius,
+    Duration? transitionDuration,
+    Curve transitionCurve = Curves.easeInOut,
+    ValueChanged<bool>? onFocusChanged,
+    ValueChanged<bool>? onHoverChanged,
+    List<String> initialHistory = const [],
+    bool enableHoverEffect = true,
+    Duration? hoverAnimationDuration,
+  }) {
+    return OsmeaSearchbar(
+      key: key,
+      customTheme: customTheme,
+      controller: controller,
+      focusNode: focusNode,
+      hint: hint,
+      size: size,
+      variant: variant,
+      state: state,
+      onChanged: onChanged,
+      onSubmitted: onSubmitted,
+      onTap: onTap,
+      textAlign: textAlign,
+      textCapitalization: textCapitalization,
+      keyboardType: keyboardType,
+      textInputAction: textInputAction,
+      textStyle: textStyle,
+      textColor: textColor,
+      backgroundColor: backgroundColor,
+      borderColor: borderColor,
+      focusColor: focusColor,
+      errorColor: errorColor,
+      hintColor: hintColor,
+      fullWidth: fullWidth,
+      animationDuration: animationDuration,
+      searchbarVariant: searchbarVariant,
+      searchbarStyle: searchbarStyle,
+      onSearch: onSearch,
+      onClear: onClear,
+      onBack: onBack,
+      suggestionProvider: suggestionProvider,
+      searchProvider: searchProvider,
+      maxHistoryItems: maxHistoryItems,
+      minQueryLength: minQueryLength,
+      debounceDuration: debounceDuration,
+      showClearButton: showClearButton,
+      showBackButton: showBackButton,
+      showSearchIcon: showSearchIcon,
+      showSuggestions: showSuggestions,
+      suggestionBuilder: suggestionBuilder,
+      historyBuilder: historyBuilder,
+      loadingBuilder: loadingBuilder,
+      errorBuilder: errorBuilder,
+      emptyStateBuilder: emptyStateBuilder,
+      searchIcon: searchIcon,
+      clearIcon: clearIcon,
+      backIcon: backIcon,
+      customBorderRadius: customBorderRadius,
+      transitionDuration: transitionDuration,
+      transitionCurve: transitionCurve,
+      onFocusChanged: onFocusChanged,
+      onHoverChanged: onHoverChanged,
+      initialHistory: initialHistory,
+      enableHoverEffect: enableHoverEffect,
+      hoverAnimationDuration: hoverAnimationDuration,
+    );
+  }
+
+  /// 🔍 **OSMEA Expandable Searchbar** - Icon button triggered search component
+  ///
+  /// An expandable search component that starts as an icon button and expands into a full searchbar.
+  /// Perfect for headers, app bars, and space-constrained layouts.
+  ///
+  /// **Features:**
+  /// - Icon button that expands to searchbar
+  /// - Smooth animation transitions
+  /// - Collapsible on back button or blur
+  /// - All standard searchbar features
+  /// - Multiple expansion directions
+  /// - Customizable animation duration
+  /// - Responsive design
+  ///
+  /// **Usage:**
+  /// ```dart
+  /// OsmeaComponents.expandableSearchbar(
+  ///   onSearch: (query) => performSearch(query),
+  ///   suggestionProvider: (query) => getSuggestions(query),
+  /// )
+  /// ```
+  static Widget expandableSearchbar({
+    Key? key,
+    CoreTheme? customTheme,
+    TextEditingController? controller,
+    FocusNode? focusNode,
+    String? hint,
+    TextFieldSize size = TextFieldSize.medium,
+    TextFieldVariant variant = TextFieldVariant.outlined,
+    TextFieldState state = TextFieldState.enabled,
+    ValueChanged<String>? onChanged,
+    ValueChanged<String>? onSubmitted,
+    GestureTapCallback? onTap,
+    TextAlign textAlign = TextAlign.start,
+    TextCapitalization textCapitalization = TextCapitalization.none,
+    TextInputType? keyboardType,
+    TextInputAction? textInputAction,
+    TextStyle? textStyle,
+    Color? textColor,
+    Color? backgroundColor,
+    Color? borderColor,
+    Color? focusColor,
+    Color? errorColor,
+    Color? hintColor,
+    bool fullWidth = false,
+    Duration? animationDuration,
+    // Expandable-specific parameters
+    Widget searchIcon = const Icon(Icons.search),
+    ExpandDirection expandDirection = ExpandDirection.right,
+    double expandWidth = 300,
+    bool collapseOnBlur = true,
+    bool collapseOnBack = true,
+    bool showBackButton = true,
+    Curve animationCurve = Curves.easeInOut,
+    Duration expandDuration = const Duration(milliseconds: 300),
+    Duration collapseDuration = const Duration(milliseconds: 250),
+    ValueChanged<String>? onSearch,
+    VoidCallback? onClear,
+    VoidCallback? onExpand,
+    VoidCallback? onCollapse,
+    Future<List<String>> Function(String query)? suggestionProvider,
+    Future<List<dynamic>> Function(String query)? searchProvider,
+    int maxHistoryItems = 10,
+    int minQueryLength = 2,
+    Duration debounceDuration = const Duration(milliseconds: 300),
+    bool showClearButton = true,
+    bool showSuggestions = true,
+    Widget Function(BuildContext context, List<String> suggestions,
+            Function(String) onSelect)?
+        suggestionBuilder,
+    Widget Function(BuildContext context, List<String> history,
+            Function(String) onSelect)?
+        historyBuilder,
+    Widget Function(BuildContext context)? loadingBuilder,
+    Widget Function(BuildContext context, String error)? errorBuilder,
+    Widget Function(BuildContext context)? emptyStateBuilder,
+    Widget? clearIcon,
+    Widget? backIcon,
+    BorderRadius? customBorderRadius,
+    Duration? transitionDuration,
+    Curve transitionCurve = Curves.easeInOut,
+    ValueChanged<bool>? onFocusChanged,
+    ValueChanged<bool>? onHoverChanged,
+    List<String> initialHistory = const [],
+    bool enableHoverEffect = true,
+    Duration? hoverAnimationDuration,
+    ButtonSize buttonSize = ButtonSize.medium,
+    ButtonVariant buttonVariant = ButtonVariant.ghost,
+    ButtonState buttonState = ButtonState.enabled,
+    Widget? buttonIcon,
+    String buttonTooltip = 'Search',
+  }) {
+    return OsmeaExpandableSearchbar(
+      key: key,
+      customTheme: customTheme,
+      controller: controller,
+      focusNode: focusNode,
+      hint: hint,
+      size: size,
+      variant: variant,
+      state: state,
+      onChanged: onChanged,
+      onSubmitted: onSubmitted,
+      onTap: onTap,
+      textAlign: textAlign,
+      textCapitalization: textCapitalization,
+      keyboardType: keyboardType,
+      textInputAction: textInputAction,
+      textStyle: textStyle,
+      textColor: textColor,
+      backgroundColor: backgroundColor,
+      borderColor: borderColor,
+      focusColor: focusColor,
+      errorColor: errorColor,
+      hintColor: hintColor,
+      fullWidth: fullWidth,
+      animationDuration: animationDuration,
+      searchIcon: searchIcon,
+      expandDirection: expandDirection,
+      expandWidth: expandWidth,
+      collapseOnBlur: collapseOnBlur,
+      collapseOnBack: collapseOnBack,
+      showBackButton: showBackButton,
+      animationCurve: animationCurve,
+      expandDuration: expandDuration,
+      collapseDuration: collapseDuration,
+      onSearch: onSearch,
+      onClear: onClear,
+      onExpand: onExpand,
+      onCollapse: onCollapse,
+      suggestionProvider: suggestionProvider,
+      searchProvider: searchProvider,
+      maxHistoryItems: maxHistoryItems,
+      minQueryLength: minQueryLength,
+      debounceDuration: debounceDuration,
+      showClearButton: showClearButton,
+      showSuggestions: showSuggestions,
+      suggestionBuilder: suggestionBuilder,
+      historyBuilder: historyBuilder,
+      loadingBuilder: loadingBuilder,
+      errorBuilder: errorBuilder,
+      emptyStateBuilder: emptyStateBuilder,
+      clearIcon: clearIcon,
+      backIcon: backIcon,
+      customBorderRadius: customBorderRadius,
+      transitionDuration: transitionDuration,
+      transitionCurve: transitionCurve,
+      onFocusChanged: onFocusChanged,
+      onHoverChanged: onHoverChanged,
+      initialHistory: initialHistory,
+      enableHoverEffect: enableHoverEffect,
+      hoverAnimationDuration: hoverAnimationDuration,
+      buttonSize: buttonSize,
+      buttonVariant: buttonVariant,
+      buttonState: buttonState,
+      buttonIcon: buttonIcon,
+      buttonTooltip: buttonTooltip,
     );
   }
 

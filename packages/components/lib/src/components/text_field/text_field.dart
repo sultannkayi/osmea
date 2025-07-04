@@ -108,6 +108,7 @@ class OsmeaTextField extends CoreTextField {
     this.customBorderRadius,
     this.showCharacterCount = false,
     this.characterCountBuilder,
+    this.customContentPadding,
   });
 
   /// Optional OSMEA-specific controller with enhanced features
@@ -158,6 +159,9 @@ class OsmeaTextField extends CoreTextField {
   /// Custom builder for character count display
   final Widget Function(BuildContext context, int current, int? max)?
       characterCountBuilder;
+
+  /// Custom content padding
+  final EdgeInsets? customContentPadding;
 
   /// Get the effective controller (OSMEA controller takes priority)
   TextEditingController get effectiveController =>
@@ -426,7 +430,7 @@ class _OsmeaTextFieldView extends StatelessWidget {
       filled: textField.variant == TextFieldVariant.filled ||
           textField.variant == TextFieldVariant.borderless,
       fillColor: colors.background,
-      contentPadding: config.padding,
+      contentPadding: textField.customContentPadding ?? config.padding,
       border: _getBorder(context, config, colors.border, state),
       enabledBorder: _getBorder(context, config, colors.border, state),
       focusedBorder: _getBorder(context, config, colors.focus, state),

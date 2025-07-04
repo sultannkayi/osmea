@@ -41,6 +41,13 @@ export 'src/utils/card_extensions.dart';
 
 // 🛠️ Utilities
 export 'src/utils/text_field_size_extensions.dart';
+
+// 🔍 Searchbar
+export 'src/components/searchbar/cubit/searchbar_cubit.dart';
+export 'src/components/searchbar/cubit/searchbar_state.dart';
+
+// 🛠️ Utils
+// Utility functions and extensions
 export 'src/utils/sizer_extensions.dart';
 export 'src/utils/text_extensions.dart';
 export 'src/utils/button_size_extensions.dart';
@@ -78,5 +85,4 @@ export 'src/components/loading/cubit/loading_state.dart';
 // 📝 Rich Text
 export 'src/components/rich_text/text_span.dart';
 
-// 🪜 Stepper
 export 'src/components/stepper/stepper.dart';

@@ -650,3 +650,140 @@ enum TextFieldType {
   /// - Auto-navigation between fields
   otp,
 }
+
+/// 🔍 **Searchbar Variant**
+///
+/// Visual style variants for search input fields.
+/// Controls the appearance and styling of search bars.
+///
+/// **Variant Guidelines:**
+/// - `outlined`: Border with transparent background
+/// - `filled`: Solid background with subtle border
+/// - `underlined`: Bottom border only, minimal style
+/// - `borderless`: No border, background only
+/// - `rounded`: Rounded corners with background
+///
+/// **Usage:**
+/// ```dart
+/// OsmeaComponents.searchbar(
+///   variant: SearchbarVariant.outlined,
+///   hint: 'Search...',
+/// )
+/// ```
+enum SearchbarVariant {
+  /// 📦 **Outlined** - Border with transparent background
+  /// - Clear boundary definition
+  /// - Good for forms and structured layouts
+  outlined,
+
+  /// 🎨 **Filled** - Solid background with subtle border
+  /// - Emphasized input area
+  /// - Good for modern, card-based designs
+  filled,
+
+  /// 📝 **Underlined** - Bottom border only
+  /// - Minimal, clean appearance
+  /// - Good for simple forms and clean designs
+  underlined,
+
+  /// 👻 **Borderless** - No border, background only
+  /// - Seamless integration
+  /// - Good for inline editing and minimal interfaces
+  borderless,
+
+  /// 🔵 **Rounded** - Rounded corners with background
+  /// - Modern, pill-shaped appearance
+  /// - Good for mobile-first designs and modern interfaces
+  rounded,
+}
+
+/// 🎨 **Searchbar Style**
+///
+/// Functional style variants for search bars.
+/// Controls the behavior and layout of search components.
+///
+/// **Style Guidelines:**
+/// - `standard`: Default search bar with search icon and clear button
+/// - `minimal`: Simplified search bar with just search icon
+/// - `expanded`: Full-width search bar with suggestions
+/// - `compact`: Small search bar for tight spaces
+/// - `hero`: Large, prominent search bar for main search
+///
+/// **Usage:**
+/// ```dart
+/// OsmeaComponents.searchbar(
+///   style: SearchbarStyle.standard,
+///   hint: 'Search products...',
+/// )
+/// ```
+enum SearchbarStyle {
+  /// 🔍 **Standard** - Default search bar
+  /// - Search icon on left, clear button on right
+  /// - Standard height and padding
+  /// - Good for most search use cases
+  standard,
+
+  /// 🔹 **Minimal** - Simplified search bar
+  /// - Only search icon, no clear button
+  /// - Compact appearance
+  /// - Good for secondary search areas
+  minimal,
+
+  /// 🔷 **Expanded** - Full-featured search bar
+  /// - Search icon, clear button, and suggestions
+  /// - Larger size for prominent search
+  /// - Good for main search functionality
+  expanded,
+
+  /// 🔸 **Compact** - Small search bar
+  /// - Reduced size for tight spaces
+  /// - Minimal padding and icons
+  /// - Good for headers and toolbars
+  compact,
+
+  /// 🔵 **Hero** - Large, prominent search bar
+  /// - Maximum size and visual impact
+  /// - Enhanced styling and animations
+  /// - Good for landing pages and main search
+  hero,
+}
+
+/// 📏 **Expand Direction**
+///
+/// Direction options for expandable components.
+/// Controls how components expand or collapse.
+///
+/// **Direction Guidelines:**
+/// - `left`: Expand towards the left
+/// - `right`: Expand towards the right (default)
+/// - `up`: Expand upwards
+/// - `down`: Expand downwards
+///
+/// **Usage:**
+/// ```dart
+/// OsmeaComponents.expandableSearchbar(
+///   expandDirection: ExpandDirection.right,
+///   onSearch: (query) => performSearch(query),
+/// )
+/// ```
+enum ExpandDirection {
+  /// ⬅️ **Left** - Expand towards the left
+  /// - Good for right-aligned components
+  /// - Common in app bars and headers
+  left,
+
+  /// ➡️ **Right** - Expand towards the right (default)
+  /// - Good for left-aligned components
+  /// - Most common expansion direction
+  right,
+
+  /// ⬆️ **Up** - Expand upwards
+  /// - Good for bottom-aligned components
+  /// - Useful in floating action buttons
+  up,
+
+  /// ⬇️ **Down** - Expand downwards
+  /// - Good for top-aligned components
+  /// - Common in dropdown menus
+  down,
+}
