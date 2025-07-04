@@ -36,6 +36,13 @@ class ComponentRegistry {
       storyPath: StoryConfig.buildComponentStoryName('Buttons'),
     ),
     ComponentInfo(
+      name: 'Badges',
+      description: 'Notification indicators and status markers',
+      icon: Icons.label,
+      color: Colors.amber,
+      storyPath: StoryConfig.buildComponentStoryName('Badges'),
+    ),
+    ComponentInfo(
       name: 'Text Fields',
       description: 'Input fields for forms and data entry',
       icon: Icons.text_fields,
