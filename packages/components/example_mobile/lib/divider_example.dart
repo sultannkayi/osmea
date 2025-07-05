@@ -23,14 +23,14 @@ class DividerExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
       appBar: OsmeaComponents.appBar(
-        title: const Text('Divider Variants Showcase'),
-        backgroundColor: Colors.deepPurple.shade50,
+        title: OsmeaComponents.text('Divider Variants Showcase'),
+        backgroundColor: const Color.fromARGB(255, 195, 160, 244),
         elevation: 0,
       ),
       body: ListView.separated(
         padding: const EdgeInsets.all(16),
         itemCount: _variants.length,
-        separatorBuilder: (_, __) => const SizedBox(height: 24),
+        separatorBuilder: (_, __) => OsmeaComponents.sizedBox(height: 24),
         itemBuilder: (context, index) {
           final variant = _variants[index];
           final variantLabel = _getVariantLabel(variant);
@@ -43,19 +43,19 @@ class DividerExample extends StatelessWidget {
               child: OsmeaComponents.column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(
+                  OsmeaComponents.text(
                     variantLabel,
-                    style: const TextStyle(
+                    textStyle: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),
                   ),
                   OsmeaComponents.sizedBox(height: 12),
-                  const Text('Horizontal'),
+                  OsmeaComponents.text('Horizontal'),
                   OsmeaComponents.sizedBox(height: 8),
                   OsmeaComponents.row(
                     children: [
-                      Expanded(
+                      OsmeaComponents.expanded(
                         child: OsmeaComponents.container(
                           height: 64,
                           decoration: BoxDecoration(
@@ -73,7 +73,7 @@ class DividerExample extends StatelessWidget {
                     ],
                   ),
                   OsmeaComponents.sizedBox(height: 16),
-                  const Text('Vertical'),
+                  OsmeaComponents.text('Vertical'),
                   OsmeaComponents.sizedBox(height: 8),
                   OsmeaComponents.container(
                     width: 60,
