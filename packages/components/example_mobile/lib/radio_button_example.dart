@@ -188,7 +188,7 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSubsectionTitle('Small Size'),
-        Wrap(
+        OsmeaComponents.wrap(
           spacing: 16,
           runSpacing: 8,
           children: [
@@ -210,7 +210,7 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
         ),
         OsmeaComponents.sizedBox(height: 16),
         _buildSubsectionTitle('Medium Size (Default)'),
-        Wrap(
+        OsmeaComponents.wrap(
           spacing: 16,
           runSpacing: 8,
           children: [
@@ -232,7 +232,7 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
         ),
         OsmeaComponents.sizedBox(height: 16),
         _buildSubsectionTitle('Large Size'),
-        Wrap(
+        OsmeaComponents.wrap(
           spacing: 16,
           runSpacing: 8,
           children: [
@@ -329,7 +329,7 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSubsectionTitle('Enabled States'),
-        Wrap(
+        OsmeaComponents.wrap(
           spacing: 16,
           runSpacing: 8,
           children: [
@@ -351,7 +351,7 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
         ),
         OsmeaComponents.sizedBox(height: 16),
         _buildSubsectionTitle('Disabled States'),
-        Wrap(
+        OsmeaComponents.wrap(
           spacing: 16,
           runSpacing: 8,
           children: [
@@ -423,7 +423,7 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSubsectionTitle('Custom Active Colors'),
-        Wrap(
+        OsmeaComponents.wrap(
           spacing: 16,
           runSpacing: 8,
           children: [
