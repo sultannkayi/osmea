@@ -371,7 +371,7 @@ class FlexibleExampleScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       // Use a constrained width or Expanded for text
-                      Expanded(
+                      OsmeaComponents.expanded(
                         child: OsmeaComponents.text(
                           'Analytics Dashboard',
                           textStyle: const TextStyle(
@@ -434,7 +434,7 @@ class FlexibleExampleScreen extends StatelessWidget {
           Icon(icon, color: Colors.white, size: 16),
           OsmeaComponents.sizedBox(width: 8),
           // Use Expanded to contain text
-          Expanded(
+          OsmeaComponents.expanded(
             child: OsmeaComponents.text(
               label,
               textStyle: const TextStyle(color: Colors.white),
@@ -467,7 +467,7 @@ class FlexibleExampleScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   // Wrap text in Expanded to prevent overflow
-                  Expanded(
+                  OsmeaComponents.expanded(
                     child: OsmeaComponents.text(
                       title,
                       textStyle: const TextStyle(
@@ -482,7 +482,7 @@ class FlexibleExampleScreen extends StatelessWidget {
                 ],
               ),
               // Use Expanded to ensure the value gets proper space
-              Expanded(
+              OsmeaComponents.expanded(
                 child: OsmeaComponents.align(
                   alignment: Alignment.centerLeft,
                   child: OsmeaComponents.text(
