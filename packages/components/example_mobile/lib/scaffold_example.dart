@@ -146,7 +146,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
         backgroundColor: OsmeaColors.nordicBlue,
         foregroundColor: OsmeaColors.white,
       ),
-      body: Center(
+      body: OsmeaComponents.center(
         child: OsmeaComponents.text(
           'Basic scaffold with appBar and body',
           textAlign: TextAlign.center,
@@ -163,7 +163,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
         backgroundColor: OsmeaColors.forestHeart,
         foregroundColor: OsmeaColors.white,
       ),
-      body: Center(
+      body: OsmeaComponents.center(
         child: OsmeaComponents.text(
           'Tab ${_currentIndex + 1} Content',
           textStyle: const TextStyle(fontSize: 20),
@@ -243,7 +243,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
           ],
         ),
       ),
-      body: Center(
+      body: OsmeaComponents.center(
         child: OsmeaComponents.text(
           'Scaffold with side drawer for navigation',
           textAlign: TextAlign.center,
@@ -260,7 +260,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
         backgroundColor: OsmeaColors.deepSea,
         foregroundColor: OsmeaColors.white,
       ),
-      body: Center(
+      body: OsmeaComponents.center(
         child: OsmeaComponents.text(
           'Scaffold with floating action button',
           textAlign: TextAlign.center,
@@ -287,7 +287,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
       ),
       body: OsmeaComponents.container(
         color: OsmeaColors.ash.withOpacity(0.1),
-        child: Center(
+        child: OsmeaComponents.center(
           child: OsmeaComponents.container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
@@ -367,8 +367,8 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
       ),
       body: OsmeaComponents.container(
         padding: const EdgeInsets.all(16),
-        child: const Center(
-          child: Text('Main Content Area'),
+        child: OsmeaComponents.center(
+          child: OsmeaComponents.text('Main Content Area'),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
