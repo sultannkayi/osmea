@@ -84,7 +84,7 @@ class _ProgressExampleState extends State<ProgressExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: OsmeaComponents.appBar(title: const Text('Progress Examples')),
+      appBar: OsmeaComponents.appBar(title: OsmeaComponents.text('Progress Examples')),
       body: OsmeaComponents.padding(
         padding: const EdgeInsets.all(16.0),
         child: OsmeaComponents.singleChildScrollView(
@@ -159,7 +159,7 @@ class _ProgressExampleState extends State<ProgressExample> {
               ),
 
               // Linear progress bars section
-              const Divider(height: 48, thickness: 2),
+              OsmeaComponents.divider(height: 48, thickness: 2),
               OsmeaComponents.text(
                 'Linear Progress Bars',
                 fontWeight: FontWeight.bold,
@@ -180,7 +180,7 @@ class _ProgressExampleState extends State<ProgressExample> {
                     // Progress bars row
                     OsmeaComponents.padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Wrap(
+                      child: OsmeaComponents.wrap(
                         spacing: 16,
                         runSpacing: 24,
                         children: List.generate(
