@@ -204,7 +204,7 @@ class SpacerExampleScreen extends StatelessWidget {
       width: 80,
       height: 60,
       color: color,
-      child: Center(
+      child: OsmeaComponents.center(
         child: OsmeaComponents.text(
           text,
           textStyle: const TextStyle(
