@@ -346,7 +346,7 @@ class AppbarDemo extends StatelessWidget {
           top: BorderSide(color: Colors.grey[200]!),
         ),
       ),
-      child: Center(
+      child: OsmeaComponents.center(
         child: OsmeaComponents.column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -379,7 +379,7 @@ class AppbarDemo extends StatelessWidget {
         color: color,
         shape: BoxShape.circle,
       ),
-      child: Center(
+      child: OsmeaComponents.center(
         child: OsmeaComponents.text(
           count,
           textStyle: const TextStyle(
