@@ -15,7 +15,6 @@ import 'package:osmea_components/src/components/ticket_widget/cubit/ticket_widge
 import 'package:osmea_components/src/components/ticket_widget/cubit/ticket_widget_state.dart';
 import 'package:osmea_components/src/components/ticket_widget/models/ticket_models.dart';
 import 'package:osmea_components/src/components/ticket_widget/widgets/ticket_form_field.dart';
-import 'package:osmea_components/src/enums/ticket_enums.dart';
 import 'package:osmea_components/src/theme/theme.dart';
 
 /// 🎫 **OSMEA Ticket Widget**
