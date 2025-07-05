@@ -105,7 +105,7 @@ class ExpandedExampleScreen extends StatelessWidget {
                     color: OsmeaColors.nordicBlue
                         .withValues(red: 44, green: 95, blue: 93, alpha: 0.7),
                     borderRadius: BorderRadius.circular(8),
-                    child: Center(
+                    child: OsmeaComponents.center(
                       child: OsmeaComponents.text(
                         'Expanded',
                         color: OsmeaColors.white,
@@ -120,7 +120,7 @@ class ExpandedExampleScreen extends StatelessWidget {
                   height: 100,
                   color: Colors.amber,
                   borderRadius: BorderRadius.circular(8),
-                  child: Center(
+                  child: OsmeaComponents.center(
                     child: OsmeaComponents.text(
                       'Fixed',
                       variant: OsmeaTextVariant.labelLarge,
@@ -168,7 +168,7 @@ class ExpandedExampleScreen extends StatelessWidget {
                   child: OsmeaComponents.container(
                     color: Colors.red.shade300,
                     borderRadius: BorderRadius.circular(8),
-                    child: Center(
+                    child: OsmeaComponents.center(
                       child: OsmeaComponents.text(
                         'flex: 1',
                         color: OsmeaColors.white,
@@ -183,7 +183,7 @@ class ExpandedExampleScreen extends StatelessWidget {
                   child: OsmeaComponents.container(
                     color: Colors.green.shade300,
                     borderRadius: BorderRadius.circular(8),
-                    child: Center(
+                    child: OsmeaComponents.center(
                       child: OsmeaComponents.text(
                         'flex: 2',
                         color: OsmeaColors.white,
@@ -198,7 +198,7 @@ class ExpandedExampleScreen extends StatelessWidget {
                   child: OsmeaComponents.container(
                     color: Colors.blue.shade300,
                     borderRadius: BorderRadius.circular(8),
-                    child: Center(
+                    child: OsmeaComponents.center(
                       child: OsmeaComponents.text(
                         'flex: 3',
                         color: OsmeaColors.white,
@@ -248,7 +248,7 @@ class ExpandedExampleScreen extends StatelessWidget {
                   color: OsmeaColors.nordicBlue
                       .withValues(red: 44, green: 95, blue: 93, alpha: 0.8),
                   borderRadius: BorderRadius.circular(8),
-                  child: Center(
+                  child: OsmeaComponents.center(
                     child: OsmeaComponents.text(
                       'Fixed Height Header',
                       color: OsmeaColors.white,
@@ -261,7 +261,7 @@ class ExpandedExampleScreen extends StatelessWidget {
                   child: OsmeaComponents.container(
                     color: Colors.teal.shade300,
                     borderRadius: BorderRadius.circular(8),
-                    child: Center(
+                    child: OsmeaComponents.center(
                       child: OsmeaComponents.text(
                         'Expanded Content Area',
                         color: OsmeaColors.white,
@@ -276,7 +276,7 @@ class ExpandedExampleScreen extends StatelessWidget {
                   color: OsmeaColors.nordicBlue
                       .withValues(red: 44, green: 95, blue: 93, alpha: 0.6),
                   borderRadius: BorderRadius.circular(8),
-                  child: Center(
+                  child: OsmeaComponents.center(
                     child: OsmeaComponents.text(
                       'Fixed Height Footer',
                       color: OsmeaColors.white,
@@ -325,7 +325,7 @@ class ExpandedExampleScreen extends StatelessWidget {
                   child: OsmeaComponents.container(
                     color: Colors.purple.shade300,
                     borderRadius: BorderRadius.circular(8),
-                    child: Center(
+                    child: OsmeaComponents.center(
                       child: OsmeaComponents.text(
                         'expanded()',
                         color: OsmeaColors.white,
@@ -341,7 +341,7 @@ class ExpandedExampleScreen extends StatelessWidget {
                   child: OsmeaComponents.container(
                     color: Colors.indigo.shade300,
                     borderRadius: BorderRadius.circular(8),
-                    child: Center(
+                    child: OsmeaComponents.center(
                       child: OsmeaComponents.text(
                         'expanded(flex: 2)',
                         color: OsmeaColors.white,
@@ -369,7 +369,7 @@ class ExpandedExampleScreen extends StatelessWidget {
                   child: OsmeaComponents.container(
                     color: Colors.orange.shade300,
                     borderRadius: BorderRadius.circular(8),
-                    child: Center(
+                    child: OsmeaComponents.center(
                       child: OsmeaComponents.text(
                         'OsmeaComponents.expanded()',
                         color: OsmeaColors.white,
@@ -705,7 +705,7 @@ class ExpandedExampleScreen extends StatelessWidget {
                       color: OsmeaColors.forestHeart,
                       borderRadius: BorderRadius.circular(8),
                       padding: const EdgeInsets.all(12),
-                      child: Center(
+                      child: OsmeaComponents.center(
                         child: OsmeaComponents.text(
                           'Tap Me',
                           color: OsmeaColors.white,
@@ -730,7 +730,7 @@ class ExpandedExampleScreen extends StatelessWidget {
                       color: OsmeaColors.sunsetGlow,
                       borderRadius: BorderRadius.circular(8),
                       padding: const EdgeInsets.all(12),
-                      child: Center(
+                      child: OsmeaComponents.center(
                         child: OsmeaComponents.text(
                           'Long Press',
                           color: OsmeaColors.white,
@@ -764,7 +764,7 @@ class ExpandedExampleScreen extends StatelessWidget {
                       width: 2,
                     ),
                     padding: const EdgeInsets.all(12),
-                    child: Center(
+                    child: OsmeaComponents.center(
                       child: OsmeaComponents.text(
                         'Border',
                         color: OsmeaColors.nordicBlue,
@@ -781,7 +781,7 @@ class ExpandedExampleScreen extends StatelessWidget {
                       color: OsmeaColors.pineGrove,
                       shape: BoxShape.circle,
                     ),
-                    child: Center(
+                    child: OsmeaComponents.center(
                       child: OsmeaComponents.text(
                         'Circle',
                         color: OsmeaColors.white,
