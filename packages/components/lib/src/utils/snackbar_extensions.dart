@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:osmea_components/osmea_components.dart';
 import 'package:osmea_components/src/components/snackbar/snackbar.dart'
-    show SnackbarManager;
+    show SnackbarManager, GlobalSnackbarOverlay;
 
 /// 🟦 **Snackbar Context Extensions**
 ///
@@ -22,6 +22,7 @@ extension OsmeaSnackbarContextExtension on BuildContext {
     String? actionLabel,
     VoidCallback? onAction,
   }) {
+    GlobalSnackbarOverlay().ensureOverlay(this);
     SnackbarManager().showSnackbar(
       context: this,
       title: title,
