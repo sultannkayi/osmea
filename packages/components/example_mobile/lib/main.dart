@@ -42,6 +42,7 @@ import 'package:osmea_components_example/rich_text_example.dart';
 import 'package:osmea_components_example/stepper_example.dart';
 import 'package:osmea_components_example/searchbar_example.dart';
 import 'package:osmea_components_example/toast_example.dart';
+import 'package:osmea_components_example/dropdown_example.dart';
 
 void main() {
   runApp(const MyApp());
@@ -834,6 +835,18 @@ class ExamplesScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => const ToastExamplePage(),
+                    ),
+                  ),
+                ),
+                _buildExampleTile(
+                  context,
+                  'Dropdown Examples',
+                  'Comprehensive dropdown component with all variants and types',
+                  Icons.arrow_drop_down,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DropdownExample(),
                     ),
                   ),
                 ),
