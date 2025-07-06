@@ -236,6 +236,7 @@ class _OsmeaProgressStatefulState extends State<_OsmeaProgressStateful> {
             value: state.value,
             progressColor: state.color,
             size: state.size,
+            wavePhase: state.wavePhase,
           ),
         );
       case ProgressType.radialBar:
@@ -357,11 +358,12 @@ class _OsmeaProgressStatefulState extends State<_OsmeaProgressStateful> {
 /// The wave effect is achieved by drawing a sine wave path
 /// that moves around the circle. The animation controller
 /// manages the wave phase timing.
-class WaveProgress extends StatefulWidget {
+class WaveProgress extends StatelessWidget {
   final double value;
   final Color? progressColor;
   final ProgressSize size;
   final double? percentFontSize;
+  final double wavePhase;
 
   const WaveProgress({
     Key? key,
@@ -369,114 +371,46 @@ class WaveProgress extends StatefulWidget {
     this.progressColor,
     this.size = ProgressSize.medium,
     this.percentFontSize,
+    this.wavePhase = 0.0,
   }) : super(key: key);
 
   @override
-  State<WaveProgress> createState() => _WaveProgressState();
-}
-
-class _WaveProgressState extends State<WaveProgress> {
-  late _WaveAnimationController _animationController;
-
-  @override
-  void initState() {
-    super.initState();
-    _animationController = _WaveAnimationController();
-  }
-
-  @override
-  void didUpdateWidget(WaveProgress oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    _animationController.updateProgress(widget.value);
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final double sizePx = widget.size.indicatorSize;
+    final double sizePx = size.indicatorSize;
     return Stack(
       alignment: Alignment.center,
       children: [
-        // 🎨 Custom Paint for Wave Effect with continuous animation
         TweenAnimationBuilder<double>(
-          tween: Tween(begin: 0.0, end: widget.value),
+          tween: Tween(begin: 0.0, end: value),
           duration: const Duration(milliseconds: 800),
           curve: Curves.easeInOut,
           builder: (context, animatedValue, _) {
-            return AnimatedBuilder(
-              animation: _animationController,
-              builder: (context, _) {
-                return Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    CustomPaint(
-                      size: Size(sizePx, sizePx),
-                      painter: _WaveModernPainter(
-                        value: animatedValue,
-                        color: widget.progressColor ??
-                            ProgressType.wave.defaultColor,
-                        wavePhase: _animationController.wavePhase,
-                        size: sizePx,
-                        strokeWidth: widget.size.progressStrokeWidth,
-                        waveHeight: widget.size.waveHeight,
-                      ),
-                    ),
-                    // 📊 Percentage Display - synchronized with animation
-                    Center(
-                      child: OsmeaText(
-                        '${(animatedValue * 100).toInt()}%',
-                        style: OsmeaTextStyle.captionLarge(context),
-                      ),
-                    ),
-                  ],
-                );
-              },
+            return Stack(
+              alignment: Alignment.center,
+              children: [
+                CustomPaint(
+                  size: Size(sizePx, sizePx),
+                  painter: _WaveModernPainter(
+                    value: animatedValue,
+                    color: progressColor ?? ProgressType.wave.defaultColor,
+                    wavePhase: wavePhase,
+                    size: sizePx,
+                    strokeWidth: size.progressStrokeWidth,
+                    waveHeight: size.waveHeight,
+                  ),
+                ),
+                Center(
+                  child: OsmeaText(
+                    '${(animatedValue * 100).toInt()}%',
+                    style: OsmeaTextStyle.captionLarge(context),
+                  ),
+                ),
+              ],
             );
           },
         ),
       ],
     );
-  }
-}
-
-class _WaveAnimationController extends ChangeNotifier {
-  Timer? _timer;
-  double _wavePhase = 0.0;
-  double _currentValue = 0.0;
-
-  double get wavePhase => _wavePhase;
-
-  _WaveAnimationController() {
-    _startAnimation();
-  }
-
-  void updateProgress(double value) {
-    _currentValue = value;
-  }
-
-  void _startAnimation() {
-    _timer = Timer.periodic(const Duration(milliseconds: 50), (timer) {
-      // Wave speed is proportional to progress value
-      // Base speed: 0.1, max speed: 0.3 when progress is 100%
-      // Negative value makes wave move from right to left
-      double speedMultiplier = -(0.1 + (_currentValue * 0.2));
-      _wavePhase += speedMultiplier;
-      if (_wavePhase < -2 * math.pi) {
-        _wavePhase = 0.0;
-      }
-      notifyListeners();
-    });
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
   }
 }
 
@@ -601,33 +535,19 @@ class RadialBarProgress extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          TweenAnimationBuilder<double>(
-            tween: Tween(begin: 0, end: value),
-            duration: const Duration(milliseconds: 800),
-            curve: Curves.easeInOut,
-            builder: (context, val, _) {
-              final safeVal = val;
-              return Stack(
-                alignment: Alignment.center,
-                children: [
-                  CustomPaint(
-                    size: Size(sizePx, sizePx),
-                    painter: _RadialBarSpikePainter(
-                        value: safeVal,
-                        color: progressColor ??
-                            ProgressType.radialBar.defaultColor,
-                        spikeCount: spikeCount,
-                        strokeWidth: sw),
-                  ),
-                  Center(
-                    child: OsmeaText(
-                      '${(safeVal * 100).toInt()}%',
-                      style: OsmeaTextStyle.captionLarge(context),
-                    ),
-                  ),
-                ],
-              );
-            },
+          CustomPaint(
+            size: Size(sizePx, sizePx),
+            painter: _RadialBarSpikePainter(
+                value: value,
+                color: progressColor ?? ProgressType.radialBar.defaultColor,
+                spikeCount: spikeCount,
+                strokeWidth: sw),
+          ),
+          Center(
+            child: OsmeaText(
+              '${(value * 100).toInt()}%',
+              style: OsmeaTextStyle.captionLarge(context),
+            ),
           ),
         ],
       ),
@@ -725,39 +645,25 @@ class ArcProgress extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          // Background arc (gray)
           CustomPaint(
             size: Size(sizePx, sizePx),
             painter: _ArcHalfBgPainter(strokeWidth: sw, radius: rad),
           ),
-          TweenAnimationBuilder<double>(
-            tween: Tween(begin: 0, end: value),
-            duration: const Duration(milliseconds: 800),
-            curve: type.animationCurve,
-            builder: (context, val, _) {
-              final safeVal = val;
-              return Stack(
-                alignment: Alignment.center,
-                children: [
-                  CustomPaint(
-                    size: Size(sizePx, sizePx),
-                    painter: _ArcModernPainter(
-                      value: safeVal,
-                      color: fgColor,
-                      strokeWidth: sw,
-                      radius: rad,
-                      isHalf: true,
-                    ),
-                  ),
-                  Center(
-                    child: OsmeaText(
-                      '${(safeVal * 100).toInt()}%',
-                      style: OsmeaTextStyle.captionLarge(context),
-                    ),
-                  ),
-                ],
-              );
-            },
+          CustomPaint(
+            size: Size(sizePx, sizePx),
+            painter: _ArcModernPainter(
+              value: value,
+              color: fgColor,
+              strokeWidth: sw,
+              radius: rad,
+              isHalf: true,
+            ),
+          ),
+          Center(
+            child: OsmeaText(
+              '${(value * 100).toInt()}%',
+              style: OsmeaTextStyle.captionLarge(context),
+            ),
           ),
         ],
       ),
@@ -865,37 +771,22 @@ class PercentProgress extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          // Background arc (gray, full circle)
           CustomPaint(
             size: Size(sizePx, sizePx),
             painter: _ArcFullBgPainter(strokeWidth: sw, radius: rad),
           ),
-          TweenAnimationBuilder<double>(
-            tween: Tween(begin: 0, end: value),
-            duration: const Duration(milliseconds: 800),
-            curve: Curves.easeInOut,
-            builder: (context, val, _) {
-              final safeVal = val;
-              return Stack(
-                alignment: Alignment.center,
-                children: [
-                  CustomPaint(
-                    size: Size(sizePx, sizePx),
-                    painter: _PercentModernPainter(
-                        value: safeVal,
-                        color:
-                            progressColor ?? ProgressType.percent.defaultColor,
-                        strokeWidth: sw),
-                  ),
-                  Center(
-                    child: OsmeaText(
-                      '${(safeVal * 100).toInt()}%',
-                      style: OsmeaTextStyle.captionLarge(context),
-                    ),
-                  ),
-                ],
-              );
-            },
+          CustomPaint(
+            size: Size(sizePx, sizePx),
+            painter: _PercentModernPainter(
+                value: value,
+                color: progressColor ?? ProgressType.percent.defaultColor,
+                strokeWidth: sw),
+          ),
+          Center(
+            child: OsmeaText(
+              '${(value * 100).toInt()}%',
+              style: OsmeaTextStyle.captionLarge(context),
+            ),
           ),
         ],
       ),
@@ -982,65 +873,50 @@ class SegmentedProgress extends StatelessWidget {
     const int segmentCount = 12;
     const double segmentWidth = 12.0;
     final double percentageHeight = showPercentage ? 44.0 : 0.0;
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return TweenAnimationBuilder<double>(
-          tween: Tween(begin: 0.0, end: value),
-          duration: const Duration(milliseconds: 1000),
-          curve: Curves.easeInOut,
-          builder: (context, animatedValue, _) {
-            final clampedValue = animatedValue.clamp(0.0, 1.0);
-            final maxWidth = constraints.maxWidth;
-
-            return SizedBox(
-              width: maxWidth,
-              height: height + percentageHeight,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: maxWidth,
+    final double clampedValue = value.clamp(0.0, 1.0);
+    return SizedBox(
+      height: height + percentageHeight,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: height,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: List.generate(segmentCount, (i) {
+                  return Container(
+                    width: segmentWidth,
                     height: height,
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: List.generate(segmentCount, (i) {
-                          return Container(
-                            width: segmentWidth,
-                            height: height,
-                            margin: EdgeInsets.only(
-                                right: i == segmentCount - 1 ? 0 : 4),
-                            decoration: BoxDecoration(
-                              color: i < (segmentCount * clampedValue).floor()
-                                  ? (progressColor ??
-                                      ProgressType.linearSegmented.defaultColor)
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                          );
-                        }),
-                      ),
+                    margin:
+                        EdgeInsets.only(right: i == segmentCount - 1 ? 0 : 4),
+                    decoration: BoxDecoration(
+                      color: i < (segmentCount * clampedValue).floor()
+                          ? (progressColor ??
+                              ProgressType.linearSegmented.defaultColor)
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.circular(6),
                     ),
-                  ),
-                  if (showPercentage) const SizedBox(height: 12),
-                  if (showPercentage)
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                      child: Text(
-                        '${(clampedValue * 100).toInt()}%',
-                        style: OsmeaTextStyle.captionSmall(context),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        softWrap: false,
-                      ),
-                    ),
-                ],
+                  );
+                }),
               ),
-            );
-          },
-        );
-      },
+            ),
+          ),
+          if (showPercentage) const SizedBox(height: 12),
+          if (showPercentage)
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+              child: Text(
+                '${(clampedValue * 100).toInt()}%',
+                style: OsmeaTextStyle.captionSmall(context),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                softWrap: false,
+              ),
+            ),
+        ],
+      ),
     );
   }
 }
@@ -1060,6 +936,8 @@ class DotCircleBarProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double sizePx = size.indicatorSize;
+    final int dots = size.dotCount;
+    final int filled = (dots * value).ceil();
     return SizedBox(
       width: sizePx,
       height: sizePx,
@@ -1070,32 +948,18 @@ class DotCircleBarProgress extends StatelessWidget {
             size: Size(sizePx, sizePx),
             painter: _DotCircleBgModernPainter(size: size),
           ),
-          TweenAnimationBuilder<double>(
-            tween: Tween(begin: 0, end: value),
-            duration: context.animationMedium,
-            curve: Curves.easeInOut,
-            builder: (context, val, _) {
-              final safeVal = val;
-              return Stack(
-                alignment: Alignment.center,
-                children: [
-                  CustomPaint(
-                    size: Size(sizePx, sizePx),
-                    painter: _DotCircleModernPainter(
-                        value: safeVal,
-                        color: progressColor ??
-                            ProgressType.dotCircleBar.defaultColor,
-                        size: size),
-                  ),
-                  Center(
-                    child: OsmeaText(
-                      '${(safeVal * 100).toInt()}%',
-                      style: OsmeaTextStyle.captionLarge(context),
-                    ),
-                  ),
-                ],
-              );
-            },
+          CustomPaint(
+            size: Size(sizePx, sizePx),
+            painter: _DotCircleModernPainter(
+                value: value,
+                color: progressColor ?? ProgressType.dotCircleBar.defaultColor,
+                size: size),
+          ),
+          Center(
+            child: OsmeaText(
+              '${(value * 100).toInt()}%',
+              style: OsmeaTextStyle.captionLarge(context),
+            ),
           ),
         ],
       ),
@@ -1173,53 +1037,43 @@ class LinearProgressModern extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double height = size.progressStrokeWidth * 2.2;
+    final double clampedValue = value.clamp(0.0, 1.0);
     return LayoutBuilder(
       builder: (context, constraints) {
-        return TweenAnimationBuilder<double>(
-          tween: Tween(begin: 0.0, end: value),
-          duration: const Duration(milliseconds: 1000),
-          curve: Curves.easeInOut,
-          builder: (context, animatedValue, _) {
-            final clampedValue = animatedValue.clamp(0.0, 1.0);
-            final barWidth = (constraints.maxWidth * clampedValue)
-                .clamp(0.0, constraints.maxWidth);
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
               children: [
-                Stack(
-                  children: [
-                    // Background track (hafif)
-                    Container(
-                      width: constraints.maxWidth,
-                      height: height,
-                      decoration: BoxDecoration(
-                        color: OsmeaColors.ash.withValues(alpha: 0.15),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                    ),
-                    // Progress bar (modern görünüm)
-                    Container(
-                      width: barWidth,
-                      height: height,
-                      decoration: BoxDecoration(
-                        color:
-                            progressColor ?? ProgressType.linear.defaultColor,
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                    ),
-                  ],
-                ),
-                if (showPercentage) SizedBox(height: 8),
-                if (showPercentage)
-                  Text(
-                    '${(clampedValue * 100).toInt()}%',
-                    style: OsmeaTextStyle.captionSmall(context),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
+                // Background track - more visible
+                Container(
+                  width: constraints.maxWidth,
+                  height: height,
+                  decoration: BoxDecoration(
+                    color: OsmeaColors.ash.withValues(alpha: 0.3),
+                    borderRadius: BorderRadius.circular(4),
                   ),
+                ),
+                // Progress bar
+                Container(
+                  width: constraints.maxWidth * clampedValue,
+                  height: height,
+                  decoration: BoxDecoration(
+                    color: progressColor ?? ProgressType.linear.defaultColor,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                ),
               ],
-            );
-          },
+            ),
+            if (showPercentage) SizedBox(height: 8),
+            if (showPercentage)
+              Text(
+                '${(clampedValue * 100).toInt()}%',
+                style: OsmeaTextStyle.captionSmall(context),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
+          ],
         );
       },
     );
@@ -1241,48 +1095,49 @@ class LinearStripedProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double height = size.progressStrokeWidth * 2.2;
+    final double clampedValue = value.clamp(0.0, 1.0);
     return LayoutBuilder(
       builder: (context, constraints) {
-        return TweenAnimationBuilder<double>(
-          tween: Tween(begin: 0.0, end: value),
-          duration: const Duration(milliseconds: 1000),
-          curve: Curves.easeInOut,
-          builder: (context, animatedValue, _) {
-            final clampedValue = animatedValue.clamp(0.0, 1.0);
-            final barWidth = (constraints.maxWidth * clampedValue)
-                .clamp(0.0, constraints.maxWidth);
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
               children: [
-                Stack(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(6),
-                      child: SizedBox(
-                        width: barWidth,
-                        height: height,
-                        child: CustomPaint(
-                          size: Size(barWidth, height),
-                          painter: _StripedBarPainter(
-                            color: progressColor ??
-                                ProgressType.linearStriped.defaultColor,
-                          ),
-                        ),
+                // Background track
+                Container(
+                  width: constraints.maxWidth,
+                  height: height,
+                  decoration: BoxDecoration(
+                    color: OsmeaColors.ash.withValues(alpha: 0.2),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                ),
+                // Progress bar with stripes
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(6),
+                  child: SizedBox(
+                    width: constraints.maxWidth * clampedValue,
+                    height: height,
+                    child: CustomPaint(
+                      size: Size(constraints.maxWidth * clampedValue, height),
+                      painter: _StripedBarPainter(
+                        color: progressColor ??
+                            ProgressType.linearStriped.defaultColor,
                       ),
                     ),
-                  ],
-                ),
-                if (showPercentage) SizedBox(height: 8),
-                if (showPercentage)
-                  Text(
-                    '${(clampedValue * 100).toInt()}%',
-                    style: OsmeaTextStyle.captionSmall(context),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
                   ),
+                ),
               ],
-            );
-          },
+            ),
+            if (showPercentage) SizedBox(height: 8),
+            if (showPercentage)
+              Text(
+                '${(clampedValue * 100).toInt()}%',
+                style: OsmeaTextStyle.captionSmall(context),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
+          ],
         );
       },
     );
@@ -1322,50 +1177,51 @@ class LinearGradientProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double height = size.progressStrokeWidth * 2.2;
+    final double clampedValue = value.clamp(0.0, 1.0);
     return LayoutBuilder(
       builder: (context, constraints) {
-        return TweenAnimationBuilder<double>(
-          tween: Tween(begin: 0.0, end: value),
-          duration: const Duration(milliseconds: 1000),
-          curve: Curves.easeInOut,
-          builder: (context, animatedValue, _) {
-            final clampedValue = animatedValue.clamp(0.0, 1.0);
-            final barWidth = (constraints.maxWidth * clampedValue)
-                .clamp(0.0, constraints.maxWidth);
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
               children: [
-                Stack(
-                  children: [
-                    Container(
-                      width: barWidth,
-                      height: height,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            progressColor ??
-                                ProgressType.linearGradient.defaultColor,
-                            (progressColor ??
-                                    ProgressType.linearGradient.defaultColor)
-                                .withValues(alpha: 0.5),
-                          ],
-                        ),
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                    ),
-                  ],
-                ),
-                if (showPercentage) SizedBox(height: 8),
-                if (showPercentage)
-                  Text(
-                    '${(clampedValue * 100).toInt()}%',
-                    style: OsmeaTextStyle.captionSmall(context),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
+                // Background track - more visible
+                Container(
+                  width: constraints.maxWidth,
+                  height: height,
+                  decoration: BoxDecoration(
+                    color: OsmeaColors.ash.withValues(alpha: 0.3),
+                    borderRadius: BorderRadius.circular(6),
                   ),
+                ),
+                // Progress bar with gradient
+                Container(
+                  width: constraints.maxWidth * clampedValue,
+                  height: height,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        progressColor ??
+                            ProgressType.linearGradient.defaultColor,
+                        (progressColor ??
+                                ProgressType.linearGradient.defaultColor)
+                            .withValues(alpha: 0.5),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                ),
               ],
-            );
-          },
+            ),
+            if (showPercentage) SizedBox(height: 8),
+            if (showPercentage)
+              Text(
+                '${(clampedValue * 100).toInt()}%',
+                style: OsmeaTextStyle.captionSmall(context),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
+          ],
         );
       },
     );
@@ -1390,63 +1246,54 @@ class LinearSegmentedProgress extends StatelessWidget {
     const int segmentCount = 12;
     const double segmentWidth = 12.0;
     final double percentageHeight = showPercentage ? 44.0 : 0.0;
+    final double clampedValue = value.clamp(0.0, 1.0);
     return LayoutBuilder(
       builder: (context, constraints) {
-        return TweenAnimationBuilder<double>(
-          tween: Tween(begin: 0.0, end: value),
-          duration: const Duration(milliseconds: 1000),
-          curve: Curves.easeInOut,
-          builder: (context, animatedValue, _) {
-            final clampedValue = animatedValue.clamp(0.0, 1.0);
-            final maxWidth = constraints.maxWidth;
-
-            return SizedBox(
-              width: maxWidth,
-              height: height + percentageHeight,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: maxWidth,
-                    height: height,
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: List.generate(segmentCount, (i) {
-                          return Container(
-                            width: segmentWidth,
-                            height: height,
-                            margin: EdgeInsets.only(
-                                right: i == segmentCount - 1 ? 0 : 4),
-                            decoration: BoxDecoration(
-                              color: i < (segmentCount * clampedValue).floor()
-                                  ? (progressColor ??
-                                      ProgressType.linearSegmented.defaultColor)
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                          );
-                        }),
-                      ),
-                    ),
+        return SizedBox(
+          width: constraints.maxWidth,
+          height: height + percentageHeight,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: constraints.maxWidth,
+                height: height,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: List.generate(segmentCount, (i) {
+                      return Container(
+                        width: segmentWidth,
+                        height: height,
+                        margin: EdgeInsets.only(
+                            right: i == segmentCount - 1 ? 0 : 4),
+                        decoration: BoxDecoration(
+                          color: i < (segmentCount * clampedValue).floor()
+                              ? (progressColor ??
+                                  ProgressType.linearSegmented.defaultColor)
+                              : OsmeaColors.ash.withValues(alpha: 0.2),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                      );
+                    }),
                   ),
-                  if (showPercentage) SizedBox(height: 12),
-                  if (showPercentage)
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                      child: Text(
-                        '${(clampedValue * 100).toInt()}%',
-                        style: OsmeaTextStyle.captionSmall(context),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        softWrap: false,
-                      ),
-                    ),
-                ],
+                ),
               ),
-            );
-          },
+              if (showPercentage) SizedBox(height: 12),
+              if (showPercentage)
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                  child: Text(
+                    '${(clampedValue * 100).toInt()}%',
+                    style: OsmeaTextStyle.captionSmall(context),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    softWrap: false,
+                  ),
+                ),
+            ],
+          ),
         );
       },
     );
@@ -1468,64 +1315,55 @@ class LinearRoundedProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double height = size.progressStrokeWidth * 2.2;
+    final double clampedValue = value.clamp(0.0, 1.0);
     return LayoutBuilder(
       builder: (context, constraints) {
-        return TweenAnimationBuilder<double>(
-          tween: Tween(begin: 0.0, end: value),
-          duration: const Duration(milliseconds: 1000),
-          curve: Curves.easeInOut,
-          builder: (context, animatedValue, _) {
-            final clampedValue = animatedValue.clamp(0.0, 1.0);
-            final barWidth = (constraints.maxWidth * clampedValue)
-                .clamp(0.0, constraints.maxWidth);
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
               children: [
-                Stack(
-                  children: [
-                    // Background track (more prominent)
-                    Container(
-                      width: constraints.maxWidth,
-                      height: height,
-                      decoration: BoxDecoration(
-                        color: OsmeaColors.ash.withValues(alpha: 0.3),
-                        borderRadius:
-                            BorderRadius.circular(height / 2), // Fully rounded
-                      ),
-                    ),
-                    // Progress bar (more rounded)
-                    Container(
-                      width: barWidth,
-                      height: height,
-                      decoration: BoxDecoration(
-                        color: progressColor ??
-                            ProgressType.linearRounded.defaultColor,
-                        borderRadius:
-                            BorderRadius.circular(height / 2), // Fully rounded
-                        boxShadow: [
-                          BoxShadow(
-                            color: (progressColor ??
-                                    ProgressType.linearRounded.defaultColor)
-                                .withValues(alpha: 0.3),
-                            blurRadius: 4,
-                            offset: Offset(0, 2),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                if (showPercentage) SizedBox(height: 8),
-                if (showPercentage)
-                  Text(
-                    '${(clampedValue * 100).toInt()}%',
-                    style: OsmeaTextStyle.captionSmall(context),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
+                // Background track - more prominent
+                Container(
+                  width: constraints.maxWidth,
+                  height: height,
+                  decoration: BoxDecoration(
+                    color: OsmeaColors.ash.withValues(alpha: 0.4),
+                    borderRadius:
+                        BorderRadius.circular(height / 2), // Fully rounded
                   ),
+                ),
+                // Progress bar - more rounded
+                Container(
+                  width: constraints.maxWidth * clampedValue,
+                  height: height,
+                  decoration: BoxDecoration(
+                    color: progressColor ??
+                        ProgressType.linearRounded.defaultColor,
+                    borderRadius:
+                        BorderRadius.circular(height / 2), // Fully rounded
+                    boxShadow: [
+                      BoxShadow(
+                        color: (progressColor ??
+                                ProgressType.linearRounded.defaultColor)
+                            .withValues(alpha: 0.3),
+                        blurRadius: 4,
+                        offset: Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                ),
               ],
-            );
-          },
+            ),
+            if (showPercentage) SizedBox(height: 8),
+            if (showPercentage)
+              Text(
+                '${(clampedValue * 100).toInt()}%',
+                style: OsmeaTextStyle.captionSmall(context),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
+          ],
         );
       },
     );
@@ -1549,75 +1387,65 @@ class LinearBufferProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double height = size.progressStrokeWidth * 2.2;
+    final double clampedValue = value.clamp(0.0, 1.0);
+    final double bufferWidth = bufferValue.clamp(0.0, 1.0);
     return LayoutBuilder(
       builder: (context, constraints) {
-        return TweenAnimationBuilder<double>(
-          tween: Tween(begin: 0.0, end: value),
-          duration: const Duration(milliseconds: 1000),
-          curve: Curves.easeInOut,
-          builder: (context, animatedValue, _) {
-            final clampedValue = animatedValue.clamp(0.0, 1.0);
-            final barWidth = (constraints.maxWidth * clampedValue)
-                .clamp(0.0, constraints.maxWidth);
-            final bufferWidth = (constraints.maxWidth * bufferValue)
-                .clamp(0.0, constraints.maxWidth);
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
               children: [
-                Stack(
-                  children: [
-                    // Background track
-                    Container(
-                      width: constraints.maxWidth,
-                      height: height,
-                      decoration: BoxDecoration(
-                        color: OsmeaColors.ash.withValues(alpha: 0.2),
-                        borderRadius: BorderRadius.circular(height / 2),
-                      ),
-                    ),
-                    // Buffer progress (more prominent)
-                    Container(
-                      width: bufferWidth,
-                      height: height,
-                      decoration: BoxDecoration(
+                // Background track - more visible
+                Container(
+                  width: constraints.maxWidth,
+                  height: height,
+                  decoration: BoxDecoration(
+                    color: OsmeaColors.ash.withValues(alpha: 0.3),
+                    borderRadius: BorderRadius.circular(height / 2),
+                  ),
+                ),
+                // Buffer progress - more prominent
+                Container(
+                  width: constraints.maxWidth * bufferWidth,
+                  height: height,
+                  decoration: BoxDecoration(
+                    color: (progressColor ??
+                            ProgressType.linearBuffer.defaultColor)
+                        .withValues(alpha: 0.5),
+                    borderRadius: BorderRadius.circular(height / 2),
+                  ),
+                ),
+                // Main progress - on top
+                Container(
+                  width: constraints.maxWidth * clampedValue,
+                  height: height,
+                  decoration: BoxDecoration(
+                    color:
+                        progressColor ?? ProgressType.linearBuffer.defaultColor,
+                    borderRadius: BorderRadius.circular(height / 2),
+                    boxShadow: [
+                      BoxShadow(
                         color: (progressColor ??
                                 ProgressType.linearBuffer.defaultColor)
-                            .withValues(alpha: 0.4),
-                        borderRadius: BorderRadius.circular(height / 2),
+                            .withValues(alpha: 0.3),
+                        blurRadius: 3,
+                        offset: Offset(0, 1),
                       ),
-                    ),
-                    // Main progress (on top)
-                    Container(
-                      width: barWidth,
-                      height: height,
-                      decoration: BoxDecoration(
-                        color: progressColor ??
-                            ProgressType.linearBuffer.defaultColor,
-                        borderRadius: BorderRadius.circular(height / 2),
-                        boxShadow: [
-                          BoxShadow(
-                            color: (progressColor ??
-                                    ProgressType.linearBuffer.defaultColor)
-                                .withValues(alpha: 0.3),
-                            blurRadius: 3,
-                            offset: Offset(0, 1),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                if (showPercentage) SizedBox(height: 8),
-                if (showPercentage)
-                  Text(
-                    '${(clampedValue * 100).toInt()}%',
-                    style: OsmeaTextStyle.captionSmall(context),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
+                    ],
                   ),
+                ),
               ],
-            );
-          },
+            ),
+            if (showPercentage) SizedBox(height: 8),
+            if (showPercentage)
+              Text(
+                '${(clampedValue * 100).toInt()}%',
+                style: OsmeaTextStyle.captionSmall(context),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
+          ],
         );
       },
     );
