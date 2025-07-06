@@ -503,7 +503,7 @@ class _OsmeaSnackbarState extends State<OsmeaSnackbar>
                       type: ProgressType.linear,
                       value: _progressAnimation.value,
                       size: ProgressSize.small,
-                      color: Colors.white,
+                      progressColor: Colors.white,
                       showPercentage: false,
                     );
                   },
