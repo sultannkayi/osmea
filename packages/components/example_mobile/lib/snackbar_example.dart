@@ -28,6 +28,12 @@ class SnackbarExampleScreen extends StatelessWidget {
                 context,
                 message: 'Item deleted',
                 type: SnackbarType.success,
+                actionLabel: 'Undo',
+                onAction: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Undo pressed!')),
+                  );
+                },
               ),
             ),
             const SizedBox(height: 12),
@@ -37,6 +43,12 @@ class SnackbarExampleScreen extends StatelessWidget {
                 context,
                 message: 'Connection failed',
                 type: SnackbarType.error,
+                actionLabel: 'Retry',
+                onAction: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Retry pressed!')),
+                  );
+                },
               ),
             ),
             const SizedBox(height: 12),
@@ -46,6 +58,12 @@ class SnackbarExampleScreen extends StatelessWidget {
                 context,
                 message: 'This action cannot be undone',
                 type: SnackbarType.warning,
+                actionLabel: 'Dismiss',
+                onAction: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Dismiss pressed!')),
+                  );
+                },
               ),
             ),
             const SizedBox(height: 32),
@@ -175,6 +193,8 @@ class SnackbarExampleScreen extends StatelessWidget {
     required SnackbarType type,
     Duration duration = const Duration(seconds: 4),
     SnackbarPosition position = SnackbarPosition.bottom,
+    String? actionLabel,
+    VoidCallback? onAction,
   }) {
     GlobalSnackbarOverlay().ensureOverlay(context);
     final id = UniqueKey().toString();
@@ -189,6 +209,8 @@ class SnackbarExampleScreen extends StatelessWidget {
         onClose: () {
           entry?.remove();
         },
+        actionLabel: actionLabel,
+        onAction: onAction,
       ),
     );
     Overlay.of(context, rootOverlay: true).insert(entry);
@@ -202,6 +224,8 @@ class _ProgressSnackbarOverlay extends StatefulWidget {
   final Duration duration;
   final SnackbarPosition position;
   final VoidCallback onClose;
+  final String? actionLabel;
+  final VoidCallback? onAction;
   const _ProgressSnackbarOverlay({
     required this.id,
     required this.message,
@@ -209,6 +233,8 @@ class _ProgressSnackbarOverlay extends StatefulWidget {
     required this.duration,
     required this.position,
     required this.onClose,
+    this.actionLabel,
+    this.onAction,
   });
   @override
   State<_ProgressSnackbarOverlay> createState() =>
@@ -263,6 +289,8 @@ class _ProgressSnackbarOverlayState extends State<_ProgressSnackbarOverlay> {
               style: SnackbarStyle.defaultStyle,
               duration: widget.duration,
               progress: _progress,
+              actionLabel: widget.actionLabel,
+              onAction: widget.onAction,
             ),
             onClose: widget.onClose,
           ),

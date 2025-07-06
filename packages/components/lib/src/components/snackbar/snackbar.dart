@@ -443,17 +443,16 @@ class OsmeaSnackbar extends StatelessWidget {
                   maxLines: 2,
                 ),
               ),
-              if (hasAction)
+              if (state.actionLabel != null && state.onAction != null)
                 Padding(
                   padding: const EdgeInsets.only(left: 2),
                   child: OsmeaTextButton(
                     text: state.actionLabel!,
                     onPressed: () {
-                      onClose?.call();
                       state.onAction?.call();
+                      onClose?.call();
                     },
-                    variant:
-                        useGlass ? ButtonVariant.outlined : ButtonVariant.ghost,
+                    variant: ButtonVariant.ghost,
                     size: ButtonSize.small,
                   ),
                 ),
