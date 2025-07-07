@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:osmea_components/osmea_components.dart';
+import 'package:osmea_components/src/components/dropdown/dropdown.dart'
+    show OsmeaDropdownUser, OsmeaDropdownMenuItem;
 
 /// 🔽 **OSMEA Dropdown Examples**
 ///
@@ -15,33 +17,7 @@ import 'package:osmea_components/osmea_components.dart';
 /// * 🎨 Custom styling and theming options
 /// * 🔧 Full-width and responsive layouts
 
-// TeamMember ve MenuItem modelleri
-class TeamMember {
-  final String name;
-  final String username;
-  final String avatarUrl;
-  final bool isOnline;
-  TeamMember(
-      {required this.name,
-      required this.username,
-      required this.avatarUrl,
-      this.isOnline = false});
-}
-
-class MenuItem {
-  final String title;
-  final IconData? icon;
-  final String? shortcut;
-  final bool isSection;
-  final bool isDestructive;
-  MenuItem(
-      {required this.title,
-      this.icon,
-      this.shortcut,
-      this.isSection = false,
-      this.isDestructive = false});
-}
-
+/// Example demonstrating the new cubit-based dropdown implementation
 class DropdownExample extends StatefulWidget {
   const DropdownExample({super.key});
 
@@ -50,846 +26,400 @@ class DropdownExample extends StatefulWidget {
 }
 
 class _DropdownExampleState extends State<DropdownExample> {
-  // State variables for different dropdown demonstrations
-  String? _selectedCountry;
-  TeamMember? _selectedTeamMember;
-  MenuItem? _selectedMenuItem;
+  String? selectedValue;
+  String? selectedUser;
+  String? selectedMenuItem;
 
-  final List<String> _countries = [
-    'Turkey',
-    'United States',
-    'United Kingdom',
-    'Germany',
-    'France',
-    'Japan',
-    'Canada',
-    'Australia',
+  final List<String> options = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
+
+  final List<OsmeaDropdownUser> users = [
+    OsmeaDropdownUser(
+      name: 'John Doe',
+      username: '@johndoe',
+      avatarUrl:
+          'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
+      isOnline: true,
+    ),
+    OsmeaDropdownUser(
+      name: 'Jane Smith',
+      username: '@janesmith',
+      avatarUrl:
+          'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
+      isOnline: false,
+    ),
+    OsmeaDropdownUser(
+      name: 'Bob Johnson',
+      username: '@bobjohnson',
+      isOnline: true,
+    ),
+    OsmeaDropdownUser(
+      name: 'Alice Brown',
+      username: '@alicebrown',
+      avatarUrl:
+          'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
+      isOnline: true,
+    ),
   ];
 
-  final List<String> _users = [
-    'John Doe',
-    'Jane Smith',
-    'Mike Johnson',
-    'Sarah Wilson',
-    'David Brown',
-  ];
-
-  final List<String> _categories = [
-    'Technology',
-    'Design',
-    'Marketing',
-    'Sales',
-    'Support',
-  ];
-
-  final List<String> _sizes = [
-    'Small',
-    'Medium',
-    'Large',
-    'Extra Large',
-  ];
-
-  final List<TeamMember> _teamMembers = [
-    TeamMember(
-        name: 'Olivia Rhye',
-        username: '@olivia',
-        avatarUrl: '',
-        isOnline: true),
-    TeamMember(
-        name: 'Phoenix Baker',
-        username: '@phoenix',
-        avatarUrl: '',
-        isOnline: false),
-    TeamMember(
-        name: 'Lana Steiner', username: '@lana', avatarUrl: '', isOnline: true),
-    TeamMember(
-        name: 'Demi Wilkinson',
-        username: '@demi',
-        avatarUrl: '',
-        isOnline: false),
-    TeamMember(
-        name: 'Candice Wu',
-        username: '@candice',
-        avatarUrl: '',
-        isOnline: true),
-    TeamMember(
-        name: 'Natali Craig',
-        username: '@natali',
-        avatarUrl: '',
-        isOnline: false),
-    TeamMember(
-        name: 'Drew Cano', username: '@drew', avatarUrl: '', isOnline: true),
-  ];
-
-  final List<MenuItem> _accountMenu = [
-    MenuItem(title: 'View profile', icon: Icons.person, shortcut: '⌘+P'),
-    MenuItem(title: 'Settings', icon: Icons.settings, shortcut: '⌘+S'),
-    MenuItem(title: 'Keyboard shortcuts', icon: Icons.keyboard, shortcut: '?'),
-    MenuItem(title: 'Company profile', icon: Icons.business, shortcut: '⌘+C'),
-    MenuItem(title: 'Team', icon: Icons.group, shortcut: '⌘+T'),
-    MenuItem(title: 'Invite colleagues', icon: Icons.person_add),
-    MenuItem(title: 'Changelog', icon: Icons.update),
-    MenuItem(title: 'Slack Community', icon: Icons.chat),
-    MenuItem(title: 'Support', icon: Icons.support),
-    MenuItem(title: 'API', icon: Icons.api),
-    MenuItem(title: 'Log out', icon: Icons.logout, isDestructive: true),
+  final List<OsmeaDropdownMenuItem> menuItems = [
+    OsmeaDropdownMenuItem(title: 'Edit', icon: Icons.edit),
+    OsmeaDropdownMenuItem(
+        title: 'Delete', icon: Icons.delete, isDestructive: true),
+    OsmeaDropdownMenuItem(title: 'Share', icon: Icons.share),
+    OsmeaDropdownMenuItem(title: 'Download', icon: Icons.download),
+    OsmeaDropdownMenuItem(title: 'Settings', icon: Icons.settings),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return OsmeaComponents.scaffold(
-      appBar: OsmeaComponents.appBar(
-        title: OsmeaComponents.text(
-          '🔽 OSMEA Dropdown Examples',
-          variant: OsmeaTextVariant.headlineMedium,
-        ),
-        backgroundColor: OsmeaColors.nordicBlue,
-        foregroundColor: OsmeaColors.white,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Dropdown Examples'),
       ),
-      body: OsmeaComponents.singleChildScrollView(
-        padding: context.paddingNormal,
-        child: OsmeaComponents.column(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildSectionTitle('🎨 Dropdown Variants'),
-            _buildVariantsSection(),
-            OsmeaComponents.sizedBox(height: 32),
-            _buildSectionTitle('📏 Dropdown Sizes'),
-            _buildSizesSection(),
-            OsmeaComponents.sizedBox(height: 32),
-            _buildSectionTitle('🔄 Dropdown Types'),
-            _buildTypesSection(),
-            OsmeaComponents.sizedBox(height: 32),
-            _buildSectionTitle('🎯 Icon Positions'),
-            _buildIconPositionsSection(),
-            OsmeaComponents.sizedBox(height: 32),
-            _buildSectionTitle('🔄 Dropdown States'),
-            _buildStatesSection(),
-            OsmeaComponents.sizedBox(height: 32),
-            _buildSectionTitle('🎭 Interactive Examples'),
-            _buildInteractiveSection(),
-            OsmeaComponents.sizedBox(height: 32),
-            _buildSectionTitle('📐 Layout Examples'),
-            _buildLayoutSection(),
-            OsmeaComponents.sizedBox(height: 32),
-            _buildSectionTitle('🎨 Custom Styling'),
-            _buildCustomStylingSection(),
-            OsmeaComponents.sizedBox(height: 32),
-            _buildSectionTitle('👤 Modern Team Member Dropdown'),
-            _buildModernTeamMemberDropdown(),
-            OsmeaComponents.sizedBox(height: 32),
-            _buildSectionTitle('⚙️ Modern Account Menu Dropdown'),
-            _buildModernAccountMenuDropdown(),
-          ],
-        ),
-      ),
-    );
-  }
+            const Text(
+              'Cubit-Based Dropdown Examples',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 20),
 
-  Widget _buildSectionTitle(String title) {
-    return OsmeaComponents.padding(
-      padding: const EdgeInsets.only(bottom: 16.0),
-      child: OsmeaComponents.text(
-        title,
-        variant: OsmeaTextVariant.headlineSmall,
-      ),
-    );
-  }
-
-  Widget _buildSubsectionTitle(String title) {
-    return OsmeaComponents.padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
-      child: OsmeaComponents.text(
-        title,
-        variant: OsmeaTextVariant.titleMedium,
-        color: OsmeaColors.nordicBlue,
-      ),
-    );
-  }
-
-  Widget _buildVariantsSection() {
-    return OsmeaComponents.column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildSubsectionTitle('Filled Variant'),
-        OsmeaComponents.wrap(
-          spacing: 12,
-          runSpacing: 8,
-          children: [
-            OsmeaComponents.dropdown(
-              items: _countries,
-              hint: 'Select Country',
-              variant: DropdownVariant.filled,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-            OsmeaComponents.dropdown(
-              items: _countries,
-              hint: 'With Label',
-              label: 'Country',
-              variant: DropdownVariant.filled,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-          ],
-        ),
-        OsmeaComponents.sizedBox(height: 16),
-        _buildSubsectionTitle('Outlined Variant'),
-        OsmeaComponents.wrap(
-          spacing: 12,
-          runSpacing: 8,
-          children: [
-            OsmeaComponents.dropdown(
-              items: _countries,
-              hint: 'Select Country',
-              variant: DropdownVariant.outlined,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-            OsmeaComponents.dropdown(
-              items: _countries,
-              hint: 'With Helper Text',
-              helperText: 'Choose your country',
-              variant: DropdownVariant.outlined,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-          ],
-        ),
-        OsmeaComponents.sizedBox(height: 16),
-        _buildSubsectionTitle('Elevated Variant'),
-        OsmeaComponents.wrap(
-          spacing: 12,
-          runSpacing: 8,
-          children: [
-            OsmeaComponents.dropdown(
-              items: _countries,
-              hint: 'Select Country',
-              variant: DropdownVariant.elevated,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-            OsmeaComponents.dropdown(
-              items: _countries,
-              hint: 'With Error',
-              errorText: 'Please select a country',
-              variant: DropdownVariant.elevated,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildSizesSection() {
-    return OsmeaComponents.column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildSubsectionTitle('Size Comparison'),
-        OsmeaComponents.column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            OsmeaComponents.dropdown(
-              items: _sizes,
-              hint: 'Small Size',
-              size: DropdownSize.small,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-            OsmeaComponents.sizedBox(height: 8),
-            OsmeaComponents.dropdown(
-              items: _sizes,
-              hint: 'Medium Size (Default)',
-              size: DropdownSize.medium,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-            OsmeaComponents.sizedBox(height: 8),
-            OsmeaComponents.dropdown(
-              items: _sizes,
-              hint: 'Large Size',
-              size: DropdownSize.large,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-          ],
-        ),
-        OsmeaComponents.sizedBox(height: 16),
-        _buildSubsectionTitle('Size with Different Types'),
-        OsmeaComponents.wrap(
-          spacing: 12,
-          runSpacing: 8,
-          children: [
-            OsmeaComponents.dropdown(
-              items: _users,
-              hint: 'Small Avatar',
-              size: DropdownSize.small,
-              type: DropdownType.avatar,
-              avatarIcon: Icons.person,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-            OsmeaComponents.dropdown(
-              items: _users,
-              hint: 'Medium Avatar',
-              size: DropdownSize.medium,
-              type: DropdownType.avatar,
-              avatarIcon: Icons.person,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-            OsmeaComponents.dropdown(
-              items: _users,
-              hint: 'Large Avatar',
-              size: DropdownSize.large,
-              type: DropdownType.avatar,
-              avatarIcon: Icons.person,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildTypesSection() {
-    return OsmeaComponents.column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildSubsectionTitle('Regular Type'),
-        OsmeaComponents.wrap(
-          spacing: 12,
-          runSpacing: 8,
-          children: [
-            OsmeaComponents.dropdown(
-              items: _categories,
-              hint: 'Select Category',
-              type: DropdownType.regular,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-            OsmeaComponents.dropdown(
-              items: _categories,
-              hint: 'With Checkbox',
-              type: DropdownType.regular,
-              showCheckbox: true,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-          ],
-        ),
-        OsmeaComponents.sizedBox(height: 16),
-        _buildSubsectionTitle('Avatar Type'),
-        OsmeaComponents.wrap(
-          spacing: 12,
-          runSpacing: 8,
-          children: [
-            OsmeaComponents.dropdown(
-              items: _users,
-              hint: 'Select User',
-              type: DropdownType.avatar,
-              avatarIcon: Icons.person,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-            OsmeaComponents.dropdown(
-              items: _users,
-              hint: 'With Avatar Icon',
-              type: DropdownType.avatar,
-              avatarIcon: Icons.person,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-          ],
-        ),
-        OsmeaComponents.sizedBox(height: 16),
-        _buildSubsectionTitle('Avatar Leading Type'),
-        OsmeaComponents.wrap(
-          spacing: 12,
-          runSpacing: 8,
-          children: [
-            OsmeaComponents.dropdown(
-              items: _users,
-              hint: 'Select User',
-              type: DropdownType.avatarLeading,
-              avatarIcon: Icons.person,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-            OsmeaComponents.dropdown(
-              items: _users,
-              hint: 'With Custom Avatar',
-              type: DropdownType.avatarLeading,
-              avatarIcon: Icons.admin_panel_settings,
-              avatarBackgroundColor: OsmeaColors.nordicBlue,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-          ],
-        ),
-        OsmeaComponents.sizedBox(height: 16),
-        _buildSubsectionTitle('Input Type'),
-        OsmeaComponents.wrap(
-          spacing: 12,
-          runSpacing: 8,
-          children: [
-            OsmeaComponents.dropdown(
-              items: _categories,
-              hint: 'Select Category',
-              type: DropdownType.input,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-            OsmeaComponents.dropdown(
-              items: _categories,
-              hint: 'With Leading Icon',
-              type: DropdownType.input,
-              leading: const Icon(Icons.category),
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildIconPositionsSection() {
-    return OsmeaComponents.column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildSubsectionTitle('Trailing Icon (Default)'),
-        OsmeaComponents.wrap(
-          spacing: 12,
-          runSpacing: 8,
-          children: [
-            OsmeaComponents.dropdown(
-              items: _countries,
-              hint: 'Select Country',
-              iconPosition: DropdownIconPosition.trailing,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-            OsmeaComponents.dropdown(
-              items: _countries,
-              hint: 'Custom Icon',
-              icon: const Icon(Icons.arrow_downward),
-              iconPosition: DropdownIconPosition.trailing,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-          ],
-        ),
-        OsmeaComponents.sizedBox(height: 16),
-        _buildSubsectionTitle('Leading Icon'),
-        OsmeaComponents.wrap(
-          spacing: 12,
-          runSpacing: 8,
-          children: [
-            OsmeaComponents.dropdown(
-              items: _countries,
-              hint: 'Select Country',
-              iconPosition: DropdownIconPosition.leading,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-            OsmeaComponents.dropdown(
-              items: _countries,
-              hint: 'With Leading Icon',
-              iconPosition: DropdownIconPosition.leading,
-              showLeadingIcon: true,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildStatesSection() {
-    return OsmeaComponents.column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildSubsectionTitle('Enabled State'),
-        OsmeaComponents.wrap(
-          spacing: 12,
-          runSpacing: 8,
-          children: [
-            OsmeaComponents.dropdown(
-              items: _countries,
-              hint: 'Enabled Dropdown',
-              isEnabled: true,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-          ],
-        ),
-        OsmeaComponents.sizedBox(height: 16),
-        _buildSubsectionTitle('Disabled State'),
-        OsmeaComponents.wrap(
-          spacing: 12,
-          runSpacing: 8,
-          children: [
-            OsmeaComponents.dropdown(
-              items: _countries,
-              hint: 'Disabled Dropdown',
-              isEnabled: false,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-          ],
-        ),
-        OsmeaComponents.sizedBox(height: 16),
-        _buildSubsectionTitle('Loading State'),
-        OsmeaComponents.wrap(
-          spacing: 12,
-          runSpacing: 8,
-          children: [
-            OsmeaComponents.dropdown(
-              items: _countries,
-              hint: 'Loading...',
-              isLoading: true,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-          ],
-        ),
-        OsmeaComponents.sizedBox(height: 16),
-        _buildSubsectionTitle('Error State'),
-        OsmeaComponents.wrap(
-          spacing: 12,
-          runSpacing: 8,
-          children: [
-            OsmeaComponents.dropdown(
-              items: _countries,
-              hint: 'Select Country',
-              errorText: 'This field is required',
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildInteractiveSection() {
-    return OsmeaComponents.column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildSubsectionTitle('Controlled Dropdown'),
-        OsmeaComponents.wrap(
-          spacing: 12,
-          runSpacing: 8,
-          children: [
-            OsmeaComponents.dropdown(
-              items: _countries,
-              value: _selectedCountry,
-              hint: 'Select Country',
+            // Basic dropdown
+            const Text('Basic Dropdown:',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+            const SizedBox(height: 8),
+            OsmeaComponents.dropdown<String>(
+              items: options,
+              value: selectedValue,
+              hint: 'Select an option',
               onChanged: (value) {
-                if (mounted) {
-                  setState(() {
-                    _selectedCountry = value as String?;
-                  });
-                }
-                _showSnackBar('Selected: $value');
+                setState(() {
+                  selectedValue = value;
+                });
               },
             ),
-            OsmeaComponents.text(
-              'Selected: ${_selectedCountry ?? 'None'}',
-              variant: OsmeaTextVariant.bodyMedium,
-            ),
-          ],
-        ),
-        OsmeaComponents.sizedBox(height: 16),
-        _buildSubsectionTitle('Custom Item Builder'),
-        OsmeaComponents.dropdown(
-          items: _users,
-          hint: 'Select User',
-          itemBuilder: (user, isSelected) {
-            return Container(
-              padding: const EdgeInsets.all(12),
-              child: Row(
-                children: [
-                  const CircleAvatar(
-                    radius: 16,
-                    backgroundColor: Colors.grey,
-                    child: Text('?'),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Text(
-                      user as String,
-                      style: TextStyle(
-                        fontWeight:
-                            isSelected ? FontWeight.bold : FontWeight.normal,
-                        color: isSelected ? OsmeaColors.nordicBlue : null,
-                      ),
-                    ),
-                  ),
-                  if (isSelected)
-                    Icon(
-                      Icons.check,
-                      color: OsmeaColors.nordicBlue,
-                      size: 20,
-                    ),
-                ],
-              ),
-            );
-          },
-          onChanged: (value) => _showSnackBar('Selected: $value'),
-        ),
-        OsmeaComponents.sizedBox(height: 16),
-        _buildSubsectionTitle('Custom Selected Item Builder'),
-        OsmeaComponents.dropdown(
-          items: _categories,
-          hint: 'Select Category',
-          selectedItemBuilder: (category) {
-            return Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  Icons.category,
-                  size: 16,
-                  color: OsmeaColors.nordicBlue,
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  category as String,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: OsmeaColors.nordicBlue,
-                  ),
-                ),
-              ],
-            );
-          },
-          onChanged: (value) => _showSnackBar('Selected: $value'),
-        ),
-      ],
-    );
-  }
+            const SizedBox(height: 20),
 
-  Widget _buildLayoutSection() {
-    return OsmeaComponents.column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildSubsectionTitle('Full Width Dropdown'),
-        OsmeaComponents.dropdown(
-          items: _countries,
-          hint: 'Full Width Dropdown',
-          fullWidth: true,
-          onChanged: (value) => _showSnackBar('Selected: $value'),
-        ),
-        OsmeaComponents.sizedBox(height: 16),
-        _buildSubsectionTitle('Dropdown with Header'),
-        OsmeaComponents.dropdown(
-          items: _users,
-          hint: 'Select User',
-          header: Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: OsmeaColors.nordicBlue.withAlpha((0.1 * 255).toInt()),
-              border: Border(
-                bottom: BorderSide(color: Colors.grey.shade300),
-              ),
-            ),
-            child: Row(
+            // Dropdown with different variants
+            const Text('Dropdown Variants:',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+            const SizedBox(height: 8),
+            Row(
               children: [
-                Icon(Icons.people, color: OsmeaColors.nordicBlue),
+                Expanded(
+                  child: OsmeaComponents.dropdown<String>(
+                    items: options,
+                    hint: 'Filled',
+                    variant: DropdownVariant.filled,
+                    onChanged: (value) {},
+                  ),
+                ),
                 const SizedBox(width: 8),
-                Text(
-                  'Available Users',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: OsmeaColors.nordicBlue,
+                Expanded(
+                  child: OsmeaComponents.dropdown<String>(
+                    items: options,
+                    hint: 'Outlined',
+                    variant: DropdownVariant.outlined,
+                    onChanged: (value) {},
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: OsmeaComponents.dropdown<String>(
+                    items: options,
+                    hint: 'Elevated',
+                    variant: DropdownVariant.elevated,
+                    onChanged: (value) {},
                   ),
                 ),
               ],
             ),
-          ),
-          onChanged: (value) => _showSnackBar('Selected: $value'),
-        ),
-        OsmeaComponents.sizedBox(height: 16),
-        _buildSubsectionTitle('Responsive Layout'),
-        OsmeaComponents.wrap(
-          spacing: 12,
-          runSpacing: 8,
-          children: [
-            OsmeaComponents.dropdown(
-              items: _categories,
-              hint: 'Category',
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-            OsmeaComponents.dropdown(
-              items: _sizes,
-              hint: 'Size',
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-            OsmeaComponents.dropdown(
-              items: _countries,
-              hint: 'Country',
-              onChanged: (value) => _showSnackBar('Selected: $value'),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
+            const SizedBox(height: 20),
 
-  Widget _buildCustomStylingSection() {
-    return OsmeaComponents.column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildSubsectionTitle('Custom Colors'),
-        OsmeaComponents.wrap(
-          spacing: 12,
-          runSpacing: 8,
-          children: [
-            OsmeaComponents.dropdown(
-              items: _categories,
-              hint: 'Custom Styled',
-              variant: DropdownVariant.filled,
-              avatarBackgroundColor: OsmeaColors.nordicBlue,
-              onChanged: (value) => _showSnackBar('Selected: $value'),
+            // Dropdown with different sizes
+            const Text('Dropdown Sizes:',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(
+                  child: OsmeaComponents.dropdown<String>(
+                    items: options,
+                    hint: 'Small',
+                    size: DropdownSize.small,
+                    onChanged: (value) {},
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: OsmeaComponents.dropdown<String>(
+                    items: options,
+                    hint: 'Medium',
+                    size: DropdownSize.medium,
+                    onChanged: (value) {},
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: OsmeaComponents.dropdown<String>(
+                    items: options,
+                    hint: 'Large',
+                    size: DropdownSize.large,
+                    onChanged: (value) {},
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-        OsmeaComponents.sizedBox(height: 16),
-        _buildSubsectionTitle('Custom Max Height'),
-        OsmeaComponents.dropdown(
-          items: _countries,
-          hint: 'Limited Height',
-          maxHeight: 150,
-          onChanged: (value) => _showSnackBar('Selected: $value'),
-        ),
-        OsmeaComponents.sizedBox(height: 16),
-        _buildSubsectionTitle('Auto Layout Disabled'),
-        OsmeaComponents.dropdown(
-          items: _countries,
-          hint: 'Fixed Width',
-          autoLayout: false,
-          onChanged: (value) => _showSnackBar('Selected: $value'),
-        ),
-      ],
-    );
-  }
+            const SizedBox(height: 20),
 
-  Widget _buildModernTeamMemberDropdown() {
-    return OsmeaComponents.dropdown<TeamMember>(
-      items: _teamMembers,
-      value: _selectedTeamMember,
-      hint: 'Select team member',
-      type: DropdownType.avatarLeading,
-      itemBuilder: (member, isSelected) {
-        return Container(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-          child: Row(
-            children: [
-              CircleAvatar(
-                radius: 16,
-                backgroundColor: Colors.grey.shade300,
-                child: Text((member is TeamMember ? member.name[0] : '?')),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            // User dropdown with avatars
+            const Text('User Dropdown with Avatars:',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+            const SizedBox(height: 8),
+            OsmeaComponents.dropdown<OsmeaDropdownUser>(
+              items: users,
+              value: selectedUser != null
+                  ? users.firstWhere((u) => u.name == selectedUser)
+                  : null,
+              hint: 'Select a user',
+              type: DropdownType.avatar,
+              label: 'Team Member',
+              helperText: 'Choose a team member to assign',
+              selectedItemBuilder: (user) {
+                if (user == null) return const SizedBox();
+                return Row(
                   children: [
-                    Text(member.name,
-                        style: const TextStyle(fontWeight: FontWeight.w500)),
-                    Text(member.username,
-                        style:
-                            const TextStyle(fontSize: 12, color: Colors.grey)),
+                    CircleAvatar(
+                      radius: 14,
+                      backgroundImage: user.avatarUrl != null
+                          ? NetworkImage(user.avatarUrl!)
+                          : null,
+                      child: user.avatarUrl == null
+                          ? Text(user.name[0].toUpperCase())
+                          : null,
+                    ),
+                    const SizedBox(width: 8),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(user.name,
+                            style:
+                                const TextStyle(fontWeight: FontWeight.w500)),
+                        Text(user.username,
+                            style: const TextStyle(
+                                fontSize: 12, color: Colors.grey)),
+                      ],
+                    ),
                   ],
-                ),
-              ),
-              Container(
-                width: 8,
-                height: 8,
-                decoration: BoxDecoration(
-                  color: member.isOnline ? Colors.green : Colors.grey,
-                  shape: BoxShape.circle,
-                ),
-              ),
-              if (isSelected)
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Icon(Icons.check,
-                      color: OsmeaColors.nordicBlue, size: 20),
-                ),
-            ],
-          ),
-        );
-      },
-      selectedItemBuilder: (member) {
-        return Row(
-          children: [
-            CircleAvatar(
-              radius: 12,
-              backgroundColor: Colors.grey.shade300,
-              child: Text((member is TeamMember ? member.name[0] : '?')),
+                );
+              },
+              onChanged: (user) {
+                setState(() {
+                  selectedUser = user?.name;
+                });
+                if (user != null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Selected: ${user.name}')),
+                  );
+                }
+              },
             ),
-            const SizedBox(width: 8),
-            Text((member is TeamMember ? member.name : '?'),
-                style: const TextStyle(fontWeight: FontWeight.w500)),
-          ],
-        );
-      },
-      onChanged: (value) {
-        setState(() {
-          _selectedTeamMember = value;
-        });
-        _showSnackBar('Selected: ${value?.name}');
-      },
-    );
-  }
+            const SizedBox(height: 20),
 
-  Widget _buildModernAccountMenuDropdown() {
-    return OsmeaComponents.dropdown<MenuItem>(
-      items: _accountMenu,
-      value: _selectedMenuItem,
-      hint: 'Account',
-      type: DropdownType.input,
-      itemBuilder: (item, isSelected) {
-        if (item.isSection) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4.0),
-            child: Text(item.title,
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.grey)),
-          );
-        }
-        return Container(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-          child: Row(
-            children: [
-              Icon(item.icon ?? Icons.help,
-                  size: 20,
-                  color:
-                      item.isDestructive == true ? Colors.red : Colors.black),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Text(item.title,
-                    style: TextStyle(
-                        color: item.isDestructive == true ? Colors.red : null)),
-              ),
-              if (item.shortcut != null)
-                Text(item.shortcut!,
-                    style: const TextStyle(fontSize: 12, color: Colors.grey)),
-              if (isSelected)
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Icon(Icons.check,
-                      color: OsmeaColors.nordicBlue, size: 20),
+            // Menu items dropdown with icons
+            const Text('Menu Items Dropdown with Icons:',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+            const SizedBox(height: 8),
+            OsmeaComponents.dropdown<OsmeaDropdownMenuItem>(
+              items: menuItems,
+              value: selectedMenuItem != null
+                  ? menuItems.firstWhere((m) => m.title == selectedMenuItem)
+                  : null,
+              hint: 'Select action',
+              type: DropdownType.avatar,
+              label: 'Actions',
+              helperText: 'Choose an action to perform',
+              onChanged: (item) {
+                setState(() {
+                  selectedMenuItem = item?.title;
+                });
+                if (item != null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Selected: ${item.title}'),
+                      backgroundColor: item.isDestructive ? Colors.red : null,
+                    ),
+                  );
+                }
+              },
+            ),
+            const SizedBox(height: 20),
+
+            // Icon dropdown with leading icon
+            const Text('Icon Dropdown with Leading Icon:',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+            const SizedBox(height: 8),
+            OsmeaComponents.dropdown<String>(
+              items: ['Technology', 'Design', 'Marketing', 'Sales', 'Support'],
+              hint: 'Select category',
+              type: DropdownType.input,
+              leading: const Icon(Icons.category, color: Colors.blue),
+              label: 'Category',
+              helperText: 'Choose a category',
+              onChanged: (category) {
+                if (category != null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Selected: $category')),
+                  );
+                }
+              },
+            ),
+            const SizedBox(height: 20),
+
+            // Dropdown with validation
+            const Text('Dropdown with Validation:',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+            const SizedBox(height: 8),
+            OsmeaComponents.dropdown<String>(
+              items: options,
+              hint: 'Required field',
+              label: 'Required Dropdown',
+              helperText: 'This field is required',
+              onChanged: (value) {},
+            ),
+            const SizedBox(height: 20),
+
+            // Dropdown with custom item builder
+            const Text('Custom Item Builder:',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+            const SizedBox(height: 8),
+            OsmeaComponents.dropdown<String>(
+              items: options,
+              hint: 'Custom items',
+              itemBuilder: (item, isSelected) {
+                return Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: isSelected ? Colors.blue.withOpacity(0.1) : null,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.check_circle,
+                        color: isSelected ? Colors.blue : Colors.grey,
+                        size: 20,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        item,
+                        style: TextStyle(
+                          fontWeight:
+                              isSelected ? FontWeight.bold : FontWeight.normal,
+                          color: isSelected ? Colors.blue : null,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+              onChanged: (value) {},
+            ),
+            const SizedBox(height: 20),
+
+            // Selected values display
+            if (selectedValue != null ||
+                selectedUser != null ||
+                selectedMenuItem != null) ...[
+              const Text('Selected Values:',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+              const SizedBox(height: 8),
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (selectedValue != null) Text('Basic: $selectedValue'),
+                      if (selectedUser != null) ...[
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 16,
+                              backgroundImage: users
+                                          .firstWhere(
+                                              (u) => u.name == selectedUser)
+                                          .avatarUrl !=
+                                      null
+                                  ? NetworkImage(users
+                                      .firstWhere((u) => u.name == selectedUser)
+                                      .avatarUrl!)
+                                  : null,
+                              child: users
+                                          .firstWhere(
+                                              (u) => u.name == selectedUser)
+                                          .avatarUrl ==
+                                      null
+                                  ? Text(selectedUser![0].toUpperCase())
+                                  : null,
+                            ),
+                            const SizedBox(width: 8),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('User: $selectedUser'),
+                                Text(
+                                    '@${users.firstWhere((u) => u.name == selectedUser).username}',
+                                    style: const TextStyle(
+                                        fontSize: 12, color: Colors.grey)),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                      if (selectedMenuItem != null) ...[
+                        const SizedBox(height: 8),
+                        Row(
+                          children: [
+                            Icon(
+                              menuItems
+                                  .firstWhere(
+                                      (m) => m.title == selectedMenuItem)
+                                  .icon,
+                              size: 16,
+                              color: menuItems
+                                      .firstWhere(
+                                          (m) => m.title == selectedMenuItem)
+                                      .isDestructive
+                                  ? Colors.red
+                                  : Colors.blue,
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              'Action: $selectedMenuItem',
+                              style: TextStyle(
+                                color: menuItems
+                                        .firstWhere(
+                                            (m) => m.title == selectedMenuItem)
+                                        .isDestructive
+                                    ? Colors.red
+                                    : null,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ],
+                  ),
                 ),
+              ),
             ],
-          ),
-        );
-      },
-      selectedItemBuilder: (item) {
-        return Row(
-          children: [
-            Icon(item?.icon ?? Icons.help, size: 16),
-            const SizedBox(width: 8),
-            Text(item?.title ?? '',
-                style: const TextStyle(fontWeight: FontWeight.w500)),
           ],
-        );
-      },
-      onChanged: (value) {
-        setState(() {
-          _selectedMenuItem = value;
-        });
-        _showSnackBar('Selected: ${value?.title}');
-      },
-    );
-  }
-
-  void _showSnackBar(String message) {
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: OsmeaComponents.text(message),
-          duration: const Duration(seconds: 2),
         ),
-      );
-    }
+      ),
+    );
   }
 }
