@@ -86,4 +86,7 @@ export 'src/components/loading/cubit/loading_state.dart';
 // 📝 Rich Text
 export 'src/components/rich_text/text_span.dart';
 
+// 🖼️ Image
+export 'src/utils/image_extensions.dart';
+
 export 'src/components/stepper/stepper.dart';
