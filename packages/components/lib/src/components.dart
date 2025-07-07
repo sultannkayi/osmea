@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/gestures.dart';
-import 'dart:ui';
 import 'package:osmea_components/osmea_components.dart';
 import 'package:osmea_components/src/components/toast/toast.dart'
     show ToastManager;
