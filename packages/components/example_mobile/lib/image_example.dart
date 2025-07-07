@@ -37,7 +37,7 @@ class ImageExample extends StatelessWidget {
             _buildSectionTitle('🎨 Interactive Images'),
             _buildInteractiveSection(context),
             OsmeaComponents.sizedBox(height: 32),
-            _buildSectionTitle(' Hero Images'),
+            _buildSectionTitle('Hero Images'),
             _buildHeroSection(context),
             OsmeaComponents.sizedBox(height: 32),
             _buildSectionTitle('🔧 Error & Loading States'),

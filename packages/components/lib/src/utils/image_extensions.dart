@@ -253,58 +253,6 @@ extension ImageVariantExtensions on ImageVariant {
   }
 }
 
-/// 🎨 **Image Animation Extensions** - Animation utility methods
-///
-/// Extension methods for ImageAnimationType enum.
-extension ImageAnimationTypeExtensions on ImageAnimationType {
-  /// Get animation duration for the type
-  Duration getDefaultDuration() {
-    switch (this) {
-      case ImageAnimationType.none:
-        return Duration.zero;
-      case ImageAnimationType.fadeIn:
-        return const Duration(milliseconds: 300);
-      case ImageAnimationType.scaleIn:
-        return const Duration(milliseconds: 400);
-      case ImageAnimationType.slideUp:
-      case ImageAnimationType.slideDown:
-      case ImageAnimationType.slideLeft:
-      case ImageAnimationType.slideRight:
-        return const Duration(milliseconds: 350);
-      case ImageAnimationType.rotate:
-        return const Duration(milliseconds: 500);
-      case ImageAnimationType.zoom:
-        return const Duration(milliseconds: 450);
-      case ImageAnimationType.custom:
-        return const Duration(milliseconds: 300);
-    }
-  }
-
-  /// Get animation curve for the type
-  Curve getDefaultCurve() {
-    switch (this) {
-      case ImageAnimationType.none:
-        return Curves.linear;
-      case ImageAnimationType.fadeIn:
-        return Curves.easeIn;
-      case ImageAnimationType.scaleIn:
-        return Curves.elasticOut;
-      case ImageAnimationType.slideUp:
-      case ImageAnimationType.slideDown:
-        return Curves.easeOutCubic;
-      case ImageAnimationType.slideLeft:
-      case ImageAnimationType.slideRight:
-        return Curves.easeOutQuart;
-      case ImageAnimationType.rotate:
-        return Curves.easeInOut;
-      case ImageAnimationType.zoom:
-        return Curves.easeOutBack;
-      case ImageAnimationType.custom:
-        return Curves.easeInOut;
-    }
-  }
-}
-
 /// 💾 **Image Cache Strategy Extensions** - Caching utility methods
 ///
 /// Extension methods for ImageCacheStrategy enum.
