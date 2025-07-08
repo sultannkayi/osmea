@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:osmea_storybook_example/storybook_test/components/chips_test_modular/showcase/unified_chip_showcase.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -101,6 +102,15 @@ List<Story> getComponentStories() {
 
     // Card component stories
     ...getUnifiedCardShowcase().map(
+      (story) => Story(
+        name: StoryConfig.buildComponentStoryName(story.name),
+        description: story.description,
+        builder: story.builder,
+      ),
+    ),
+
+    // Chip component stories
+    ...getUnifiedChipShowcase().map(
       (story) => Story(
         name: StoryConfig.buildComponentStoryName(story.name),
         description: story.description,

@@ -29,6 +29,13 @@ class ComponentRegistry {
       storyPath: StoryConfig.buildComponentStoryName('Cards'),
     ),
     ComponentInfo(
+      name: 'Chips',
+      description: 'Compact elements for filtering, tagging, or selection',
+      icon: Icons.label_important,
+      color: Colors.blueGrey,
+      storyPath: StoryConfig.buildComponentStoryName('Chips'),
+    ),
+    ComponentInfo(
       name: 'Avatars',
       description: 'User profile pictures and placeholders',
       icon: Icons.account_circle,
