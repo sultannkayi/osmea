@@ -212,12 +212,12 @@ class CenterExample extends StatelessWidget {
               },
               child: OsmeaComponents.container(
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
+                  color: OsmeaColors.grey.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: OsmeaComponents.center(
                   child: _buildColoredBox(
-                      color: Colors.indigo, text: 'Long Press Me!'),
+                      color: OsmeaColors.nordicBlue, text: 'Long Press Me!'),
                 ),
               ),
             ),
@@ -236,7 +236,7 @@ class CenterExample extends StatelessWidget {
           _buildContainer(
             OsmeaComponents.center(
               child: _buildColoredBox(
-                  color: Colors.blue,
+                  color: OsmeaColors.blue,
                   width: double.infinity,
                   text: 'Width Factor: 0.6, Height Factor: 0.6'),
               widthFactor: 0.6,
@@ -252,7 +252,7 @@ class CenterExample extends StatelessWidget {
               child: OsmeaComponents.sizedBox(
                 width: 200,
                 child: _buildColoredBox(
-                    color: Colors.green, text: 'Fixed Width: 200'),
+                    color: OsmeaColors.forestHeart, text: 'Fixed Width: 200'),
               ),
             ),
           ),
@@ -265,7 +265,7 @@ class CenterExample extends StatelessWidget {
               child: OsmeaComponents.sizedBox(
                 height: 80,
                 child: _buildColoredBox(
-                    color: Colors.orange, text: 'Fixed Height: 80'),
+                    color: OsmeaColors.meadow, text: 'Fixed Height: 80'),
               ),
             ),
           ),
@@ -279,7 +279,7 @@ class CenterExample extends StatelessWidget {
                 width: 180,
                 height: 90,
                 child: _buildColoredBox(
-                    color: Colors.purple, text: 'Fixed Size: 180x90'),
+                    color: OsmeaColors.purple, text: 'Fixed Size: 180x90'),
               ),
             ),
           ),
@@ -323,7 +323,7 @@ class CenterExample extends StatelessWidget {
           text,
           textAlign: TextAlign.center,
           textStyle: TextStyle(
-            color: color.computeLuminance() > 0.5 ? Colors.black : Colors.white,
+            color: color.computeLuminance() > 0.5 ? OsmeaColors.steel : OsmeaColors.white,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -336,8 +336,8 @@ class CenterExample extends StatelessWidget {
       width: double.infinity,
       height: 200,
       decoration: BoxDecoration(
-        color: Colors.grey.shade100,
-        border: Border.all(color: Colors.grey.shade300),
+        color: OsmeaColors.platinum,
+        border: Border.all(color: OsmeaColors.platinum),
         borderRadius: BorderRadius.circular(8),
       ),
       child: child,
