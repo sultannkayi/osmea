@@ -485,7 +485,7 @@ class _PopupExampleState extends State<PopupExample> {
       child: OsmeaComponents.text(
         '💡 This is a tooltip that will auto-dismiss in 3 seconds.',
         textAlign: TextAlign.center,
-        color: Colors.white,
+        color: OsmeaColors.white,
       ),
     );
   }
@@ -595,9 +595,9 @@ class _PopupExampleState extends State<PopupExample> {
       SnackBar(
         content: OsmeaComponents.text(
           message ?? 'Action completed successfully!',
-          color: Colors.white,
+          color: OsmeaColors.white,
         ),
-        backgroundColor: Colors.green,
+        backgroundColor: OsmeaColors.green,
         behavior: SnackBarBehavior.floating,
       ),
     );
