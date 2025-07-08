@@ -75,14 +75,14 @@ class _ToastExamplePageState extends State<ToastExamplePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF6F8FA),
+      backgroundColor: OsmeaColors.snow,
       appBar: AppBar(
         title: const Text('Toast Demo',
             maxLines: 1, overflow: TextOverflow.ellipsis),
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: OsmeaColors.white,
         elevation: 0.5,
-        foregroundColor: Colors.black87,
+        foregroundColor: OsmeaColors.black54,
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),
@@ -93,7 +93,7 @@ class _ToastExamplePageState extends State<ToastExamplePage> {
                 Switch(
                   value: _stacked,
                   onChanged: (val) => setState(() => _stacked = val),
-                  activeColor: Colors.green,
+                  activeColor: OsmeaColors.meadow,
                 ),
               ],
             ),
@@ -120,7 +120,7 @@ class _ToastExamplePageState extends State<ToastExamplePage> {
                       Row(
                         children: [
                           Icon(Icons.notifications_active,
-                              color: Colors.blue.shade700, size: 26),
+                              color: OsmeaColors.nordicBlue, size: 26),
                           const SizedBox(width: 10),
                           Expanded(
                             child: Text(
@@ -141,7 +141,7 @@ class _ToastExamplePageState extends State<ToastExamplePage> {
                         style: Theme.of(context)
                             .textTheme
                             .bodySmall
-                            ?.copyWith(color: Colors.black54),
+                            ?.copyWith(color: OsmeaColors.black54),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -191,14 +191,14 @@ class _ToastExamplePageState extends State<ToastExamplePage> {
                         label: _maxToasts.toString(),
                         onChanged: (val) =>
                             setState(() => _maxToasts = val.round()),
-                        activeColor: Colors.blue.shade700,
+                        activeColor: OsmeaColors.nordicBlue,
                       ),
                       const SizedBox(height: 28),
                       Center(
                         child: ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue.shade700,
-                            foregroundColor: Colors.white,
+                            backgroundColor: OsmeaColors.nordicBlue,
+                            foregroundColor: OsmeaColors.white,
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 32, vertical: 16),
                             shape: RoundedRectangleBorder(
@@ -236,10 +236,10 @@ class _ToastExamplePageState extends State<ToastExamplePage> {
       padding: const EdgeInsets.only(bottom: 4),
       child: Text(
         text,
-        style: const TextStyle(
+        style: TextStyle(
           fontWeight: FontWeight.w600,
           fontSize: 15,
-          color: Colors.black87,
+          color: OsmeaColors.black54,
           letterSpacing: 0.2,
         ),
       ),
@@ -263,9 +263,9 @@ class _ToastExamplePageState extends State<ToastExamplePage> {
           .toList(),
       onChanged: onChanged,
       borderRadius: BorderRadius.circular(12),
-      underline: Container(height: 2, color: Colors.blue.shade100),
-      style: const TextStyle(fontSize: 15, color: Colors.black87),
-      dropdownColor: Colors.white,
+      underline: Container(height: 2, color: OsmeaColors.nordicBlue.withOpacity(0.1)),
+      style: TextStyle(fontSize: 15, color: OsmeaColors.steel),
+      dropdownColor: OsmeaColors.white,
       elevation: 2,
     );
   }
