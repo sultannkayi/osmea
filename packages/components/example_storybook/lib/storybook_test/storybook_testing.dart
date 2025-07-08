@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'components/avatar_test_modular/showcase/unified_avatar_showcase.dart';
 import 'components/badge_test_modular/showcase/unified_badge_showcase.dart';
 import 'components/button_test_modular/showcase/unified_button_showcase.dart';
+import 'components/cards_test_modular/showcase/unified_card_showcase.dart';
 import 'components/navbar_test_modular/showcase/unified_navbar_showcase.dart';
 import 'components/appbar_test_modular/showcase/unified_appbar_showcase.dart';
 import 'components/text_field_test_modular/showcase/unified_text_field_showcase.dart';
@@ -91,6 +92,15 @@ List<Story> getComponentStories() {
     
     // Button component stories
     ...getUnifiedButtonShowcase().map(
+      (story) => Story(
+        name: StoryConfig.buildComponentStoryName(story.name),
+        description: story.description,
+        builder: story.builder,
+      ),
+    ),
+
+    // Card component stories
+    ...getUnifiedCardShowcase().map(
       (story) => Story(
         name: StoryConfig.buildComponentStoryName(story.name),
         description: story.description,
