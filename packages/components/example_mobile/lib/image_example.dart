@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:osmea_components/osmea_components.dart';
-import 'package:osmea_components/src/enums/image_enums.dart';
 
 /// 🖼️ **OSMEA Image Examples** - Comprehensive image component examples
 ///
@@ -354,10 +353,10 @@ class ImageExample extends StatelessWidget {
               width: 96,
               height: 96,
               decoration: BoxDecoration(
-                color: OsmeaColors.sunsetGlow.withOpacity(0.1),
+                color: OsmeaColors.sunsetGlow.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                  color: OsmeaColors.sunsetGlow.withOpacity(0.3),
+                  color: OsmeaColors.sunsetGlow.withValues(alpha: 0.3),
                   width: 1,
                 ),
               ),
@@ -369,7 +368,7 @@ class ImageExample extends StatelessWidget {
                     color: OsmeaColors.sunsetGlow,
                     size: 24,
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Text(
                     'Failed',
                     style: TextStyle(
@@ -400,7 +399,7 @@ class ImageExample extends StatelessWidget {
                 ),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Icon(
+              child: const Icon(
                 Icons.photo_library_outlined,
                 color: OsmeaColors.white,
                 size: 32,
@@ -424,7 +423,7 @@ class ImageExample extends StatelessWidget {
                   colors: [OsmeaColors.sunsetGlow, OsmeaColors.nordicBlue],
                 ),
               ),
-              child: Icon(
+              child: const Icon(
                 Icons.change_history,
                 color: OsmeaColors.white,
                 size: 32,

@@ -4,6 +4,11 @@ import 'dart:typed_data';
 import 'package:osmea_components/src/enums/image_enums.dart';
 import 'package:osmea_components/src/utils/image_extensions.dart';
 import 'package:osmea_components/src/styles/colors.dart';
+import 'package:osmea_components/src/components/container/container.dart';
+import 'package:osmea_components/src/components/center/center.dart';
+import 'package:osmea_components/src/components/column/column.dart';
+import 'package:osmea_components/src/components/sized_box/sized_box.dart';
+import 'package:osmea_components/src/components/clip_r_rect/clip_r_rect.dart';
 
 /// 🖼️ **OSMEA Image** - Universal image component
 ///
@@ -221,7 +226,7 @@ class OsmeaImage extends StatelessWidget {
       customHeight: height,
     );
 
-    Widget container = Container(
+    Widget container = OsmeaContainer(
       width: dimensions.width,
       height: dimensions.height,
       decoration: BoxDecoration(
@@ -230,7 +235,7 @@ class OsmeaImage extends StatelessWidget {
         border: border,
         boxShadow: boxShadow ?? variant.getBoxShadow(),
       ),
-      child: ClipRRect(
+      child: OsmeaClipRRect(
         borderRadius: variant.isTriangular
             ? BorderRadius.zero
             : (borderRadius ?? variant.getBorderRadius()),
@@ -439,8 +444,8 @@ class OsmeaImage extends StatelessWidget {
       return _buildPlaceholder();
     }
 
-    return Center(
-      child: SizedBox(
+    return OsmeaCenter(
+      child: OsmeaSizedBox(
         width: 24,
         height: 24,
         child: CircularProgressIndicator(
@@ -458,10 +463,10 @@ class OsmeaImage extends StatelessWidget {
       return errorWidget!;
     }
 
-    return Container(
+    return OsmeaContainer(
       color: OsmeaColors.silver.withOpacity(0.1),
-      child: Center(
-        child: Column(
+      child: OsmeaCenter(
+        child: OsmeaColumn(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -481,9 +486,9 @@ class OsmeaImage extends StatelessWidget {
       return placeholder!;
     }
 
-    return Container(
+    return OsmeaContainer(
       color: OsmeaColors.silver.withOpacity(0.1),
-      child: Center(
+      child: OsmeaCenter(
         child: Icon(
           Icons.image_outlined,
           color: OsmeaColors.steel,
