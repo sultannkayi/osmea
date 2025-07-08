@@ -166,7 +166,7 @@ class ColorsExample extends StatelessWidget {
             color: colorInfo.color == OsmeaColors.white ||
                     colorInfo.color == OsmeaColors.transparent
                 ? OsmeaColors.silver
-                : Colors.transparent,
+                : OsmeaColors.transparent,
             width: 2,
           ),
           boxShadow: const [
