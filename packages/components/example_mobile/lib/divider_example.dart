@@ -59,14 +59,14 @@ class DividerExample extends StatelessWidget {
                         child: OsmeaComponents.container(
                           height: 64,
                           decoration: BoxDecoration(
-                            color: Colors.grey.withAlpha(30),
+                            color: OsmeaColors.grey.withAlpha(30),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           alignment: Alignment.center,
                           child: OsmeaComponents.divider(
                             variant: variant,
                             direction: Axis.horizontal,
-                            color: Colors.deepPurple,
+                            color: OsmeaColors.purple,
                           ),
                         ),
                       ),
@@ -79,14 +79,14 @@ class DividerExample extends StatelessWidget {
                     width: 60,
                     height: 120,
                     decoration: BoxDecoration(
-                      color: Colors.grey.withAlpha(30),
+                      color: OsmeaColors.grey.withAlpha(30),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     alignment: Alignment.center,
                     child: OsmeaComponents.divider(
                       variant: variant,
                       direction: Axis.vertical,
-                      color: Colors.deepPurple,
+                      color: OsmeaColors.purple,
                     ),
                   ),
                 ],
