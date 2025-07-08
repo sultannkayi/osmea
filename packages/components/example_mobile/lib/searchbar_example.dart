@@ -30,7 +30,7 @@ class _SearchbarExampleState extends State<SearchbarExample> {
       appBar: AppBar(
         title: const Text('Searchbar Examples'),
         backgroundColor: OsmeaColors.nordicBlue,
-        foregroundColor: Colors.white,
+        foregroundColor: OsmeaColors.white,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
