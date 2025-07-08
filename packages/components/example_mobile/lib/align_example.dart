@@ -132,7 +132,7 @@ class AlignExample extends StatelessWidget {
               alignment: Alignment.center,
               child: OsmeaComponents.container(
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
+                  color: OsmeaColors.ash,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: _buildColoredBox(
@@ -169,7 +169,7 @@ class AlignExample extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 margin: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
+                  color: OsmeaColors.ash,
                 ),
                 child: _buildColoredBox(
                     color: OsmeaColors.silver, text: 'With Padding & Margin'),
@@ -195,10 +195,10 @@ class AlignExample extends StatelessWidget {
                   debugPrint('Align tapped!');
                 },
                 child: OsmeaComponents.container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
+                                  decoration: BoxDecoration(
+                  color: OsmeaColors.ash,
+                  borderRadius: BorderRadius.circular(8),
+                ),
                   child: _buildColoredBox(
                       color: OsmeaColors.crystalBay, text: 'Tap Me!'),
                 ),
@@ -216,12 +216,12 @@ class AlignExample extends StatelessWidget {
               heightFactor: 0.5,
               child: OsmeaComponents.container(
                 decoration: BoxDecoration(
-                  color: Colors.indigo.shade100,
+                  color: OsmeaColors.crystalBay,
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(color: OsmeaColors.eclipse),
                 ),
                 child: _buildColoredBox(
-                    color: Colors.indigo,
+                    color: OsmeaColors.nordicBlue,
                     text: 'Width Factor: 0.8, Height Factor: 0.5'),
               ),
             ),
@@ -306,7 +306,7 @@ class AlignExample extends StatelessWidget {
           text,
           textAlign: TextAlign.center,
           textStyle: TextStyle(
-            color: color.computeLuminance() > 0.5 ? Colors.black : Colors.white,
+            color: color.computeLuminance() > 0.5 ? OsmeaColors.black : OsmeaColors.white,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -319,8 +319,8 @@ class AlignExample extends StatelessWidget {
       width: double.infinity,
       height: 200,
       decoration: BoxDecoration(
-        color: Colors.grey.shade100,
-        border: Border.all(color: Colors.grey.shade300),
+        color: OsmeaColors.snow,
+        border: Border.all(color: OsmeaColors.platinum),
         borderRadius: BorderRadius.circular(8),
       ),
       child: child,
