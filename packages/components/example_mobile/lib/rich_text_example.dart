@@ -102,9 +102,9 @@ class RichTextExample extends StatelessWidget {
     return OsmeaComponents.container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.grey.shade100,
+        color: OsmeaColors.snow,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.grey.shade300),
+        border: Border.all(color: OsmeaColors.platinum),
       ),
       child: OsmeaComponents.richText(
         textSpans: [
@@ -142,17 +142,17 @@ class RichTextExample extends StatelessWidget {
     return OsmeaComponents.container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.grey.shade100,
+        color: OsmeaColors.snow,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.grey.shade300),
+        border: Border.all(color: OsmeaColors.platinum),
       ),
       child: OsmeaComponents.richText(
         textSpans: [
           OsmeaTextSpan(text: 'Visit our '),
           OsmeaTextSpan(
             text: 'website',
-            style: const TextStyle(
-              color: Colors.blue,
+            style:TextStyle(
+              color: OsmeaColors.nordicBlue,
               decoration: TextDecoration.underline,
             ),
             onTap: () {
@@ -164,8 +164,8 @@ class RichTextExample extends StatelessWidget {
           OsmeaTextSpan(text: ' or contact '),
           OsmeaTextSpan(
             text: 'support',
-            style: const TextStyle(
-              color: Colors.green,
+            style:TextStyle(
+              color: OsmeaColors.meadow,
               decoration: TextDecoration.underline,
             ),
             onTap: () {
@@ -188,12 +188,12 @@ class RichTextExample extends StatelessWidget {
         OsmeaComponents.container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: Colors.grey.shade100,
+            color: OsmeaColors.snow,
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: Colors.grey.shade300),
+            border: Border.all(color: OsmeaColors.platinum),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                color: OsmeaColors.black.withOpacity(0.05),
                 blurRadius: 4,
                 offset: const Offset(0, 2),
               ),
@@ -208,7 +208,7 @@ class RichTextExample extends StatelessWidget {
                   OsmeaTextSpan(text: 'Headline '),
                   OsmeaTextSpan(
                     text: 'Medium',
-                    style: const TextStyle(color: Colors.blue),
+                    style: TextStyle(color: OsmeaColors.nordicBlue),
                   ),
                 ],
               ),
@@ -219,7 +219,7 @@ class RichTextExample extends StatelessWidget {
                   OsmeaTextSpan(text: 'Title '),
                   OsmeaTextSpan(
                     text: 'Large',
-                    style: const TextStyle(color: Colors.green),
+                    style: TextStyle(color: OsmeaColors.meadow),
                   ),
                 ],
               ),
@@ -230,7 +230,7 @@ class RichTextExample extends StatelessWidget {
                   OsmeaTextSpan(text: 'Body '),
                   OsmeaTextSpan(
                     text: 'Large',
-                    style: const TextStyle(color: Colors.purple),
+                    style: TextStyle(color: OsmeaColors.purple),
                   ),
                   OsmeaTextSpan(
                     text: ' with more text to demonstrate the larger body style.',
@@ -244,7 +244,7 @@ class RichTextExample extends StatelessWidget {
                   OsmeaTextSpan(text: 'Label '),
                   OsmeaTextSpan(
                     text: 'Medium',
-                    style: const TextStyle(color: Colors.orange),
+                    style: TextStyle(color: OsmeaColors.sunsetGlow),
                   ),
                 ],
               ),
@@ -263,9 +263,9 @@ class RichTextExample extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: Colors.grey.shade100,
+            color: OsmeaColors.snow,
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: Colors.grey.shade300),
+            border: Border.all(color: OsmeaColors.platinum),
           ),
           margin: const EdgeInsets.only(bottom: 12),
           child: OsmeaComponents.richText(
@@ -285,9 +285,9 @@ class RichTextExample extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: Colors.grey.shade100,
+            color: OsmeaColors.snow,
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: Colors.grey.shade300),
+            border: Border.all(color: OsmeaColors.platinum),
           ),
           margin: const EdgeInsets.only(bottom: 12),
           child: OsmeaComponents.richText(
@@ -307,9 +307,9 @@ class RichTextExample extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: Colors.grey.shade100,
+            color: OsmeaColors.snow,
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: Colors.grey.shade300),
+            border: Border.all(color: OsmeaColors.platinum),
           ),
           child: OsmeaComponents.richText(
             textAlign: TextAlign.end,
@@ -333,9 +333,9 @@ class RichTextExample extends StatelessWidget {
     return OsmeaComponents.container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.grey.shade100,
+        color: OsmeaColors.snow,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.grey.shade300),
+        border: Border.all(color: OsmeaColors.platinum),
       ),
       child: OsmeaComponents.richText(
         selectable: true,
@@ -345,7 +345,7 @@ class RichTextExample extends StatelessWidget {
           ),
           OsmeaTextSpan(
             text: 'Try selecting this text with your finger or mouse ',
-            style: const TextStyle(color: Colors.purple),
+            style: const TextStyle(color: OsmeaColors.purple),
           ),
           OsmeaTextSpan(
             text: 'to copy it to your clipboard.',
@@ -364,7 +364,7 @@ class RichTextExample extends StatelessWidget {
         OsmeaComponents.container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: Colors.grey.shade900,
+            color: OsmeaColors.grayMaterial[900],
             borderRadius: BorderRadius.circular(8),
           ),
           margin: const EdgeInsets.only(bottom: 16),
@@ -372,31 +372,31 @@ class RichTextExample extends StatelessWidget {
             textSpans: [
               OsmeaTextSpan(
                 text: 'void ',
-                style: const TextStyle(color: Colors.blue, fontFamily: 'monospace'),
+                style:TextStyle(color: OsmeaColors.nordicBlue, fontFamily: 'monospace'),
               ),
               OsmeaTextSpan(
                 text: 'main',
-                style: const TextStyle(color: Colors.yellow, fontFamily: 'monospace'),
+                style: TextStyle(color: OsmeaColors.sunsetGlow, fontFamily: 'monospace'),
               ),
               OsmeaTextSpan(
                 text: '() {\n  ',
-                style: const TextStyle(color: Colors.white, fontFamily: 'monospace'),
+                style: TextStyle(color: OsmeaColors.white, fontFamily: 'monospace'),
               ),
               OsmeaTextSpan(
                 text: 'print',
-                style: const TextStyle(color: Colors.lightBlue, fontFamily: 'monospace'),
+                style: TextStyle(color: OsmeaColors.nordicBlue, fontFamily: 'monospace'),
               ),
               OsmeaTextSpan(
                 text: '(',
-                style: const TextStyle(color: Colors.white, fontFamily: 'monospace'),
+                style: TextStyle(color: OsmeaColors.white, fontFamily: 'monospace'),
               ),
               OsmeaTextSpan(
                 text: "'Hello, world!'",
-                style: const TextStyle(color: Colors.green, fontFamily: 'monospace'),
+                style: TextStyle(color: OsmeaColors.meadow, fontFamily: 'monospace'),
               ),
               OsmeaTextSpan(
                 text: ');\n}',
-                style: const TextStyle(color: Colors.white, fontFamily: 'monospace'),
+                style: TextStyle(color: OsmeaColors.white, fontFamily: 'monospace'),
               ),
             ],
           ),
@@ -406,9 +406,9 @@ class RichTextExample extends StatelessWidget {
         OsmeaComponents.container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: Colors.blue.withOpacity(0.1),
+            color: OsmeaColors.nordicBlue.withOpacity(0.1),
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: Colors.blue.shade300),
+            border: Border.all(color: OsmeaColors.nordicBlue),
           ),
           margin: const EdgeInsets.only(bottom: 16),
           child: OsmeaComponents.richText(
@@ -416,31 +416,31 @@ class RichTextExample extends StatelessWidget {
               WidgetSpan(
                 child: OsmeaComponents.padding(
                   padding: const EdgeInsets.only(right: 8.0),
-                  child: Icon(Icons.info, color: Colors.blue, size: 20),
+                  child: Icon(Icons.info, color: OsmeaColors.nordicBlue, size: 20),
                 ),
               ),
               OsmeaTextSpan(
                 text: 'Info: ',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Colors.blue.shade700,
+                  color: OsmeaColors.nordicBlue,
                 ),
               ),
               OsmeaTextSpan(
                 text: 'This is an information message with ',
-                style: TextStyle(color: Colors.blue.shade700),
+                style: TextStyle(color: OsmeaColors.nordicBlue),
               ),
               OsmeaTextSpan(
                 text: 'important details',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   decoration: TextDecoration.underline,
-                  color: Colors.blue.shade700,
+                  color: OsmeaColors.nordicBlue,
                 ),
               ),
               OsmeaTextSpan(
                 text: '.',
-                style: TextStyle(color: Colors.blue.shade700),
+                style: TextStyle(color: OsmeaColors.nordicBlue),
               ),
             ],
           ),
@@ -450,7 +450,7 @@ class RichTextExample extends StatelessWidget {
         OsmeaComponents.container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: Colors.grey.shade100,
+            color: OsmeaColors.snow,
             borderRadius: BorderRadius.circular(8),
           ),
           child: OsmeaComponents.richText(
@@ -460,23 +460,23 @@ class RichTextExample extends StatelessWidget {
               ),
               OsmeaTextSpan(
                 text: "\$",
-                style: const TextStyle(
-                  color: Colors.green,
+                style: TextStyle(
+                  color: OsmeaColors.meadow,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               OsmeaTextSpan(
                 text: '29',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: Colors.green,
+                  color: OsmeaColors.meadow,
                 ),
               ),
               OsmeaTextSpan(
                 text: '.99',
-                style: const TextStyle(
-                  color: Colors.green,
+                style: TextStyle(
+                  color: OsmeaColors.meadow,
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
@@ -486,8 +486,8 @@ class RichTextExample extends StatelessWidget {
               ),
               OsmeaTextSpan(
                 text: '50%',
-                style: const TextStyle(
-                  color: Colors.red,
+                style: TextStyle(
+                  color: OsmeaColors.sunsetGlow,
                   fontWeight: FontWeight.bold,
                 ),
               ),
