@@ -51,6 +51,9 @@ export 'chips_enums.dart';
 // Carousel enums
 export 'carousel_enums.dart';
 
+// Dropdown enums
+export 'dropdown_enums.dart';
+
 // List item enums
 export 'list_item_enums.dart';
 
