@@ -109,36 +109,37 @@ class LoadingExample extends StatelessWidget {
       },
     ];
     final List<Color> colors = [
-      Colors.blue,
-      Colors.red,
-      Colors.green,
-      Colors.orange,
-      Colors.purple,
-      Colors.teal,
-      Colors.pink,
-      Colors.amber,
-      Colors.indigo,
-      Colors.cyan,
-      Colors.deepOrange,
-      Colors.deepPurple,
-      Colors.lightBlue,
-      Colors.lime,
-      Colors.brown,
-      Colors.grey,
-      Colors.blueGrey,
-      Colors.yellow,
-      Colors.lightGreen,
-      Colors.indigoAccent,
-      Colors.redAccent,
-      Colors.greenAccent,
-      Colors.orangeAccent,
-      Colors.purpleAccent,
-      Colors.tealAccent,
-      Colors.pinkAccent,
-      Colors.black,
-      Colors.white,
-      Colors.brown.shade300,
-      Colors.blue.shade900,
+      OsmeaColors.blue, // blue
+      OsmeaColors.sunsetGlow, // red
+      OsmeaColors.meadow, // green
+      OsmeaColors.sunsetGlow, // orange
+      OsmeaColors.nordicBlue, // purple
+      OsmeaColors.nordicBlue, // teal
+      OsmeaColors.sunsetGlow, // pink
+      OsmeaColors.sunsetGlow, // amber
+      OsmeaColors.nordicBlue, // indigo
+      OsmeaColors.nordicBlue, // cyan
+      OsmeaColors.sunsetGlow, // deepOrange
+      OsmeaColors.nordicBlue, // deepPurple
+      OsmeaColors.nordicBlue, // lightBlue
+      OsmeaColors.meadow, // lime
+      OsmeaColors.silver, // brown
+      OsmeaColors.nordicBlue, // nordicBlue
+      OsmeaColors.grey, // grey
+      OsmeaColors.slate, // blueGrey
+      OsmeaColors.sunsetGlow, // yellow
+      OsmeaColors.meadow, // lightGreen
+      OsmeaColors.nordicBlue, // indigoAccent
+      OsmeaColors.sunsetGlow, // redAccent
+      OsmeaColors.meadow, // greenAccent
+      OsmeaColors.sunsetGlow, // orangeAccent
+      OsmeaColors.nordicBlue, // purpleAccent
+      OsmeaColors.slate, // tealAccent
+      OsmeaColors.sunsetGlow, // pinkAccent
+      OsmeaColors.black, // black
+      OsmeaColors.white, // white
+      OsmeaColors.silver, // brown.shade300
+      OsmeaColors.nordicBlue, // blue.shade900
     ];
 
     return OsmeaComponents.scaffold(
@@ -161,7 +162,7 @@ class LoadingExample extends StatelessWidget {
               OsmeaComponents.text(
                 'Below you can see all loading animations in the OSMEA library, presented in different sizes and colors. Each animation is shown with a short description and multiple sizes for a modern, clear showcase.',
                 fontSize: 16,
-                color: Colors.grey[700],
+                color: OsmeaColors.grey[700],
               ),
               OsmeaComponents.sizedBox(height: 24),
               for (int i = 0; i < loadingTypes.length; i++)
@@ -191,7 +192,7 @@ class LoadingExample extends StatelessWidget {
                         OsmeaComponents.text(
                           loadingTypes[i]['desc'],
                           fontSize: 15,
-                          color: Colors.grey[700],
+                          color: OsmeaColors.grey[700],
                         ),
                         OsmeaComponents.sizedBox(height: 16),
                         OsmeaComponents.column(
