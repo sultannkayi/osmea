@@ -531,11 +531,11 @@ class _BadgeExampleState extends State<BadgeExample> {
                 width: 44,
                 height: 44,
                 decoration: BoxDecoration(
-                  color: Colors.grey[200],
+                  color: OsmeaColors.grey[200],
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: const Icon(Icons.notifications,
-                    size: 24, color: Colors.black54),
+                    size: 24, color: OsmeaColors.black54),
               ),
               content: '8',
               position: BadgePosition.topRight,
@@ -548,8 +548,8 @@ class _BadgeExampleState extends State<BadgeExample> {
             OsmeaComponents.badge(
               child: const CircleAvatar(
                 radius: 22,
-                backgroundColor: Colors.grey,
-                child: Icon(Icons.person, color: Colors.white),
+                backgroundColor: OsmeaColors.grey,
+                child: Icon(Icons.person, color: OsmeaColors.white),
               ),
               content: '3',
               position: BadgePosition.bottomRight,
@@ -564,10 +564,10 @@ class _BadgeExampleState extends State<BadgeExample> {
                 width: 44,
                 height: 44,
                 decoration: BoxDecoration(
-                  color: Colors.grey[200],
+                  color: OsmeaColors.grey[200],
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.mail, size: 24, color: Colors.black54),
+                child: const Icon(Icons.mail, size: 24, color: OsmeaColors.black54),
               ),
               content: null,
               position: BadgePosition.topRight,
@@ -610,7 +610,7 @@ class _BadgeExampleState extends State<BadgeExample> {
                 padding: const EdgeInsets.only(left: 4, right: 10),
                 child: OsmeaComponents.padding(
                   padding: const EdgeInsets.only(right: 4),
-                  child: const Icon(Icons.mail, size: 16, color: Colors.blue),
+                  child: const Icon(Icons.mail, size: 16, color: OsmeaColors.blue),
                 ),
               ),
             ],
@@ -645,14 +645,14 @@ class _BadgeExampleState extends State<BadgeExample> {
       width: 70,
       height: 70,
       decoration: BoxDecoration(
-        color: Colors.grey.shade200,
+        color: OsmeaColors.grey.shade200,
         borderRadius: BorderRadius.circular(4),
       ),
       child: OsmeaComponents.center(
         child: OsmeaComponents.text(
           'Parent',
           fontSize: 14,
-          color: Colors.black54,
+          color: OsmeaColors.black54,
         ),
       ),
     );
@@ -869,7 +869,7 @@ class _BadgeExampleState extends State<BadgeExample> {
             label,
             textStyle: const TextStyle(
               fontSize: 14,
-              color: Colors.black54,
+              color: OsmeaColors.black54,
               fontWeight: FontWeight.w500,
             ),
             textAlign: TextAlign.center,
