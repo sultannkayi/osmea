@@ -46,7 +46,7 @@ import 'package:osmea_components/src/components/stepper/stepper.dart';
 import 'package:osmea_components/src/components/searchbar/searchbar.dart';
 import 'package:osmea_components/src/components/searchbar/expandable_searchbar.dart';
 import 'package:osmea_components/src/components/dropdown/dropdown.dart';
-
+import 'package:osmea_components/src/components/footer/footer.dart';
 
 class OsmeaComponents {
   /// Supported Button variants - All variants are supported
@@ -933,8 +933,6 @@ class OsmeaComponents {
       selectedItemBuilder: selectedItemBuilder,
     );
   }
-
-  
 
   /// 🔄 **OSMEA Switch Button** - Comprehensive switch component
   ///
@@ -3268,8 +3266,9 @@ class OsmeaComponents {
       buttonState: buttonState,
       buttonIcon: buttonIcon,
       buttonTooltip: buttonTooltip,
-    ); 
-    }
+    );
+  }
+
   /// 📑 **OSMEA TabBar** - Comprehensive tab navigation component
   ///
   /// Creates a feature-rich tab navigation component with support for:
@@ -3389,7 +3388,7 @@ class OsmeaComponents {
   ///   maxToasts: 5, // Maximum number of toasts visible at once (default)
   /// );
   /// ```
-  
+
   static void toast({
     required BuildContext context,
     String? title,
@@ -3439,6 +3438,50 @@ class OsmeaComponents {
   /// Hides all currently visible toasts
   static void hideAllToasts() {
     ToastManager().hideAllToasts();
+  }
+
+  /// 🦶 **OSMEA Footer** - Modern footer component with multiple variants
+  ///
+  /// Creates a comprehensive footer component with support for:
+  /// - Customizable footer items with labels and descriptions
+  /// - Interactive bottom sheet integration
+  /// - Divider customization
+  /// - Full customization options
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.footer(
+  ///   items: [
+  ///     FooterItem(label: 'Privacy', description: 'Privacy policy details...'),
+  ///     FooterItem(label: 'Terms', description: 'Terms of service...'),
+  ///     FooterItem(label: 'Contact', description: 'Contact information...'),
+  ///   ],
+  ///   dividerIndent: 16,
+  ///   dividerEndIndent: 16,
+  ///   dividerThickness: 1,
+  /// )
+  /// ```
+  static Widget footer({
+    List<OsmeaFooterItem>? items,
+    double dividerIndent = 16,
+    double dividerEndIndent = 16,
+    double dividerThickness = 1.2,
+    Color? dividerColor,
+    EdgeInsetsGeometry padding = const EdgeInsets.symmetric(vertical: 8),
+    Color? backgroundColor,
+    FooterVariant variant = FooterVariant.defaultFooter,
+    String? text,
+  }) {
+    return OsmeaFooter(
+      items: items,
+      dividerIndent: dividerIndent,
+      dividerEndIndent: dividerEndIndent,
+      dividerThickness: dividerThickness,
+      dividerColor: dividerColor,
+      backgroundColor: backgroundColor,
+      variant: variant,
+      text: text,
+    );
   }
 }
 
@@ -3540,14 +3583,15 @@ class OsmeaDropdownMenuItem {
     IconData? icon,
     bool isDestructive = false,
     String? shortcut,
-  }) => OsmeaDropdownItem<T>(
-    label: label,
-    value: value,
-    icon: icon,
-    isDestructive: isDestructive,
-    shortcut: shortcut,
-    isAvatar: false,
-  );
+  }) =>
+      OsmeaDropdownItem<T>(
+        label: label,
+        value: value,
+        icon: icon,
+        isDestructive: isDestructive,
+        shortcut: shortcut,
+        isAvatar: false,
+      );
 
   static OsmeaDropdownItem<T> dropdownAvatarItem<T>({
     required String name,
@@ -3555,12 +3599,52 @@ class OsmeaDropdownMenuItem {
     required T value,
     String? avatarUrl,
     bool isOnline = false,
-  }) => OsmeaDropdownItem<T>(
-    label: name,
-    value: value,
-    isAvatar: true,
-    username: username,
-    avatarUrl: avatarUrl,
-    isOnline: isOnline,
-  );
+  }) =>
+      OsmeaDropdownItem<T>(
+        label: name,
+        value: value,
+        isAvatar: true,
+        username: username,
+        avatarUrl: avatarUrl,
+        isOnline: isOnline,
+      );
+}
+
+/// 🦶 **Footer Item** - Configuration for a single footer button
+///
+/// Represents a single item in the OSMEA Footer, including label, description, icon, and custom actions.
+/// Used to configure the content and behavior of each footer button.
+///
+/// Example:
+/// ```dart
+/// OsmeaFooterItem(
+///   label: 'GitHub',
+///   description: 'View our GitHub page',
+///   icon: Icons.code,
+///   onTap: () => launch('https://github.com/osmea'),
+/// )
+/// ```
+class OsmeaFooterItem {
+  /// The label displayed on the footer button
+  final String label;
+
+  /// The description shown in the bottom sheet when the item is tapped
+  final String description;
+
+  /// Optional icon for the footer item
+  final IconData? icon;
+
+  /// Optional custom onTap for the item (e.g., open a popup, launch a URL, etc.)
+  final VoidCallback? onTap;
+
+  /// Optional custom bottom sheet builder
+  final WidgetBuilder? bottomSheetBuilder;
+
+  const OsmeaFooterItem({
+    required this.label,
+    required this.description,
+    this.icon,
+    this.onTap,
+    this.bottomSheetBuilder,
+  });
 }

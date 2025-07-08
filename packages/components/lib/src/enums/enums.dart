@@ -76,3 +76,6 @@ export 'divider_enums.dart';
 
 // Toast enums
 export 'toast_enums.dart';
+
+// Footer enums
+export 'footer_enums.dart';
