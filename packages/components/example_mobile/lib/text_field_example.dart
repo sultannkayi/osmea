@@ -361,7 +361,7 @@ class _TextFieldExampleState extends State<TextFieldExample> {
           OsmeaComponents.container(
             padding: EdgeInsets.all(context.spacing12),
             decoration: BoxDecoration(
-              color: OsmeaColors.forestHeart.withOpacity(0.1),
+              color: OsmeaColors.forestHeart.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: OsmeaColors.forestHeart, width: 1),
             ),
@@ -394,7 +394,7 @@ class _TextFieldExampleState extends State<TextFieldExample> {
           variant: TextFieldVariant.underlined,
           spacing: 16.0,
           obscureText: true, // Hidden digits for security
-          backgroundColor: OsmeaColors.nordicBlue.withOpacity(0.05),
+          backgroundColor: OsmeaColors.nordicBlue.withValues(alpha: 0.05),
           focusColor: OsmeaColors.nordicBlue,
           borderColor: OsmeaColors.silver,
           onChanged: (otp) =>
@@ -417,7 +417,7 @@ class _TextFieldExampleState extends State<TextFieldExample> {
     return OsmeaComponents.container(
       padding: EdgeInsets.all(context.spacing16),
       decoration: BoxDecoration(
-        color: OsmeaColors.pewter.withOpacity(0.05),
+        color: OsmeaColors.pewter.withValues(alpha: 0.05),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: OsmeaColors.silver, width: 1),
       ),
@@ -505,7 +505,7 @@ class _TextFieldExampleState extends State<TextFieldExample> {
           hint: 'This field has custom colors',
           variant: TextFieldVariant.outlined,
           size: TextFieldSize.medium,
-          backgroundColor: OsmeaColors.nordicBlue.withOpacity(0.05),
+          backgroundColor: OsmeaColors.nordicBlue.withValues(alpha: 0.05),
           borderColor: OsmeaColors.nordicBlue,
           focusColor: OsmeaColors.forestHeart,
           textColor: OsmeaColors.slate,

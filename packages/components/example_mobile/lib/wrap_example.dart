@@ -212,7 +212,7 @@ class WrapExample extends StatelessWidget {
         OsmeaComponents.text('WrapAlignment.start:'),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.container(
-          color: OsmeaColors.ash.withOpacity(0.2),
+          color: OsmeaColors.ash.withValues(alpha: 0.2),
           width: double.infinity,
           child: OsmeaComponents.wrap(
             alignment: WrapAlignment.start,
@@ -225,7 +225,7 @@ class WrapExample extends StatelessWidget {
         OsmeaComponents.text('WrapAlignment.center:'),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.container(
-          color: OsmeaColors.ash.withOpacity(0.2),
+          color: OsmeaColors.ash.withValues(alpha: 0.2),
           width: double.infinity,
           child: OsmeaComponents.wrap(
             alignment: WrapAlignment.center,
@@ -238,7 +238,7 @@ class WrapExample extends StatelessWidget {
         OsmeaComponents.text('WrapAlignment.end:'),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.container(
-          color: OsmeaColors.ash.withOpacity(0.2),
+          color: OsmeaColors.ash.withValues(alpha: 0.2),
           width: double.infinity,
           child: OsmeaComponents.wrap(
             alignment: WrapAlignment.end,
@@ -259,7 +259,7 @@ class WrapExample extends StatelessWidget {
         OsmeaComponents.text('runAlignment: WrapAlignment.start:'),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.container(
-          color: OsmeaColors.ash.withOpacity(0.2),
+          color: OsmeaColors.ash.withValues(alpha: 0.2),
           height: 150,
           width: double.infinity,
           child: OsmeaComponents.wrap(
@@ -273,7 +273,7 @@ class WrapExample extends StatelessWidget {
         OsmeaComponents.text('runAlignment: WrapAlignment.spaceBetween:'),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.container(
-          color: OsmeaColors.ash.withOpacity(0.2),
+          color: OsmeaColors.ash.withValues(alpha: 0.2),
           height: 150,
           width: double.infinity,
           child: OsmeaComponents.wrap(
@@ -319,7 +319,7 @@ class WrapExample extends StatelessWidget {
         OsmeaComponents.text('WrapCrossAlignment.start:'),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.container(
-          color: OsmeaColors.ash.withOpacity(0.2),
+          color: OsmeaColors.ash.withValues(alpha: 0.2),
           width: double.infinity,
           child: OsmeaComponents.wrap(
             crossAxisAlignment: WrapCrossAlignment.start,
@@ -332,7 +332,7 @@ class WrapExample extends StatelessWidget {
         OsmeaComponents.text('WrapCrossAlignment.center:'),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.container(
-          color: OsmeaColors.ash.withOpacity(0.2),
+          color: OsmeaColors.ash.withValues(alpha: 0.2),
           width: double.infinity,
           child: OsmeaComponents.wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
@@ -345,7 +345,7 @@ class WrapExample extends StatelessWidget {
         OsmeaComponents.text('WrapCrossAlignment.end:'),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.container(
-          color: OsmeaColors.ash.withOpacity(0.2),
+          color: OsmeaColors.ash.withValues(alpha: 0.2),
           width: double.infinity,
           child: OsmeaComponents.wrap(
             crossAxisAlignment: WrapCrossAlignment.end,
@@ -425,7 +425,7 @@ class WrapExample extends StatelessWidget {
         return OsmeaComponents.container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
-            color: color.withOpacity(0.15),
+            color: color.withValues(alpha: 0.15),
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: color),
           ),
@@ -476,7 +476,7 @@ class WrapExample extends StatelessWidget {
             child: Icon(
               Icons.image,
               size: 32,
-              color: OsmeaColors.white.withOpacity(0.8),
+              color: OsmeaColors.white.withValues(alpha: 0.8),
             ),
           ),
         );
