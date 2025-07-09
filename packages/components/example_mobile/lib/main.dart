@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
       title: 'OSMEA Components Example',
       theme: CoreTheme.lightTheme,
       darkTheme: CoreTheme.darkTheme,
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.light,
       home: const MainScreen(),
     );
   }
