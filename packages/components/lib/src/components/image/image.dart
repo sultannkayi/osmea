@@ -464,7 +464,7 @@ class OsmeaImage extends StatelessWidget {
     }
 
     return OsmeaContainer(
-      color: OsmeaColors.silver.withOpacity(0.1),
+      color: OsmeaColors.silver.withValues(alpha: 0.1),
       child: OsmeaCenter(
         child: OsmeaColumn(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -487,7 +487,7 @@ class OsmeaImage extends StatelessWidget {
     }
 
     return OsmeaContainer(
-      color: OsmeaColors.silver.withOpacity(0.1),
+      color: OsmeaColors.silver.withValues(alpha: 0.1),
       child: OsmeaCenter(
         child: Icon(
           Icons.image_outlined,

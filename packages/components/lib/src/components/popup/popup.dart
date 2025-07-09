@@ -432,9 +432,9 @@ class _PopupContentState extends State<_PopupContent>
   }
 
   void _setupAnimations() {
-    final duration = widget.popup.animationDuration ?? 
-                    context.popupAnimationDuration;
-    
+    final duration =
+        widget.popup.animationDuration ?? context.popupAnimationDuration;
+
     _animationController = AnimationController(
       duration: duration,
       vsync: this,
@@ -581,9 +581,10 @@ class _PopupContentState extends State<_PopupContent>
       child: Container(
         width: _getWidth(),
         height: widget.popup.height,
-        constraints: widget.popup.constraints ?? BoxConstraints(
-          maxHeight: context.popupMaxHeight,
-        ),
+        constraints: widget.popup.constraints ??
+            BoxConstraints(
+              maxHeight: context.popupMaxHeight,
+            ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -603,9 +604,9 @@ class _PopupContentState extends State<_PopupContent>
 
   bool _hasHeader() {
     return widget.popup.title != null ||
-           widget.popup.subtitle != null ||
-           widget.popup.showCloseButton ||
-           (widget.popup.headerActions?.isNotEmpty ?? false);
+        widget.popup.subtitle != null ||
+        widget.popup.showCloseButton ||
+        (widget.popup.headerActions?.isNotEmpty ?? false);
   }
 
   Widget _buildHeader() {
@@ -614,7 +615,7 @@ class _PopupContentState extends State<_PopupContent>
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: Theme.of(context).dividerColor.withOpacity(0.1),
+            color: Theme.of(context).dividerColor.withValues(alpha: 0.1),
             width: 1,
           ),
         ),
@@ -629,17 +630,18 @@ class _PopupContentState extends State<_PopupContent>
                 if (widget.popup.title != null)
                   Text(
                     widget.popup.title!,
-                    style: widget.popup.titleStyle ?? 
-                           Theme.of(context).textTheme.titleLarge,
+                    style: widget.popup.titleStyle ??
+                        Theme.of(context).textTheme.titleLarge,
                   ),
                 if (widget.popup.subtitle != null) ...[
                   const SizedBox(height: 4),
                   Text(
                     widget.popup.subtitle!,
-                    style: widget.popup.subtitleStyle ?? 
-                           Theme.of(context).textTheme.bodyMedium?.copyWith(
-                             color: Theme.of(context).textTheme.bodySmall?.color,
-                           ),
+                    style: widget.popup.subtitleStyle ??
+                        Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color:
+                                  Theme.of(context).textTheme.bodySmall?.color,
+                            ),
                   ),
                 ],
               ],
@@ -650,8 +652,7 @@ class _PopupContentState extends State<_PopupContent>
           if (widget.popup.showCloseButton)
             IconButton(
               onPressed: _dismiss,
-              icon: widget.popup.closeButtonIcon ?? 
-                   const Icon(Icons.close),
+              icon: widget.popup.closeButtonIcon ?? const Icon(Icons.close),
               iconSize: 20,
               visualDensity: VisualDensity.compact,
             ),
@@ -666,7 +667,7 @@ class _PopupContentState extends State<_PopupContent>
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
-            color: Theme.of(context).dividerColor.withOpacity(0.1),
+            color: Theme.of(context).dividerColor.withValues(alpha: 0.1),
             width: 1,
           ),
         ),
@@ -689,8 +690,8 @@ class _PopupContentState extends State<_PopupContent>
       case PopupVariant.tooltip:
         return Theme.of(context).tooltipTheme.decoration != null
             ? (Theme.of(context).tooltipTheme.decoration as BoxDecoration?)
-                  ?.color ??
-              Theme.of(context).colorScheme.inverseSurface
+                    ?.color ??
+                Theme.of(context).colorScheme.inverseSurface
             : Theme.of(context).colorScheme.inverseSurface;
     }
   }
@@ -803,4 +804,4 @@ class _TooltipOverlay<T> extends StatelessWidget {
       ),
     );
   }
-} 
+}
