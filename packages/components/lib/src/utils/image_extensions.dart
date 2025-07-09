@@ -142,7 +142,7 @@ extension ImageVariantExtensions on ImageVariant {
       case ImageVariant.card:
         return [
           BoxShadow(
-            color: OsmeaColors.shark.withOpacity(0.1),
+            color: OsmeaColors.shark.withValues(alpha: 0.1),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -150,7 +150,7 @@ extension ImageVariantExtensions on ImageVariant {
       case ImageVariant.framed:
         return [
           BoxShadow(
-            color: OsmeaColors.shark.withOpacity(0.05),
+            color: OsmeaColors.shark.withValues(alpha: 0.05),
             blurRadius: 4,
             offset: const Offset(0, 1),
           ),
@@ -158,7 +158,7 @@ extension ImageVariantExtensions on ImageVariant {
       case ImageVariant.hero:
         return [
           BoxShadow(
-            color: OsmeaColors.shark.withOpacity(0.15),
+            color: OsmeaColors.shark.withValues(alpha: 0.15),
             blurRadius: 16,
             offset: const Offset(0, 4),
           ),
@@ -166,7 +166,7 @@ extension ImageVariantExtensions on ImageVariant {
       case ImageVariant.avatar:
         return [
           BoxShadow(
-            color: OsmeaColors.shark.withOpacity(0.08),
+            color: OsmeaColors.shark.withValues(alpha: 0.08),
             blurRadius: 6,
             offset: const Offset(0, 2),
           ),
