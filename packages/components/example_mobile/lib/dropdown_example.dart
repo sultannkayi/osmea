@@ -68,32 +68,37 @@ class _DropdownExampleState extends State<DropdownExample> {
   ];
 
   Widget _iconSelectedBuilder(OsmeaDropdownItem<String>? selected) {
-    if (selected == null) return const SizedBox();
-    return Row(
+    if (selected == null) return OsmeaComponents.sizedBox();
+    return OsmeaComponents.row(
       children: [
         if (selected.icon != null)
           Icon(selected.icon, size: 20, color: OsmeaColors.nordicBlue),
-        if (selected.icon != null) const SizedBox(width: 8),
-        Text(selected.label),
+        if (selected.icon != null) OsmeaComponents.sizedBox(width: 8),
+        OsmeaComponents.text(selected.label),
       ],
     );
   }
 
   Widget _buildDropdownGroup(String groupLabel, DropdownVariant variant,
       List<MapEntry<String, Widget>> dropdowns) {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(groupLabel,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-        const SizedBox(height: 8),
+        OsmeaComponents.text(
+          groupLabel,
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+        ),
+        OsmeaComponents.sizedBox(height: 8),
         for (final entry in dropdowns) ...[
-          Text(entry.key,
-              style:
-                  const TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
-          const SizedBox(height: 4),
+          OsmeaComponents.text(
+            entry.key,
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
+          OsmeaComponents.sizedBox(height: 4),
           entry.value,
-          const SizedBox(height: 16),
+          OsmeaComponents.sizedBox(height: 16),
         ],
       ],
     );
@@ -101,17 +106,21 @@ class _DropdownExampleState extends State<DropdownExample> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Dropdown Variants & Sizes')),
-      body: SingleChildScrollView(
+    return OsmeaComponents.scaffold(
+      appBar: OsmeaComponents.appBar(
+        title: OsmeaComponents.text('Dropdown Variants & Sizes'),
+      ),
+      body: OsmeaComponents.singleChildScrollView(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
+        child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Primitive Dropdowns
-            const Text('Primitive Dropdowns',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 12),
+            OsmeaComponents.text(
+              'Primitive Dropdowns',
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+            OsmeaComponents.sizedBox(height: 12),
             _buildDropdownGroup('Filled Variant', DropdownVariant.filled, [
               MapEntry(
                   'Small',
@@ -181,11 +190,13 @@ class _DropdownExampleState extends State<DropdownExample> {
                       selectedElevatedLarge,
                       (v) => setState(() => selectedElevatedLarge = v))),
             ]),
-            const SizedBox(height: 32),
-            // Icon Dropdowns
-            const Text('Icon Dropdowns',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 12),
+            OsmeaComponents.sizedBox(height: 32),
+            OsmeaComponents.text(
+              'Icon Dropdowns',
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+            OsmeaComponents.sizedBox(height: 12),
             _buildDropdownGroup('Filled Variant', DropdownVariant.filled, [
               MapEntry(
                   'Small',
@@ -255,11 +266,13 @@ class _DropdownExampleState extends State<DropdownExample> {
                       selectedIconElevatedLarge,
                       (v) => setState(() => selectedIconElevatedLarge = v))),
             ]),
-            const SizedBox(height: 32),
-            // Avatar Dropdowns
-            const Text('Avatar Dropdowns',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 12),
+            OsmeaComponents.sizedBox(height: 32),
+            OsmeaComponents.text(
+              'Avatar Dropdowns',
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+            OsmeaComponents.sizedBox(height: 12),
             _buildDropdownGroup('Filled Variant', DropdownVariant.filled, [
               MapEntry(
                   'Small',
