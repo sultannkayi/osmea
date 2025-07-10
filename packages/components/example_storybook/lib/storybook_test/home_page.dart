@@ -74,7 +74,7 @@ class ComponentOverviewPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
-                        '${ComponentRegistry.componentCount} Components Available',
+                        '${allComponents.length} Components Available',
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w500,
@@ -117,9 +117,9 @@ class ComponentOverviewPage extends StatelessWidget {
                       mainAxisSpacing: 12,
                       childAspectRatio: cardWidth / cardHeight,
                     ),
-                    itemCount: ComponentRegistry.allComponents.length,
+                    itemCount: allComponents.length,
                     itemBuilder: (context, index) {
-                      final component = ComponentRegistry.allComponents[index];
+                      final component = allComponents[index];
                       return _buildComponentCard(
                         context,
                         component.name,

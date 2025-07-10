@@ -1,13 +1,26 @@
 import 'package:flutter/material.dart';
 import 'story_config.dart';
+import 'package:storybook_flutter/storybook_flutter.dart';
+import 'components/cards_test_modular/showcase/unified_card_showcase.dart';
+import 'components/chips_test_modular/showcase/unified_chip_showcase.dart';
+import 'components/avatar_test_modular/showcase/unified_avatar_showcase.dart';
+import 'components/button_test_modular/showcase/unified_button_showcase.dart';
+import 'components/badge_test_modular/showcase/unified_badge_showcase.dart';
+import 'components/text_field_test_modular/showcase/unified_text_field_showcase.dart';
+import 'components/navbar_test_modular/showcase/unified_navbar_showcase.dart';
+import 'components/appbar_test_modular/showcase/unified_appbar_showcase.dart';
+import 'components/checkbox_test_modular/showcase/unified_checkbox_showcase.dart';
+import 'components/radio_button_test_modular/showcase/unified_radio_button_showcase.dart';
+import 'components/switch_button_test_modular/showcase/unified_switch_button_showcase.dart';
 
-/// Model for component information displayed on home page
+/// Model for component information displayed on home page and stories
 class ComponentInfo {
   final String name;
   final String description;
   final IconData icon;
   final Color color;
   final String storyPath;
+  final List<Story> Function() getStories;
 
   const ComponentInfo({
     required this.name,
@@ -15,94 +28,98 @@ class ComponentInfo {
     required this.icon,
     required this.color,
     required this.storyPath,
+    required this.getStories,
   });
 }
 
-/// Registry of all available components in the design system
-class ComponentRegistry {
-  static final List<ComponentInfo> _components = [
-    ComponentInfo(
-      name: 'Cards',
-      description: 'Flexible containers for content and actions',
-      icon: Icons.credit_card,
-      color: Colors.deepPurple,
-      storyPath: StoryConfig.buildComponentStoryName('Cards'),
-    ),
-    ComponentInfo(
-      name: 'Chips',
-      description: 'Compact elements for filtering, tagging, or selection',
-      icon: Icons.label_important,
-      color: Colors.blueGrey,
-      storyPath: StoryConfig.buildComponentStoryName('Chips'),
-    ),
-    ComponentInfo(
-      name: 'Avatars',
-      description: 'User profile pictures and placeholders',
-      icon: Icons.account_circle,
-      color: Colors.cyan,
-      storyPath: StoryConfig.buildComponentStoryName('Avatars'),
-    ),
-    ComponentInfo(
-      name: 'Buttons',
-      description: 'Interactive buttons with various styles',
-      icon: Icons.smart_button,
-      color: Colors.blue,
-      storyPath: StoryConfig.buildComponentStoryName('Buttons'),
-    ),
-    ComponentInfo(
-      name: 'Badges',
-      description: 'Notification indicators and status markers',
-      icon: Icons.label,
-      color: Colors.amber,
-      storyPath: StoryConfig.buildComponentStoryName('Badges'),
-    ),
-    ComponentInfo(
-      name: 'Text Fields',
-      description: 'Input fields for forms and data entry',
-      icon: Icons.text_fields,
-      color: Colors.green,
-      storyPath: StoryConfig.buildComponentStoryName('Text Fields'),
-    ),
-    ComponentInfo(
-      name: 'Navigation Bar',
-      description: 'Tab navigation and indicators',
-      icon: Icons.navigation,
-      color: Colors.orange,
-      storyPath: StoryConfig.buildComponentStoryName('Navigation Bar'),
-    ),
-    ComponentInfo(
-      name: 'App Bar',
-      description: 'Top application bars and headers',
-      icon: Icons.app_settings_alt,
-      color: Colors.purple,
-      storyPath: StoryConfig.buildComponentStoryName('App Bar'),
-    ),
-    ComponentInfo(
-      name: 'Checkboxes',
-      description: 'Selection controls for multiple choices',
-      icon: Icons.check_box,
-      color: Colors.teal,
-      storyPath: StoryConfig.buildComponentStoryName('Checkboxes'),
-    ),
-    ComponentInfo(
-      name: 'Radio Buttons',
-      description: 'Selection controls for single choice',
-      icon: Icons.radio_button_checked,
-      color: Colors.red,
-      storyPath: StoryConfig.buildComponentStoryName('Radio Buttons'),
-    ),
-    ComponentInfo(
-      name: 'Switch Buttons',
-      description: 'Toggle controls for on/off states',
-      icon: Icons.toggle_on,
-      color: Colors.indigo,
-      storyPath: StoryConfig.buildComponentStoryName('Switch Buttons'),
-    ),
-  ];
-
-  /// Get all available components
-  static List<ComponentInfo> get allComponents => _components;
-
-  /// Get component count
-  static int get componentCount => _components.length;
-}
+/// Central registry for all components (used for both home and stories)
+final List<ComponentInfo> allComponents = [
+  ComponentInfo(
+    name: 'Cards',
+    description: 'Flexible containers for content and actions',
+    icon: Icons.credit_card,
+    color: Colors.deepPurple,
+    storyPath: StoryConfig.buildComponentStoryName('Cards'),
+    getStories: getUnifiedCardShowcase,
+  ),
+  ComponentInfo(
+    name: 'Chips',
+    description: 'Compact elements for filtering, tagging, or selection',
+    icon: Icons.label_important,
+    color: Colors.blueGrey,
+    storyPath: StoryConfig.buildComponentStoryName('Chips'),
+    getStories: getUnifiedChipShowcase,
+  ),
+  ComponentInfo(
+    name: 'Avatars',
+    description: 'User profile pictures and placeholders',
+    icon: Icons.account_circle,
+    color: Colors.cyan,
+    storyPath: StoryConfig.buildComponentStoryName('Avatars'),
+    getStories: getUnifiedAvatarShowcase,
+  ),
+  ComponentInfo(
+    name: 'Buttons',
+    description: 'Interactive buttons with various styles',
+    icon: Icons.smart_button,
+    color: Colors.blue,
+    storyPath: StoryConfig.buildComponentStoryName('Buttons'),
+    getStories: getUnifiedButtonShowcase,
+  ),
+  ComponentInfo(
+    name: 'Badges',
+    description: 'Notification indicators and status markers',
+    icon: Icons.label,
+    color: Colors.amber,
+    storyPath: StoryConfig.buildComponentStoryName('Badges'),
+    getStories: getUnifiedBadgeShowcase,
+  ),
+  ComponentInfo(
+    name: 'Text Fields',
+    description: 'Input fields for forms and data entry',
+    icon: Icons.text_fields,
+    color: Colors.green,
+    storyPath: StoryConfig.buildComponentStoryName('Text Fields'),
+    getStories: getUnifiedTextFieldShowcase,
+  ),
+  ComponentInfo(
+    name: 'Navigation Bar',
+    description: 'Tab navigation and indicators',
+    icon: Icons.navigation,
+    color: Colors.orange,
+    storyPath: StoryConfig.buildComponentStoryName('Navigation Bar'),
+    getStories: getUnifiedNavbarShowcase,
+  ),
+  ComponentInfo(
+    name: 'App Bar',
+    description: 'Top application bars and headers',
+    icon: Icons.app_settings_alt,
+    color: Colors.purple,
+    storyPath: StoryConfig.buildComponentStoryName('App Bar'),
+    getStories: getUnifiedAppBarShowcase,
+  ),
+  ComponentInfo(
+    name: 'Checkboxes',
+    description: 'Selection controls for multiple choices',
+    icon: Icons.check_box,
+    color: Colors.teal,
+    storyPath: StoryConfig.buildComponentStoryName('Checkboxes'),
+    getStories: getUnifiedCheckboxShowcase,
+  ),
+  ComponentInfo(
+    name: 'Radio Buttons',
+    description: 'Selection controls for single choice',
+    icon: Icons.radio_button_checked,
+    color: Colors.red,
+    storyPath: StoryConfig.buildComponentStoryName('Radio Buttons'),
+    getStories: getUnifiedRadioButtonShowcase,
+  ),
+  ComponentInfo(
+    name: 'Switch Buttons',
+    description: 'Toggle controls for on/off states',
+    icon: Icons.toggle_on,
+    color: Colors.indigo,
+    storyPath: StoryConfig.buildComponentStoryName('Switch Buttons'),
+    getStories: getUnifiedSwitchButtonShowcase,
+  ),
+];

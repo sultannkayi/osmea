@@ -1,23 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:osmea_storybook_example/storybook_test/components/chips_test_modular/showcase/unified_chip_showcase.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 import 'package:provider/provider.dart';
-
-// Import individual component showcases directly
-import 'components/avatar_test_modular/showcase/unified_avatar_showcase.dart';
-import 'components/badge_test_modular/showcase/unified_badge_showcase.dart';
-import 'components/button_test_modular/showcase/unified_button_showcase.dart';
-import 'components/cards_test_modular/showcase/unified_card_showcase.dart';
-import 'components/navbar_test_modular/showcase/unified_navbar_showcase.dart';
-import 'components/appbar_test_modular/showcase/unified_appbar_showcase.dart';
-import 'components/text_field_test_modular/showcase/unified_text_field_showcase.dart';
-import 'components/checkbox_test_modular/showcase/unified_checkbox_showcase.dart';
-import 'components/radio_button_test_modular/showcase/unified_radio_button_showcase.dart';
-import 'components/switch_button_test_modular/showcase/unified_switch_button_showcase.dart';
 import 'device_frame_test.dart';
 import 'home_page.dart';
 import 'story_config.dart';
 import 'storybook_theme_plugin.dart';
+import 'component_registry.dart';
 
 /// Main function to run the OSMEA Storybook app
 void runStorybookApp() {
@@ -65,111 +53,17 @@ List<Story> getHomeStories() {
     Story(
       name: StoryConfig.buildOverviewStoryName(StoryConfig.homePage),
       builder: (context) => const ComponentOverviewPage(),
-      
     ),
   ];
 }
 
 /// Function to collect all component stories under Components folder
 List<Story> getComponentStories() {
-  return [
-    // Avatar component stories
-    ...getUnifiedAvatarShowcase().map(
-      (story) => Story(
-        name: StoryConfig.buildComponentStoryName(story.name),
-        description: story.description,
-        builder: story.builder,
-      ),
+  return allComponents.expand((component) => component.getStories().map(
+    (story) => Story(
+      name: StoryConfig.buildComponentStoryName(story.name),
+      description: story.description,
+      builder: story.builder,
     ),
-    
-    // Badge component stories
-    ...getUnifiedBadgeShowcase().map(
-      (story) => Story(
-        name: StoryConfig.buildComponentStoryName(story.name),
-        description: story.description,
-        builder: story.builder,
-      ),
-    ),
-    
-    // Button component stories
-    ...getUnifiedButtonShowcase().map(
-      (story) => Story(
-        name: StoryConfig.buildComponentStoryName(story.name),
-        description: story.description,
-        builder: story.builder,
-      ),
-    ),
-
-    // Card component stories
-    ...getUnifiedCardShowcase().map(
-      (story) => Story(
-        name: StoryConfig.buildComponentStoryName(story.name),
-        description: story.description,
-        builder: story.builder,
-      ),
-    ),
-
-    // Chip component stories
-    ...getUnifiedChipShowcase().map(
-      (story) => Story(
-        name: StoryConfig.buildComponentStoryName(story.name),
-        description: story.description,
-        builder: story.builder,
-      ),
-    ),
-    
-    // Navbar component stories
-    ...getUnifiedNavbarShowcase().map(
-      (story) => Story(
-        name: StoryConfig.buildComponentStoryName(story.name),
-        description: story.description,
-        builder: story.builder,
-      ),
-    ),
-    
-    // AppBar component stories
-    ...getUnifiedAppBarShowcase().map(
-      (story) => Story(
-        name: StoryConfig.buildComponentStoryName(story.name),
-        description: story.description,
-        builder: story.builder,
-      ),
-    ),
-    
-    // Text Field component stories
-    ...getUnifiedTextFieldShowcase().map(
-      (story) => Story(
-        name: StoryConfig.buildComponentStoryName(story.name),
-        description: story.description,
-        builder: story.builder,
-      ),
-    ),
-    
-    // Checkbox component stories
-    ...getUnifiedCheckboxShowcase().map(
-      (story) => Story(
-        name: StoryConfig.buildComponentStoryName(story.name),
-        description: story.description,
-        builder: story.builder,
-      ),
-    ),
-    
-    // Radio Button component stories
-    ...getUnifiedRadioButtonShowcase().map(
-      (story) => Story(
-        name: StoryConfig.buildComponentStoryName(story.name),
-        description: story.description,
-        builder: story.builder,
-      ),
-    ),
-    
-    // Switch Button component stories
-    ...getUnifiedSwitchButtonShowcase().map(
-      (story) => Story(
-        name: StoryConfig.buildComponentStoryName(story.name),
-        description: story.description,
-        builder: story.builder,
-      ),
-    ),
-  ];
+  )).toList();
 }
