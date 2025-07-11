@@ -40,7 +40,7 @@ class ContainerExampleScreen extends StatelessWidget {
               fontSize: 16,
             ),
             OsmeaComponents.sizedBox(height: 8),
-            basicContainerExample(),
+            basicContainerExample(context),
             OsmeaComponents.sizedBox(height: 24),
 
             // Container with border radius
@@ -49,7 +49,7 @@ class ContainerExampleScreen extends StatelessWidget {
               fontSize: 16,
             ),
             OsmeaComponents.sizedBox(height: 8),
-            roundedContainerExample(),
+            roundedContainerExample(context),
             OsmeaComponents.sizedBox(height: 24),
 
             // Container with shadow
@@ -58,7 +58,7 @@ class ContainerExampleScreen extends StatelessWidget {
               fontSize: 16,
             ),
             OsmeaComponents.sizedBox(height: 8),
-            shadowContainerExample(),
+            shadowContainerExample(context),
             OsmeaComponents.sizedBox(height: 24),
 
             // Section title for layout containers
@@ -72,7 +72,7 @@ class ContainerExampleScreen extends StatelessWidget {
             // Containers with alignment
             OsmeaComponents.text('Containers with different alignments:'),
             OsmeaComponents.sizedBox(height: 8),
-            alignmentContainerExamples(),
+            alignmentContainerExamples(context),
             OsmeaComponents.sizedBox(height: 24),
 
             // Containers with padding and margin
@@ -154,8 +154,6 @@ class ContainerExampleScreen extends StatelessWidget {
             OsmeaComponents.sizedBox(height: 8),
             complexContainerExamples(),
             OsmeaComponents.sizedBox(height: 32),
-
-            
           ],
         ),
       ),
@@ -163,7 +161,7 @@ class ContainerExampleScreen extends StatelessWidget {
   }
 
   // Basic container example
-  Widget basicContainerExample() {
+  Widget basicContainerExample(BuildContext context) {
     return OsmeaComponents.container(
       width: double.infinity,
       height: 100,
@@ -171,14 +169,14 @@ class ContainerExampleScreen extends StatelessWidget {
       child: OsmeaComponents.center(
         child: OsmeaComponents.text(
           'Basic Container',
-          textStyle: const TextStyle(color: OsmeaColors.white, fontSize: 16),
+          textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(color: OsmeaColors.white, fontSize: 16),
         ),
       ),
     );
   }
 
   // Rounded container example
-  Widget roundedContainerExample() {
+  Widget roundedContainerExample(BuildContext context) {
     return OsmeaComponents.container(
       width: double.infinity,
       height: 100,
@@ -187,14 +185,14 @@ class ContainerExampleScreen extends StatelessWidget {
       child: OsmeaComponents.center(
         child: OsmeaComponents.text(
           'Rounded Container',
-          textStyle: const TextStyle(color: OsmeaColors.white, fontSize: 16),
+          textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(color: OsmeaColors.white, fontSize: 16),
         ),
       ),
     );
   }
 
   // Container with shadow example
-  Widget shadowContainerExample() {
+  Widget shadowContainerExample(BuildContext context) {
     return OsmeaComponents.container(
       width: double.infinity,
       height: 100,
@@ -210,14 +208,14 @@ class ContainerExampleScreen extends StatelessWidget {
       child: OsmeaComponents.center(
         child: OsmeaComponents.text(
           'Shadow Container',
-          textStyle: const TextStyle(fontSize: 16),
+          textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(fontSize: 16),
         ),
       ),
     );
   }
 
   // Container alignment examples
-  Widget alignmentContainerExamples() {
+  Widget alignmentContainerExamples(BuildContext context) {
     return OsmeaComponents.row(
       children: [
         OsmeaComponents.expanded(
@@ -226,7 +224,7 @@ class ContainerExampleScreen extends StatelessWidget {
             color: OsmeaColors.springLeaf,
             alignment: Alignment.topLeft,
             child: OsmeaComponents.text('Top Left',
-                textStyle: const TextStyle(color: OsmeaColors.white)),
+                textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(color: OsmeaColors.white)),
           ),
         ),
         OsmeaComponents.sizedBox(width: 8),
@@ -236,7 +234,7 @@ class ContainerExampleScreen extends StatelessWidget {
             color: OsmeaColors.forestHeart,
             alignment: Alignment.center,
             child: OsmeaComponents.text('Center',
-                textStyle: const TextStyle(color: OsmeaColors.white)),
+                textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(color: OsmeaColors.white)),
           ),
         ),
         OsmeaComponents.sizedBox(width: 8),
@@ -246,7 +244,7 @@ class ContainerExampleScreen extends StatelessWidget {
             color: OsmeaColors.pineGrove,
             alignment: Alignment.bottomRight,
             child: OsmeaComponents.text('Bottom Right',
-                textStyle: const TextStyle(color: OsmeaColors.white)),
+                textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(color: OsmeaColors.white)),
           ),
         ),
       ],
