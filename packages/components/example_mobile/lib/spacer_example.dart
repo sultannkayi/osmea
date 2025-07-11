@@ -23,55 +23,52 @@ class SpacerExampleScreen extends StatelessWidget {
             // Section title
             OsmeaComponents.text(
               '📏 Basic Spacers in Row',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
             // Basic row with spacer example
             OsmeaComponents.text('Spacer pushing items apart:'),
             OsmeaComponents.sizedBox(height: 8),
-            basicRowSpacerExample(),
+            basicRowSpacerExample(context),
             OsmeaComponents.sizedBox(height: 24),
 
             // Multiple spacers example
             OsmeaComponents.text('Multiple spacers with different flex:'),
             OsmeaComponents.sizedBox(height: 8),
-            multipleSpacersExample(),
+            multipleSpacersExample(context),
             OsmeaComponents.sizedBox(height: 24),
 
             // Section title for column spacers
             OsmeaComponents.text(
               '📏 Spacers in Column',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
             // Column with spacers example
             OsmeaComponents.text('Spacers in a column:'),
             OsmeaComponents.sizedBox(height: 8),
-            columnSpacersExample(),
+            columnSpacersExample(context),
             OsmeaComponents.sizedBox(height: 24),
 
             // Section title for practical examples
             OsmeaComponents.text(
               '💡 Practical Examples',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
             // App bar layout example
             OsmeaComponents.text('App bar-like layout:'),
             OsmeaComponents.sizedBox(height: 8),
-            appBarLayoutExample(),
+            appBarLayoutExample(context),
             OsmeaComponents.sizedBox(height: 24),
 
             // Card with actions example
             OsmeaComponents.text('Card with actions:'),
             OsmeaComponents.sizedBox(height: 8),
-            cardWithActionsExample(),
+            cardWithActionsExample(context),
             OsmeaComponents.sizedBox(height: 32),
           ],
         ),
@@ -80,57 +77,57 @@ class SpacerExampleScreen extends StatelessWidget {
   }
 
   // Basic row with spacer example
-  Widget basicRowSpacerExample() {
+  Widget basicRowSpacerExample(BuildContext context) {
     return OsmeaComponents.container(
       height: 60,
       color: OsmeaColors.ash,
       child: OsmeaComponents.row(
         children: [
-          _buildColorBox(OsmeaColors.sunsetGlow, 'Left'),
+          _buildColorBox(context, OsmeaColors.sunsetGlow, 'Left'),
           OsmeaComponents.spacer(), // Pushes the right box to the end
-          _buildColorBox(OsmeaColors.nordicBlue, 'Right'),
+          _buildColorBox(context, OsmeaColors.nordicBlue, 'Right'),
         ],
       ),
     );
   }
 
   // Multiple spacers example
-  Widget multipleSpacersExample() {
+  Widget multipleSpacersExample(BuildContext context) {
     return OsmeaComponents.container(
       height: 60,
       color: OsmeaColors.ash,
       child: OsmeaComponents.row(
         children: [
-          _buildColorBox(OsmeaColors.sunsetGlow, 'Left'),
+          _buildColorBox(context, OsmeaColors.sunsetGlow, 'Left'),
           OsmeaComponents.spacer(flex: 1), // 1 part of space
-          _buildColorBox(OsmeaColors.forestHeart, 'Middle'),
+          _buildColorBox(context, OsmeaColors.forestHeart, 'Middle'),
           OsmeaComponents.spacer(flex: 2), // 2 parts of space (twice as much)
-          _buildColorBox(OsmeaColors.nordicBlue, 'Right'),
+          _buildColorBox(context, OsmeaColors.nordicBlue, 'Right'),
         ],
       ),
     );
   }
 
   // Column with spacers example
-  Widget columnSpacersExample() {
+  Widget columnSpacersExample(BuildContext context) {
     return OsmeaComponents.container(
       height: 300,
       width: double.infinity,
       color: OsmeaColors.ash,
       child: OsmeaComponents.column(
         children: [
-          _buildColorBox(OsmeaColors.sunsetGlow, 'Top'),
+          _buildColorBox(context, OsmeaColors.sunsetGlow, 'Top'),
           OsmeaComponents.spacer(), // Pushes middle and bottom down
-          _buildColorBox(OsmeaColors.forestHeart, 'Middle'),
+          _buildColorBox(context, OsmeaColors.forestHeart, 'Middle'),
           OsmeaComponents.spacer(flex: 2), // Extra space before bottom
-          _buildColorBox(OsmeaColors.nordicBlue, 'Bottom'),
+          _buildColorBox(context, OsmeaColors.nordicBlue, 'Bottom'),
         ],
       ),
     );
   }
 
   // App bar layout example using spacers
-  Widget appBarLayoutExample() {
+  Widget appBarLayoutExample(BuildContext context) {
     return OsmeaComponents.container(
       height: 60,
       width: double.infinity,
@@ -142,7 +139,7 @@ class SpacerExampleScreen extends StatelessWidget {
           OsmeaComponents.sizedBox(width: 16),
           OsmeaComponents.text(
             'App Title',
-            textStyle: const TextStyle(
+            textStyle: OsmeaTextStyle.titleMedium(context).copyWith(
               color: OsmeaColors.white,
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -158,7 +155,7 @@ class SpacerExampleScreen extends StatelessWidget {
   }
 
   // Card with actions using spacers
-  Widget cardWithActionsExample() {
+  Widget cardWithActionsExample(BuildContext context) {
     return Card(
       child: OsmeaComponents.padding(
         padding: const EdgeInsets.all(16),
@@ -167,7 +164,7 @@ class SpacerExampleScreen extends StatelessWidget {
           children: [
             OsmeaComponents.text(
               'Card Title',
-              textStyle: const TextStyle(
+              textStyle: OsmeaTextStyle.titleMedium(context).copyWith(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
@@ -199,7 +196,7 @@ class SpacerExampleScreen extends StatelessWidget {
   }
 
   // Helper for creating color boxes
-  Widget _buildColorBox(Color color, String text) {
+  Widget _buildColorBox(BuildContext context, Color color, String text) {
     return OsmeaComponents.container(
       width: 80,
       height: 60,
@@ -207,7 +204,7 @@ class SpacerExampleScreen extends StatelessWidget {
       child: OsmeaComponents.center(
         child: OsmeaComponents.text(
           text,
-          textStyle: const TextStyle(
+          textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
             color: OsmeaColors.white,
             fontWeight: FontWeight.bold,
           ),
