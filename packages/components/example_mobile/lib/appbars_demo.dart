@@ -164,7 +164,7 @@ class AppbarDemo extends StatelessWidget {
           variant: AppBarVariant.standard,
           size: AppBarSize.comfortable,
           titleAlignment: AppBarTitleAlignment.left,
-          leading: IconButton(
+          leading: OsmeaComponents.iconButton(
             icon: const Icon(Icons.expand_more),
             onPressed: () {},
           ),
@@ -190,7 +190,7 @@ class AppbarDemo extends StatelessWidget {
           variant: AppBarVariant.primary,
           size: AppBarSize.comfortable,
           titleAlignment: AppBarTitleAlignment.center,
-          leading: IconButton(
+          leading: OsmeaComponents.iconButton(
             icon: const Icon(Icons.menu),
             onPressed: () {},
           ),
@@ -222,7 +222,7 @@ class AppbarDemo extends StatelessWidget {
           variant: AppBarVariant.secondary,
           size: AppBarSize.standard,
           titleAlignment: AppBarTitleAlignment.left,
-          leading: IconButton(
+          leading: OsmeaComponents.iconButton(
             icon: const Icon(Icons.menu),
             onPressed: () {},
           ),
@@ -259,7 +259,7 @@ class AppbarDemo extends StatelessWidget {
           variant: AppBarVariant.surface,
           size: AppBarSize.large,
           titleAlignment: AppBarTitleAlignment.left,
-          leading: IconButton(
+          leading: OsmeaComponents.iconButton(
             icon: const Icon(Icons.dashboard),
             onPressed: () {},
           ),
@@ -289,7 +289,7 @@ class AppbarDemo extends StatelessWidget {
           variant: AppBarVariant.gradient,
           size: AppBarSize.comfortable,
           titleAlignment: AppBarTitleAlignment.center,
-          leading: IconButton(
+          leading: OsmeaComponents.iconButton(
             icon: const Icon(Icons.menu),
             onPressed: () {},
           ),
@@ -319,7 +319,7 @@ class AppbarDemo extends StatelessWidget {
           variant: AppBarVariant.outlined,
           size: AppBarSize.standard,
           titleAlignment: AppBarTitleAlignment.center,
-          leading: IconButton(
+          leading: OsmeaComponents.iconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {},
           ),
