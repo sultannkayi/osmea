@@ -454,15 +454,15 @@ class RowExampleScreen extends StatelessWidget {
                 ),
                 OsmeaComponents.row(
                   children: [
-                    IconButton(
+                    OsmeaComponents.iconButton(
                       icon: const Icon(Icons.call),
                       onPressed: () {},
                     ),
-                    IconButton(
+                    OsmeaComponents.iconButton(
                       icon: const Icon(Icons.videocam),
                       onPressed: () {},
                     ),
-                    IconButton(
+                    OsmeaComponents.iconButton(
                       icon: const Icon(Icons.more_vert),
                       onPressed: () {},
                     ),
