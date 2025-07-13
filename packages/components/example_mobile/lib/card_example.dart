@@ -183,7 +183,7 @@ class _CardExampleState extends State<CardExample> {
               color: OsmeaColors.nordicBlue,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(Icons.landscape, color: OsmeaColors.white, size: 48),
+            child:  const Icon(Icons.landscape, color: OsmeaColors.white, size: 48),
           ),
           imageHeight: 200,
           imagePosition: ComponentPosition.bottom,
@@ -212,7 +212,7 @@ class _CardExampleState extends State<CardExample> {
               color: OsmeaColors.crystalBay,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(Icons.computer, color: OsmeaColors.white, size: 32),
+            child: const Icon(Icons.computer, color: OsmeaColors.white, size: 32),
           ),
           imageHeight: 100,
           imagePosition: ComponentPosition.left,
@@ -252,7 +252,7 @@ class _CardExampleState extends State<CardExample> {
               ],
             ),
             child: OsmeaComponents.center(
-              child: Icon(
+              child: const Icon(
                 Icons.headphones,
                 color: OsmeaColors.white,
                 size: 90,
@@ -317,7 +317,7 @@ class _CardExampleState extends State<CardExample> {
             child: OsmeaComponents.column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
+                const Icon(
                   Icons.watch,
                   color: OsmeaColors.white,
                   size: 85,
@@ -332,7 +332,7 @@ class _CardExampleState extends State<CardExample> {
                   child: OsmeaComponents.row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.favorite,
+                       Icon(Icons.favorite,
                           color: OsmeaColors.sunsetGlow, size: 16),
                       OsmeaComponents.sizedBox(width: 4),
                       OsmeaComponents.text('72 BPM',
@@ -412,7 +412,7 @@ class _CardExampleState extends State<CardExample> {
                 ),
                 OsmeaComponents.expanded(
                   child: OsmeaComponents.center(
-                    child: Icon(
+                    child: const Icon(
                       Icons.smartphone,
                       color: OsmeaColors.white,
                       size: 80,
@@ -524,7 +524,7 @@ class _CardExampleState extends State<CardExample> {
                 ),
                 OsmeaComponents.expanded(
                   child: OsmeaComponents.center(
-                    child: Icon(
+                    child:  Icon(
                       Icons.headset_mic,
                       color: OsmeaColors.azureWave,
                       size: 75,
@@ -1179,7 +1179,7 @@ class _CardExampleState extends State<CardExample> {
                       shape: BoxShape.circle,
                     ),
                     child:
-                        Icon(Icons.person, color: OsmeaColors.white, size: 32),
+                        const Icon(Icons.person, color: OsmeaColors.white, size: 32),
                   ),
                   OsmeaComponents.sizedBox(width: 16),
                   OsmeaComponents.expanded(
