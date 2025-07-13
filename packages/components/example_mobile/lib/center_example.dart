@@ -224,7 +224,7 @@ class CenterExample extends StatelessWidget {
               },
               child: OsmeaComponents.container(
                 decoration: BoxDecoration(
-                  color: OsmeaColors.grey.withOpacity(0.2),
+                  color: OsmeaColors.grey.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: OsmeaComponents.center(
