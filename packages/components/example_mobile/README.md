@@ -38,8 +38,6 @@ The **OSMEA Components Example Mobile App** is a production-ready Flutter applic
 > **Experience OSMEA Components in Action**  
 > 🌐 **[osmea-app.web.app](https://osmea-app.web.app)**
 
-[![Demo Preview](https://via.placeholder.com/800x400/4A90E2/FFFFFF?text=OSMEA+Components+Demo)](https://osmea-app.web.app)
-
 *Interactive playground showcasing all OSMEA components with real-time examples*
 
 </div>
@@ -79,7 +77,7 @@ The **OSMEA Components Example Mobile App** is a production-ready Flutter applic
 - **Bottom Sheets**: Modal overlays for additional content
 - **Popups**: Contextual information and actions
 
-#### **Feedback Components**
+#### **Dynamics Components**
 - **Loading Indicators**: Spinners, progress bars, skeleton screens
 - **Toast Notifications**: Temporary success, error, and info messages
 - **Progress Indicators**: Linear and circular progress displays
@@ -90,12 +88,11 @@ The **OSMEA Components Example Mobile App** is a production-ready Flutter applic
 - **Search Bars**: Intelligent search with suggestions
 - **Rich Text**: Formatted text with styling options
 - **List Items**: Structured list components
-- **Color Pickers**: Interactive color selection tools
+
 
 ### 🏗️ Architecture Features
 
 - **📱 Responsive Design**: Adapts to different screen sizes and orientations
-- **🌙 Theme Support**: Light and dark theme implementations
 - **🎯 Type Safety**: Full TypeScript-like type safety with Dart
 - **🔧 Customization**: Extensive theming and styling options
 - **📦 Modular Structure**: Clean separation of concerns and reusable components
@@ -239,26 +236,6 @@ flutter run -d <device-id>
 flutter run --release
 ```
 
-**Web:**
-```bash
-# Run on web browser
-flutter run -d chrome
-
-# Or visit the live demo
-# https://osmea-app.web.app
-```
-
-**Desktop (macOS/Windows/Linux):**
-```bash
-# Enable desktop support (if not already enabled)
-flutter config --enable-macos-desktop
-flutter config --enable-windows-desktop
-flutter config --enable-linux-desktop
-
-# Run on desktop
-flutter run -d macos  # or windows, linux
-```
-
 ### 🔧 Development Setup
 
 #### **IDE Configuration**
@@ -268,10 +245,6 @@ flutter run -d macos  # or windows, linux
 2. Install the Dart extension
 3. Configure your workspace settings
 
-**Android Studio:**
-1. Install the Flutter plugin
-2. Install the Dart plugin
-3. Configure your Flutter SDK path
 
 #### **Hot Reload Development**
 ```bash
@@ -365,25 +338,7 @@ OsmeaComponents.checkbox(
 
 ---
 
-## 🎨 Theming & Customization
-
-### 🌙 Theme Configuration
-
-```dart
-// Light theme
-final lightTheme = CoreTheme.lightTheme;
-
-// Dark theme
-final darkTheme = CoreTheme.darkTheme;
-
-// Custom theme
-final customTheme = ThemeData(
-  primaryColor: OsmeaColors.nordicBlue,
-  colorScheme: ColorScheme.fromSeed(
-    seedColor: OsmeaColors.nordicBlue,
-  ),
-);
-```
+## 🎨 Customization
 
 ### 🎨 Color System
 
@@ -409,18 +364,6 @@ OsmeaColors.gray100       // Very light gray
 
 ---
 
-## 📱 Platform Support
-
-| Platform | Status | Notes |
-|----------|--------|-------|
-| **iOS** | ✅ Full Support | iOS 12.0+ |
-| **Android** | ✅ Full Support | API 21+ |
-| **Web** | ✅ Full Support | Modern browsers |
-| **macOS** | ✅ Full Support | macOS 10.14+ |
-| **Windows** | ✅ Full Support | Windows 10+ |
-| **Linux** | ✅ Full Support | Ubuntu 18.04+ |
-
----
 
 ## 🔧 Configuration
 
@@ -435,7 +378,6 @@ dependencies:
   osmea_components:     # Main UI component library
     path: ../
   intl: ^0.18.0         # Internationalization
-  flutter_colorpicker: ^1.1.0  # Color picker component
   url_launcher: ^6.3.1  # URL handling
 
 dev_dependencies:
@@ -462,44 +404,9 @@ flutter build ios
 
 ---
 
-## 🧪 Testing
-
-### 🧪 Running Tests
-
-```bash
-# Run all tests
-flutter test
-
-# Run tests with coverage
-flutter test --coverage
-
-# Run specific test file
-flutter test test/widget_test.dart
-```
-
-### 📊 Test Coverage
-
-The app includes comprehensive tests for:
-- ✅ Widget rendering
-- ✅ User interactions
-- ✅ State management
-- ✅ Component behavior
-- ✅ Accessibility features
-
----
-
 ## 🚀 Deployment
 
 ### 📱 Mobile Deployment
-
-**Android:**
-```bash
-# Build APK
-flutter build apk --release
-
-# Build App Bundle (recommended for Play Store)
-flutter build appbundle --release
-```
 
 **iOS:**
 ```bash
@@ -509,20 +416,6 @@ flutter build ios --release
 # Archive for App Store
 # Use Xcode to archive and upload
 ```
-
-### 🌐 Web Deployment
-
-```bash
-# Build for web
-flutter build web --release
-
-# Deploy to Firebase Hosting
-firebase deploy
-```
-
----
-
-
 
 ---
 
