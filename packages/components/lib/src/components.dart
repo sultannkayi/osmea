@@ -38,10 +38,12 @@ import 'package:osmea_components/src/components/text_field/otp_text_field.dart';
 import 'package:osmea_components/src/components/wrap/wrap.dart';
 import 'package:osmea_components/src/components/text/text.dart';
 import 'package:osmea_components/src/components/carousel/carousel.dart';
+import 'package:osmea_components/src/components/counter/counter.dart';
 import 'package:osmea_components/src/components/list_item/list_item.dart';
 import 'package:osmea_components/src/components/ticket_widget/ticket_widget.dart';
 import 'package:osmea_components/src/components/ticket_widget/models/ticket_models.dart';
 import 'package:osmea_components/src/components/popup/popup.dart';
+
 import 'package:osmea_components/src/components/searchbar/searchbar.dart';
 import 'package:osmea_components/src/components/searchbar/expandable_searchbar.dart';
 
@@ -3587,6 +3589,90 @@ class OsmeaComponents {
       backgroundColor: backgroundColor,
       variant: variant,
       text: text,
+    );
+  }
+
+  /// 🔢 **OSMEA Counter** - Interactive numeric counter component with cubit state management
+  ///
+  /// Creates a counter component with increment/decrement controls.
+  /// Features cubit-based state management, customizable styling, size variants, and value constraints.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.counter(
+  ///   initialValue: counterValue,
+  ///   onChanged: (newValue) => print('Counter: $newValue'),
+  ///   minValue: 0,
+  ///   maxValue: 100,
+  ///   size: CounterSize.medium,
+  ///   variant: CounterVariant.outlined,
+  /// )
+  /// ```
+  static Widget counter({
+    Key? key,
+    CoreTheme? customTheme,
+    int initialValue = 0,
+    ValueChanged<int>? onChanged,
+    int minValue = 0,
+    int maxValue = 100,
+    int step = 1,
+    CounterSize size = CounterSize.medium,
+    CounterVariant variant = CounterVariant.outlined,
+    CounterIconVariant? iconVariant,
+    Widget? incrementIcon,
+    Widget? decrementIcon,
+    bool showValue = true,
+    TextStyle? valueTextStyle,
+    Color? buttonColor,
+    Color? backgroundColor,
+    Color? borderColor,
+    EdgeInsetsGeometry? padding,
+    EdgeInsetsGeometry? margin,
+    double? width,
+    double? height,
+    BorderRadius? borderRadius,
+    bool enabled = true,
+    ValueChanged<int>? onIncrement,
+    ValueChanged<int>? onDecrement,
+    VoidCallback? onMinReached,
+    VoidCallback? onMaxReached,
+    ValueChanged<String>? onErrorOccurred,
+    String? Function(int value)? validator,
+    Duration animationDuration = const Duration(milliseconds: 150),
+    Duration debounceDuration = const Duration(milliseconds: 100),
+  }) {
+    return OsmeaCounter(
+      key: key,
+      customTheme: customTheme,
+      initialValue: initialValue,
+      onChanged: onChanged,
+      minValue: minValue,
+      maxValue: maxValue,
+      step: step,
+      size: size,
+      variant: variant,
+      iconVariant: iconVariant,
+      incrementIcon: incrementIcon,
+      decrementIcon: decrementIcon,
+      showValue: showValue,
+      valueTextStyle: valueTextStyle,
+      buttonColor: buttonColor,
+      backgroundColor: backgroundColor,
+      borderColor: borderColor,
+      padding: padding,
+      margin: margin,
+      width: width,
+      height: height,
+      borderRadius: borderRadius,
+      enabled: enabled,
+      onIncrement: onIncrement,
+      onDecrement: onDecrement,
+      onMinReached: onMinReached,
+      onMaxReached: onMaxReached,
+      onErrorOccurred: onErrorOccurred,
+      validator: validator,
+      animationDuration: animationDuration,
+      debounceDuration: debounceDuration,
     );
   }
 }

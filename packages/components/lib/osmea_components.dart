@@ -27,6 +27,9 @@ export 'src/components/text_field/controllers/text_field_controller.dart';
 export 'src/components/radio_button/radio_button.dart';
 export 'src/components/login_button/login_button.dart';
 
+// 🔢 Counter
+export 'src/utils/counter_extensions.dart';
+
 // 🧩 Components
 export 'src/components.dart';
 
