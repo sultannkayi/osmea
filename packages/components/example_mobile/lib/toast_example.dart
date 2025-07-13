@@ -12,7 +12,7 @@ class ToastExamplePage extends StatefulWidget {
 }
 
 class _ToastExamplePageState extends State<ToastExamplePage> {
-  bool _stacked = true;
+ final bool _stacked = true;
 
   ToastStyle _selectedStyle = ToastStyle.defaultStyle;
   ToastType _selectedType = ToastType.success;
@@ -242,7 +242,7 @@ class _ToastExamplePageState extends State<ToastExamplePage> {
           .toList(),
       onChanged: onChanged,
       borderRadius: BorderRadius.circular(12),
-      underline: OsmeaComponents.container(height: 2, color: OsmeaColors.nordicBlue.withOpacity(0.1)),
+      underline: OsmeaComponents.container(height: 2, color: OsmeaColors.nordicBlue.withValues(alpha: 0.1)),
       style: OsmeaTextStyle.bodyMedium(context).copyWith(fontSize: 15, color: OsmeaColors.steel),
       dropdownColor: OsmeaColors.white,
       elevation: 2,
