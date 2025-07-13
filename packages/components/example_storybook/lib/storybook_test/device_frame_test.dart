@@ -354,7 +354,7 @@ class _DeviceFrameWrapperState extends State<DeviceFrameWrapper> {
   Widget _buildDeviceFrames() {
     return LayoutBuilder(
       builder: (context, constraints) {
-        return Container(
+        return SizedBox(
           width: constraints.maxWidth,
           height: constraints.maxHeight,
           child: OverflowBox(
