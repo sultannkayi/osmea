@@ -143,7 +143,7 @@ class SizedBoxExample extends StatelessWidget {
                 color: OsmeaColors.forestHeart,
                 boxShadow: [
                   BoxShadow(
-                    color: OsmeaColors.black.withOpacity(0.2),
+                    color: OsmeaColors.black.withValues(alpha: 0.2),
                     blurRadius: 10,
                     spreadRadius: 2,
                     offset: const Offset(0, 4),
@@ -199,7 +199,7 @@ class SizedBoxExample extends StatelessWidget {
               margin: const EdgeInsets.all(10),
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: OsmeaColors.amberFlame.withOpacity(0.2),
+                color: OsmeaColors.amberFlame.withValues(alpha: 0.2), 
                 border: Border.all(color: OsmeaColors.amberFlame),
               ),
               child: OsmeaComponents.container(
