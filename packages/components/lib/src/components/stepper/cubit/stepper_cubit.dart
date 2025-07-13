@@ -150,7 +150,9 @@ class StepperCubit extends Cubit<StepperState> {
     if (stepIndex < 0 ||
         stepIndex >= state.totalSteps ||
         stepIndex == state.currentStep ||
-        state.isAnimating) return;
+        state.isAnimating) {
+      return;
+    }
 
     // Allow navigation to any step if allowStepTapping is true
     // Or allow navigation to any previous/visited step
