@@ -84,7 +84,7 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
         textStyle: OsmeaTextStyle.titleLarge(context).copyWith(
           fontSize: 20,
           fontWeight: FontWeight.bold,
-          color: OsmeaColors.black.withOpacity(0.8),
+          color: OsmeaColors.black.withValues(alpha: 0.8),
         ),
       ),
     );
