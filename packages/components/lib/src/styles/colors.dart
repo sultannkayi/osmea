@@ -129,4 +129,15 @@ class OsmeaColors {
   // ================== SHADOW SYSTEM ==================
   static const Color shadowLight = Color(0x1A000000);
   static const Color shadowDark = Color(0x4D000000);
+
+  // ================== MATERIAL COLORS ==================
+  static const MaterialColor grey = Colors.grey;
+  static const MaterialColor green = Colors.green;
+  static const MaterialColor red = Colors.red;
+  static const MaterialColor orange = Colors.orange;
+
+  // ================== COMMON COLORS ==================
+  static const Color black54 = Colors.black54;
+  static const Color blue = Colors.blue;
+  static const Color purple = Colors.purple;
 }

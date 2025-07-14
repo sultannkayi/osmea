@@ -3,7 +3,7 @@ import 'package:osmea_components/osmea_components.dart';
 import '../utils/badge_builder.dart';
 
 /// 📝 **Sample Content Section**
-/// 
+///
 /// Demonstrates badge usage with sample content and real-world scenarios
 
 class SampleContentSection extends StatelessWidget {
@@ -51,15 +51,15 @@ class SampleContentSection extends StatelessWidget {
         // Notification Context Example
         _buildNotificationExample(context),
         SizedBox(height: spacing * 2),
-        
+
         // E-commerce Context Example
         _buildEcommerceExample(context),
         SizedBox(height: spacing * 2),
-        
+
         // Social Media Context Example
         _buildSocialExample(context),
         SizedBox(height: spacing * 2),
-        
+
         // Dashboard Context Example
         _buildDashboardExample(context),
       ],
@@ -85,7 +85,7 @@ class SampleContentSection extends StatelessWidget {
             badgeCount: 3,
           ),
           SizedBox(width: spacing),
-          
+
           // Bell Icon with Badge
           _buildWithBadge(
             context,
@@ -98,7 +98,7 @@ class SampleContentSection extends StatelessWidget {
             badgeCount: null,
           ),
           SizedBox(width: spacing),
-          
+
           // Mail Icon with Badge
           _buildWithBadge(
             context,
@@ -129,7 +129,7 @@ class SampleContentSection extends StatelessWidget {
               width: 60,
               height: 60,
               decoration: BoxDecoration(
-                color: OsmeaColors.silver.withOpacity(0.3),
+                color: OsmeaColors.silver.withValues(alpha: 0.3),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(
@@ -142,7 +142,7 @@ class SampleContentSection extends StatelessWidget {
             badgeColor: Colors.red,
           ),
           SizedBox(width: spacing),
-          
+
           // Cart with Item Count
           _buildWithBadge(
             context,
@@ -155,7 +155,7 @@ class SampleContentSection extends StatelessWidget {
             badgeCount: 5,
           ),
           SizedBox(width: spacing),
-          
+
           // Wishlist with Badge
           _buildWithBadge(
             context,
@@ -197,7 +197,7 @@ class SampleContentSection extends StatelessWidget {
             badgeSize: BadgeSize.small,
           ),
           SizedBox(width: spacing),
-          
+
           // Likes with Count
           _buildWithBadge(
             context,
@@ -210,7 +210,7 @@ class SampleContentSection extends StatelessWidget {
             badgeCount: 42,
           ),
           SizedBox(width: spacing),
-          
+
           // Comments with Badge
           _buildWithBadge(
             context,
@@ -247,7 +247,7 @@ class SampleContentSection extends StatelessWidget {
             badgeColor: OsmeaColors.forestHeart,
           ),
           SizedBox(width: spacing),
-          
+
           // Alerts Count
           _buildWithBadge(
             context,
@@ -261,7 +261,7 @@ class SampleContentSection extends StatelessWidget {
             badgeColor: OsmeaColors.sunsetGlow,
           ),
           SizedBox(width: spacing),
-          
+
           // Tasks Progress
           _buildWithBadge(
             context,

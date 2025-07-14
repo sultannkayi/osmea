@@ -35,8 +35,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
             // Section title
             OsmeaComponents.text(
               '🏗️ Basic Scaffold Examples',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
@@ -83,8 +82,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
             // Advanced Scaffold
             OsmeaComponents.text(
               '🧰 Advanced Scaffold Examples',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
@@ -111,13 +109,12 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
           children: [
             OsmeaComponents.text(
               title,
-              textStyle:
-                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 8),
             OsmeaComponents.text(
               description,
-              textStyle: const TextStyle(fontSize: 14),
+              textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(fontSize: 14),
               color: OsmeaColors.pewter,
             ),
             OsmeaComponents.sizedBox(height: 16),
@@ -127,7 +124,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
                 border: Border.all(color: OsmeaColors.silver),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: ClipRRect(
+              child: OsmeaComponents.clipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: example,
               ),
@@ -146,7 +143,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
         backgroundColor: OsmeaColors.nordicBlue,
         foregroundColor: OsmeaColors.white,
       ),
-      body: Center(
+      body: OsmeaComponents.center(
         child: OsmeaComponents.text(
           'Basic scaffold with appBar and body',
           textAlign: TextAlign.center,
@@ -163,10 +160,10 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
         backgroundColor: OsmeaColors.forestHeart,
         foregroundColor: OsmeaColors.white,
       ),
-      body: Center(
+      body: OsmeaComponents.center(
         child: OsmeaComponents.text(
           'Tab ${_currentIndex + 1} Content',
-          textStyle: const TextStyle(fontSize: 20),
+          textStyle: OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20),
           textAlign: TextAlign.center,
         ),
       ),
@@ -203,7 +200,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
         title: OsmeaComponents.text('With Drawer'),
         backgroundColor: OsmeaColors.sunsetGlow,
         foregroundColor: OsmeaColors.white,
-        leading: IconButton(
+        leading: OsmeaComponents.iconButton(
           icon: const Icon(Icons.menu),
           onPressed: () {
             // This would open the drawer in a real app
@@ -220,7 +217,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
               ),
               child: OsmeaComponents.text(
                 'Navigation Drawer',
-                textStyle: const TextStyle(
+                textStyle: OsmeaTextStyle.headlineSmall(context).copyWith(
                   color: OsmeaColors.white,
                   fontSize: 24,
                 ),
@@ -243,7 +240,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
           ],
         ),
       ),
-      body: Center(
+      body: OsmeaComponents.center(
         child: OsmeaComponents.text(
           'Scaffold with side drawer for navigation',
           textAlign: TextAlign.center,
@@ -260,7 +257,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
         backgroundColor: OsmeaColors.deepSea,
         foregroundColor: OsmeaColors.white,
       ),
-      body: Center(
+      body: OsmeaComponents.center(
         child: OsmeaComponents.text(
           'Scaffold with floating action button',
           textAlign: TextAlign.center,
@@ -286,18 +283,18 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
         foregroundColor: OsmeaColors.white,
       ),
       body: OsmeaComponents.container(
-        color: OsmeaColors.ash.withOpacity(0.1),
-        child: Center(
+        color: OsmeaColors.ash.withValues(alpha: 0.1),
+        child: OsmeaComponents.center(
           child: OsmeaComponents.container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: OsmeaColors.white,
               borderRadius: BorderRadius.circular(8),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   color: OsmeaColors.shadowLight,
                   blurRadius: 5,
-                  offset: const Offset(0, 2),
+                  offset:  Offset(0, 2),
                 ),
               ],
             ),
@@ -320,15 +317,15 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
         foregroundColor: OsmeaColors.white,
         actions: [
           AppBarAction(
-              type: AppBarActionType.search,
-              icon: const Icon(Icons.search),
-              onPressed: () {},
-            ),
+            type: AppBarActionType.search,
+            icon: const Icon(Icons.search),
+            onPressed: () {},
+          ),
           AppBarAction(
-              type: AppBarActionType.search,
-              icon: const Icon(Icons.notifications),
-              onPressed: () {},
-            ),
+            type: AppBarActionType.search,
+            icon: const Icon(Icons.notifications),
+            onPressed: () {},
+          ),
         ],
       ),
       drawer: Drawer(
@@ -341,7 +338,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
               ),
               child: OsmeaComponents.text(
                 'Navigation',
-                textStyle: const TextStyle(
+                textStyle: OsmeaTextStyle.headlineSmall(context).copyWith(
                   color: OsmeaColors.white,
                   fontSize: 24,
                 ),
@@ -367,8 +364,8 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
       ),
       body: OsmeaComponents.container(
         padding: const EdgeInsets.all(16),
-        child: const Center(
-          child: Text('Main Content Area'),
+        child: OsmeaComponents.center(
+          child: OsmeaComponents.text('Main Content Area'),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(

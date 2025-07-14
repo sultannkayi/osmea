@@ -40,10 +40,10 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
           '🔘 OSMEA Radio Examples',
           fontWeight: FontWeight.bold,
           fontSize: 20,
-          color: Colors.white,
+          color: OsmeaColors.white,
         ),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
+        backgroundColor: OsmeaColors.blue,
+        foregroundColor: OsmeaColors.white,
       ),
       body: OsmeaComponents.singleChildScrollView(
         padding: context.paddingNormal,
@@ -81,10 +81,10 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
       padding: const EdgeInsets.only(bottom: 16.0),
       child: OsmeaComponents.text(
         title,
-        textStyle: const TextStyle(
+        textStyle: OsmeaTextStyle.titleLarge(context).copyWith(
           fontSize: 20,
           fontWeight: FontWeight.bold,
-          color: Colors.black87,
+          color: OsmeaColors.black.withValues(alpha: 0.8),
         ),
       ),
     );
@@ -188,7 +188,7 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSubsectionTitle('Small Size'),
-        Wrap(
+        OsmeaComponents.wrap(
           spacing: 16,
           runSpacing: 8,
           children: [
@@ -210,7 +210,7 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
         ),
         OsmeaComponents.sizedBox(height: 16),
         _buildSubsectionTitle('Medium Size (Default)'),
-        Wrap(
+        OsmeaComponents.wrap(
           spacing: 16,
           runSpacing: 8,
           children: [
@@ -232,7 +232,7 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
         ),
         OsmeaComponents.sizedBox(height: 16),
         _buildSubsectionTitle('Large Size'),
-        Wrap(
+        OsmeaComponents.wrap(
           spacing: 16,
           runSpacing: 8,
           children: [
@@ -329,7 +329,7 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSubsectionTitle('Enabled States'),
-        Wrap(
+        OsmeaComponents.wrap(
           spacing: 16,
           runSpacing: 8,
           children: [
@@ -351,7 +351,7 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
         ),
         OsmeaComponents.sizedBox(height: 16),
         _buildSubsectionTitle('Disabled States'),
-        Wrap(
+        OsmeaComponents.wrap(
           spacing: 16,
           runSpacing: 8,
           children: [
@@ -423,7 +423,7 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSubsectionTitle('Custom Active Colors'),
-        Wrap(
+        OsmeaComponents.wrap(
           spacing: 16,
           runSpacing: 8,
           children: [
@@ -431,28 +431,28 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
               value: 'red',
               groupValue: _selectedColor,
               label: 'Red Theme',
-              activeColor: Colors.red,
+              activeColor: OsmeaColors.red,
               onChanged: (value) => setState(() => _selectedColor = value),
             ),
             OsmeaComponents.radioButton<String>(
               value: 'green',
               groupValue: _selectedColor,
               label: 'Green Theme',
-              activeColor: Colors.green,
+              activeColor: OsmeaColors.green,
               onChanged: (value) => setState(() => _selectedColor = value),
             ),
             OsmeaComponents.radioButton<String>(
               value: 'purple',
               groupValue: _selectedColor,
               label: 'Purple Theme',
-              activeColor: Colors.purple,
+              activeColor: OsmeaColors.purple,
               onChanged: (value) => setState(() => _selectedColor = value),
             ),
             OsmeaComponents.radioButton<String>(
               value: 'orange',
               groupValue: _selectedColor,
               label: 'Orange Theme',
-              activeColor: Colors.orange,
+              activeColor: OsmeaColors.orange,
               onChanged: (value) => setState(() => _selectedColor = value),
             ),
           ],
@@ -466,10 +466,10 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
       padding: const EdgeInsets.only(bottom: 8.0, top: 4.0),
       child: OsmeaComponents.text(
         title,
-        textStyle: const TextStyle(
+        textStyle: OsmeaTextStyle.titleMedium(context).copyWith(
           fontSize: 16,
           fontWeight: FontWeight.w600,
-          color: Colors.black54,
+          color: OsmeaColors.black54,
         ),
       ),
     );

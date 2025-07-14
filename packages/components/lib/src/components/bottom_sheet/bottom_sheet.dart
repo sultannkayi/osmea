@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:osmea_components/osmea_components.dart';
 import 'package:osmea_components/src/core/container_widget.dart';
-import 'package:osmea_components/src/enums/bottom_sheet_enums.dart';
-import 'package:osmea_components/src/utils/bottom_sheet_extensions.dart';
 
 /// 📋 **OSMEA Components Library**
 ///
@@ -378,8 +376,8 @@ class OsmeaBottomSheet extends CoreContainer {
         );
       case BottomSheetVariant.persistent:
         return _BottomSheetColors(
-          background: colorScheme.surfaceVariant,
-          text: colorScheme.onSurfaceVariant,
+          background: colorScheme.surfaceContainerHighest,
+          text: colorScheme.onSurface,
           divider: colorScheme.outline,
         );
       case BottomSheetVariant.floating:
@@ -410,7 +408,7 @@ class OsmeaBottomSheet extends CoreContainer {
     if (variant == BottomSheetVariant.floating) {
       return [
         BoxShadow(
-          color: Colors.black.withOpacity(0.1),
+          color: Colors.black.withValues(alpha: 0.1),
           blurRadius: elevation ?? 8,
           offset: const Offset(0, -2),
         ),
@@ -430,7 +428,7 @@ class OsmeaBottomSheet extends CoreContainer {
   TextStyle _getDefaultSubtitleStyle(
       BuildContext context, _BottomSheetColors colors) {
     return Theme.of(context).textTheme.bodyMedium!.copyWith(
-          color: colors.text.withOpacity(0.7),
+          color: colors.text.withValues(alpha: 0.7),
         );
   }
 

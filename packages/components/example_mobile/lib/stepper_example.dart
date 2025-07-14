@@ -33,7 +33,7 @@ class _StepperExampleState extends State<StepperExample> {
             OsmeaComponents.text(
               'Notice: Completed steps show check icons and green color',
               fontSize: 14,
-              color: Colors.grey,
+              color: OsmeaColors.silver,
             ),
             OsmeaComponents.sizedBox(height: 16),
             OsmeaComponents.stepper(
@@ -257,7 +257,7 @@ class _StepperExampleState extends State<StepperExample> {
             OsmeaComponents.text(
               'Shows OSMEA Colors used in stepper states',
               fontSize: 14,
-              color: Colors.grey,
+              color: OsmeaColors.silver,
             ),
             OsmeaComponents.sizedBox(height: 16),
             OsmeaComponents.row(
@@ -280,13 +280,13 @@ class _StepperExampleState extends State<StepperExample> {
     return OsmeaComponents.container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.grey.shade50,
+        color: OsmeaColors.snow,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.grey.shade300),
+        border: Border.all(color: OsmeaColors.silver),
       ),
       child: OsmeaComponents.column(
         children: [
-          Icon(icon, size: 48, color: Colors.blue),
+          Icon(icon, size: 48, color: OsmeaColors.nordicBlue),
           OsmeaComponents.sizedBox(height: 12),
           OsmeaComponents.text(
             description,
@@ -309,7 +309,7 @@ class _StepperExampleState extends State<StepperExample> {
         CircleAvatar(
           backgroundColor: color,
           radius: 24,
-          child: Icon(icon, color: Colors.white, size: 20),
+          child: Icon(icon, color: OsmeaColors.white, size: 20),
         ),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.text(

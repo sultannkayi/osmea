@@ -71,7 +71,7 @@ class _BadgeExampleState extends State<BadgeExample> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
+            color: OsmeaColors.black.withValues(alpha: 0.05),
             blurRadius: 15,
             spreadRadius: 0,
             offset: const Offset(0, 3),
@@ -87,7 +87,7 @@ class _BadgeExampleState extends State<BadgeExample> {
         children: [
           OsmeaComponents.text(
             '🏷️ OSMEA Badge Component',
-            textStyle: TextStyle(
+            textStyle: OsmeaTextStyle.headlineMedium(context).copyWith(
               fontSize: 24,
               fontWeight: FontWeight.bold,
               color: OsmeaColors.nordicBlue,
@@ -98,15 +98,15 @@ class _BadgeExampleState extends State<BadgeExample> {
           OsmeaComponents.sizedBox(height: 14),
           OsmeaComponents.text(
             'Modern, minimalist badges for notifications, labels, and status indicators',
-            textStyle: const TextStyle(
+            textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
               fontSize: 16,
-              color: Colors.black87,
+              color: OsmeaColors.black.withValues(alpha: 0.87),
               height: 1.4,
               letterSpacing: -0.3,
             ),
           ),
           OsmeaComponents.sizedBox(height: 30),
-          Wrap(
+          OsmeaComponents.wrap(
             spacing: 20,
             runSpacing: 30,
             children: [
@@ -156,16 +156,16 @@ class _BadgeExampleState extends State<BadgeExample> {
                 title: 'Positioning',
                 description: 'Place badges anywhere relative to parent elements',
                 badge: OsmeaComponents.badge(
-                  child: OsmeaComponents.container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade200,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Icon(Icons.notifications,
-                        size: 24, color: Colors.black54),
+                                  child: OsmeaComponents.container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: OsmeaColors.ash.withValues(alpha: 0.2),
+                    borderRadius: BorderRadius.circular(8),
                   ),
+                  child: Icon(Icons.notifications,
+                      size: 24, color: OsmeaColors.black.withValues(alpha: 0.54)),
+                ),
                   content: '8',
                   position: BadgePosition.topRight,
                   variant: BadgeVariant.danger,
@@ -183,8 +183,8 @@ class _BadgeExampleState extends State<BadgeExample> {
                       content: '3',
                       variant: BadgeVariant.primary,
                       style: BadgeStyle.normal,
-                      child: const Icon(Icons.mail,
-                          size: 22, color: Color.fromARGB(137, 255, 0, 0)),
+                                          child: Icon(Icons.mail,
+                        size: 22, color: OsmeaColors.sunsetGlow.withValues(alpha: 0.54)),
                     ),
                     OsmeaComponents.sizedBox(width: 12),
                     OsmeaComponents.badge(
@@ -192,8 +192,8 @@ class _BadgeExampleState extends State<BadgeExample> {
                       size: BadgeSize.dot,
                       variant: BadgeVariant.warning,
                       style: BadgeStyle.normal,
-                      child: const Icon(Icons.chat,
-                          size: 22, color: Colors.black54),
+                                          child: Icon(Icons.chat,
+                        size: 22, color: OsmeaColors.black.withValues(alpha: 0.54)),
                     ),
                   ],
                 ),
@@ -210,7 +210,7 @@ class _BadgeExampleState extends State<BadgeExample> {
     required String description,
     required Widget badge,
   }) {
-    return SizedBox(
+    return OsmeaComponents.sizedBox(
       width: MediaQuery.of(context).size.width > 600
           ? 250
           : (MediaQuery.of(context).size.width - 60) / 2,
@@ -225,19 +225,19 @@ class _BadgeExampleState extends State<BadgeExample> {
           OsmeaComponents.sizedBox(height: 12),
           OsmeaComponents.text(
             title,
-            textStyle: const TextStyle(
+            textStyle: OsmeaTextStyle.titleMedium(context).copyWith(
               fontSize: 16,
               fontWeight: FontWeight.w600,
-              color: Colors.black87,
+              color: OsmeaColors.black.withValues(alpha: 0.87),
               letterSpacing: -0.3,
             ),
           ),
           OsmeaComponents.sizedBox(height: 6),
           OsmeaComponents.text(
             description,
-            textStyle: const TextStyle(
+            textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(
               fontSize: 14,
-              color: Colors.black54,
+              color: OsmeaColors.black.withValues(alpha: 0.54),
               height: 1.4,
               letterSpacing: -0.2,
             ),
@@ -279,7 +279,7 @@ class _BadgeExampleState extends State<BadgeExample> {
           OsmeaComponents.sizedBox(width: 12),
           OsmeaComponents.text(
             title,
-            textStyle: TextStyle(
+            textStyle: OsmeaTextStyle.titleMedium(context).copyWith(
               fontSize: 18,
               fontWeight: FontWeight.w600,
               color: OsmeaColors.nordicBlue,
@@ -292,7 +292,7 @@ class _BadgeExampleState extends State<BadgeExample> {
   }
 
   Widget _buildVariantShowcase() {
-    return Wrap(
+    return OsmeaComponents.wrap(
       spacing: 16,
       runSpacing: 24,
       alignment: WrapAlignment.start,
@@ -366,7 +366,7 @@ class _BadgeExampleState extends State<BadgeExample> {
   }
 
   Widget _buildSizeShowcase() {
-    return Wrap(
+    return OsmeaComponents.wrap(
       spacing: 24,
       runSpacing: 24,
       crossAxisAlignment: WrapCrossAlignment.center,
@@ -424,7 +424,7 @@ class _BadgeExampleState extends State<BadgeExample> {
   }
 
   Widget _buildShapeShowcase() {
-    return Wrap(
+    return OsmeaComponents.wrap(
       spacing: 24,
       runSpacing: 24,
       crossAxisAlignment: WrapCrossAlignment.center,
@@ -474,7 +474,7 @@ class _BadgeExampleState extends State<BadgeExample> {
   }
 
   Widget _buildStateShowcase() {
-    return Wrap(
+    return OsmeaComponents.wrap(
       spacing: 24,
       runSpacing: 24,
       crossAxisAlignment: WrapCrossAlignment.center,
@@ -503,7 +503,7 @@ class _BadgeExampleState extends State<BadgeExample> {
               variant: BadgeVariant.primary,
               shape: BadgeShape.rounded,
               style: BadgeStyle.normal, // Use normal style for better contrast
-              textColor: Colors.white, // Ensure text is white for visibility
+              textColor: OsmeaColors.white, // Ensure text is white for visibility
             )),
         _buildBadgeWithLabel(
             'Clickable',
@@ -519,7 +519,7 @@ class _BadgeExampleState extends State<BadgeExample> {
   }
 
   Widget _buildIconShowcase() {
-    return Wrap(
+    return OsmeaComponents.wrap(
       spacing: 24,
       runSpacing: 24,
       crossAxisAlignment: WrapCrossAlignment.center,
@@ -531,11 +531,11 @@ class _BadgeExampleState extends State<BadgeExample> {
                 width: 44,
                 height: 44,
                 decoration: BoxDecoration(
-                  color: Colors.grey[200],
+                  color: OsmeaColors.grey[200],
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: const Icon(Icons.notifications,
-                    size: 24, color: Colors.black54),
+                    size: 24, color: OsmeaColors.black54),
               ),
               content: '8',
               position: BadgePosition.topRight,
@@ -548,8 +548,8 @@ class _BadgeExampleState extends State<BadgeExample> {
             OsmeaComponents.badge(
               child: const CircleAvatar(
                 radius: 22,
-                backgroundColor: Colors.grey,
-                child: Icon(Icons.person, color: Colors.white),
+                backgroundColor: OsmeaColors.grey,
+                child: Icon(Icons.person, color: OsmeaColors.white),
               ),
               content: '3',
               position: BadgePosition.bottomRight,
@@ -564,10 +564,10 @@ class _BadgeExampleState extends State<BadgeExample> {
                 width: 44,
                 height: 44,
                 decoration: BoxDecoration(
-                  color: Colors.grey[200],
+                  color: OsmeaColors.grey[200],
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.mail, size: 24, color: Colors.black54),
+                child: const Icon(Icons.mail, size: 24, color: OsmeaColors.black54),
               ),
               content: null,
               position: BadgePosition.topRight,
@@ -589,7 +589,7 @@ class _BadgeExampleState extends State<BadgeExample> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                child: const Text('Messages'),
+                child: OsmeaComponents.text('Messages'),
               ),
               content: '12',
               position: BadgePosition.topRight,
@@ -610,7 +610,7 @@ class _BadgeExampleState extends State<BadgeExample> {
                 padding: const EdgeInsets.only(left: 4, right: 10),
                 child: OsmeaComponents.padding(
                   padding: const EdgeInsets.only(right: 4),
-                  child: const Icon(Icons.mail, size: 16, color: Colors.blue),
+                  child: const Icon(Icons.mail, size: 16, color: OsmeaColors.blue),
                 ),
               ),
             ],
@@ -645,18 +645,19 @@ class _BadgeExampleState extends State<BadgeExample> {
       width: 70,
       height: 70,
       decoration: BoxDecoration(
-        color: Colors.grey.shade200,
+        color: OsmeaColors.grey.shade200,
         borderRadius: BorderRadius.circular(4),
       ),
-      child: const Center(
-        child: Text(
+      child: OsmeaComponents.center(
+        child: OsmeaComponents.text(
           'Parent',
-          style: TextStyle(fontSize: 14, color: Colors.black54),
+          fontSize: 14,
+          color: OsmeaColors.black54,
         ),
       ),
     );
 
-    return Wrap(
+    return OsmeaComponents.wrap(
       spacing: 24,
       runSpacing: 24,
       children: [
@@ -715,7 +716,7 @@ class _BadgeExampleState extends State<BadgeExample> {
   }
 
   Widget _buildInteractiveShowcase() {
-    return Wrap(
+    return OsmeaComponents.wrap(
       spacing: 16,
       runSpacing: 16,
       children: [
@@ -727,7 +728,7 @@ class _BadgeExampleState extends State<BadgeExample> {
               shape: BadgeShape.pill,
               onTap: () {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Badge tapped!')),
+                  SnackBar(content: OsmeaComponents.text('Badge tapped!')),
                 );
               },
             )),
@@ -750,7 +751,7 @@ class _BadgeExampleState extends State<BadgeExample> {
   }
 
   Widget _buildDotBadgeShowcase() {
-    return Wrap(
+    return OsmeaComponents.wrap(
       spacing: 24,
       runSpacing: 24,
       crossAxisAlignment: WrapCrossAlignment.center,
@@ -802,7 +803,7 @@ class _BadgeExampleState extends State<BadgeExample> {
   }
 
   Widget _buildStyleShowcase() {
-    return Wrap(
+    return OsmeaComponents.wrap(
       spacing: 24,
       runSpacing: 24,
       crossAxisAlignment: WrapCrossAlignment.center,
@@ -866,9 +867,9 @@ class _BadgeExampleState extends State<BadgeExample> {
           OsmeaComponents.sizedBox(height: 8),
           OsmeaComponents.text(
             label,
-            textStyle: const TextStyle(
+            textStyle: OsmeaTextStyle.labelLarge(context).copyWith(
               fontSize: 14,
-              color: Colors.black54,
+              color: OsmeaColors.black54,
               fontWeight: FontWeight.w500,
             ),
             textAlign: TextAlign.center,

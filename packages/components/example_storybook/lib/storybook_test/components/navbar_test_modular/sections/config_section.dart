@@ -42,24 +42,28 @@ class ConfigSection extends StatelessWidget {
 
   String _formatEnumName(String enumString) {
     // Convert camelCase to Title Case
-    return enumString.replaceAllMapped(
-      RegExp(r'([A-Z])'),
-      (match) => ' ${match.group(0)}',
-    ).trim().split(' ').map((word) => 
-      word[0].toUpperCase() + word.substring(1).toLowerCase()
-    ).join(' ');
+    return enumString
+        .replaceAllMapped(
+          RegExp(r'([A-Z])'),
+          (match) => ' ${match.group(0)}',
+        )
+        .trim()
+        .split(' ')
+        .map((word) => word[0].toUpperCase() + word.substring(1).toLowerCase())
+        .join(' ');
   }
 
   Widget _buildConfigChip(String label, String value) {
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: isCompact ? 6 : 8, 
+        horizontal: isCompact ? 6 : 8,
         vertical: isCompact ? 3 : 4,
       ),
       decoration: BoxDecoration(
-        color: OsmeaColors.crystalBay.withOpacity(0.2),
+        color: OsmeaColors.crystalBay.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: OsmeaColors.nordicBlue.withOpacity(0.3)),
+        border:
+            Border.all(color: OsmeaColors.nordicBlue.withValues(alpha: 0.3)),
       ),
       child: Text(
         '$label: $value',
@@ -83,7 +87,7 @@ class ConfigSection extends StatelessWidget {
         border: Border.all(color: OsmeaColors.silver),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -116,8 +120,9 @@ class ConfigSection extends StatelessWidget {
             runSpacing: isCompact ? 6 : 8,
             children: [
               _buildConfigChip('Size', _formatEnumName(_enumToString(size))),
-              _buildConfigChip('Variant', _formatEnumName(_enumToString(variant))),
-              _buildConfigChip('Elevation', '${elevation.toStringAsFixed(1)}'),
+              _buildConfigChip(
+                  'Variant', _formatEnumName(_enumToString(variant))),
+              _buildConfigChip('Elevation', '$elevation.toStringAsFixed(1)'),
               _buildConfigChip('Items', '$itemCount'),
               if (showLabels) _buildConfigChip('Labels', 'Shown'),
               if (showIcons) _buildConfigChip('Icons', 'Shown'),
@@ -126,8 +131,11 @@ class ConfigSection extends StatelessWidget {
               if (showBadges) _buildConfigChip('Badges', 'Shown'),
               if (showDifferentStates) _buildConfigChip('Item States', 'Demo'),
               if (useCustomColors) _buildConfigChip('Custom Colors', 'Active'),
-              if (borderRadius > 0) _buildConfigChip('Border Radius', '${borderRadius.toStringAsFixed(0)}px'),
-              if (animationSpeed != 'Normal') _buildConfigChip('Animation', animationSpeed),
+              if (borderRadius > 0)
+                _buildConfigChip(
+                    'Border Radius', '${borderRadius.toStringAsFixed(0)}px'),
+              if (animationSpeed != 'Normal')
+                _buildConfigChip('Animation', animationSpeed),
             ],
           ),
         ],

@@ -82,7 +82,8 @@ extension BottomSheetSizeExtension on BuildContext {
   }) {
     final screenHeight = MediaQuery.of(this).size.height;
     final maxHeight = screenHeight * maxHeightRatio;
-    return (contentHeight + 100).clamp(200.0, maxHeight); // +100 for padding/handle
+    return (contentHeight + 100)
+        .clamp(200.0, maxHeight); // +100 for padding/handle
   }
 }
 
@@ -173,7 +174,7 @@ extension BottomSheetHandleExtension on BuildContext {
 
   /// Handle decoration
   BoxDecoration get bottomSheetHandleDecoration => BoxDecoration(
-        color: Theme.of(this).dividerColor.withOpacity(0.4),
+        color: Theme.of(this).dividerColor.withValues(alpha: 0.4),
         borderRadius: BorderRadius.circular(2),
       );
 
@@ -188,13 +189,16 @@ extension BottomSheetHandleExtension on BuildContext {
 /// Provides animation utilities for bottom sheet transitions.
 extension BottomSheetAnimationExtension on BuildContext {
   /// Standard slide animation duration
-  Duration get bottomSheetAnimationDuration => const Duration(milliseconds: 300);
+  Duration get bottomSheetAnimationDuration =>
+      const Duration(milliseconds: 300);
 
   /// Fast animation duration
-  Duration get bottomSheetAnimationDurationFast => const Duration(milliseconds: 200);
+  Duration get bottomSheetAnimationDurationFast =>
+      const Duration(milliseconds: 200);
 
   /// Slow animation duration
-  Duration get bottomSheetAnimationDurationSlow => const Duration(milliseconds: 400);
+  Duration get bottomSheetAnimationDurationSlow =>
+      const Duration(milliseconds: 400);
 
   /// Spring animation curve
   Curve get bottomSheetAnimationCurve => Curves.easeOutCubic;
@@ -220,7 +224,8 @@ class BottomSheetSizeConfig {
   });
 
   /// Get complete configuration for small bottom sheet
-  static BottomSheetSizeConfig small(BuildContext context) => BottomSheetSizeConfig(
+  static BottomSheetSizeConfig small(BuildContext context) =>
+      BottomSheetSizeConfig(
         height: context.bottomSheetHeightSmall,
         padding: context.bottomSheetPaddingSmall,
         borderRadius: context.bottomSheetBorderRadiusSmall,
@@ -228,7 +233,8 @@ class BottomSheetSizeConfig {
       );
 
   /// Get complete configuration for medium bottom sheet
-  static BottomSheetSizeConfig medium(BuildContext context) => BottomSheetSizeConfig(
+  static BottomSheetSizeConfig medium(BuildContext context) =>
+      BottomSheetSizeConfig(
         height: context.bottomSheetHeightMedium,
         padding: context.bottomSheetPaddingMedium,
         borderRadius: context.bottomSheetBorderRadius,
@@ -236,7 +242,8 @@ class BottomSheetSizeConfig {
       );
 
   /// Get complete configuration for large bottom sheet
-  static BottomSheetSizeConfig large(BuildContext context) => BottomSheetSizeConfig(
+  static BottomSheetSizeConfig large(BuildContext context) =>
+      BottomSheetSizeConfig(
         height: context.bottomSheetHeightLarge,
         padding: context.bottomSheetPaddingLarge,
         borderRadius: context.bottomSheetBorderRadiusLarge,
@@ -281,4 +288,4 @@ extension BottomSheetSizeConfigExtension on BottomSheetSize {
         return 0.75;
     }
   }
-} 
+}

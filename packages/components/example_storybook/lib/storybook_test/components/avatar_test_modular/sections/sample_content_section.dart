@@ -3,7 +3,7 @@ import 'package:osmea_components/osmea_components.dart';
 import '../utils/avatar_builder.dart';
 
 /// 📝 **Sample Content Section**
-/// 
+///
 /// Demonstrates avatar usage with sample content and real-world scenarios
 
 class SampleContentSection extends StatelessWidget {
@@ -47,15 +47,15 @@ class SampleContentSection extends StatelessWidget {
         // User Profile Example
         _buildUserProfileExample(context),
         SizedBox(height: spacing * 2),
-        
+
         // Team Members Example
         _buildTeamMembersExample(context),
         SizedBox(height: spacing * 2),
-        
+
         // Chat Avatar Example
         _buildChatAvatarExample(context),
         SizedBox(height: spacing * 2),
-        
+
         // Status Avatars Example
         _buildStatusAvatarsExample(context),
       ],
@@ -96,7 +96,7 @@ class SampleContentSection extends StatelessWidget {
                 borderWidth: borderWidth,
                 elevation: elevation,
                 borderRadius: borderRadius,
-                onTap: enableInteraction 
+                onTap: enableInteraction
                     ? () => _showSnackBar(context, 'Profile picture tapped!')
                     : null,
                 heroTag: showHeroAnimation ? 'profile_avatar' : null,
@@ -120,7 +120,8 @@ class SampleContentSection extends StatelessWidget {
                       'Senior Designer',
                       style: TextStyle(
                         fontSize: 14,
-                        color: isDark ? Colors.grey.shade300 : OsmeaColors.pewter,
+                        color:
+                            isDark ? Colors.grey.shade300 : OsmeaColors.pewter,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -144,7 +145,7 @@ class SampleContentSection extends StatelessWidget {
 
   Widget _buildTeamMembersExample(BuildContext context) {
     final teamMembers = AvatarBuilder.getSampleTeamMembers();
-    
+
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -183,7 +184,8 @@ class SampleContentSection extends StatelessWidget {
                     elevation: elevation,
                     borderRadius: borderRadius,
                     onTap: enableInteraction
-                        ? () => _showSnackBar(context, '${member['name']} selected')
+                        ? () =>
+                            _showSnackBar(context, '${member['name']} selected')
                         : null,
                     semanticLabel: '${member['name']} avatar',
                   ),
@@ -228,17 +230,24 @@ class SampleContentSection extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          _buildChatMessage('Alice', 'AB', 'Hey there! How are you doing?', OsmeaColors.forestHeart),
+          _buildChatMessage('Alice', 'AB', 'Hey there! How are you doing?',
+              OsmeaColors.forestHeart),
           const SizedBox(height: 12),
-          _buildChatMessage('Bob', 'BB', 'Great! Working on the new design system.', OsmeaColors.azureWave),
+          _buildChatMessage(
+              'Bob',
+              'BB',
+              'Great! Working on the new design system.',
+              OsmeaColors.azureWave),
           const SizedBox(height: 12),
-          _buildChatMessage('Charlie', 'CD', 'Looks amazing! Can\'t wait to see it.', OsmeaColors.sunsetGlow),
+          _buildChatMessage('Charlie', 'CD',
+              'Looks amazing! Can\'t wait to see it.', OsmeaColors.sunsetGlow),
         ],
       ),
     );
   }
 
-  Widget _buildChatMessage(String name, String initials, String message, Color avatarColor) {
+  Widget _buildChatMessage(
+      String name, String initials, String message, Color avatarColor) {
     return Builder(
       builder: (context) => Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -256,38 +265,41 @@ class SampleContentSection extends StatelessWidget {
                 : null,
             semanticLabel: '$name avatar',
           ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                name,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: isDark ? Colors.white : OsmeaColors.nordicBlue,
-                ),
-              ),
-              const SizedBox(height: 4),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                decoration: BoxDecoration(
-                  color: isDark ? Colors.grey.shade700 : OsmeaColors.ash.withOpacity(0.3),
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Text(
-                  message,
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
                   style: TextStyle(
                     fontSize: 14,
-                    color: isDark ? Colors.grey.shade300 : OsmeaColors.pewter,
+                    fontWeight: FontWeight.w600,
+                    color: isDark ? Colors.white : OsmeaColors.nordicBlue,
                   ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 4),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: isDark
+                        ? Colors.grey.shade700
+                        : OsmeaColors.ash.withValues(alpha: 0.3),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Text(
+                    message,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: isDark ? Colors.grey.shade300 : OsmeaColors.pewter,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
       ),
     );
   }
@@ -319,10 +331,13 @@ class SampleContentSection extends StatelessWidget {
             spacing: spacing,
             runSpacing: spacing,
             children: [
-              _buildStatusAvatar('Online', Icons.person, OsmeaColors.forestHeart),
+              _buildStatusAvatar(
+                  'Online', Icons.person, OsmeaColors.forestHeart),
               _buildStatusAvatar('Busy', Icons.work, OsmeaColors.sunsetGlow),
-              _buildStatusAvatar('Away', Icons.schedule, OsmeaColors.amberFlame),
-              _buildStatusAvatar('Offline', Icons.person_outline, OsmeaColors.pewter),
+              _buildStatusAvatar(
+                  'Away', Icons.schedule, OsmeaColors.amberFlame),
+              _buildStatusAvatar(
+                  'Offline', Icons.person_outline, OsmeaColors.pewter),
             ],
           ),
         ],
@@ -350,34 +365,34 @@ class SampleContentSection extends StatelessWidget {
                     : null,
                 semanticLabel: '$status user avatar',
               ),
-            Positioned(
-              right: 0,
-              bottom: 0,
-              child: Container(
-                width: AvatarBuilder.getAvatarSize(size) * 0.3,
-                height: AvatarBuilder.getAvatarSize(size) * 0.3,
-                decoration: BoxDecoration(
-                  color: statusColor,
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: isDark ? Colors.grey.shade800 : Colors.white,
-                    width: 2,
+              Positioned(
+                right: 0,
+                bottom: 0,
+                child: Container(
+                  width: AvatarBuilder.getAvatarSize(size) * 0.3,
+                  height: AvatarBuilder.getAvatarSize(size) * 0.3,
+                  decoration: BoxDecoration(
+                    color: statusColor,
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: isDark ? Colors.grey.shade800 : Colors.white,
+                      width: 2,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 8),
-        Text(
-          status,
-          style: TextStyle(
-            fontSize: 12,
-            color: isDark ? Colors.grey.shade300 : OsmeaColors.pewter,
+            ],
           ),
-          textAlign: TextAlign.center,
-        ),
-      ],
+          const SizedBox(height: 8),
+          Text(
+            status,
+            style: TextStyle(
+              fontSize: 12,
+              color: isDark ? Colors.grey.shade300 : OsmeaColors.pewter,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
     );
   }

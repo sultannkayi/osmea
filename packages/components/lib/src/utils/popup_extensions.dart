@@ -137,10 +137,12 @@ extension PopupBorderRadiusExtension on BuildContext {
   BorderRadius get popupBorderRadius => BorderRadius.circular(radiusLow * 2);
 
   /// Small popup border radius
-  BorderRadius get popupBorderRadiusSmall => BorderRadius.circular(radiusLow * 1.5);
+  BorderRadius get popupBorderRadiusSmall =>
+      BorderRadius.circular(radiusLow * 1.5);
 
   /// Large popup border radius
-  BorderRadius get popupBorderRadiusLarge => BorderRadius.circular(radiusLow * 2.5);
+  BorderRadius get popupBorderRadiusLarge =>
+      BorderRadius.circular(radiusLow * 2.5);
 
   /// Tooltip popup border radius
   BorderRadius get popupBorderRadiusTooltip => BorderRadius.circular(radiusLow);
@@ -214,7 +216,7 @@ extension PopupPositionExtension on BuildContext {
   /// Get margin based on popup position and size
   EdgeInsets getPopupMargin(PopupPosition position, PopupSize size) {
     double margin = normalValue;
-    
+
     switch (size) {
       case PopupSize.small:
         margin = normalValue;
@@ -281,13 +283,13 @@ extension PopupPositionExtension on BuildContext {
 /// Provides barrier styling for modal popups.
 extension PopupBarrierExtension on BuildContext {
   /// Standard barrier color with opacity
-  Color get popupBarrierColor => Colors.black.withOpacity(0.5);
+  Color get popupBarrierColor => Colors.black.withValues(alpha: 0.5);
 
   /// Light barrier color for tooltips
-  Color get popupBarrierColorLight => Colors.black.withOpacity(0.2);
+  Color get popupBarrierColorLight => Colors.black.withValues(alpha: 0.2);
 
   /// Dark barrier color for important modals
-  Color get popupBarrierColorDark => Colors.black.withOpacity(0.7);
+  Color get popupBarrierColorDark => Colors.black.withValues(alpha: 0.7);
 }
 
 /// 🎨 **Popup Shadow Extensions**
@@ -297,12 +299,12 @@ extension PopupShadowExtension on BuildContext {
   /// Standard popup shadow
   List<BoxShadow> get popupShadow => [
         BoxShadow(
-          color: Colors.black.withOpacity(0.1),
+          color: Colors.black.withValues(alpha: 0.1),
           blurRadius: 20,
           offset: const Offset(0, 10),
         ),
         BoxShadow(
-          color: Colors.black.withOpacity(0.05),
+          color: Colors.black.withValues(alpha: 0.05),
           blurRadius: 10,
           offset: const Offset(0, 5),
         ),
@@ -311,7 +313,7 @@ extension PopupShadowExtension on BuildContext {
   /// Light popup shadow for tooltips
   List<BoxShadow> get popupShadowLight => [
         BoxShadow(
-          color: Colors.black.withOpacity(0.08),
+          color: Colors.black.withValues(alpha: 0.08),
           blurRadius: 12,
           offset: const Offset(0, 4),
         ),
@@ -320,14 +322,14 @@ extension PopupShadowExtension on BuildContext {
   /// Heavy popup shadow for important modals
   List<BoxShadow> get popupShadowHeavy => [
         BoxShadow(
-          color: Colors.black.withOpacity(0.15),
+          color: Colors.black.withValues(alpha: 0.15),
           blurRadius: 30,
           offset: const Offset(0, 15),
         ),
         BoxShadow(
-          color: Colors.black.withOpacity(0.1),
+          color: Colors.black.withValues(alpha: 0.1),
           blurRadius: 15,
           offset: const Offset(0, 8),
         ),
       ];
-} 
+}

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:osmea_components/osmea_components.dart';
 
 /// 📋 **Badge Header Section**
-/// 
+///
 /// Header component for the badge showcase with title, subtitle, and info chips
 
 class BadgeHeaderSection extends StatelessWidget {
@@ -37,7 +37,7 @@ class BadgeHeaderSection extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        
+
         // Subtitle
         Text(
           subtitle,
@@ -47,19 +47,22 @@ class BadgeHeaderSection extends StatelessWidget {
             height: 1.4,
           ),
         ),
-        
+
         if (infoChips.isNotEmpty) ...[
           const SizedBox(height: 16),
-          
+
           // Info Chips
           Wrap(
             spacing: 8,
             runSpacing: 8,
             children: infoChips.entries.map((entry) {
               return Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
-                  color: isDark ? Colors.grey.shade700 : OsmeaColors.silver.withOpacity(0.3),
+                  color: isDark
+                      ? Colors.grey.shade700
+                      : OsmeaColors.silver.withValues(alpha: 0.3),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
                     color: isDark ? Colors.grey.shade600 : OsmeaColors.silver,
@@ -74,7 +77,8 @@ class BadgeHeaderSection extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
-                        color: isDark ? Colors.grey.shade300 : OsmeaColors.pewter,
+                        color:
+                            isDark ? Colors.grey.shade300 : OsmeaColors.pewter,
                       ),
                     ),
                     const SizedBox(width: 4),

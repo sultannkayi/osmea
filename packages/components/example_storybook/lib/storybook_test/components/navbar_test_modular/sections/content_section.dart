@@ -21,14 +21,14 @@ class ContentSection extends StatelessWidget {
       decoration: BoxDecoration(
         color: OsmeaColors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: OsmeaColors.silver.withOpacity(0.5)),
+        border: Border.all(color: OsmeaColors.silver.withValues(alpha: 0.5)),
       ),
       child: Column(
         children: [
           Icon(
             Icons.navigation,
             size: isCompact ? 32 : 48,
-            color: OsmeaColors.nordicBlue.withOpacity(0.7),
+            color: OsmeaColors.nordicBlue.withValues(alpha: 0.7),
           ),
           SizedBox(height: isCompact ? 8 : 16),
           Text(
@@ -41,9 +41,9 @@ class ContentSection extends StatelessWidget {
           ),
           SizedBox(height: isCompact ? 4 : 8),
           Text(
-            showDifferentStates 
-              ? 'Demonstrating different item states'
-              : 'Currently showing: Item ${currentIndex + 1}',
+            showDifferentStates
+                ? 'Demonstrating different item states'
+                : 'Currently showing: Item ${currentIndex + 1}',
             style: TextStyle(
               fontSize: isCompact ? 12 : 16,
               color: OsmeaColors.pewter,

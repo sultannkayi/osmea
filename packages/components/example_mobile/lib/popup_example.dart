@@ -33,8 +33,8 @@ class _PopupExampleState extends State<PopupExample> {
   PopupVariant _selectedVariant = PopupVariant.modal;
   PopupPosition _selectedPosition = PopupPosition.center;
   PopupAnimationType _selectedAnimation = PopupAnimationType.scale;
-  bool _showCloseButton = true;
-  bool _isDismissible = true;
+  final bool _showCloseButton = true;
+  final bool _isDismissible = true;
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +68,7 @@ class _PopupExampleState extends State<PopupExample> {
     return OsmeaComponents.container(
       padding: context.paddingMedium,
       decoration: BoxDecoration(
-        color: OsmeaColors.nordicBlue.withOpacity(0.1),
+        color: OsmeaColors.nordicBlue.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(context.radiusLow * 2),
       ),
       child: OsmeaComponents.column(
@@ -105,7 +105,7 @@ class _PopupExampleState extends State<PopupExample> {
             color: OsmeaColors.slate,
           ),
           OsmeaComponents.sizedBox(height: 20),
-          
+
           // Size Selection
           _buildSectionTitle('📏 Size'),
           OsmeaComponents.sizedBox(height: 8),
@@ -114,8 +114,8 @@ class _PopupExampleState extends State<PopupExample> {
             children: PopupSize.values.map<Widget>((size) {
               return OsmeaComponents.button(
                 text: _getSizeLabel(size),
-                variant: _selectedSize == size 
-                    ? ButtonVariant.primary 
+                variant: _selectedSize == size
+                    ? ButtonVariant.primary
                     : ButtonVariant.outlined,
                 size: ButtonSize.small,
                 onPressed: () => setState(() => _selectedSize = size),
@@ -132,8 +132,8 @@ class _PopupExampleState extends State<PopupExample> {
             children: PopupVariant.values.map<Widget>((variant) {
               return OsmeaComponents.button(
                 text: _getVariantLabel(variant),
-                variant: _selectedVariant == variant 
-                    ? ButtonVariant.primary 
+                variant: _selectedVariant == variant
+                    ? ButtonVariant.primary
                     : ButtonVariant.outlined,
                 size: ButtonSize.small,
                 onPressed: () => setState(() => _selectedVariant = variant),
@@ -150,8 +150,8 @@ class _PopupExampleState extends State<PopupExample> {
             children: PopupPosition.values.map<Widget>((position) {
               return OsmeaComponents.button(
                 text: _getPositionLabel(position),
-                variant: _selectedPosition == position 
-                    ? ButtonVariant.primary 
+                variant: _selectedPosition == position
+                    ? ButtonVariant.primary
                     : ButtonVariant.outlined,
                 size: ButtonSize.small,
                 onPressed: () => setState(() => _selectedPosition = position),
@@ -168,8 +168,8 @@ class _PopupExampleState extends State<PopupExample> {
             children: PopupAnimationType.values.map<Widget>((animation) {
               return OsmeaComponents.button(
                 text: _getAnimationLabel(animation),
-                variant: _selectedAnimation == animation 
-                    ? ButtonVariant.primary 
+                variant: _selectedAnimation == animation
+                    ? ButtonVariant.primary
                     : ButtonVariant.outlined,
                 size: ButtonSize.small,
                 onPressed: () => setState(() => _selectedAnimation = animation),
@@ -485,7 +485,7 @@ class _PopupExampleState extends State<PopupExample> {
       child: OsmeaComponents.text(
         '💡 This is a tooltip that will auto-dismiss in 3 seconds.',
         textAlign: TextAlign.center,
-        color: Colors.white,
+        color: OsmeaColors.white,
       ),
     );
   }
@@ -574,7 +574,8 @@ class _PopupExampleState extends State<PopupExample> {
       context: context,
       size: size,
       title: '${_getSizeLabel(size)} Popup',
-      subtitle: 'This demonstrates the ${_getSizeLabel(size).toLowerCase()} size variant',
+      subtitle:
+          'This demonstrates the ${_getSizeLabel(size).toLowerCase()} size variant',
       child: OsmeaComponents.text(
         'This is a ${_getSizeLabel(size).toLowerCase()} sized popup. '
         'Notice how the width and padding adjust based on the size variant.',
@@ -595,9 +596,9 @@ class _PopupExampleState extends State<PopupExample> {
       SnackBar(
         content: OsmeaComponents.text(
           message ?? 'Action completed successfully!',
-          color: Colors.white,
+          color: OsmeaColors.white,
         ),
-        backgroundColor: Colors.green,
+        backgroundColor: OsmeaColors.green,
         behavior: SnackBarBehavior.floating,
       ),
     );

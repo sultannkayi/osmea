@@ -36,21 +36,21 @@ class _ChipsExampleState extends State<ChipsExample> {
         backgroundColor: OsmeaColors.nordicBlue,
         foregroundColor: OsmeaColors.white,
       ),
-      body: SingleChildScrollView(
+      body: OsmeaComponents.singleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             OsmeaComponents.text(
               '1. Category Filtering (Single Selection)',
-              textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 12),
             _buildFilterChips(),
-            const Divider(height: 32),
+            OsmeaComponents.divider(height: 32),
             OsmeaComponents.text(
               '2. Interests (Multiple Selection)',
-              textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 12),
             _buildMultiSelectChips(),
@@ -58,19 +58,19 @@ class _ChipsExampleState extends State<ChipsExample> {
             OsmeaComponents.text(
               'Selected interests: ${_selectedInterests.isEmpty ? "No selection yet" : _selectedInterests.join(", ")}',
               fontSize: 14,
-              color: Colors.grey[600],
+              color: OsmeaColors.pewter,
             ),
-            const Divider(height: 32),
+            OsmeaComponents.divider(height: 32),
             OsmeaComponents.text(
               '3. Different Styles',
-              textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 12),
             _buildStyleShowcase(),
-            const Divider(height: 32),
+            OsmeaComponents.divider(height: 32),
             OsmeaComponents.text(
               '4. Interactive Examples',
-              textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 12),
             _buildInteractiveExamples(),
@@ -122,7 +122,7 @@ class _ChipsExampleState extends State<ChipsExample> {
       'DevOps',
     ];
 
-    return Wrap(
+    return OsmeaComponents.wrap(
       spacing: 10,
       runSpacing: 12,
       children: interests.map((interest) {
@@ -182,8 +182,8 @@ class _ChipsExampleState extends State<ChipsExample> {
         // Style variations
         OsmeaComponents.text('● Style Variations:',
             fontWeight: FontWeight.w500),
-        const SizedBox(height: 8),
-        Wrap(
+        OsmeaComponents.sizedBox(height: 8),
+        OsmeaComponents.wrap(
           spacing: 8,
           runSpacing: 8,
           children: [
@@ -208,13 +208,13 @@ class _ChipsExampleState extends State<ChipsExample> {
           ],
         ),
 
-        const SizedBox(height: 20),
+        OsmeaComponents.sizedBox(height: 20),
 
         // State variations
         OsmeaComponents.text('● State Variations:',
             fontWeight: FontWeight.w500),
-        const SizedBox(height: 8),
-        Wrap(
+        OsmeaComponents.sizedBox(height: 8),
+        OsmeaComponents.wrap(
           spacing: 8,
           runSpacing: 8,
           children: [
@@ -238,11 +238,11 @@ class _ChipsExampleState extends State<ChipsExample> {
           ],
         ),
 
-        const SizedBox(height: 20),
+        OsmeaComponents.sizedBox(height: 20),
 
         // Size variations
         OsmeaComponents.text('● Size Variations:', fontWeight: FontWeight.w500),
-        const SizedBox(height: 8),
+        OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -252,21 +252,21 @@ class _ChipsExampleState extends State<ChipsExample> {
               size: ChipsSize.extraSmall,
               variant: ChipsVariant.warning,
             ),
-            const SizedBox(height: 8),
+            OsmeaComponents.sizedBox(height: 8),
             OsmeaComponents.chips(
               text: 'Small',
               style: ChipsStyle.normal,
               size: ChipsSize.small,
               variant: ChipsVariant.warning,
             ),
-            const SizedBox(height: 8),
+            OsmeaComponents.sizedBox(height: 8),
             OsmeaComponents.chips(
               text: 'Medium',
               style: ChipsStyle.normal,
               size: ChipsSize.medium,
               variant: ChipsVariant.warning,
             ),
-            const SizedBox(height: 8),
+            OsmeaComponents.sizedBox(height: 8),
             OsmeaComponents.chips(
               text: 'Large',
               style: ChipsStyle.normal,
@@ -276,12 +276,12 @@ class _ChipsExampleState extends State<ChipsExample> {
           ],
         ),
 
-        const SizedBox(height: 20),
+        OsmeaComponents.sizedBox(height: 20),
 
         // Color variations
         OsmeaComponents.text('● Color Variations:',
             fontWeight: FontWeight.w500),
-        const SizedBox(height: 8),
+        OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -290,37 +290,37 @@ class _ChipsExampleState extends State<ChipsExample> {
               style: ChipsStyle.normal,
               variant: ChipsVariant.primary,
             ),
-            const SizedBox(height: 8),
+            OsmeaComponents.sizedBox(height: 8),
             OsmeaComponents.chips(
               text: 'Secondary',
               style: ChipsStyle.normal,
               variant: ChipsVariant.secondary,
             ),
-            const SizedBox(height: 8),
+            OsmeaComponents.sizedBox(height: 8),
             OsmeaComponents.chips(
               text: 'Success',
               style: ChipsStyle.normal,
               variant: ChipsVariant.success,
             ),
-            const SizedBox(height: 8),
+            OsmeaComponents.sizedBox(height: 8),
             OsmeaComponents.chips(
               text: 'Warning',
               style: ChipsStyle.normal,
               variant: ChipsVariant.warning,
             ),
-            const SizedBox(height: 8),
+            OsmeaComponents.sizedBox(height: 8),
             OsmeaComponents.chips(
               text: 'Danger',
               style: ChipsStyle.normal,
               variant: ChipsVariant.danger,
             ),
-            const SizedBox(height: 8),
+            OsmeaComponents.sizedBox(height: 8),
             OsmeaComponents.chips(
               text: 'Info',
               style: ChipsStyle.normal,
               variant: ChipsVariant.info,
             ),
-            const SizedBox(height: 8),
+            OsmeaComponents.sizedBox(height: 8),
             OsmeaComponents.chips(
               text: 'Neutral',
               style: ChipsStyle.normal,
@@ -361,22 +361,19 @@ class _ChipsExampleState extends State<ChipsExample> {
           ),
         ),
 
-        const SizedBox(height: 16),
+        OsmeaComponents.sizedBox(height: 16),
 
         // With avatar
         OsmeaComponents.container(
           alignment: Alignment.centerLeft,
           child: OsmeaComponents.chips(
             text: 'With Avatar',
-            avatar: const CircleAvatar(
-              backgroundColor: Colors.blue,
+            avatar: CircleAvatar(
+              backgroundColor: OsmeaColors.nordicBlue,
               radius: 12,
-              child: Text(
+              child: OsmeaComponents.text(
                 'A',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
-                ),
+                textStyle: OsmeaTextStyle.labelMedium(context).copyWith(color: OsmeaColors.white, fontSize: 12),
               ),
             ),
             variant: ChipsVariant.info,
@@ -391,7 +388,7 @@ class _ChipsExampleState extends State<ChipsExample> {
           ),
         ),
 
-        const SizedBox(height: 16),
+        OsmeaComponents.sizedBox(height: 16),
 
         // With icon
         OsmeaComponents.container(
@@ -412,7 +409,7 @@ class _ChipsExampleState extends State<ChipsExample> {
           ),
         ),
 
-        const SizedBox(height: 16),
+        OsmeaComponents.sizedBox(height: 16),
 
         // Icon-only chip
         OsmeaComponents.container(

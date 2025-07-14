@@ -30,89 +30,54 @@ class WrapExample extends StatelessWidget {
             // Section title
             OsmeaComponents.text(
               '🧩 Basic Wrap Examples',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
             // Basic wrap example
-            _buildExampleSection(
-              'Basic Wrap',
-              'Simple horizontal wrap that flows to the next line when out of space',
-              _buildBasicWrap(),
-            ),
+            _buildExampleSection(context, 'Basic Wrap', 'Simple horizontal wrap that flows to the next line when out of space', _buildBasicWrap(context)),
             OsmeaComponents.sizedBox(height: 24),
 
             // Spacing example
-            _buildExampleSection(
-              'Wrap with Spacing',
-              'Wrap with custom spacing between items and rows',
-              _buildSpacingWrap(),
-            ),
+            _buildExampleSection(context, 'Wrap with Spacing', 'Wrap with custom spacing between items and rows', _buildSpacingWrap(context)),
             OsmeaComponents.sizedBox(height: 24),
 
             // Alignment examples
             OsmeaComponents.text(
               '📏 Alignment Examples',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
             // Horizontal alignment
-            _buildExampleSection(
-              'Horizontal Alignment',
-              'Different WrapAlignment options for horizontal alignment',
-              _buildHorizontalAlignmentWrap(),
-            ),
+            _buildExampleSection(context, 'Horizontal Alignment', 'Different WrapAlignment options for horizontal alignment', _buildHorizontalAlignmentWrap(context)),
             OsmeaComponents.sizedBox(height: 24),
 
             // Run alignment
-            _buildExampleSection(
-              'Run Alignment',
-              'Different WrapAlignment options for vertical (run) alignment',
-              _buildRunAlignmentWrap(),
-            ),
+            _buildExampleSection(context, 'Run Alignment', 'Different WrapAlignment options for vertical (run) alignment', _buildRunAlignmentWrap(context)),
             OsmeaComponents.sizedBox(height: 24),
 
             // Cross-axis alignment
-            _buildExampleSection(
-              'Cross-Axis Alignment',
-              'Different WrapCrossAlignment options for alignment within a row',
-              _buildCrossAxisAlignmentWrap(),
-            ),
+            _buildExampleSection(context, 'Cross-Axis Alignment', 'Different WrapCrossAlignment options for alignment within a row', _buildCrossAxisAlignmentWrap(context)),
             OsmeaComponents.sizedBox(height: 24),
 
             // Advanced examples
             OsmeaComponents.text(
               '🎨 Styled Wrap Examples',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
             // Vertical direction
-            _buildExampleSection(
-              'Vertical Direction',
-              'Wrap with vertical direction instead of horizontal',
-              _buildVerticalWrap(),
-            ),
+            _buildExampleSection(context, 'Vertical Direction', 'Wrap with vertical direction instead of horizontal', _buildVerticalWrap(context)),
             OsmeaComponents.sizedBox(height: 24),
 
             // Practical examples
-            _buildExampleSection(
-              'Tag Cloud',
-              'A practical example using Wrap for a tag/chip cloud',
-              _buildTagCloud(),
-            ),
+            _buildExampleSection(context, 'Tag Cloud', 'A practical example using Wrap for a tag/chip cloud', _buildTagCloud(context)),
             OsmeaComponents.sizedBox(height: 24),
 
             // Photos grid
-            _buildExampleSection(
-              'Photo Grid',
-              'A responsive photo grid using Wrap',
-              _buildPhotoGrid(context),
-            ),
+            _buildExampleSection(context, 'Photo Grid', 'A responsive photo grid using Wrap', _buildPhotoGrid(context)),
             OsmeaComponents.sizedBox(height: 24),
           ],
         ),
@@ -120,19 +85,18 @@ class WrapExample extends StatelessWidget {
     );
   }
 
-  Widget _buildExampleSection(
-      String title, String description, Widget example) {
+  Widget _buildExampleSection(BuildContext context, String title, String description, Widget example) {
     return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         OsmeaComponents.text(
           title,
-          textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.text(
           description,
-          textStyle: const TextStyle(fontSize: 14),
+          textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(fontSize: 14),
           color: OsmeaColors.pewter,
         ),
         OsmeaComponents.sizedBox(height: 16),
@@ -150,7 +114,7 @@ class WrapExample extends StatelessWidget {
   }
 
   // Basic wrap example
-  Widget _buildBasicWrap() {
+  Widget _buildBasicWrap(BuildContext context) {
     return OsmeaComponents.wrap(
       children: [
         for (int i = 1; i <= 10; i++)
@@ -162,10 +126,10 @@ class WrapExample extends StatelessWidget {
               color: OsmeaColors.nordicBlue,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Center(
+            child: OsmeaComponents.center(
               child: OsmeaComponents.text(
                 '$i',
-                textStyle: const TextStyle(
+                textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
                   color: OsmeaColors.white,
                   fontWeight: FontWeight.bold,
                 ),
@@ -177,7 +141,7 @@ class WrapExample extends StatelessWidget {
   }
 
   // Wrap with spacing example
-  Widget _buildSpacingWrap() {
+  Widget _buildSpacingWrap(BuildContext context) {
     return OsmeaComponents.wrap(
       spacing: 16.0, // gap between items
       runSpacing: 16.0, // gap between rows
@@ -190,10 +154,10 @@ class WrapExample extends StatelessWidget {
               color: OsmeaColors.forestHeart,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Center(
+            child: OsmeaComponents.center(
               child: OsmeaComponents.text(
                 '$i',
-                textStyle: const TextStyle(
+                textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
                   color: OsmeaColors.white,
                   fontWeight: FontWeight.bold,
                 ),
@@ -205,46 +169,46 @@ class WrapExample extends StatelessWidget {
   }
 
   // Horizontal alignment example
-  Widget _buildHorizontalAlignmentWrap() {
+  Widget _buildHorizontalAlignmentWrap(BuildContext context) {
     return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         OsmeaComponents.text('WrapAlignment.start:'),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.container(
-          color: OsmeaColors.ash.withOpacity(0.2),
+          color: OsmeaColors.ash.withValues(alpha: 0.2),
           width: double.infinity,
           child: OsmeaComponents.wrap(
             alignment: WrapAlignment.start,
             spacing: 8.0,
             runSpacing: 8.0,
-            children: _buildColorBoxes(5, OsmeaColors.nordicBlue),
+            children: _buildColorBoxes(context, 5, OsmeaColors.nordicBlue),
           ),
         ),
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.text('WrapAlignment.center:'),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.container(
-          color: OsmeaColors.ash.withOpacity(0.2),
+          color: OsmeaColors.ash.withValues(alpha: 0.2),
           width: double.infinity,
           child: OsmeaComponents.wrap(
             alignment: WrapAlignment.center,
             spacing: 8.0,
             runSpacing: 8.0,
-            children: _buildColorBoxes(5, OsmeaColors.sunsetGlow),
+            children: _buildColorBoxes(context, 5, OsmeaColors.sunsetGlow),
           ),
         ),
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.text('WrapAlignment.end:'),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.container(
-          color: OsmeaColors.ash.withOpacity(0.2),
+          color: OsmeaColors.ash.withValues(alpha: 0.2),
           width: double.infinity,
           child: OsmeaComponents.wrap(
             alignment: WrapAlignment.end,
             spacing: 8.0,
             runSpacing: 8.0,
-            children: _buildColorBoxes(5, OsmeaColors.forestHeart),
+            children: _buildColorBoxes(context, 5, OsmeaColors.forestHeart),
           ),
         ),
       ],
@@ -252,35 +216,35 @@ class WrapExample extends StatelessWidget {
   }
 
   // Run alignment example
-  Widget _buildRunAlignmentWrap() {
+  Widget _buildRunAlignmentWrap(BuildContext context) {
     return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         OsmeaComponents.text('runAlignment: WrapAlignment.start:'),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.container(
-          color: OsmeaColors.ash.withOpacity(0.2),
+          color: OsmeaColors.ash.withValues(alpha: 0.2),
           height: 150,
           width: double.infinity,
           child: OsmeaComponents.wrap(
             runAlignment: WrapAlignment.start,
             spacing: 8.0,
             runSpacing: 8.0,
-            children: _buildColorBoxes(6, OsmeaColors.nordicBlue),
+            children: _buildColorBoxes(context, 6, OsmeaColors.nordicBlue),
           ),
         ),
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.text('runAlignment: WrapAlignment.spaceBetween:'),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.container(
-          color: OsmeaColors.ash.withOpacity(0.2),
+          color: OsmeaColors.ash.withValues(alpha: 0.2),
           height: 150,
           width: double.infinity,
           child: OsmeaComponents.wrap(
             runAlignment: WrapAlignment.spaceBetween,
             spacing: 8.0,
             runSpacing: 8.0,
-            children: _buildColorBoxes(6, OsmeaColors.sunsetGlow),
+            children: _buildColorBoxes(context, 6, OsmeaColors.sunsetGlow),
           ),
         ),
       ],
@@ -288,7 +252,7 @@ class WrapExample extends StatelessWidget {
   }
 
   // Cross-axis alignment example
-  Widget _buildCrossAxisAlignmentWrap() {
+  Widget _buildCrossAxisAlignmentWrap(BuildContext context) {
     List<Widget> getBoxesWithVaryingHeights() {
       return [
         for (int i = 0; i < 5; i++)
@@ -300,10 +264,10 @@ class WrapExample extends StatelessWidget {
                   i % 2 == 0 ? OsmeaColors.nordicBlue : OsmeaColors.sunsetGlow,
               borderRadius: BorderRadius.circular(4),
             ),
-            child: Center(
+            child: OsmeaComponents.center(
               child: OsmeaComponents.text(
                 '$i',
-                textStyle: const TextStyle(
+                textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
                   color: OsmeaColors.white,
                   fontWeight: FontWeight.bold,
                 ),
@@ -319,7 +283,7 @@ class WrapExample extends StatelessWidget {
         OsmeaComponents.text('WrapCrossAlignment.start:'),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.container(
-          color: OsmeaColors.ash.withOpacity(0.2),
+          color: OsmeaColors.ash.withValues(alpha: 0.2),
           width: double.infinity,
           child: OsmeaComponents.wrap(
             crossAxisAlignment: WrapCrossAlignment.start,
@@ -332,7 +296,7 @@ class WrapExample extends StatelessWidget {
         OsmeaComponents.text('WrapCrossAlignment.center:'),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.container(
-          color: OsmeaColors.ash.withOpacity(0.2),
+          color: OsmeaColors.ash.withValues(alpha: 0.2),
           width: double.infinity,
           child: OsmeaComponents.wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
@@ -345,7 +309,7 @@ class WrapExample extends StatelessWidget {
         OsmeaComponents.text('WrapCrossAlignment.end:'),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.container(
-          color: OsmeaColors.ash.withOpacity(0.2),
+          color: OsmeaColors.ash.withValues(alpha: 0.2),
           width: double.infinity,
           child: OsmeaComponents.wrap(
             crossAxisAlignment: WrapCrossAlignment.end,
@@ -359,7 +323,7 @@ class WrapExample extends StatelessWidget {
   }
 
   // Vertical wrap example
-  Widget _buildVerticalWrap() {
+  Widget _buildVerticalWrap(BuildContext context) {
     return OsmeaComponents.sizedBox(
       height: 200,
       child: OsmeaComponents.wrap(
@@ -379,10 +343,10 @@ class WrapExample extends StatelessWidget {
                         : OsmeaColors.forestHeart,
                 borderRadius: BorderRadius.circular(4),
               ),
-              child: Center(
+              child: OsmeaComponents.center(
                 child: OsmeaComponents.text(
                   '$i',
-                  textStyle: const TextStyle(
+                  textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
                     color: OsmeaColors.white,
                     fontWeight: FontWeight.bold,
                   ),
@@ -395,7 +359,7 @@ class WrapExample extends StatelessWidget {
   }
 
   // Tag cloud example
-  Widget _buildTagCloud() {
+  Widget _buildTagCloud(BuildContext context) {
     final List<String> tags = [
       'Flutter',
       'UI',
@@ -425,14 +389,14 @@ class WrapExample extends StatelessWidget {
         return OsmeaComponents.container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
-            color: color.withOpacity(0.15),
+            color: color.withValues(alpha: 0.15),
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: color),
           ),
           child: OsmeaComponents.text(
             tag,
             color: color,
-            textStyle: const TextStyle(fontWeight: FontWeight.w500),
+            textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(fontWeight: FontWeight.w500, color: color),
           ),
         );
       }).toList(),
@@ -464,19 +428,19 @@ class WrapExample extends StatelessWidget {
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(8),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: OsmeaColors.shadowLight,
                 blurRadius: 4,
-                offset: const Offset(0, 2),
+                offset: Offset(0, 2),
               ),
             ],
           ),
-          child: Center(
+          child: OsmeaComponents.center(
             child: Icon(
               Icons.image,
               size: 32,
-              color: OsmeaColors.white.withOpacity(0.8),
+              color: OsmeaColors.white.withValues(alpha: 0.8),
             ),
           ),
         );
@@ -485,7 +449,7 @@ class WrapExample extends StatelessWidget {
   }
 
   // Helper to build color boxes
-  List<Widget> _buildColorBoxes(int count, Color color) {
+  List<Widget> _buildColorBoxes(BuildContext context, int count, Color color) {
     return List.generate(
       count,
       (index) => OsmeaComponents.container(
@@ -495,10 +459,10 @@ class WrapExample extends StatelessWidget {
           color: color,
           borderRadius: BorderRadius.circular(4),
         ),
-        child: Center(
+        child: OsmeaComponents.center(
           child: OsmeaComponents.text(
             '${index + 1}',
-            textStyle: const TextStyle(
+            textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
               color: OsmeaColors.white,
               fontWeight: FontWeight.bold,
             ),

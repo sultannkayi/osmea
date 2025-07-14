@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// A reusable container widget for organizing sections in checkbox showcases
-/// 
+///
 /// This widget provides consistent styling and spacing for different sections
 /// of the checkbox showcase, ensuring a uniform look across all examples.
 
@@ -34,30 +34,41 @@ class SectionContainerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     if (isCollapsible) {
       return Container(
         margin: margin ?? const EdgeInsets.only(bottom: 16),
         child: ExpansionTile(
           title: _buildTitle(theme),
-          subtitle: description != null ? Text(
-            description!,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
-            ),
-          ) : null,
-          leading: icon != null ? Icon(icon, color: theme.colorScheme.primary) : null,
+          subtitle: description != null
+              ? Text(
+                  description!,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+                )
+              : null,
+          leading: icon != null
+              ? Icon(icon, color: theme.colorScheme.primary)
+              : null,
           initiallyExpanded: initiallyExpanded,
           backgroundColor: backgroundColor ?? theme.colorScheme.surface,
-          collapsedBackgroundColor: backgroundColor ?? theme.colorScheme.surface,
-          shape: showBorder ? RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-            side: BorderSide(color: theme.colorScheme.outline.withOpacity(0.2)),
-          ) : null,
-          collapsedShape: showBorder ? RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-            side: BorderSide(color: theme.colorScheme.outline.withOpacity(0.2)),
-          ) : null,
+          collapsedBackgroundColor:
+              backgroundColor ?? theme.colorScheme.surface,
+          shape: showBorder
+              ? RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  side: BorderSide(
+                      color: theme.colorScheme.outline.withValues(alpha: 0.2)),
+                )
+              : null,
+          collapsedShape: showBorder
+              ? RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  side: BorderSide(
+                      color: theme.colorScheme.outline.withValues(alpha: 0.2)),
+                )
+              : null,
           children: [
             Padding(
               padding: padding ?? const EdgeInsets.all(16),
@@ -73,9 +84,11 @@ class SectionContainerWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: backgroundColor ?? theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
-        border: showBorder ? Border.all(
-          color: theme.colorScheme.outline.withOpacity(0.2),
-        ) : null,
+        border: showBorder
+            ? Border.all(
+                color: theme.colorScheme.outline.withValues(alpha: 0.2),
+              )
+            : null,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,7 +106,7 @@ class SectionContainerWidget extends StatelessWidget {
               ],
             ),
           ),
-          
+
           // Description
           if (description != null)
             Padding(
@@ -105,7 +118,7 @@ class SectionContainerWidget extends StatelessWidget {
                 ),
               ),
             ),
-          
+
           // Content
           Padding(
             padding: padding ?? const EdgeInsets.all(16),
@@ -137,14 +150,14 @@ class CheckboxSectionContainer extends SectionContainerWidget {
     bool isCollapsible = false,
     bool initiallyExpanded = true,
   }) : super(
-    key: key,
-    title: title,
-    child: child,
-    description: description,
-    icon: Icons.check_box_outlined,
-    isCollapsible: isCollapsible,
-    initiallyExpanded: initiallyExpanded,
-  );
+          key: key,
+          title: title,
+          child: child,
+          description: description,
+          icon: Icons.check_box_outlined,
+          isCollapsible: isCollapsible,
+          initiallyExpanded: initiallyExpanded,
+        );
 }
 
 /// A specialized section container for information and guidelines
@@ -157,14 +170,14 @@ class InfoSectionContainer extends SectionContainerWidget {
     bool isCollapsible = true,
     bool initiallyExpanded = false,
   }) : super(
-    key: key,
-    title: title,
-    child: child,
-    description: description,
-    icon: Icons.info_outline,
-    isCollapsible: isCollapsible,
-    initiallyExpanded: initiallyExpanded,
-  );
+          key: key,
+          title: title,
+          child: child,
+          description: description,
+          icon: Icons.info_outline,
+          isCollapsible: isCollapsible,
+          initiallyExpanded: initiallyExpanded,
+        );
 }
 
 /// A specialized section container for usage examples
@@ -177,12 +190,12 @@ class ExampleSectionContainer extends SectionContainerWidget {
     bool isCollapsible = false,
     bool initiallyExpanded = true,
   }) : super(
-    key: key,
-    title: title,
-    child: child,
-    description: description,
-    icon: Icons.play_circle_outline,
-    isCollapsible: isCollapsible,
-    initiallyExpanded: initiallyExpanded,
-  );
+          key: key,
+          title: title,
+          child: child,
+          description: description,
+          icon: Icons.play_circle_outline,
+          isCollapsible: isCollapsible,
+          initiallyExpanded: initiallyExpanded,
+        );
 }

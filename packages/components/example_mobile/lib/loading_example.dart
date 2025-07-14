@@ -109,36 +109,37 @@ class LoadingExample extends StatelessWidget {
       },
     ];
     final List<Color> colors = [
-      Colors.blue,
-      Colors.red,
-      Colors.green,
-      Colors.orange,
-      Colors.purple,
-      Colors.teal,
-      Colors.pink,
-      Colors.amber,
-      Colors.indigo,
-      Colors.cyan,
-      Colors.deepOrange,
-      Colors.deepPurple,
-      Colors.lightBlue,
-      Colors.lime,
-      Colors.brown,
-      Colors.grey,
-      Colors.blueGrey,
-      Colors.yellow,
-      Colors.lightGreen,
-      Colors.indigoAccent,
-      Colors.redAccent,
-      Colors.greenAccent,
-      Colors.orangeAccent,
-      Colors.purpleAccent,
-      Colors.tealAccent,
-      Colors.pinkAccent,
-      Colors.black,
-      Colors.white,
-      Colors.brown.shade300,
-      Colors.blue.shade900,
+      OsmeaColors.blue, // blue
+      OsmeaColors.sunsetGlow, // red
+      OsmeaColors.meadow, // green
+      OsmeaColors.sunsetGlow, // orange
+      OsmeaColors.nordicBlue, // purple
+      OsmeaColors.nordicBlue, // teal
+      OsmeaColors.sunsetGlow, // pink
+      OsmeaColors.sunsetGlow, // amber
+      OsmeaColors.nordicBlue, // indigo
+      OsmeaColors.nordicBlue, // cyan
+      OsmeaColors.sunsetGlow, // deepOrange
+      OsmeaColors.nordicBlue, // deepPurple
+      OsmeaColors.nordicBlue, // lightBlue
+      OsmeaColors.meadow, // lime
+      OsmeaColors.silver, // brown
+      OsmeaColors.nordicBlue, // nordicBlue
+      OsmeaColors.grey, // grey
+      OsmeaColors.slate, // blueGrey
+      OsmeaColors.sunsetGlow, // yellow
+      OsmeaColors.meadow, // lightGreen
+      OsmeaColors.nordicBlue, // indigoAccent
+      OsmeaColors.sunsetGlow, // redAccent
+      OsmeaColors.meadow, // greenAccent
+      OsmeaColors.sunsetGlow, // orangeAccent
+      OsmeaColors.nordicBlue, // purpleAccent
+      OsmeaColors.slate, // tealAccent
+      OsmeaColors.sunsetGlow, // pinkAccent
+      OsmeaColors.black, // black
+      OsmeaColors.white, // white
+      OsmeaColors.silver, // brown.shade300
+      OsmeaColors.nordicBlue, // blue.shade900
     ];
 
     return OsmeaComponents.scaffold(
@@ -161,7 +162,7 @@ class LoadingExample extends StatelessWidget {
               OsmeaComponents.text(
                 'Below you can see all loading animations in the OSMEA library, presented in different sizes and colors. Each animation is shown with a short description and multiple sizes for a modern, clear showcase.',
                 fontSize: 16,
-                color: Colors.grey[700],
+                color: OsmeaColors.grey[700],
               ),
               OsmeaComponents.sizedBox(height: 24),
               for (int i = 0; i < loadingTypes.length; i++)
@@ -191,7 +192,7 @@ class LoadingExample extends StatelessWidget {
                         OsmeaComponents.text(
                           loadingTypes[i]['desc'],
                           fontSize: 15,
-                          color: Colors.grey[700],
+                          color: OsmeaColors.grey[700],
                         ),
                         OsmeaComponents.sizedBox(height: 16),
                         OsmeaComponents.column(
@@ -201,27 +202,29 @@ class LoadingExample extends StatelessWidget {
                               children: [
                                 for (final size in [24.0, 36.0])
                                   OsmeaComponents.padding(
-                                    padding:
-                                        const EdgeInsets.symmetric(horizontal: 8),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8),
                                     child: ClipRect(
-                                      child: Container(
+                                      child: OsmeaComponents.container(
                                         width: size + 32,
-                                        padding:
-                                            const EdgeInsets.symmetric(vertical: 10),
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10),
                                         decoration: BoxDecoration(
                                           color: colors[i % colors.length]
-                                              .withOpacity(0.08),
-                                          borderRadius: BorderRadius.circular(12),
+                                              .withValues(alpha: 0.08),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
                                         ),
                                         child: OsmeaComponents.column(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
-                                            FittedBox(
+                                            OsmeaComponents.fittedBox(
                                               fit: BoxFit.scaleDown,
                                               child: OsmeaComponents.loading(
                                                 type: loadingTypes[i]['type'],
                                                 size: size,
-                                                color: colors[i % colors.length],
+                                                color:
+                                                    colors[i % colors.length],
                                               ),
                                             ),
                                             OsmeaComponents.sizedBox(height: 8),
@@ -243,27 +246,29 @@ class LoadingExample extends StatelessWidget {
                               children: [
                                 for (final size in [48.0, 64.0])
                                   OsmeaComponents.padding(
-                                    padding:
-                                        const EdgeInsets.symmetric(horizontal: 8),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8),
                                     child: ClipRect(
-                                      child: Container(
+                                      child: OsmeaComponents.container(
                                         width: size + 32,
-                                        padding:
-                                            const EdgeInsets.symmetric(vertical: 10),
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10),
                                         decoration: BoxDecoration(
                                           color: colors[i % colors.length]
-                                              .withOpacity(0.08),
-                                          borderRadius: BorderRadius.circular(12),
+                                              .withValues(alpha: 0.08),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
                                         ),
                                         child: OsmeaComponents.column(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
-                                            FittedBox(
+                                            OsmeaComponents.fittedBox(
                                               fit: BoxFit.scaleDown,
                                               child: OsmeaComponents.loading(
                                                 type: loadingTypes[i]['type'],
                                                 size: size,
-                                                color: colors[i % colors.length],
+                                                color:
+                                                    colors[i % colors.length],
                                               ),
                                             ),
                                             OsmeaComponents.sizedBox(height: 8),

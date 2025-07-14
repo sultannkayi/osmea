@@ -81,7 +81,7 @@ class _NavbarShowcaseWidgetState extends State<NavbarShowcaseWidget> {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            OsmeaColors.crystalBay.withOpacity(0.1),
+            OsmeaColors.crystalBay.withValues(alpha: 0.1),
             OsmeaColors.snow,
           ],
         ),
@@ -89,7 +89,7 @@ class _NavbarShowcaseWidgetState extends State<NavbarShowcaseWidget> {
       child: LayoutBuilder(
         builder: (context, constraints) {
           final isLandscape = constraints.maxWidth > constraints.maxHeight;
-          
+
           if (isLandscape) {
             // Landscape layout - use Row to utilize horizontal space
             return SingleChildScrollView(
@@ -195,9 +195,9 @@ class _NavbarShowcaseWidgetState extends State<NavbarShowcaseWidget> {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: OsmeaColors.white.withOpacity(0.8),
+        color: OsmeaColors.white.withValues(alpha: 0.8),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: OsmeaColors.silver.withOpacity(0.3)),
+        border: Border.all(color: OsmeaColors.silver.withValues(alpha: 0.3)),
       ),
       child: Row(
         children: [
@@ -205,7 +205,7 @@ class _NavbarShowcaseWidgetState extends State<NavbarShowcaseWidget> {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: OsmeaColors.nordicBlue.withOpacity(0.1),
+              color: OsmeaColors.nordicBlue.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(
@@ -253,9 +253,9 @@ class _NavbarShowcaseWidgetState extends State<NavbarShowcaseWidget> {
       currentIndex: _currentIndex,
       onItemTap: (index) => setState(() => _currentIndex = index),
     );
-    
+
     Widget content = _buildBackgroundContent();
-    
+
     // Create the navbar widget (always positioned at bottom for consistency)
     Widget navbar = Container(
       // Add a little extra padding to prevent overflow in navbar items
@@ -273,18 +273,21 @@ class _NavbarShowcaseWidgetState extends State<NavbarShowcaseWidget> {
         currentIndex: _currentIndex,
         onItemTap: (index) => setState(() => _currentIndex = index),
         backgroundColor: StylingHelperWidget.getCustomBackgroundColor(
-          widget.useCustomColors, 
+          widget.useCustomColors,
           widget.customBackgroundColor,
         ),
         activeColor: StylingHelperWidget.getCustomActiveColor(
-          widget.useCustomColors, 
+          widget.useCustomColors,
           widget.customActiveColor,
         ),
-        borderRadius: widget.borderRadius > 0 ? BorderRadius.circular(widget.borderRadius) : null,
-        animationDuration: StylingHelperWidget.getAnimationDuration(widget.animationSpeed),
+        borderRadius: widget.borderRadius > 0
+            ? BorderRadius.circular(widget.borderRadius)
+            : null,
+        animationDuration:
+            StylingHelperWidget.getAnimationDuration(widget.animationSpeed),
       ),
     );
-    
+
     // Always use bottom navigation for consistency
     return Scaffold(
       body: content,

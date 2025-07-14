@@ -119,7 +119,7 @@ List<Story> getUnifiedAvatarShowcase() {
             Option(label: 'Forest Heart', value: OsmeaColors.forestHeart),
             Option(label: 'Sunset Glow', value: OsmeaColors.sunsetGlow),
             Option(label: 'Azure Wave', value: OsmeaColors.azureWave),
-            Option(label: 'White', value: OsmeaColors.white),
+            const Option(label: 'White', value: OsmeaColors.white),
             Option(label: 'Silver', value: OsmeaColors.silver),
           ],
         ),

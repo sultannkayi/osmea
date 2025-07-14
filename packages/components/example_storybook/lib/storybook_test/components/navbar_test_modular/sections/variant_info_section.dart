@@ -18,12 +18,15 @@ class VariantInfoSection extends StatelessWidget {
 
   String _formatEnumName(String enumString) {
     // Convert camelCase to Title Case
-    return enumString.replaceAllMapped(
-      RegExp(r'([A-Z])'),
-      (match) => ' ${match.group(0)}',
-    ).trim().split(' ').map((word) => 
-      word[0].toUpperCase() + word.substring(1).toLowerCase()
-    ).join(' ');
+    return enumString
+        .replaceAllMapped(
+          RegExp(r'([A-Z])'),
+          (match) => ' ${match.group(0)}',
+        )
+        .trim()
+        .split(' ')
+        .map((word) => word[0].toUpperCase() + word.substring(1).toLowerCase())
+        .join(' ');
   }
 
   String _getVariantDescription(NavbarVariant variant) {
@@ -47,7 +50,7 @@ class VariantInfoSection extends StatelessWidget {
       margin: isCompact ? EdgeInsets.zero : const EdgeInsets.all(16),
       padding: EdgeInsets.all(isCompact ? 12 : 16),
       decoration: BoxDecoration(
-        color: OsmeaColors.crystalBay.withOpacity(0.1),
+        color: OsmeaColors.crystalBay.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(

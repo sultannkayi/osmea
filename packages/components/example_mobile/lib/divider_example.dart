@@ -23,14 +23,14 @@ class DividerExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
       appBar: OsmeaComponents.appBar(
-        title: const Text('Divider Variants Showcase'),
-        backgroundColor: Colors.deepPurple.shade50,
+        title: OsmeaComponents.text('Divider Variants Showcase'),
+        backgroundColor: const Color.fromARGB(255, 195, 160, 244),
         elevation: 0,
       ),
       body: ListView.separated(
         padding: const EdgeInsets.all(16),
         itemCount: _variants.length,
-        separatorBuilder: (_, __) => const SizedBox(height: 24),
+        separatorBuilder: (_, __) => OsmeaComponents.sizedBox(height: 24),
         itemBuilder: (context, index) {
           final variant = _variants[index];
           final variantLabel = _getVariantLabel(variant);
@@ -43,50 +43,50 @@ class DividerExample extends StatelessWidget {
               child: OsmeaComponents.column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(
+                  OsmeaComponents.text(
                     variantLabel,
-                    style: const TextStyle(
+                    textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),
                   ),
-                  const SizedBox(height: 12),
-                  const Text('Horizontal'),
-                  const SizedBox(height: 8),
+                  OsmeaComponents.sizedBox(height: 12),
+                  OsmeaComponents.text('Horizontal'),
+                  OsmeaComponents.sizedBox(height: 8),
                   OsmeaComponents.row(
                     children: [
-                      Expanded(
+                      OsmeaComponents.expanded(
                         child: OsmeaComponents.container(
                           height: 64,
                           decoration: BoxDecoration(
-                            color: Colors.grey.withAlpha(30),
+                            color: OsmeaColors.grey.withAlpha(30),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           alignment: Alignment.center,
                           child: OsmeaComponents.divider(
                             variant: variant,
                             direction: Axis.horizontal,
-                            color: Colors.deepPurple,
+                            color: OsmeaColors.purple,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
-                  const Text('Vertical'),
-                  const SizedBox(height: 8),
+                  OsmeaComponents.sizedBox(height: 16),
+                  OsmeaComponents.text('Vertical'),
+                  OsmeaComponents.sizedBox(height: 8),
                   OsmeaComponents.container(
                     width: 60,
                     height: 120,
                     decoration: BoxDecoration(
-                      color: Colors.grey.withAlpha(30),
+                      color: OsmeaColors.grey.withAlpha(30),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     alignment: Alignment.center,
                     child: OsmeaComponents.divider(
                       variant: variant,
                       direction: Axis.vertical,
-                      color: Colors.deepPurple,
+                      color: OsmeaColors.purple,
                     ),
                   ),
                 ],

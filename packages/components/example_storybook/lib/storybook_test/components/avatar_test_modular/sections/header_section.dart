@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:osmea_components/osmea_components.dart';
 
 /// 📋 **Avatar Header Section**
-/// 
+///
 /// Header component for the avatar showcase with title, subtitle, and info chips
 
 class AvatarHeaderSection extends StatelessWidget {
@@ -37,7 +37,7 @@ class AvatarHeaderSection extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        
+
         // Subtitle
         Text(
           subtitle,
@@ -47,26 +47,27 @@ class AvatarHeaderSection extends StatelessWidget {
             height: 1.4,
           ),
         ),
-        
+
         if (infoChips.isNotEmpty) ...[
           const SizedBox(height: 16),
-          
+
           // Info Chips
           Wrap(
             spacing: 8,
             runSpacing: 8,
             children: infoChips.entries.map((entry) {
               return Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
-                  color: isDark 
-                      ? Colors.grey.shade700 
-                      : OsmeaColors.nordicBlue.withOpacity(0.1),
+                  color: isDark
+                      ? Colors.grey.shade700
+                      : OsmeaColors.nordicBlue.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
-                    color: isDark 
-                        ? Colors.grey.shade600 
-                        : OsmeaColors.nordicBlue.withOpacity(0.2),
+                    color: isDark
+                        ? Colors.grey.shade600
+                        : OsmeaColors.nordicBlue.withValues(alpha: 0.2),
                     width: 1,
                   ),
                 ),
@@ -85,7 +86,8 @@ class AvatarHeaderSection extends StatelessWidget {
                       entry.value,
                       style: TextStyle(
                         fontSize: 12,
-                        color: isDark ? Colors.grey.shade300 : OsmeaColors.pewter,
+                        color:
+                            isDark ? Colors.grey.shade300 : OsmeaColors.pewter,
                       ),
                     ),
                   ],

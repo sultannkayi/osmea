@@ -3,7 +3,7 @@ import '../widgets/info_chip_widget.dart';
 import '../data/checkbox_descriptions.dart';
 
 /// Header section for checkbox showcases that displays component information
-/// 
+///
 /// This section provides an overview of the checkbox component, current configuration,
 /// and quick access to variant and style information.
 
@@ -28,21 +28,23 @@ class HeaderSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: darkBackground 
-            ? [Colors.grey.shade700, Colors.grey.shade800]
-            : [theme.colorScheme.primaryContainer.withOpacity(0.3), 
-               theme.colorScheme.surface],
+          colors: darkBackground
+              ? [Colors.grey.shade700, Colors.grey.shade800]
+              : [
+                  theme.colorScheme.primaryContainer.withValues(alpha: 0.3),
+                  theme.colorScheme.surface
+                ],
         ),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: theme.colorScheme.outline.withOpacity(0.2),
+          color: theme.colorScheme.outline.withValues(alpha: 0.2),
         ),
       ),
       child: Column(
@@ -54,7 +56,7 @@ class HeaderSection extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: theme.colorScheme.primary.withOpacity(0.1),
+                  color: theme.colorScheme.primary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(
@@ -72,18 +74,18 @@ class HeaderSection extends StatelessWidget {
                       'OSMEA Checkbox Components',
                       style: theme.textTheme.headlineSmall?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: darkBackground 
-                          ? Colors.white 
-                          : theme.colorScheme.onSurface,
+                        color: darkBackground
+                            ? Colors.white
+                            : theme.colorScheme.onSurface,
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       'Interactive checkbox controls with multiple variants',
                       style: theme.textTheme.bodyMedium?.copyWith(
-                        color: darkBackground 
-                          ? Colors.white70 
-                          : theme.colorScheme.onSurfaceVariant,
+                        color: darkBackground
+                            ? Colors.white70
+                            : theme.colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -91,21 +93,20 @@ class HeaderSection extends StatelessWidget {
               ),
             ],
           ),
-          
+
           const SizedBox(height: 20),
-          
+
           // Current configuration chips
           Text(
             'Current Configuration:',
             style: theme.textTheme.titleSmall?.copyWith(
               fontWeight: FontWeight.w600,
-              color: darkBackground 
-                ? Colors.white 
-                : theme.colorScheme.onSurface,
+              color:
+                  darkBackground ? Colors.white : theme.colorScheme.onSurface,
             ),
           ),
           const SizedBox(height: 12),
-          
+
           Wrap(
             spacing: 8,
             runSpacing: 8,
@@ -144,22 +145,24 @@ class HeaderSection extends StatelessWidget {
                 ),
             ],
           ),
-          
+
           const SizedBox(height: 16),
-          
+
           // Description
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: (darkBackground ? Colors.black26 : theme.colorScheme.surfaceVariant.withOpacity(0.3)),
+              color: (darkBackground
+                  ? Colors.black26
+                  : theme.colorScheme.surface.withValues(alpha: 0.3)),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(
               CheckboxDescriptions.mainDescription,
               style: theme.textTheme.bodySmall?.copyWith(
-                color: darkBackground 
-                  ? Colors.white70 
-                  : theme.colorScheme.onSurfaceVariant,
+                color: darkBackground
+                    ? Colors.white70
+                    : theme.colorScheme.onSurfaceVariant,
                 height: 1.4,
               ),
             ),

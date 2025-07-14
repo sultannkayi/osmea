@@ -19,7 +19,7 @@ class RowExampleScreen extends StatelessWidget {
           fontSize: 20,
         ),
       ),
-      body: SingleChildScrollView(
+      body: OsmeaComponents.singleChildScrollView(
         padding: context.paddingNormal,
         child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,7 +28,7 @@ class RowExampleScreen extends StatelessWidget {
             OsmeaComponents.text(
               '🔄 Basic Rows',
               textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
@@ -48,7 +48,7 @@ class RowExampleScreen extends StatelessWidget {
             OsmeaComponents.text(
               '📏 Spacing & Distribution (Using Composition)',
               textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
@@ -68,7 +68,7 @@ class RowExampleScreen extends StatelessWidget {
             OsmeaComponents.text(
               '🔀 Wrapping Rows (Using Composition)',
               textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
@@ -82,7 +82,7 @@ class RowExampleScreen extends StatelessWidget {
             OsmeaComponents.text(
               '🎨 Row Styling (Using Composition)',
               textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
@@ -96,7 +96,7 @@ class RowExampleScreen extends StatelessWidget {
             OsmeaComponents.text(
               '👆 Interactive Rows (Using Composition)',
               textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
@@ -110,14 +110,14 @@ class RowExampleScreen extends StatelessWidget {
             OsmeaComponents.text(
               '🚀 Advanced Examples (Using Composition)',
               textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
             // Complex row combinations
             OsmeaComponents.text('Complex row combinations:'),
             OsmeaComponents.sizedBox(height: 8),
-            complexRowExamples(),
+            complexRowExamples(context),
           ],
         ),
       ),
@@ -131,17 +131,17 @@ class RowExampleScreen extends StatelessWidget {
         OsmeaComponents.container(
           width: 50,
           height: 50,
-          color: Colors.red,
+          color: OsmeaColors.red,
         ),
         OsmeaComponents.container(
           width: 50,
           height: 50,
-          color: Colors.green,
+          color: OsmeaColors.forestHeart,
         ),
         OsmeaComponents.container(
           width: 50,
           height: 50,
-          color: Colors.blue,
+          color: OsmeaColors.nordicBlue,
         ),
       ],
     );
@@ -152,40 +152,40 @@ class RowExampleScreen extends StatelessWidget {
     return OsmeaComponents.column(
       children: [
         OsmeaComponents.container(
-          color: Colors.grey.shade200,
+          color: OsmeaColors.ash,
           padding: const EdgeInsets.all(8),
           margin: const EdgeInsets.only(bottom: 8),
           child: OsmeaComponents.row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              _buildColorBox(Colors.red),
-              _buildColorBox(Colors.green),
-              _buildColorBox(Colors.blue),
+              _buildColorBox(OsmeaColors.red),
+              _buildColorBox(OsmeaColors.forestHeart),
+              _buildColorBox(OsmeaColors.nordicBlue),
             ],
           ),
         ),
         OsmeaComponents.container(
-          color: Colors.grey.shade200,
+          color: OsmeaColors.ash,
           padding: const EdgeInsets.all(8),
           margin: const EdgeInsets.only(bottom: 8),
           child: OsmeaComponents.row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildColorBox(Colors.red),
-              _buildColorBox(Colors.green),
-              _buildColorBox(Colors.blue),
+              _buildColorBox(OsmeaColors.sunsetGlow),
+              _buildColorBox(OsmeaColors.forestHeart),
+              _buildColorBox(OsmeaColors.nordicBlue),
             ],
           ),
         ),
         OsmeaComponents.container(
-          color: Colors.grey.shade200,
+          color: OsmeaColors.ash,
           padding: const EdgeInsets.all(8),
           child: OsmeaComponents.row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              _buildColorBox(Colors.red),
-              _buildColorBox(Colors.green),
-              _buildColorBox(Colors.blue),
+              _buildColorBox(OsmeaColors.sunsetGlow),
+              _buildColorBox(OsmeaColors.forestHeart),
+              _buildColorBox(OsmeaColors.nordicBlue),
             ],
           ),
         ),
@@ -196,17 +196,17 @@ class RowExampleScreen extends StatelessWidget {
   // Row with spacing example using SizedBox
   Widget spacingRowExample() {
     return OsmeaComponents.container(
-      color: Colors.grey.shade200,
+      color: OsmeaColors.ash,
       padding: const EdgeInsets.all(16),
       child: OsmeaComponents.row(
         children: [
-          _buildColorBox(Colors.red),
+          _buildColorBox(OsmeaColors.sunsetGlow),
           OsmeaComponents.sizedBox(width: 16),
-          _buildColorBox(Colors.green),
+          _buildColorBox(OsmeaColors.forestHeart),
           OsmeaComponents.sizedBox(width: 16),
-          _buildColorBox(Colors.blue),
+          _buildColorBox(OsmeaColors.nordicBlue),
           OsmeaComponents.sizedBox(width: 16),
-          _buildColorBox(Colors.purple),
+          _buildColorBox(OsmeaColors.purple),
         ],
       ),
     );
@@ -217,43 +217,43 @@ class RowExampleScreen extends StatelessWidget {
     return OsmeaComponents.column(
       children: [
         OsmeaComponents.container(
-          color: Colors.grey.shade200,
+          color: OsmeaColors.ash,
           padding: const EdgeInsets.all(8),
           margin: const EdgeInsets.only(bottom: 8),
           width: double.infinity,
           child: OsmeaComponents.row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildColorBox(Colors.red),
-              _buildColorBox(Colors.green),
-              _buildColorBox(Colors.blue),
+              _buildColorBox(OsmeaColors.sunsetGlow),
+              _buildColorBox(OsmeaColors.forestHeart),
+              _buildColorBox(OsmeaColors.nordicBlue),
             ],
           ),
         ),
         OsmeaComponents.container(
-          color: Colors.grey.shade200,
+          color: OsmeaColors.ash,
           padding: const EdgeInsets.all(8),
           margin: const EdgeInsets.only(bottom: 8),
           width: double.infinity,
           child: OsmeaComponents.row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _buildColorBox(Colors.red),
-              _buildColorBox(Colors.green),
-              _buildColorBox(Colors.blue),
+              _buildColorBox(OsmeaColors.sunsetGlow),
+              _buildColorBox(OsmeaColors.forestHeart),
+              _buildColorBox(OsmeaColors.nordicBlue),
             ],
           ),
         ),
         OsmeaComponents.container(
-          color: Colors.grey.shade200,
+          color: OsmeaColors.ash,
           padding: const EdgeInsets.all(8),
           width: double.infinity,
           child: OsmeaComponents.row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              _buildColorBox(Colors.red),
-              _buildColorBox(Colors.green),
-              _buildColorBox(Colors.blue),
+              _buildColorBox(OsmeaColors.sunsetGlow),
+              _buildColorBox(OsmeaColors.forestHeart),
+              _buildColorBox(OsmeaColors.nordicBlue),
             ],
           ),
         ),
@@ -264,20 +264,20 @@ class RowExampleScreen extends StatelessWidget {
   // Wrapping row example using Wrap
   Widget wrappingRowExample() {
     return OsmeaComponents.container(
-      color: Colors.grey.shade200,
+      color: OsmeaColors.ash,
       padding: const EdgeInsets.all(16),
-      child: Wrap(
+      child: OsmeaComponents.wrap(
         spacing: 16,
         runSpacing: 16,
         children: [
-          _buildColorBox(Colors.red),
-          _buildColorBox(Colors.green),
-          _buildColorBox(Colors.blue),
-          _buildColorBox(Colors.purple),
-          _buildColorBox(Colors.orange),
-          _buildColorBox(Colors.teal),
-          _buildColorBox(Colors.pink),
-          _buildColorBox(Colors.amber),
+          _buildColorBox(OsmeaColors.sunsetGlow),
+          _buildColorBox(OsmeaColors.forestHeart),
+          _buildColorBox(OsmeaColors.nordicBlue),
+          _buildColorBox(OsmeaColors.purple),
+          _buildColorBox(OsmeaColors.sunsetGlow),
+          _buildColorBox(OsmeaColors.forestHeart),
+          _buildColorBox(OsmeaColors.sunsetGlow),
+          _buildColorBox(OsmeaColors.amberFlame),
         ],
       ),
     );
@@ -290,13 +290,13 @@ class RowExampleScreen extends StatelessWidget {
         OsmeaComponents.container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: Colors.blue
+            color: OsmeaColors.nordicBlue
                 .withValues(red: 0, green: 122, blue: 255, alpha: 0.2),
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: Colors.blue),
+            border: Border.all(color: OsmeaColors.nordicBlue),
             boxShadow: [
               BoxShadow(
-                color: Colors.blue
+                color: OsmeaColors.nordicBlue
                     .withValues(red: 0, green: 122, blue: 255, alpha: 0.2),
                 blurRadius: 4,
                 offset: const Offset(0, 2),
@@ -307,11 +307,11 @@ class RowExampleScreen extends StatelessWidget {
           child: OsmeaComponents.row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildColorBox(Colors.red),
+              _buildColorBox(OsmeaColors.sunsetGlow),
               OsmeaComponents.sizedBox(width: 16),
-              _buildColorBox(Colors.green),
+              _buildColorBox(OsmeaColors.forestHeart),
               OsmeaComponents.sizedBox(width: 16),
-              _buildColorBox(Colors.blue),
+              _buildColorBox(OsmeaColors.nordicBlue),
             ],
           ),
         ),
@@ -320,9 +320,9 @@ class RowExampleScreen extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Colors.purple
+                OsmeaColors.purple
                     .withValues(red: 156, green: 39, blue: 176, alpha: 0.3),
-                Colors.pink
+                OsmeaColors.sunsetGlow
                     .withValues(red: 233, green: 30, blue: 99, alpha: 0.3),
               ],
             ),
@@ -331,9 +331,9 @@ class RowExampleScreen extends StatelessWidget {
           child: OsmeaComponents.row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              _buildColorBox(Colors.amber),
-              _buildColorBox(Colors.deepOrange),
-              _buildColorBox(Colors.indigo),
+              _buildColorBox(OsmeaColors.amberFlame),
+              _buildColorBox(OsmeaColors.amberFlame),
+              _buildColorBox(OsmeaColors.nordicBlue),
             ],
           ),
         ),
@@ -354,7 +354,7 @@ class RowExampleScreen extends StatelessWidget {
           child: OsmeaComponents.container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.grey.shade200,
+              color: OsmeaColors.ash,
               borderRadius: BorderRadius.circular(8),
             ),
             margin: const EdgeInsets.only(bottom: 16),
@@ -379,7 +379,7 @@ class RowExampleScreen extends StatelessWidget {
           child: OsmeaComponents.container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.grey.shade200,
+              color: OsmeaColors.ash,
               borderRadius: BorderRadius.circular(8),
             ),
             child: OsmeaComponents.row(
@@ -399,17 +399,17 @@ class RowExampleScreen extends StatelessWidget {
   }
 
   // Advanced row examples
-  Widget complexRowExamples() {
+  Widget complexRowExamples(BuildContext context) {
     return OsmeaComponents.container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.grey.shade100,
+        color: OsmeaColors.snow,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade300),
+        border: Border.all(color: OsmeaColors.silver),
         boxShadow: [
           BoxShadow(
             color:
-                Colors.black.withValues(red: 0, green: 0, blue: 0, alpha: 0.1),
+                OsmeaColors.black.withValues(red: 0, green: 0, blue: 0, alpha: 0.1),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -421,7 +421,7 @@ class RowExampleScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             margin: const EdgeInsets.only(bottom: 16),
             decoration: BoxDecoration(
-              color: Colors.blue
+              color: OsmeaColors.nordicBlue
                   .withValues(red: 0, green: 122, blue: 255, alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
@@ -437,15 +437,15 @@ class RowExampleScreen extends StatelessWidget {
                       children: [
                         OsmeaComponents.text(
                           'John Doe',
-                          textStyle: const TextStyle(
+                          textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         OsmeaComponents.text(
                           'Online',
-                          textStyle: const TextStyle(
+                          textStyle: OsmeaTextStyle.bodySmall(context).copyWith(
                             fontSize: 12,
-                            color: Colors.green,
+                            color: OsmeaColors.forestHeart,
                           ),
                         ),
                       ],
@@ -454,15 +454,15 @@ class RowExampleScreen extends StatelessWidget {
                 ),
                 OsmeaComponents.row(
                   children: [
-                    IconButton(
+                    OsmeaComponents.iconButton(
                       icon: const Icon(Icons.call),
                       onPressed: () {},
                     ),
-                    IconButton(
+                    OsmeaComponents.iconButton(
                       icon: const Icon(Icons.videocam),
                       onPressed: () {},
                     ),
-                    IconButton(
+                    OsmeaComponents.iconButton(
                       icon: const Icon(Icons.more_vert),
                       onPressed: () {},
                     ),
@@ -474,7 +474,7 @@ class RowExampleScreen extends StatelessWidget {
           OsmeaComponents.container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: Colors.green
+              color: OsmeaColors.forestHeart
                   .withValues(red: 76, green: 175, blue: 80, alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
@@ -482,7 +482,7 @@ class RowExampleScreen extends StatelessWidget {
               children: [
                 const Icon(Icons.shopping_cart, size: 24),
                 OsmeaComponents.sizedBox(width: 8),
-                Expanded(
+                OsmeaComponents.expanded(
                   child: OsmeaComponents.text('Your shopping cart'),
                 ),
                 OsmeaComponents.container(
@@ -491,13 +491,13 @@ class RowExampleScreen extends StatelessWidget {
                     vertical: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.green,
+                    color: OsmeaColors.forestHeart,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: OsmeaComponents.text(
                     '3 items',
-                    textStyle: const TextStyle(
-                      color: Colors.white,
+                    textStyle: OsmeaTextStyle.bodySmall(context).copyWith(
+                      color: OsmeaColors.white,
                       fontSize: 12,
                     ),
                   ),

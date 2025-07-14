@@ -14,8 +14,8 @@ class AppbarDemo extends StatelessWidget {
       appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('Mobile-Inspired AppBars'),
         centerTitle: true,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        backgroundColor: OsmeaColors.white,
+        foregroundColor: OsmeaColors.black,
         elevation: 1,
       ),
       body: ListView(
@@ -30,7 +30,7 @@ class AppbarDemo extends StatelessWidget {
           OsmeaComponents.text(
             'AppBar designs inspired by popular mobile applications',
             fontSize: 16,
-            color: Colors.grey,
+            color: OsmeaColors.grey,
           ),
           OsmeaComponents.sizedBox(height: 32),
 
@@ -40,7 +40,7 @@ class AppbarDemo extends StatelessWidget {
             appName: 'Osmea Style (Standard)',
             description:
                 'Clean white background with left-aligned content, perfect for reading and content apps',
-            preview: _buildOsmeaStyleApp(),
+            preview: _buildOsmeaStyleApp(context),
           ),
 
           OsmeaComponents.sizedBox(height: 32),
@@ -51,7 +51,7 @@ class AppbarDemo extends StatelessWidget {
             appName: 'Social Media Style (Primary)',
             description:
                 'Brand-focused design with strong visual presence, great for social platforms',
-            preview: _buildSocialMediaStyleApp(),
+            preview: _buildSocialMediaStyleApp(context),
           ),
 
           OsmeaComponents.sizedBox(height: 32),
@@ -62,7 +62,7 @@ class AppbarDemo extends StatelessWidget {
             appName: 'E-commerce Style (Secondary)',
             description:
                 'Subtle and clean design perfect for shopping and marketplace apps',
-            preview: _buildEcommerceStyleApp(),
+            preview: _buildEcommerceStyleApp(context),
           ),
 
           OsmeaComponents.sizedBox(height: 32),
@@ -73,7 +73,7 @@ class AppbarDemo extends StatelessWidget {
             appName: 'Productivity Style (Surface)',
             description:
                 'Material design with balanced elevation for productivity and business apps',
-            preview: _buildProductivityStyleApp(),
+            preview: _buildProductivityStyleApp(context),
           ),
 
           OsmeaComponents.sizedBox(height: 32),
@@ -84,7 +84,7 @@ class AppbarDemo extends StatelessWidget {
             appName: 'Entertainment Style (Gradient)',
             description:
                 'Vibrant gradient design for media and entertainment applications',
-            preview: _buildEntertainmentStyleApp(),
+            preview: _buildEntertainmentStyleApp(context),
           ),
 
           OsmeaComponents.sizedBox(height: 32),
@@ -95,7 +95,7 @@ class AppbarDemo extends StatelessWidget {
             appName: 'Minimal Style (Outlined)',
             description:
                 'Clean and minimal border-only design for focus-driven apps',
-            preview: _buildMinimalStyleApp(),
+            preview: _buildMinimalStyleApp(context),
           ),
 
           OsmeaComponents.sizedBox(height: 48),
@@ -114,9 +114,9 @@ class AppbarDemo extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: OsmeaComponents.container(
         decoration: BoxDecoration(
-          color: Colors.grey[50],
+          color: OsmeaColors.grey[50],
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.grey[200]!),
+          border: Border.all(color: OsmeaColors.grey[200]!),
         ),
         child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,14 +135,14 @@ class AppbarDemo extends StatelessWidget {
                   OsmeaComponents.text(
                     description,
                     fontSize: 14,
-                    color: Colors.grey[600],
+                    color: OsmeaColors.grey[600],
                   ),
                 ],
               ),
             ),
             OsmeaComponents.container(
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: OsmeaColors.white,
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(12),
                   bottomRight: Radius.circular(12),
@@ -156,7 +156,7 @@ class AppbarDemo extends StatelessWidget {
     );
   }
 
-  Widget _buildOsmeaStyleApp() {
+  Widget _buildOsmeaStyleApp(BuildContext context) {
     return OsmeaComponents.column(
       children: [
         OsmeaComponents.appBar(
@@ -164,7 +164,7 @@ class AppbarDemo extends StatelessWidget {
           variant: AppBarVariant.standard,
           size: AppBarSize.comfortable,
           titleAlignment: AppBarTitleAlignment.left,
-          leading: IconButton(
+          leading: OsmeaComponents.iconButton(
             icon: const Icon(Icons.expand_more),
             onPressed: () {},
           ),
@@ -173,16 +173,16 @@ class AppbarDemo extends StatelessWidget {
               type: AppBarActionType.notification,
               icon: const Icon(Icons.notifications_outlined),
               onPressed: () {},
-              badge: _buildNotificationBadge('1', Colors.green),
+              badge: _buildNotificationBadge('1', OsmeaColors.green, context),
             ),
           ],
         ),
-        _buildAppContent('📚 Your reading list awaits'),
+        _buildAppContent('📚 Your reading list awaits', context),
       ],
     );
   }
 
-  Widget _buildSocialMediaStyleApp() {
+  Widget _buildSocialMediaStyleApp(BuildContext context) {
     return OsmeaComponents.column(
       children: [
         OsmeaComponents.appBar(
@@ -190,7 +190,7 @@ class AppbarDemo extends StatelessWidget {
           variant: AppBarVariant.primary,
           size: AppBarSize.comfortable,
           titleAlignment: AppBarTitleAlignment.center,
-          leading: IconButton(
+          leading: OsmeaComponents.iconButton(
             icon: const Icon(Icons.menu),
             onPressed: () {},
           ),
@@ -204,16 +204,16 @@ class AppbarDemo extends StatelessWidget {
               type: AppBarActionType.notification,
               icon: const Icon(Icons.notifications_outlined),
               onPressed: () {},
-              badge: _buildNotificationBadge('5', Colors.red),
+              badge: _buildNotificationBadge('5', OsmeaColors.red, context),
             ),
           ],
         ),
-        _buildAppContent('👋 Connect with friends'),
+        _buildAppContent('👋 Connect with friends', context),
       ],
     );
   }
 
-  Widget _buildEcommerceStyleApp() {
+  Widget _buildEcommerceStyleApp(BuildContext context) {
     return OsmeaComponents.column(
       children: [
         OsmeaComponents.appBar(
@@ -222,7 +222,7 @@ class AppbarDemo extends StatelessWidget {
           variant: AppBarVariant.secondary,
           size: AppBarSize.standard,
           titleAlignment: AppBarTitleAlignment.left,
-          leading: IconButton(
+          leading: OsmeaComponents.iconButton(
             icon: const Icon(Icons.menu),
             onPressed: () {},
           ),
@@ -241,16 +241,16 @@ class AppbarDemo extends StatelessWidget {
               type: AppBarActionType.more,
               icon: const Icon(Icons.shopping_cart_outlined),
               onPressed: () {},
-              badge: _buildNotificationBadge('3', Colors.orange),
+              badge: _buildNotificationBadge('3', OsmeaColors.orange, context),
             ),
           ],
         ),
-        _buildAppContent('🛍️ Discover amazing products'),
+        _buildAppContent('🛍️ Discover amazing products', context),
       ],
     );
   }
 
-  Widget _buildProductivityStyleApp() {
+  Widget _buildProductivityStyleApp(BuildContext context) {
     return OsmeaComponents.column(
       children: [
         OsmeaComponents.appBar(
@@ -259,7 +259,7 @@ class AppbarDemo extends StatelessWidget {
           variant: AppBarVariant.surface,
           size: AppBarSize.large,
           titleAlignment: AppBarTitleAlignment.left,
-          leading: IconButton(
+          leading: OsmeaComponents.iconButton(
             icon: const Icon(Icons.dashboard),
             onPressed: () {},
           ),
@@ -276,12 +276,12 @@ class AppbarDemo extends StatelessWidget {
             ),
           ],
         ),
-        _buildAppContent('✅ Boost your productivity'),
+        _buildAppContent('✅ Boost your productivity', context),
       ],
     );
   }
 
-  Widget _buildEntertainmentStyleApp() {
+  Widget _buildEntertainmentStyleApp(BuildContext context) {
     return OsmeaComponents.column(
       children: [
         OsmeaComponents.appBar(
@@ -289,7 +289,7 @@ class AppbarDemo extends StatelessWidget {
           variant: AppBarVariant.gradient,
           size: AppBarSize.comfortable,
           titleAlignment: AppBarTitleAlignment.center,
-          leading: IconButton(
+          leading: OsmeaComponents.iconButton(
             icon: const Icon(Icons.menu),
             onPressed: () {},
           ),
@@ -306,12 +306,12 @@ class AppbarDemo extends StatelessWidget {
             ),
           ],
         ),
-        _buildAppContent('🎬 Endless entertainment'),
+        _buildAppContent('🎬 Endless entertainment', context),
       ],
     );
   }
 
-  Widget _buildMinimalStyleApp() {
+  Widget _buildMinimalStyleApp(BuildContext context) {
     return OsmeaComponents.column(
       children: [
         OsmeaComponents.appBar(
@@ -319,7 +319,7 @@ class AppbarDemo extends StatelessWidget {
           variant: AppBarVariant.outlined,
           size: AppBarSize.standard,
           titleAlignment: AppBarTitleAlignment.center,
-          leading: IconButton(
+          leading: OsmeaComponents.iconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {},
           ),
@@ -331,28 +331,28 @@ class AppbarDemo extends StatelessWidget {
             ),
           ],
         ),
-        _buildAppContent('🧘 Minimal & focused'),
+        _buildAppContent('🧘 Minimal & focused', context),
       ],
     );
   }
 
-  Widget _buildAppContent(String message) {
+  Widget _buildAppContent(String message, BuildContext context) {
     return OsmeaComponents.container(
       height: 120,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.grey[50],
+        color: OsmeaColors.grey[50],
         border: Border(
-          top: BorderSide(color: Colors.grey[200]!),
+          top: BorderSide(color: OsmeaColors.grey[200]!),
         ),
       ),
-      child: Center(
+      child: OsmeaComponents.center(
         child: OsmeaComponents.column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             OsmeaComponents.text(
               message,
-              textStyle: const TextStyle(
+              textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
               ),
@@ -360,9 +360,9 @@ class AppbarDemo extends StatelessWidget {
             OsmeaComponents.sizedBox(height: 8),
             OsmeaComponents.text(
               'App content would appear here',
-              textStyle: TextStyle(
+              textStyle: OsmeaTextStyle.bodySmall(context).copyWith(
                 fontSize: 12,
-                color: Colors.grey[600],
+                color: OsmeaColors.grey[600],
               ),
             ),
           ],
@@ -371,7 +371,7 @@ class AppbarDemo extends StatelessWidget {
     );
   }
 
-  Widget _buildNotificationBadge(String count, Color color) {
+  Widget _buildNotificationBadge(String count, Color color, BuildContext context) {
     return OsmeaComponents.container(
       width: 18,
       height: 18,
@@ -379,11 +379,11 @@ class AppbarDemo extends StatelessWidget {
         color: color,
         shape: BoxShape.circle,
       ),
-      child: Center(
+      child: OsmeaComponents.center(
         child: OsmeaComponents.text(
           count,
-          textStyle: const TextStyle(
-            color: Colors.white,
+          textStyle: OsmeaTextStyle.labelSmall(context).copyWith(
+            color: OsmeaColors.white,
             fontSize: 11,
             fontWeight: FontWeight.bold,
           ),

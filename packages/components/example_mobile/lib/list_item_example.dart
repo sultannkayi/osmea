@@ -34,7 +34,7 @@ class _ListItemExampleState extends State<ListItemExample> {
             children: [
               OsmeaComponents.text(t('Standard List Item', 'Standard-Listenelement')),
               OsmeaComponents.listItem(
-                leading: const CircleAvatar(child: Icon(Icons.person, color: Colors.white)),
+                leading: const CircleAvatar(child: Icon(Icons.person, color: OsmeaColors.white)),
                 title: OsmeaComponents.text(t('Title', 'Titel')),
                 subtitle: OsmeaComponents.text(t('Subtitle', 'Untertitel')),
                 trailing: const Icon(Icons.chevron_right),
@@ -66,7 +66,7 @@ class _ListItemExampleState extends State<ListItemExample> {
                 variant: ListItemVariant.filled,
                 leading: const Icon(Icons.inbox),
                 trailing: const Icon(Icons.done),
-                backgroundColor: Colors.grey.shade200,
+                backgroundColor: OsmeaColors.silver.withValues(alpha: 0.2),
               ),
               OsmeaComponents.sizedBox(height: 16),
               OsmeaComponents.text(t('Tonal List Item', 'Tonales Listenelement')),
@@ -75,7 +75,7 @@ class _ListItemExampleState extends State<ListItemExample> {
                 variant: ListItemVariant.tonal,
                 leading: const Icon(Icons.palette),
                 trailing: const Icon(Icons.color_lens),
-                backgroundColor: Colors.blue.shade50,
+                backgroundColor: OsmeaColors.nordicBlue.withValues(alpha: 0.1),
               ),
               OsmeaComponents.sizedBox(height: 16),
               OsmeaComponents.text(t('Ghost List Item', 'Geister-Listenelement')),
@@ -83,7 +83,7 @@ class _ListItemExampleState extends State<ListItemExample> {
                 title: OsmeaComponents.text(t('Ghost Item', 'Geister-Element')),
                 variant: ListItemVariant.switchTile,
                 trailing: const Icon(Icons.remove_red_eye_outlined),
-                backgroundColor: Colors.transparent,
+                backgroundColor: OsmeaColors.transparent,
               ),
               OsmeaComponents.sizedBox(height: 16),
               OsmeaComponents.text(t('Selectable (Checkbox) List Item (Manual)',
@@ -152,9 +152,9 @@ class _ListItemExampleState extends State<ListItemExample> {
               OsmeaComponents.text(t('Error List Item', 'Fehler-Listenelement')),
               OsmeaComponents.listItem(
                 title: OsmeaComponents.text(t('Error Item', 'Fehler-Element')),
-                leading: const Icon(Icons.error, color: Colors.red),
+                leading: Icon(Icons.error, color: OsmeaColors.sunsetGlow),
                 error: true,
-                trailing: const Icon(Icons.warning, color: Colors.red),
+                trailing: Icon(Icons.warning, color: OsmeaColors.sunsetGlow),
               ),
               OsmeaComponents.sizedBox(height: 16),
               OsmeaComponents.text(t('Disabled List Item', 'Deaktiviertes Listenelement')),
@@ -179,12 +179,12 @@ class _ListItemExampleState extends State<ListItemExample> {
                   t('Custom Child List Item', 'Benutzerdefiniertes Listenelement')),
               OsmeaComponents.listItem(
                 padding: const EdgeInsets.all(12),
-                backgroundColor: Colors.green.shade50,
+                backgroundColor: OsmeaColors.springLeaf.withValues(alpha: 0.15),
                 child: OsmeaComponents.row(
                   children: [
                     const Icon(Icons.label),
                     OsmeaComponents.sizedBox(width: 8),
-                    Expanded(
+                    OsmeaComponents.expanded(
                         child: OsmeaComponents.text(t('Fully customizable row',
                             'Vollständig anpassbare Zeile'))),
                     ElevatedButton(
@@ -258,44 +258,44 @@ class _ListItemExampleState extends State<ListItemExample> {
                 title: OsmeaComponents.text(t('All Sides', 'Alle Seiten')),
                 leading: const Icon(Icons.border_all),
                 borderVariant: ListItemBorderVariant.all,
-                borderColor: Colors.blue,
+                borderColor: OsmeaColors.nordicBlue,
               ),
               OsmeaComponents.sizedBox(height: 8),
               OsmeaComponents.listItem(
                 title: OsmeaComponents.text(t('Top Border', 'Oberer Rand')),
                 leading: const Icon(Icons.border_top),
                 borderVariant: ListItemBorderVariant.top,
-                borderColor: Colors.green,
+                borderColor: OsmeaColors.meadow,
               ),
               OsmeaComponents.sizedBox(height: 8),
               OsmeaComponents.listItem(
                 title: OsmeaComponents.text(t('Bottom Border', 'Unterer Rand')),
                 leading: const Icon(Icons.border_bottom),
                 borderVariant: ListItemBorderVariant.bottom,
-                borderColor: Colors.red,
+                borderColor: OsmeaColors.red,
               ),
               OsmeaComponents.sizedBox(height: 8),
               OsmeaComponents.listItem(
                 title: OsmeaComponents.text(t('Left Border', 'Linker Rand')),
                 leading: const Icon(Icons.border_left),
                 borderVariant: ListItemBorderVariant.left,
-                borderColor: Colors.orange,
+                borderColor: OsmeaColors.sunsetGlow,
               ),
               OsmeaComponents.sizedBox(height: 8),
               OsmeaComponents.listItem(
                 title: OsmeaComponents.text(t('Right Border', 'Rechter Rand')),
                 leading: const Icon(Icons.border_right),
                 borderVariant: ListItemBorderVariant.right,
-                borderColor: Colors.purple,
+                borderColor: OsmeaColors.nordicBlue,
               ),
               OsmeaComponents.sizedBox(height: 8),
               OsmeaComponents.listItem(
                 title: OsmeaComponents.text(t('Custom Border', 'Benutzerdefinierter Rand')),
                 leading: const Icon(Icons.border_style),
                 borderVariant: ListItemBorderVariant.custom,
-                customBorder: const Border(
-                  top: BorderSide(color: Colors.teal, width: 2),
-                  bottom: BorderSide(color: Colors.amber, width: 2),
+                customBorder: Border(
+                  top: BorderSide(color: OsmeaColors.nordicBlue, width: 2),
+                  bottom: BorderSide(color: OsmeaColors.sunsetGlow, width: 2),
                 ),
               ),
               OsmeaComponents.sizedBox(height: 16),
@@ -310,7 +310,7 @@ class _ListItemExampleState extends State<ListItemExample> {
                   ListItemBorderSide.top,
                   ListItemBorderSide.bottom
                 },
-                borderColor: Colors.teal,
+                borderColor: OsmeaColors.nordicBlue,
               ),
               OsmeaComponents.sizedBox(height: 8),
               OsmeaComponents.listItem(
@@ -320,7 +320,7 @@ class _ListItemExampleState extends State<ListItemExample> {
                   ListItemBorderSide.left,
                   ListItemBorderSide.right
                 },
-                borderColor: Colors.deepOrange,
+                borderColor: OsmeaColors.sunsetGlow,
               ),
               OsmeaComponents.sizedBox(height: 8),
               OsmeaComponents.listItem(
@@ -333,7 +333,7 @@ class _ListItemExampleState extends State<ListItemExample> {
                   ListItemBorderSide.left,
                   ListItemBorderSide.right
                 },
-                borderColor: Colors.indigo,
+                borderColor: OsmeaColors.nordicBlue,
               ),
               OsmeaComponents.sizedBox(height: 16),
               OsmeaComponents.text(t('Checkbox List Item (Auto Structure)',

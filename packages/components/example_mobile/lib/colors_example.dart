@@ -145,7 +145,7 @@ class ColorsExample extends StatelessWidget {
   }
 
   Widget _buildColorSection(List<_ColorInfo> colors) {
-    return Wrap(
+    return OsmeaComponents.wrap(
       spacing: 12,
       runSpacing: 12,
       children: colors.map((colorInfo) => _buildColorCard(colorInfo)).toList(),
@@ -166,7 +166,7 @@ class ColorsExample extends StatelessWidget {
             color: colorInfo.color == OsmeaColors.white ||
                     colorInfo.color == OsmeaColors.transparent
                 ? OsmeaColors.silver
-                : Colors.transparent,
+                : OsmeaColors.transparent,
             width: 2,
           ),
           boxShadow: const [
@@ -177,7 +177,7 @@ class ColorsExample extends StatelessWidget {
             ),
           ],
         ),
-        child: Stack(
+        child: OsmeaComponents.stack(
           children: [
             if (colorInfo.color == OsmeaColors.transparent)
               OsmeaComponents.container(
@@ -190,7 +190,7 @@ class ColorsExample extends StatelessWidget {
                   child: OsmeaComponents.container(),
                 ),
               ),
-            Positioned(
+            OsmeaComponents.positioned(
               bottom: 0,
               left: 0,
               right: 0,
@@ -227,7 +227,7 @@ class ColorsExample extends StatelessWidget {
                 ),
               ),
             ),
-            Positioned(
+            OsmeaComponents.positioned(
               top: 12,
               right: 12,
               child: OsmeaComponents.container(
@@ -307,7 +307,7 @@ class ColorsExample extends StatelessWidget {
             ),
           ),
           OsmeaComponents.sizedBox(width: 12),
-          Expanded(
+          OsmeaComponents.expanded(
             child: OsmeaComponents.column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

@@ -47,7 +47,7 @@ class ComponentOverviewPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.deepPurple.withOpacity(0.3),
+                      color: Colors.deepPurple.withValues(alpha: 0.3),
                       blurRadius: 20,
                       offset: const Offset(0, 10),
                     ),
@@ -67,13 +67,14 @@ class ComponentOverviewPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 8),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
+                        color: Colors.white.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
-                        '${ComponentRegistry.componentCount} Components Available',
+                        '${allComponents.length} Components Available',
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w500,
@@ -83,9 +84,9 @@ class ComponentOverviewPage extends StatelessWidget {
                   ],
                 ),
               ),
-              
+
               const SizedBox(height: 32),
-              
+
               // Components Grid Section
               const Text(
                 'Available Components',
@@ -96,15 +97,17 @@ class ComponentOverviewPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              
+
               // Use LayoutBuilder to handle constraints properly
               LayoutBuilder(
                 builder: (context, constraints) {
                   // Calculate responsive values for 4 components per row
                   final availableWidth = constraints.maxWidth;
-                  final cardWidth = (availableWidth - totalSpacingBetweenCards) / 4; // Account for spacing (3 gaps of 12px each)
+                  final cardWidth =
+                      (availableWidth - totalSpacingBetweenCards) /
+                          4; // Account for spacing (3 gaps of 12px each)
                   final cardHeight = cardWidth * 0.9; // More square-like cards
-                  
+
                   return GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -114,9 +117,9 @@ class ComponentOverviewPage extends StatelessWidget {
                       mainAxisSpacing: 12,
                       childAspectRatio: cardWidth / cardHeight,
                     ),
-                    itemCount: ComponentRegistry.allComponents.length,
+                    itemCount: allComponents.length,
                     itemBuilder: (context, index) {
-                      final component = ComponentRegistry.allComponents[index];
+                      final component = allComponents[index];
                       return _buildComponentCard(
                         context,
                         component.name,
@@ -145,16 +148,17 @@ class ComponentOverviewPage extends StatelessWidget {
     double cardWidth, // Add cardWidth parameter for responsive sizing
   ) {
     // Calculate responsive icon size based on card width
-    final iconSize = (cardWidth * 0.25).clamp(24.0, 48.0); // 25% of card width, between 24-48px
+    final iconSize = (cardWidth * 0.25)
+        .clamp(24.0, 48.0); // 25% of card width, between 24-48px
     final containerSize = iconSize + 16; // Add padding around icon
-    
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.06),
+            color: Colors.black.withValues(alpha: 0.06),
             blurRadius: 6,
             offset: const Offset(0, 3),
           ),
@@ -180,18 +184,19 @@ class ComponentOverviewPage extends StatelessWidget {
                   width: containerSize,
                   height: containerSize,
                   decoration: BoxDecoration(
-                    color: color.withOpacity(0.1),
+                    color: color.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: _getComponentImage(title, iconSize) ?? Icon(
-                    icon,
-                    color: color,
-                    size: iconSize,
-                  ),
+                  child: _getComponentImage(title, iconSize) ??
+                      Icon(
+                        icon,
+                        color: color,
+                        size: iconSize,
+                      ),
                 ),
-                
+
                 const SizedBox(height: 8),
-                
+
                 // Title
                 Text(
                   title,
@@ -214,7 +219,7 @@ class ComponentOverviewPage extends StatelessWidget {
 
   Widget? _getComponentImage(String componentName, double iconSize) {
     final containerSize = iconSize + 16; // Add padding around icon
-    
+
     // Add component images here - you can replace with actual images
     switch (componentName.toLowerCase()) {
       case 'button':
@@ -223,7 +228,7 @@ class ComponentOverviewPage extends StatelessWidget {
           width: containerSize,
           height: containerSize,
           decoration: BoxDecoration(
-            color: Colors.blue.withOpacity(0.1),
+            color: Colors.blue.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Icon(Icons.smart_button, color: Colors.blue, size: iconSize),
@@ -234,7 +239,7 @@ class ComponentOverviewPage extends StatelessWidget {
           width: containerSize,
           height: containerSize,
           decoration: BoxDecoration(
-            color: Colors.green.withOpacity(0.1),
+            color: Colors.green.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Icon(Icons.navigation, color: Colors.green, size: iconSize),
@@ -245,10 +250,11 @@ class ComponentOverviewPage extends StatelessWidget {
           width: containerSize,
           height: containerSize,
           decoration: BoxDecoration(
-            color: Colors.purple.withOpacity(0.1),
+            color: Colors.purple.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Icon(Icons.app_settings_alt, color: Colors.purple, size: iconSize),
+          child: Icon(Icons.app_settings_alt,
+              color: Colors.purple, size: iconSize),
         );
       case 'text field':
       case 'textfield':
@@ -256,7 +262,7 @@ class ComponentOverviewPage extends StatelessWidget {
           width: containerSize,
           height: containerSize,
           decoration: BoxDecoration(
-            color: Colors.orange.withOpacity(0.1),
+            color: Colors.orange.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Icon(Icons.text_fields, color: Colors.orange, size: iconSize),
@@ -266,7 +272,7 @@ class ComponentOverviewPage extends StatelessWidget {
           width: containerSize,
           height: containerSize,
           decoration: BoxDecoration(
-            color: Colors.teal.withOpacity(0.1),
+            color: Colors.teal.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Icon(Icons.check_box, color: Colors.teal, size: iconSize),
@@ -277,10 +283,11 @@ class ComponentOverviewPage extends StatelessWidget {
           width: containerSize,
           height: containerSize,
           decoration: BoxDecoration(
-            color: Colors.pink.withOpacity(0.1),
+            color: Colors.pink.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Icon(Icons.radio_button_checked, color: Colors.pink, size: iconSize),
+          child: Icon(Icons.radio_button_checked,
+              color: Colors.pink, size: iconSize),
         );
       case 'switch':
       case 'switch button':
@@ -288,7 +295,7 @@ class ComponentOverviewPage extends StatelessWidget {
           width: containerSize,
           height: containerSize,
           decoration: BoxDecoration(
-            color: Colors.indigo.withOpacity(0.1),
+            color: Colors.indigo.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Icon(Icons.toggle_on, color: Colors.indigo, size: iconSize),

@@ -208,7 +208,7 @@ class _TextFieldExampleState extends State<TextFieldExample> {
           size: TextFieldSize.medium,
           obscureText: !_isPasswordVisible,
           prefixIcon: const Icon(Icons.lock_outline),
-          suffixIcon: IconButton(
+          suffixIcon: OsmeaComponents.iconButton(
             icon: Icon(
                 _isPasswordVisible ? Icons.visibility_off : Icons.visibility),
             onPressed: () =>
@@ -318,7 +318,7 @@ class _TextFieldExampleState extends State<TextFieldExample> {
           onCompleted: (otp) {
             print('4-digit OTP completed: $otp');
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('4-digit OTP completed: $otp')),
+              SnackBar(content: OsmeaComponents.text('4-digit OTP completed: $otp')),
             );
           },
           validator: (otp) => otp?.length == 4 ? null : 'Please enter 4 digits',
@@ -345,7 +345,7 @@ class _TextFieldExampleState extends State<TextFieldExample> {
             setState(() => _validationMessage = 'OTP Completed: $otp');
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text('6-digit OTP completed: $otp'),
+                content: OsmeaComponents.text('6-digit OTP completed: $otp'),
                 backgroundColor: OsmeaColors.forestHeart,
               ),
             );
@@ -361,7 +361,7 @@ class _TextFieldExampleState extends State<TextFieldExample> {
           OsmeaComponents.container(
             padding: EdgeInsets.all(context.spacing12),
             decoration: BoxDecoration(
-              color: OsmeaColors.forestHeart.withOpacity(0.1),
+              color: OsmeaColors.forestHeart.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: OsmeaColors.forestHeart, width: 1),
             ),
@@ -394,7 +394,7 @@ class _TextFieldExampleState extends State<TextFieldExample> {
           variant: TextFieldVariant.underlined,
           spacing: 16.0,
           obscureText: true, // Hidden digits for security
-          backgroundColor: OsmeaColors.nordicBlue.withOpacity(0.05),
+          backgroundColor: OsmeaColors.nordicBlue.withValues(alpha: 0.05),
           focusColor: OsmeaColors.nordicBlue,
           borderColor: OsmeaColors.silver,
           onChanged: (otp) =>
@@ -417,7 +417,7 @@ class _TextFieldExampleState extends State<TextFieldExample> {
     return OsmeaComponents.container(
       padding: EdgeInsets.all(context.spacing16),
       decoration: BoxDecoration(
-        color: OsmeaColors.pewter.withOpacity(0.05),
+        color: OsmeaColors.pewter.withValues(alpha: 0.05),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: OsmeaColors.silver, width: 1),
       ),
@@ -438,11 +438,11 @@ class _TextFieldExampleState extends State<TextFieldExample> {
             color: OsmeaColors.slate,
           ),
           OsmeaComponents.sizedBox(height: 8),
-          Wrap(
+          OsmeaComponents.wrap(
             spacing: 8,
             children: TextFieldVariant.values.map((variant) {
               return ChoiceChip(
-                label: Text(variant.toString().split('.').last),
+                label: OsmeaComponents.text(variant.toString().split('.').last),
                 selected: _selectedVariant == variant,
                 onSelected: (selected) =>
                     setState(() => _selectedVariant = variant),
@@ -458,7 +458,7 @@ class _TextFieldExampleState extends State<TextFieldExample> {
             color: OsmeaColors.slate,
           ),
           OsmeaComponents.sizedBox(height: 8),
-          Wrap(
+          OsmeaComponents.wrap(
             spacing: 8,
             children: TextFieldSize.values.map((size) {
               return ChoiceChip(
@@ -472,7 +472,7 @@ class _TextFieldExampleState extends State<TextFieldExample> {
 
           // Floating Label Toggle
           CheckboxListTile(
-            title: const Text('Floating Label'),
+            title: OsmeaComponents.text('Floating Label'),
             value: _showFloatingLabel,
             onChanged: (value) =>
                 setState(() => _showFloatingLabel = value ?? false),
@@ -505,7 +505,7 @@ class _TextFieldExampleState extends State<TextFieldExample> {
           hint: 'This field has custom colors',
           variant: TextFieldVariant.outlined,
           size: TextFieldSize.medium,
-          backgroundColor: OsmeaColors.nordicBlue.withOpacity(0.05),
+          backgroundColor: OsmeaColors.nordicBlue.withValues(alpha: 0.05),
           borderColor: OsmeaColors.nordicBlue,
           focusColor: OsmeaColors.forestHeart,
           textColor: OsmeaColors.slate,

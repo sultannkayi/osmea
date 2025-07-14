@@ -15,7 +15,7 @@ class FlexibleExampleScreen extends StatelessWidget {
       appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('OSMEA Flexible Examples'),
       ),
-      body: SingleChildScrollView(
+      body: OsmeaComponents.singleChildScrollView(
         padding: context.paddingNormal,
         child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,56 +23,56 @@ class FlexibleExampleScreen extends StatelessWidget {
             // Section title
             OsmeaComponents.text(
               '🔄 Basic Flexible in Row',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleLarge(context)
+                  .copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
             // Basic row with flexible example
             OsmeaComponents.text('Flexible with different flex factors:'),
             OsmeaComponents.sizedBox(height: 8),
-            basicRowFlexibleExample(),
+            basicRowFlexibleExample(context),
             OsmeaComponents.sizedBox(height: 24),
 
             // Flexible with fit example
             OsmeaComponents.text('Flexible with different fit types:'),
             OsmeaComponents.sizedBox(height: 8),
-            flexibleFitExample(),
+            flexibleFitExample(context),
             OsmeaComponents.sizedBox(height: 24),
 
             // Section title for column flexibles
             OsmeaComponents.text(
               '🔄 Flexible in Column',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleLarge(context)
+                  .copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
             // Column with flexibles example
             OsmeaComponents.text('Flexibles in a column:'),
             OsmeaComponents.sizedBox(height: 8),
-            columnFlexiblesExample(),
+            columnFlexiblesExample(context),
             OsmeaComponents.sizedBox(height: 24),
 
             // Section title for comparison with expanded
             OsmeaComponents.text(
               '🔄 Flexible vs Expanded',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleLarge(context)
+                  .copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
             // Flexible vs expanded example
             OsmeaComponents.text('Comparing Flexible with Expanded:'),
             OsmeaComponents.sizedBox(height: 8),
-            flexibleVsExpandedExample(),
+            flexibleVsExpandedExample(context),
             OsmeaComponents.sizedBox(height: 24),
 
             // Section title for practical examples
             OsmeaComponents.text(
               '💡 Practical Examples',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleLarge(context)
+                  .copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
@@ -85,7 +85,7 @@ class FlexibleExampleScreen extends StatelessWidget {
             // Dashboard layout example
             OsmeaComponents.text('Dashboard layout with flexible panels:'),
             OsmeaComponents.sizedBox(height: 8),
-            dashboardLayoutExample(),
+            dashboardLayoutExample(context),
             OsmeaComponents.sizedBox(height: 32),
           ],
         ),
@@ -94,25 +94,25 @@ class FlexibleExampleScreen extends StatelessWidget {
   }
 
   // Basic row with flexible example
-  Widget basicRowFlexibleExample() {
+  Widget basicRowFlexibleExample(BuildContext context) {
     return OsmeaComponents.container(
       height: 60,
       width: double.infinity, // Set width to prevent overflow
-      color: Colors.grey.shade200,
+      color: OsmeaColors.grey.shade200,
       child: OsmeaComponents.row(
         mainAxisSize: MainAxisSize.max, // Ensure row takes full width
         children: [
           OsmeaComponents.flexible(
             flex: 1, // 1 part of space
-            child: _buildColorBox(Colors.red, 'flex: 1'),
+            child: _buildColorBox(context, OsmeaColors.red, 'flex: 1'),
           ),
           OsmeaComponents.flexible(
             flex: 2, // 2 parts of space (twice as much)
-            child: _buildColorBox(Colors.green, 'flex: 2'),
+            child: _buildColorBox(context, OsmeaColors.green, 'flex: 2'),
           ),
           OsmeaComponents.flexible(
             flex: 1, // 1 part of space
-            child: _buildColorBox(Colors.blue, 'flex: 1'),
+            child: _buildColorBox(context, OsmeaColors.blue, 'flex: 1'),
           ),
         ],
       ),
@@ -120,11 +120,11 @@ class FlexibleExampleScreen extends StatelessWidget {
   }
 
   // Flexible fit example
-  Widget flexibleFitExample() {
+  Widget flexibleFitExample(BuildContext context) {
     return OsmeaComponents.container(
       height: 60,
       width: double.infinity, // Set width to prevent overflow
-      color: Colors.grey.shade200,
+      color: OsmeaColors.grey.shade200,
       child: OsmeaComponents.row(
         mainAxisSize: MainAxisSize.max, // Ensure row takes full width
         children: [
@@ -132,14 +132,11 @@ class FlexibleExampleScreen extends StatelessWidget {
             flex: 1,
             fit: FlexFit.loose, // Default - takes needed space
             child: OsmeaComponents.container(
-              color: Colors.red,
+              color: OsmeaColors.red,
               padding: const EdgeInsets.all(8),
               child: OsmeaComponents.text(
                 'FlexFit.loose',
-                textStyle: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
-                ),
+                textStyle: OsmeaTextStyle.bodySmall(context).copyWith(color: OsmeaColors.white, fontSize: 12),
               ),
             ),
           ),
@@ -147,15 +144,12 @@ class FlexibleExampleScreen extends StatelessWidget {
             flex: 1,
             fit: FlexFit.tight, // Forces to fill available space
             child: OsmeaComponents.container(
-              color: Colors.blue,
+              color: OsmeaColors.blue,
               padding: const EdgeInsets.all(8),
               child: OsmeaComponents.center(
                 child: OsmeaComponents.text(
                   'FlexFit.tight',
-                  textStyle: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                  ),
+                  textStyle: OsmeaTextStyle.bodySmall(context).copyWith(color: OsmeaColors.white, fontSize: 12),
                 ),
               ),
             ),
@@ -166,22 +160,22 @@ class FlexibleExampleScreen extends StatelessWidget {
   }
 
   // Column with flexibles example
-  Widget columnFlexiblesExample() {
+  Widget columnFlexiblesExample(BuildContext context) {
     return OsmeaComponents.container(
       height: 300,
       width: double.infinity,
-      color: Colors.grey.shade200,
+      color: OsmeaColors.grey.shade200,
       child: OsmeaComponents.column(
         children: [
           OsmeaComponents.flexible(
             flex: 1, // 1 part of space
             child: OsmeaComponents.container(
-              color: Colors.red,
+              color: OsmeaColors.red,
               width: double.infinity,
               child: OsmeaComponents.center(
                 child: OsmeaComponents.text(
                   'flex: 1',
-                  textStyle: const TextStyle(color: Colors.white),
+                  textStyle: OsmeaTextStyle.bodySmall(context).copyWith(color: OsmeaColors.white),
                 ),
               ),
             ),
@@ -189,12 +183,12 @@ class FlexibleExampleScreen extends StatelessWidget {
           OsmeaComponents.flexible(
             flex: 2, // 2 parts of space (twice as much)
             child: OsmeaComponents.container(
-              color: Colors.green,
+              color: OsmeaColors.green,
               width: double.infinity,
               child: OsmeaComponents.center(
                 child: OsmeaComponents.text(
                   'flex: 2',
-                  textStyle: const TextStyle(color: Colors.white),
+                  textStyle: OsmeaTextStyle.bodySmall(context).copyWith(color: OsmeaColors.white),
                 ),
               ),
             ),
@@ -202,12 +196,12 @@ class FlexibleExampleScreen extends StatelessWidget {
           OsmeaComponents.flexible(
             flex: 1, // 1 part of space
             child: OsmeaComponents.container(
-              color: Colors.blue,
+              color: OsmeaColors.blue,
               width: double.infinity,
               child: OsmeaComponents.center(
                 child: OsmeaComponents.text(
                   'flex: 1',
-                  textStyle: const TextStyle(color: Colors.white),
+                  textStyle: OsmeaTextStyle.bodySmall(context).copyWith(color: OsmeaColors.white),
                 ),
               ),
             ),
@@ -218,24 +212,24 @@ class FlexibleExampleScreen extends StatelessWidget {
   }
 
   // Flexible vs expanded example
-  Widget flexibleVsExpandedExample() {
+  Widget flexibleVsExpandedExample(BuildContext context) {
     return OsmeaComponents.container(
       height: 60,
       width: double.infinity, // Set width to prevent overflow
-      color: Colors.grey.shade200,
+      color: OsmeaColors.grey.shade200,
       child: OsmeaComponents.row(
         mainAxisSize: MainAxisSize.max, // Ensure row takes full width
         children: [
           OsmeaComponents.flexible(
             flex: 1,
             child: OsmeaComponents.container(
-              color: Colors.amber,
+              color: OsmeaColors.sunsetGlow, // amber yerine benzer bir renk
               padding: const EdgeInsets.all(8),
               // Center text to prevent overflow
               child: OsmeaComponents.center(
                 child: OsmeaComponents.text(
                   'Flexible',
-                  textStyle: const TextStyle(fontSize: 12),
+                  textStyle: OsmeaTextStyle.bodySmall(context).copyWith(fontSize: 12),
                 ),
               ),
             ),
@@ -243,14 +237,11 @@ class FlexibleExampleScreen extends StatelessWidget {
           OsmeaComponents.expanded(
             flex: 1,
             child: OsmeaComponents.container(
-              color: Colors.deepPurple.withOpacity(0.7),
+              color: Colors.deepPurple.withValues(alpha: 0.7),
               child: OsmeaComponents.center(
                 child: OsmeaComponents.text(
                   'Expanded',
-                  textStyle: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                  ),
+                  textStyle: OsmeaTextStyle.bodySmall(context).copyWith(color: OsmeaColors.white, fontSize: 12),
                 ),
               ),
             ),
@@ -278,14 +269,9 @@ class FlexibleExampleScreen extends StatelessWidget {
                 OsmeaComponents.sizedBox(width: 8),
                 OsmeaComponents.expanded(
                   // Use expanded instead of flexible
-                  child: TextField(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 8,
-                      ),
-                    ),
+                  child: OsmeaComponents.textField(
+                    variant: TextFieldVariant.outlined,
+                    size: TextFieldSize.medium,
                   ),
                 ),
               ],
@@ -303,14 +289,9 @@ class FlexibleExampleScreen extends StatelessWidget {
                 OsmeaComponents.expanded(
                   // Use expanded instead of flexible
                   flex: 2, // Takes more space
-                  child: TextField(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 8,
-                      ),
-                    ),
+                  child: OsmeaComponents.textField(
+                    variant: TextFieldVariant.outlined,
+                    size: TextFieldSize.medium,
                   ),
                 ),
               ],
@@ -322,11 +303,11 @@ class FlexibleExampleScreen extends StatelessWidget {
   }
 
   // Dashboard layout example using flexibles
-  Widget dashboardLayoutExample() {
+  Widget dashboardLayoutExample(BuildContext context) {
     return OsmeaComponents.container(
       height: 200,
       width: double.infinity,
-      color: Colors.grey.shade200,
+      color: OsmeaColors.grey.shade200,
       child: OsmeaComponents.row(
         mainAxisSize: MainAxisSize.max, // Ensure row takes full width
         children: [
@@ -334,7 +315,7 @@ class FlexibleExampleScreen extends StatelessWidget {
           OsmeaComponents.flexible(
             flex: 1,
             child: OsmeaComponents.container(
-              color: Colors.blueGrey.shade700,
+              color: OsmeaColors.slate, // blueGrey yerine benzer bir renk
               child: OsmeaComponents.padding(
                 padding: const EdgeInsets.all(12),
                 child: OsmeaComponents.column(
@@ -342,15 +323,12 @@ class FlexibleExampleScreen extends StatelessWidget {
                   children: [
                     OsmeaComponents.text(
                       'Dashboard',
-                      textStyle: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      textStyle: OsmeaTextStyle.bodySmall(context).copyWith(color: OsmeaColors.white, fontWeight: FontWeight.bold),
                     ),
                     OsmeaComponents.sizedBox(height: 16),
-                    _buildSidebarItem('Home', Icons.home),
-                    _buildSidebarItem('Analytics', Icons.insert_chart),
-                    _buildSidebarItem('Settings', Icons.settings),
+                    _buildSidebarItem(context, 'Home', Icons.home),
+                    _buildSidebarItem(context, 'Analytics', Icons.insert_chart),
+                    _buildSidebarItem(context, 'Settings', Icons.settings),
                   ],
                 ),
               ),
@@ -365,19 +343,16 @@ class FlexibleExampleScreen extends StatelessWidget {
               children: [
                 // Header
                 OsmeaComponents.container(
-                  color: Colors.white,
+                  color: OsmeaColors.white,
                   padding: const EdgeInsets.all(16),
                   child: OsmeaComponents.row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       // Use a constrained width or Expanded for text
-                      Expanded(
+                      OsmeaComponents.expanded(
                         child: OsmeaComponents.text(
                           'Analytics Dashboard',
-                          textStyle: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          ),
+                          textStyle: OsmeaTextStyle.titleLarge(context).copyWith(fontWeight: FontWeight.bold, fontSize: 18),
                         ),
                       ),
                       OsmeaComponents.spacer(),
@@ -397,20 +372,22 @@ class FlexibleExampleScreen extends StatelessWidget {
                         // Use expanded instead of flexible
                         flex: 1,
                         child: _buildDashboardCard(
+                          context,
                           'Users',
                           '1,254',
                           Icons.people,
-                          Colors.blue,
+                          OsmeaColors.nordicBlue,
                         ),
                       ),
                       OsmeaComponents.expanded(
                         // Use expanded instead of flexible
                         flex: 1,
                         child: _buildDashboardCard(
+                          context,
                           'Revenue',
                           '\$12,345',
                           Icons.attach_money,
-                          Colors.green,
+                          OsmeaColors.meadow,
                         ),
                       ),
                     ],
@@ -425,19 +402,19 @@ class FlexibleExampleScreen extends StatelessWidget {
   }
 
   // Helper for sidebar item - fix overflow
-  Widget _buildSidebarItem(String label, IconData icon) {
+  Widget _buildSidebarItem(BuildContext context, String label, IconData icon) {
     return OsmeaComponents.padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: OsmeaComponents.row(
         mainAxisSize: MainAxisSize.min, // Use min size to avoid overflow
         children: [
-          Icon(icon, color: Colors.white, size: 16),
+          Icon(icon, color: OsmeaColors.white, size: 16),
           OsmeaComponents.sizedBox(width: 8),
           // Use Expanded to contain text
-          Expanded(
+          OsmeaComponents.expanded(
             child: OsmeaComponents.text(
               label,
-              textStyle: const TextStyle(color: Colors.white),
+              textStyle: OsmeaTextStyle.bodySmall(context).copyWith(color: OsmeaColors.white),
               overflow: TextOverflow.ellipsis, // Add ellipsis for long text
             ),
           ),
@@ -448,6 +425,7 @@ class FlexibleExampleScreen extends StatelessWidget {
 
   // Helper for dashboard card
   Widget _buildDashboardCard(
+    BuildContext context,
     String title,
     String value,
     IconData icon,
@@ -467,13 +445,10 @@ class FlexibleExampleScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   // Wrap text in Expanded to prevent overflow
-                  Expanded(
+                  OsmeaComponents.expanded(
                     child: OsmeaComponents.text(
                       title,
-                      textStyle: const TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 14,
-                      ),
+                      textStyle: OsmeaTextStyle.bodySmall(context).copyWith(fontWeight: FontWeight.w500, fontSize: 14),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -482,16 +457,12 @@ class FlexibleExampleScreen extends StatelessWidget {
                 ],
               ),
               // Use Expanded to ensure the value gets proper space
-              Expanded(
-                child: Align(
+              OsmeaComponents.expanded(
+                child: OsmeaComponents.align(
                   alignment: Alignment.centerLeft,
                   child: OsmeaComponents.text(
                     value,
-                    textStyle: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: color,
-                    ),
+                    textStyle: OsmeaTextStyle.titleLarge(context).copyWith(fontWeight: FontWeight.bold, fontSize: 20, color: color),
                   ),
                 ),
               ),
@@ -503,17 +474,13 @@ class FlexibleExampleScreen extends StatelessWidget {
   }
 
   // Helper for creating color boxes
-  Widget _buildColorBox(Color color, String text) {
+  Widget _buildColorBox(BuildContext context, Color color, String text) {
     return OsmeaComponents.container(
       color: color,
       child: OsmeaComponents.center(
         child: OsmeaComponents.text(
           text,
-          textStyle: const TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 12,
-          ),
+          textStyle: OsmeaTextStyle.bodySmall(context).copyWith(color: OsmeaColors.white, fontWeight: FontWeight.bold, fontSize: 12),
           textAlign: TextAlign.center, // Center text to avoid overflow
           overflow: TextOverflow.ellipsis, // Add ellipsis for long text
         ),

@@ -3,7 +3,7 @@ import '../data/button_guidelines.dart';
 import '../widgets/section_container_widget.dart';
 
 /// 📋 **Button Usage Guidelines Section**
-/// 
+///
 /// Displays usage guidelines and best practices for button components
 /// Helps developers understand when and how to use different button types
 
@@ -27,7 +27,8 @@ class ButtonUsageGuidelinesSection extends StatelessWidget {
       spacing: spacing,
       isDark: isDark,
       children: [
-        _buildGuidelinesCard('Accessibility', ButtonGuidelines.accessibilityGuidelines),
+        _buildGuidelinesCard(
+            'Accessibility', ButtonGuidelines.accessibilityGuidelines),
         _buildGuidelinesCard('Layout', ButtonGuidelines.layoutGuidelines),
         _buildGuidelinesCard('Best Practices', ButtonGuidelines.bestPractices),
         _buildMistakesCard(),
@@ -58,30 +59,36 @@ class ButtonUsageGuidelinesSection extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          ...guidelines.map((guideline) => Padding(
-            padding: const EdgeInsets.only(bottom: 4),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '• ',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: isDark ? Colors.grey.shade300 : Colors.grey.shade600,
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    guideline,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: isDark ? Colors.grey.shade300 : Colors.grey.shade600,
+          ...guidelines
+              .map((guideline) => Padding(
+                    padding: const EdgeInsets.only(bottom: 4),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '• ',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: isDark
+                                ? Colors.grey.shade300
+                                : Colors.grey.shade600,
+                          ),
+                        ),
+                        Expanded(
+                          child: Text(
+                            guideline,
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: isDark
+                                  ? Colors.grey.shade300
+                                  : Colors.grey.shade600,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ),
-              ],
-            ),
-          )).toList(),
+                  ))
+              .toList(),
         ],
       ),
     );
@@ -92,7 +99,9 @@ class ButtonUsageGuidelinesSection extends StatelessWidget {
       width: 280,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark ? Colors.red.shade900.withOpacity(0.3) : Colors.red.shade50,
+        color: isDark
+            ? Colors.red.shade900.withValues(alpha: 0.3)
+            : Colors.red.shade50,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: isDark ? Colors.red.shade700 : Colors.red.shade300,
@@ -110,29 +119,35 @@ class ButtonUsageGuidelinesSection extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          ...ButtonGuidelines.commonMistakes.entries.map((entry) => Padding(
-            padding: const EdgeInsets.only(bottom: 6),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '❌ ${entry.key}',
-                  style: TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w600,
-                    color: isDark ? Colors.red.shade300 : Colors.red.shade700,
-                  ),
-                ),
-                Text(
-                  entry.value,
-                  style: TextStyle(
-                    fontSize: 10,
-                    color: isDark ? Colors.red.shade400 : Colors.red.shade600,
-                  ),
-                ),
-              ],
-            ),
-          )).toList(),
+          ...ButtonGuidelines.commonMistakes.entries
+              .map((entry) => Padding(
+                    padding: const EdgeInsets.only(bottom: 6),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '❌ ${entry.key}',
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
+                            color: isDark
+                                ? Colors.red.shade300
+                                : Colors.red.shade700,
+                          ),
+                        ),
+                        Text(
+                          entry.value,
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: isDark
+                                ? Colors.red.shade400
+                                : Colors.red.shade600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ))
+              .toList(),
         ],
       ),
     );

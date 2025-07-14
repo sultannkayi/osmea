@@ -51,6 +51,9 @@ export 'chips_enums.dart';
 // Carousel enums
 export 'carousel_enums.dart';
 
+// Dropdown enums
+export 'dropdown_enums.dart';
+
 // List item enums
 export 'list_item_enums.dart';
 
@@ -73,6 +76,14 @@ export 'divider_enums.dart';
 
 // Toast enums
 export 'toast_enums.dart';
+
+// Image enums
+export 'image_enums.dart';
+// Footer enums
+export 'footer_enums.dart';
+
+// Collapse enums
+export 'collapse_enums.dart';
 
 // Snackbar enums
 export 'snackbar_enums.dart';

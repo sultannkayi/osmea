@@ -38,6 +38,12 @@ class _ProgressExampleState extends State<ProgressExample> {
     Colors.tealAccent,
     Colors.orangeAccent,
     Colors.purpleAccent,
+    OsmeaColors.azureWave,
+    OsmeaColors.nordicBlue,
+    OsmeaColors.purple,
+    OsmeaColors.blue,
+    OsmeaColors.meadow,
+    OsmeaColors.sunsetGlow,
   ];
 
   final progressSizes = [
@@ -73,20 +79,21 @@ class _ProgressExampleState extends State<ProgressExample> {
   ];
 
   final linearColors = [
-    Colors.blueAccent,
-    Colors.indigoAccent,
-    Colors.tealAccent,
-    Colors.purple,
-    Colors.blueAccent,
+    OsmeaColors.nordicBlue,
+    OsmeaColors.nordicBlue,
+    OsmeaColors.meadow,
+    OsmeaColors.purple,
+    OsmeaColors.nordicBlue,
   ];
 
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: OsmeaComponents.appBar(title: const Text('Progress Examples')),
+      appBar: OsmeaComponents.appBar(
+          title: OsmeaComponents.text('Progress Examples')),
       body: OsmeaComponents.padding(
         padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
+        child: OsmeaComponents.singleChildScrollView(
           child: OsmeaComponents.column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -164,7 +171,7 @@ class _ProgressExampleState extends State<ProgressExample> {
               // Circular progress types
               ...List.generate(
                 progressTypes.length,
-                (i) => Column(
+                (i) => OsmeaComponents.column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     OsmeaComponents.text(
@@ -172,94 +179,47 @@ class _ProgressExampleState extends State<ProgressExample> {
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
                     ),
-                    Column(
-                      children: List.generate(
-                        (progressSizes.length / 2).ceil(),
-                        (rowIdx) {
-                          final firstIdx = rowIdx * 2;
-                          final secondIdx = firstIdx + 1;
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                    OsmeaComponents.sizedBox(
+                      height: 110,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: progressSizes.length,
+                        separatorBuilder: (_, __) =>
+                            OsmeaComponents.sizedBox(width: 24),
+                        itemBuilder: (context, j) {
+                          return OsmeaComponents.column(
+                            mainAxisSize: MainAxisSize.min,
                             children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 12.0, horizontal: 4.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      OsmeaComponents.progress(
-                                        key:
-                                            ValueKey('circular_${i}_$firstIdx'),
-                                        type: progressTypes[i],
-                                        value: isIncreasing ? 0.0 : 1.0,
-                                        size: progressSizes[firstIdx],
-                                        progressColor: progressColors[i],
-                                        showPercentage: true,
-                                        isAutoProgressEnabled:
-                                            isAutoProgressEnabled,
-                                        autoProgressSpeed: autoProgressSpeed,
-                                        isIncreasing: isIncreasing,
-                                      ),
-                                      const SizedBox(height: 8),
-                                      OsmeaComponents.text(
-                                        progressSizeLabels[firstIdx],
-                                        fontSize: 13,
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                              OsmeaComponents.progress(
+                                type: progressTypes[i],
+                                value: progressValue,
+                                size: progressSizes[j],
+                                color: progressColors[i],
+                                showPercentage: true,
                               ),
-                              if (secondIdx < progressSizes.length)
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 12.0, horizontal: 4.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        OsmeaComponents.progress(
-                                          key: ValueKey(
-                                              'circular_${i}_$secondIdx'),
-                                          type: progressTypes[i],
-                                          value: isIncreasing ? 0.0 : 1.0,
-                                          size: progressSizes[secondIdx],
-                                          progressColor: progressColors[i],
-                                          showPercentage: true,
-                                          isAutoProgressEnabled:
-                                              isAutoProgressEnabled,
-                                          autoProgressSpeed: autoProgressSpeed,
-                                          isIncreasing: isIncreasing,
-                                        ),
-                                        const SizedBox(height: 8),
-                                        OsmeaComponents.text(
-                                          progressSizeLabels[secondIdx],
-                                          fontSize: 13,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              else
-                                const Expanded(child: SizedBox()),
+                              OsmeaComponents.sizedBox(height: 8),
+                              OsmeaComponents.text(
+                                progressSizeLabels[j],
+                                fontSize: 13,
+                              ),
                             ],
                           );
                         },
                       ),
                     ),
-                    const SizedBox(height: 32),
+                    OsmeaComponents.sizedBox(height: 32),
                   ],
                 ),
               ),
 
               // Linear progress bars section
-              const Divider(height: 48, thickness: 2),
+              OsmeaComponents.divider(height: 48, thickness: 2),
               OsmeaComponents.text(
                 'Linear Progress Bars',
                 fontWeight: FontWeight.bold,
                 fontSize: 22,
               ),
-              const SizedBox(height: 16),
+              OsmeaComponents.sizedBox(height: 16),
 
               ...List.generate(
                 linearTypes.length,
@@ -274,12 +234,12 @@ class _ProgressExampleState extends State<ProgressExample> {
                     // Progress bars row
                     OsmeaComponents.padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Wrap(
+                      child: OsmeaComponents.wrap(
                         spacing: 16,
                         runSpacing: 24,
                         children: List.generate(
                           progressSizes.length,
-                          (j) => SizedBox(
+                          (j) => OsmeaComponents.sizedBox(
                             width: MediaQuery.of(context).size.width / 2.3,
                             child: OsmeaComponents.column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -302,7 +262,7 @@ class _ProgressExampleState extends State<ProgressExample> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 32),
+                    OsmeaComponents.sizedBox(height: 32),
                   ],
                 ),
               ),

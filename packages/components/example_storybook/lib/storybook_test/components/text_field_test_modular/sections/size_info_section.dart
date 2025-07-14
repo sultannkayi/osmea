@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 /// This section is intended to display size-related information.
 /// Currently, it serves as a placeholder and can be extended in the future.
 class SizeInfoSection extends StatelessWidget {
+  const SizeInfoSection({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16.0),
-      child: Column(
+      padding: const EdgeInsets.all(16.0),
+      child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
