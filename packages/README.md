@@ -44,7 +44,7 @@ The **OSMEA Packages** is a modular Flutter ecosystem designed to provide develo
 **A comprehensive UI component library for building beautiful, accessible Flutter applications.**
 
 #### ✨ Key Features
-- **🎨 45+ UI Components**: Buttons, forms, layouts, navigation, dynamic, and more
+- **🎨 50+ UI Components**: Buttons, forms, layouts, navigation, dynamic, and more
 - **📱 Responsive Design**: Mobile-first approach with adaptive layouts
 - **🎯 Type Safety**: Full TypeScript-like type safety with Dart
 - **🔧 Customization**: Extensive theming and styling options
