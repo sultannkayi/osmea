@@ -23,15 +23,15 @@ extension ProgressSizeExtension on ProgressSize {
   double get indicatorSize {
     switch (this) {
       case ProgressSize.extraSmall:
-        return 48.0;
+        return 56.0;
       case ProgressSize.small:
-        return 48.0;
-      case ProgressSize.medium:
         return 64.0;
-      case ProgressSize.large:
-        return 72.0;
-      case ProgressSize.extraLarge:
+      case ProgressSize.medium:
         return 80.0;
+      case ProgressSize.large:
+        return 96.0;
+      case ProgressSize.extraLarge:
+        return 112.0;
     }
   }
 
@@ -78,7 +78,7 @@ extension ProgressSizeExtension on ProgressSize {
     }
   }
 
-  int get dotCount => 20;
+  int get dotCount => 32;
   int get segmentCount => 12;
 
   double get segmentSweep {
@@ -112,15 +112,15 @@ extension ProgressSizeExtension on ProgressSize {
   double get dotRadius {
     switch (this) {
       case ProgressSize.extraSmall:
-        return 2.0;
+        return 3.0;
       case ProgressSize.small:
-        return 2.8;
-      case ProgressSize.medium:
         return 3.5;
-      case ProgressSize.large:
+      case ProgressSize.medium:
         return 4.2;
-      case ProgressSize.extraLarge:
+      case ProgressSize.large:
         return 5.0;
+      case ProgressSize.extraLarge:
+        return 6.0;
     }
   }
 

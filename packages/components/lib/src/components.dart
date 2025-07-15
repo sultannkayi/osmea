@@ -45,10 +45,11 @@ import 'package:osmea_components/src/components/popup/popup.dart';
 
 import 'package:osmea_components/src/components/searchbar/searchbar.dart';
 import 'package:osmea_components/src/components/searchbar/expandable_searchbar.dart';
-import 'package:osmea_components/src/components/image/image.dart';
-import 'package:osmea_components/src/components/dropdown/dropdown.dart';
-import 'package:osmea_components/src/components/footer/footer.dart';
-import 'package:osmea_components/src/components/collapse/collapse.dart';
+
+import 'components/collapse/collapse.dart';
+import 'components/dropdown/dropdown.dart';
+import 'components/footer/footer.dart';
+import 'components/image/image.dart';
 
 class OsmeaComponents {
   /// Supported Button variants - All variants are supported
@@ -2669,29 +2670,49 @@ class OsmeaComponents {
     return type.osmeaLoading(size: size, color: color, cubit: cubit);
   }
 
-  /// 🌀 **OSMEA Progress** - Modern animated progress bar/circular
+  /// 🌀 **OSMEA Progress** - Comprehensive progress indicator system
+  ///
+  /// Creates progress indicators with support for multiple types, sizes, and animations.
   ///
   /// Example:
   /// ```dart
-  /// OsmeaComponents.progress(type: ProgressType.circular, value: 0.7)
+  /// OsmeaComponents.progress(type: ProgressType.wave, value: 0.7)
   /// ```
   static Widget progress({
     Key? key,
     required ProgressType type,
     required double value,
     ProgressSize size = ProgressSize.medium,
-    Color? color,
+    Color? progressColor,
     bool showPercentage = false,
     double speed = 1.0,
+    double bufferValue = 0.75,
+    double? strokeWidth,
+    double? radius,
+    double? percentFontSize,
+    bool isAutoProgressEnabled = false,
+    double autoProgressSpeed = 0.05,
+    double minValue = 0.0,
+    double maxValue = 1.0,
+    bool isIncreasing = true,
   }) {
     return OsmeaProgress(
       key: key,
       type: type,
       value: value,
       size: size,
-      color: color,
+      progressColor: progressColor,
       showPercentage: showPercentage,
       speed: speed,
+      bufferValue: bufferValue,
+      strokeWidth: strokeWidth,
+      radius: radius,
+      percentFontSize: percentFontSize,
+      isAutoProgressEnabled: isAutoProgressEnabled,
+      autoProgressSpeed: autoProgressSpeed,
+      minValue: minValue,
+      maxValue: maxValue,
+      isIncreasing: isIncreasing,
     );
   }
 

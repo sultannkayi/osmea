@@ -84,3 +84,6 @@ export 'footer_enums.dart';
 
 // Collapse enums
 export 'collapse_enums.dart';
+
+// Snackbar enums
+export 'snackbar_enums.dart';

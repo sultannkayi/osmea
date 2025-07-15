@@ -43,6 +43,7 @@ import 'package:osmea_components_example/rich_text_example.dart';
 import 'package:osmea_components_example/stepper_example.dart';
 import 'package:osmea_components_example/searchbar_example.dart';
 import 'package:osmea_components_example/toast_example.dart';
+import 'package:osmea_components_example/snackbar_example.dart';
 import 'package:osmea_components_example/dropdown_example.dart';
 import 'package:osmea_components_example/tabbar_example.dart';
 import 'package:osmea_components_example/counter_example.dart';
@@ -900,6 +901,18 @@ class ExamplesScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => const ToastExamplePage(),
+                      ),
+                    ),
+                  ),
+                  _buildExampleTile(
+                    context,
+                    'Snackbar Example',
+                    'Snackbar notification examples',
+                    Icons.notifications,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SnackbarExampleScreen(),
                       ),
                     ),
                   ),

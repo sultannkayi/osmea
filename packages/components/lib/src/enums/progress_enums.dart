@@ -24,7 +24,7 @@ enum ProgressType {
   /// 🟩 Circular Percent progress
   percent,
 
-  /// �� Segmented progress bar (multi-section, step or status based)
+  /// 🟩 Segmented progress bar (multi-section, step or status based)
   segmented,
 
   /// 🟩 Circular Dot Circle Bar progress
