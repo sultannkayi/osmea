@@ -1,0 +1,17 @@
+{
+  "badge": {
+    "text": "Version 1.0.0 • Multi-Platform Framework",
+    "variant": "outline"
+  },
+  "title": "OSMEA",
+  "subtitle": "Mobile E-commerce Architecture Framework",
+  "description": "Build scalable, customizable, and cross-platform e-commerce apps using Flutter. Designed for integration with Shopify, WooCommerce, or custom APIs.",
+  "button": {
+    "text": "View on GitHub",
+    "href": "https://github.com/masterfabric-mobile/osmea",
+    "variant": "outline",
+    "size": "lg",
+    "icon": "Github",
+    "external": true
+  }
+} 

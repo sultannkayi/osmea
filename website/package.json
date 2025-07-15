@@ -1,0 +1,62 @@
+{
+  "name": "osmea-website",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Official website for Osmea - Flutter UI component library with modern design system",
+  "author": {
+    "name": "Gurkan Fikret Gunak",
+    "email": "gurkanfikretgunak@masterfabric.co",
+    "url": "https://github.com/gurkanfikretgunak"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/masterfabric-mobile/osmea.git",
+    "directory": "website"
+  },
+  "homepage": "https://osmea.masterfabric.co",
+  "bugs": {
+    "url": "https://github.com/masterfabric-mobile/osmea/issues"
+  },
+  "keywords": [
+    "flutter",
+    "ui",
+    "components",
+    "design-system",
+    "dart",
+    "mobile",
+    "web",
+    "osmea",
+    "next.js",
+    "website"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@radix-ui/react-progress": "^1.1.7",
+    "@radix-ui/react-slot": "^1.0.2",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "lucide-react": "^0.263.1",
+    "next": "15.1.3",
+    "react": "^18",
+    "react-dom": "^18",
+    "tailwind-merge": "^1.14.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "15.1.3",
+    "typescript": "^5"
+  }
+}
