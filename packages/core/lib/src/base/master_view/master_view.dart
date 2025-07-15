@@ -36,6 +36,7 @@ abstract class MasterView<V extends BaseViewModelBloc<E, S>, E, S>
   final MasterViewTypes currentView; // Current view type for the master view
   final Function snackBarFunction; // Function to handle Snackbar actions
   final AppBar? appBar; // AppBar for the view
+  final bool showDevGrid;
 
   MasterView({
     super.key,
@@ -43,6 +44,7 @@ abstract class MasterView<V extends BaseViewModelBloc<E, S>, E, S>
     this.currentView = MasterViewTypes.content, // Default to content state
     this.snackBarFunction = defaultSnackBarFunction,
     this.appBar, // Default to a predefined function
+    this.showDevGrid = true,
   })  : assert(arguments != null,
             'Arguments must not be null'), // Ensure arguments is not null
         assert(arguments.isNotEmpty,
@@ -103,18 +105,25 @@ abstract class MasterView<V extends BaseViewModelBloc<E, S>, E, S>
         extendBody: true,
         extendBodyBehindAppBar: true,
         key: _scaffoldMessengerKey,
-        appBar: appBar, // Set the appBar of the scaffold 
-        body: BaseView<V, E, S>(
-          onViewModelReady: initialContent,
-          builder: (viewModel, context, state) {
-            return viewContent(
-                context, viewModel, state); // Render the view content
-          },
+        appBar: appBar, // Set the appBar of the scaffold
+        body: Stack(
+          fit: StackFit.expand,
+          children: [
+            if (showDevGrid) const DevGridOverlay(margin: 0, columnWidth: 16),
+            SafeArea(
+              child: BaseView<V, E, S>(
+                onViewModelReady: initialContent,
+                builder: (viewModel, context, state) {
+                  return viewContent(
+                      context, viewModel, state); // Render the view content
+                },
+              ),
+            ),
+          ],
         ),
       );
     }, context);
   }
-
 
   /// Handles errors that may occur during scaffold building.
   Widget _handleScaffoldErrors(
@@ -205,7 +214,7 @@ abstract class MasterView<V extends BaseViewModelBloc<E, S>, E, S>
       debugPrint('Error showing snackbar: $e');
       debugPrintStack(
           stackTrace:
-              s); // Log any errors that occur while showing the Snackbar
+              s); // Log any errors that occur while showing the SnackBar
     }
   }
 
