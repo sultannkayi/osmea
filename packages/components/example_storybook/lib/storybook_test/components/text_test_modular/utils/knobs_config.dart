@@ -23,7 +23,7 @@ class TextKnobsConfig {
   static const List<Option<String>> variantSizeOptions = [
     Option(label: 'Small', value: 'small'),
     Option(label: 'Medium', value: 'medium'),
-    Option(label: 'Large', value: 'Large'),
+    Option(label: 'Large', value: 'large'),
   ];
 
   static String getVariantTypeKnob(KnobsBuilder knobs) {
