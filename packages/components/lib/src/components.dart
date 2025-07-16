@@ -4,7 +4,6 @@ import 'package:flutter/gestures.dart';
 import 'package:osmea_components/osmea_components.dart';
 import 'package:osmea_components/src/components/toast/toast.dart'
     show ToastManager;
-
 // Component imports
 import 'package:osmea_components/src/components/align/align.dart';
 import 'package:osmea_components/src/components/appbar/appbar.dart';
@@ -19,6 +18,7 @@ import 'package:osmea_components/src/components/chips/chips.dart';
 import 'package:osmea_components/src/components/column/column.dart';
 import 'package:osmea_components/src/components/container/container.dart';
 import 'package:osmea_components/src/components/divider/divider.dart';
+import 'package:osmea_components/src/components/dot_indicator/dot_indicator.dart';
 import 'package:osmea_components/src/components/expanded/expanded.dart';
 import 'package:osmea_components/src/components/flexible/flexible.dart';
 import 'package:osmea_components/src/components/padding/padding.dart';
@@ -42,7 +42,6 @@ import 'package:osmea_components/src/components/list_item/list_item.dart';
 import 'package:osmea_components/src/components/ticket_widget/ticket_widget.dart';
 import 'package:osmea_components/src/components/ticket_widget/models/ticket_models.dart';
 import 'package:osmea_components/src/components/popup/popup.dart';
-
 import 'package:osmea_components/src/components/searchbar/searchbar.dart';
 import 'package:osmea_components/src/components/searchbar/expandable_searchbar.dart';
 
@@ -1520,6 +1519,84 @@ class OsmeaComponents {
       textWidthBasis: textWidthBasis,
       textHeightBehavior: textHeightBehavior,
       selectionColor: selectionColor,
+    );
+  }
+  /// 🔘 **OSMEA Dot Indicator** - Comprehensive dot indicator component
+  ///
+  /// Creates a feature-rich dot indicator component with support for:
+  /// - All visual variants (primary, secondary, success, warning, danger, info, neutral, custom)
+  /// - All size options (extraSmall to extraLarge)
+  /// - Multiple shape options (circle, rectangle, square, diamond, star, triangle, hexagon, heart, arrow, custom)
+  /// - Multiple visual styles (filled, outlined, soft, bold, glassmorphism, neumorphism, material, minimal)
+  /// - Multiple animation types (none, fade, scale, slide, bounce, elastic, pulse, ripple)
+  /// - Interactive states (enabled, disabled, loading, error)
+  /// - Full customization options
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.dotIndicator(
+  ///   itemCount: 5,
+  ///   currentIndex: 2,
+  ///   size: DotIndicatorSize.medium,
+  ///   shape: DotIndicatorShape.star,
+  ///   variant: DotIndicatorVariant.primary,
+  ///   animation: DotIndicatorAnimation.bounce,
+  ///   onDotTapped: (index) => handleDotTap(index),
+  /// )
+  /// ```
+  static Widget dotIndicator({
+    Key? key,
+    CoreTheme? customTheme,
+    required int itemCount,
+    int currentIndex = 0,
+    DotIndicatorSize size = DotIndicatorSize.medium,
+    DotIndicatorVariant variant = DotIndicatorVariant.primary,
+    DotIndicatorShape shape = DotIndicatorShape.circle,
+    DotIndicatorStyle style = DotIndicatorStyle.filled,
+    DotIndicatorState state = DotIndicatorState.enabled,
+    DotIndicatorPosition position = DotIndicatorPosition.bottomCenter,
+    DotIndicatorOrientation orientation = DotIndicatorOrientation.horizontal,
+    DotIndicatorAnimation animation = DotIndicatorAnimation.scale,
+    ValueChanged<int>? onDotTapped,
+    double? spacing,
+    Color? customActiveColor,
+    Color? customInactiveColor,
+    Color? customDisabledColor,
+    Widget? customShape,
+    Widget Function(BuildContext context, int index, bool isActive)? customDotBuilder,
+    bool showNumbers = false,
+    bool enableRipple = true,
+    Duration? animationDuration,
+    Offset? customOffset,
+    EdgeInsetsGeometry? padding,
+    EdgeInsetsGeometry? margin,
+  }) {
+    return OsmeaDotIndicator(
+      key: key,
+      customTheme: customTheme,
+      itemCount: itemCount,
+      currentIndex: currentIndex,
+      size: size,
+      variant: variant,
+      shape: shape,
+      style: style,
+      state: state,
+      position: position,
+      orientation: orientation,
+      animation: animation,
+      onDotTapped: onDotTapped,
+      spacing: spacing,
+      customActiveColor: customActiveColor,
+      customInactiveColor: customInactiveColor,
+      customDisabledColor: customDisabledColor,
+      customShape: customShape,
+      customDotBuilder: customDotBuilder,
+      showNumbers: showNumbers,
+      enableRipple: enableRipple,
+      animationDuration: animationDuration,
+      customOffset: customOffset,
+      padding: padding,
+      margin: margin,
     );
   }
 
@@ -3682,6 +3759,8 @@ class OsmeaComponents {
       text: text,
     );
   }
+
+
 
   /// 🔢 **OSMEA Counter** - Interactive numeric counter component with cubit state management
   ///

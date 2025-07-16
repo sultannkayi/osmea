@@ -87,3 +87,6 @@ export 'collapse_enums.dart';
 
 // Snackbar enums
 export 'snackbar_enums.dart';
+
+// Dot Indicator enums
+export 'dot_indicator_enums.dart';
