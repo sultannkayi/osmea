@@ -3,6 +3,7 @@ import 'package:osmea_components/osmea_components.dart';
 import 'package:osmea_components_example/align_example.dart';
 import 'package:osmea_components_example/avatar_example.dart';
 import 'package:osmea_components_example/carousel_example.dart';
+import 'package:osmea_components_example/dot_indicator_example.dart';
 import 'package:osmea_components_example/chips_example.dart';
 import 'package:osmea_components_example/divider_example.dart';
 import 'package:osmea_components_example/footer_example.dart';
@@ -353,6 +354,17 @@ class ComponentsScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => const CarouselExample(),
+                    ),
+                  ),
+                ),
+                _buildComponentCard(
+                  context,
+                  'Dot Indicator',
+                  Icons.radio_button_checked,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DotIndicatorExample(),
                     ),
                   ),
                 ),
