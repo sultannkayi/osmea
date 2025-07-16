@@ -13,6 +13,7 @@ import 'components/checkbox_test_modular/showcase/unified_checkbox_showcase.dart
 import 'components/radio_button_test_modular/showcase/unified_radio_button_showcase.dart';
 import 'components/switch_button_test_modular/showcase/unified_switch_button_showcase.dart';
 import 'components/loading_test_modular/showcase/unified_loading_showcase.dart';
+import 'components/text_test_modular/texts.dart';
 
 /// Model for component information displayed on home page and stories
 class ComponentInfo {
@@ -122,6 +123,14 @@ final List<ComponentInfo> allComponents = [
     color: Colors.indigo,
     storyPath: StoryConfig.buildComponentStoryName('Switch Buttons'),
     getStories: getUnifiedSwitchButtonShowcase,
+  ),
+  ComponentInfo(
+    name: 'Text',
+    description: 'Typography, headings, and text styles',
+    icon: Icons.text_format,
+    color: Colors.deepOrange,
+    storyPath: StoryConfig.buildComponentStoryName('Text'),
+    getStories: getAllTextStories,
   ),
   ComponentInfo(
     name: 'Loading Animations',
