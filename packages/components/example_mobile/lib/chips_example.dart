@@ -43,14 +43,14 @@ class _ChipsExampleState extends State<ChipsExample> {
           children: [
             OsmeaComponents.text(
               '1. Category Filtering (Single Selection)',
-              textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 12),
             _buildFilterChips(),
             OsmeaComponents.divider(height: 32),
             OsmeaComponents.text(
               '2. Interests (Multiple Selection)',
-              textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 12),
             _buildMultiSelectChips(),
@@ -63,14 +63,14 @@ class _ChipsExampleState extends State<ChipsExample> {
             OsmeaComponents.divider(height: 32),
             OsmeaComponents.text(
               '3. Different Styles',
-              textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 12),
             _buildStyleShowcase(),
             OsmeaComponents.divider(height: 32),
             OsmeaComponents.text(
               '4. Interactive Examples',
-              textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 12),
             _buildInteractiveExamples(),
@@ -373,10 +373,7 @@ class _ChipsExampleState extends State<ChipsExample> {
               radius: 12,
               child: OsmeaComponents.text(
                 'A',
-                textStyle: TextStyle(
-                  color: OsmeaColors.white,
-                  fontSize: 12,
-                ),
+                textStyle: OsmeaTextStyle.labelMedium(context).copyWith(color: OsmeaColors.white, fontSize: 12),
               ),
             ),
             variant: ChipsVariant.info,

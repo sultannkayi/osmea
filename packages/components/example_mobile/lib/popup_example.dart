@@ -33,8 +33,8 @@ class _PopupExampleState extends State<PopupExample> {
   PopupVariant _selectedVariant = PopupVariant.modal;
   PopupPosition _selectedPosition = PopupPosition.center;
   PopupAnimationType _selectedAnimation = PopupAnimationType.scale;
-  bool _showCloseButton = true;
-  bool _isDismissible = true;
+  final bool _showCloseButton = true;
+  final bool _isDismissible = true;
 
   @override
   Widget build(BuildContext context) {

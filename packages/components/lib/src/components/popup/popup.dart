@@ -373,7 +373,6 @@ class OsmeaPopup extends CoreContainer {
 
     overlayEntry = OverlayEntry(
       builder: (context) => _TooltipOverlay<T>(
-        child: child,
         position: position,
         onDismiss: () {
           overlayEntry.remove();
@@ -382,6 +381,7 @@ class OsmeaPopup extends CoreContainer {
           }
         },
         isDismissible: isDismissible,
+        child: child,
       ),
     );
 
@@ -684,7 +684,7 @@ class _PopupContentState extends State<_PopupContent>
     switch (widget.popup.variant) {
       case PopupVariant.modal:
       case PopupVariant.dialog:
-        return Theme.of(context).dialogBackgroundColor;
+        return Theme.of(context).dialogTheme.backgroundColor ?? Theme.of(context).colorScheme.surface;
       case PopupVariant.alert:
         return Theme.of(context).cardColor;
       case PopupVariant.tooltip:

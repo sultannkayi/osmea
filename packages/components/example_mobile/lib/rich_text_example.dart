@@ -23,15 +23,15 @@ class RichTextExample extends StatelessWidget {
             // Section title
             OsmeaComponents.text(
               '📝 Basic Rich Text',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleLarge(context)
+                  .copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
             // Basic rich text example
             OsmeaComponents.text('Simple rich text with multiple styles:'),
             OsmeaComponents.sizedBox(height: 8),
-            basicRichTextExample(),
+            basicRichTextExample(context),
             OsmeaComponents.sizedBox(height: 24),
 
             // Rich text with links
@@ -43,57 +43,57 @@ class RichTextExample extends StatelessWidget {
             // Section title for text variants
             OsmeaComponents.text(
               '🎨 Text Style Variants',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleLarge(context)
+                  .copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
             // Rich text with different variants
             OsmeaComponents.text('Different text style variants:'),
             OsmeaComponents.sizedBox(height: 8),
-            variantRichTextExamples(),
+            variantRichTextExamples(context),
             OsmeaComponents.sizedBox(height: 24),
 
             // Section title for alignment
             OsmeaComponents.text(
               '↔️ Text Alignment',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleLarge(context)
+                  .copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
             // Rich text with different alignments
             OsmeaComponents.text('Different text alignments:'),
             OsmeaComponents.sizedBox(height: 8),
-            alignmentRichTextExamples(),
+            alignmentRichTextExamples(context),
             OsmeaComponents.sizedBox(height: 24),
 
             // Section title for selectable text
             OsmeaComponents.text(
               '👆 Selectable Rich Text',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleLarge(context)
+                  .copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
             // Selectable rich text examples
             OsmeaComponents.text('Selectable rich text (try selecting):'),
             OsmeaComponents.sizedBox(height: 8),
-            selectableRichTextExample(),
+            selectableRichTextExample(context),
             OsmeaComponents.sizedBox(height: 24),
 
             // Section title for advanced examples
             OsmeaComponents.text(
               '🚀 Advanced Examples',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleLarge(context)
+                  .copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
             // Complex formatting examples
             OsmeaComponents.text('Complex text formatting:'),
             OsmeaComponents.sizedBox(height: 8),
-            advancedRichTextExamples(),
+            advancedRichTextExamples(context),
             OsmeaComponents.sizedBox(height: 32),
           ],
         ),
@@ -102,7 +102,7 @@ class RichTextExample extends StatelessWidget {
   }
 
   // Basic rich text example
-  Widget basicRichTextExample() {
+  Widget basicRichTextExample(BuildContext context) {
     return OsmeaComponents.container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -117,21 +117,21 @@ class RichTextExample extends StatelessWidget {
           ),
           OsmeaTextSpan(
             text: 'bold',
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: OsmeaTextStyle.bodyLarge(context).copyWith(fontWeight: FontWeight.bold),
           ),
           OsmeaTextSpan(
             text: ' and this is ',
           ),
           OsmeaTextSpan(
             text: 'italic',
-            style: const TextStyle(fontStyle: FontStyle.italic),
+            style: OsmeaTextStyle.bodyLarge(context).copyWith(fontStyle: FontStyle.italic),
           ),
           OsmeaTextSpan(
             text: ' text in a ',
           ),
           OsmeaTextSpan(
             text: 'single',
-            style: const TextStyle(decoration: TextDecoration.underline),
+            style: OsmeaTextStyle.bodyLarge(context).copyWith(decoration: TextDecoration.underline),
           ),
           OsmeaTextSpan(
             text: ' rich text component.',
@@ -155,26 +155,26 @@ class RichTextExample extends StatelessWidget {
           OsmeaTextSpan(text: 'Visit our '),
           OsmeaTextSpan(
             text: 'website',
-            style: TextStyle(
+            style: OsmeaTextStyle.bodyLarge(context).copyWith(
               color: OsmeaColors.nordicBlue,
               decoration: TextDecoration.underline,
             ),
             onTap: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Website link tapped')),
+                SnackBar(content: OsmeaComponents.text('Website link tapped')),
               );
             },
           ),
           OsmeaTextSpan(text: ' or contact '),
           OsmeaTextSpan(
             text: 'support',
-            style: TextStyle(
+            style: OsmeaTextStyle.bodyLarge(context).copyWith(
               color: OsmeaColors.meadow,
               decoration: TextDecoration.underline,
             ),
             onTap: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Support link tapped')),
+                SnackBar(content: OsmeaComponents.text('Support link tapped')),
               );
             },
           ),
@@ -185,7 +185,7 @@ class RichTextExample extends StatelessWidget {
   }
 
   // Rich text with different variants
-  Widget variantRichTextExamples() {
+  Widget variantRichTextExamples(BuildContext context) {
     return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -212,7 +212,7 @@ class RichTextExample extends StatelessWidget {
                   OsmeaTextSpan(text: 'Headline '),
                   OsmeaTextSpan(
                     text: 'Medium',
-                    style: TextStyle(color: OsmeaColors.nordicBlue),
+                    style: OsmeaTextStyle.bodyLarge(context).copyWith(color: OsmeaColors.nordicBlue),
                   ),
                 ],
               ),
@@ -223,7 +223,7 @@ class RichTextExample extends StatelessWidget {
                   OsmeaTextSpan(text: 'Title '),
                   OsmeaTextSpan(
                     text: 'Large',
-                    style: TextStyle(color: OsmeaColors.meadow),
+                    style: OsmeaTextStyle.bodyLarge(context).copyWith(color: OsmeaColors.meadow),
                   ),
                 ],
               ),
@@ -234,11 +234,10 @@ class RichTextExample extends StatelessWidget {
                   OsmeaTextSpan(text: 'Body '),
                   OsmeaTextSpan(
                     text: 'Large',
-                    style: TextStyle(color: OsmeaColors.purple),
+                    style: OsmeaTextStyle.bodyLarge(context).copyWith(color: OsmeaColors.purple),
                   ),
                   OsmeaTextSpan(
-                    text:
-                        ' with more text to demonstrate the larger body style.',
+                    text: ' with more text to demonstrate the larger body style.',
                   ),
                 ],
               ),
@@ -249,7 +248,7 @@ class RichTextExample extends StatelessWidget {
                   OsmeaTextSpan(text: 'Label '),
                   OsmeaTextSpan(
                     text: 'Medium',
-                    style: TextStyle(color: OsmeaColors.sunsetGlow),
+                    style: OsmeaTextStyle.bodyLarge(context).copyWith(color: OsmeaColors.sunsetGlow),
                   ),
                 ],
               ),
@@ -261,7 +260,7 @@ class RichTextExample extends StatelessWidget {
   }
 
   // Rich text with different alignments
-  Widget alignmentRichTextExamples() {
+  Widget alignmentRichTextExamples(BuildContext context) {
     return OsmeaComponents.column(
       children: [
         OsmeaComponents.container(
@@ -278,7 +277,7 @@ class RichTextExample extends StatelessWidget {
             textSpans: [
               OsmeaTextSpan(
                 text: 'Left aligned ',
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style: OsmeaTextStyle.bodyLarge(context).copyWith(fontWeight: FontWeight.bold),
               ),
               OsmeaTextSpan(
                 text: 'rich text with multiple spans showing proper alignment.',
@@ -300,7 +299,7 @@ class RichTextExample extends StatelessWidget {
             textSpans: [
               OsmeaTextSpan(
                 text: 'Center aligned ',
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style: OsmeaTextStyle.bodyLarge(context).copyWith(fontWeight: FontWeight.bold),
               ),
               OsmeaTextSpan(
                 text: 'rich text with multiple spans showing proper alignment.',
@@ -321,7 +320,7 @@ class RichTextExample extends StatelessWidget {
             textSpans: [
               OsmeaTextSpan(
                 text: 'Right aligned ',
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style: OsmeaTextStyle.bodyLarge(context).copyWith(fontWeight: FontWeight.bold),
               ),
               OsmeaTextSpan(
                 text: 'rich text with multiple spans showing proper alignment.',
@@ -334,7 +333,7 @@ class RichTextExample extends StatelessWidget {
   }
 
   // Selectable rich text example
-  Widget selectableRichTextExample() {
+  Widget selectableRichTextExample(BuildContext context) {
     return OsmeaComponents.container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -350,11 +349,11 @@ class RichTextExample extends StatelessWidget {
           ),
           OsmeaTextSpan(
             text: 'Try selecting this text with your finger or mouse ',
-            style: const TextStyle(color: OsmeaColors.purple),
+            style: OsmeaTextStyle.bodyLarge(context).copyWith(color: OsmeaColors.purple),
           ),
           OsmeaTextSpan(
             text: 'to copy it to your clipboard.',
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: OsmeaTextStyle.bodyLarge(context).copyWith(fontWeight: FontWeight.bold),
           ),
         ],
       ),
@@ -362,7 +361,7 @@ class RichTextExample extends StatelessWidget {
   }
 
   // Advanced rich text examples
-  Widget advancedRichTextExamples() {
+  Widget advancedRichTextExamples(BuildContext context) {
     return OsmeaComponents.column(
       children: [
         // Code snippet example
@@ -377,68 +376,55 @@ class RichTextExample extends StatelessWidget {
             textSpans: [
               OsmeaTextSpan(
                 text: 'void ',
-                style: TextStyle(
-                    color: OsmeaColors.nordicBlue, fontFamily: 'monospace'),
+                style: OsmeaTextStyle.bodyLarge(context).copyWith(color: OsmeaColors.nordicBlue, fontFamily: 'monospace'),
               ),
               OsmeaTextSpan(
                 text: 'main',
-                style: TextStyle(
-                    color: OsmeaColors.sunsetGlow, fontFamily: 'monospace'),
+                style: OsmeaTextStyle.bodyLarge(context).copyWith(color: OsmeaColors.sunsetGlow, fontFamily: 'monospace'),
               ),
               OsmeaTextSpan(
                 text: '() {\n  ',
-                style: TextStyle(
-                    color: OsmeaColors.white, fontFamily: 'monospace'),
+                style: OsmeaTextStyle.bodyLarge(context).copyWith(color: OsmeaColors.white, fontFamily: 'monospace'),
               ),
               OsmeaTextSpan(
                 text: 'print',
-                style: TextStyle(
-                    color: OsmeaColors.nordicBlue, fontFamily: 'monospace'),
+                style: OsmeaTextStyle.bodyLarge(context).copyWith(color: OsmeaColors.nordicBlue, fontFamily: 'monospace'),
               ),
               OsmeaTextSpan(
                 text: '(',
-                style: TextStyle(
-                    color: OsmeaColors.white, fontFamily: 'monospace'),
+                style: OsmeaTextStyle.bodyLarge(context).copyWith(color: OsmeaColors.white, fontFamily: 'monospace'),
               ),
               OsmeaTextSpan(
                 text: "'Hello, world!'",
-                style: TextStyle(
-                    color: OsmeaColors.meadow, fontFamily: 'monospace'),
+                style: OsmeaTextStyle.bodyLarge(context).copyWith(color: OsmeaColors.meadow, fontFamily: 'monospace'),
               ),
               OsmeaTextSpan(
                 text: ');\n}',
-                style: TextStyle(
-                    color: OsmeaColors.white, fontFamily: 'monospace'),
+                style: OsmeaTextStyle.bodyLarge(context).copyWith(color: OsmeaColors.white, fontFamily: 'monospace'),
               ),
               OsmeaTextSpan(
                 text: 'main',
-                style: const TextStyle(
-                    color: Colors.yellow, fontFamily: 'monospace'),
+                style: OsmeaTextStyle.bodyLarge(context).copyWith(color: Colors.yellow, fontFamily: 'monospace'),
               ),
               OsmeaTextSpan(
                 text: '() {\n  ',
-                style: const TextStyle(
-                    color: Colors.white, fontFamily: 'monospace'),
+                style: OsmeaTextStyle.bodyLarge(context).copyWith(color: Colors.white, fontFamily: 'monospace'),
               ),
               OsmeaTextSpan(
                 text: 'print',
-                style: const TextStyle(
-                    color: Colors.lightBlue, fontFamily: 'monospace'),
+                style: OsmeaTextStyle.bodyLarge(context).copyWith(color: Colors.lightBlue, fontFamily: 'monospace'),
               ),
               OsmeaTextSpan(
                 text: '(',
-                style: const TextStyle(
-                    color: Colors.white, fontFamily: 'monospace'),
+                style: OsmeaTextStyle.bodyLarge(context).copyWith(color: Colors.white, fontFamily: 'monospace'),
               ),
               OsmeaTextSpan(
                 text: "'Hello, world!'",
-                style: const TextStyle(
-                    color: Colors.green, fontFamily: 'monospace'),
+                style: OsmeaTextStyle.bodyLarge(context).copyWith(color: Colors.green, fontFamily: 'monospace'),
               ),
               OsmeaTextSpan(
                 text: ');\n}',
-                style: const TextStyle(
-                    color: Colors.white, fontFamily: 'monospace'),
+                style: OsmeaTextStyle.bodyLarge(context).copyWith(color: Colors.white, fontFamily: 'monospace'),
               ),
             ],
           ),
@@ -464,26 +450,19 @@ class RichTextExample extends StatelessWidget {
               ),
               OsmeaTextSpan(
                 text: 'Info: ',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: OsmeaColors.nordicBlue,
-                ),
+                style: OsmeaTextStyle.bodyLarge(context).copyWith(fontWeight: FontWeight.bold, color: OsmeaColors.nordicBlue),
               ),
               OsmeaTextSpan(
                 text: 'This is an information message with ',
-                style: TextStyle(color: OsmeaColors.nordicBlue),
+                style: OsmeaTextStyle.bodyLarge(context).copyWith(color: OsmeaColors.nordicBlue),
               ),
               OsmeaTextSpan(
                 text: 'important details',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  decoration: TextDecoration.underline,
-                  color: OsmeaColors.nordicBlue,
-                ),
+                style: OsmeaTextStyle.bodyLarge(context).copyWith(fontWeight: FontWeight.bold, decoration: TextDecoration.underline, color: OsmeaColors.nordicBlue),
               ),
               OsmeaTextSpan(
                 text: '.',
-                style: TextStyle(color: OsmeaColors.nordicBlue),
+                style: OsmeaTextStyle.bodyLarge(context).copyWith(color: OsmeaColors.nordicBlue),
               ),
             ],
           ),
@@ -502,37 +481,23 @@ class RichTextExample extends StatelessWidget {
                 text: 'The product costs ',
               ),
               OsmeaTextSpan(
-                text: "\$",
-                style: TextStyle(
-                  color: OsmeaColors.meadow,
-                  fontWeight: FontWeight.bold,
-                ),
+                text: '\$',
+                style: OsmeaTextStyle.bodyLarge(context).copyWith(color: OsmeaColors.meadow, fontWeight: FontWeight.bold),
               ),
               OsmeaTextSpan(
                 text: '29',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: OsmeaColors.meadow,
-                ),
+                style: OsmeaTextStyle.bodyLarge(context).copyWith(fontSize: 22, fontWeight: FontWeight.bold, color: OsmeaColors.meadow),
               ),
               OsmeaTextSpan(
                 text: '.99',
-                style: TextStyle(
-                  color: OsmeaColors.meadow,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
+                style: OsmeaTextStyle.bodyLarge(context).copyWith(color: OsmeaColors.meadow, fontWeight: FontWeight.bold, fontSize: 16),
               ),
               OsmeaTextSpan(
                 text: ' (save ',
               ),
               OsmeaTextSpan(
                 text: '50%',
-                style: TextStyle(
-                  color: OsmeaColors.sunsetGlow,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: OsmeaTextStyle.bodyLarge(context).copyWith(color: OsmeaColors.sunsetGlow, fontWeight: FontWeight.bold),
               ),
               OsmeaTextSpan(
                 text: ')',

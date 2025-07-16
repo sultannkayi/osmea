@@ -25,95 +25,90 @@ class PositionedExampleScreen extends StatelessWidget {
             // Section title
             OsmeaComponents.text(
               '📍 Basic Positioning',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
             // Basic positioning example
             OsmeaComponents.text('Simple positioned elements:'),
             OsmeaComponents.sizedBox(height: 8),
-            basicPositionedExample(),
+            basicPositionedExample(context),
             OsmeaComponents.sizedBox(height: 24),
 
             // Corner positioning example
             OsmeaComponents.text('Positioning in corners:'),
             OsmeaComponents.sizedBox(height: 8),
-            cornerPositioningExample(),
+            cornerPositioningExample(context),
             OsmeaComponents.sizedBox(height: 24),
 
             // Section title for edge positioning
             OsmeaComponents.text(
               '📏 Edge Positioning',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
             // Edge positioning
             OsmeaComponents.text('Positioning along edges:'),
             OsmeaComponents.sizedBox(height: 8),
-            edgePositioningExample(),
+            edgePositioningExample(context),
             OsmeaComponents.sizedBox(height: 24),
 
             // Section title for fill and size
             OsmeaComponents.text(
               '📐 Fill and Size',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
             // Fill example
             OsmeaComponents.text('Using positionedFill:'),
             OsmeaComponents.sizedBox(height: 8),
-            fillPositioningExample(),
+            fillPositioningExample(context),
             OsmeaComponents.sizedBox(height: 24),
 
             // Size example
             OsmeaComponents.text('Setting width and height:'),
             OsmeaComponents.sizedBox(height: 8),
-            sizePositioningExample(),
+            sizePositioningExample(context),
             OsmeaComponents.sizedBox(height: 24),
 
             // Section title for fractional
             OsmeaComponents.text(
               '🔢 Fractional Positioning',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
             // Fractional example
             OsmeaComponents.text('Using positionedFractional:'),
             OsmeaComponents.sizedBox(height: 8),
-            fractionalPositioningExample(),
+            fractionalPositioningExample(context),
             OsmeaComponents.sizedBox(height: 24),
 
             // Section title for practical examples
             OsmeaComponents.text(
               '💡 Practical Examples',
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
             // Overlay example
             OsmeaComponents.text('Creating an overlay effect:'),
             OsmeaComponents.sizedBox(height: 8),
-            overlayExample(),
+            overlayExample(context),
             OsmeaComponents.sizedBox(height: 24),
 
             // Badge example
             OsmeaComponents.text('Adding badges to elements:'),
             OsmeaComponents.sizedBox(height: 8),
-            badgeExample(),
+            badgeExample(context),
             OsmeaComponents.sizedBox(height: 24),
 
             // Spacer example (new)
             OsmeaComponents.text('Spacer with positioned elements:'),
             OsmeaComponents.sizedBox(height: 8),
-            spacerExample(),
+            spacerExample(context),
             OsmeaComponents.sizedBox(height: 32),
           ],
         ),
@@ -122,7 +117,7 @@ class PositionedExampleScreen extends StatelessWidget {
   }
 
   // Basic positioning example
-  Widget basicPositionedExample() {
+  Widget basicPositionedExample(BuildContext context) {
     return OsmeaComponents.container(
       height: 200,
       color: OsmeaColors.silver,
@@ -131,22 +126,22 @@ class PositionedExampleScreen extends StatelessWidget {
           OsmeaComponents.positioned(
             left: 20,
             top: 20,
-            child: _buildColorBox(OsmeaColors.red, 'Top Left'),
+            child: _buildColorBox(context, OsmeaColors.red, 'Top Left'),
           ),
           OsmeaComponents.positioned(
             right: 20,
             top: 20,
-            child: _buildColorBox(OsmeaColors.blue, 'Top Right'),
+            child: _buildColorBox(context, OsmeaColors.blue, 'Top Right'),
           ),
           OsmeaComponents.positioned(
             left: 20,
             bottom: 20,
-            child: _buildColorBox(OsmeaColors.green, 'Bottom Left'),
+            child: _buildColorBox(context, OsmeaColors.green, 'Bottom Left'),
           ),
           OsmeaComponents.positioned(
             right: 20,
             bottom: 20,
-            child: _buildColorBox(OsmeaColors.sunsetGlow, 'Bottom Right'),
+            child: _buildColorBox(context, OsmeaColors.sunsetGlow, 'Bottom Right'),
           ),
         ],
       ),
@@ -154,7 +149,7 @@ class PositionedExampleScreen extends StatelessWidget {
   }
 
   // Corner positioning example
-  Widget cornerPositioningExample() {
+  Widget cornerPositioningExample(BuildContext context) {
     return OsmeaComponents.container(
       height: 200,
       color: OsmeaColors.silver,
@@ -163,8 +158,7 @@ class PositionedExampleScreen extends StatelessWidget {
         children: [
           OsmeaComponents.text(
             'Center Content',
-            textStyle:
-                const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           OsmeaComponents.positioned(
             left: 0,
@@ -192,7 +186,7 @@ class PositionedExampleScreen extends StatelessWidget {
   }
 
   // Edge positioning example
-  Widget edgePositioningExample() {
+  Widget edgePositioningExample(BuildContext context) {
     return OsmeaComponents.container(
       height: 200,
       color: OsmeaColors.silver,
@@ -278,7 +272,7 @@ class PositionedExampleScreen extends StatelessWidget {
   }
 
   // Fill positioning example
-  Widget fillPositioningExample() {
+  Widget fillPositioningExample(BuildContext context) {
     return OsmeaComponents.container(
       height: 200,
       color: OsmeaColors.silver,
@@ -306,7 +300,7 @@ class PositionedExampleScreen extends StatelessWidget {
               child: OsmeaComponents.center(
                 child: OsmeaComponents.text(
                   'Inset with Margins (20px)',
-                  textStyle: const TextStyle(fontWeight: FontWeight.bold),
+                  textStyle: OsmeaTextStyle.titleSmall(context).copyWith(fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -331,7 +325,7 @@ class PositionedExampleScreen extends StatelessWidget {
               ),
               child: OsmeaComponents.text(
                 'positionedFill',
-                textStyle: const TextStyle(fontSize: 12),
+                textStyle: OsmeaTextStyle.bodySmall(context).copyWith(fontSize: 12),
               ),
             ),
           ),
@@ -341,7 +335,7 @@ class PositionedExampleScreen extends StatelessWidget {
   }
 
   // Size positioning example
-  Widget sizePositioningExample() {
+  Widget sizePositioningExample(BuildContext context) {
     return OsmeaComponents.container(
       height: 200,
       color: OsmeaColors.silver,
@@ -378,7 +372,7 @@ class PositionedExampleScreen extends StatelessWidget {
               ),
               child: OsmeaComponents.text(
                 'Width: 120px',
-                textStyle: const TextStyle(color: OsmeaColors.white),
+                textStyle: OsmeaTextStyle.bodySmall(context).copyWith(color: OsmeaColors.white),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -389,7 +383,7 @@ class PositionedExampleScreen extends StatelessWidget {
   }
 
   // Fractional positioning example
-  Widget fractionalPositioningExample() {
+  Widget fractionalPositioningExample(BuildContext context) {
     return OsmeaComponents.container(
       height: 200,
       color: OsmeaColors.silver,
@@ -427,7 +421,7 @@ class PositionedExampleScreen extends StatelessWidget {
               child: OsmeaComponents.center(
                 child: OsmeaComponents.text(
                   'Fixed Size',
-                  textStyle: const TextStyle(color: OsmeaColors.white),
+                  textStyle: OsmeaTextStyle.bodySmall(context).copyWith(color: OsmeaColors.white),
                 ),
               ),
             ),
@@ -451,7 +445,7 @@ class PositionedExampleScreen extends StatelessWidget {
               ),
               child: OsmeaComponents.text(
                 'OsmeaPositioned',
-                textStyle: const TextStyle(fontSize: 12),
+                textStyle: OsmeaTextStyle.bodySmall(context).copyWith(fontSize: 12),
               ),
             ),
           ),
@@ -461,7 +455,7 @@ class PositionedExampleScreen extends StatelessWidget {
   }
 
   // Overlay example
-  Widget overlayExample() {
+  Widget overlayExample(BuildContext context) {
     return OsmeaComponents.container(
       height: 200,
       decoration: BoxDecoration(
@@ -506,19 +500,12 @@ class PositionedExampleScreen extends StatelessWidget {
               children: [
                 OsmeaComponents.text(
                   'Beautiful Nature',
-                  textStyle: const TextStyle(
-                    color: OsmeaColors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  textStyle: OsmeaTextStyle.titleLarge(context).copyWith(color: OsmeaColors.white, fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 OsmeaComponents.sizedBox(height: 4),
                 OsmeaComponents.text(
                   'Using positioned for overlay text on images',
-                  textStyle: TextStyle(
-                    color: OsmeaColors.white.withOpacity(0.7),
-                    fontSize: 14,
-                  ),
+                  textStyle: OsmeaTextStyle.bodySmall(context).copyWith(color: OsmeaColors.white.withValues(alpha: 0.7), fontSize: 14), 
                 ),
               ],
             ),
@@ -541,11 +528,7 @@ class PositionedExampleScreen extends StatelessWidget {
                   OsmeaComponents.sizedBox(width: 4),
                   OsmeaComponents.text(
                     'Featured',
-                    textStyle: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                      color: OsmeaColors.white,
-                    ),
+                    textStyle: OsmeaTextStyle.bodySmall(context).copyWith(fontWeight: FontWeight.bold, fontSize: 12, color: OsmeaColors.white),
                   ),
                 ],
               ),
@@ -557,7 +540,7 @@ class PositionedExampleScreen extends StatelessWidget {
   }
 
   // Spacer example with positioned elements
-  Widget spacerExample() {
+  Widget spacerExample(BuildContext context) {
     return OsmeaComponents.container(
       height: 200,
       color: OsmeaColors.silver,
@@ -567,10 +550,7 @@ class PositionedExampleScreen extends StatelessWidget {
           // Center content
           OsmeaComponents.text(
             'Content in the middle',
-            textStyle: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
+            textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontSize: 16, fontWeight: FontWeight.bold),
           ),
 
           // Top spacer with positioned element
@@ -584,7 +564,7 @@ class PositionedExampleScreen extends StatelessWidget {
               child: OsmeaComponents.center(
                 child: OsmeaComponents.text(
                   'Top Spacer',
-                  textStyle: const TextStyle(fontWeight: FontWeight.bold),
+                  textStyle: OsmeaTextStyle.titleSmall(context).copyWith(fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -601,7 +581,7 @@ class PositionedExampleScreen extends StatelessWidget {
               child: OsmeaComponents.center(
                 child: OsmeaComponents.text(
                   'Bottom Spacer',
-                  textStyle: const TextStyle(fontWeight: FontWeight.bold),
+                  textStyle: OsmeaTextStyle.titleSmall(context).copyWith(fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -620,7 +600,7 @@ class PositionedExampleScreen extends StatelessWidget {
                   quarterTurns: 3,
                   child: OsmeaComponents.text(
                     'Left Spacer',
-                    textStyle: const TextStyle(fontWeight: FontWeight.bold),
+                    textStyle: OsmeaTextStyle.titleSmall(context).copyWith(fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -640,7 +620,7 @@ class PositionedExampleScreen extends StatelessWidget {
                   quarterTurns: 1,
                   child: OsmeaComponents.text(
                     'Right Spacer',
-                    textStyle: const TextStyle(fontWeight: FontWeight.bold),
+                    textStyle: OsmeaTextStyle.titleSmall(context).copyWith(fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -652,7 +632,7 @@ class PositionedExampleScreen extends StatelessWidget {
   }
 
   // Badge example
-  Widget badgeExample() {
+  Widget badgeExample(BuildContext context) {
     return OsmeaComponents.container(
       height: 150,
       padding: const EdgeInsets.all(20),
@@ -690,16 +670,11 @@ class PositionedExampleScreen extends StatelessWidget {
                     children: [
                       OsmeaComponents.text(
                         'John Doe',
-                        textStyle: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       OsmeaComponents.text(
                         'Software Developer',
-                        textStyle: const TextStyle(
-                          color: OsmeaColors.grey,
-                        ),
+                        textStyle: OsmeaTextStyle.bodySmall(context).copyWith(color: OsmeaColors.grey),
                       ),
                     ],
                   ),
@@ -723,11 +698,7 @@ class PositionedExampleScreen extends StatelessWidget {
               ),
               child: OsmeaComponents.text(
                 'Online',
-                textStyle: const TextStyle(
-                  color: OsmeaColors.white,
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                ),
+                textStyle: OsmeaTextStyle.bodySmall(context).copyWith(color: OsmeaColors.white, fontSize: 12, fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -747,11 +718,7 @@ class PositionedExampleScreen extends StatelessWidget {
               ),
               child: OsmeaComponents.text(
                 'Pro Member',
-                textStyle: const TextStyle(
-                  color: OsmeaColors.white,
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                ),
+                textStyle: OsmeaTextStyle.bodySmall(context).copyWith(color: OsmeaColors.white, fontSize: 12, fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -761,7 +728,7 @@ class PositionedExampleScreen extends StatelessWidget {
   }
 
   // Helper for creating color boxes
-  Widget _buildColorBox(Color color, String text) {
+  Widget _buildColorBox(BuildContext context, Color color, String text) {
     return OsmeaComponents.container(
       width: 80,
       height: 80,
@@ -769,10 +736,7 @@ class PositionedExampleScreen extends StatelessWidget {
       child: OsmeaComponents.center(
         child: OsmeaComponents.text(
           text,
-          textStyle: const TextStyle(
-            color: OsmeaColors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(color: OsmeaColors.white, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
       ),

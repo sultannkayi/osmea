@@ -351,7 +351,7 @@ class _OsmeaSearchbarView extends StatelessWidget {
 
   Widget _buildBackButton(BuildContext context, SearchbarCubit cubit) {
     return OsmeaIconButton(
-      icon: searchbar.backIcon ?? Icon(Icons.arrow_back, size: 20),
+      icon: searchbar.backIcon ?? const Icon(Icons.arrow_back, size: 20),
       onPressed: cubit.handleBack,
       variant: ButtonVariant.ghost,
       tooltip: 'Clear',
@@ -385,7 +385,7 @@ class _OsmeaSearchbarView extends StatelessWidget {
         vertical: 12.0,
       ),
       prefixIcon: searchbar.showSearchIcon
-          ? Icon(
+          ?  Icon(
               Icons.search,
               size: 20,
               color: Colors.grey[600],
@@ -393,7 +393,7 @@ class _OsmeaSearchbarView extends StatelessWidget {
           : null,
       suffixIcon: state.shouldShowClearButton
           ? IconButton(
-              icon: searchbar.clearIcon ?? Icon(Icons.clear, size: 18),
+              icon: searchbar.clearIcon ?? const Icon(Icons.clear, size: 18),
               onPressed: cubit.clear,
               color: Colors.grey[600],
               padding: EdgeInsets.zero,
@@ -405,7 +405,7 @@ class _OsmeaSearchbarView extends StatelessWidget {
 
   Widget _buildLoadingIndicator(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
       child: OsmeaSizedBox(
         width: 16,
         height: 16,
@@ -453,8 +453,8 @@ class _OsmeaSearchbarView extends StatelessWidget {
     }
 
     return OsmeaContainer(
-      margin: EdgeInsets.only(top: 4),
-      padding: EdgeInsets.all(8),
+      margin: const EdgeInsets.only(top: 4),
+      padding: const EdgeInsets.all(8),
       child: Text(
         state.errorMessage!,
         style: TextStyle(

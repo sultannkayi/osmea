@@ -67,7 +67,7 @@ class _TicketWidgetExampleState extends State<TicketWidgetExample> {
         foregroundColor: OsmeaColors.white,
       ),
       body: _isLoading
-          ? OsmeaComponents.center(child: CircularProgressIndicator())
+          ? OsmeaComponents.center(child: const CircularProgressIndicator())
           : _errorMessage != null
               ? _buildErrorView()
               : _buildTicketForm(),

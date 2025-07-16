@@ -34,7 +34,7 @@ class _ListItemExampleState extends State<ListItemExample> {
             children: [
               OsmeaComponents.text(t('Standard List Item', 'Standard-Listenelement')),
               OsmeaComponents.listItem(
-                leading: CircleAvatar(child: Icon(Icons.person, color: OsmeaColors.white)),
+                leading: const CircleAvatar(child: Icon(Icons.person, color: OsmeaColors.white)),
                 title: OsmeaComponents.text(t('Title', 'Titel')),
                 subtitle: OsmeaComponents.text(t('Subtitle', 'Untertitel')),
                 trailing: const Icon(Icons.chevron_right),
@@ -66,7 +66,7 @@ class _ListItemExampleState extends State<ListItemExample> {
                 variant: ListItemVariant.filled,
                 leading: const Icon(Icons.inbox),
                 trailing: const Icon(Icons.done),
-                backgroundColor: OsmeaColors.silver.withOpacity(0.2),
+                backgroundColor: OsmeaColors.silver.withValues(alpha: 0.2),
               ),
               OsmeaComponents.sizedBox(height: 16),
               OsmeaComponents.text(t('Tonal List Item', 'Tonales Listenelement')),
@@ -75,7 +75,7 @@ class _ListItemExampleState extends State<ListItemExample> {
                 variant: ListItemVariant.tonal,
                 leading: const Icon(Icons.palette),
                 trailing: const Icon(Icons.color_lens),
-                backgroundColor: OsmeaColors.nordicBlue.withOpacity(0.1),
+                backgroundColor: OsmeaColors.nordicBlue.withValues(alpha: 0.1),
               ),
               OsmeaComponents.sizedBox(height: 16),
               OsmeaComponents.text(t('Ghost List Item', 'Geister-Listenelement')),
@@ -179,7 +179,7 @@ class _ListItemExampleState extends State<ListItemExample> {
                   t('Custom Child List Item', 'Benutzerdefiniertes Listenelement')),
               OsmeaComponents.listItem(
                 padding: const EdgeInsets.all(12),
-                backgroundColor: OsmeaColors.springLeaf.withOpacity(0.15),
+                backgroundColor: OsmeaColors.springLeaf.withValues(alpha: 0.15),
                 child: OsmeaComponents.row(
                   children: [
                     const Icon(Icons.label),

@@ -19,19 +19,25 @@ This document tracks the status of both design styles and reusable UI components
 | Textfields                    | 🟢     | 18.06.25   | 21.06.25 | @nisacolak         |
 | List Items                    | 🟢     | 23.06.25   | 24.06.25 | @NurhayatYurtaslan |
 | Ticket Widget                 | 🟢     | 25.06.25   | 25.06.25 | @gurkanfikretgunak |
-| Snackbar                      | 🔴     | (TBD)      | (TBD)    | (To be assigned)   |
-| Toast                         | 🟢     | 27.01.25   | 03.07.25 | @NurhayatYurtaslan |
+| Snackbar                      | 🟢     | 05.07.25   | 15.07.25 | @nisacolak         |
+| Toast                         | 🟢     | 27.06.25   | 03.07.25 | @NurhayatYurtaslan |
 | Carousel                      | 🟢     | 22.06.25   | 22.06.25 | @NurhayatYurtaslan |
 | Chips                         | 🟢     | 21.06.25   | 22.06.25 | @NurhayatYurtaslan |
 | Badge                         | 🟢     | 20.06.25   | 21.06.25 | @NurhayatYurtaslan |
-| Dividers                      | 🟢     | 27.01.25   | 28.01.25 | @NurhayatYurtaslan |
-| Accordion                     | 🟡     | 27.01.25   | (TBD)    | @NurhayatYurtaslan |
-| Loading ve Progress           | 🟢     | 27.01.25   | 28.01.25 | @NurhayatYurtaslan |
-| Stepper                       | 🟢     | 27.01.25   | 27.01.25 | @nisacolak         |
+| Dividers                      | 🟢     | 27.06.25   | 28.06.25 | @NurhayatYurtaslan |
+| Collapse                      | 🟢     | 11.07.25   | 11.07.25 | @melihalkbk        |
+| Collapse                      | 🟢     | 12.07.25   | 14.07.25 | @melihalkbk        |
+| Loading                       | 🟢     | 27.06.25   | 28.06.25 | @NurhayatYurtaslan |
+| Progress                      | 🟢     | 27.06.25   | 28.06.25 | @NurhayatYurtaslan |
+| Stepper                       | 🟢     | 27.06.25   | 27.06.25 | @nisacolak         |
 | Upload                        | 🔴     | (TBD)      | (TBD)    | (To be assigned)   |
 | Skeleton                      | 🔴     | (TBD)      | (TBD)    | (To be assigned)   |
-| Searchbar                     | 🟡     | 28.01.25   | (TBD)    | @nisacolak         |
-| Tabbar                        | 🟡     | 27.01.25   | (TBD)    | @NurhayatYurtaslan |
+| Searchbar                     | 🟢     | 28.06.25   | 03.07.25 | @nisacolak         |
+| Dropdown                      | 🟢     | 27.06.25   | 08.07.25 | @NurhayatYurtaslan |
+| Footer                        | 🟢     | 07.07.25   | 08.07.25 | @NurhayatYurtaslan |
+| Tabbar                        | 🟢     | 06.07.25   | 06.07.25 | @yuceel            |
+| Counter                       | 🟢     | 12.07.25   | 13.07.25 | @yuceel            |
+| Dot Indicator                 | 🟢     | 14.07.25   | 15.07.25 | @yuceel            |
 | Layout Utilities              | 🟡     | 20.06.25   | (TBD)    | @NurhayatYurtaslan @yuceel @nisacolak |
 
 ---

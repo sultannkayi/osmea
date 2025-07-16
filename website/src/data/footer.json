@@ -1,0 +1,48 @@
+{
+  "company": {
+    "name": "OSMEA",
+    "description": "Mobile E-commerce Architecture Framework built with Flutter for the future of cross-platform development."
+  },
+  "resources": {
+    "title": "Resources",
+    "links": [
+      {
+        "text": "Documentation",
+        "url": "https://github.com/masterfabric-mobile/osmea",
+        "external": true
+      },
+      {
+        "text": "Issues",
+        "url": "https://github.com/masterfabric-mobile/osmea/issues",
+        "external": true
+      },
+      {
+        "text": "Pull Requests",
+        "url": "https://github.com/masterfabric-mobile/osmea/pulls",
+        "external": true
+      }
+    ]
+  },
+  "community": {
+    "title": "Community",
+    "button": {
+      "text": "Source Code",
+      "url": "https://github.com/masterfabric-mobile/osmea",
+      "icon": "Github",
+      "variant": "outline",
+      "external": true
+    }
+  },
+  "copyright": {
+    "year": "2025",
+    "company": {
+      "name": "Masterfabric",
+      "url": "https://www.masterfabric.co"
+    },
+    "maintainer": "OSMEA Engineering Team",
+    "license": {
+      "name": "GNU AGPL v3.0",
+      "url": "https://github.com/masterfabric-mobile/osmea/blob/dev/LICENSE"
+    }
+  }
+} 

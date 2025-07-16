@@ -81,10 +81,10 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
       padding: const EdgeInsets.only(bottom: 16.0),
       child: OsmeaComponents.text(
         title,
-        textStyle: TextStyle(
+        textStyle: OsmeaTextStyle.titleLarge(context).copyWith(
           fontSize: 20,
           fontWeight: FontWeight.bold,
-          color: OsmeaColors.black.withOpacity(0.8),
+          color: OsmeaColors.black.withValues(alpha: 0.8),
         ),
       ),
     );
@@ -466,7 +466,7 @@ class _RadioButtonExampleState extends State<RadioButtonExample> {
       padding: const EdgeInsets.only(bottom: 8.0, top: 4.0),
       child: OsmeaComponents.text(
         title,
-        textStyle: const TextStyle(
+        textStyle: OsmeaTextStyle.titleMedium(context).copyWith(
           fontSize: 16,
           fontWeight: FontWeight.w600,
           color: OsmeaColors.black54,

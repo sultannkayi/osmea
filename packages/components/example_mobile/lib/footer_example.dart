@@ -22,8 +22,7 @@ class FooterExample extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: OsmeaComponents.text(
                 'OSMEA Footer Component',
-                textStyle:
-                    const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                textStyle: OsmeaTextStyle.headlineLarge(context).copyWith(fontSize: 28, fontWeight: FontWeight.bold),
               ),
             ),
             OsmeaComponents.sizedBox(height: 8),
@@ -32,7 +31,7 @@ class FooterExample extends StatelessWidget {
               child: OsmeaComponents.text(
                 'Modern, responsive footer component with customizable items and interactive bottom sheet integration.',
                 color: Colors.grey[600],
-                textStyle: const TextStyle(fontSize: 16),
+                textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(fontSize: 16),
               ),
             ),
             OsmeaComponents.sizedBox(height: 32),
@@ -42,13 +41,13 @@ class FooterExample extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 4),
               child: OsmeaComponents.text('Default OSMEA Footer',
-                  textStyle: const TextStyle(fontWeight: FontWeight.w600)),
+                  textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontWeight: FontWeight.w600)),
             ),
             OsmeaComponents.padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: OsmeaComponents.text('Standard footer with three items.',
                   color: Colors.grey[600],
-                  textStyle: const TextStyle(fontSize: 13)),
+                  textStyle: OsmeaTextStyle.bodySmall(context).copyWith(fontSize: 13)),
             ),
             OsmeaComponents.sizedBox(height: 8),
             OsmeaComponents.footer(variant: FooterVariant.defaultFooter),
@@ -59,14 +58,14 @@ class FooterExample extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 4),
               child: OsmeaComponents.text('Legal Footer',
-                  textStyle: const TextStyle(fontWeight: FontWeight.w600)),
+                  textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontWeight: FontWeight.w600)),
             ),
             OsmeaComponents.padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: OsmeaComponents.text(
                   'Footer with legal links and copyright.',
                   color: Colors.grey[600],
-                  textStyle: const TextStyle(fontSize: 13)),
+                  textStyle: OsmeaTextStyle.bodySmall(context).copyWith(fontSize: 13)),
             ),
             OsmeaComponents.sizedBox(height: 8),
             OsmeaComponents.footer(variant: FooterVariant.legal),
@@ -77,14 +76,14 @@ class FooterExample extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 4),
               child: OsmeaComponents.text('Social Footer',
-                  textStyle: const TextStyle(fontWeight: FontWeight.w600)),
+                  textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontWeight: FontWeight.w600)),
             ),
             OsmeaComponents.padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: OsmeaComponents.text(
                   'Footer with social links and contact.',
                   color: Colors.grey[600],
-                  textStyle: const TextStyle(fontSize: 13)),
+                  textStyle: OsmeaTextStyle.bodySmall(context).copyWith(fontSize: 13)),
             ),
             OsmeaComponents.sizedBox(height: 8),
             OsmeaComponents.footer(variant: FooterVariant.social),
@@ -95,13 +94,13 @@ class FooterExample extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 4),
               child: OsmeaComponents.text('Minimal Footer',
-                  textStyle: const TextStyle(fontWeight: FontWeight.w600)),
+                  textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontWeight: FontWeight.w600)),
             ),
             OsmeaComponents.padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: OsmeaComponents.text('Simple footer with just one link.',
                   color: Colors.grey[600],
-                  textStyle: const TextStyle(fontSize: 13)),
+                  textStyle: OsmeaTextStyle.bodySmall(context).copyWith(fontSize: 13)),
             ),
             OsmeaComponents.sizedBox(height: 8),
             OsmeaComponents.footer(variant: FooterVariant.minimal),
@@ -112,13 +111,13 @@ class FooterExample extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 4),
               child: OsmeaComponents.text('Text Only Footer',
-                  textStyle: const TextStyle(fontWeight: FontWeight.w600)),
+                  textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontWeight: FontWeight.w600)),
             ),
             OsmeaComponents.padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: OsmeaComponents.text('Footer with only text, no actions.',
                   color: Colors.grey[600],
-                  textStyle: const TextStyle(fontSize: 13)),
+                  textStyle: OsmeaTextStyle.bodySmall(context).copyWith(fontSize: 13)),
             ),
             OsmeaComponents.sizedBox(height: 8),
             OsmeaComponents.footer(
@@ -132,14 +131,14 @@ class FooterExample extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 4),
               child: OsmeaComponents.text('Custom Footer',
-                  textStyle: const TextStyle(fontWeight: FontWeight.w600)),
+                  textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontWeight: FontWeight.w600)),
             ),
             OsmeaComponents.padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: OsmeaComponents.text(
                   'Custom footer with icons, custom actions, and long label for overflow.',
                   color: Colors.grey[600],
-                  textStyle: const TextStyle(fontSize: 13)),
+                  textStyle: OsmeaTextStyle.bodySmall(context).copyWith(fontSize: 13)),
             ),
             OsmeaComponents.sizedBox(height: 8),
             OsmeaComponents.footer(
@@ -184,7 +183,7 @@ class FooterExample extends StatelessWidget {
               child: OsmeaComponents.text(
                 'Create Your Own Footer',
                 textStyle:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
             OsmeaComponents.padding(
@@ -192,7 +191,7 @@ class FooterExample extends StatelessWidget {
               child: OsmeaComponents.text(
                   'A footer with custom icons, colors, and actions. You can build any structure you want!',
                   color: Colors.grey[600],
-                  textStyle: const TextStyle(fontSize: 13)),
+                  textStyle: OsmeaTextStyle.bodySmall(context).copyWith(fontSize: 13)),
             ),
             OsmeaComponents.sizedBox(height: 8),
             OsmeaComponents.footer(

@@ -9,16 +9,16 @@ class ProgressExample extends StatefulWidget {
 }
 
 class _ProgressExampleState extends State<ProgressExample> {
-  // Single slider for all progress types
-  double progressValue = 0.25;
-  bool showPercentageInBar = true;
+  // Auto progress control
+  bool isAutoProgressEnabled = true;
+  double autoProgressSpeed = 0.05;
+  bool isIncreasing = true;
 
   final progressTypes = [
     ProgressType.wave,
     ProgressType.radialBar,
     ProgressType.arc,
     ProgressType.percent,
-    ProgressType.segmented,
     ProgressType.dotCircleBar,
   ];
 
@@ -26,8 +26,8 @@ class _ProgressExampleState extends State<ProgressExample> {
     'Wave',
     'Radial Bar',
     'Arc',
-    'Percent',
-    'Segment',
+    'Segment'
+        'Percent',
     'Dot Circle Bar',
   ];
 
@@ -48,7 +48,6 @@ class _ProgressExampleState extends State<ProgressExample> {
     ProgressSize.extraLarge,
   ];
 
-  // Short labels for sizes
   final progressSizeLabels = [
     'XS',
     'S',
@@ -84,41 +83,88 @@ class _ProgressExampleState extends State<ProgressExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: OsmeaComponents.appBar(title: OsmeaComponents.text('Progress Examples')),
+      appBar: OsmeaComponents.appBar(
+          title: OsmeaComponents.text('Progress Examples')),
       body: OsmeaComponents.padding(
         padding: const EdgeInsets.all(16.0),
         child: OsmeaComponents.singleChildScrollView(
           child: OsmeaComponents.column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Toggle for showing percentage inside bar
-              OsmeaComponents.row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  OsmeaComponents.text(
-                    'Show percentage inside bar',
-                    fontSize: 16,
+              // Simple controls
+              Card(
+                child: OsmeaComponents.padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: OsmeaComponents.column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      OsmeaComponents.text(
+                        '🔄 Auto Progress Controls',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+
+                      // Direction buttons
+                      OsmeaComponents.row(
+                        children: [
+                          Expanded(
+                            child: OsmeaComponents.button(
+                              text: 'Increase',
+                              onPressed: isIncreasing
+                                  ? null
+                                  : () => setState(() => isIncreasing = true),
+                              variant: isIncreasing
+                                  ? ButtonVariant.primary
+                                  : ButtonVariant.outlined,
+                              size: ButtonSize.small,
+                              icon: const Icon(Icons.trending_up, size: 16),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: OsmeaComponents.button(
+                              text: 'Decrease',
+                              onPressed: !isIncreasing
+                                  ? null
+                                  : () => setState(() => isIncreasing = false),
+                              variant: !isIncreasing
+                                  ? ButtonVariant.primary
+                                  : ButtonVariant.outlined,
+                              size: ButtonSize.small,
+                              icon: const Icon(Icons.trending_down, size: 16),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      const SizedBox(height: 16),
+
+                      // Speed control
+                      OsmeaComponents.text(
+                        'Speed: ${(autoProgressSpeed * 1000).toStringAsFixed(0)} ms',
+                        fontSize: 14,
+                        color: Colors.grey[600],
+                      ),
+                      Slider(
+                        value: autoProgressSpeed,
+                        min: 0.02,
+                        max: 0.15,
+                        divisions: 13,
+                        label:
+                            '${(autoProgressSpeed * 1000).toStringAsFixed(0)} ms',
+                        onChanged: (value) =>
+                            setState(() => autoProgressSpeed = value),
+                      ),
+                    ],
                   ),
-                  Switch(
-                    value: showPercentageInBar,
-                    onChanged: (v) => setState(() => showPercentageInBar = v),
-                  ),
-                ],
+                ),
               ),
-              // Progress control slider
-              Slider(
-                value: progressValue,
-                min: 0.0,
-                max: 1.0,
-                divisions: 100,
-                label: '${(progressValue * 100).toStringAsFixed(0)}%',
-                onChanged: (v) => setState(() => progressValue = v),
-              ),
+              OsmeaComponents.sizedBox(height: 16),
 
               // Circular progress types
               ...List.generate(
                 progressTypes.length,
-                (i) => OsmeaComponents.column(
+                (i) => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     OsmeaComponents.text(
@@ -126,28 +172,76 @@ class _ProgressExampleState extends State<ProgressExample> {
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
                     ),
-                    OsmeaComponents.sizedBox(
-                      height: 110,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: progressSizes.length,
-                        separatorBuilder: (_, __) => OsmeaComponents.sizedBox(width: 24),
-                        itemBuilder: (context, j) {
-                          return OsmeaComponents.column(
-                            mainAxisSize: MainAxisSize.min,
+                    Column(
+                      children: List.generate(
+                        (progressSizes.length / 2).ceil(),
+                        (rowIdx) {
+                          final firstIdx = rowIdx * 2;
+                          final secondIdx = firstIdx + 1;
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              OsmeaComponents.progress(
-                                type: progressTypes[i],
-                                value: progressValue,
-                                size: progressSizes[j],
-                                color: progressColors[i],
-                                showPercentage: true,
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 12.0, horizontal: 4.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      OsmeaComponents.progress(
+                                        key:
+                                            ValueKey('circular_${i}_$firstIdx'),
+                                        type: progressTypes[i],
+                                        value: isIncreasing ? 0.0 : 1.0,
+                                        size: progressSizes[firstIdx],
+                                        progressColor: progressColors[i],
+                                        showPercentage: true,
+                                        isAutoProgressEnabled:
+                                            isAutoProgressEnabled,
+                                        autoProgressSpeed: autoProgressSpeed,
+                                        isIncreasing: isIncreasing,
+                                      ),
+                                      const SizedBox(height: 8),
+                                      OsmeaComponents.text(
+                                        progressSizeLabels[firstIdx],
+                                        fontSize: 13,
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
-                              OsmeaComponents.sizedBox(height: 8),
-                              OsmeaComponents.text(
-                                progressSizeLabels[j],
-                                fontSize: 13,
-                              ),
+                              if (secondIdx < progressSizes.length)
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12.0, horizontal: 4.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        OsmeaComponents.progress(
+                                          key: ValueKey(
+                                              'circular_${i}_$secondIdx'),
+                                          type: progressTypes[i],
+                                          value: isIncreasing ? 0.0 : 1.0,
+                                          size: progressSizes[secondIdx],
+                                          progressColor: progressColors[i],
+                                          showPercentage: true,
+                                          isAutoProgressEnabled:
+                                              isAutoProgressEnabled,
+                                          autoProgressSpeed: autoProgressSpeed,
+                                          isIncreasing: isIncreasing,
+                                        ),
+                                        OsmeaComponents.sizedBox(height: 8),
+                                        OsmeaComponents.text(
+                                          progressSizeLabels[secondIdx],
+                                          fontSize: 13,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              else
+                                const Expanded(child: SizedBox()),
                             ],
                           );
                         },
@@ -191,12 +285,16 @@ class _ProgressExampleState extends State<ProgressExample> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 OsmeaComponents.progress(
+                                  key: ValueKey('linear_${i}_$j'),
                                   type: linearTypes[i],
-                                  value: progressValue,
+                                  value: isIncreasing ? 0.0 : 1.0,
                                   size: progressSizes[j],
-                                  color: linearColors[i],
-                                  showPercentage: showPercentageInBar,
+                                  progressColor: linearColors[i],
+                                  showPercentage: true,
                                   speed: 1.0,
+                                  isAutoProgressEnabled: isAutoProgressEnabled,
+                                  autoProgressSpeed: autoProgressSpeed,
+                                  isIncreasing: isIncreasing,
                                 ),
                               ],
                             ),

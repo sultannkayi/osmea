@@ -122,7 +122,7 @@ class ConfigSection extends StatelessWidget {
               _buildConfigChip('Size', _formatEnumName(_enumToString(size))),
               _buildConfigChip(
                   'Variant', _formatEnumName(_enumToString(variant))),
-              _buildConfigChip('Elevation', '${elevation.toStringAsFixed(1)}'),
+              _buildConfigChip('Elevation', '$elevation.toStringAsFixed(1)'),
               _buildConfigChip('Items', '$itemCount'),
               if (showLabels) _buildConfigChip('Labels', 'Shown'),
               if (showIcons) _buildConfigChip('Icons', 'Shown'),

@@ -183,7 +183,7 @@ class _CardExampleState extends State<CardExample> {
               color: OsmeaColors.nordicBlue,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(Icons.landscape, color: OsmeaColors.white, size: 48),
+            child:  const Icon(Icons.landscape, color: OsmeaColors.white, size: 48),
           ),
           imageHeight: 200,
           imagePosition: ComponentPosition.bottom,
@@ -212,7 +212,7 @@ class _CardExampleState extends State<CardExample> {
               color: OsmeaColors.crystalBay,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(Icons.computer, color: OsmeaColors.white, size: 32),
+            child: const Icon(Icons.computer, color: OsmeaColors.white, size: 32),
           ),
           imageHeight: 100,
           imagePosition: ComponentPosition.left,
@@ -252,7 +252,7 @@ class _CardExampleState extends State<CardExample> {
               ],
             ),
             child: OsmeaComponents.center(
-              child: Icon(
+              child: const Icon(
                 Icons.headphones,
                 color: OsmeaColors.white,
                 size: 90,
@@ -317,7 +317,7 @@ class _CardExampleState extends State<CardExample> {
             child: OsmeaComponents.column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
+                const Icon(
                   Icons.watch,
                   color: OsmeaColors.white,
                   size: 85,
@@ -332,7 +332,7 @@ class _CardExampleState extends State<CardExample> {
                   child: OsmeaComponents.row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.favorite,
+                       Icon(Icons.favorite,
                           color: OsmeaColors.sunsetGlow, size: 16),
                       OsmeaComponents.sizedBox(width: 4),
                       OsmeaComponents.text('72 BPM',
@@ -400,7 +400,7 @@ class _CardExampleState extends State<CardExample> {
                     children: [
                       OsmeaComponents.text(
                         '5G',
-                        textStyle: const TextStyle(
+                        textStyle: OsmeaTextStyle.labelLarge(context).copyWith(
                           color: OsmeaColors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -412,7 +412,7 @@ class _CardExampleState extends State<CardExample> {
                 ),
                 OsmeaComponents.expanded(
                   child: OsmeaComponents.center(
-                    child: Icon(
+                    child: const Icon(
                       Icons.smartphone,
                       color: OsmeaColors.white,
                       size: 80,
@@ -432,8 +432,10 @@ class _CardExampleState extends State<CardExample> {
                         ),
                         child: OsmeaComponents.text(
                           '1TB Storage',
-                          textStyle: const TextStyle(
-                              color: OsmeaColors.white, fontSize: 12),
+                          textStyle: OsmeaTextStyle.bodySmall(context).copyWith(
+                            color: OsmeaColors.white,
+                            fontSize: 12,
+                          ),
                         ),
                       ),
                       OsmeaComponents.spacer(),
@@ -456,7 +458,7 @@ class _CardExampleState extends State<CardExample> {
             ),
             child: OsmeaComponents.text(
               '25% OFF',
-              textStyle: const TextStyle(
+              textStyle: OsmeaTextStyle.labelSmall(context).copyWith(
                 color: OsmeaColors.white,
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
@@ -522,7 +524,7 @@ class _CardExampleState extends State<CardExample> {
                 ),
                 OsmeaComponents.expanded(
                   child: OsmeaComponents.center(
-                    child: Icon(
+                    child:  Icon(
                       Icons.headset_mic,
                       color: OsmeaColors.azureWave,
                       size: 75,
@@ -545,7 +547,7 @@ class _CardExampleState extends State<CardExample> {
             ),
             child: OsmeaComponents.text(
               'GAMING',
-              textStyle: const TextStyle(
+              textStyle: OsmeaTextStyle.labelSmall(context).copyWith(
                 color: OsmeaColors.white,
                 fontSize: 11,
                 fontWeight: FontWeight.bold,
@@ -648,7 +650,7 @@ class _CardExampleState extends State<CardExample> {
             ),
             child: OsmeaComponents.text(
               'SMART',
-              textStyle: const TextStyle(
+              textStyle: OsmeaTextStyle.labelSmall(context).copyWith(
                 color: OsmeaColors.white,
                 fontSize: 11,
                 fontWeight: FontWeight.bold,
@@ -1177,7 +1179,7 @@ class _CardExampleState extends State<CardExample> {
                       shape: BoxShape.circle,
                     ),
                     child:
-                        Icon(Icons.person, color: OsmeaColors.white, size: 32),
+                        const Icon(Icons.person, color: OsmeaColors.white, size: 32),
                   ),
                   OsmeaComponents.sizedBox(width: 16),
                   OsmeaComponents.expanded(

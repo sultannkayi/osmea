@@ -16,29 +16,29 @@ class SizedBoxExample extends StatelessWidget {
         child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildSectionTitle('Basic SizedBox'),
-            _buildBasicSizedBoxExamples(),
+            _buildSectionTitle(context, 'Basic SizedBox'),
+            _buildBasicSizedBoxExamples(context),
             OsmeaComponents.sizedBox(height: 32),
-            _buildSectionTitle('Styled SizedBox'),
-            _buildStyledSizedBoxExamples(),
+            _buildSectionTitle(context, 'Styled SizedBox'),
+            _buildStyledSizedBoxExamples(context),
             OsmeaComponents.sizedBox(height: 32),
-            _buildSectionTitle('Interactive SizedBox'),
-            _buildInteractiveSizedBoxExamples(),
+            _buildSectionTitle(context, 'Interactive SizedBox'),
+            _buildInteractiveSizedBoxExamples(context),
             OsmeaComponents.sizedBox(height: 32),
-            _buildSectionTitle('Convenience Methods'),
-            _buildConvenienceMethodExamples(),
+            _buildSectionTitle(context, 'Convenience Methods'),
+            _buildConvenienceMethodExamples(context),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildSectionTitle(String title) {
+  Widget _buildSectionTitle(BuildContext context, String title) {
     return OsmeaComponents.padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: OsmeaComponents.text(
         title,
-        textStyle: const TextStyle(
+        textStyle: OsmeaTextStyle.titleLarge(context).copyWith(
           fontSize: 20,
           fontWeight: FontWeight.bold,
         ),
@@ -46,43 +46,47 @@ class SizedBoxExample extends StatelessWidget {
     );
   }
 
-  Widget _buildBasicSizedBoxExamples() {
+  Widget _buildBasicSizedBoxExamples(BuildContext context) {
     return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildExampleWithCaption(
+          context,
           'Fixed Width & Height',
           OsmeaComponents.sizedBox(
             width: 200,
             height: 100,
             child: _buildColoredBox(
-                color: OsmeaColors.nordicBlue, text: 'Width: 200, Height: 100'),
+                context, color: OsmeaColors.nordicBlue, text: 'Width: 200, Height: 100'),
           ),
         ),
         OsmeaComponents.sizedBox(height: 16),
         _buildExampleWithCaption(
+          context,
           'Fixed Width Only',
           OsmeaComponents.sizedBox(
             width: 150,
-            child: _buildColoredBox(color: OsmeaColors.forestHeart, text: 'Width: 150'),
+            child: _buildColoredBox(context, color: OsmeaColors.forestHeart, text: 'Width: 150'),
           ),
         ),
         OsmeaComponents.sizedBox(height: 16),
         _buildExampleWithCaption(
+          context,
           'Fixed Height Only',
           OsmeaComponents.sizedBox(
             height: 60,
-            child: _buildColoredBox(color: OsmeaColors.sunsetGlow, text: 'Height: 60'),
+            child: _buildColoredBox(context, color: OsmeaColors.sunsetGlow, text: 'Height: 60'),
           ),
         ),
         OsmeaComponents.sizedBox(height: 16),
         _buildExampleWithCaption(
+          context,
           'Empty SizedBox as Spacer',
           OsmeaComponents.column(
             children: [
-              _buildColoredBox(color: OsmeaColors.purple, text: 'Before Spacer'),
+              _buildColoredBox(context, color: OsmeaColors.purple, text: 'Before Spacer'),
               OsmeaComponents.sizedBox(height: 30),
-              _buildColoredBox(color: OsmeaColors.purple, text: 'After Spacer'),
+              _buildColoredBox(context, color: OsmeaColors.purple, text: 'After Spacer'),
             ],
           ),
         ),
@@ -90,11 +94,12 @@ class SizedBoxExample extends StatelessWidget {
     );
   }
 
-  Widget _buildStyledSizedBoxExamples() {
+  Widget _buildStyledSizedBoxExamples(BuildContext context) {
     return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildExampleWithCaption(
+          context,
           'SizedBox with Container Child',
           OsmeaComponents.sizedBox(
             width: 200,
@@ -111,6 +116,7 @@ class SizedBoxExample extends StatelessWidget {
         ),
         OsmeaComponents.sizedBox(height: 16),
         _buildExampleWithCaption(
+          context,
           'SizedBox with Bordered Container',
           OsmeaComponents.sizedBox(
             width: 200,
@@ -127,6 +133,7 @@ class SizedBoxExample extends StatelessWidget {
         ),
         OsmeaComponents.sizedBox(height: 16),
         _buildExampleWithCaption(
+          context,
           'SizedBox with Shadowed Container',
           OsmeaComponents.sizedBox(
             width: 200,
@@ -136,7 +143,7 @@ class SizedBoxExample extends StatelessWidget {
                 color: OsmeaColors.forestHeart,
                 boxShadow: [
                   BoxShadow(
-                    color: OsmeaColors.black.withOpacity(0.2),
+                    color: OsmeaColors.black.withValues(alpha: 0.2),
                     blurRadius: 10,
                     spreadRadius: 2,
                     offset: const Offset(0, 4),
@@ -146,7 +153,7 @@ class SizedBoxExample extends StatelessWidget {
               child: OsmeaComponents.center(
                   child: OsmeaComponents.text(
                 'With BoxShadow',
-                textStyle: TextStyle(
+                textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
                   color: OsmeaColors.forestHeart.computeLuminance() > 0.5
                       ? OsmeaColors.black
                       : OsmeaColors.white,
@@ -158,6 +165,7 @@ class SizedBoxExample extends StatelessWidget {
         ),
         OsmeaComponents.sizedBox(height: 16),
         _buildExampleWithCaption(
+          context,
           'SizedBox with Gradient Container',
           OsmeaComponents.sizedBox(
             width: 200,
@@ -173,7 +181,7 @@ class SizedBoxExample extends StatelessWidget {
               child: OsmeaComponents.center(
                 child: OsmeaComponents.text(
                   'With Gradient',
-                  textStyle: const TextStyle(
+                  textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
                       color: OsmeaColors.white, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -182,6 +190,7 @@ class SizedBoxExample extends StatelessWidget {
         ),
         OsmeaComponents.sizedBox(height: 16),
         _buildExampleWithCaption(
+          context,
           'SizedBox with Padded Container',
           OsmeaComponents.sizedBox(
             width: 200,
@@ -190,7 +199,7 @@ class SizedBoxExample extends StatelessWidget {
               margin: const EdgeInsets.all(10),
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: OsmeaColors.amberFlame.withOpacity(0.2),
+                color: OsmeaColors.amberFlame.withValues(alpha: 0.2), 
                 border: Border.all(color: OsmeaColors.amberFlame),
               ),
               child: OsmeaComponents.container(
@@ -205,11 +214,12 @@ class SizedBoxExample extends StatelessWidget {
     );
   }
 
-  Widget _buildInteractiveSizedBoxExamples() {
+  Widget _buildInteractiveSizedBoxExamples(BuildContext context) {
     return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildExampleWithCaption(
+          context,
           'SizedBox with GestureDetector',
           OsmeaComponents.sizedBox(
             width: 200,
@@ -226,13 +236,14 @@ class SizedBoxExample extends StatelessWidget {
                 child: OsmeaComponents.center(
                     child: OsmeaComponents.text('Tap Me!',
                         textStyle:
-                            const TextStyle(fontWeight: FontWeight.bold))),
+                            OsmeaTextStyle.bodyLarge(context).copyWith(fontWeight: FontWeight.bold))),
               ),
             ),
           ),
         ),
         OsmeaComponents.sizedBox(height: 16),
         _buildExampleWithCaption(
+          context,
           'SizedBox with Long Press GestureDetector',
           OsmeaComponents.sizedBox(
             width: 200,
@@ -249,7 +260,7 @@ class SizedBoxExample extends StatelessWidget {
                 child: OsmeaComponents.center(
                     child: OsmeaComponents.text('Long Press Me!',
                         textStyle:
-                            const TextStyle(fontWeight: FontWeight.bold))),
+                            OsmeaTextStyle.bodyLarge(context).copyWith(fontWeight: FontWeight.bold))),
               ),
             ),
           ),
@@ -258,7 +269,7 @@ class SizedBoxExample extends StatelessWidget {
     );
   }
 
-  Widget _buildExampleWithCaption(String caption, Widget child) {
+  Widget _buildExampleWithCaption(BuildContext context, String caption, Widget child) {
     return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -266,7 +277,7 @@ class SizedBoxExample extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 8),
           child: OsmeaComponents.text(
             caption,
-            textStyle: const TextStyle(
+            textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(
               fontSize: 14,
               fontWeight: FontWeight.bold,
             ),
@@ -277,14 +288,14 @@ class SizedBoxExample extends StatelessWidget {
     );
   }
 
-  Widget _buildColoredBox({required Color color, required String text}) {
+  Widget _buildColoredBox(BuildContext context, {required Color color, required String text}) {
     return OsmeaComponents.container(
       width: double.infinity,
       color: color,
       padding: const EdgeInsets.all(12),
       child: OsmeaComponents.text(
         text,
-        textStyle: TextStyle(
+        textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
           color: color.computeLuminance() > 0.5 ? OsmeaColors.black : OsmeaColors.white,
           fontWeight: FontWeight.bold,
         ),
@@ -292,13 +303,14 @@ class SizedBoxExample extends StatelessWidget {
     );
   }
 
-  Widget _buildConvenienceMethodExamples() {
+  Widget _buildConvenienceMethodExamples(BuildContext context) {
     // Since OsmeaSizedBox now only accepts standard SizedBox properties,
     // we demonstrate these using Flutter's built-in SizedBox convenience constructors
     return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildExampleWithCaption(
+          context,
           'Square SizedBox',
           OsmeaComponents.sizedBox(
             width: 100,
@@ -309,7 +321,7 @@ class SizedBoxExample extends StatelessWidget {
                 child: OsmeaComponents.text(
                   'Square\n100x100',
                   textAlign: TextAlign.center,
-                  textStyle: const TextStyle(color: OsmeaColors.white),
+                  textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(color: OsmeaColors.white),
                 ),
               ),
             ),
@@ -317,6 +329,7 @@ class SizedBoxExample extends StatelessWidget {
         ),
         OsmeaComponents.sizedBox(height: 16),
         _buildExampleWithCaption(
+          context,
           'Expanded SizedBox',
           OsmeaComponents.sizedBox(
             height: 80,
@@ -333,7 +346,7 @@ class SizedBoxExample extends StatelessWidget {
                       child: OsmeaComponents.center(
                         child: OsmeaComponents.text(
                           'Expands to Fill Parent',
-                          textStyle: const TextStyle(color: OsmeaColors.white),
+                          textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(color: OsmeaColors.white),
                         ),
                       ),
                     ),
@@ -345,6 +358,7 @@ class SizedBoxExample extends StatelessWidget {
         ),
         OsmeaComponents.sizedBox(height: 16),
         _buildExampleWithCaption(
+          context,
           'Horizontal Spacing',
           OsmeaComponents.row(
             children: [
@@ -370,6 +384,7 @@ class SizedBoxExample extends StatelessWidget {
         ),
         OsmeaComponents.sizedBox(height: 16),
         _buildExampleWithCaption(
+          context,
           'Vertical Spacing',
           OsmeaComponents.column(
             children: [

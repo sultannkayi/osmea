@@ -28,7 +28,7 @@ class RowExampleScreen extends StatelessWidget {
             OsmeaComponents.text(
               '🔄 Basic Rows',
               textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
@@ -48,7 +48,7 @@ class RowExampleScreen extends StatelessWidget {
             OsmeaComponents.text(
               '📏 Spacing & Distribution (Using Composition)',
               textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
@@ -68,7 +68,7 @@ class RowExampleScreen extends StatelessWidget {
             OsmeaComponents.text(
               '🔀 Wrapping Rows (Using Composition)',
               textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
@@ -82,7 +82,7 @@ class RowExampleScreen extends StatelessWidget {
             OsmeaComponents.text(
               '🎨 Row Styling (Using Composition)',
               textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
@@ -96,7 +96,7 @@ class RowExampleScreen extends StatelessWidget {
             OsmeaComponents.text(
               '👆 Interactive Rows (Using Composition)',
               textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
@@ -110,14 +110,14 @@ class RowExampleScreen extends StatelessWidget {
             OsmeaComponents.text(
               '🚀 Advanced Examples (Using Composition)',
               textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
 
             // Complex row combinations
             OsmeaComponents.text('Complex row combinations:'),
             OsmeaComponents.sizedBox(height: 8),
-            complexRowExamples(),
+            complexRowExamples(context),
           ],
         ),
       ),
@@ -399,7 +399,7 @@ class RowExampleScreen extends StatelessWidget {
   }
 
   // Advanced row examples
-  Widget complexRowExamples() {
+  Widget complexRowExamples(BuildContext context) {
     return OsmeaComponents.container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -437,13 +437,13 @@ class RowExampleScreen extends StatelessWidget {
                       children: [
                         OsmeaComponents.text(
                           'John Doe',
-                          textStyle: const TextStyle(
+                          textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         OsmeaComponents.text(
                           'Online',
-                          textStyle: TextStyle(
+                          textStyle: OsmeaTextStyle.bodySmall(context).copyWith(
                             fontSize: 12,
                             color: OsmeaColors.forestHeart,
                           ),
@@ -454,15 +454,15 @@ class RowExampleScreen extends StatelessWidget {
                 ),
                 OsmeaComponents.row(
                   children: [
-                    IconButton(
+                    OsmeaComponents.iconButton(
                       icon: const Icon(Icons.call),
                       onPressed: () {},
                     ),
-                    IconButton(
+                    OsmeaComponents.iconButton(
                       icon: const Icon(Icons.videocam),
                       onPressed: () {},
                     ),
-                    IconButton(
+                    OsmeaComponents.iconButton(
                       icon: const Icon(Icons.more_vert),
                       onPressed: () {},
                     ),
@@ -496,7 +496,7 @@ class RowExampleScreen extends StatelessWidget {
                   ),
                   child: OsmeaComponents.text(
                     '3 items',
-                    textStyle: const TextStyle(
+                    textStyle: OsmeaTextStyle.bodySmall(context).copyWith(
                       color: OsmeaColors.white,
                       fontSize: 12,
                     ),

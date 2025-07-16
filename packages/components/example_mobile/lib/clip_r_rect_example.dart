@@ -52,7 +52,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('OSMEA ClipRRect Examples'),
         backgroundColor: OsmeaColors.nordicBlue,
         foregroundColor: OsmeaColors.white,
@@ -65,12 +65,12 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
             children: [
               OsmeaComponents.text(
                 '✂️ Interactive ClipRRect Demo',
-                textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                textStyle: OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               OsmeaComponents.sizedBox(height: 16),
               OsmeaComponents.text(
                 'Explore all ClipRRect features with interactive controls.',
-                textStyle: const TextStyle(fontSize: 14),
+                textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(fontSize: 14),
                 color: OsmeaColors.pewter,
                 textAlign: TextAlign.center,
               ),
@@ -107,7 +107,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
           children: [
             OsmeaComponents.text(
               '🎛️ Interactive Controls',
-              textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 20),
             
@@ -139,7 +139,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
       children: [
         OsmeaComponents.text(
           'Border Radius Type:',
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         OsmeaComponents.sizedBox(height: 12),
         OsmeaComponents.wrap(
@@ -163,7 +163,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
                 ),
                 child: OsmeaComponents.text(
                   radiusTypeLabels[index],
-                  textStyle: TextStyle(
+                  textStyle: OsmeaTextStyle.bodySmall(context).copyWith(
                     color: isSelected ? OsmeaColors.white : OsmeaColors.slate,
                     fontSize: 12,
                     fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
@@ -186,11 +186,11 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
           children: [
             OsmeaComponents.text(
               'Border Radius:',
-              textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.text(
               '${borderRadiusValue.toInt()}px',
-              textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(fontSize: 14, fontWeight: FontWeight.bold),
               color: OsmeaColors.nordicBlue,
             ),
           ],
@@ -219,7 +219,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
       children: [
         OsmeaComponents.text(
           'Select Corners:',
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         OsmeaComponents.sizedBox(height: 12),
         OsmeaComponents.row(
@@ -279,7 +279,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
           OsmeaComponents.flexible(
             child: OsmeaComponents.text(
               label,
-              textStyle: const TextStyle(fontSize: 12),
+              textStyle: OsmeaTextStyle.bodySmall(context).copyWith(fontSize: 12),
             ),
           ),
         ],
@@ -293,7 +293,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
       children: [
         OsmeaComponents.text(
           'Clip Behavior:',
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         OsmeaComponents.sizedBox(height: 12),
         OsmeaComponents.container(
@@ -309,7 +309,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
               value: clipBehavior,
               isExpanded: true,
               icon: Icon(Icons.arrow_drop_down, color: OsmeaColors.nordicBlue),
-              style: TextStyle(color: OsmeaColors.slate, fontSize: 14),
+              style: OsmeaTextStyle.bodyMedium(context).copyWith(color: OsmeaColors.slate, fontSize: 14),
               dropdownColor: OsmeaColors.white,
               onChanged: (Clip? newValue) {
                 if (newValue != null) {
@@ -323,7 +323,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
                   value: value,
                   child: OsmeaComponents.text(
                     clipBehaviorLabels[value] ?? '',
-                    textStyle: const TextStyle(fontSize: 14),
+                    textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(fontSize: 14),
                   ),
                 );
               }).toList(),
@@ -333,7 +333,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.text(
           clipBehaviorDescriptions[clipBehavior] ?? '',
-          textStyle: const TextStyle(fontSize: 12),
+          textStyle: OsmeaTextStyle.bodySmall(context).copyWith(fontSize: 12),
           color: OsmeaColors.pewter,
         ),
       ],
@@ -349,7 +349,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
           children: [
             OsmeaComponents.text(
               '🎬 Live Examples',
-              textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 20),
             
@@ -406,17 +406,17 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
         children: [
           OsmeaComponents.text(
             'Current Settings:',
-            textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(fontSize: 14, fontWeight: FontWeight.bold),
           ),
           OsmeaComponents.sizedBox(height: 8),
           OsmeaComponents.text(
             radiusText,
-            textStyle: const TextStyle(fontSize: 12, fontFamily: 'monospace'),
+            textStyle: OsmeaTextStyle.bodySmall(context).copyWith(fontSize: 12, fontFamily: 'monospace'),
             color: OsmeaColors.nordicBlue,
           ),
           OsmeaComponents.text(
             clipBehaviorLabels[clipBehavior] ?? '',
-            textStyle: const TextStyle(fontSize: 12, fontFamily: 'monospace'),
+            textStyle: OsmeaTextStyle.bodySmall(context).copyWith(fontSize: 12, fontFamily: 'monospace'),
             color: OsmeaColors.forestHeart,
           ),
         ],
@@ -429,7 +429,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
       children: [
         OsmeaComponents.text(
           label,
-          textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+          textStyle: OsmeaTextStyle.bodySmall(context).copyWith(fontSize: 12, fontWeight: FontWeight.bold),
         ),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.clipRRect(
@@ -460,7 +460,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
             OsmeaComponents.sizedBox(height: 8),
             OsmeaComponents.text(
               'TEXT\nCONTENT',
-              textStyle: const TextStyle(
+              textStyle: OsmeaTextStyle.bodySmall(context).copyWith(
                 color: OsmeaColors.white,
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
@@ -496,7 +496,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
             OsmeaComponents.sizedBox(height: 8),
             OsmeaComponents.text(
               'IMAGE\nSTYLE',
-              textStyle: const TextStyle(
+              textStyle: OsmeaTextStyle.bodySmall(context).copyWith(
                 color: OsmeaColors.white,
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
@@ -532,7 +532,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
             OsmeaComponents.sizedBox(height: 8),
             OsmeaComponents.text(
               'GRADIENT\nDESIGN',
-              textStyle: const TextStyle(
+              textStyle: OsmeaTextStyle.bodySmall(context).copyWith(
                 color: OsmeaColors.white,
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
@@ -550,7 +550,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
       children: [
         OsmeaComponents.text(
           'Large Interactive Example:',
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         OsmeaComponents.sizedBox(height: 12),
         LayoutBuilder(
@@ -587,7 +587,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
                       OsmeaComponents.sizedBox(height: 16),
                       OsmeaComponents.text(
                         'CLIP RRECT',
-                        textStyle: const TextStyle(
+                        textStyle: OsmeaTextStyle.titleLarge(context).copyWith(
                           color: OsmeaColors.white,
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -595,15 +595,15 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
                       ),
                       OsmeaComponents.sizedBox(height: 8),
                       OsmeaComponents.text(
-                        'Radius: ${borderRadiusValue.toInt()}px',
-                        textStyle: const TextStyle(
+                        'Radius: {borderRadiusValue.toInt()}px',
+                        textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
                           color: OsmeaColors.white,
                           fontSize: 14,
                         ),
                       ),
                       OsmeaComponents.text(
                         clipBehaviorLabels[clipBehavior] ?? '',
-                        textStyle: const TextStyle(
+                        textStyle: OsmeaTextStyle.bodySmall(context).copyWith(
                           color: OsmeaColors.white,
                           fontSize: 12,
                         ),
@@ -628,7 +628,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
           children: [
             OsmeaComponents.text(
               '💼 Real-World Use Cases',
-              textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 20),
             
@@ -654,7 +654,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
       children: [
         OsmeaComponents.text(
           label,
-          textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+          textStyle: OsmeaTextStyle.bodySmall(context).copyWith(fontSize: 12, fontWeight: FontWeight.bold),
         ),
         OsmeaComponents.sizedBox(height: 8),
         content,
@@ -674,7 +674,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
           ),
         ),
         child: OsmeaComponents.center(
-          child: Icon(
+          child: const Icon(
             Icons.person,
             color: OsmeaColors.white,
             size: 32,
@@ -690,13 +690,13 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
       child: OsmeaComponents.container(
         width: 100,
         height: 80,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: OsmeaColors.white,
           boxShadow: [
             BoxShadow(
               color: OsmeaColors.shadowLight,
               blurRadius: 4,
-              offset: const Offset(0, 2),
+              offset:  Offset(0, 2),
             ),
           ],
         ),
@@ -713,7 +713,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
               OsmeaComponents.sizedBox(height: 4),
               OsmeaComponents.text(
                 'Card',
-                textStyle: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                textStyle: OsmeaTextStyle.bodySmall(context).copyWith(fontSize: 10, fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -734,7 +734,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
         child: OsmeaComponents.center(
           child: OsmeaComponents.text(
             'BUTTON',
-            textStyle: const TextStyle(
+            textStyle: OsmeaTextStyle.bodySmall(context).copyWith(
               color: OsmeaColors.white,
               fontSize: 12,
               fontWeight: FontWeight.bold,
@@ -763,7 +763,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
           child: OsmeaComponents.column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
+              const Icon(
                 Icons.photo_library,
                 color: OsmeaColors.white,
                 size: 24,
@@ -771,7 +771,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
               OsmeaComponents.sizedBox(height: 4),
               OsmeaComponents.text(
                 'Gallery',
-                textStyle: const TextStyle(
+                textStyle: OsmeaTextStyle.bodySmall(context).copyWith(
                   color: OsmeaColors.white,
                   fontSize: 10,
                   fontWeight: FontWeight.bold,
@@ -793,7 +793,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
           children: [
             OsmeaComponents.text(
               '🎨 Border Radius Gallery',
-              textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 20),
             
@@ -836,7 +836,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
             child: OsmeaComponents.center(
               child: OsmeaComponents.text(
                 '${radius.toInt()}',
-                textStyle: const TextStyle(
+                textStyle: OsmeaTextStyle.bodySmall(context).copyWith(
                   color: OsmeaColors.white,
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
@@ -848,7 +848,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
         OsmeaComponents.sizedBox(height: 4),
         OsmeaComponents.text(
           label,
-          textStyle: const TextStyle(fontSize: 10),
+          textStyle: OsmeaTextStyle.bodySmall(context).copyWith(fontSize: 10),
         ),
       ],
     );
@@ -873,4 +873,4 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
         return BorderRadius.circular(borderRadiusValue);
     }
   }
-} 
+}

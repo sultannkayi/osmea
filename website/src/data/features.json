@@ -1,0 +1,42 @@
+{
+  "title": "Why Choose OSMEA?",
+  "description": "OSMEA is not just a framework — it's an ecosystem for building the future of mobile e-commerce.",
+  "features": [
+    {
+      "id": "platform-agnostic",
+      "emoji": "🔥",
+      "title": "Platform Agnostic",
+      "description": "Connects with Shopify, WooCommerce • RESTful by design — headless friendly"
+    },
+    {
+      "id": "modular-composable",
+      "emoji": "🧱",
+      "title": "Modular & Composable",
+      "description": "Each module is plug & play • Build only what you need. No bloat."
+    },
+    {
+      "id": "enterprise-ready",
+      "emoji": "🚀",
+      "title": "Enterprise-Ready",
+      "description": "CI/CD pipelines, test coverage, versioning • Built for scale. Not a toy framework."
+    },
+    {
+      "id": "themeable-customizable",
+      "emoji": "🎨",
+      "title": "Themeable & Customizable",
+      "description": "Complete UI kit: Text, Colors, Buttons, Cards • Override everything. Your brand, your rules."
+    },
+    {
+      "id": "cross-platform",
+      "emoji": "📱",
+      "title": "Cross-Platform",
+      "description": "Flutter-powered single codebase • Native look & performance on iOS & Android"
+    },
+    {
+      "id": "secure-scalable",
+      "emoji": "🔐",
+      "title": "Secure & Scalable",
+      "description": "Role-based access, modular APIs • Built with Clean Architecture & async-safety"
+    }
+  ]
+} 

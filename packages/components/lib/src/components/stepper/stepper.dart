@@ -41,7 +41,8 @@ class OsmeaStepper extends CoreContainer {
   final bool allowStepTapping;
   final StepperStyle stepperStyle;
 
-  OsmeaStepper({
+
+  const OsmeaStepper({
     super.key,
     super.customTheme,
     super.alignment,

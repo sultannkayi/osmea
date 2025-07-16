@@ -3,6 +3,7 @@ import 'package:osmea_components/osmea_components.dart';
 import 'package:osmea_components_example/align_example.dart';
 import 'package:osmea_components_example/avatar_example.dart';
 import 'package:osmea_components_example/carousel_example.dart';
+import 'package:osmea_components_example/dot_indicator_example.dart';
 import 'package:osmea_components_example/chips_example.dart';
 import 'package:osmea_components_example/divider_example.dart';
 import 'package:osmea_components_example/footer_example.dart';
@@ -10,7 +11,7 @@ import 'package:osmea_components_example/loading_example.dart';
 import 'package:osmea_components_example/progress_example.dart';
 import 'package:osmea_components_example/services/mock_auth_service.dart';
 import 'package:osmea_components_example/center_example.dart';
-import 'package:osmea_components_example/appbars_demo.dart';
+import 'package:osmea_components_example/appbar_example.dart';
 import 'package:osmea_components_example/switch_button_example.dart';
 import 'package:osmea_components_example/radio_button_example.dart';
 import 'package:osmea_components_example/text_example.dart';
@@ -43,11 +44,12 @@ import 'package:osmea_components_example/rich_text_example.dart';
 import 'package:osmea_components_example/stepper_example.dart';
 import 'package:osmea_components_example/searchbar_example.dart';
 import 'package:osmea_components_example/toast_example.dart';
+import 'package:osmea_components_example/snackbar_example.dart';
 import 'package:osmea_components_example/dropdown_example.dart';
 import 'package:osmea_components_example/tabbar_example.dart';
 import 'package:osmea_components_example/counter_example.dart';
 import 'package:osmea_components_example/image_example.dart';
-import 'package:osmea_components_example/counter_example.dart';
+import 'package:osmea_components_example/collapse_example.dart';
 
 void main() {
   runApp(const MyApp());
@@ -357,6 +359,17 @@ class ComponentsScreen extends StatelessWidget {
                 ),
                 _buildComponentCard(
                   context,
+                  'Dot Indicator',
+                  Icons.radio_button_checked,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DotIndicatorExample(),
+                    ),
+                  ),
+                ),
+                _buildComponentCard(
+                  context,
                   'Cards',
                   Icons.credit_card,
                   () => Navigator.push(
@@ -495,7 +508,7 @@ class ComponentsScreen extends StatelessWidget {
               OsmeaComponents.sizedBox(height: 12),
               OsmeaComponents.text(
                 title,
-                textStyle: const TextStyle(
+                textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                 ),
@@ -515,364 +528,411 @@ class ExamplesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.padding(
-      padding: context.paddingNormal,
-      child: OsmeaComponents.column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          OsmeaComponents.text(
-            'Interactive Examples',
-            textStyle: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
+        padding: context.paddingNormal,
+        child: OsmeaComponents.column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            OsmeaComponents.text(
+              'Interactive Examples',
+              textStyle: OsmeaTextStyle.headlineSmall(context).copyWith(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          OsmeaComponents.sizedBox(height: 16),
-          Expanded(
-            child: ListView(
-              children: [
-                _buildExampleTile(
-                  context,
-                  'Positioned Examples',
-                  'Precise widget placement within a Stack',
-                  Icons.fullscreen,
-                  () => Navigator.push(
+            OsmeaComponents.sizedBox(height: 16),
+            Expanded(
+              child: ListView(
+                children: [
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const PositionedExampleScreen(),
+                    'Positioned Examples',
+                    'Precise widget placement within a Stack',
+                    Icons.fullscreen,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PositionedExampleScreen(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'Stack Examples',
-                  'Layered widget stack with alignment control',
-                  Icons.layers,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const StackExample(),
+                    'Stack Examples',
+                    'Layered widget stack with alignment control',
+                    Icons.layers,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const StackExample(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'Switch Examples',
-                  'Toggle switches with different styles',
-                  Icons.toggle_on,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const SwitchButtonExample(),
+                    'Switch Examples',
+                    'Toggle switches with different styles',
+                    Icons.toggle_on,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SwitchButtonExample(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'Avatar Examples',
-                  'User avatars with icons, images, and text',
-                  Icons.account_circle,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const AvatarExample(),
+                    'Avatar Examples',
+                    'User avatars with icons, images, and text',
+                    Icons.account_circle,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AvatarExample(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'Radio Button Examples',
-                  'Single and multiple selection options',
-                  Icons.radio_button_checked,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const RadioButtonExample(),
+                    'Radio Button Examples',
+                    'Single and multiple selection options',
+                    Icons.radio_button_checked,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const RadioButtonExample(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'Navbar Examples',
-                  'Navigation bar variants and positions',
-                  Icons.navigation,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const NavbarExample(),
+                    'Navbar Examples',
+                    'Navigation bar variants and positions',
+                    Icons.navigation,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const NavbarExample(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'Container Examples',
-                  'Flexible container with styling options',
-                  Icons.crop_square,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const ContainerExampleScreen(),
+                    'Container Examples',
+                    'Flexible container with styling options',
+                    Icons.crop_square,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ContainerExampleScreen(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'Row Examples',
-                  'Horizontal layout with enhanced features',
-                  Icons.view_week,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const RowExampleScreen(),
+                    'Row Examples',
+                    'Horizontal layout with enhanced features',
+                    Icons.view_week,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const RowExampleScreen(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'Column Examples',
-                  'Vertical layout with enhanced features',
-                  Icons.view_stream,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const ColumnExampleScreen(),
+                    'Column Examples',
+                    'Vertical layout with enhanced features',
+                    Icons.view_stream,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ColumnExampleScreen(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'Colors Examples',
-                  'OSMEA design system color palette',
-                  Icons.color_lens,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const ColorsExample(),
+                    'Dropdown Examples',
+                    'Comprehensive dropdown component with all variants and types',
+                    Icons.arrow_drop_down,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const DropdownExample(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'Expanded Examples',
-                  'Flexible widget that expands to fill available space',
-                  Icons.expand,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const ExpandedExampleScreen(),
+                    'Image Examples',
+                    'Image component with variants and animations',
+                    Icons.image,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ImageExample(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'Padding Examples',
-                  'Enhanced padding with styling and interactive features',
-                  Icons.space_bar,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const PaddingExample(),
+                    'Colors Examples',
+                    'OSMEA design system color palette',
+                    Icons.color_lens,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ColorsExample(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'SizedBox Examples',
-                  'Enhanced sized box with styling and interactive features',
-                  Icons.crop_square_rounded,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const SizedBoxExample(),
+                    'Expanded Examples',
+                    'Flexible widget that expands to fill available space',
+                    Icons.expand,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ExpandedExampleScreen(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'Align Examples',
-                  'Enhanced alignment with styling and interactive features',
-                  Icons.align_horizontal_center,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const AlignExample(),
+                    'Padding Examples',
+                    'Enhanced padding with styling and interactive features',
+                    Icons.space_bar,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PaddingExample(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'Center Examples',
-                  'Enhanced centering with styling and interactive features',
-                  Icons.center_focus_strong,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const CenterExample(),
+                    'SizedBox Examples',
+                    'Enhanced sized box with styling and interactive features',
+                    Icons.crop_square_rounded,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SizedBoxExample(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'Scaffold Examples',
-                  'Flexible application structure with multiple customization options',
-                  Icons.web_asset,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const ScaffoldExample(),
+                    'Align Examples',
+                    'Enhanced alignment with styling and interactive features',
+                    Icons.align_horizontal_center,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AlignExample(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'SingleChildScrollView Examples',
-                  'Scrollable container with various scroll behaviors',
-                  Icons.swipe_vertical,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const SingleChildScrollViewExample(),
+                    'Collapse Examples',
+                    'Expandable panels with accordion and multiple modes',
+                    Icons.expand_more,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CollapseExample(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'FittedBox Examples',
-                  'Scale and fit child widgets with various fit modes',
-                  Icons.fit_screen,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const FittedBoxExample(),
+                    'Center Examples',
+                    'Enhanced centering with styling and interactive features',
+                    Icons.center_focus_strong,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CenterExample(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'ClipRRect Examples',
-                  'Clip child widgets with rounded corners and custom borders',
-                  Icons.crop,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const ClipRRectExample(),
+                    'Scaffold Examples',
+                    'Flexible application structure with multiple customization options',
+                    Icons.web_asset,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ScaffoldExample(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'Wrap Examples',
-                  'Flexible layout for multiple children with wrapping behavior',
-                  Icons.wrap_text,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const WrapExample(),
+                    'SingleChildScrollView Examples',
+                    'Scrollable container with various scroll behaviors',
+                    Icons.swipe_vertical,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            const SingleChildScrollViewExample(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'Card Examples',
-                  'Cards with actions and interactive content',
-                  Icons.touch_app,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const CardExample(),
+                    'FittedBox Examples',
+                    'Scale and fit child widgets with various fit modes',
+                    Icons.fit_screen,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const FittedBoxExample(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'List Item Examples',
-                  'Comprehensive list item component with multiple types and variants',
-                  Icons.list,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const ListItemExample(),
+                    'ClipRRect Examples',
+                    'Clip child widgets with rounded corners and custom borders',
+                    Icons.crop,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ClipRRectExample(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'Spacer Examples',
-                  'Flexible space distribution in layouts',
-                  Icons.space_bar,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const SpacerExampleScreen(),
+                    'Wrap Examples',
+                    'Flexible layout for multiple children with wrapping behavior',
+                    Icons.wrap_text,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const WrapExample(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'Flexible Examples',
-                  'Flexible space allocation in layouts',
-                  Icons.aspect_ratio,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const FlexibleExampleScreen(),
+                    'Card Examples',
+                    'Cards with actions and interactive content',
+                    Icons.touch_app,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CardExample(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'TabBar Examples',
-                  'Flexible tab bar with variants, sizes, and animation',
-                  Icons.tab,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const TabBarExample(),
+                    'List Item Examples',
+                    'Comprehensive list item component with multiple types and variants',
+                    Icons.list,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ListItemExample(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'Counter Examples',
-                  'Interactive numeric counter with increment/decrement controls',
-                  Icons.add_circle_outline,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const CounterExample(),
+                    'Spacer Examples',
+                    'Flexible space distribution in layouts',
+                    Icons.space_bar,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SpacerExampleScreen(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'Searchbar Examples',
-                  'Advanced search component with suggestions and history',
-                  Icons.search,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const SearchbarExample(),
+                    'Flexible Examples',
+                    'Flexible space allocation in layouts',
+                    Icons.aspect_ratio,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const FlexibleExampleScreen(),
+                      ),
                     ),
                   ),
-                ),
-                _buildExampleTile(
-                  context,
-                  'Toast Example',
-                  'Toast notification examples',
-                  Icons.notifications,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const ToastExamplePage(),
+                    'TabBar Examples',
+                    'Flexible tab bar with variants, sizes, and animation',
+                    Icons.tab,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const TabBarExample(),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                  _buildExampleTile(
+                    context,
+                    'Counter Examples',
+                    'Interactive numeric counter with increment/decrement controls',
+                    Icons.add_circle_outline,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CounterExample(),
+                      ),
+                    ),
+                  ),
+                  _buildExampleTile(
+                    context,
+                    'Searchbar Examples',
+                    'Advanced search component with suggestions and history',
+                    Icons.search,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SearchbarExample(),
+                      ),
+                    ),
+                  ),
+                  _buildExampleTile(
+                    context,
+                    'Toast Example',
+                    'Toast notification examples',
+                    Icons.notifications,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ToastExamplePage(),
+                      ),
+                    ),
+                  ),
+                  _buildExampleTile(
+                    context,
+                    'Snackbar Example',
+                    'Snackbar notification examples',
+                    Icons.notifications,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SnackbarExampleScreen(),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ]
-      ),
-    );
+          ],
+        ));
   }
 
   Widget _buildExampleTile(
@@ -907,7 +967,7 @@ class SettingsScreen extends StatelessWidget {
         children: [
           OsmeaComponents.text(
             'Settings',
-            textStyle: const TextStyle(
+            textStyle: OsmeaTextStyle.headlineSmall(context).copyWith(
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),

@@ -1,0 +1,22 @@
+{
+  "site": {
+    "name": "OSMEA",
+    "title": "OSMEA - Mobile E-commerce Architecture Framework",
+    "description": "Mobile E-commerce Architecture Framework built with Flutter for the future of cross-platform development.",
+    "url": "https://osmea.dev"
+  },
+  "github": {
+    "owner": "masterfabric-mobile",
+    "repo": "osmea",
+    "branch": "dev",
+    "url": "https://github.com/masterfabric-mobile/osmea"
+  },
+  "api": {
+    "github": "https://api.github.com/repos/masterfabric-mobile/osmea"
+  },
+  "theme": {
+    "primaryColor": "#000000",
+    "secondaryColor": "#ffffff",
+    "accentColor": "#4a90e2"
+  }
+} 

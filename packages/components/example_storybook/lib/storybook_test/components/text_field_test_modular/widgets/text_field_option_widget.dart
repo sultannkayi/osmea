@@ -67,7 +67,7 @@ class TextFieldOptionWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 2),
       child: OsmeaComponents.textField(
         controller: controller,
-        label: showLabel ? '${labelText}${isRequired ? ' *' : ''}' : null,
+        label: showLabel ? '$labelText${isRequired ? ' *' : ''}' : null,
         hint: hintText,
         helperText: showHelper ? helperText : null,
         errorText: hasError ? errorText : null,
@@ -79,8 +79,8 @@ class TextFieldOptionWidget extends StatelessWidget {
         readOnly: isReadOnly,
         obscureText: obscureText,
         maxLines: maxLines,
-        prefixIcon: showPrefixIcon ? Icon(Icons.person) : null,
-        suffixIcon: showSuffixIcon ? Icon(Icons.visibility) : null,
+        prefixIcon: showPrefixIcon ? const Icon(Icons.person) : null,
+        suffixIcon: showSuffixIcon ? const Icon(Icons.visibility) : null,
         onChanged: onChanged,
       ),
     );

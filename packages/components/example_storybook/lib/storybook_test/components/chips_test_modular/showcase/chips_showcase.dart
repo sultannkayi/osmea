@@ -26,11 +26,11 @@ class ChipShowcaseDemo extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Interactive Demo
-            SectionContainerWidget(
+           const SectionContainerWidget(
               title: 'Interactive Demo',
               wrapContent: false,
               children: [
-                const ChipShowcase(),
+                 ChipShowcase(),
               ],
             ),
             

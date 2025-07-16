@@ -64,8 +64,8 @@ class CardShowcaseWidget extends StatelessWidget {
             const SizedBox(height: 32),
             SectionContainerWidget(
               title: 'Demo',
-              children: [SizedBox(width: 350, child: card)],
               wrapContent: false,
+              children: [SizedBox(width: 350, child: card)],
             ),
           ],
         ),

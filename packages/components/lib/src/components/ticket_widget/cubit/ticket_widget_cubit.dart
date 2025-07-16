@@ -136,13 +136,13 @@ class TicketWidgetCubit extends Cubit<TicketWidgetState> {
       case ValidationMode.minLength:
         final minLength = question.constraints?['minLength'] as int?;
         if (minLength != null && value is String && value.length < minLength) {
-          return 'Minimum ${minLength} characters required';
+          return 'Minimum $minLength characters required';
         }
         break;
       case ValidationMode.maxLength:
         final maxLength = question.constraints?['maxLength'] as int?;
         if (maxLength != null && value is String && value.length > maxLength) {
-          return 'Maximum ${maxLength} characters allowed';
+          return 'Maximum $maxLength characters allowed';
         }
         break;
       case ValidationMode.custom:

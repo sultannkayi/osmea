@@ -596,12 +596,12 @@ class ExpandedExampleScreen extends StatelessWidget {
                             variant: OsmeaTextVariant.bodySmall),
                         OsmeaComponents.row(
                           children: [
-                            IconButton(
+                            OsmeaComponents.iconButton(
                               icon: Icon(Icons.help_outline,
                                   size: 18, color: OsmeaColors.thunder),
                               onPressed: () {},
                             ),
-                            IconButton(
+                            OsmeaComponents.iconButton(
                               icon: Icon(Icons.info_outline,
                                   size: 18, color: OsmeaColors.thunder),
                               onPressed: () {},
@@ -845,7 +845,7 @@ class ExpandedExampleScreen extends StatelessWidget {
                           ),
                           OsmeaComponents.text(
                             'Tap to explore all the enhanced styling options',
-                            color: OsmeaColors.white.withOpacity(0.7),
+                            color: OsmeaColors.white.withValues(alpha: 0.7),
                             variant: OsmeaTextVariant.bodyMedium,
                           ),
                         ],
@@ -874,7 +874,7 @@ class ExpandedExampleScreen extends StatelessWidget {
                     child: OsmeaComponents.column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.info_outline,
+                          Icon(Icons.info_outline,
                             color: OsmeaColors.nordicBlue, size: 30),
                         OsmeaComponents.text(
                           'Did you know?',

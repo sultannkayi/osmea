@@ -349,7 +349,7 @@ class ImageExample extends StatelessWidget {
             imageUrl: 'https://httpstat.us/500',
             variant: ImageVariant.rounded,
             size: ImageSize.medium,
-            errorWidget: Container(
+            errorWidget: OsmeaComponents.container(
               width: 96,
               height: 96,
               decoration: BoxDecoration(
@@ -360,7 +360,7 @@ class ImageExample extends StatelessWidget {
                   width: 1,
                 ),
               ),
-              child: Column(
+              child: OsmeaComponents.column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
@@ -368,14 +368,12 @@ class ImageExample extends StatelessWidget {
                     color: OsmeaColors.sunsetGlow,
                     size: 24,
                   ),
-                  const SizedBox(height: 4),
-                  Text(
+                  OsmeaComponents.sizedBox(height: 4),
+                  OsmeaComponents.text(
                     'Failed',
-                    style: TextStyle(
-                      color: OsmeaColors.sunsetGlow,
-                      fontSize: 10,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    color: OsmeaColors.sunsetGlow,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w500,
                   ),
                 ],
               ),
@@ -390,7 +388,7 @@ class ImageExample extends StatelessWidget {
             imageUrl: null,
             variant: ImageVariant.rounded,
             size: ImageSize.medium,
-            placeholder: Container(
+            placeholder: OsmeaComponents.container(
               width: 96,
               height: 96,
               decoration: BoxDecoration(
@@ -415,7 +413,7 @@ class ImageExample extends StatelessWidget {
             imageUrl: null,
             variant: ImageVariant.triangle,
             size: ImageSize.medium,
-            placeholder: Container(
+            placeholder: OsmeaComponents.container(
               width: 96,
               height: 96,
               decoration: BoxDecoration(

@@ -38,6 +38,7 @@ class SingleChildScrollViewExample extends StatelessWidget {
 
               // Vertical scroll example
               _buildExampleCard(
+                context,
                 'Vertical Scrolling',
                 'Standard vertical scroll view',
                 _buildVerticalScrollExample(context),
@@ -46,6 +47,7 @@ class SingleChildScrollViewExample extends StatelessWidget {
 
               // Horizontal scroll example
               _buildExampleCard(
+                context,
                 'Horizontal Scrolling',
                 'Single child scroll view with horizontal axis',
                 _buildHorizontalScrollExample(context),
@@ -54,6 +56,7 @@ class SingleChildScrollViewExample extends StatelessWidget {
 
               // Nested scroll views
               _buildExampleCard(
+                context,
                 'Nested Scroll Views',
                 'Combining horizontal and vertical scrolling',
                 _buildNestedScrollExample(context),
@@ -70,6 +73,7 @@ class SingleChildScrollViewExample extends StatelessWidget {
 
               // Custom physics example
               _buildExampleCard(
+                context,
                 'Custom Scroll Physics',
                 'ScrollView with custom physics behavior',
                 _buildCustomPhysicsScrollExample(context),
@@ -78,6 +82,7 @@ class SingleChildScrollViewExample extends StatelessWidget {
 
               // Styled scroll view
               _buildExampleCard(
+                context,
                 'Styled Scroll View',
                 'ScrollView with custom styling and effects',
                 _buildStyledScrollExample(context),
@@ -89,7 +94,7 @@ class SingleChildScrollViewExample extends StatelessWidget {
     );
   }
 
-  Widget _buildExampleCard(String title, String description, Widget example) {
+  Widget _buildExampleCard(BuildContext context, String title, String description, Widget example) {
     return Card(
       elevation: 2,
       child: OsmeaComponents.padding(
@@ -99,13 +104,12 @@ class SingleChildScrollViewExample extends StatelessWidget {
           children: [
             OsmeaComponents.text(
               title,
-              textStyle:
-                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 8),
             OsmeaComponents.text(
               description,
-              textStyle: const TextStyle(fontSize: 14),
+              textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(fontSize: 14),
               color: OsmeaColors.pewter,
             ),
             OsmeaComponents.sizedBox(height: 16),
@@ -115,7 +119,7 @@ class SingleChildScrollViewExample extends StatelessWidget {
                 border: Border.all(color: OsmeaColors.silver),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: ClipRRect(
+              child: OsmeaComponents.clipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: example,
               ),
@@ -136,8 +140,7 @@ class SingleChildScrollViewExample extends StatelessWidget {
           children: [
             OsmeaComponents.text(
               'Vertical Scrolling Example',
-              textStyle:
-                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
             OsmeaComponents.text(
@@ -204,8 +207,7 @@ class SingleChildScrollViewExample extends StatelessWidget {
           children: [
             OsmeaComponents.text(
               'Nested Scrolling Example',
-              textStyle:
-                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
             OsmeaComponents.text(
@@ -215,8 +217,7 @@ class SingleChildScrollViewExample extends StatelessWidget {
             for (int section = 1; section <= 3; section++) ...[
               OsmeaComponents.text(
                 'Section $section',
-                textStyle:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               OsmeaComponents.sizedBox(height: 8),
               OsmeaComponents.sizedBox(
@@ -240,8 +241,7 @@ class SingleChildScrollViewExample extends StatelessWidget {
                           child: OsmeaComponents.center(
                             child: OsmeaComponents.text(
                               'Item $i',
-                              textStyle:
-                                  const TextStyle(color: OsmeaColors.white),
+                              textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(color: OsmeaColors.white),
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -269,8 +269,7 @@ class SingleChildScrollViewExample extends StatelessWidget {
           children: [
             OsmeaComponents.text(
               'Custom Physics Example',
-              textStyle:
-                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
             OsmeaComponents.text(
@@ -316,8 +315,7 @@ class SingleChildScrollViewExample extends StatelessWidget {
           children: [
             OsmeaComponents.text(
               'Styled Scroll Example',
-              textStyle:
-                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textStyle: OsmeaTextStyle.titleMedium(context).copyWith(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 16),
             OsmeaComponents.text(
@@ -332,10 +330,10 @@ class SingleChildScrollViewExample extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: OsmeaColors.white,
                   borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       color: OsmeaColors.shadowLight,
-                      offset: const Offset(0, 2),
+                      offset: Offset(0, 2),
                       blurRadius: 6,
                     ),
                   ],
@@ -356,7 +354,7 @@ class SingleChildScrollViewExample extends StatelessWidget {
                       child: OsmeaComponents.center(
                         child: OsmeaComponents.text(
                           '$i',
-                          textStyle: const TextStyle(
+                          textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
                             color: OsmeaColors.white,
                             fontWeight: FontWeight.bold,
                           ),
@@ -370,8 +368,7 @@ class SingleChildScrollViewExample extends StatelessWidget {
                         children: [
                           OsmeaComponents.text(
                             'Item $i Title',
-                            textStyle:
-                                const TextStyle(fontWeight: FontWeight.bold),
+                            textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(fontWeight: FontWeight.bold),
                           ),
                           OsmeaComponents.sizedBox(height: 4),
                           OsmeaComponents.text(

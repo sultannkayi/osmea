@@ -96,7 +96,7 @@ class _SwitchButtonExampleState extends State<SwitchButtonExample> {
       padding: const EdgeInsets.only(bottom: 16.0),
       child: OsmeaComponents.text(
         title,
-        textStyle: TextStyle(
+        textStyle: OsmeaTextStyle.titleLarge(context).copyWith(
           fontSize: 20,
           fontWeight: FontWeight.bold,
           color: OsmeaColors.black54,
@@ -338,7 +338,7 @@ class _SwitchButtonExampleState extends State<SwitchButtonExample> {
             OsmeaComponents.container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: OsmeaColors.nordicBlue.withOpacity(0.1),
+                color: OsmeaColors.nordicBlue.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: OsmeaComponents.switchButton(

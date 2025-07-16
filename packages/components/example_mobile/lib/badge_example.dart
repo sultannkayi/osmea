@@ -87,7 +87,7 @@ class _BadgeExampleState extends State<BadgeExample> {
         children: [
           OsmeaComponents.text(
             '🏷️ OSMEA Badge Component',
-            textStyle: TextStyle(
+            textStyle: OsmeaTextStyle.headlineMedium(context).copyWith(
               fontSize: 24,
               fontWeight: FontWeight.bold,
               color: OsmeaColors.nordicBlue,
@@ -98,7 +98,7 @@ class _BadgeExampleState extends State<BadgeExample> {
           OsmeaComponents.sizedBox(height: 14),
           OsmeaComponents.text(
             'Modern, minimalist badges for notifications, labels, and status indicators',
-            textStyle: TextStyle(
+            textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
               fontSize: 16,
               color: OsmeaColors.black.withValues(alpha: 0.87),
               height: 1.4,
@@ -225,7 +225,7 @@ class _BadgeExampleState extends State<BadgeExample> {
           OsmeaComponents.sizedBox(height: 12),
           OsmeaComponents.text(
             title,
-            textStyle: TextStyle(
+            textStyle: OsmeaTextStyle.titleMedium(context).copyWith(
               fontSize: 16,
               fontWeight: FontWeight.w600,
               color: OsmeaColors.black.withValues(alpha: 0.87),
@@ -235,7 +235,7 @@ class _BadgeExampleState extends State<BadgeExample> {
           OsmeaComponents.sizedBox(height: 6),
           OsmeaComponents.text(
             description,
-            textStyle: TextStyle(
+            textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(
               fontSize: 14,
               color: OsmeaColors.black.withValues(alpha: 0.54),
               height: 1.4,
@@ -279,7 +279,7 @@ class _BadgeExampleState extends State<BadgeExample> {
           OsmeaComponents.sizedBox(width: 12),
           OsmeaComponents.text(
             title,
-            textStyle: TextStyle(
+            textStyle: OsmeaTextStyle.titleMedium(context).copyWith(
               fontSize: 18,
               fontWeight: FontWeight.w600,
               color: OsmeaColors.nordicBlue,
@@ -867,7 +867,7 @@ class _BadgeExampleState extends State<BadgeExample> {
           OsmeaComponents.sizedBox(height: 8),
           OsmeaComponents.text(
             label,
-            textStyle: const TextStyle(
+            textStyle: OsmeaTextStyle.labelLarge(context).copyWith(
               fontSize: 14,
               color: OsmeaColors.black54,
               fontWeight: FontWeight.w500,

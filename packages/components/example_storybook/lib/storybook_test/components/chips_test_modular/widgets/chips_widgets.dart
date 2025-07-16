@@ -34,7 +34,7 @@ class SelectableChipGroup extends StatefulWidget {
 
 class _SelectableChipGroupState extends State<SelectableChipGroup> {
   String? _selectedOption;
-  Set<String> _selectedOptions = {};
+  final Set<String> _selectedOptions = {};
 
   @override
   void initState() {
@@ -316,8 +316,8 @@ class ChipShowcase extends StatelessWidget {
         const SizedBox(height: 24),
         _buildSection(
           'Removable Items',
-          RemovableChipGroup(
-            initialItems: ['Tag 1', 'Tag 2', 'Tag 3'],
+           RemovableChipGroup(
+            initialItems:  const ['Tag 1', 'Tag 2', 'Tag 3'],
             onItemsChanged: interactive ? (items) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
@@ -331,7 +331,7 @@ class ChipShowcase extends StatelessWidget {
         const SizedBox(height: 24),
         _buildSection(
           'Status',
-          StatusChipGroup(
+           const StatusChipGroup(
             statusItems: {
               'Active': ChipsVariant.success,
               'Pending': ChipsVariant.warning,

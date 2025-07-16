@@ -68,12 +68,15 @@ export 'src/utils/bottom_sheet_extensions.dart';
 export 'src/utils/system_extension.dart';
 export 'src/utils/chips_extensions.dart';
 export 'src/utils/carousel_extensions.dart';
+export 'src/utils/dot_indicator_extensions.dart';
 export 'src/utils/list_item_extensions.dart';
 export 'src/utils/stepper_extension.dart';
 export 'src/utils/progress_extensions.dart';
 export 'src/utils/toast_extensions.dart';
+export 'src/utils/snackbar_extensions.dart';
 export 'src/utils/dropdown_extensions.dart';
 export 'src/utils/footer_extensions.dart';
+export 'src/utils/collapse_extensions.dart';
 
 // 🔢 Enums
 export 'src/enums/enums.dart';
@@ -82,6 +85,8 @@ export 'src/enums/enums.dart';
 export 'src/components/login_button/cubit/login_button_cubit.dart';
 export 'src/core/cubit_button/cubit/core_button_state.dart';
 export 'src/core/cubit_button/cubit/core_button_cubit.dart';
+export 'src/components/collapse/cubit/collapse_cubit.dart';
+export 'src/components/collapse/cubit/collapse_state.dart';
 
 // 🌀 Loading
 export 'src/utils/loading_extensions.dart';

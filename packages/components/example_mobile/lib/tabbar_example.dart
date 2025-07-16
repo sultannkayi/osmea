@@ -174,7 +174,7 @@ class _TabBarExampleState extends State<TabBarExample> {
   Widget _buildSectionTitle(String title) {
     return OsmeaComponents.text(
       title,
-      textStyle: TextStyle(
+      textStyle: OsmeaTextStyle.titleLarge(context).copyWith(
         fontSize: 20,
         fontWeight: FontWeight.bold,
         color: OsmeaColors.nordicBlue,
@@ -197,7 +197,7 @@ class _TabBarExampleState extends State<TabBarExample> {
         children: [
           OsmeaComponents.text(
             title,
-            textStyle: const TextStyle(
+            textStyle: OsmeaTextStyle.titleMedium(context).copyWith(
               fontSize: 16,
               fontWeight: FontWeight.w600,
               color: OsmeaColors.black,

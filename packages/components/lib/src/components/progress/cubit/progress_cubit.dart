@@ -7,6 +7,8 @@ import 'dart:async';
 class ProgressCubit extends Cubit<ProgressState> {
   StreamSubscription<double>? _valueSub;
   Timer? _waveTimer;
+  Timer? _autoProgressTimer;
+  double _currentValue = 0.0;
 
   ProgressCubit({
     required ProgressType type,
@@ -21,6 +23,11 @@ class ProgressCubit extends Cubit<ProgressState> {
     double? percentFontSize,
     double wavePhase = 0.0,
     Stream<double>? valueStream,
+    bool isAutoProgressEnabled = false,
+    double autoProgressSpeed = 0.05,
+    double minValue = 0.0,
+    double maxValue = 1.0,
+    bool isIncreasing = true,
   }) : super(ProgressState(
           type: type,
           value: value,
@@ -33,7 +40,13 @@ class ProgressCubit extends Cubit<ProgressState> {
           radius: radius,
           percentFontSize: percentFontSize,
           wavePhase: wavePhase,
+          isAutoProgressEnabled: isAutoProgressEnabled,
+          autoProgressSpeed: autoProgressSpeed,
+          minValue: minValue,
+          maxValue: maxValue,
+          isIncreasing: isIncreasing,
         )) {
+    _currentValue = value;
     if (valueStream != null) {
       _valueSub = valueStream.listen((v) {
         if (v != state.value) {
@@ -42,6 +55,7 @@ class ProgressCubit extends Cubit<ProgressState> {
       });
     }
     _startWaveAnimation();
+    _startAutoProgress();
   }
 
   void _startWaveAnimation() {
@@ -51,6 +65,65 @@ class ProgressCubit extends Cubit<ProgressState> {
       final newPhase = (state.wavePhase + 0.03 * state.speed) % (3.14159 * 2);
       emit(state.copyWith(wavePhase: newPhase));
     });
+  }
+
+  void _startAutoProgress() {
+    _autoProgressTimer?.cancel();
+
+    if (state.isAutoProgressEnabled) {
+      // Check if progress is already completed to avoid unnecessary restarts
+      bool isCompleted = state.isIncreasing
+          ? _currentValue >= state.maxValue
+          : _currentValue <= state.minValue;
+
+      if (isCompleted) {
+        return; // Don't restart if already completed
+      }
+
+      // Set correct starting value based on direction
+      if (state.isIncreasing) {
+        // For increase: start from minValue if current value is below min
+        if (_currentValue < state.minValue) {
+          _currentValue = state.minValue;
+        }
+      } else {
+        // For decrease: start from maxValue if current value is above max
+        if (_currentValue > state.maxValue) {
+          _currentValue = state.maxValue;
+        }
+      }
+      setValue(_currentValue);
+
+      // Use consistent speed for both increase and decrease
+      // Fixed timer interval for smooth animation
+      const int timerInterval = 50; // 50ms for smoother animation
+
+      _autoProgressTimer =
+          Timer.periodic(Duration(milliseconds: timerInterval), (timer) {
+        if (state.isAutoProgressEnabled) {
+          // Calculate step size based on speed and timer interval
+          // Speed represents progress per second, so divide by 20 for 50ms interval
+          double stepSize = state.autoProgressSpeed / 20.0;
+
+          if (state.isIncreasing) {
+            _currentValue += stepSize;
+            if (_currentValue >= state.maxValue) {
+              _currentValue = state.maxValue;
+              timer.cancel();
+            }
+          } else {
+            _currentValue -= stepSize;
+            if (_currentValue <= state.minValue) {
+              _currentValue = state.minValue;
+              timer.cancel();
+            }
+          }
+          setValue(_currentValue);
+        } else {
+          timer.cancel();
+        }
+      });
+    }
   }
 
   void setValue(double value) => emit(state.copyWith(value: value));
@@ -68,6 +141,47 @@ class ProgressCubit extends Cubit<ProgressState> {
   void setPercentFontSize(double? percentFontSize) =>
       emit(state.copyWith(percentFontSize: percentFontSize));
 
+  // Auto progress methods
+  void setAutoProgressEnabled(bool enabled) {
+    emit(state.copyWith(isAutoProgressEnabled: enabled));
+    if (enabled) {
+      _startAutoProgress();
+    } else {
+      _autoProgressTimer?.cancel();
+    }
+  }
+
+  void setAutoProgressSpeed(double speed) {
+    emit(state.copyWith(autoProgressSpeed: speed));
+    if (state.isAutoProgressEnabled) {
+      _startAutoProgress();
+    }
+  }
+
+  void setAutoProgressRange(double minValue, double maxValue) {
+    emit(state.copyWith(minValue: minValue, maxValue: maxValue));
+    if (state.isAutoProgressEnabled) {
+      _startAutoProgress();
+    }
+  }
+
+  void setAutoProgressDirection(bool isIncreasing) {
+    emit(state.copyWith(isIncreasing: isIncreasing));
+    if (state.isAutoProgressEnabled) {
+      _startAutoProgress();
+    }
+  }
+
+  void toggleAutoProgress() {
+    bool newEnabled = !state.isAutoProgressEnabled;
+    emit(state.copyWith(isAutoProgressEnabled: newEnabled));
+    if (newEnabled) {
+      _startAutoProgress();
+    } else {
+      _autoProgressTimer?.cancel();
+    }
+  }
+
   /// Update all properties at once - useful for stateless widget rebuilds
   void updateProperties({
     ProgressType? type,
@@ -81,8 +195,26 @@ class ProgressCubit extends Cubit<ProgressState> {
     double? radius,
     double? percentFontSize,
     double? wavePhase,
+    bool? isAutoProgressEnabled,
+    double? autoProgressSpeed,
+    double? minValue,
+    double? maxValue,
+    bool? isIncreasing,
   }) {
-    emit(state.copyWith(
+    // Update current value if provided
+    if (value != null) {
+      _currentValue = value;
+    }
+
+    // Check if auto progress settings are changing
+    bool autoProgressSettingsChanged = isAutoProgressEnabled != null ||
+        autoProgressSpeed != null ||
+        minValue != null ||
+        maxValue != null ||
+        isIncreasing != null;
+
+    // Create new state
+    final newState = state.copyWith(
       type: type,
       value: value,
       speed: speed,
@@ -94,13 +226,32 @@ class ProgressCubit extends Cubit<ProgressState> {
       radius: radius,
       percentFontSize: percentFontSize,
       wavePhase: wavePhase,
-    ));
+      isAutoProgressEnabled: isAutoProgressEnabled,
+      autoProgressSpeed: autoProgressSpeed,
+      minValue: minValue,
+      maxValue: maxValue,
+      isIncreasing: isIncreasing,
+    );
+
+    emit(newState);
+
+    // Restart auto progress if auto progress settings changed
+    if (autoProgressSettingsChanged) {
+      // Cancel existing timer first
+      _autoProgressTimer?.cancel();
+      
+      // Then restart if enabled
+      if (newState.isAutoProgressEnabled) {
+        _startAutoProgress();
+      }
+    }
   }
 
   @override
   Future<void> close() {
     _valueSub?.cancel();
     _waveTimer?.cancel();
+    _autoProgressTimer?.cancel();
     return super.close();
   }
 }

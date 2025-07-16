@@ -49,7 +49,7 @@ class _FittedBoxExampleState extends State<FittedBoxExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('OSMEA FittedBox Examples'),
         backgroundColor: OsmeaColors.nordicBlue,
         foregroundColor: OsmeaColors.white,
@@ -62,13 +62,12 @@ class _FittedBoxExampleState extends State<FittedBoxExample> {
             children: [
               OsmeaComponents.text(
                 '📏 Interactive FittedBox Demo',
-                textStyle:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                textStyle: OsmeaTextStyle.titleLarge(context).copyWith(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               OsmeaComponents.sizedBox(height: 16),
               OsmeaComponents.text(
                 'Select a BoxFit option to see how it affects the FittedBox examples.',
-                textStyle: const TextStyle(fontSize: 14),
+                textStyle: OsmeaTextStyle.bodySmall(context).copyWith(fontSize: 14),
                 color: OsmeaColors.pewter,
                 textAlign: TextAlign.center,
               ),
@@ -96,7 +95,7 @@ class _FittedBoxExampleState extends State<FittedBoxExample> {
             // Description
             OsmeaComponents.text(
               boxFitDescriptions[selectedBoxFit] ?? '',
-              textStyle: const TextStyle(fontSize: 14),
+              textStyle: OsmeaTextStyle.bodySmall(context).copyWith(fontSize: 14),
               color: OsmeaColors.pewter,
               textAlign: TextAlign.center,
             ),
@@ -115,7 +114,7 @@ class _FittedBoxExampleState extends State<FittedBoxExample> {
       children: [
         OsmeaComponents.text(
           'Select BoxFit Mode:',
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         OsmeaComponents.sizedBox(height: 12),
         OsmeaComponents.container(
@@ -132,7 +131,7 @@ class _FittedBoxExampleState extends State<FittedBoxExample> {
               isExpanded: true,
               icon: Icon(Icons.arrow_drop_down, color: OsmeaColors.nordicBlue),
               elevation: 8,
-              style: TextStyle(
+              style: OsmeaTextStyle.bodyLarge(context).copyWith(
                 color: OsmeaColors.slate,
                 fontSize: 16,
               ),
@@ -149,7 +148,7 @@ class _FittedBoxExampleState extends State<FittedBoxExample> {
                   value: value,
                   child: OsmeaComponents.text(
                     boxFitLabels[value] ?? '',
-                    textStyle: const TextStyle(fontSize: 15),
+                    textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(fontSize: 15),
                   ),
                 );
               }).toList(),
@@ -165,7 +164,7 @@ class _FittedBoxExampleState extends State<FittedBoxExample> {
       children: [
         OsmeaComponents.text(
           'FittedBox Examples:',
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         OsmeaComponents.sizedBox(height: 16),
         
@@ -192,7 +191,7 @@ class _FittedBoxExampleState extends State<FittedBoxExample> {
       children: [
         OsmeaComponents.text(
           label,
-          textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+          textStyle: OsmeaTextStyle.labelMedium(context).copyWith(fontSize: 12, fontWeight: FontWeight.bold),
         ),
         OsmeaComponents.sizedBox(height: 6),
         OsmeaComponents.container(
@@ -226,7 +225,7 @@ class _FittedBoxExampleState extends State<FittedBoxExample> {
       child: OsmeaComponents.center(
         child: OsmeaComponents.text(
           'TEXT EXAMPLE',
-          textStyle: const TextStyle(
+          textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
             color: OsmeaColors.white,
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -281,7 +280,7 @@ class _FittedBoxExampleState extends State<FittedBoxExample> {
       children: [
         OsmeaComponents.text(
           'Large Example Container:',
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         OsmeaComponents.sizedBox(height: 12),
         LayoutBuilder(
@@ -334,7 +333,7 @@ class _FittedBoxExampleState extends State<FittedBoxExample> {
                           OsmeaComponents.sizedBox(height: 12),
                           OsmeaComponents.text(
                             'FITTED BOX',
-                            textStyle: TextStyle(
+                            textStyle: OsmeaTextStyle.titleLarge(context).copyWith(
                               color: OsmeaColors.white,
                               fontSize: titleFontSize,
                               fontWeight: FontWeight.bold,
@@ -343,7 +342,7 @@ class _FittedBoxExampleState extends State<FittedBoxExample> {
                           OsmeaComponents.sizedBox(height: 4),
                           OsmeaComponents.text(
                             boxFitLabels[selectedBoxFit] ?? '',
-                            textStyle: TextStyle(
+                            textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(
                               color: OsmeaColors.white,
                               fontSize: subtitleFontSize,
                             ),
@@ -361,4 +360,4 @@ class _FittedBoxExampleState extends State<FittedBoxExample> {
       ],
     );
   }
-} 
+}

@@ -115,7 +115,7 @@ class TicketWidgetState {
   static String _generateTicketId() {
     final now = DateTime.now();
     final timestamp = now.millisecondsSinceEpoch;
-    return 'ticket_${timestamp}';
+    return 'ticket_$timestamp';
   }
 
   /// Create a copy with updated values

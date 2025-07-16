@@ -12,7 +12,7 @@ class ToastExamplePage extends StatefulWidget {
 }
 
 class _ToastExamplePageState extends State<ToastExamplePage> {
-  bool _stacked = true;
+ final bool _stacked = true;
 
   ToastStyle _selectedStyle = ToastStyle.defaultStyle;
   ToastType _selectedType = ToastType.success;
@@ -74,35 +74,19 @@ class _ToastExamplePageState extends State<ToastExamplePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return OsmeaComponents.scaffold(
       backgroundColor: OsmeaColors.snow,
-      appBar: AppBar(
-        title: const Text('Toast Demo',
+      appBar: OsmeaComponents.appBar(
+        title: OsmeaComponents.text('Toast Demo',
             maxLines: 1, overflow: TextOverflow.ellipsis),
         centerTitle: true,
-        backgroundColor: OsmeaColors.white,
+        backgroundColor: const Color.fromARGB(255, 238, 196, 196),
         elevation: 0.5,
         foregroundColor: OsmeaColors.black54,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Row(
-              children: [
-                const Text('Stacked',
-                    style: TextStyle(fontWeight: FontWeight.w500)),
-                Switch(
-                  value: _stacked,
-                  onChanged: (val) => setState(() => _stacked = val),
-                  activeColor: OsmeaColors.meadow,
-                ),
-              ],
-            ),
-          ),
-        ],
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Padding(
+      body: OsmeaComponents.center(
+        child: OsmeaComponents.singleChildScrollView(
+          child: OsmeaComponents.padding(
             padding: const EdgeInsets.all(16),
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 420),
@@ -110,42 +94,39 @@ class _ToastExamplePageState extends State<ToastExamplePage> {
                 elevation: 8,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
-                child: Padding(
+                child: OsmeaComponents.padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 28),
-                  child: Column(
+                  child: OsmeaComponents.column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Row(
+                      OsmeaComponents.row(
                         children: [
                           Icon(Icons.notifications_active,
                               color: OsmeaColors.nordicBlue, size: 26),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: Text(
+                          OsmeaComponents.sizedBox(width: 10),
+                          OsmeaComponents.expanded(
+                            child: OsmeaComponents.text(
                               'Toast Showcase',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium
-                                  ?.copyWith(fontWeight: FontWeight.bold),
+                              fontWeight: FontWeight.bold,
+                              fontSize: Theme.of(context).textTheme.titleMedium?.fontSize,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 8),
-                      Text(
+                      OsmeaComponents.sizedBox(height: 8),
+                      OsmeaComponents.text(
                         'Try different toast styles, types, positions, and animations below.',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodySmall
-                            ?.copyWith(color: OsmeaColors.black54),
+                        color: OsmeaColors.black54,
+                        fontSize: 13, // veya Theme.of(context).textTheme.bodySmall?.fontSize
+                        fontWeight: FontWeight.normal,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      const SizedBox(height: 24),
+                      OsmeaComponents.sizedBox(height: 24),
                       _buildSectionHeader('Toast Style'),
                       _buildDropdown<ToastStyle>(
                         value: _selectedStyle,
@@ -154,7 +135,7 @@ class _ToastExamplePageState extends State<ToastExamplePage> {
                         onChanged: (val) =>
                             setState(() => _selectedStyle = val!),
                       ),
-                      const SizedBox(height: 16),
+                      OsmeaComponents.sizedBox(height: 16),
                       _buildSectionHeader('Toast Type'),
                       _buildDropdown<ToastType>(
                         value: _selectedType,
@@ -163,7 +144,7 @@ class _ToastExamplePageState extends State<ToastExamplePage> {
                         onChanged: (val) =>
                             setState(() => _selectedType = val!),
                       ),
-                      const SizedBox(height: 16),
+                      OsmeaComponents.sizedBox(height: 16),
                       _buildSectionHeader('Toast Position'),
                       _buildDropdown<ToastPosition>(
                         value: _selectedPosition,
@@ -172,7 +153,7 @@ class _ToastExamplePageState extends State<ToastExamplePage> {
                         onChanged: (val) =>
                             setState(() => _selectedPosition = val!),
                       ),
-                      const SizedBox(height: 16),
+                      OsmeaComponents.sizedBox(height: 16),
                       _buildSectionHeader('Toast Animation'),
                       _buildDropdown<ToastAnimation>(
                         value: _selectedAnimation,
@@ -181,7 +162,7 @@ class _ToastExamplePageState extends State<ToastExamplePage> {
                         onChanged: (val) =>
                             setState(() => _selectedAnimation = val!),
                       ),
-                      const SizedBox(height: 16),
+                      OsmeaComponents.sizedBox(height: 16),
                       _buildSectionHeader('Max Toasts'),
                       Slider(
                         value: _maxToasts.toDouble(),
@@ -193,8 +174,8 @@ class _ToastExamplePageState extends State<ToastExamplePage> {
                             setState(() => _maxToasts = val.round()),
                         activeColor: OsmeaColors.nordicBlue,
                       ),
-                      const SizedBox(height: 28),
-                      Center(
+                      OsmeaComponents.sizedBox(height: 28),
+                      OsmeaComponents.center(
                         child: ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: OsmeaColors.nordicBlue,
@@ -207,17 +188,17 @@ class _ToastExamplePageState extends State<ToastExamplePage> {
                           ),
                           icon: Icon(_stacked ? Icons.layers : Icons.filter_1,
                               size: 20),
-                          label: Text(
+                          label: OsmeaComponents.text(
                             _stacked
                                 ? 'Show Toast (Stacked)'
                                 : 'Show Toast (Single)',
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w600, fontSize: 15),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15,
                           ),
                           onPressed: () => _showToast(context),
                         ),
                       ),
-                      const SizedBox(
+                      OsmeaComponents.sizedBox(
                           height:
                               32), // Extra space to avoid overlap with toast/snackbar
                     ],
@@ -232,16 +213,14 @@ class _ToastExamplePageState extends State<ToastExamplePage> {
   }
 
   Widget _buildSectionHeader(String text) {
-    return Padding(
+    return OsmeaComponents.padding(
       padding: const EdgeInsets.only(bottom: 4),
-      child: Text(
+      child: OsmeaComponents.text(
         text,
-        style: TextStyle(
-          fontWeight: FontWeight.w600,
-          fontSize: 15,
-          color: OsmeaColors.black54,
-          letterSpacing: 0.2,
-        ),
+        fontWeight: FontWeight.w600,
+        fontSize: 15,
+        color: OsmeaColors.black54,
+        letterSpacing: 0.2,
       ),
     );
   }
@@ -258,13 +237,13 @@ class _ToastExamplePageState extends State<ToastExamplePage> {
       items: items
           .map((item) => DropdownMenuItem(
                 value: item,
-                child: Text(labels[item] ?? item.toString()),
+                child: OsmeaComponents.text(labels[item] ?? item.toString()),
               ))
           .toList(),
       onChanged: onChanged,
       borderRadius: BorderRadius.circular(12),
-      underline: Container(height: 2, color: OsmeaColors.nordicBlue.withOpacity(0.1)),
-      style: TextStyle(fontSize: 15, color: OsmeaColors.steel),
+      underline: OsmeaComponents.container(height: 2, color: OsmeaColors.nordicBlue.withValues(alpha: 0.1)),
+      style: OsmeaTextStyle.bodyMedium(context).copyWith(fontSize: 15, color: OsmeaColors.steel),
       dropdownColor: OsmeaColors.white,
       elevation: 2,
     );

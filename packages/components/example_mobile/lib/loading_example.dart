@@ -218,7 +218,7 @@ class LoadingExample extends StatelessWidget {
                                         child: OsmeaComponents.column(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
-                                            FittedBox(
+                                            OsmeaComponents.fittedBox(
                                               fit: BoxFit.scaleDown,
                                               child: OsmeaComponents.loading(
                                                 type: loadingTypes[i]['type'],
@@ -262,7 +262,7 @@ class LoadingExample extends StatelessWidget {
                                         child: OsmeaComponents.column(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
-                                            FittedBox(
+                                            OsmeaComponents.fittedBox(
                                               fit: BoxFit.scaleDown,
                                               child: OsmeaComponents.loading(
                                                 type: loadingTypes[i]['type'],

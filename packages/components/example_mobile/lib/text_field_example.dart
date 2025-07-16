@@ -208,7 +208,7 @@ class _TextFieldExampleState extends State<TextFieldExample> {
           size: TextFieldSize.medium,
           obscureText: !_isPasswordVisible,
           prefixIcon: const Icon(Icons.lock_outline),
-          suffixIcon: IconButton(
+          suffixIcon: OsmeaComponents.iconButton(
             icon: Icon(
                 _isPasswordVisible ? Icons.visibility_off : Icons.visibility),
             onPressed: () =>

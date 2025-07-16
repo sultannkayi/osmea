@@ -154,7 +154,7 @@ class HeaderSection extends StatelessWidget {
             decoration: BoxDecoration(
               color: (darkBackground
                   ? Colors.black26
-                  : theme.colorScheme.surfaceVariant.withValues(alpha: 0.3)),
+                  : theme.colorScheme.surface.withValues(alpha: 0.3)),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(

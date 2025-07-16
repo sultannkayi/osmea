@@ -4,7 +4,6 @@ import 'package:flutter/gestures.dart';
 import 'package:osmea_components/osmea_components.dart';
 import 'package:osmea_components/src/components/toast/toast.dart'
     show ToastManager;
-
 // Component imports
 import 'package:osmea_components/src/components/align/align.dart';
 import 'package:osmea_components/src/components/appbar/appbar.dart';
@@ -19,6 +18,7 @@ import 'package:osmea_components/src/components/chips/chips.dart';
 import 'package:osmea_components/src/components/column/column.dart';
 import 'package:osmea_components/src/components/container/container.dart';
 import 'package:osmea_components/src/components/divider/divider.dart';
+import 'package:osmea_components/src/components/dot_indicator/dot_indicator.dart';
 import 'package:osmea_components/src/components/expanded/expanded.dart';
 import 'package:osmea_components/src/components/flexible/flexible.dart';
 import 'package:osmea_components/src/components/padding/padding.dart';
@@ -28,7 +28,6 @@ import 'package:osmea_components/src/components/rich_text/rich_text.dart';
 import 'package:osmea_components/src/components/row/row.dart';
 import 'package:osmea_components/src/components/scaffold/scaffold.dart';
 import 'package:osmea_components/src/components/single_child_scroll_view/single_child_scroll_view.dart';
-
 import 'package:osmea_components/src/components/sized_box/sized_box.dart';
 import 'package:osmea_components/src/components/spacer/spacer.dart';
 import 'package:osmea_components/src/components/stack/stack.dart';
@@ -43,14 +42,13 @@ import 'package:osmea_components/src/components/list_item/list_item.dart';
 import 'package:osmea_components/src/components/ticket_widget/ticket_widget.dart';
 import 'package:osmea_components/src/components/ticket_widget/models/ticket_models.dart';
 import 'package:osmea_components/src/components/popup/popup.dart';
-
 import 'package:osmea_components/src/components/searchbar/searchbar.dart';
 import 'package:osmea_components/src/components/searchbar/expandable_searchbar.dart';
 
-import 'package:osmea_components/src/components/image/image.dart';
-
-import 'package:osmea_components/src/components/dropdown/dropdown.dart';
-import 'package:osmea_components/src/components/footer/footer.dart';
+import 'components/collapse/collapse.dart';
+import 'components/dropdown/dropdown.dart';
+import 'components/footer/footer.dart';
+import 'components/image/image.dart';
 
 class OsmeaComponents {
   /// Supported Button variants - All variants are supported
@@ -1523,6 +1521,84 @@ class OsmeaComponents {
       selectionColor: selectionColor,
     );
   }
+  /// 🔘 **OSMEA Dot Indicator** - Comprehensive dot indicator component
+  ///
+  /// Creates a feature-rich dot indicator component with support for:
+  /// - All visual variants (primary, secondary, success, warning, danger, info, neutral, custom)
+  /// - All size options (extraSmall to extraLarge)
+  /// - Multiple shape options (circle, rectangle, square, diamond, star, triangle, hexagon, heart, arrow, custom)
+  /// - Multiple visual styles (filled, outlined, soft, bold, glassmorphism, neumorphism, material, minimal)
+  /// - Multiple animation types (none, fade, scale, slide, bounce, elastic, pulse, ripple)
+  /// - Interactive states (enabled, disabled, loading, error)
+  /// - Full customization options
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.dotIndicator(
+  ///   itemCount: 5,
+  ///   currentIndex: 2,
+  ///   size: DotIndicatorSize.medium,
+  ///   shape: DotIndicatorShape.star,
+  ///   variant: DotIndicatorVariant.primary,
+  ///   animation: DotIndicatorAnimation.bounce,
+  ///   onDotTapped: (index) => handleDotTap(index),
+  /// )
+  /// ```
+  static Widget dotIndicator({
+    Key? key,
+    CoreTheme? customTheme,
+    required int itemCount,
+    int currentIndex = 0,
+    DotIndicatorSize size = DotIndicatorSize.medium,
+    DotIndicatorVariant variant = DotIndicatorVariant.primary,
+    DotIndicatorShape shape = DotIndicatorShape.circle,
+    DotIndicatorStyle style = DotIndicatorStyle.filled,
+    DotIndicatorState state = DotIndicatorState.enabled,
+    DotIndicatorPosition position = DotIndicatorPosition.bottomCenter,
+    DotIndicatorOrientation orientation = DotIndicatorOrientation.horizontal,
+    DotIndicatorAnimation animation = DotIndicatorAnimation.scale,
+    ValueChanged<int>? onDotTapped,
+    double? spacing,
+    Color? customActiveColor,
+    Color? customInactiveColor,
+    Color? customDisabledColor,
+    Widget? customShape,
+    Widget Function(BuildContext context, int index, bool isActive)? customDotBuilder,
+    bool showNumbers = false,
+    bool enableRipple = true,
+    Duration? animationDuration,
+    Offset? customOffset,
+    EdgeInsetsGeometry? padding,
+    EdgeInsetsGeometry? margin,
+  }) {
+    return OsmeaDotIndicator(
+      key: key,
+      customTheme: customTheme,
+      itemCount: itemCount,
+      currentIndex: currentIndex,
+      size: size,
+      variant: variant,
+      shape: shape,
+      style: style,
+      state: state,
+      position: position,
+      orientation: orientation,
+      animation: animation,
+      onDotTapped: onDotTapped,
+      spacing: spacing,
+      customActiveColor: customActiveColor,
+      customInactiveColor: customInactiveColor,
+      customDisabledColor: customDisabledColor,
+      customShape: customShape,
+      customDotBuilder: customDotBuilder,
+      showNumbers: showNumbers,
+      enableRipple: enableRipple,
+      animationDuration: animationDuration,
+      customOffset: customOffset,
+      padding: padding,
+      margin: margin,
+    );
+  }
 
   /// 🎯 **OSMEA AppBar** - Comprehensive application bar component
   ///
@@ -1657,6 +1733,78 @@ class OsmeaComponents {
       verticalDirection: verticalDirection,
       clipBehavior: clipBehavior,
       children: children,
+    );
+  }
+
+  /// 📋 **OSMEA Collapse** - Comprehensive collapse component
+  ///
+  /// Creates a comprehensive collapse component with support for:
+  /// - Multiple size variants (small, medium, large)
+  /// - Multiple style variants (block, card, accordion, ghost, outlined, filled)
+  /// - Accordion mode (only one panel open at a time)
+  /// - Multiple mode (multiple panels can be open)
+  /// - Smooth animations and transitions
+  /// - Full customization options
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.collapse(
+  ///   size: CollapseSize.medium,
+  ///   variant: CollapseVariant.block,
+  ///   mode: CollapseBehaviorMode.accordion,
+  ///   children: [
+  ///     OsmeaCollapsePanel(
+  ///       header: 'FAQ 1',
+  ///       body: Text('Answer 1'),
+  ///     ),
+  ///     OsmeaCollapsePanel(
+  ///       header: 'FAQ 2',
+  ///       body: Text('Answer 2'),
+  ///     ),
+  ///   ],
+  /// )
+  /// ```
+  static Widget collapse({
+    Key? key,
+    required List<OsmeaCollapsePanel> children,
+    CollapseSize size = CollapseSize.medium,
+    CollapseVariant variant = CollapseVariant.block,
+    CollapseBehaviorMode mode = CollapseBehaviorMode.multiple,
+    String? accordionValue,
+    ValueChanged<String?>? onAccordionChanged,
+    ExpansionPanelCallback? expansionCallback,
+    Color? backgroundColor,
+    Color? borderColor,
+    BorderRadius? borderRadius,
+    double elevation = 0,
+    EdgeInsetsGeometry? padding,
+    EdgeInsetsGeometry? margin,
+    Duration animationDuration = const Duration(milliseconds: 300),
+    bool maintainState = false,
+    bool disabled = false,
+    bool loading = false,
+    bool error = false,
+  }) {
+    return OsmeaCollapse(
+      key: key,
+      size: size,
+      variant: variant,
+      mode: mode,
+      children: children,
+      accordionValue: accordionValue,
+      onAccordionChanged: onAccordionChanged,
+      expansionCallback: expansionCallback,
+      backgroundColor: backgroundColor,
+      borderColor: borderColor,
+      borderRadius: borderRadius,
+      elevation: elevation,
+      padding: padding,
+      margin: margin,
+      animationDuration: animationDuration,
+      maintainState: maintainState,
+      disabled: disabled,
+      loading: loading,
+      error: error,
     );
   }
 
@@ -2599,29 +2747,49 @@ class OsmeaComponents {
     return type.osmeaLoading(size: size, color: color, cubit: cubit);
   }
 
-  /// 🌀 **OSMEA Progress** - Modern animated progress bar/circular
+  /// 🌀 **OSMEA Progress** - Comprehensive progress indicator system
+  ///
+  /// Creates progress indicators with support for multiple types, sizes, and animations.
   ///
   /// Example:
   /// ```dart
-  /// OsmeaComponents.progress(type: ProgressType.circular, value: 0.7)
+  /// OsmeaComponents.progress(type: ProgressType.wave, value: 0.7)
   /// ```
   static Widget progress({
     Key? key,
     required ProgressType type,
     required double value,
     ProgressSize size = ProgressSize.medium,
-    Color? color,
+    Color? progressColor,
     bool showPercentage = false,
     double speed = 1.0,
+    double bufferValue = 0.75,
+    double? strokeWidth,
+    double? radius,
+    double? percentFontSize,
+    bool isAutoProgressEnabled = false,
+    double autoProgressSpeed = 0.05,
+    double minValue = 0.0,
+    double maxValue = 1.0,
+    bool isIncreasing = true,
   }) {
     return OsmeaProgress(
       key: key,
       type: type,
       value: value,
       size: size,
-      color: color,
+      progressColor: progressColor,
       showPercentage: showPercentage,
       speed: speed,
+      bufferValue: bufferValue,
+      strokeWidth: strokeWidth,
+      radius: radius,
+      percentFontSize: percentFontSize,
+      isAutoProgressEnabled: isAutoProgressEnabled,
+      autoProgressSpeed: autoProgressSpeed,
+      minValue: minValue,
+      maxValue: maxValue,
+      isIncreasing: isIncreasing,
     );
   }
 
@@ -3592,6 +3760,8 @@ class OsmeaComponents {
     );
   }
 
+
+
   /// 🔢 **OSMEA Counter** - Interactive numeric counter component with cubit state management
   ///
   /// Creates a counter component with increment/decrement controls.
@@ -3839,4 +4009,194 @@ class OsmeaFooterItem {
     this.onTap,
     this.bottomSheetBuilder,
   });
+}
+
+/// 🎯 **OsmeaCollapsePanelItem** - Configuration class for collapse panels
+///
+/// Configuration class for creating collapse panels with default settings.
+/// Similar to OsmeaDropdownItem and OsmeaFooterItem pattern for consistency.
+class OsmeaCollapsePanelItem {
+  final String header;
+  final Widget body;
+  final String? value;
+  final Widget? leading;
+  final Widget? trailing;
+  final bool disabled;
+  final bool loading;
+  final bool error;
+
+  const OsmeaCollapsePanelItem({
+    required this.header,
+    required this.body,
+    this.value,
+    this.leading,
+    this.trailing,
+    this.disabled = false,
+    this.loading = false,
+    this.error = false,
+  });
+
+  /// Create a copy with modified properties
+  OsmeaCollapsePanelItem copyWith({
+    String? header,
+    Widget? body,
+    String? value,
+    Widget? leading,
+    Widget? trailing,
+    bool? disabled,
+    bool? loading,
+    bool? error,
+  }) {
+    return OsmeaCollapsePanelItem(
+      header: header ?? this.header,
+      body: body ?? this.body,
+      value: value ?? this.value,
+      leading: leading ?? this.leading,
+      trailing: trailing ?? this.trailing,
+      disabled: disabled ?? this.disabled,
+      loading: loading ?? this.loading,
+      error: error ?? this.error,
+    );
+  }
+}
+
+/// 📋 **OsmeaCollapsePanel** - Individual panel within a collapse component
+///
+/// Individual panel within a collapse component.
+/// Contains header, body, and optional leading/trailing widgets.
+///
+/// Features:
+/// * 📝 Header content (String or Widget)
+/// * 📄 Body content widget
+/// * 🎯 Leading widget (icon, avatar, etc.)
+/// * 🎯 Trailing widget (icon, button, etc.)
+/// * 🔑 Unique value for accordion mode
+/// * ♿ Interactive states (disabled, loading, error)
+/// * 🎨 Variant support for styling
+///
+/// ```dart
+/// OsmeaCollapsePanel(
+///   header: 'FAQ Section',
+///   body: Text('This is the answer to the FAQ.'),
+///   leading: Icon(Icons.help),
+///   trailing: Icon(Icons.arrow_drop_down),
+///   value: 'faq-1',
+///   variant: CollapseVariant.block,
+/// )
+/// ```
+///
+/// See also:
+/// * [OsmeaCollapse] - Parent collapse component
+/// * [CollapseVariant] - Style variants enum
+/// * [CollapseSize] - Size variants enum
+class OsmeaCollapsePanel {
+  /// Creates a collapse panel.
+  ///
+  /// [header]: Header content (String or Widget)
+  /// [body]: Body content widget
+  /// [leading]: Leading widget (icon, avatar, etc.)
+  /// [trailing]: Trailing widget (icon, button, etc.)
+  /// [value]: Unique value for accordion mode
+  /// [variant]: Visual style variant for the panel
+  /// [disabled]: Whether the panel is disabled
+  /// [loading]: Whether the panel is loading
+  /// [error]: Whether the panel is in error state
+  const OsmeaCollapsePanel({
+    required this.header,
+    required this.body,
+    this.leading,
+    this.trailing,
+    this.value,
+    this.variant,
+    this.disabled = false,
+    this.loading = false,
+    this.error = false,
+  });
+
+  /// Header content - can be a String or Widget
+  final dynamic header; // String or Widget
+
+  /// Body content widget
+  final Widget body;
+
+  /// Leading widget (icon, avatar, etc.)
+  final Widget? leading;
+
+  /// Trailing widget (icon, button, etc.)
+  final Widget? trailing;
+
+  /// Unique value for accordion mode
+  final String? value;
+
+  /// Visual style variant for the panel
+  final CollapseVariant? variant;
+
+  /// Whether the panel is disabled
+  final bool disabled;
+
+  /// Whether the panel is loading
+  final bool loading;
+
+  /// Whether the panel is in error state
+  final bool error;
+
+  /// Create a copy with updated values
+  OsmeaCollapsePanel copyWith({
+    dynamic header,
+    Widget? body,
+    Widget? leading,
+    Widget? trailing,
+    String? value,
+    CollapseVariant? variant,
+    bool? disabled,
+    bool? loading,
+    bool? error,
+  }) {
+    return OsmeaCollapsePanel(
+      header: header ?? this.header,
+      body: body ?? this.body,
+      leading: leading ?? this.leading,
+      trailing: trailing ?? this.trailing,
+      value: value ?? this.value,
+      variant: variant ?? this.variant,
+      disabled: disabled ?? this.disabled,
+      loading: loading ?? this.loading,
+      error: error ?? this.error,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is OsmeaCollapsePanel &&
+        other.header == header &&
+        other.body == body &&
+        other.leading == leading &&
+        other.trailing == trailing &&
+        other.value == value &&
+        other.variant == variant &&
+        other.disabled == disabled &&
+        other.loading == loading &&
+        other.error == error;
+  }
+
+  @override
+  int get hashCode {
+    return Object.hash(
+      header,
+      body,
+      leading,
+      trailing,
+      value,
+      variant,
+      disabled,
+      loading,
+      error,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'OsmeaCollapsePanel(header: $header, value: $value, variant: $variant, disabled: $disabled, loading: $loading, error: $error)';
+  }
 }

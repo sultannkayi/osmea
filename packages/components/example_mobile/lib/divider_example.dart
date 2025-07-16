@@ -45,7 +45,7 @@ class DividerExample extends StatelessWidget {
                 children: [
                   OsmeaComponents.text(
                     variantLabel,
-                    textStyle: const TextStyle(
+                    textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),

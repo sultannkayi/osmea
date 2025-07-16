@@ -44,14 +44,14 @@ class TicketFormField extends StatelessWidget {
         RichText(
           text: TextSpan(
             text: question.label,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
               color: Colors.black87,
             ),
             children: [
               if (question.isRequired)
-                TextSpan(
+                const TextSpan(
                   text: ' *',
                   style: TextStyle(color: Colors.red),
                 ),
@@ -80,7 +80,7 @@ class TicketFormField extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             errorText!,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12,
               color: Colors.red,
             ),
@@ -127,7 +127,7 @@ class TicketFormField extends StatelessWidget {
       onChanged: onChanged,
       decoration: InputDecoration(
         hintText: question.hint,
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         errorText: errorText,
       ),
     );
@@ -140,7 +140,7 @@ class TicketFormField extends StatelessWidget {
       maxLines: 5,
       decoration: InputDecoration(
         hintText: question.hint,
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         errorText: errorText,
       ),
     );
@@ -153,7 +153,7 @@ class TicketFormField extends StatelessWidget {
       isExpanded: true, // This ensures the dropdown takes available width
       decoration: InputDecoration(
         hintText: question.hint,
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         errorText: errorText,
       ),
       items: question.options?.map((option) {
@@ -231,7 +231,7 @@ class TicketFormField extends StatelessWidget {
                   subtitle: option.description != null
                       ? Text(
                           option.description!,
-                          style: const TextStyle(fontSize: 12),
+                            style: const TextStyle(fontSize: 12),
                         )
                       : null,
                   value: option.value.toString(),
@@ -260,9 +260,9 @@ class TicketFormField extends StatelessWidget {
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         hintText: question.hint ?? 'Enter email address',
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         errorText: errorText,
-        prefixIcon: Icon(Icons.email),
+        prefixIcon: const Icon(Icons.email),
       ),
     );
   }
@@ -274,9 +274,9 @@ class TicketFormField extends StatelessWidget {
       keyboardType: TextInputType.phone,
       decoration: InputDecoration(
         hintText: question.hint ?? 'Enter phone number',
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         errorText: errorText,
-        prefixIcon: Icon(Icons.phone),
+        prefixIcon: const Icon(Icons.phone),
       ),
     );
   }
@@ -288,7 +288,7 @@ class TicketFormField extends StatelessWidget {
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
         hintText: question.hint ?? 'Enter number',
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         errorText: errorText,
       ),
     );
@@ -309,18 +309,18 @@ class TicketFormField extends StatelessWidget {
           }
         },
         child: Container(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             border: Border.all(color: Colors.grey),
             borderRadius: BorderRadius.circular(4),
           ),
           child: Row(
             children: [
-              Icon(Icons.calendar_today),
-              SizedBox(width: 8),
+              const Icon(Icons.calendar_today),
+              const SizedBox(width: 8),
               Text(
                 value != null ? value.toString().split('T')[0] : 'Select date',
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
               ),
             ],
           ),
@@ -331,15 +331,15 @@ class TicketFormField extends StatelessWidget {
 
   Widget _buildFileField() {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding:const EdgeInsets.all(16),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey),
         borderRadius: BorderRadius.circular(4),
       ),
-      child: Row(
+      child: const Row(
         children: [
-          Icon(Icons.attach_file),
-          SizedBox(width: 8),
+           Icon(Icons.attach_file),
+           SizedBox(width: 8),
           Text('File upload - Not implemented yet'),
         ],
       ),
@@ -369,9 +369,9 @@ class TicketFormField extends StatelessWidget {
       keyboardType: TextInputType.url,
       decoration: InputDecoration(
         hintText: question.hint ?? 'Enter URL',
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         errorText: errorText,
-        prefixIcon: Icon(Icons.link),
+        prefixIcon: const Icon(Icons.link),
       ),
     );
   }

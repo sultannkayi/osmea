@@ -414,7 +414,7 @@ class OsmeaCounter extends CoreContainer {
     return BoxDecoration(
       color: backgroundColor ?? colors.containerBackground,
       borderRadius: borderRadius ?? BorderRadius.circular(8),
-      // Border'ı kaldırdık çünkü her parçanın kendi border'ı var
+     
     );
   }
 

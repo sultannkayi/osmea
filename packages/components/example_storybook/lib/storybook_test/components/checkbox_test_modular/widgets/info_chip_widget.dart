@@ -37,7 +37,7 @@ class InfoChipWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: backgroundColor ?? (isSelected 
               ? theme.colorScheme.primaryContainer 
-              : theme.colorScheme.surfaceVariant),
+              : theme.colorScheme.surface),
             borderRadius: BorderRadius.circular(16),
             border: isSelected 
               ? Border.all(color: theme.colorScheme.primary, width: 1.5)

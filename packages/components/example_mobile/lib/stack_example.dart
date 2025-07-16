@@ -16,32 +16,32 @@ class StackExample extends StatelessWidget {
         child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildSectionTitle('Basic Stack'),
-            _buildBasicStackExamples(),
+            _buildSectionTitle(context, 'Basic Stack'),
+            _buildBasicStackExamples(context),
             OsmeaComponents.sizedBox(height: 32),
-            _buildSectionTitle('Styled Stack'),
-            _buildStyledStackExamples(),
+            _buildSectionTitle(context, 'Styled Stack'),
+            _buildStyledStackExamples(context),
             OsmeaComponents.sizedBox(height: 32),
-            _buildSectionTitle('Interactive Stack'),
-            _buildInteractiveStackExamples(),
+            _buildSectionTitle(context, 'Interactive Stack'),
+            _buildInteractiveStackExamples(context),
             OsmeaComponents.sizedBox(height: 32),
-            _buildSectionTitle('Positioned Children'),
-            _buildPositionedChildrenExamples(),
+            _buildSectionTitle(context, 'Positioned Children'),
+            _buildPositionedChildrenExamples(context),
             OsmeaComponents.sizedBox(height: 32),
-            _buildSectionTitle('Practical Examples'),
-            _buildPracticalExamples(),
+            _buildSectionTitle(context, 'Practical Examples'),
+            _buildPracticalExamples(context),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildSectionTitle(String title) {
+  Widget _buildSectionTitle(BuildContext context, String title) {
     return OsmeaComponents.padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: OsmeaComponents.text(
         title,
-        textStyle: const TextStyle(
+        textStyle: OsmeaTextStyle.titleLarge(context).copyWith(
           fontSize: 20,
           fontWeight: FontWeight.bold,
         ),
@@ -49,37 +49,34 @@ class StackExample extends StatelessWidget {
     );
   }
 
-  Widget _buildBasicStackExamples() {
+  Widget _buildBasicStackExamples(BuildContext context) {
     return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildExampleWithCaption(
+        _buildExampleWithCaption(context,
           'Simple Stack with Default Alignment',
           _buildContainer(
             OsmeaComponents.stack(
               children: [
-                _buildColoredBox(color: OsmeaColors.sunsetGlow, size: 150),
-                _buildColoredBox(
-                    color: Colors.green.withValues(alpha: 0.7), size: 120),
-                _buildColoredBox(
-                    color: Colors.blue.withValues(alpha: 0.7), size: 90),
+                _buildColoredBox(context, color: OsmeaColors.sunsetGlow, size: 150),
+                _buildColoredBox(context, color: OsmeaColors.green.withValues(alpha: 0.7), size: 120),
+                _buildColoredBox(context, color: OsmeaColors.blue.withValues(alpha: 0.7), size: 90),
               ],
             ),
           ),
         ),
         OsmeaComponents.sizedBox(height: 16),
-        _buildExampleWithCaption(
+        _buildExampleWithCaption(context,
           'Stack with Center Alignment',
           _buildContainer(
             OsmeaComponents.stack(
               alignment: Alignment.center,
               children: [
-                _buildColoredBox(color: OsmeaColors.purple, size: 150),
-                _buildColoredBox(
-                    color: Colors.amber.withValues(alpha: 0.7), size: 100),
+                _buildColoredBox(context, color: OsmeaColors.purple, size: 150),
+                _buildColoredBox(context, color: OsmeaColors.goldenHour.withValues(alpha: 0.7), size: 100),
                 OsmeaComponents.text(
                   'Centered Text',
-                  textStyle: const TextStyle(
+                  textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
                     color: OsmeaColors.white,
                     fontWeight: FontWeight.bold,
                   ),
@@ -89,22 +86,21 @@ class StackExample extends StatelessWidget {
           ),
         ),
         OsmeaComponents.sizedBox(height: 16),
-        _buildExampleWithCaption(
+        _buildExampleWithCaption(context,
           'Stack with Bottom-Right Alignment',
           _buildContainer(
             OsmeaComponents.stack(
               alignment: Alignment.bottomRight,
               children: [
-                _buildColoredBox(color: OsmeaColors.forestHeart, size: 150),
-                _buildColoredBox(color: OsmeaColors.sunsetGlow.withOpacity(0.7), size: 80),
-                _buildColoredBox(color: Colors.teal, size: 150),
-                _buildColoredBox(
-                    color: Colors.pink.withValues(alpha: 0.7), size: 80),
+                _buildColoredBox(context, color: OsmeaColors.forestHeart, size: 150),
+                _buildColoredBox(context, color: OsmeaColors.sunsetGlow.withValues(alpha: 0.7), size: 80),  
+                _buildColoredBox(context, color: OsmeaColors.meadow, size: 150),
+                _buildColoredBox(context, color: OsmeaColors.sunsetGlow.withValues(alpha: 0.7), size: 80),
                 OsmeaComponents.padding(
                   padding: const EdgeInsets.all(8),
                   child: OsmeaComponents.text(
                     'Bottom-Right',
-                    textStyle: const TextStyle(
+                    textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
                       color: OsmeaColors.white,
                       fontWeight: FontWeight.bold,
                     ),
@@ -118,11 +114,11 @@ class StackExample extends StatelessWidget {
     );
   }
 
-  Widget _buildStyledStackExamples() {
+  Widget _buildStyledStackExamples(BuildContext context) {
     return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildExampleWithCaption(
+        _buildExampleWithCaption(context,
           'Stack with ClipBehavior.none',
           _buildContainer(
             OsmeaComponents.container(
@@ -144,12 +140,12 @@ class StackExample extends StatelessWidget {
                   OsmeaComponents.positioned(
                     top: -20,
                     right: -20,
-                    child: _buildColoredBox(color: OsmeaColors.sunsetGlow, size: 50),
+                    child: _buildColoredBox(context, color: OsmeaColors.sunsetGlow, size: 50),
                   ),
                   OsmeaComponents.positioned(
                     bottom: -20,
                     left: -20,
-                    child: _buildColoredBox(color: OsmeaColors.nordicBlue, size: 50),
+                    child: _buildColoredBox(context, color: OsmeaColors.nordicBlue, size: 50),
                   ),
                 ],
               ),
@@ -157,7 +153,7 @@ class StackExample extends StatelessWidget {
           ),
         ),
         OsmeaComponents.sizedBox(height: 16),
-        _buildExampleWithCaption(
+        _buildExampleWithCaption(context,
           'Stack with StackFit.expand',
           _buildContainer(
             OsmeaComponents.sizedBox(
@@ -166,14 +162,14 @@ class StackExample extends StatelessWidget {
               child: OsmeaComponents.stack(
                 fit: StackFit.expand,
                 children: [
-                  OsmeaComponents.container(color: OsmeaColors.forestHeart.withOpacity(0.3)),
+                  OsmeaComponents.container(color: OsmeaColors.forestHeart.withValues(alpha: 0.3)),
                   OsmeaComponents.align(
                     alignment: Alignment.center,
                     child: OsmeaComponents.container(
-                      color: Colors.green.withValues(alpha: 0.3),
+                      color: OsmeaColors.green.withValues(alpha: 0.3),
                     ),
                   ),
-                  Align(
+                  OsmeaComponents.align(
                     alignment: Alignment.center,
                     child: OsmeaComponents.container(
                       width: 100,
@@ -182,7 +178,7 @@ class StackExample extends StatelessWidget {
                       child: OsmeaComponents.center(
                         child: OsmeaComponents.text(
                           'Expanded',
-                          textStyle: const TextStyle(
+                          textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
                             color: OsmeaColors.white,
                           ),
                         ),
@@ -198,11 +194,11 @@ class StackExample extends StatelessWidget {
     );
   }
 
-  Widget _buildInteractiveStackExamples() {
+  Widget _buildInteractiveStackExamples(BuildContext context) {
     return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildExampleWithCaption(
+        _buildExampleWithCaption(context,
           'Stack with Gesture Detection',
           _buildContainer(
             GestureDetector(
@@ -212,10 +208,10 @@ class StackExample extends StatelessWidget {
               child: OsmeaComponents.stack(
                 alignment: Alignment.center,
                 children: [
-                  _buildColoredBox(color: OsmeaColors.nordicBlue, size: 150),
+                  _buildColoredBox(context, color: OsmeaColors.nordicBlue, size: 150),
                   OsmeaComponents.text(
                     'Tap Me!',
-                    textStyle: const TextStyle(
+                    textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
                       color: OsmeaColors.white,
                       fontWeight: FontWeight.bold,
                     ),
@@ -229,11 +225,11 @@ class StackExample extends StatelessWidget {
     );
   }
 
-  Widget _buildPositionedChildrenExamples() {
+  Widget _buildPositionedChildrenExamples(BuildContext context) {
     return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildExampleWithCaption(
+        _buildExampleWithCaption(context,
           'Stack with Positioned Children',
           _buildContainer(
             OsmeaComponents.sizedBox(
@@ -245,34 +241,28 @@ class StackExample extends StatelessWidget {
                   OsmeaComponents.positioned(
                     top: 10,
                     left: 10,
-                    child: _buildColoredBox(color: OsmeaColors.sunsetGlow, size: 50),
+                    child: _buildColoredBox(context, color: OsmeaColors.sunsetGlow, size: 50),
                   ),
                   OsmeaComponents.positioned(
                     top: 10,
                     right: 10,
-                    child: _buildColoredBox(color: OsmeaColors.forestHeart, size: 50),
+                    child: _buildColoredBox(context, color: OsmeaColors.forestHeart, size: 50),
                   ),
                   OsmeaComponents.positioned(
                     bottom: 10,
                     left: 10,
-                    child: _buildColoredBox(color: OsmeaColors.nordicBlue, size: 50),
+                    child: _buildColoredBox(context, color: OsmeaColors.nordicBlue, size: 50),
                   ),
                   OsmeaComponents.positioned(
                     bottom: 10,
                     right: 10,
-                    child: _buildColoredBox(color: OsmeaColors.amberFlame, size: 50),
-                  ),
-                  OsmeaComponents.positioned(
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
                     child: OsmeaComponents.container(
                       height: 40,
-                      color: Colors.black.withValues(alpha: 0.5),
+                      color: OsmeaColors.black.withValues(alpha: 0.5),
                       alignment: Alignment.center,
                       child: OsmeaComponents.text(
                         'Overlay Caption',
-                        textStyle: const TextStyle(
+                        textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
                           color: OsmeaColors.white,
                         ),
                       ),
@@ -284,7 +274,7 @@ class StackExample extends StatelessWidget {
           ),
         ),
         OsmeaComponents.sizedBox(height: 16),
-        _buildExampleWithCaption(
+        _buildExampleWithCaption(context,
           'Stack with positionedFill and positionedFractional',
           _buildContainer(
             OsmeaComponents.sizedBox(
@@ -300,10 +290,10 @@ class StackExample extends StatelessWidget {
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                           colors: [
-                            OsmeaColors.nordicBlue.withOpacity(0.2),
-                            OsmeaColors.purple.withOpacity(0.2),
-                            Colors.blue.withValues(alpha: 0.2),
-                            Colors.purple.withValues(alpha: 0.2),
+                            OsmeaColors.nordicBlue.withValues(alpha: 0.2),
+                            OsmeaColors.purple.withValues(alpha: 0.2),
+                            OsmeaColors.blue.withValues(alpha: 0.2),
+                            OsmeaColors.purple.withValues(alpha: 0.2),
                           ],
                         ),
                       ),
@@ -340,17 +330,17 @@ class StackExample extends StatelessWidget {
     );
   }
 
-  Widget _buildPracticalExamples() {
+  Widget _buildPracticalExamples(BuildContext context) {
     return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildExampleWithCaption(
+        _buildExampleWithCaption(context,
           'Image Card with Overlay',
           _buildContainer(
             OsmeaComponents.sizedBox(
               width: double.infinity,
               height: 200,
-              child: ClipRRect(
+              child: OsmeaComponents.clipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: OsmeaComponents.stack(
                   fit: StackFit.expand,
@@ -368,9 +358,9 @@ class StackExample extends StatelessWidget {
                             colors: [
                               OsmeaColors.transparent,
                               OsmeaColors.black.withValues(alpha: 0.7),
-                              Colors.transparent,
-                              Colors.black.withValues(alpha: 0.7),
-                              Colors.black.withValues(alpha: 0.5),
+                              OsmeaColors.transparent,
+                              OsmeaColors.black.withValues(alpha: 0.7),
+                              OsmeaColors.black.withValues(alpha: 0.5),
                             ],
                             stops: const [0.6, 1.0],
                           ),
@@ -387,7 +377,7 @@ class StackExample extends StatelessWidget {
                         children: [
                           OsmeaComponents.text(
                             'Beautiful Landscape',
-                            textStyle: const TextStyle(
+                            textStyle: OsmeaTextStyle.titleMedium(context).copyWith(
                               color: OsmeaColors.white,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -396,8 +386,8 @@ class StackExample extends StatelessWidget {
                           OsmeaComponents.sizedBox(height: 4),
                           OsmeaComponents.text(
                             'Nature Photography',
-                            textStyle: TextStyle(
-                              color: OsmeaColors.white.withOpacity(0.7),
+                            textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(
+                              color: OsmeaColors.white.withValues(alpha: 0.7),
                               fontSize: 14,
                             ),
                           ),
@@ -413,12 +403,12 @@ class StackExample extends StatelessWidget {
                           vertical: 4,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.black.withValues(alpha: 0.5),
+                          color: OsmeaColors.black.withValues(alpha: 0.5),
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: OsmeaComponents.text(
                           'Featured',
-                          textStyle: const TextStyle(
+                          textStyle: OsmeaTextStyle.labelSmall(context).copyWith(
                             color: OsmeaColors.white,
                             fontSize: 12,
                           ),
@@ -432,7 +422,7 @@ class StackExample extends StatelessWidget {
           ),
         ),
         OsmeaComponents.sizedBox(height: 16),
-        _buildExampleWithCaption(
+        _buildExampleWithCaption(context,
           'Profile Card with Badge',
           _buildContainer(
             OsmeaComponents.container(
@@ -443,7 +433,7 @@ class StackExample extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withValues(alpha: 0.2),
+                    color: OsmeaColors.grey.withValues(alpha: 0.2),
                     blurRadius: 8,
                     offset: const Offset(0, 4),
                   ),
@@ -470,7 +460,7 @@ class StackExample extends StatelessWidget {
                           children: [
                             OsmeaComponents.text(
                               'John Doe',
-                              textStyle: const TextStyle(
+                              textStyle: OsmeaTextStyle.titleMedium(context).copyWith(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -478,7 +468,7 @@ class StackExample extends StatelessWidget {
                             OsmeaComponents.sizedBox(height: 4),
                             OsmeaComponents.text(
                               'Senior Developer',
-                              textStyle: TextStyle(
+                              textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(
                                 fontSize: 14,
                                 color: OsmeaColors.steel,
                               ),
@@ -499,7 +489,7 @@ class StackExample extends StatelessWidget {
                       ),
                       child: OsmeaComponents.text(
                         'Online',
-                        textStyle: TextStyle(
+                        textStyle: OsmeaTextStyle.labelSmall(context).copyWith(
                           color: OsmeaColors.white,
                           fontSize: 10,
                           fontWeight: FontWeight.bold,
@@ -516,7 +506,7 @@ class StackExample extends StatelessWidget {
     );
   }
 
-  Widget _buildExampleWithCaption(String caption, Widget child) {
+  Widget _buildExampleWithCaption(BuildContext context, String caption, Widget child) {
     return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -524,7 +514,7 @@ class StackExample extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 8),
           child: OsmeaComponents.text(
             caption,
-            textStyle: const TextStyle(
+            textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(
               fontSize: 14,
               fontWeight: FontWeight.bold,
             ),
@@ -535,11 +525,7 @@ class StackExample extends StatelessWidget {
     );
   }
 
-  Widget _buildColoredBox({
-    required Color color,
-    required double size,
-    String? text,
-  }) {
+  Widget _buildColoredBox(BuildContext context, {required Color color, required double size, String? text}) {
     return OsmeaComponents.container(
       width: size,
       height: size,
@@ -548,7 +534,7 @@ class StackExample extends StatelessWidget {
       child: text != null
           ? OsmeaComponents.text(
               text,
-              textStyle: TextStyle(
+              textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
                 color: color.computeLuminance() > 0.5
                     ? OsmeaColors.black
                     : OsmeaColors.white,
