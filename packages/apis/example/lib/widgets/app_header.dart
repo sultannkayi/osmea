@@ -11,6 +11,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback onThemeToggle;
   final VoidCallback? onDrawerToggle;
   final bool isDarkMode;
+  final VoidCallback? onDebugTest;
 
   const AppHeader({
     super.key,
@@ -20,6 +21,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
     required this.onThemeToggle,
     this.onDrawerToggle,
     this.isDarkMode = false,
+    this.onDebugTest,
   });
 
   @override
@@ -134,7 +136,8 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
                         onTap: () async {
                           try {
                             if (apiUrl.isNotEmpty) {
-                              await Clipboard.setData(ClipboardData(text: apiUrl));
+                              await Clipboard.setData(
+                                  ClipboardData(text: apiUrl));
                               onUrlCopied(); // Call the callback to show success message
                             }
                           } catch (e) {
@@ -150,7 +153,8 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
                           child: Icon(
                             Icons.copy_rounded,
                             size: 14,
-                            color: colorScheme.primary, // Use theme primary color
+                            color:
+                                colorScheme.primary, // Use theme primary color
                           ),
                         ),
                       ),
@@ -163,6 +167,16 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
           ],
         ),
         actions: [
+          // Debug Test Button
+          if (onDebugTest != null)
+            Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: IconButton(
+                icon: const Icon(Icons.bug_report_rounded),
+                onPressed: onDebugTest,
+                tooltip: 'Test Config Loading',
+              ),
+            ),
           // Theme Toggle
           Padding(
             padding: const EdgeInsets.only(right: 16),
