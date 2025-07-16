@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/network/remote/demo_woo/abstract/coupons_service.dart';
+import 'package:apis/network/remote/woocommerce/coupons/abstract/coupons_service.dart';
 import 'package:example/services/api_request_handler.dart';
 import 'package:get_it/get_it.dart';
 import 'package:example/services/api_service_registry.dart';
@@ -22,7 +22,9 @@ class ListAllCouponsHandler implements ApiRequestHandler {
       };
     }
     try {
-      final response = await GetIt.I<CouponsService>().listAllCoupons();
+      final response = await GetIt.I<CouponsService>().listAllCoupons(
+        apiVersion: WooNetwork.apiVersion,
+      );
       return {
         "status": "success",
         "coupons": response.map((e) => e.toJson()).toList(),
