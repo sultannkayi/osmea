@@ -38,7 +38,7 @@ class ApiDioClient {
     return dio;
   }
 
-  /// WooCommerce için özel Dio instance'ı
+  /// Creates a specialized Dio instance for WooCommerce API communication
   static Dio wooDio() {
     final dio = Dio()
       ..options = BaseOptions()
