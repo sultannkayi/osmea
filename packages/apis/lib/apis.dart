@@ -260,7 +260,7 @@ Future<void> initNetworksFromConfig(GetIt getIt) async {
 
   if (hasShopify) {
     await ApiNetwork.initFromConfig(getIt);
-    print('[initNetworksFromConfig] Shopify başlatıldı.');
+    print('[initNetworksFromConfig] Shopify initialized successfully.');
   }
   if (hasWoo) {
     await WooNetwork.initFromConfig(getIt);
