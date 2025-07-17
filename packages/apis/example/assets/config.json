@@ -4,6 +4,12 @@
       "storeName": "<STORE_NAME>",
       "shopifyAccessToken": "<SHOPIFY_ACCESS_TOKEN>",
       "apiVersion": "<API_VERSION>"
+    },
+    "woocommerce": {
+      "storeUrl": "<STORE_URL>",
+      "username": "<USERNAME>",
+      "password": "<PASSWORD>",
+      "apiVersion": "<API_VERSION>"
     }
   }
 }
