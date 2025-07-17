@@ -89,6 +89,7 @@ class ApiInterceptorDefault extends Interceptor {
 }
 
 /// WooCommerce için Basic Auth ve JSON header ekleyen interceptor
+/// Interceptor that adds Basic Auth and JSON headers for WooCommerce
 class WooInterceptor extends Interceptor {
   @override
   void onRequest(
