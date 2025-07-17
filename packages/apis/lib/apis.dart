@@ -230,7 +230,7 @@ class WooNetwork {
   static String basicAuthHeader() {
     String credentials = '${WooNetwork.username}:${WooNetwork.password}';
     String encoded = base64Encode(utf8.encode(credentials));
-    return 'Basic ' + encoded;
+    return 'Basic $encoded';
   }
 }
 
