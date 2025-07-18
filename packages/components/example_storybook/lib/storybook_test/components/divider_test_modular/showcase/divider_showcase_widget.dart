@@ -154,73 +154,7 @@ class _DividerShowcaseWidgetState extends State<DividerShowcaseWidget> {
     );
   }
 
-  Widget _buildSizeComparison() {
-    final sizes = [];
-    
-    return Column(
-      children: sizes.map((size) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          child: Row(
-            children: [
-              SizedBox(
-                width: 80,
-                child: Text(
-                  size,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade50,
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.grey.shade200),
-                  ),
-                                     child: widget.direction == Axis.horizontal
-                       ? OsmeaComponents.divider(
-                           variant: widget.variant,
-                           thickness: _getThickness(size),
-                           color: widget.color,
-                           direction: widget.direction,
-                           text: widget.variant == DividerVariant.label ? widget.labelText : null,
-                           icon: widget.variant == DividerVariant.icon ? Icon(widget.icon) : null,
-                         )
-                       : IntrinsicHeight(
-                           child: Row(
-                             children: [
-                               const Expanded(child: Text('Left')),
-                               const SizedBox(width: 16),
-                               SizedBox(
-                                 width: _getDividerWidth(),
-                                 child: OsmeaComponents.divider(
-                                   variant: widget.variant,
-                                   thickness: _getThickness(size),
-                                   color: widget.color,
-                                   direction: widget.direction,
-                                   text: widget.variant == DividerVariant.label ? widget.labelText : null,
-                                   icon: widget.variant == DividerVariant.icon ? Icon(widget.icon) : null,
-                                   height: 50,
-                                 ),
-                               ),
-                               const SizedBox(width: 16),
-                               const Expanded(child: Text('Right')),
-                             ],
-                           ),
-                         ),
-                ),
-              ),
-            ],
-          ),
-        );
-      }).toList(),
-    );
-  }
+
 
 
   double _getThickness(String size) {
@@ -253,7 +187,6 @@ class _DividerShowcaseWidgetState extends State<DividerShowcaseWidget> {
     }
   }
 
-  double _getDividerHeight() {
-    return 50.0;
-  }
+
+  
 } 
