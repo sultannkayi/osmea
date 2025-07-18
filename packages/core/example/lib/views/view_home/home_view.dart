@@ -50,8 +50,10 @@ class HomeView extends MasterView<HomeViewModel, HomeViewEvent, HomeViewState> {
           child: Stack(
             children: [
               FutureBuilder<dynamic>(
-                future: _localStorageHelper.getItem("osmea_package_device_name"),
-                builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                future:
+                    _localStorageHelper.getItem("osmea_package_device_name"),
+                builder:
+                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
@@ -95,9 +97,9 @@ class HomeView extends MasterView<HomeViewModel, HomeViewEvent, HomeViewState> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Icon(Icons.error_outline, color: Colors.red, size: 48),
-            const SizedBox(height: 16),
+            vSpacer(24),
             Text(state.message, textAlign: TextAlign.center),
-            const SizedBox(height: 16),
+            vSpacer(24),
             ElevatedButton(
               onPressed: () => viewModel.loadProducts(),
               child: const Text('Retry'),
@@ -115,17 +117,17 @@ class HomeView extends MasterView<HomeViewModel, HomeViewEvent, HomeViewState> {
   Widget _buildProductsList(
       BuildContext context, HomeViewModel viewModel, List<Product> products) {
     if (products.isEmpty) {
-      return const Center(
+      return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.inventory, size: 64, color: Colors.grey),
-            SizedBox(height: 16),
+            vSpacer(24),
             Text(
               'No products yet',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
+            vSpacer(8),
             Text(
               'Tap + to add a new encrypted product',
               style: TextStyle(color: Colors.grey),
@@ -135,13 +137,13 @@ class HomeView extends MasterView<HomeViewModel, HomeViewEvent, HomeViewState> {
       );
     }
 
-    return ListView.builder(
+    return ListView.separated(
       padding: const EdgeInsets.all(16),
       itemCount: products.length,
       itemBuilder: (context, index) {
         final product = products[index];
         return Card(
-          margin: const EdgeInsets.only(bottom: 16),
+          margin: EdgeInsets.zero, // Sadece spacer ile boşluk verilecek
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
@@ -154,15 +156,17 @@ class HomeView extends MasterView<HomeViewModel, HomeViewEvent, HomeViewState> {
               children: [
                 Row(
                   children: [
-                    Expanded(
+                    Flexible(
                       child: Text(
                         product.name,
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
+                    hSpacer(8),
                     IconButton(
                       icon: const Icon(Icons.delete, color: Colors.red),
                       onPressed: () =>
@@ -170,19 +174,19 @@ class HomeView extends MasterView<HomeViewModel, HomeViewEvent, HomeViewState> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 8),
+                vSpacer(8),
                 Text(
                   'Price: \$${product.price.toStringAsFixed(2)}',
                   style: const TextStyle(fontSize: 16, color: Colors.green),
                 ),
                 if (product.description.isNotEmpty) ...[
-                  const SizedBox(height: 8),
+                  vSpacer(8),
                   Text(
                     'Description: ${product.description}',
                     style: const TextStyle(fontSize: 14),
                   ),
                 ],
-                const SizedBox(height: 8),
+                vSpacer(8),
                 const Text(
                   '🔒 Stored with encryption',
                   style: TextStyle(
@@ -196,6 +200,7 @@ class HomeView extends MasterView<HomeViewModel, HomeViewEvent, HomeViewState> {
           ),
         );
       },
+      separatorBuilder: (context, index) => vSpacer(24),
     );
   }
 
@@ -233,7 +238,7 @@ class HomeView extends MasterView<HomeViewModel, HomeViewEvent, HomeViewState> {
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
+              vSpacer(16),
               TextField(
                 controller: priceController,
                 decoration: InputDecoration(
@@ -249,7 +254,7 @@ class HomeView extends MasterView<HomeViewModel, HomeViewEvent, HomeViewState> {
                 ),
                 keyboardType: TextInputType.number,
               ),
-              const SizedBox(height: 16),
+              vSpacer(16),
               TextField(
                 controller: descriptionController,
                 decoration: InputDecoration(

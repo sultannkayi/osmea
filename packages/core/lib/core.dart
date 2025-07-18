@@ -21,3 +21,5 @@ export 'package:core/src/helper/local_storage/local_storage_helper.dart';
 
 // 🧩 Exports the base class for Master View
 export 'package:core/src/base/master_view/dev_grid_overlay.dart';
+
+export 'package:core/src/spacer.dart';
