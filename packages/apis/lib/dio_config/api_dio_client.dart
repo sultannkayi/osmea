@@ -22,7 +22,8 @@ abstract class DioModule {
 class ApiDioClient {
   // 🍪 Cookie managers for different use-cases
   static CookieManager cookieJar = CookieManager(PersistCookieJar());
-  static CookieManager cookieJarPersonaClick = CookieManager(PersistCookieJar());
+  static CookieManager cookieJarPersonaClick =
+      CookieManager(PersistCookieJar());
 
   /// 🏁 Creates and configures a Dio instance with default options and interceptors
   static Dio starter() {
@@ -32,7 +33,17 @@ class ApiDioClient {
       ..interceptors.add(ApiInterceptorDefault(
         shopifyAccessToken: ApiNetwork.shopifyAccessToken,
       ));
-      // ..interceptors.add(cookieJar); // Uncomment to enable cookie management
+    // ..interceptors.add(cookieJar); // Uncomment to enable cookie management
+    _proxySettingsForQA(dio);
+    return dio;
+  }
+
+  /// Creates a specialized Dio instance for WooCommerce API communication
+  static Dio wooDio() {
+    final dio = Dio()
+      ..options = BaseOptions()
+      ..options.responseType = ResponseType.json
+      ..interceptors.add(WooInterceptor());
     _proxySettingsForQA(dio);
     return dio;
   }
@@ -52,7 +63,8 @@ class ApiDioClient {
           };
 
           // ⚠️ Disable certificate validation for QA/testing only!
-          client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+          client.badCertificateCallback =
+              (X509Certificate cert, String host, int port) => true;
 
           return client;
         },
@@ -72,7 +84,3 @@ class ApiDioClient {
     // 🍪 Now cookies will persist between app launches!
   }
 }
-
-
-
-

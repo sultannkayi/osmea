@@ -10,7 +10,7 @@ class ApiInterceptorDefault extends Interceptor {
   final _dioLogger = GetIt.I.get<ApiBaseLogger>();
   final String shopifyAccessToken;
 
-  ApiInterceptorDefault({ required this.shopifyAccessToken });
+  ApiInterceptorDefault({required this.shopifyAccessToken});
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
@@ -22,7 +22,8 @@ class ApiInterceptorDefault extends Interceptor {
   }
 
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     // 🌐 Pre-request hook for network checks or analytics
     await ApiNetwork.onRequestInterceptor();
 
@@ -33,7 +34,9 @@ class ApiInterceptorDefault extends Interceptor {
 
     if (token.isEmpty) {
       // ⚠️ Warn if access token is missing
-      _dioLogger.printErrorLogs("X-Shopify-Access-Token is missing! Set it before making requests. 🔑" as DioException);
+      _dioLogger.printErrorLogs(
+          "X-Shopify-Access-Token is missing! Set it before making requests. 🔑"
+              as DioException);
     }
 
     // 📝 Set common headers for all requests
@@ -82,5 +85,17 @@ class ApiInterceptorDefault extends Interceptor {
     }
 
     super.onResponse(response, handler);
+  }
+}
+
+/// Interceptor that adds Basic Auth and JSON headers for WooCommerce
+class WooInterceptor extends Interceptor {
+  @override
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
+    options.headers['Authorization'] = WooNetwork.basicAuthHeader();
+    options.headers['Accept'] = 'application/json';
+    options.headers['Content-Type'] = 'application/json';
+    super.onRequest(options, handler);
   }
 }

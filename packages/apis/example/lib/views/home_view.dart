@@ -5,7 +5,7 @@ import 'package:example/widgets/modern_sidebar.dart';
 import 'package:example/widgets/app_header.dart';
 import 'package:example/widgets/home/responsive_content.dart';
 import 'package:example/widgets/config_popup_dialog.dart';
-
+import 'package:apis/helpers/json_config_helper.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -84,7 +84,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
         debugPrint('🔄 Request interceptor triggered');
       },
     );
-    
+
     // Set initial URL to show the base structure
     _setInitialUrl();
   }
@@ -96,7 +96,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     } catch (e) {
       baseUrl = 'https://<STORE_NAME>.myshopify.com/admin';
     }
-    
+
     setState(() {
       _currentApiUrl = '$baseUrl/api/<API_VERSION>/';
     });
@@ -114,6 +114,20 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     });
   }
 
+  // Debug function to test config loading
+  Future<void> _testConfigLoading() async {
+    try {
+      final configHelper = await JsonConfigHelper.load('assets/config.json');
+      final wooStoreUrl = configHelper.get('root.woocommerce.storeUrl');
+      final wooUsername = configHelper.get('root.woocommerce.username');
+
+      _showSnackBar(
+          'Config Test: storeUrl="$wooStoreUrl", username="$wooUsername"',
+          isError: false);
+    } catch (e) {
+      _showSnackBar('Config Test Error: $e', isError: true);
+    }
+  }
 
   @override
   void dispose() {
@@ -129,6 +143,10 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     String path = '';
     String queryParams = '';
 
+    // Check if this is a WooCommerce service
+    bool isWooCommerceService =
+        service.category.toString().contains('woocommerce');
+
     // Determine path based on service name and method using proper endpoint mapping
     switch (service.name) {
       case 'Storefront Access Token':
@@ -136,7 +154,8 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
             params.containsKey('id') &&
             params['id']!.isNotEmpty) {
           final id = params['id']!;
-          path = '/api/${ApiNetwork.apiVersion}/storefront_access_tokens/$id.json';
+          path =
+              '/api/${ApiNetwork.apiVersion}/storefront_access_tokens/$id.json';
         } else {
           path = '/api/${ApiNetwork.apiVersion}/storefront_access_tokens.json';
         }
@@ -146,7 +165,10 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
         path = '/api/${ApiNetwork.apiVersion}/oauth/access_scopes.json';
         break;
 
- 
+      // WooCommerce specific cases
+      case 'WooCommerce List All Coupons':
+        path = '/wp-json/wc/v3/coupons';
+        break;
 
       default:
         // Use the endpoint from the service registry if available
@@ -154,7 +176,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
         if (endpoint.startsWith('/')) {
           endpoint = endpoint.substring(1); // Remove leading slash
         }
-        
+
         // Replace :parameter with {parameter} for display
         endpoint = endpoint.replaceAllMapped(RegExp(r':(\w+)'), (match) {
           final paramName = match.group(1)!;
@@ -163,10 +185,15 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
           }
           return '{$paramName}';
         });
-        
-        path = '/api/${ApiNetwork.apiVersion}/$endpoint';
-        if (!path.endsWith('.json') && method == 'GET') {
-          path += '.json';
+
+        // For WooCommerce services, don't add Shopify-specific prefixes
+        if (isWooCommerceService) {
+          path = '/$endpoint';
+        } else {
+          path = '/api/${ApiNetwork.apiVersion}/$endpoint';
+          if (!path.endsWith('.json') && method == 'GET') {
+            path += '.json';
+          }
         }
     }
 
@@ -174,24 +201,38 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     if (method == 'GET' && params.isNotEmpty) {
       // Filter out path parameters that are already in the URL
       final queryParamsMap = Map<String, String>.from(params);
-      queryParamsMap.removeWhere((key, value) => path.contains('{$key}') || path.contains('/$value/') || path.contains('/$value.'));
-      
+      queryParamsMap.removeWhere((key, value) =>
+          path.contains('{$key}') ||
+          path.contains('/$value/') ||
+          path.contains('/$value.'));
+
       if (queryParamsMap.isNotEmpty) {
-        queryParams = '?${queryParamsMap.entries.map((e) => '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}').join('&')}';
+        queryParams =
+            '?${queryParamsMap.entries.map((e) => '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}').join('&')}';
       }
     }
 
     // Build the complete URL
     String baseUrl;
     try {
-      baseUrl = ApiNetwork.baseUrl;
+      if (isWooCommerceService) {
+        // For WooCommerce services, use WooNetwork baseUrl
+        baseUrl = WooNetwork.baseUrl;
+      } else {
+        // For Shopify services, use ApiNetwork baseUrl
+        baseUrl = ApiNetwork.baseUrl;
+      }
     } catch (e) {
       // If baseUrl throws exception due to missing store name, use placeholder format
-      baseUrl = 'https://<STORE_NAME>.myshopify.com/admin';
+      if (isWooCommerceService) {
+        baseUrl = 'https://<YOUR_SITE>.com';
+      } else {
+        baseUrl = 'https://<STORE_NAME>.myshopify.com/admin';
+      }
     }
-    
+
     final fullUrl = baseUrl + path + queryParams;
-    
+
     setState(() {
       _currentApiUrl = fullUrl;
     });
@@ -321,7 +362,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                 Expanded(child: Text(message)),
               ],
             ),
-            backgroundColor: const Color(0xFF8B5CF6), 
+            backgroundColor: const Color(0xFF8B5CF6),
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
@@ -343,8 +384,9 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
           data: _isDarkMode ? ThemeData.dark() : ThemeData.light(),
           child: Scaffold(
             key: _scaffoldKey,
-            backgroundColor:
-                _isDarkMode ? const Color.fromARGB(255, 18, 18, 18) : const Color(0xFFFAFAFA),
+            backgroundColor: _isDarkMode
+                ? const Color.fromARGB(255, 18, 18, 18)
+                : const Color(0xFFFAFAFA),
             appBar: AppHeader(
               title: 'OSMEA APIs',
               apiUrl: _currentApiUrl,
@@ -353,6 +395,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
               onThemeToggle: _toggleTheme,
               onDrawerToggle: _toggleDrawer,
               isDarkMode: _isDarkMode,
+              onDebugTest: _testConfigLoading,
             ),
             drawer: Drawer(
               width: _calculateDrawerWidth(screenWidth),
@@ -382,9 +425,6 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
               onSendRequest: _sendRequest,
               screenWidth: screenWidth,
             ),
-
-            
-            
           ),
         );
       },

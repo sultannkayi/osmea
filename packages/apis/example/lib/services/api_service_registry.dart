@@ -1,4 +1,3 @@
-
 import 'package:example/services/index.dart';
 
 enum ApiCategory {
@@ -20,6 +19,12 @@ enum ApiCategory {
   storeProperties,
   tendertransaction,
   webhooks,
+  // WooCommerce categories
+  woocommerce,
+  woocommerceCoupons,
+  woocommerceProducts,
+  woocommerceOrders,
+  woocommerceCustomers,
 }
 
 extension ApiCategoryExtension on ApiCategory {
@@ -61,6 +66,17 @@ extension ApiCategoryExtension on ApiCategory {
         return 'Tender Transaction APIs';
       case ApiCategory.webhooks:
         return 'Webhooks APIs';
+      // WooCommerce categories
+      case ApiCategory.woocommerce:
+        return 'WooCommerce APIs';
+      case ApiCategory.woocommerceCoupons:
+        return 'WooCommerce Coupons APIs';
+      case ApiCategory.woocommerceProducts:
+        return 'WooCommerce Products APIs';
+      case ApiCategory.woocommerceOrders:
+        return 'WooCommerce Orders APIs';
+      case ApiCategory.woocommerceCustomers:
+        return 'WooCommerce Customers APIs';
     }
   }
 }
@@ -2669,6 +2685,22 @@ class ApiServiceRegistry {
       subcategory: 'Product Images',
       handler: ModifyProductImageAddMetafieldHandler(),
     ),
+    ApiService(
+      name: 'List All Coupons',
+      endpoint: '/coupons',
+      category: ApiCategory.discounts,
+      subcategory: 'Coupons',
+      handler: ListAllCouponsHandler(),
+    ),
+
+    // 🛒 WooCommerce Services
+    ApiService(
+      name: 'WooCommerce List All Coupons',
+      endpoint: '/wp-json/wc/v3/coupons',
+      category: ApiCategory.woocommerceCoupons,
+      subcategory: 'WooCommerce Coupons',
+      handler: ListAllCouponsHandler(),
+    ),
   ];
 
   static void initialize() {}
@@ -2733,6 +2765,17 @@ class ApiServiceRegistry {
         return 'Tender Transaction';
       case ApiCategory.webhooks:
         return 'Webhooks';
+      // WooCommerce categories
+      case ApiCategory.woocommerce:
+        return 'WooCommerce';
+      case ApiCategory.woocommerceCoupons:
+        return 'WooCommerce Coupons';
+      case ApiCategory.woocommerceProducts:
+        return 'WooCommerce Products';
+      case ApiCategory.woocommerceOrders:
+        return 'WooCommerce Orders';
+      case ApiCategory.woocommerceCustomers:
+        return 'WooCommerce Customers';
     }
   }
 }

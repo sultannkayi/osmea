@@ -138,7 +138,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                               'Browse and test APIs',
                               style: TextStyle(
                                 fontSize: 12,
-                                color: Colors.white.withValues(alpha:.8),
+                                color: Colors.white.withValues(alpha: .8),
                               ),
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -658,6 +658,12 @@ class _ModernSidebarState extends State<ModernSidebar>
     switch (category) {
       case ApiCategory.access:
         return Icons.security_rounded;
+      case ApiCategory.storefront:
+        return Icons.storefront_rounded;
+      case ApiCategory.admin:
+        return Icons.admin_panel_settings_rounded;
+      case ApiCategory.catalog:
+        return Icons.category_rounded;
       case ApiCategory.customer:
         return Icons.people_rounded;
       case ApiCategory.discounts:
@@ -686,8 +692,17 @@ class _ModernSidebarState extends State<ModernSidebar>
         return Icons.account_balance_wallet_rounded;
       case ApiCategory.webhooks:
         return Icons.webhook_rounded;
-      default:
-        return Icons.api_rounded;
+      // WooCommerce categories
+      case ApiCategory.woocommerce:
+        return Icons.shopping_bag_rounded;
+      case ApiCategory.woocommerceCoupons:
+        return Icons.local_offer_rounded;
+      case ApiCategory.woocommerceProducts:
+        return Icons.category_rounded;
+      case ApiCategory.woocommerceOrders:
+        return Icons.shopping_cart_rounded;
+      case ApiCategory.woocommerceCustomers:
+        return Icons.people_rounded;
     }
   }
 }
