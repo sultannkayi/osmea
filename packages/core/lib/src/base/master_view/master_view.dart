@@ -36,11 +36,9 @@ abstract class MasterView<V extends BaseViewModelBloc<E, S>, E, S>
   final Map<String, dynamic> arguments; // Arguments passed to the view
   final MasterViewTypes currentView; // Current view type for the master view
   final Function snackBarFunction; // Function to handle Snackbar actions
-  final AppBar? appBar; // AppBar for the view
+  final PreferredSizeWidget Function(BuildContext, V)? coreAppBar;
+  final Widget? Function(BuildContext, V)? coreBottomBar;
   final bool showDevGrid;
-
-  /// Indicates if there is a bottom bar or footer in the Scaffold. If true, show the 36px dev spacer at the bottom.
-  final bool hasBottomBar;
 
   /// Optional bottom navigation bar widget for the Scaffold.
   final Widget? bottomNavigationBar;
@@ -50,9 +48,9 @@ abstract class MasterView<V extends BaseViewModelBloc<E, S>, E, S>
     this.arguments = const {}, // Default to an empty map
     this.currentView = MasterViewTypes.content, // Default to content state
     this.snackBarFunction = defaultSnackBarFunction,
-    this.appBar, // Default to a predefined function
+    this.coreAppBar, // Default to a predefined function
+    this.coreBottomBar, // New: function to build bottom bar
     this.showDevGrid = true,
-    this.hasBottomBar = false, // Default: no bottom bar/footer
     this.bottomNavigationBar, // Optional bottom navigation bar
   })  : assert(arguments != null,
             'Arguments must not be null'), // Ensure arguments is not null
@@ -63,7 +61,8 @@ abstract class MasterView<V extends BaseViewModelBloc<E, S>, E, S>
         assert(snackBarFunction != null, 'SnackBar function must not be null') {
     // Global Flutter error handler
     FlutterError.onError = (FlutterErrorDetails details) {
-      debugPrint('FlutterError: ${details.exception}');
+      debugPrint(
+          'FlutterError: \u001b[36m[36m${details.exception}\u001b[39m\u001b[39m');
       debugPrintStack(stackTrace: details.stack);
     };
   }
@@ -110,42 +109,37 @@ abstract class MasterView<V extends BaseViewModelBloc<E, S>, E, S>
   /// Builds the main scaffold for the view, including the body content.
   Widget _scaffold(BuildContext context) {
     return _handleScaffoldErrors(() {
-      return Scaffold(
-        extendBody: true,
-        extendBodyBehindAppBar: true,
-        key: _scaffoldMessengerKey,
-        appBar: appBar, // Set the appBar of the scaffold
-        body: SafeArea(
-          child: Column(
-            children: [
-              // DEV MODE: 24px blue spacer just below the AppBar (only if AppBar exists)
-              if (globalDevModeSpacer && kDebugMode && appBar != null)
-                const CoreSpacer(
-                  size: 24,
-                  direction: Axis.vertical,
-                  color: Colors.orange,
-                ),
-              // Main content from the view
-              Expanded(
-                child: BaseView<V, E, S>(
-                  onViewModelReady: initialContent,
-                  builder: (viewModel, context, state) {
-                    return viewContent(context, viewModel, state);
-                  },
-                ),
+      return BaseView<V, E, S>(
+        onViewModelReady: initialContent,
+        builder: (viewModel, context, state) {
+          final bool hasAnyBottomBar =
+              coreBottomBar != null || bottomNavigationBar != null;
+          return Scaffold(
+            extendBody: true,
+            extendBodyBehindAppBar: true,
+            key: _scaffoldMessengerKey,
+            appBar: coreAppBar?.call(context, viewModel),
+            body: SafeArea(
+              child: Column(
+                children: [
+                  // DEV MODE: 24px blue spacer just below the AppBar (only if AppBar exists)
+                  if (globalDevModeSpacer && kDebugMode && coreAppBar != null)
+                    const CoreSpacer(CoreSpacerType.navbar),
+                  // Main content from the view
+                  Expanded(
+                    child: viewContent(context, viewModel, state),
+                  ),
+                  // DEV MODE: 36px blue spacer at the bottom ONLY if there IS a bottom bar/footer
+                  if (globalDevModeSpacer && kDebugMode && hasAnyBottomBar)
+                    const CoreSpacer(CoreSpacerType.footer),
+                ],
               ),
-              // DEV MODE: 36px blue spacer at the bottom ONLY if there IS a bottom bar/footer
-              if (globalDevModeSpacer && kDebugMode && hasBottomBar)
-                const CoreSpacer(
-                  size: 36,
-                  direction: Axis.vertical,
-                  color: Colors.blue,
-                ),
-            ],
-          ),
-        ),
-        // Pass the bottomNavigationBar to the Scaffold
-        bottomNavigationBar: bottomNavigationBar,
+            ),
+            bottomNavigationBar: coreBottomBar != null
+                ? coreBottomBar!.call(context, viewModel)
+                : bottomNavigationBar,
+          );
+        },
       );
     }, context);
   }
@@ -173,7 +167,6 @@ abstract class MasterView<V extends BaseViewModelBloc<E, S>, E, S>
   /// Creates a scaffold with the specified body content.
   Widget _createScaffold({required Widget body}) {
     return Scaffold(
-      appBar: appBar, // Set the appBar of the scaffold
       key: _scaffoldMessengerKey,
       body: body, // Set the body of the scaffold
     );
