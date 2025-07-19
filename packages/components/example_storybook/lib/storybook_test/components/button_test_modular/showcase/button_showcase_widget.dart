@@ -146,8 +146,6 @@ class UnifiedButtonShowcaseWidget extends StatelessWidget {
             
             SizedBox(height: spacing * 2),
             
-            // Size Comparison Section
-            if (showLabels) _buildSizeComparisonSection(),
           ],
         ),
       ),
@@ -213,43 +211,6 @@ class UnifiedButtonShowcaseWidget extends StatelessWidget {
       fullWidth: fullWidth,
       backgroundColor: customBackgroundColor,
       textColor: customTextColor,
-    );
-  }
-
-  Widget _buildSizeComparisonSection() {
-    return SectionContainerWidget(
-      title: 'Size Comparison',
-      showTitle: showLabels,
-      spacing: spacing,
-      isDark: darkBackground,
-      children: ButtonSize.values.map((buttonSize) {
-        String sizeLabel = ButtonBuilder.formatEnumName(ButtonBuilder.enumToString(buttonSize));
-        bool isCircular = buttonShape == ButtonShape.circular;
-        
-        return Column(
-          children: [
-            ButtonBuilder.buildStandardButton(
-              text: isCircular ? 'Size' : sizeLabel,
-              icon: isCircular ? selectedIcon : null,
-              size: buttonSize,
-              variant: variant,
-              state: state,
-              iconPosition: isCircular ? IconPosition.only : IconPosition.leading,
-              isUppercase: isUppercase,
-              backgroundColor: customBackgroundColor,
-              textColor: customTextColor,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              sizeLabel,
-              style: TextStyle(
-                fontSize: 10,
-                color: darkBackground ? Colors.grey.shade400 : Colors.grey.shade600,
-              ),
-            ),
-          ],
-        );
-      }).toList(),
     );
   }
 }

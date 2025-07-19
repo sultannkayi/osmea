@@ -15,6 +15,7 @@ import 'components/switch_button_test_modular/showcase/unified_switch_button_sho
 import 'components/loading_test_modular/showcase/unified_loading_showcase.dart';
 import 'components/text_test_modular/texts.dart';
 import 'components/progress_test_modular/showcase/unified_progress_showcase.dart';
+import 'components/divider_test_modular/showcase/unified_divider_showcase.dart';
 
 /// Model for component information displayed on home page and stories
 class ComponentInfo {
@@ -148,5 +149,13 @@ final List<ComponentInfo> allComponents = [
     color: Colors.lightBlue,
     storyPath: StoryConfig.buildComponentStoryName('Loading Animations'),
     getStories: getUnifiedLoadingShowcase,
+  ),
+  ComponentInfo(
+    name: 'Dividers',
+    description: 'Flexible separation components with multiple styles',
+    icon: Icons.horizontal_rule,
+    color: Colors.grey,
+    storyPath: StoryConfig.buildComponentStoryName('Dividers'),
+    getStories: getUnifiedDividerShowcase,
   ),
 ];
