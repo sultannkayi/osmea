@@ -59,9 +59,42 @@ class SplashView extends MasterView<SplashViewModel, SplashEvent, SplashState> {
   Widget viewContent(
       BuildContext context, SplashViewModel viewModel, SplashState state) {
     return Container(
-      padding: EdgeInsets.all(16.0),
+      width: double.infinity,
+      height: double.infinity,
+      color: Colors.white, // Pure white background
       child: Center(
-        child: CircularProgressIndicator(), // Only the splash animation
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // App name
+            const Text(
+              'Osmea',
+              style: TextStyle(
+                fontSize: 44,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF1976D2), // Strong blue for contrast
+                letterSpacing: 2,
+              ),
+            ),
+            const SizedBox(height: 8),
+            // Subtitle
+            const Text(
+              'Core App',
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w500,
+                color: Color(0xFF757575), // Medium gray for subtitle
+                letterSpacing: 1.2,
+              ),
+            ),
+            const SizedBox(height: 40),
+            // Splash loading indicator
+            const CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF1976D2)),
+              strokeWidth: 3.5,
+            ),
+          ],
+        ),
       ),
     );
   }
