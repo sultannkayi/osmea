@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
 /// Enum for all core spacer types
@@ -23,17 +24,17 @@ class SpacerHelper {
   static SpacerConfig configOf(CoreSpacerType type) {
     switch (type) {
       case CoreSpacerType.navbar:
-        return const SpacerConfig(24, Axis.vertical, Colors.orange);
+        return SpacerConfig(24, Axis.vertical, OsmeaColors.nordicBlue);
       case CoreSpacerType.footer:
-        return const SpacerConfig(36, Axis.vertical, Colors.blue);
+        return SpacerConfig(36, Axis.vertical, OsmeaColors.nordicBlue);
       case CoreSpacerType.content:
-        return const SpacerConfig(16, Axis.vertical, Colors.grey);
+        return SpacerConfig(16, Axis.vertical, OsmeaColors.forestHeart);
       case CoreSpacerType.section:
-        return const SpacerConfig(32, Axis.vertical, Colors.green);
+        return SpacerConfig(32, Axis.vertical, OsmeaColors.pineGrove);
       case CoreSpacerType.horizontal:
-        return const SpacerConfig(16, Axis.horizontal, Colors.purple);
+        return SpacerConfig(16, Axis.horizontal, OsmeaColors.deepSea);
       case CoreSpacerType.vertical:
-        return const SpacerConfig(16, Axis.vertical, Colors.pink);
+        return SpacerConfig(16, Axis.vertical, OsmeaColors.sunsetGlow);
     }
   }
 }
