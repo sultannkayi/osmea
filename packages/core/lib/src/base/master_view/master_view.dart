@@ -112,8 +112,6 @@ abstract class MasterView<V extends BaseViewModelBloc<E, S>, E, S>
       return BaseView<V, E, S>(
         onViewModelReady: initialContent,
         builder: (viewModel, context, state) {
-          final bool hasAnyBottomBar =
-              coreBottomBar != null || bottomNavigationBar != null;
           return Scaffold(
             extendBody: true,
             extendBodyBehindAppBar: true,
@@ -122,7 +120,7 @@ abstract class MasterView<V extends BaseViewModelBloc<E, S>, E, S>
             body: SafeArea(
               child: Column(
                 children: [
-                  // Always a spacer below the navbar  
+                  // Always a spacer below the navbar
                   const CoreSpacer(CoreSpacerType.navbar),
                   // Main content from the view
                   Expanded(
