@@ -16,6 +16,7 @@ import 'components/loading_test_modular/showcase/unified_loading_showcase.dart';
 import 'components/text_test_modular/texts.dart';
 import 'components/progress_test_modular/showcase/unified_progress_showcase.dart';
 import 'components/divider_test_modular/showcase/unified_divider_showcase.dart';
+import 'components/list_item_test_modular/list_items.dart';
 
 /// Model for component information displayed on home page and stories
 class ComponentInfo {
@@ -157,5 +158,13 @@ final List<ComponentInfo> allComponents = [
     color: Colors.grey,
     storyPath: StoryConfig.buildComponentStoryName('Dividers'),
     getStories: getUnifiedDividerShowcase,
+  ),
+  ComponentInfo(
+    name: 'List Item',
+    description: 'Interactive list items with various styles and configurations',
+    icon: Icons.list,
+    color: Colors.pink,
+    storyPath: StoryConfig.buildComponentStoryName('List Item'),
+    getStories: getAllListItemStories,
   ),
 ];
