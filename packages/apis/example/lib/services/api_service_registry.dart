@@ -1,15 +1,8 @@
 import 'package:example/services/index.dart';
 
 enum ApiCategory {
-<<<<<<< HEAD
-  // Ana kategoriler
   shopify,
   woocommerce,
-  // Shopify alt kategorileri
-=======
-  shopify,
-  woocommerce,
->>>>>>> 7ad1109ee3a0b5a1987506800f1e7dd5f2d9f74f
   access,
   storefront,
   admin,
@@ -28,10 +21,6 @@ enum ApiCategory {
   storeProperties,
   tendertransaction,
   webhooks,
-<<<<<<< HEAD
-  // WooCommerce alt kategorileri
-=======
->>>>>>> 7ad1109ee3a0b5a1987506800f1e7dd5f2d9f74f
   woocommerceCoupons,
   woocommerceProducts,
   woocommerceOrders,
