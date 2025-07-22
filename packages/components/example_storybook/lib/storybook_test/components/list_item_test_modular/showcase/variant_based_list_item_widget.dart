@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:osmea_components/osmea_components.dart';
 
+import '../utils/size_mapper.dart';
+
 /// 🎨 **List Item Widget**
 /// 
 /// Comprehensive widget showcasing all list item features:
@@ -413,19 +415,19 @@ class _VariantBasedListItemWidgetState extends State<VariantBasedListItemWidget>
         return OsmeaComponents.badge(
           content: 'NEW',
           variant: BadgeVariant.primary,
-          size: _getBadgeSizeForListSize(),
+          size: SizeMapper.getBadgeSize(widget.size),
         );
       case ListItemVariant.multiLeading:
         return Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.star, size: _getIconSizeForListSize()),
+            Icon(Icons.star, size: SizeMapper.getIconSize(widget.size)),
             const SizedBox(width: 4),
-            Icon(Icons.favorite, size: _getIconSizeForListSize()),
+            Icon(Icons.favorite, size: SizeMapper.getIconSize(widget.size)),
           ],
         );
       default:
-        return Icon(Icons.folder, size: _getIconSizeForListSize());
+        return Icon(Icons.folder, size: SizeMapper.getIconSize(widget.size));
     }
   }
 
@@ -442,17 +444,17 @@ class _VariantBasedListItemWidgetState extends State<VariantBasedListItemWidget>
           mainAxisSize: MainAxisSize.min,
           children: [
             IconButton(
-              icon: Icon(Icons.edit, size: _getIconSizeForListSize()),
+              icon: Icon(Icons.edit, size: SizeMapper.getIconSize(widget.size)),
               onPressed: () {},
             ),
             IconButton(
-              icon: Icon(Icons.delete, size: _getIconSizeForListSize()),
+              icon: Icon(Icons.delete, size: SizeMapper.getIconSize(widget.size)),
               onPressed: () {},
             ),
           ],
         );
       default:
-        return Icon(Icons.chevron_right, size: _getIconSizeForListSize());
+        return Icon(Icons.chevron_right, size: SizeMapper.getIconSize(widget.size));
     }
   }
 
@@ -479,7 +481,7 @@ class _VariantBasedListItemWidgetState extends State<VariantBasedListItemWidget>
         iconData = Icons.settings;
     }
     
-    return Icon(iconData, size: _getIconSizeForListSize());
+    return Icon(iconData, size: SizeMapper.getIconSize(widget.size));
   }
 
   Widget? _buildExpandIcon() {
@@ -542,73 +544,10 @@ class _VariantBasedListItemWidgetState extends State<VariantBasedListItemWidget>
   }
 
   Widget _buildAvatarForSize() {
-    double radius;
-    double iconSize;
-    
-    switch (widget.size) {
-      case ListItemSize.extraSmall:
-        radius = 12;
-        iconSize = 14;
-        break;
-      case ListItemSize.small:
-        radius = 14;
-        iconSize = 16;
-        break;
-      case ListItemSize.medium:
-        radius = 16;
-        iconSize = 18;
-        break;
-      case ListItemSize.large:
-        radius = 20;
-        iconSize = 22;
-        break;
-      case ListItemSize.extraLarge:
-        radius = 24;
-        iconSize = 26;
-        break;
-      case ListItemSize.dense:
-        radius = 12;
-        iconSize = 14;
-        break;
-    }
-    
     return CircleAvatar(
-      radius: radius,
-      child: Icon(Icons.person, size: iconSize),
+      radius: SizeMapper.getAvatarRadius(widget.size),
+      child: Icon(Icons.person, size: SizeMapper.getAvatarIconSize(widget.size)),
     );
-  }
-
-  double _getIconSizeForListSize() {
-    switch (widget.size) {
-      case ListItemSize.extraSmall:
-        return 16;
-      case ListItemSize.small:
-        return 18;
-      case ListItemSize.medium:
-        return 20;
-      case ListItemSize.large:
-        return 24;
-      case ListItemSize.extraLarge:
-        return 28;
-      case ListItemSize.dense:
-        return 16;
-    }
-  }
-
-  BadgeSize _getBadgeSizeForListSize() {
-    switch (widget.size) {
-      case ListItemSize.extraSmall:
-      case ListItemSize.dense:
-        return BadgeSize.small;
-      case ListItemSize.small:
-        return BadgeSize.small;
-      case ListItemSize.medium:
-        return BadgeSize.medium;
-      case ListItemSize.large:
-        return BadgeSize.large;
-      case ListItemSize.extraLarge:
-        return BadgeSize.large;
-    }
   }
 
   Widget _buildConfigurationDisplay(BuildContext context) {
