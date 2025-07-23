@@ -1,7 +1,7 @@
 // 📦 Core packages
 import 'package:apis/apis.dart';
-import 'package:apis/network/remote/access/storefront_access_token/abstract/storefront_access_token.dart';
-import 'package:apis/network/remote/access/storefront_access_token/freezed_model/request/create_new_storefront_access_token_request.dart';
+import 'package:apis/network/remote/shopify/access/storefront_access_token/abstract/storefront_access_token.dart';
+import 'package:apis/network/remote/shopify/access/storefront_access_token/freezed_model/request/create_new_storefront_access_token_request.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'dart:convert';

@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/network/remote/access/access_scope/abstract/access_scope_service.dart';
+import 'package:apis/network/remote/shopify/access/access_scope/abstract/access_scope_service.dart';
 import 'package:example/services/api_request_handler.dart';
 import 'package:example/services/api_service_registry.dart';
 import 'package:get_it/get_it.dart';
