@@ -2702,6 +2702,34 @@ class ApiServiceRegistry {
       subcategory: 'WooCommerce Coupons',
       handler: ListAllCouponsHandler(),
     ),
+    ApiService(
+      name: 'WooCommerce Retrieve Coupon',
+      endpoint: '/wp-json/wc/v3/coupons/{coupon_id}',
+      category: ApiCategory.woocommerceCoupons,
+      subcategory: 'WooCommerce Coupons',
+      handler: RetrieveCouponHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Create Coupon',
+      endpoint: '/wp-json/wc/v3/coupons',
+      category: ApiCategory.woocommerceCoupons,
+      subcategory: 'WooCommerce Coupons',
+      handler: CreateCouponHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Update Coupon',
+      endpoint: '/wp-json/wc/v3/coupons/{coupon_id}',
+      category: ApiCategory.woocommerceCoupons,
+      subcategory: 'WooCommerce Coupons',
+      handler: UpdateCouponHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Delete Coupon',
+      endpoint: '/wp-json/wc/v3/coupons/{coupon_id}',
+      category: ApiCategory.woocommerceCoupons,
+      subcategory: 'WooCommerce Coupons',
+      handler: DeleteCouponHandler(),
+    ),
   ];
 
   static void initialize() {}
