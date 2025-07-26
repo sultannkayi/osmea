@@ -2730,6 +2730,41 @@ class ApiServiceRegistry {
       subcategory: 'WooCommerce Coupons',
       handler: DeleteCouponHandler(),
     ),
+    ApiService(
+      name: 'WooCommerce List All Customers',
+      endpoint: '/wp-json/wc/v3/customers',
+      category: ApiCategory.woocommerceCustomers,
+      subcategory: 'WooCommerce Customers',
+      handler: ListAllCustomersHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Retrieve Customer',
+      endpoint: '/wp-json/wc/v3/customers/{customer_id}',
+      category: ApiCategory.woocommerceCustomers,
+      subcategory: 'WooCommerce Customers',
+      handler: RetrieveCustomerHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Create Customer',
+      endpoint: '/wp-json/wc/v3/customers',
+      category: ApiCategory.woocommerceCustomers,
+      subcategory: 'WooCommerce Customers',
+      handler: CreateCustomerHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Update Customer',
+      endpoint: '/wp-json/wc/v3/customers/{customer_id}',
+      category: ApiCategory.woocommerceCustomers,
+      subcategory: 'WooCommerce Customers',
+      handler: UpdateCustomerHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Delete Customer',
+      endpoint: '/wp-json/wc/v3/customers/{customer_id}',
+      category: ApiCategory.woocommerceCustomers,
+      subcategory: 'WooCommerce Customers',
+      handler: DeleteCustomerHandler(),
+    ),
   ];
 
   static void initialize() {}

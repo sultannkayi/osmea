@@ -351,3 +351,10 @@ export 'handlers/woocommerce/coupons_handlers/retrieve_coupon_handler.dart';
 export 'handlers/woocommerce/coupons_handlers/create_coupon_handler.dart';
 export 'handlers/woocommerce/coupons_handlers/update_coupon_handler.dart';
 export 'handlers/woocommerce/coupons_handlers/delete_coupon_handler.dart';
+
+// 👥 Customers Handlers
+export 'handlers/woocommerce/customers_handlers/list_all_customers_handler.dart';
+export 'handlers/woocommerce/customers_handlers/retrieve_customer_handler.dart';
+export 'handlers/woocommerce/customers_handlers/create_customer_handler.dart';
+export 'handlers/woocommerce/customers_handlers/update_customer_handler.dart';
+export 'handlers/woocommerce/customers_handlers/delete_customer_handler.dart';
