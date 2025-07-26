@@ -1,5 +1,5 @@
-import 'package:admin_dashboard/views/view_splash/module/events.dart';
-import 'package:admin_dashboard/views/view_splash/module/states.dart';
+import 'package:admin_dashboard/views/view_splash/models/module/events.dart';
+import 'package:admin_dashboard/views/view_splash/models/module/states.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
