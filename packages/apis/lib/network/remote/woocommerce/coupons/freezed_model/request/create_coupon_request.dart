@@ -21,7 +21,7 @@ class CreateCouponRequest with _$CreateCouponRequest {
     @JsonKey(name: "amount") String? amount,
     @JsonKey(name: "discount_type") String? discountType,
     @JsonKey(name: "description") String? description,
-    @JsonKey(name: "date_expires") DateTime? dateExpires,
+    @JsonKey(name: "date_expires") String? dateExpires,
     @JsonKey(name: "individual_use") bool? individualUse,
     @JsonKey(name: "product_ids") List<int>? productIds,
     @JsonKey(name: "excluded_product_ids") List<int>? excludedProductIds,
