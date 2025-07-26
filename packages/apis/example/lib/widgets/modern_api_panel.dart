@@ -41,11 +41,29 @@ class _ModernApiPanelState extends State<ModernApiPanel>
   late TabController _tabController;
   final ScrollController _scrollController = ScrollController();
   bool _isDisposed = false; // Track disposal state
+  final Map<String, TextEditingController> _controllers = {};
+  ApiService? _previousService;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 1, vsync: this);
+    _previousService = widget.selectedService;
+  }
+
+  @override
+  void didUpdateWidget(ModernApiPanel oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    // Check if service has changed
+    if (widget.selectedService != _previousService) {
+      // Clear all controllers when service changes
+      for (var controller in _controllers.values) {
+        controller.clear();
+      }
+      _controllers.clear();
+      _previousService = widget.selectedService;
+    }
   }
 
   @override
@@ -53,7 +71,19 @@ class _ModernApiPanelState extends State<ModernApiPanel>
     _isDisposed = true; // Mark as disposed
     _tabController.dispose();
     _scrollController.dispose();
+    // Dispose all controllers
+    for (var controller in _controllers.values) {
+      controller.dispose();
+    }
+    _controllers.clear();
     super.dispose();
+  }
+
+  TextEditingController _getController(String fieldName) {
+    if (!_controllers.containsKey(fieldName)) {
+      _controllers[fieldName] = TextEditingController();
+    }
+    return _controllers[fieldName]!;
   }
 
   @override
@@ -119,7 +149,11 @@ class _ModernApiPanelState extends State<ModernApiPanel>
                       isTablet, isMobile, isNarrow, isVeryNarrow),
                 if (widget.selectedService != null)
                   SizedBox(
-                    height: isNarrow ? 200 : isMobile ? 250 : 300,
+                    height: isNarrow
+                        ? 200
+                        : isMobile
+                            ? 250
+                            : 300,
                     child: _buildResponsiveTabContent(
                         isTablet, isMobile, isNarrow),
                   ),
@@ -234,6 +268,7 @@ class _ModernApiPanelState extends State<ModernApiPanel>
                 ),
                 SizedBox(height: isNarrow ? 6 : 8),
                 TextField(
+                  controller: _getController(field.name),
                   style: TextStyle(fontSize: isNarrow ? 12 : 14),
                   decoration: InputDecoration(
                     hintText: field.hint,

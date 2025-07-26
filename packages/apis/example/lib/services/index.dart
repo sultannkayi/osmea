@@ -346,4 +346,8 @@ export 'handlers/shopify/smart_collection_handlers/updates_ordering_type_of_prod
 export 'handlers/shopify/smart_collection_handlers/delete_smart_collection_handler.dart';
 
 // 📦 Coupons Handlers
-export 'handlers/woocommerce/coupons_handlers/coupons_handler.dart';
+export 'handlers/woocommerce/coupons_handlers/list_all_coupons_handler.dart';
+export 'handlers/woocommerce/coupons_handlers/retrieve_coupon_handler.dart';
+export 'handlers/woocommerce/coupons_handlers/create_coupon_handler.dart';
+export 'handlers/woocommerce/coupons_handlers/update_coupon_handler.dart';
+export 'handlers/woocommerce/coupons_handlers/delete_coupon_handler.dart';
