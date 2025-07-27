@@ -45,7 +45,7 @@ class DeleteCouponResponse with _$DeleteCouponResponse {
     @JsonKey(name: "maximum_amount") String? maximumAmount,
     @JsonKey(name: "email_restrictions") List<String>? emailRestrictions,
     @JsonKey(name: "used_by") List<dynamic>? usedBy,
-    @JsonKey(name: "meta_data") List<MetaDatum>? metaData,
+    @JsonKey(name: "meta_data") List<dynamic>? metaData,
     @JsonKey(name: "_links") Links? links,
   }) = _DeleteCouponResponse;
 

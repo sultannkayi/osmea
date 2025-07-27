@@ -358,3 +358,17 @@ export 'handlers/woocommerce/customers_handlers/retrieve_customer_handler.dart';
 export 'handlers/woocommerce/customers_handlers/create_customer_handler.dart';
 export 'handlers/woocommerce/customers_handlers/update_customer_handler.dart';
 export 'handlers/woocommerce/customers_handlers/delete_customer_handler.dart';
+
+// 🛒 Orders Handlers
+export 'handlers/woocommerce/orders_handlers/list_all_orders_handler.dart';
+export 'handlers/woocommerce/orders_handlers/create_order_handler.dart';
+export 'handlers/woocommerce/orders_handlers/retrieve_order_handler.dart';
+export 'handlers/woocommerce/orders_handlers/update_order_handler.dart';
+export 'handlers/woocommerce/orders_handlers/delete_order_handler.dart';
+export 'handlers/woocommerce/orders_handlers/send_order_details_handler.dart';
+
+// 📝 Order Notes Handlers
+export 'handlers/woocommerce/order_notes_handlers/list_all_order_notes_handler.dart';
+export 'handlers/woocommerce/order_notes_handlers/create_order_note_handler.dart';
+export 'handlers/woocommerce/order_notes_handlers/retrieve_order_note_handler.dart';
+export 'handlers/woocommerce/order_notes_handlers/delete_order_note_handler.dart';

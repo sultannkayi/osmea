@@ -2765,6 +2765,80 @@ class ApiServiceRegistry {
       subcategory: 'WooCommerce Customers',
       handler: DeleteCustomerHandler(),
     ),
+
+    // 🛒 WooCommerce Orders
+    ApiService(
+      name: 'WooCommerce List All Orders',
+      endpoint: '/wp-json/wc/v3/orders',
+      category: ApiCategory.woocommerceOrders,
+      subcategory: 'WooCommerce Orders',
+      handler: ListAllOrdersHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Create Order',
+      endpoint: '/wp-json/wc/v3/orders',
+      category: ApiCategory.woocommerceOrders,
+      subcategory: 'WooCommerce Orders',
+      handler: CreateOrderHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Retrieve Order',
+      endpoint: '/wp-json/wc/v3/orders/{order_id}',
+      category: ApiCategory.woocommerceOrders,
+      subcategory: 'WooCommerce Orders',
+      handler: RetrieveOrderHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Update Order',
+      endpoint: '/wp-json/wc/v3/orders/{order_id}',
+      category: ApiCategory.woocommerceOrders,
+      subcategory: 'WooCommerce Orders',
+      handler: UpdateOrderHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Delete Order',
+      endpoint: '/wp-json/wc/v3/orders/{order_id}',
+      category: ApiCategory.woocommerceOrders,
+      subcategory: 'WooCommerce Orders',
+      handler: DeleteOrderHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Send Order Details',
+      endpoint: '/wp-json/wc/v3/orders/{order_id}/actions/send_order_details',
+      category: ApiCategory.woocommerceOrders,
+      subcategory: 'WooCommerce Orders',
+      handler: SendOrderDetailsHandler(),
+    ),
+
+    // 📝 WooCommerce Order Notes
+    ApiService(
+      name: 'WooCommerce List All Order Notes',
+      endpoint: '/wp-json/wc/v3/orders/{order_id}/notes',
+      category: ApiCategory.woocommerceOrders,
+      subcategory: 'WooCommerce Order Notes',
+      handler: ListAllOrderNotesHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Create Order Note',
+      endpoint: '/wp-json/wc/v3/orders/{order_id}/notes',
+      category: ApiCategory.woocommerceOrders,
+      subcategory: 'WooCommerce Order Notes',
+      handler: CreateOrderNoteHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Retrieve Order Note',
+      endpoint: '/wp-json/wc/v3/orders/{order_id}/notes/{note_id}',
+      category: ApiCategory.woocommerceOrders,
+      subcategory: 'WooCommerce Order Notes',
+      handler: RetrieveOrderNoteHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Delete Order Note',
+      endpoint: '/wp-json/wc/v3/orders/{order_id}/notes/{note_id}',
+      category: ApiCategory.woocommerceOrders,
+      subcategory: 'WooCommerce Order Notes',
+      handler: DeleteOrderNoteHandler(),
+    ),
   ];
 
   static void initialize() {}
