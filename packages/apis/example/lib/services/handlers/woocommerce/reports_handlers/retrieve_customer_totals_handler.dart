@@ -1,47 +1,11 @@
+import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/reports/abstract/reports_service.dart';
+import 'package:apis/network/remote/woocommerce/reports/freezed_model/response/retrieve_customer_totals_response.dart';
+import 'package:dio/dio.dart';
 import 'package:example/services/api_request_handler.dart';
 import 'package:example/services/api_service_registry.dart';
 
-import 'package:get_it/get_it.dart';
-
-///************************************************************
-///****** 👤 RETRIEVE CUSTOMER TOTALS REPORT HANDLER **********
-///************************************************************
-
-class RetrieveCustomerTotalsReportHandler implements ApiRequestHandler {
-  @override
-  Future<Map<String, dynamic>> handleRequest(
-    String method,
-    Map<String, String> params,
-  ) async {
-    if (method != 'GET') {
-      return {
-        'status': 'error',
-        'message': 'Method $method not supported for Retrieve Customer Totals Report API',
-        'timestamp': DateTime.now().toIso8601String(),
-      };
-    }
-
-    try {
-      final reports = await GetIt.I<ReportsService>().retrieveCustomerTotalsReport(
-        apiVersion: params['api_version']!,
-      );
-
-      return {
-        'status': 'success',
-        'customer_totals': reports.map((e) => e.toJson()).toList(),
-        'total': reports.length,
-        'timestamp': DateTime.now().toIso8601String(),
-      };
-    } catch (e) {
-      return {
-        'status': 'error',
-        'message': 'Failed to fetch customer totals report: ${e.toString()}',
-        'timestamp': DateTime.now().toIso8601String(),
-      };
-    }
-  }
-
+class RetrieveCustomerTotalsHandler implements ApiRequestHandler {
   @override
   List<String> get supportedMethods => ['GET'];
 
@@ -51,9 +15,67 @@ class RetrieveCustomerTotalsReportHandler implements ApiRequestHandler {
           const ApiField(
             name: 'api_version',
             label: 'API Version',
-            hint: 'WooCommerce API version to use (e.g., v3)',
-            isRequired: true,
+            hint: 'WooCommerce API version (default: v3)',
+            isRequired: false,
           ),
         ],
       };
+
+  @override
+  Future<Map<String, dynamic>> handleRequest(
+    String method,
+    Map<String, dynamic> params,
+  ) async {
+    try {
+      // Parse API version
+      final apiVersion = params['api_version']?.toString() ?? 'v3';
+
+      print('👥 Retrieve Customer Totals Parameters:');
+      print('  API Version: $apiVersion');
+
+      // Get service and call API
+      final service = WooNetwork.getIt.get<ReportsService>();
+      final List<RetrieveCustomerTotalsResponse> response =
+          await service.retrieveCustomerTotals(
+        apiVersion: apiVersion,
+      );
+
+      print(
+          '✅ Retrieve Customer Totals Success: Found ${response.length} customer totals');
+
+      return {
+        'success': true,
+        'data': response.map((customer) => customer.toJson()).toList(),
+        'message': 'Customer totals retrieved successfully',
+        'count': response.length,
+      };
+    } on DioException catch (e) {
+      String errorMessage = 'Failed to retrieve customer totals';
+
+      if (e.response?.statusCode == 404) {
+        errorMessage = 'Customer totals not found';
+      } else if (e.response?.data != null) {
+        final responseData = e.response!.data;
+        if (responseData is Map && responseData.containsKey('message')) {
+          errorMessage = responseData['message']?.toString() ?? errorMessage;
+        }
+      }
+
+      print('❌ Retrieve Customer Totals Error: $errorMessage');
+      print('🔍 Full error: ${e.toString()}');
+
+      return {
+        'success': false,
+        'message': errorMessage,
+        'error_details': e.toString(),
+      };
+    } catch (e) {
+      print('❌ Retrieve Customer Totals Unexpected Error: ${e.toString()}');
+      return {
+        'success': false,
+        'message': 'Unexpected error occurred while retrieving customer totals',
+        'error_details': e.toString(),
+      };
+    }
+  }
 }

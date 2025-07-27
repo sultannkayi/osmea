@@ -1,12 +1,12 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/reports/abstract/reports_service.dart';
 import 'package:example/services/api_request_handler.dart';
-import 'package:example/services/api_service_registry.dart';
 import 'package:get_it/get_it.dart';
+import 'package:example/services/api_service_registry.dart';
 
-///************************************************************
-///************ 📊 RETRIEVE TOP SELLER REPORT HANDLER *********
-///************************************************************
+///*******************************************************************
+///******************* ✨ RETRIEVE TOP SELLER REPORT HANDLER *********
+///*******************************************************************
 
 class RetrieveTopSellerReportHandler implements ApiRequestHandler {
   @override
@@ -23,20 +23,32 @@ class RetrieveTopSellerReportHandler implements ApiRequestHandler {
     }
 
     try {
-      final response = await GetIt.I<ReportsService>().retrieveTopSellerReport(
+      // Parse parameters
+      final dateMin = params['date_min'];
+      final dateMax = params['date_max'];
+      final limitStr = params['limit'];
+      
+      // Parse numeric values
+      final limit = limitStr != null ? int.tryParse(limitStr) : null;
+
+      final response = await GetIt.I<ReportsService>().retrieveTopSellersReport(
         apiVersion: WooNetwork.apiVersion,
+        dateMin: dateMin,
+        dateMax: dateMax,
+        limit: limit,
       );
 
       return {
         "status": "success",
-        "top_sellers": response.map((e) => e.toJson()).toList(),
-        "total": response.length,
+        "data": response.map((seller) => seller.toJson()).toList(),
+        "params": params,
         "timestamp": DateTime.now().toIso8601String(),
       };
     } catch (e) {
       return {
         "status": "error",
-        "message": "Failed to fetch top seller report: " + e.toString(),
+        "message": "Failed to retrieve top seller report: ${e.toString()}",
+        "params": params,
         "timestamp": DateTime.now().toIso8601String(),
       };
     }
@@ -49,10 +61,20 @@ class RetrieveTopSellerReportHandler implements ApiRequestHandler {
   Map<String, List<ApiField>> get requiredFields => {
         'GET': [
           const ApiField(
-            name: 'api_version',
-            label: 'API Version',
-            hint: 'WooCommerce API version to use (e.g., v3)',
-            isRequired: true,
+            name: 'date_min',
+            label: 'Start Date',
+            hint: 'Start date for the report (YYYY-MM-DD)',
+          ),
+          const ApiField(
+            name: 'date_max',
+            label: 'End Date',
+            hint: 'End date for the report (YYYY-MM-DD)',
+          ),
+          const ApiField(
+            name: 'limit',
+            label: 'Limit',
+            hint: 'Maximum number of top sellers to retrieve',
+            type: ApiFieldType.number,
           ),
         ],
       };

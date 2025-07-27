@@ -1,46 +1,11 @@
+import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/reports/abstract/reports_service.dart';
+import 'package:apis/network/remote/woocommerce/reports/freezed_model/response/retrieve_review_totals_response.dart';
+import 'package:dio/dio.dart';
 import 'package:example/services/api_request_handler.dart';
 import 'package:example/services/api_service_registry.dart';
-import 'package:get_it/get_it.dart';
 
-///************************************************************
-///******* ⭐️ RETRIEVE REVIEW TOTALS REPORT HANDLER ***********
-///************************************************************
-
-class RetrieveReviewTotalsReportHandler implements ApiRequestHandler {
-  @override
-  Future<Map<String, dynamic>> handleRequest(
-    String method,
-    Map<String, String> params,
-  ) async {
-    if (method != 'GET') {
-      return {
-        'status': 'error',
-        'message': 'Method $method not supported for Retrieve Review Totals Report API',
-        'timestamp': DateTime.now().toIso8601String(),
-      };
-    }
-
-    try {
-      final reports = await GetIt.I<ReportsService>().retrieveReviewTotalsReport(
-        apiVersion: params['api_version']!,
-      );
-
-      return {
-        'status': 'success',
-        'review_totals': reports.map((e) => e.toJson()).toList(),
-        'total': reports.length,
-        'timestamp': DateTime.now().toIso8601String(),
-      };
-    } catch (e) {
-      return {
-        'status': 'error',
-        'message': 'Failed to fetch review totals report: ${e.toString()}',
-        'timestamp': DateTime.now().toIso8601String(),
-      };
-    }
-  }
-
+class RetrieveReviewTotalsHandler implements ApiRequestHandler {
   @override
   List<String> get supportedMethods => ['GET'];
 
@@ -50,9 +15,67 @@ class RetrieveReviewTotalsReportHandler implements ApiRequestHandler {
           const ApiField(
             name: 'api_version',
             label: 'API Version',
-            hint: 'WooCommerce API version to use (e.g., v3)',
-            isRequired: true,
+            hint: 'WooCommerce API version (default: v3)',
+            isRequired: false,
           ),
         ],
       };
+
+  @override
+  Future<Map<String, dynamic>> handleRequest(
+    String method,
+    Map<String, dynamic> params,
+  ) async {
+    try {
+      // Parse API version
+      final apiVersion = params['api_version']?.toString() ?? 'v3';
+
+      print('⭐ Retrieve Review Totals Parameters:');
+      print('  API Version: $apiVersion');
+
+      // Get service and call API
+      final service = WooNetwork.getIt.get<ReportsService>();
+      final List<RetrieveReviewTotalsResponse> response =
+          await service.retrieveReviewTotals(
+        apiVersion: apiVersion,
+      );
+
+      print(
+          '✅ Retrieve Review Totals Success: Found ${response.length} review totals');
+
+      return {
+        'success': true,
+        'data': response.map((review) => review.toJson()).toList(),
+        'message': 'Review totals retrieved successfully',
+        'count': response.length,
+      };
+    } on DioException catch (e) {
+      String errorMessage = 'Failed to retrieve review totals';
+
+      if (e.response?.statusCode == 404) {
+        errorMessage = 'Review totals not found';
+      } else if (e.response?.data != null) {
+        final responseData = e.response!.data;
+        if (responseData is Map && responseData.containsKey('message')) {
+          errorMessage = responseData['message']?.toString() ?? errorMessage;
+        }
+      }
+
+      print('❌ Retrieve Review Totals Error: $errorMessage');
+      print('🔍 Full error: ${e.toString()}');
+
+      return {
+        'success': false,
+        'message': errorMessage,
+        'error_details': e.toString(),
+      };
+    } catch (e) {
+      print('❌ Retrieve Review Totals Unexpected Error: ${e.toString()}');
+      return {
+        'success': false,
+        'message': 'Unexpected error occurred while retrieving review totals',
+        'error_details': e.toString(),
+      };
+    }
+  }
 }
