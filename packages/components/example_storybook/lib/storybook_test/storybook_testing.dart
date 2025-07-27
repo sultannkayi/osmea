@@ -3,6 +3,7 @@ import 'package:storybook_flutter/storybook_flutter.dart';
 import 'package:provider/provider.dart';
 import 'device_frame_test.dart';
 import 'home_page.dart';
+import 'colors_page.dart';
 import 'story_config.dart';
 import 'storybook_theme_plugin.dart';
 import 'component_registry.dart';
@@ -32,7 +33,8 @@ class TableCalendarStorybookApp extends StatelessWidget {
           final currentStoryName = storyNotifier.currentStoryName ?? '';
           
           // Show home page without device frame, all other stories with device frame
-          if (currentStoryName == StoryConfig.buildOverviewStoryName(StoryConfig.homePage)) {
+          if (currentStoryName == StoryConfig.buildOverviewStoryName(StoryConfig.homePage) ||
+              currentStoryName == StoryConfig.buildOverviewStoryName(StoryConfig.colorsPage)) {
             return child ?? Container(color: Colors.white);
           } else {
             return DeviceFrameWrapper(child: child ?? Container(color: Colors.white));
@@ -53,6 +55,10 @@ List<Story> getHomeStories() {
     Story(
       name: StoryConfig.buildOverviewStoryName(StoryConfig.homePage),
       builder: (context) => const ComponentOverviewPage(),
+    ),
+    Story(
+      name: StoryConfig.buildOverviewStoryName(StoryConfig.colorsPage),
+      builder: (context) => const ColorsDocumentationPage(),
     ),
   ];
 }

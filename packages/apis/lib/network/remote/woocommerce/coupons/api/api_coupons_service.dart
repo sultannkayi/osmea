@@ -1,6 +1,5 @@
 import 'package:apis/apis.dart';
 import 'package:apis/dio_config/api_dio_client.dart';
-import 'package:apis/dio_config/interceptors/api_interceptor_default.dart';
 import 'package:apis/network/remote/woocommerce/coupons/abstract/coupons_service.dart';
 import 'package:apis/network/remote/woocommerce/coupons/freezed_model/response/list_all_coupons_response.dart';
 import 'package:apis/network/remote/woocommerce/coupons/freezed_model/response/retrieve_coupon_response.dart';
@@ -70,7 +69,7 @@ abstract class CouponsServiceClient implements CouponsService {
   Future<UpdateCouponResponse> updateCoupon({
     @Path('api_version') required String apiVersion,
     @Path('coupon_id') required int couponId,
-    @Body() required UpdateCouponRequest couponData,
+    @Body() required Map<String, dynamic> couponData,
   });
 
   /// 🗑️ Delete a coupon from WooCommerce API
