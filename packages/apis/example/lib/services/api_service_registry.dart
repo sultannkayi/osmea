@@ -29,6 +29,11 @@ enum ApiCategory {
   woocommerceSystemStatus,
   woocommerceShippingMethods,
   woocommercePaymentGateways,
+  woocommerceData,
+  woocommerceContinents,
+  woocommerceCountries,
+  woocommerceCurrencies,
+  woocommerceRefunds,
 }
 
 extension ApiCategoryExtension on ApiCategory {
@@ -90,6 +95,16 @@ extension ApiCategoryExtension on ApiCategory {
         return 'WooCommerce Shipping Methods APIs';
       case ApiCategory.woocommercePaymentGateways:
         return 'WooCommerce Payment Gateways APIs';
+      case ApiCategory.woocommerceData:
+        return 'WooCommerce Data APIs';
+      case ApiCategory.woocommerceContinents:
+        return 'WooCommerce Continents APIs';
+      case ApiCategory.woocommerceCountries:
+        return 'WooCommerce Countries APIs';
+      case ApiCategory.woocommerceCurrencies:
+        return 'WooCommerce Currencies APIs';
+      case ApiCategory.woocommerceRefunds:
+        return 'WooCommerce Refunds APIs';
     }
   }
 }
@@ -3298,6 +3313,79 @@ class ApiServiceRegistry {
       subcategory: 'WooCommerce Payment Gateways',
       handler: UpdatePaymentGatewayHandler(),
     ),
+
+    // 📊 WooCommerce Data
+    ApiService(
+      name: 'WooCommerce List All Data',
+      endpoint: '/wp-json/wc/v3/data',
+      category: ApiCategory.woocommerceData,
+      subcategory: 'WooCommerce Data',
+      handler: ListAllDataHandler(),
+    ),
+
+    // 🌍 WooCommerce Continents
+    ApiService(
+      name: 'WooCommerce List All Continents',
+      endpoint: '/wp-json/wc/v3/data/continents',
+      category: ApiCategory.woocommerceContinents,
+      subcategory: 'WooCommerce Continents',
+      handler: ListAllContinentsHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Retrieve Continent Data',
+      endpoint: '/wp-json/wc/v3/data/continents/{code}',
+      category: ApiCategory.woocommerceContinents,
+      subcategory: 'WooCommerce Continents',
+      handler: RetrieveContinentDataHandler(),
+    ),
+
+    // 🌍 WooCommerce Countries
+    ApiService(
+      name: 'WooCommerce List All Countries',
+      endpoint: '/wp-json/wc/v3/data/countries',
+      category: ApiCategory.woocommerceCountries,
+      subcategory: 'WooCommerce Countries',
+      handler: ListAllCountriesHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Retrieve Country Data',
+      endpoint: '/wp-json/wc/v3/data/countries/{code}',
+      category: ApiCategory.woocommerceCountries,
+      subcategory: 'WooCommerce Countries',
+      handler: RetrieveCountryDataHandler(),
+    ),
+
+    // 💰 WooCommerce Currencies
+    ApiService(
+      name: 'WooCommerce List All Currencies',
+      endpoint: '/wp-json/wc/v3/data/currencies',
+      category: ApiCategory.woocommerceCurrencies,
+      subcategory: 'WooCommerce Currencies',
+      handler: ListAllCurrenciesHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Retrieve Currency Data',
+      endpoint: '/wp-json/wc/v3/data/currencies/{code}',
+      category: ApiCategory.woocommerceCurrencies,
+      subcategory: 'WooCommerce Currencies',
+      handler: RetrieveCurrencyDataHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Retrieve Current Currency',
+      endpoint: '/wp-json/wc/v3/data/currencies/current',
+      category: ApiCategory.woocommerceCurrencies,
+      subcategory: 'WooCommerce Currencies',
+      handler: RetrieveCurrentCurrencyHandler(),
+    ),
+
+    // 💰 WooCommerce Refunds
+    ApiService(
+      name: 'WooCommerce List All Refunds',
+      endpoint: '/wp-json/wc/v3/orders/{orderId}/refunds',
+      category: ApiCategory.woocommerceRefunds,
+      subcategory: 'WooCommerce Refunds',
+      handler: ListAllRefundsHandler(),
+    ),
   ];
 
   static void initialize() {}
@@ -3342,6 +3430,11 @@ class ApiServiceRegistry {
       ApiCategory.woocommerceSystemStatus,
       ApiCategory.woocommerceShippingMethods,
       ApiCategory.woocommercePaymentGateways,
+      ApiCategory.woocommerceData,
+      ApiCategory.woocommerceContinents,
+      ApiCategory.woocommerceCountries,
+      ApiCategory.woocommerceCurrencies,
+      ApiCategory.woocommerceRefunds,
     ];
   }
 
@@ -3421,6 +3514,16 @@ class ApiServiceRegistry {
         return 'WooCommerce Shipping Methods';
       case ApiCategory.woocommercePaymentGateways:
         return 'WooCommerce Payment Gateways';
+      case ApiCategory.woocommerceData:
+        return 'WooCommerce Data';
+      case ApiCategory.woocommerceContinents:
+        return 'WooCommerce Continents';
+      case ApiCategory.woocommerceCountries:
+        return 'WooCommerce Countries';
+      case ApiCategory.woocommerceCurrencies:
+        return 'WooCommerce Currencies';
+      case ApiCategory.woocommerceRefunds:
+        return 'WooCommerce Refunds';
     }
   }
 }
