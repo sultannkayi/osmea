@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 import 'package:osmea_components/osmea_components.dart';
 
@@ -16,7 +15,7 @@ List<Story> getUnifiedCounterShowcase() {
         variant: context.knobs.options(
           label: 'Variant',
           initial: CounterVariant.filled,
-          options:  [
+          options:  const[
             Option(label: 'Filled', value: CounterVariant.filled),
             Option(label: 'Outlined', value: CounterVariant.outlined),
             Option(label: 'Horizontal', value: CounterVariant.horizontal),
@@ -27,7 +26,7 @@ List<Story> getUnifiedCounterShowcase() {
         size: context.knobs.options(
           label: 'Size',
           initial: CounterSize.medium,
-          options:  [
+          options:  const[
             Option(label: 'Small', value: CounterSize.small),
             Option(label: 'Medium', value: CounterSize.medium),
             Option(label: 'Large', value: CounterSize.large),
@@ -85,7 +84,7 @@ List<Story> getUnifiedCounterShowcase() {
           label: 'Background Color',
           initial: OsmeaColors.white,
           options: [
-            Option(label: 'White', value: OsmeaColors.white),
+           const Option(label: 'White', value: OsmeaColors.white),
             Option(label: 'Silver', value: OsmeaColors.silver),
             Option(label: 'Crystal Bay', value: OsmeaColors.crystalBay),
           ],

@@ -18,6 +18,8 @@ import 'components/progress_test_modular/showcase/unified_progress_showcase.dart
 import 'components/divider_test_modular/showcase/unified_divider_showcase.dart';
 import 'components/list_item_test_modular/list_items.dart';
 import 'components/counter_test_modular/showcase/unified_counter_showcase.dart';
+import 'components/container_test_modular/containers.dart';
+import 'components/footer_test_modular/showcase/unified_footer_showcase.dart';
 
 /// Model for component information displayed on home page and stories
 class ComponentInfo {
@@ -175,5 +177,21 @@ final List<ComponentInfo> allComponents = [
     color: Colors.deepOrange,
     storyPath: StoryConfig.buildComponentStoryName('Counters'),
     getStories: getUnifiedCounterShowcase,
+  ),
+  ComponentInfo(
+    name: 'Containers',
+    description: 'Flexible layout containers with styling and interaction',
+    icon: Icons.crop_square,
+    color: Colors.brown,
+    storyPath: StoryConfig.buildComponentStoryName('Containers'),
+    getStories: getAllContainerStories,
+  ),
+  ComponentInfo(
+    name: 'Footers',
+    description: 'Page footers with navigation links and information',
+    icon: Icons.foundation,
+    color: Colors.blueGrey,
+    storyPath: StoryConfig.buildComponentStoryName('Footers'),
+    getStories: getUnifiedFooterShowcase,
   ),
 ];

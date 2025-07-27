@@ -346,4 +346,131 @@ export 'handlers/shopify/smart_collection_handlers/updates_ordering_type_of_prod
 export 'handlers/shopify/smart_collection_handlers/delete_smart_collection_handler.dart';
 
 // 📦 Coupons Handlers
-export 'handlers/woocommerce/coupons_handlers/coupons_handler.dart';
+export 'handlers/woocommerce/coupons_handlers/list_all_coupons_handler.dart';
+export 'handlers/woocommerce/coupons_handlers/retrieve_coupon_handler.dart';
+export 'handlers/woocommerce/coupons_handlers/create_coupon_handler.dart';
+export 'handlers/woocommerce/coupons_handlers/update_coupon_handler.dart';
+export 'handlers/woocommerce/coupons_handlers/delete_coupon_handler.dart';
+
+// 👥 Customers Handlers
+export 'handlers/woocommerce/customers_handlers/list_all_customers_handler.dart';
+export 'handlers/woocommerce/customers_handlers/retrieve_customer_handler.dart';
+export 'handlers/woocommerce/customers_handlers/create_customer_handler.dart';
+export 'handlers/woocommerce/customers_handlers/update_customer_handler.dart';
+export 'handlers/woocommerce/customers_handlers/delete_customer_handler.dart';
+
+// 🛍️ Products Handlers
+export 'handlers/woocommerce/products_handlers/list_all_products_handler.dart';
+export 'handlers/woocommerce/products_handlers/retrieve_product_handler.dart';
+export 'handlers/woocommerce/products_handlers/create_product_handler.dart';
+export 'handlers/woocommerce/products_handlers/update_product_handler.dart';
+export 'handlers/woocommerce/products_handlers/delete_product_handler.dart';
+export 'handlers/woocommerce/products_handlers/retrieve_product_custom_field_names_handler.dart';
+
+// 🏷️ Product Categories Handlers
+export 'handlers/woocommerce/product_categories_handlers/list_all_product_categories_handler.dart';
+export 'handlers/woocommerce/product_categories_handlers/create_product_category_handler.dart';
+export 'handlers/woocommerce/product_categories_handlers/retrieve_product_category_handler.dart';
+export 'handlers/woocommerce/product_categories_handlers/update_product_category_handler.dart';
+export 'handlers/woocommerce/product_categories_handlers/delete_product_category_handler.dart';
+
+// 🏷️ WooCommerce Product Reviews Handlers
+export 'handlers/woocommerce/product_reviews_handlers/list_all_product_reviews_handler.dart';
+export 'handlers/woocommerce/product_reviews_handlers/create_product_review_handler.dart';
+export 'handlers/woocommerce/product_reviews_handlers/retrieve_product_review_handler.dart';
+export 'handlers/woocommerce/product_reviews_handlers/update_product_review_handler.dart';
+export 'handlers/woocommerce/product_reviews_handlers/delete_product_review_handler.dart';
+
+// 📦 WooCommerce Product Shipping Classes Handlers
+export 'handlers/woocommerce/product_shipping_classes_handlers/list_all_product_shipping_classes_handler.dart';
+export 'handlers/woocommerce/product_shipping_classes_handlers/create_product_shipping_class_handler.dart';
+export 'handlers/woocommerce/product_shipping_classes_handlers/retrieve_product_shipping_class_handler.dart';
+export 'handlers/woocommerce/product_shipping_classes_handlers/update_product_shipping_class_handler.dart';
+export 'handlers/woocommerce/product_shipping_classes_handlers/delete_product_shipping_class_handler.dart';
+
+// 🏷️ WooCommerce Product Tags Handlers
+export 'handlers/woocommerce/product_tags_handlers/list_all_product_tags_handler.dart';
+export 'handlers/woocommerce/product_tags_handlers/create_product_tag_handler.dart';
+export 'handlers/woocommerce/product_tags_handlers/retrieve_product_tag_handler.dart';
+export 'handlers/woocommerce/product_tags_handlers/update_product_tag_handler.dart';
+export 'handlers/woocommerce/product_tags_handlers/delete_product_tag_handler.dart';
+
+// 🔄 WooCommerce Product Variations Handlers
+export 'handlers/woocommerce/product_variations_handlers/list_all_product_variations_handler.dart';
+export 'handlers/woocommerce/product_variations_handlers/create_product_variation_handler.dart';
+export 'handlers/woocommerce/product_variations_handlers/retrieve_product_variation_handler.dart';
+export 'handlers/woocommerce/product_variations_handlers/update_product_variation_handler.dart';
+export 'handlers/woocommerce/product_variations_handlers/delete_product_variation_handler.dart';
+
+// 🏷️ WooCommerce Product Attributes Handlers
+export 'handlers/woocommerce/product_attributes_handlers/list_all_product_attributes_handler.dart';
+export 'handlers/woocommerce/product_attributes_handlers/create_product_attribute_handler.dart';
+export 'handlers/woocommerce/product_attributes_handlers/retrieve_product_attribute_handler.dart';
+export 'handlers/woocommerce/product_attributes_handlers/update_product_attribute_handler.dart';
+export 'handlers/woocommerce/product_attributes_handlers/delete_product_attribute_handler.dart';
+
+// 🏷️ WooCommerce Product Attribute Terms Handlers
+export 'handlers/woocommerce/product_attribute_terms_handlers/list_all_product_attribute_terms_handler.dart';
+export 'handlers/woocommerce/product_attribute_terms_handlers/create_product_attribute_term_handler.dart';
+export 'handlers/woocommerce/product_attribute_terms_handlers/retrieve_product_attribute_term_handler.dart';
+export 'handlers/woocommerce/product_attribute_terms_handlers/update_product_attribute_term_handler.dart';
+export 'handlers/woocommerce/product_attribute_terms_handlers/delete_product_attribute_term_handler.dart';
+
+// 🔄 WooCommerce Product Variations Handlers
+export 'handlers/woocommerce/product_variations_handlers/list_all_product_variations_handler.dart';
+export 'handlers/woocommerce/product_variations_handlers/create_product_variation_handler.dart';
+
+// 🔗 WooCommerce Webhooks Handlers
+export 'handlers/woocommerce/webhooks_handlers/list_all_webhooks_handler.dart';
+export 'handlers/woocommerce/webhooks_handlers/create_webhook_handler.dart';
+export 'handlers/woocommerce/webhooks_handlers/retrieve_webhook_handler.dart';
+export 'handlers/woocommerce/webhooks_handlers/update_webhook_handler.dart';
+export 'handlers/woocommerce/webhooks_handlers/delete_webhook_handler.dart';
+
+// 🔧 WooCommerce System Status Handlers
+export 'handlers/woocommerce/system_status_handlers/get_system_status_handler.dart';
+export 'handlers/woocommerce/system_status_handlers/list_all_tools_from_system_status_handler.dart';
+export 'handlers/woocommerce/system_status_handlers/retrieve_tool_from_system_status_handler.dart';
+export 'handlers/woocommerce/system_status_handlers/run_tool_from_system_status_handler.dart';
+
+// 🛒 Orders Handlers
+export 'handlers/woocommerce/orders_handlers/list_all_orders_handler.dart';
+export 'handlers/woocommerce/orders_handlers/create_order_handler.dart';
+export 'handlers/woocommerce/orders_handlers/retrieve_order_handler.dart';
+export 'handlers/woocommerce/orders_handlers/update_order_handler.dart';
+export 'handlers/woocommerce/orders_handlers/delete_order_handler.dart';
+export 'handlers/woocommerce/orders_handlers/send_order_details_handler.dart';
+
+// 📝 Order Notes Handlers
+export 'handlers/woocommerce/order_notes_handlers/list_all_order_notes_handler.dart';
+export 'handlers/woocommerce/order_notes_handlers/create_order_note_handler.dart';
+export 'handlers/woocommerce/order_notes_handlers/retrieve_order_note_handler.dart';
+export 'handlers/woocommerce/order_notes_handlers/delete_order_note_handler.dart';
+
+// 🚚 WooCommerce Shipping Methods Handlers
+export 'handlers/woocommerce/shipping_methods_handlers/list_all_shipping_methods_handler.dart';
+export 'handlers/woocommerce/shipping_methods_handlers/retrieve_shipping_method_handler.dart';
+
+// 💳 WooCommerce Payment Gateways Handlers
+export 'handlers/woocommerce/payment_gateways_handlers/list_all_payment_gateways_handler.dart';
+export 'handlers/woocommerce/payment_gateways_handlers/retrieve_payment_gateway_handler.dart';
+export 'handlers/woocommerce/payment_gateways_handlers/update_payment_gateway_handler.dart';
+
+// 📊 WooCommerce Data Handlers
+export 'handlers/woocommerce/data_handlers/list_all_data_handler.dart';
+
+// 🌍 WooCommerce Continents Handlers
+export 'handlers/woocommerce/continents_handlers/list_all_continents_handler.dart';
+export 'handlers/woocommerce/continents_handlers/retrieve_continent_data_handler.dart';
+
+// 🌍 WooCommerce Countries Handlers
+export 'handlers/woocommerce/countries_handlers/list_all_countries_handler.dart';
+export 'handlers/woocommerce/countries_handlers/retrieve_country_data_handler.dart';
+
+// 💰 WooCommerce Currencies Handlers
+export 'handlers/woocommerce/currencies_handlers/list_all_currencies_handler.dart';
+export 'handlers/woocommerce/currencies_handlers/retrieve_currency_data_handler.dart';
+export 'handlers/woocommerce/currencies_handlers/retrieve_current_currency_handler.dart';
+
+// 💰 WooCommerce Refunds Handlers
+export 'handlers/woocommerce/refunds_handlers/list_all_refunds_handler.dart';

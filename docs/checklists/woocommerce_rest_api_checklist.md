@@ -1,8 +1,8 @@
 # 📋 WooCommerce REST API Checklist
 | Category           | Status | Start Date | Due Date | Assignee |
 |:------------------|:------:|:----------:|:--------:|:--------:|
-| coupons            | 🔴     | -          | -        | -        |
-| customers          | 🔴     | -          | -        | -        |
+| coupons            | 🟢     | 26.07.25  |26.07.25  |@melihalkbk|
+| customers          | 🟢     |26.07.25   |26.07.25  |@melihalkbk|
 | orders             | 🔴     | -          | -        | -        |
 | products           | 🔴     | -          | -        | -        |
 | reports            | 🔴     | -          | -        | -        |

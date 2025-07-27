@@ -789,6 +789,24 @@ class _ModernSidebarState extends State<ModernSidebar>
         return Icons.shopping_cart_rounded;
       case ApiCategory.woocommerceCustomers:
         return Icons.people_rounded;
+      case ApiCategory.woocommerceWebhooks:
+        return Icons.webhook_rounded;
+      case ApiCategory.woocommerceSystemStatus:
+        return Icons.system_update_rounded;
+      case ApiCategory.woocommerceShippingMethods:
+        return Icons.local_shipping_rounded;
+      case ApiCategory.woocommercePaymentGateways:
+        return Icons.payment_rounded;
+      case ApiCategory.woocommerceData:
+        return Icons.data_usage_rounded;
+      case ApiCategory.woocommerceContinents:
+        return Icons.public_rounded;
+      case ApiCategory.woocommerceCountries:
+        return Icons.flag_rounded;
+      case ApiCategory.woocommerceCurrencies:
+        return Icons.attach_money_rounded;
+      case ApiCategory.woocommerceRefunds:
+        return Icons.money_off_rounded;
     }
   }
 }
