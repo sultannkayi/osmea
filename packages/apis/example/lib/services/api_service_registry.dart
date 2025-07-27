@@ -24,7 +24,8 @@ enum ApiCategory {
   woocommerceCoupons,
   woocommerceProducts,
   woocommerceOrders,
-  woocommerceCustomers,
+  woocommerceCustomers, 
+  woocommerceReports,
 }
 
 extension ApiCategoryExtension on ApiCategory {
@@ -78,6 +79,8 @@ extension ApiCategoryExtension on ApiCategory {
         return 'WooCommerce Orders APIs';
       case ApiCategory.woocommerceCustomers:
         return 'WooCommerce Customers APIs';
+      case ApiCategory.woocommerceReports:
+        return 'WooCommerce Reports APIs';
     }
   }
 }
@@ -2765,6 +2768,72 @@ class ApiServiceRegistry {
       subcategory: 'WooCommerce Customers',
       handler: DeleteCustomerHandler(),
     ),
+    ApiService(
+      name: 'WooCommerce List All Reports',
+      endpoint: '/wp-json/wc/{api_version}/reports',
+      category: ApiCategory.woocommerceReports,
+      subcategory: 'All Reports',
+      handler: ListAllReportsHandler(),
+    ),
+
+    ApiService(
+      name: 'WooCommerce Retrieve Sales Report',
+      endpoint: '/wp-json/wc/v3/reports/sales',
+      category: ApiCategory.woocommerceReports,
+      subcategory: 'Sales Report',
+      handler: RetrieveReportSaleHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Retrieve Top Seller Report',
+      endpoint: '/wp-json/wc/v3/reports/top_sellers',
+      category: ApiCategory.woocommerceReports,
+      subcategory: 'Top Seller Report',
+      handler: RetrieveTopSellerReportHandler(),
+),
+ApiService(
+  name: 'WooCommerce Retrieve Order Totals Report',
+  endpoint: '/wp-json/wc/v3/reports/orders/totals',
+      category: ApiCategory.woocommerceReports,
+  subcategory: 'Order Totals Report',
+  handler: RetrieveOrderTotalsReportHandler(),
+),
+
+ApiService(
+  name: 'WooCommerce Retrieve Product Totals Report',
+  endpoint: '/wp-json/wc/v3/reports/products/totals',
+      category: ApiCategory.woocommerceReports,
+  subcategory: 'Product Totals Report',
+  handler: RetrieveProductTotalsReportHandler(),
+),
+
+ApiService(
+  name: 'WooCommerce Retrieve Customer Totals Report',
+  endpoint: '/wp-json/wc/v3/reports/customers/totals',
+      category: ApiCategory.woocommerceReports,
+  subcategory: 'Customer Totals Report',
+  handler: RetrieveCustomerTotalsReportHandler(),
+),
+
+ApiService(
+  name: 'WooCommerce Retrieve Coupon Totals Report',
+  endpoint: '/wp-json/wc/v3/reports/coupons/totals',
+      category: ApiCategory.woocommerceReports,
+  subcategory: 'Coupon Totals Report',
+  handler: RetrieveCouponTotalsReportHandler(),
+),
+
+ApiService(
+  name: 'WooCommerce Retrieve Review Totals Report',
+  endpoint: '/wp-json/wc/v3/reports/reviews/totals',
+      category: ApiCategory.woocommerceReports,
+  subcategory: 'Review Totals Report',
+  handler: RetrieveReviewTotalsReportHandler(),
+),
+
+
+
+
+
   ];
 
   static void initialize() {}
@@ -2805,6 +2874,7 @@ class ApiServiceRegistry {
       ApiCategory.woocommerceProducts,
       ApiCategory.woocommerceOrders,
       ApiCategory.woocommerceCustomers,
+      ApiCategory.woocommerceReports,
     ];
   }
 
@@ -2876,6 +2946,8 @@ class ApiServiceRegistry {
         return 'WooCommerce Orders';
       case ApiCategory.woocommerceCustomers:
         return 'WooCommerce Customers';
+      case ApiCategory.woocommerceReports:
+        return 'WooCommerce Reports';
     }
   }
 }
