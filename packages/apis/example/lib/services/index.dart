@@ -484,3 +484,9 @@ export 'handlers/woocommerce/reports_handlers/retrieve_product_totals_handler.da
 export 'handlers/woocommerce/reports_handlers/retrieve_customer_totals_handler.dart';
 export 'handlers/woocommerce/reports_handlers/retrieve_coupon_totals_handler.dart';
 export 'handlers/woocommerce/reports_handlers/retrieve_review_totals_handler.dart';
+
+
+// setting handlers
+export 'package:example/services/handlers/woocommerce/settings_handlers/list_settings_groups_handler.dart';
+export 'package:example/services/handlers/woocommerce/settings_handlers/retrieve_setting_option_handler.dart';
+export 'package:example/services/handlers/woocommerce/settings_handlers/update_settings_option_handler.dart';

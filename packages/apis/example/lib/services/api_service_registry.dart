@@ -35,6 +35,7 @@ enum ApiCategory {
   woocommerceCurrencies,
   woocommerceRefunds,
    woocommerceReports, 
+   woocommerceSetting,
 }
 
 extension ApiCategoryExtension on ApiCategory {
@@ -108,6 +109,8 @@ extension ApiCategoryExtension on ApiCategory {
         return 'WooCommerce Currencies APIs';
       case ApiCategory.woocommerceRefunds:
         return 'WooCommerce Refunds APIs';
+      case ApiCategory.woocommerceSetting:
+        return 'WooCommerce Settings';
     }
   }
 }
@@ -2453,6 +2456,7 @@ class ApiServiceRegistry {
     ),
 
     // 🔄 UPDATE PRODUCT REORDER VARIANTS HANDLER
+
     ApiService(
       name: 'Update Product Reorder Variants',
       endpoint: '/products/:product_id',
@@ -2605,6 +2609,7 @@ class ApiServiceRegistry {
       handler: CreatesSmartCollectionHandler(),
     ),
 
+    // ⚙️ WooCommerce Settings
     ApiService(
       name: 'List Product Images',
       endpoint: '/products/:product_id/images',
@@ -2612,7 +2617,6 @@ class ApiServiceRegistry {
       subcategory: 'Product Images',
       handler: RetrieveListOfProductImagesHandler(),
     ),
-
     ApiService(
       name: 'Create Product Image',
       endpoint: '/products/:product_id/images',
@@ -2620,7 +2624,6 @@ class ApiServiceRegistry {
       subcategory: 'Product Images',
       handler: CreateANewProductImageHandler(),
     ),
-
     ApiService(
       name: 'Get Single Product Image',
       endpoint: '/products/:product_id/images/:image_id',
@@ -3412,6 +3415,31 @@ class ApiServiceRegistry {
       subcategory: 'WooCommerce Payment Gateways',
       handler: UpdatePaymentGatewayHandler(),
     ),
+
+       // ⚙️ WooCommerce Settings Handlers
+    ApiService(
+      name: 'WooCommerce List All Settings Groups',
+      endpoint: '/wp-json/wc/v3/settings',
+      category: ApiCategory.woocommerceSetting,
+      subcategory: 'WooCommerce Settings',
+      handler: ListSettingsGroupsHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Retrieve Setting Option',
+      endpoint: '/wp-json/wc/v3/settings/{group_id}/{option_id}',
+      category: ApiCategory.woocommerceSetting,
+      subcategory: 'WooCommerce Settings',
+      handler: RetrieveSettingOptionHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Update Setting Option',
+      endpoint: '/wp-json/wc/v3/settings/{group_id}/{option_id}',
+      category: ApiCategory.woocommerceSetting,
+      subcategory: 'WooCommerce Settings',
+      handler: UpdateSettingsOptionHandler(),
+    ),
+
+
   ];
 
   static void initialize() {}
@@ -3457,6 +3485,7 @@ class ApiServiceRegistry {
       ApiCategory.woocommerceReports,
       ApiCategory.woocommerceShippingMethods,
       ApiCategory.woocommercePaymentGateways,
+      ApiCategory.woocommerceSetting,
       ApiCategory.woocommerceData,
       ApiCategory.woocommerceContinents,
       ApiCategory.woocommerceCountries,
@@ -3543,6 +3572,8 @@ class ApiServiceRegistry {
         return 'WooCommerce Shipping Methods';
       case ApiCategory.woocommercePaymentGateways:
         return 'WooCommerce Payment Gateways';
+      case ApiCategory.woocommerceSetting:
+        return 'WooCommerce Settings';
       case ApiCategory.woocommerceData:
         return 'WooCommerce Data';
       case ApiCategory.woocommerceContinents:
