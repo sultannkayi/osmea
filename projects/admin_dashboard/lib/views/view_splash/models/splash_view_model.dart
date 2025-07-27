@@ -50,7 +50,7 @@ class SplashViewModel extends BaseViewModelBloc<SplashEvent, SplashState> {
 /// Handles the user check event.
 ///
 /// Simulates a user check with a delay, then emits content or error state.
-_onCheckUser(SplashEventCheckUser event, emit) async {
+void _onCheckUser(SplashEventCheckUser event, emit) async {
   emit(SplashStateLoading()); // Set state to loading
   try {
     await Future.delayed(Duration(seconds: 3)); // Simulate async operation
