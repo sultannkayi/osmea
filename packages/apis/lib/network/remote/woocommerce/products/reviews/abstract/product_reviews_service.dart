@@ -8,6 +8,7 @@ import 'package:apis/network/remote/woocommerce/products/reviews/freezed_model/r
 
 /// 📝 Abstract service for WooCommerce Product Reviews API operations
 abstract class ProductReviewsService {
+  /// 📋 List all product reviews
   Future<List<ListProductReviewsResponse>> listAllProductReviews({
     required String apiVersion,
     String? context,
