@@ -13,6 +13,7 @@ import 'package:admin_dashboard/views/view_splash/models/splash_view_model.dart'
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:admin_dashboard/gen/assets.gen.dart';
+import 'package:admin_dashboard/resources/resources.g.dart';
 
 /// SplashView displays the splash screen and delegates navigation logic to the ViewModel.
 ///
@@ -103,14 +104,14 @@ class SplashView extends MasterView<SplashViewModel, SplashEvent, SplashState> {
           children: [
             // --- App Title ---
             OsmeaComponents.text(
-              'Dashboard',
+              resource.application_config.app_name,
               textStyle: OsmeaTextStyle.titleSmall(context),
             ),
             CoreSpacer(CoreSpacerType.section),
 
             // --- Version Info ---
             OsmeaComponents.text(
-              'v1.0.0',
+              resource.application_config.app_version,
               textStyle: OsmeaTextStyle.labelSmall(context),
             ),
             CoreSpacer(CoreSpacerType.section),
@@ -121,7 +122,7 @@ class SplashView extends MasterView<SplashViewModel, SplashEvent, SplashState> {
               children: [
                 // Inline credit text
                 OsmeaComponents.text(
-                  'made by ',
+                  resource.views.splash.made_by,
                   textStyle: OsmeaTextStyle.labelSmall(context),
                 ),
                 CoreSpacer(CoreSpacerType.horizontal),
@@ -138,7 +139,7 @@ class SplashView extends MasterView<SplashViewModel, SplashEvent, SplashState> {
                 CoreSpacer(CoreSpacerType.horizontal),
                 // Company name
                 OsmeaComponents.text(
-                  ' MasterFabric',
+                  resource.views.splash.mf,
                   textStyle: OsmeaTextStyle.labelSmall(context),
                 ),
               ],
