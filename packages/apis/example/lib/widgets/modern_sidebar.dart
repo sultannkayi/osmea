@@ -795,6 +795,10 @@ class _ModernSidebarState extends State<ModernSidebar>
         return Icons.system_update_rounded;
       case ApiCategory.woocommerceReports:
         return Icons.analytics_rounded;
+      case ApiCategory.woocommerceShippingMethods:
+        return Icons.local_shipping_rounded;
+      case ApiCategory.woocommercePaymentGateways:
+        return Icons.payment_rounded;
     }
   }
 }

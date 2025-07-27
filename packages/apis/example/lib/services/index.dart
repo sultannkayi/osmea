@@ -456,3 +456,11 @@ export 'handlers/woocommerce/reports_handlers/retrieve_product_totals_handler.da
 export 'handlers/woocommerce/reports_handlers/retrieve_customer_totals_handler.dart';
 export 'handlers/woocommerce/reports_handlers/retrieve_coupon_totals_handler.dart';
 export 'handlers/woocommerce/reports_handlers/retrieve_review_totals_handler.dart';
+// 🚚 WooCommerce Shipping Methods Handlers
+export 'handlers/woocommerce/shipping_methods_handlers/list_all_shipping_methods_handler.dart';
+export 'handlers/woocommerce/shipping_methods_handlers/retrieve_shipping_method_handler.dart';
+
+// 💳 WooCommerce Payment Gateways Handlers
+export 'handlers/woocommerce/payment_gateways_handlers/list_all_payment_gateways_handler.dart';
+export 'handlers/woocommerce/payment_gateways_handlers/retrieve_payment_gateway_handler.dart';
+export 'handlers/woocommerce/payment_gateways_handlers/update_payment_gateway_handler.dart';
