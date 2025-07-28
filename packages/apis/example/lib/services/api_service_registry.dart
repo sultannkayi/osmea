@@ -3490,6 +3490,14 @@ ApiService(
 ),
 
 ApiService(
+  name: 'WooCommerce Update Tax Rate',
+  endpoint: '/wp-json/wc/v3/taxes/{tax_rate_id}',
+  category: ApiCategory.woocommerceTaxes,
+  subcategory: 'WooCommerce Tax Rates',
+  handler: UpdateTaxRateHandler(),
+),
+
+ApiService(
   name: 'WooCommerce List All Tax Rates',
   endpoint: '/wp-json/wc/v3/taxes',
   category: ApiCategory.woocommerceTaxes,

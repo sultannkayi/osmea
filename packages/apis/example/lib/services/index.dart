@@ -499,3 +499,4 @@ export 'handlers/woocommerce/taxes_handlers/taxes_rates_handlers/retrieve_tax_ra
 export 'handlers/woocommerce/taxes_handlers/taxes_rates_handlers/delete_tax_rate_handler.dart';
 export 'handlers/woocommerce/taxes_handlers/taxes_rates_handlers/list_tax_rates_handler.dart';
 export 'handlers/woocommerce/taxes_handlers/taxes_rates_handlers/create_tax_rate_handler.dart';
+export 'handlers/woocommerce/taxes_handlers/taxes_rates_handlers/update_tax_rate_handler.dart';
