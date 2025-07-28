@@ -85,12 +85,10 @@ class SplashView extends MasterView<SplashViewModel, SplashEvent, SplashState> {
         // ──────────────────────────────────────────────
         OsmeaComponents.expanded(
           child: OsmeaComponents.center(
-            child: OsmeaComponents.sizedBox(
+            child: OsmeaComponents.image(
               width: 200,
               height: 200,
-              child: OsmeaComponents.image(
-                assetPath: Assets.images.osmeaLogoBlack.path,
-              ),
+              assetPath: Assets.images.osmeaLogoBlack.path,
             ),
           ),
         ),
