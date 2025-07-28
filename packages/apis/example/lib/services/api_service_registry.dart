@@ -24,7 +24,7 @@ enum ApiCategory {
   woocommerceCoupons,
   woocommerceProducts,
   woocommerceOrders,
-  woocommerceCustomers,
+  woocommerceCustomers, 
   woocommerceWebhooks,
   woocommerceSystemStatus,
   woocommerceShippingMethods,
@@ -34,6 +34,8 @@ enum ApiCategory {
   woocommerceCountries,
   woocommerceCurrencies,
   woocommerceRefunds,
+   woocommerceReports, 
+   woocommerceSetting,
 }
 
 extension ApiCategoryExtension on ApiCategory {
@@ -91,6 +93,8 @@ extension ApiCategoryExtension on ApiCategory {
         return 'WooCommerce Webhooks APIs';
       case ApiCategory.woocommerceSystemStatus:
         return 'WooCommerce System Status APIs';
+      case ApiCategory.woocommerceReports:
+        return 'WooCommerce Reports APIs';
       case ApiCategory.woocommerceShippingMethods:
         return 'WooCommerce Shipping Methods APIs';
       case ApiCategory.woocommercePaymentGateways:
@@ -105,6 +109,8 @@ extension ApiCategoryExtension on ApiCategory {
         return 'WooCommerce Currencies APIs';
       case ApiCategory.woocommerceRefunds:
         return 'WooCommerce Refunds APIs';
+      case ApiCategory.woocommerceSetting:
+        return 'WooCommerce Settings';
     }
   }
 }
@@ -2450,6 +2456,7 @@ class ApiServiceRegistry {
     ),
 
     // 🔄 UPDATE PRODUCT REORDER VARIANTS HANDLER
+
     ApiService(
       name: 'Update Product Reorder Variants',
       endpoint: '/products/:product_id',
@@ -2602,6 +2609,7 @@ class ApiServiceRegistry {
       handler: CreatesSmartCollectionHandler(),
     ),
 
+    // ⚙️ WooCommerce Settings
     ApiService(
       name: 'List Product Images',
       endpoint: '/products/:product_id/images',
@@ -2609,7 +2617,6 @@ class ApiServiceRegistry {
       subcategory: 'Product Images',
       handler: RetrieveListOfProductImagesHandler(),
     ),
-
     ApiService(
       name: 'Create Product Image',
       endpoint: '/products/:product_id/images',
@@ -2617,7 +2624,6 @@ class ApiServiceRegistry {
       subcategory: 'Product Images',
       handler: CreateANewProductImageHandler(),
     ),
-
     ApiService(
       name: 'Get Single Product Image',
       endpoint: '/products/:product_id/images/:image_id',
@@ -3314,78 +3320,126 @@ class ApiServiceRegistry {
       handler: UpdatePaymentGatewayHandler(),
     ),
 
-    // 📊 WooCommerce Data
+// 📊 WooCommerce Reports
     ApiService(
-      name: 'WooCommerce List All Data',
-      endpoint: '/wp-json/wc/v3/data',
-      category: ApiCategory.woocommerceData,
-      subcategory: 'WooCommerce Data',
-      handler: ListAllDataHandler(),
+      name: 'WooCommerce List All Reports',
+      endpoint: '/wp-json/wc/v3/reports',
+      category: ApiCategory.woocommerceReports,
+      subcategory: 'WooCommerce Reports',
+      handler: ListAllReportsHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Retrieve Coupon Totals',
+      endpoint: '/wp-json/wc/v3/reports/coupons/totals',
+      category: ApiCategory.woocommerceReports,
+      subcategory: 'WooCommerce Reports',
+      handler: RetrieveCouponTotalsHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Retrieve Customer Totals',
+      endpoint: '/wp-json/wc/v3/reports/customers/totals',
+      category: ApiCategory.woocommerceReports,
+      subcategory: 'WooCommerce Reports',
+      handler: RetrieveCustomerTotalsHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Retrieve Order Totals',
+      endpoint: '/wp-json/wc/v3/reports/orders/totals',
+      category: ApiCategory.woocommerceReports,
+      subcategory: 'WooCommerce Reports',
+      handler: RetrieveOrderTotalsHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Retrieve Product Totals',
+      endpoint: '/wp-json/wc/v3/reports/products/totals',
+      category: ApiCategory.woocommerceReports,
+      subcategory: 'WooCommerce Reports',
+      handler: RetrieveProductTotalsHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Retrieve Sales Report',
+      endpoint: '/wp-json/wc/v3/reports/sales',
+      category: ApiCategory.woocommerceReports,
+      subcategory: 'WooCommerce Reports',
+      handler: RetrieveSalesReportHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Retrieve Review Totals',
+      endpoint: '/wp-json/wc/v3/reports/reviews/totals',
+      category: ApiCategory.woocommerceReports,
+      subcategory: 'WooCommerce Reports',
+      handler: RetrieveReviewTotalsHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Retrieve Top Sellers Report',
+      endpoint: '/wp-json/wc/v3/reports/products/totals',
+      category: ApiCategory.woocommerceReports,
+      subcategory: 'WooCommerce Reports',
+      handler: RetrieveTopSellerReportHandler(),
+    ),
+    // 🚚 WooCommerce Shipping Methods
+    ApiService(
+      name: 'WooCommerce List All Shipping Methods',
+      endpoint: '/wp-json/wc/v3/shipping_methods',
+      category: ApiCategory.woocommerceShippingMethods,
+      subcategory: 'WooCommerce Shipping Methods',
+      handler: ListAllShippingMethodsHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Retrieve Shipping Method',
+      endpoint: '/wp-json/wc/v3/shipping_methods/{id}',
+      category: ApiCategory.woocommerceShippingMethods,
+      subcategory: 'WooCommerce Shipping Methods',
+      handler: RetrieveShippingMethodHandler(),
     ),
 
-    // 🌍 WooCommerce Continents
+    // 💳 WooCommerce Payment Gateways
     ApiService(
-      name: 'WooCommerce List All Continents',
-      endpoint: '/wp-json/wc/v3/data/continents',
-      category: ApiCategory.woocommerceContinents,
-      subcategory: 'WooCommerce Continents',
-      handler: ListAllContinentsHandler(),
+      name: 'WooCommerce List All Payment Gateways',
+      endpoint: '/wp-json/wc/v3/payment_gateways',
+      category: ApiCategory.woocommercePaymentGateways,
+      subcategory: 'WooCommerce Payment Gateways',
+      handler: ListAllPaymentGatewaysHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Retrieve Continent Data',
-      endpoint: '/wp-json/wc/v3/data/continents/{code}',
-      category: ApiCategory.woocommerceContinents,
-      subcategory: 'WooCommerce Continents',
-      handler: RetrieveContinentDataHandler(),
-    ),
-
-    // 🌍 WooCommerce Countries
-    ApiService(
-      name: 'WooCommerce List All Countries',
-      endpoint: '/wp-json/wc/v3/data/countries',
-      category: ApiCategory.woocommerceCountries,
-      subcategory: 'WooCommerce Countries',
-      handler: ListAllCountriesHandler(),
+      name: 'WooCommerce Retrieve Payment Gateway',
+      endpoint: '/wp-json/wc/v3/payment_gateways/{id}',
+      category: ApiCategory.woocommercePaymentGateways,
+      subcategory: 'WooCommerce Payment Gateways',
+      handler: RetrievePaymentGatewayHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Retrieve Country Data',
-      endpoint: '/wp-json/wc/v3/data/countries/{code}',
-      category: ApiCategory.woocommerceCountries,
-      subcategory: 'WooCommerce Countries',
-      handler: RetrieveCountryDataHandler(),
+      name: 'WooCommerce Update Payment Gateway',
+      endpoint: '/wp-json/wc/v3/payment_gateways/{id}',
+      category: ApiCategory.woocommercePaymentGateways,
+      subcategory: 'WooCommerce Payment Gateways',
+      handler: UpdatePaymentGatewayHandler(),
     ),
 
-    // 💰 WooCommerce Currencies
+       // ⚙️ WooCommerce Settings Handlers
     ApiService(
-      name: 'WooCommerce List All Currencies',
-      endpoint: '/wp-json/wc/v3/data/currencies',
-      category: ApiCategory.woocommerceCurrencies,
-      subcategory: 'WooCommerce Currencies',
-      handler: ListAllCurrenciesHandler(),
+      name: 'WooCommerce List All Settings Groups',
+      endpoint: '/wp-json/wc/v3/settings',
+      category: ApiCategory.woocommerceSetting,
+      subcategory: 'WooCommerce Settings',
+      handler: ListSettingsGroupsHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Retrieve Currency Data',
-      endpoint: '/wp-json/wc/v3/data/currencies/{code}',
-      category: ApiCategory.woocommerceCurrencies,
-      subcategory: 'WooCommerce Currencies',
-      handler: RetrieveCurrencyDataHandler(),
+      name: 'WooCommerce Retrieve Setting Option',
+      endpoint: '/wp-json/wc/v3/settings/{group_id}/{option_id}',
+      category: ApiCategory.woocommerceSetting,
+      subcategory: 'WooCommerce Settings',
+      handler: RetrieveSettingOptionHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Retrieve Current Currency',
-      endpoint: '/wp-json/wc/v3/data/currencies/current',
-      category: ApiCategory.woocommerceCurrencies,
-      subcategory: 'WooCommerce Currencies',
-      handler: RetrieveCurrentCurrencyHandler(),
+      name: 'WooCommerce Update Setting Option',
+      endpoint: '/wp-json/wc/v3/settings/{group_id}/{option_id}',
+      category: ApiCategory.woocommerceSetting,
+      subcategory: 'WooCommerce Settings',
+      handler: UpdateSettingsOptionHandler(),
     ),
 
-    // 💰 WooCommerce Refunds
-    ApiService(
-      name: 'WooCommerce List All Refunds',
-      endpoint: '/wp-json/wc/v3/orders/{orderId}/refunds',
-      category: ApiCategory.woocommerceRefunds,
-      subcategory: 'WooCommerce Refunds',
-      handler: ListAllRefundsHandler(),
-    ),
+
   ];
 
   static void initialize() {}
@@ -3428,8 +3482,10 @@ class ApiServiceRegistry {
       ApiCategory.woocommerceCustomers,
       ApiCategory.woocommerceWebhooks,
       ApiCategory.woocommerceSystemStatus,
+      ApiCategory.woocommerceReports,
       ApiCategory.woocommerceShippingMethods,
       ApiCategory.woocommercePaymentGateways,
+      ApiCategory.woocommerceSetting,
       ApiCategory.woocommerceData,
       ApiCategory.woocommerceContinents,
       ApiCategory.woocommerceCountries,
@@ -3510,10 +3566,14 @@ class ApiServiceRegistry {
         return 'WooCommerce Webhooks';
       case ApiCategory.woocommerceSystemStatus:
         return 'WooCommerce System Status';
+      case ApiCategory.woocommerceReports:
+        return 'WooCommerce Reports';
       case ApiCategory.woocommerceShippingMethods:
         return 'WooCommerce Shipping Methods';
       case ApiCategory.woocommercePaymentGateways:
         return 'WooCommerce Payment Gateways';
+      case ApiCategory.woocommerceSetting:
+        return 'WooCommerce Settings';
       case ApiCategory.woocommerceData:
         return 'WooCommerce Data';
       case ApiCategory.woocommerceContinents:

@@ -474,3 +474,19 @@ export 'handlers/woocommerce/currencies_handlers/retrieve_current_currency_handl
 
 // 💰 WooCommerce Refunds Handlers
 export 'handlers/woocommerce/refunds_handlers/list_all_refunds_handler.dart';
+
+// 📊 Reports Handlers
+export 'handlers/woocommerce/reports_handlers/list_all_reports_handler.dart';
+export 'handlers/woocommerce/reports_handlers/retrieve_report_sale_handler.dart';
+export 'handlers/woocommerce/reports_handlers/retrieve_top_seller_report_handler.dart';
+export 'handlers/woocommerce/reports_handlers/retrieve_order_totals_handler.dart';
+export 'handlers/woocommerce/reports_handlers/retrieve_product_totals_handler.dart';
+export 'handlers/woocommerce/reports_handlers/retrieve_customer_totals_handler.dart';
+export 'handlers/woocommerce/reports_handlers/retrieve_coupon_totals_handler.dart';
+export 'handlers/woocommerce/reports_handlers/retrieve_review_totals_handler.dart';
+
+
+// setting handlers
+export 'package:example/services/handlers/woocommerce/settings_handlers/list_settings_groups_handler.dart';
+export 'package:example/services/handlers/woocommerce/settings_handlers/retrieve_setting_option_handler.dart';
+export 'package:example/services/handlers/woocommerce/settings_handlers/update_settings_option_handler.dart';
