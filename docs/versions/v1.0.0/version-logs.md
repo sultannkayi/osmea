@@ -2,9 +2,52 @@
 
 > This changelog is generated from the latest closed pull requests. For a full, always-up-to-date changelog, visit [Closed PRs on GitHub](https://github.com/masterfabric-mobile/osmea/pulls?state=closed&sort=updated&direction=desc).  
 
+## v1.13.9
+
+### 🆕 Added & Improvements
+
+- **#97:** Added WooCommerce coupon integration and advanced API capabilities to the project.
+- **#99:** Developed a new Grid and Spacer system, contributing to the core infrastructure.
+- **#104:** Refactored the file structure by separating Shopify and WooCommerce modules for better modularity.
+- **#106:** Implemented full CRUD operations and management interface for the WooCommerce Coupon API.
+- **#107:** Provided CRUD operations and management support for the WooCommerce Customer API.
+- **#109:** Integrated API for WooCommerce orders and order notes, adding new services.
+- **#110:** Delivered comprehensive WooCommerce product management API, covering products, categories, tags, and related entities.
+- **#111:** Integrated WooCommerce Webhook and system status APIs, introducing new features.
+- **#114:** Added WooCommerce shipping and payment method APIs, expanding administrative options.
+- **#115:** Extended the admin panel via WooCommerce reports and settings API integration.
+- **#117:** Enhanced data management with continent, country, currency, and refund APIs, and introduced global ApiDataService.
+- **#119:** Launched the foundation and splash screen of the Flutter-based admin dashboard.
+- **#120:** Fully integrated WooCommerce tax classes and rates API with relevant services.
 
 ---
 
+### 🐞 Bug Fixes
+
+- **#105:** Fixed a critical integration issue between Counter and Chips components.
+- **#101:** Resolved rendering issues in sidebar category management and Divider component, improving UX.
+
+---
+
+### 📚 Documentation
+
+- **#98:** Added interactive Storybook documentation and bug fixes for the Divider component.
+- **#102:** Provided comprehensive Storybook and UI improvements for all List Item variants.
+- **#103:** Extended Storybook documentation for the Counter component with new variants and customization options.
+- **#108:** Delivered extensive Storybook documentation and interactive features for Container widgets.
+- **#113:** Created detailed documentation and showcase for all color palettes in the design system.
+- **#116:** Developed a comprehensive Typography documentation page for Storybook with a clean and readable layout.
+- **#118:** Added an interactive Storybook and documentation for the Footer component, covering all variants and live controls.
+
+---
+
+## ⚠️ Known Issues
+
+- No explicitly stated known issues are present in this PR list.
+
+---
+
+## v1.0.0
 ### 🆕 Added & Improvements
 
 - **Text Component Storybook** ([#94](https://github.com/masterfabric-mobile/osmea/pull/94)):  
