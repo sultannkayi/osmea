@@ -174,7 +174,8 @@ class _ConfigPopupDialogState extends State<ConfigPopupDialog>
                                   Container(
                                     padding: const EdgeInsets.all(8),
                                     decoration: BoxDecoration(
-                                      color: Colors.amber.withValues(alpha: 0.1),
+                                      color:
+                                          Colors.amber.withValues(alpha: 0.1),
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                     child: Icon(
@@ -185,29 +186,29 @@ class _ConfigPopupDialogState extends State<ConfigPopupDialog>
                                   ),
                                   const SizedBox(width: 12),
                                   const Expanded(
-                                                                         child: Text(
-                                       'API configuration must be completed',
-                                       style: TextStyle(
-                                         fontSize: 16,
-                                         fontWeight: FontWeight.w600,
-                                         color: Color(0xFF374151),
-                                       ),
-                                     ),
+                                    child: Text(
+                                      'API configuration must be completed',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        color: Color(0xFF374151),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
 
                               const SizedBox(height: 20),
 
-                                                             // Information Text
-                               const Text(
-                                 'To use the application, you need to fill in the information in the file below:',
-                                 style: TextStyle(
-                                   fontSize: 14,
-                                   color: Color(0xFF6B7280),
-                                   height: 1.5,
-                                 ),
-                               ),
+                              // Information Text
+                              const Text(
+                                'To use the application, you need to fill in the information in the file below:',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Color(0xFF6B7280),
+                                  height: 1.5,
+                                ),
+                              ),
 
                               const SizedBox(height: 16),
 
@@ -232,14 +233,14 @@ class _ConfigPopupDialogState extends State<ConfigPopupDialog>
                                           color: Colors.blue[600],
                                         ),
                                         const SizedBox(width: 8),
-                                                                                 const Text(
-                                           'File Location:',
-                                           style: TextStyle(
-                                             fontSize: 12,
-                                             fontWeight: FontWeight.w600,
-                                             color: Color(0xFF374151),
-                                           ),
-                                         ),
+                                        const Text(
+                                          'File Location:',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w600,
+                                            color: Color(0xFF374151),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                     const SizedBox(height: 8),
@@ -258,46 +259,102 @@ class _ConfigPopupDialogState extends State<ConfigPopupDialog>
 
                               const SizedBox(height: 16),
 
-                                                             // Required Fields
-                               const Text(
-                                 'Required fields:',
-                                 style: TextStyle(
-                                   fontSize: 14,
-                                   fontWeight: FontWeight.w600,
-                                   color: Color(0xFF374151),
-                                 ),
-                               ),
+                              // Required Fields
+                              const Text(
+                                'Required fields:',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xFF374151),
+                                ),
+                              ),
 
                               const SizedBox(height: 12),
 
-                              ...['STORE_NAME', 'SHOPIFY_ACCESS_TOKEN', 'API_VERSION']
-                                  .map(
-                                    (field) => Padding(
-                                      padding: const EdgeInsets.only(bottom: 8),
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                            width: 6,
-                                            height: 6,
-                                            decoration: BoxDecoration(
-                                              color: Colors.blue[600],
-                                              shape: BoxShape.circle,
-                                            ),
-                                          ),
-                                          const SizedBox(width: 12),
-                                          Text(
-                                            field,
-                                            style: const TextStyle(
-                                              fontSize: 13,
-                                              fontFamily: 'monospace',
-                                              color: Color(0xFF6B7280),
-                                            ),
-                                          ),
-                                        ],
+                              // Shopify Required Fields
+                              const Text(
+                                'Shopify required fields:',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xFF374151),
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              ...[
+                                'STORE_NAME',
+                                'SHOPIFY_ACCESS_TOKEN',
+                                'API_VERSION'
+                              ].map(
+                                (field) => Padding(
+                                  padding: const EdgeInsets.only(bottom: 8),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 6,
+                                        height: 6,
+                                        decoration: BoxDecoration(
+                                          color: Colors.blue[600],
+                                          shape: BoxShape.circle,
+                                        ),
                                       ),
-                                    ),
-                                  )
-                                  ,
+                                      const SizedBox(width: 12),
+                                      Text(
+                                        field,
+                                        style: const TextStyle(
+                                          fontSize: 13,
+                                          fontFamily: 'monospace',
+                                          color: Color(0xFF6B7280),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+
+                              const SizedBox(height: 16),
+
+                              // WooCommerce Required Fields
+                              const Text(
+                                'WooCommerce required fields:',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xFF374151),
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              ...[
+                                'STORE_URL',
+                                'USERNAME',
+                                'PASSWORD',
+                                'API_VERSION'
+                              ].map(
+                                (field) => Padding(
+                                  padding: const EdgeInsets.only(bottom: 8),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 6,
+                                        height: 6,
+                                        decoration: BoxDecoration(
+                                          color: Colors.green[600],
+                                          shape: BoxShape.circle,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 12),
+                                      Text(
+                                        field,
+                                        style: const TextStyle(
+                                          fontSize: 13,
+                                          fontFamily: 'monospace',
+                                          color: Color(0xFF6B7280),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -312,28 +369,29 @@ class _ConfigPopupDialogState extends State<ConfigPopupDialog>
                               bottomRight: Radius.circular(20),
                             ),
                           ),
-                                                     child: SizedBox(
-                             width: double.infinity,
-                             child: ElevatedButton(
-                               onPressed: _closePopup,
-                               style: ElevatedButton.styleFrom(
-                                 backgroundColor: const Color(0xFF667EEA),
-                                 foregroundColor: Colors.white,
-                                 padding: const EdgeInsets.symmetric(vertical: 16),
-                                 elevation: 0,
-                                 shape: RoundedRectangleBorder(
-                                   borderRadius: BorderRadius.circular(8),
-                                 ),
-                               ),
-                               child: const Text(
-                                 'I Understand',
-                                 style: TextStyle(
-                                   fontSize: 14,
-                                   fontWeight: FontWeight.w600,
-                                 ),
-                               ),
-                             ),
-                           ),
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: _closePopup,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF667EEA),
+                                foregroundColor: Colors.white,
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 16),
+                                elevation: 0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              child: const Text(
+                                'I Understand',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -346,4 +404,4 @@ class _ConfigPopupDialogState extends State<ConfigPopupDialog>
       },
     );
   }
-} 
+}

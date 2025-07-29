@@ -24,17 +24,19 @@ enum ApiCategory {
   woocommerceCoupons,
   woocommerceProducts,
   woocommerceOrders,
-  woocommerceCustomers, 
+  woocommerceCustomers,
   woocommerceWebhooks,
   woocommerceSystemStatus,
+  woocommerceReports,
   woocommerceShippingMethods,
+  woocommerceShippingZones,
+  woocommerceShippingZoneMethods,
   woocommercePaymentGateways,
   woocommerceData,
   woocommerceContinents,
   woocommerceCountries,
   woocommerceCurrencies,
   woocommerceRefunds,
-  woocommerceReports, 
   woocommerceSetting,
   woocommerceTaxes,
 }
@@ -83,37 +85,41 @@ extension ApiCategoryExtension on ApiCategory {
       case ApiCategory.webhooks:
         return 'Webhooks APIs';
       case ApiCategory.woocommerceCoupons:
-        return 'WooCommerce Coupons APIs';
+        return 'Coupons APIs';
       case ApiCategory.woocommerceProducts:
-        return 'WooCommerce Products APIs';
+        return 'Products APIs';
       case ApiCategory.woocommerceOrders:
-        return 'WooCommerce Orders APIs';
+        return 'Orders APIs';
       case ApiCategory.woocommerceCustomers:
-        return 'WooCommerce Customers APIs';
+        return 'Customers APIs';
       case ApiCategory.woocommerceWebhooks:
-        return 'WooCommerce Webhooks APIs';
+        return 'Webhooks APIs';
       case ApiCategory.woocommerceSystemStatus:
-        return 'WooCommerce System Status APIs';
+        return 'System Status APIs';
       case ApiCategory.woocommerceReports:
-        return 'WooCommerce Reports APIs';
+        return 'Reports APIs';
       case ApiCategory.woocommerceShippingMethods:
-        return 'WooCommerce Shipping Methods APIs';
+        return 'Shipping Methods APIs';
+      case ApiCategory.woocommerceShippingZones:
+        return 'Shipping Zones APIs';
+      case ApiCategory.woocommerceShippingZoneMethods:
+        return 'Shipping Zone Methods APIs';
       case ApiCategory.woocommercePaymentGateways:
-        return 'WooCommerce Payment Gateways APIs';
+        return 'Payment Gateways APIs';
       case ApiCategory.woocommerceData:
-        return 'WooCommerce Data APIs';
+        return 'Data APIs';
       case ApiCategory.woocommerceContinents:
-        return 'WooCommerce Continents APIs';
+        return 'Continents APIs';
       case ApiCategory.woocommerceCountries:
-        return 'WooCommerce Countries APIs';
+        return 'Countries APIs';
       case ApiCategory.woocommerceCurrencies:
-        return 'WooCommerce Currencies APIs';
+        return 'Currencies APIs';
       case ApiCategory.woocommerceRefunds:
-        return 'WooCommerce Refunds APIs';
+        return 'Refunds APIs';
       case ApiCategory.woocommerceSetting:
-        return 'WooCommerce Settings';
+        return 'Settings';
       case ApiCategory.woocommerceTaxes:
-        return 'WooCommerce Taxes APIs';
+        return 'Taxes APIs';
     }
   }
 }
@@ -2732,38 +2738,38 @@ class ApiServiceRegistry {
 
     // 🛒 WooCommerce Services
     ApiService(
-      name: 'WooCommerce List All Coupons',
+      name: 'List All Coupons',
       endpoint: '/wp-json/wc/v3/coupons',
       category: ApiCategory.woocommerceCoupons,
-      subcategory: 'WooCommerce Coupons',
+      subcategory: 'Coupons',
       handler: ListAllCouponsHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Retrieve Coupon',
+      name: 'Retrieve Coupon',
       endpoint: '/wp-json/wc/v3/coupons/{coupon_id}',
       category: ApiCategory.woocommerceCoupons,
-      subcategory: 'WooCommerce Coupons',
+      subcategory: 'Coupons',
       handler: RetrieveCouponHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Create Coupon',
+      name: 'Create Coupon',
       endpoint: '/wp-json/wc/v3/coupons',
       category: ApiCategory.woocommerceCoupons,
-      subcategory: 'WooCommerce Coupons',
+      subcategory: 'Coupons',
       handler: CreateCouponHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Update Coupon',
+      name: 'Update Coupon',
       endpoint: '/wp-json/wc/v3/coupons/{coupon_id}',
       category: ApiCategory.woocommerceCoupons,
-      subcategory: 'WooCommerce Coupons',
+      subcategory: 'Coupons',
       handler: UpdateCouponHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Delete Coupon',
+      name: 'Delete Coupon',
       endpoint: '/wp-json/wc/v3/coupons/{coupon_id}',
       category: ApiCategory.woocommerceCoupons,
-      subcategory: 'WooCommerce Coupons',
+      subcategory: 'Coupons',
       handler: DeleteCouponHandler(),
     ),
     ApiService(
@@ -2776,444 +2782,444 @@ class ApiServiceRegistry {
 
     // 🛍️ WooCommerce Products Services
     ApiService(
-      name: 'WooCommerce List All Products',
+      name: 'List All Products',
       endpoint: '/wp-json/wc/v3/products',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Products',
+      subcategory: 'Products',
       handler: ListAllProductsHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Retrieve Product',
+      name: 'Retrieve Product',
       endpoint: '/wp-json/wc/v3/products/{product_id}',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Products',
+      subcategory: 'Products',
       handler: RetrieveProductHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Create Product',
+      name: 'Create Product',
       endpoint: '/wp-json/wc/v3/products',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Products',
+      subcategory: 'Products',
       handler: CreateProductHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Update Product',
+      name: 'Update Product',
       endpoint: '/wp-json/wc/v3/products/{product_id}',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Products',
+      subcategory: 'Products',
       handler: UpdateProductHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Delete Product',
+      name: 'Delete Product',
       endpoint: '/wp-json/wc/v3/products/{product_id}',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Products',
+      subcategory: 'Products',
       handler: WooDeleteProductHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Retrieve Product Custom Field Names',
+      name: 'Retrieve Product Custom Field Names',
       endpoint: '/wp-json/wc/v3/products/{product_id}/custom_fields/names',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Products',
+      subcategory: 'Products',
       handler: RetrieveProductCustomFieldNamesHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce List All Product Categories',
+      name: 'List All Product Categories',
       endpoint: '/wp-json/wc/v3/products/categories',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Categories',
+      subcategory: 'Product Categories',
       handler: ListAllProductCategoriesHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Create Product Category',
+      name: 'Create Product Category',
       endpoint: '/wp-json/wc/v3/products/categories',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Categories',
+      subcategory: 'Product Categories',
       handler: CreateProductCategoryHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Retrieve Product Category',
+      name: 'Retrieve Product Category',
       endpoint: '/wp-json/wc/v3/products/categories/{id}',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Categories',
+      subcategory: 'Product Categories',
       handler: RetrieveProductCategoryHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Update Product Category',
+      name: 'Update Product Category',
       endpoint: '/wp-json/wc/v3/products/categories/{id}',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Categories',
+      subcategory: 'Product Categories',
       handler: UpdateProductCategoryHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Delete Product Category',
+      name: 'Delete Product Category',
       endpoint: '/wp-json/wc/v3/products/categories/{id}',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Categories',
+      subcategory: 'Product Categories',
       handler: DeleteProductCategoryHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce List All Product Reviews',
+      name: 'List All Product Reviews',
       endpoint: '/wp-json/wc/v3/products/reviews',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Reviews',
+      subcategory: 'Product Reviews',
       handler: ListAllProductReviewsHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Create Product Review',
+      name: 'Create Product Review',
       endpoint: '/wp-json/wc/v3/products/reviews',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Reviews',
+      subcategory: 'Product Reviews',
       handler: CreateProductReviewHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Retrieve Product Review',
+      name: 'Retrieve Product Review',
       endpoint: '/wp-json/wc/v3/products/reviews/{id}',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Reviews',
+      subcategory: 'Product Reviews',
       handler: RetrieveProductReviewHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Update Product Review',
+      name: 'Update Product Review',
       endpoint: '/wp-json/wc/v3/products/reviews/{id}',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Reviews',
+      subcategory: 'Product Reviews',
       handler: UpdateProductReviewHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Delete Product Review',
+      name: 'Delete Product Review',
       endpoint: '/wp-json/wc/v3/products/reviews/{id}',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Reviews',
+      subcategory: 'Product Reviews',
       handler: DeleteProductReviewHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce List All Product Shipping Classes',
+      name: 'List All Product Shipping Classes',
       endpoint: '/wp-json/wc/v3/products/shipping_classes',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Shipping Classes',
+      subcategory: 'Product Shipping Classes',
       handler: ListAllProductShippingClassesHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Create Product Shipping Class',
+      name: 'Create Product Shipping Class',
       endpoint: '/wp-json/wc/v3/products/shipping_classes',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Shipping Classes',
+      subcategory: 'Product Shipping Classes',
       handler: CreateProductShippingClassHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Retrieve Product Shipping Class',
+      name: 'Retrieve Product Shipping Class',
       endpoint: '/wp-json/wc/v3/products/shipping_classes/{id}',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Shipping Classes',
+      subcategory: 'Product Shipping Classes',
       handler: RetrieveProductShippingClassHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Update Product Shipping Class',
+      name: 'Update Product Shipping Class',
       endpoint: '/wp-json/wc/v3/products/shipping_classes/{id}',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Shipping Classes',
+      subcategory: 'Product Shipping Classes',
       handler: UpdateProductShippingClassHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Delete Product Shipping Class',
+      name: 'Delete Product Shipping Class',
       endpoint: '/wp-json/wc/v3/products/shipping_classes/{id}',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Shipping Classes',
+      subcategory: 'Product Shipping Classes',
       handler: DeleteProductShippingClassHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce List All Product Tags',
+      name: 'List All Product Tags',
       endpoint: '/wp-json/wc/v3/products/tags',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Tags',
+      subcategory: 'Product Tags',
       handler: ListAllProductTagsHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Create Product Tag',
+      name: 'Create Product Tag',
       endpoint: '/wp-json/wc/v3/products/tags',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Tags',
+      subcategory: 'Product Tags',
       handler: CreateProductTagHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Retrieve Product Tag',
+      name: 'Retrieve Product Tag',
       endpoint: '/wp-json/wc/v3/products/tags/{id}',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Tags',
+      subcategory: 'Product Tags',
       handler: RetrieveProductTagHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Update Product Tag',
+      name: 'Update Product Tag',
       endpoint: '/wp-json/wc/v3/products/tags/{id}',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Tags',
+      subcategory: 'Product Tags',
       handler: UpdateProductTagHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Delete Product Tag',
+      name: 'Delete Product Tag',
       endpoint: '/wp-json/wc/v3/products/tags/{id}',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Tags',
+      subcategory: 'Product Tags',
       handler: DeleteProductTagHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce List All Product Variations',
+      name: 'List All Product Variations',
       endpoint: '/wp-json/wc/v3/products/{product_id}/variations',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Variations',
+      subcategory: 'Product Variations',
       handler: ListAllProductVariationsHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Create Product Variation',
+      name: 'Create Product Variation',
       endpoint: '/wp-json/wc/v3/products/{product_id}/variations',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Variations',
+      subcategory: 'Product Variations',
       handler: CreateProductVariationHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Retrieve Product Variation',
+      name: 'Retrieve Product Variation',
       endpoint:
           '/wp-json/wc/v3/products/{product_id}/variations/{variation_id}',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Variations',
+      subcategory: 'Product Variations',
       handler: RetrieveProductVariationHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Update Product Variation',
+      name: 'Update Product Variation',
       endpoint:
           '/wp-json/wc/v3/products/{product_id}/variations/{variation_id}',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Variations',
+      subcategory: 'Product Variations',
       handler: UpdateProductVariationHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Delete Product Variation',
+      name: 'Delete Product Variation',
       endpoint:
           '/wp-json/wc/v3/products/{product_id}/variations/{variation_id}',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Variations',
+      subcategory: 'Product Variations',
       handler: DeleteProductVariationHandler(),
     ),
 
     // 🏷️ WooCommerce Product Attributes Services
     ApiService(
-      name: 'WooCommerce List All Product Attributes',
+      name: 'List All Product Attributes',
       endpoint: '/wp-json/wc/v3/products/attributes',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Attributes',
+      subcategory: 'Product Attributes',
       handler: ListAllProductAttributesHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Create Product Attribute',
+      name: 'Create Product Attribute',
       endpoint: '/wp-json/wc/v3/products/attributes',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Attributes',
+      subcategory: 'Product Attributes',
       handler: CreateProductAttributeHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Retrieve Product Attribute',
+      name: 'Retrieve Product Attribute',
       endpoint: '/wp-json/wc/v3/products/attributes/{attribute_id}',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Attributes',
+      subcategory: 'Product Attributes',
       handler: RetrieveProductAttributeHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Update Product Attribute',
+      name: 'Update Product Attribute',
       endpoint: '/wp-json/wc/v3/products/attributes/{attribute_id}',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Attributes',
+      subcategory: 'Product Attributes',
       handler: UpdateProductAttributeHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Delete Product Attribute',
+      name: 'Delete Product Attribute',
       endpoint: '/wp-json/wc/v3/products/attributes/{attribute_id}',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Attributes',
+      subcategory: 'Product Attributes',
       handler: DeleteProductAttributeHandler(),
     ),
 
     // 🏷️ WooCommerce Product Attribute Terms Services
     ApiService(
-      name: 'WooCommerce List All Product Attribute Terms',
+      name: 'List All Product Attribute Terms',
       endpoint: '/wp-json/wc/v3/products/attributes/{attribute_id}/terms',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Attribute Terms',
+      subcategory: 'Product Attribute Terms',
       handler: ListAllProductAttributeTermsHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Create Product Attribute Term',
+      name: 'Create Product Attribute Term',
       endpoint: '/wp-json/wc/v3/products/attributes/{attribute_id}/terms',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Attribute Terms',
+      subcategory: 'Product Attribute Terms',
       handler: CreateProductAttributeTermHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Retrieve Product Attribute Term',
+      name: 'Retrieve Product Attribute Term',
       endpoint:
           '/wp-json/wc/v3/products/attributes/{attribute_id}/terms/{term_id}',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Attribute Terms',
+      subcategory: 'Product Attribute Terms',
       handler: RetrieveProductAttributeTermHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Update Product Attribute Term',
+      name: 'Update Product Attribute Term',
       endpoint:
           '/wp-json/wc/v3/products/attributes/{attribute_id}/terms/{term_id}',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Attribute Terms',
+      subcategory: 'Product Attribute Terms',
       handler: UpdateProductAttributeTermHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Delete Product Attribute Term',
+      name: 'Delete Product Attribute Term',
       endpoint:
           '/wp-json/wc/v3/products/attributes/{attribute_id}/terms/{term_id}',
       category: ApiCategory.woocommerceProducts,
-      subcategory: 'WooCommerce Product Attribute Terms',
+      subcategory: 'Product Attribute Terms',
       handler: DeleteProductAttributeTermHandler(),
     ),
 
     // 🔗 WooCommerce Webhooks Services
     ApiService(
-      name: 'WooCommerce List All Webhooks',
+      name: 'List All Webhooks',
       endpoint: '/wp-json/wc/v3/webhooks',
       category: ApiCategory.woocommerceWebhooks,
-      subcategory: 'WooCommerce Webhooks',
+      subcategory: 'Webhooks',
       handler: ListAllWebhooksHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Create Webhook',
+      name: 'Create Webhook',
       endpoint: '/wp-json/wc/v3/webhooks',
       category: ApiCategory.woocommerceWebhooks,
-      subcategory: 'WooCommerce Webhooks',
+      subcategory: 'Webhooks',
       handler: WooCreateWebhookHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Retrieve Webhook',
+      name: 'Retrieve Webhook',
       endpoint: '/wp-json/wc/v3/webhooks/{webhook_id}',
       category: ApiCategory.woocommerceWebhooks,
-      subcategory: 'WooCommerce Webhooks',
+      subcategory: 'Webhooks',
       handler: RetrieveWebhookHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Update Webhook',
+      name: 'Update Webhook',
       endpoint: '/wp-json/wc/v3/webhooks/{webhook_id}',
       category: ApiCategory.woocommerceWebhooks,
-      subcategory: 'WooCommerce Webhooks',
+      subcategory: 'Webhooks',
       handler: WooUpdateWebhookHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Delete Webhook',
+      name: 'Delete Webhook',
       endpoint: '/wp-json/wc/v3/webhooks/{webhook_id}',
       category: ApiCategory.woocommerceWebhooks,
-      subcategory: 'WooCommerce Webhooks',
+      subcategory: 'Webhooks',
       handler: WooDeleteWebhookHandler(),
     ),
 
     // 🔧 WooCommerce System Status Services
     ApiService(
-      name: 'WooCommerce Get System Status',
+      name: 'Get System Status',
       endpoint: '/wp-json/wc/v3/system_status',
       category: ApiCategory.woocommerceSystemStatus,
-      subcategory: 'WooCommerce System Status',
+      subcategory: 'System Status',
       handler: GetSystemStatusHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce List All Tools From System Status',
+      name: 'List All Tools From System Status',
       endpoint: '/wp-json/wc/v3/system_status/tools',
       category: ApiCategory.woocommerceSystemStatus,
-      subcategory: 'WooCommerce System Status',
+      subcategory: 'System Status',
       handler: ListAllToolsFromSystemStatusHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Retrieve Tool From System Status',
+      name: 'Retrieve Tool From System Status',
       endpoint: '/wp-json/wc/v3/system_status/tools/{tool_id}',
       category: ApiCategory.woocommerceSystemStatus,
-      subcategory: 'WooCommerce System Status',
+      subcategory: 'System Status',
       handler: RetrieveToolFromSystemStatusHandler(),
     ),
 
     ApiService(
-      name: 'WooCommerce Run Tool From System Status',
+      name: 'Run Tool From System Status',
       endpoint: '/wp-json/wc/v3/system_status/tools/{tool_id}',
       category: ApiCategory.woocommerceSystemStatus,
-      subcategory: 'WooCommerce System Status',
+      subcategory: 'System Status',
       handler: RunToolFromSystemStatusHandler(),
     ),
 
     // 👥 WooCommerce Customers Services
     ApiService(
-      name: 'WooCommerce List All Customers',
+      name: 'List All Customers',
       endpoint: '/wp-json/wc/v3/customers',
       category: ApiCategory.woocommerceCustomers,
-      subcategory: 'WooCommerce Customers',
+      subcategory: 'Customers',
       handler: ListAllCustomersHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Retrieve Customer',
+      name: 'Retrieve Customer',
       endpoint: '/wp-json/wc/v3/customers/{customer_id}',
       category: ApiCategory.woocommerceCustomers,
-      subcategory: 'WooCommerce Customers',
+      subcategory: 'Customers',
       handler: RetrieveCustomerHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Create Customer',
+      name: 'Create Customer',
       endpoint: '/wp-json/wc/v3/customers',
       category: ApiCategory.woocommerceCustomers,
-      subcategory: 'WooCommerce Customers',
+      subcategory: 'Customers',
       handler: CreateCustomerHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Update Customer',
+      name: 'Update Customer',
       endpoint: '/wp-json/wc/v3/customers/{customer_id}',
       category: ApiCategory.woocommerceCustomers,
-      subcategory: 'WooCommerce Customers',
+      subcategory: 'Customers',
       handler: UpdateCustomerHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Delete Customer',
+      name: 'Delete Customer',
       endpoint: '/wp-json/wc/v3/customers/{customer_id}',
       category: ApiCategory.woocommerceCustomers,
-      subcategory: 'WooCommerce Customers',
+      subcategory: 'Customers',
       handler: DeleteCustomerHandler(),
     ),
     ApiService(
@@ -3233,45 +3239,45 @@ class ApiServiceRegistry {
 
     // 🛒 WooCommerce Orders
     ApiService(
-      name: 'WooCommerce List All Orders',
+      name: 'List All Orders',
       endpoint: '/wp-json/wc/v3/orders',
       category: ApiCategory.woocommerceOrders,
-      subcategory: 'WooCommerce Orders',
+      subcategory: 'Orders',
       handler: ListAllOrdersHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Create Order',
+      name: 'Create Order',
       endpoint: '/wp-json/wc/v3/orders',
       category: ApiCategory.woocommerceOrders,
-      subcategory: 'WooCommerce Orders',
+      subcategory: 'Orders',
       handler: CreateOrderHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Retrieve Order',
+      name: 'Retrieve Order',
       endpoint: '/wp-json/wc/v3/orders/{order_id}',
       category: ApiCategory.woocommerceOrders,
-      subcategory: 'WooCommerce Orders',
+      subcategory: 'Orders',
       handler: RetrieveOrderHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Update Order',
+      name: 'Update Order',
       endpoint: '/wp-json/wc/v3/orders/{order_id}',
       category: ApiCategory.woocommerceOrders,
-      subcategory: 'WooCommerce Orders',
+      subcategory: 'Orders',
       handler: UpdateOrderHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Delete Order',
+      name: 'Delete Order',
       endpoint: '/wp-json/wc/v3/orders/{order_id}',
       category: ApiCategory.woocommerceOrders,
-      subcategory: 'WooCommerce Orders',
+      subcategory: 'Orders',
       handler: DeleteOrderHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Send Order Details',
+      name: 'Send Order Details',
       endpoint: '/wp-json/wc/v3/orders/{order_id}/actions/send_order_details',
       category: ApiCategory.woocommerceOrders,
-      subcategory: 'WooCommerce Orders',
+      subcategory: 'Orders',
       handler: SendOrderDetailsHandler(),
     ),
     ApiService(
@@ -3284,255 +3290,410 @@ class ApiServiceRegistry {
 
     // 📝 WooCommerce Order Notes
     ApiService(
-      name: 'WooCommerce List All Order Notes',
+      name: 'List All Order Notes',
       endpoint: '/wp-json/wc/v3/orders/{order_id}/notes',
       category: ApiCategory.woocommerceOrders,
-      subcategory: 'WooCommerce Order Notes',
+      subcategory: 'Order Notes',
       handler: ListAllOrderNotesHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Create Order Note',
+      name: 'Create Order Note',
       endpoint: '/wp-json/wc/v3/orders/{order_id}/notes',
       category: ApiCategory.woocommerceOrders,
-      subcategory: 'WooCommerce Order Notes',
+      subcategory: 'Order Notes',
       handler: CreateOrderNoteHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Retrieve Order Note',
+      name: 'Retrieve Order Note',
       endpoint: '/wp-json/wc/v3/orders/{order_id}/notes/{note_id}',
       category: ApiCategory.woocommerceOrders,
-      subcategory: 'WooCommerce Order Notes',
+      subcategory: 'Order Notes',
       handler: RetrieveOrderNoteHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Delete Order Note',
+      name: 'Delete Order Note',
       endpoint: '/wp-json/wc/v3/orders/{order_id}/notes/{note_id}',
       category: ApiCategory.woocommerceOrders,
-      subcategory: 'WooCommerce Order Notes',
+      subcategory: 'Order Notes',
       handler: DeleteOrderNoteHandler(),
     ),
 
     // 🚚 WooCommerce Shipping Methods
     ApiService(
-      name: 'WooCommerce List All Shipping Methods',
+      name: 'List All Shipping Methods',
       endpoint: '/wp-json/wc/v3/shipping_methods',
       category: ApiCategory.woocommerceShippingMethods,
-      subcategory: 'WooCommerce Shipping Methods',
+      subcategory: 'Shipping Methods',
       handler: ListAllShippingMethodsHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Retrieve Shipping Method',
+      name: 'Retrieve Shipping Method',
       endpoint: '/wp-json/wc/v3/shipping_methods/{id}',
       category: ApiCategory.woocommerceShippingMethods,
-      subcategory: 'WooCommerce Shipping Methods',
+      subcategory: 'Shipping Methods',
       handler: RetrieveShippingMethodHandler(),
     ),
 
     // 💳 WooCommerce Payment Gateways
     ApiService(
-      name: 'WooCommerce List All Payment Gateways',
+      name: 'List All Payment Gateways',
       endpoint: '/wp-json/wc/v3/payment_gateways',
       category: ApiCategory.woocommercePaymentGateways,
-      subcategory: 'WooCommerce Payment Gateways',
+      subcategory: 'Payment Gateways',
       handler: ListAllPaymentGatewaysHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Retrieve Payment Gateway',
+      name: 'Retrieve Payment Gateway',
       endpoint: '/wp-json/wc/v3/payment_gateways/{id}',
       category: ApiCategory.woocommercePaymentGateways,
-      subcategory: 'WooCommerce Payment Gateways',
+      subcategory: 'Payment Gateways',
       handler: RetrievePaymentGatewayHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Update Payment Gateway',
+      name: 'Update Payment Gateway',
       endpoint: '/wp-json/wc/v3/payment_gateways/{id}',
       category: ApiCategory.woocommercePaymentGateways,
-      subcategory: 'WooCommerce Payment Gateways',
+      subcategory: 'Payment Gateways',
       handler: UpdatePaymentGatewayHandler(),
     ),
 
 // 📊 WooCommerce Reports
     ApiService(
-      name: 'WooCommerce List All Reports',
+      name: 'List All Reports',
       endpoint: '/wp-json/wc/v3/reports',
       category: ApiCategory.woocommerceReports,
-      subcategory: 'WooCommerce Reports',
+      subcategory: 'Reports',
       handler: ListAllReportsHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Retrieve Coupon Totals',
+      name: 'Retrieve Coupon Totals',
       endpoint: '/wp-json/wc/v3/reports/coupons/totals',
       category: ApiCategory.woocommerceReports,
-      subcategory: 'WooCommerce Reports',
+      subcategory: 'Reports',
       handler: RetrieveCouponTotalsHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Retrieve Customer Totals',
+      name: 'Retrieve Customer Totals',
       endpoint: '/wp-json/wc/v3/reports/customers/totals',
       category: ApiCategory.woocommerceReports,
-      subcategory: 'WooCommerce Reports',
+      subcategory: 'Reports',
       handler: RetrieveCustomerTotalsHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Retrieve Order Totals',
+      name: 'Retrieve Order Totals',
       endpoint: '/wp-json/wc/v3/reports/orders/totals',
       category: ApiCategory.woocommerceReports,
-      subcategory: 'WooCommerce Reports',
+      subcategory: 'Reports',
       handler: RetrieveOrderTotalsHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Retrieve Product Totals',
+      name: 'Retrieve Product Totals',
       endpoint: '/wp-json/wc/v3/reports/products/totals',
       category: ApiCategory.woocommerceReports,
-      subcategory: 'WooCommerce Reports',
+      subcategory: 'Reports',
       handler: RetrieveProductTotalsHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Retrieve Sales Report',
+      name: 'Retrieve Sales Report',
       endpoint: '/wp-json/wc/v3/reports/sales',
       category: ApiCategory.woocommerceReports,
-      subcategory: 'WooCommerce Reports',
+      subcategory: 'Reports',
       handler: RetrieveSalesReportHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Retrieve Review Totals',
+      name: 'Retrieve Review Totals',
       endpoint: '/wp-json/wc/v3/reports/reviews/totals',
       category: ApiCategory.woocommerceReports,
-      subcategory: 'WooCommerce Reports',
+      subcategory: 'Reports',
       handler: RetrieveReviewTotalsHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Retrieve Top Sellers Report',
+      name: 'Retrieve Top Sellers Report',
       endpoint: '/wp-json/wc/v3/reports/products/totals',
       category: ApiCategory.woocommerceReports,
-      subcategory: 'WooCommerce Reports',
+      subcategory: 'Reports',
       handler: RetrieveTopSellerReportHandler(),
     ),
     // 🚚 WooCommerce Shipping Methods
     ApiService(
-      name: 'WooCommerce List All Shipping Methods',
+      name: 'List All Shipping Methods',
       endpoint: '/wp-json/wc/v3/shipping_methods',
       category: ApiCategory.woocommerceShippingMethods,
-      subcategory: 'WooCommerce Shipping Methods',
+      subcategory: 'Shipping Methods',
       handler: ListAllShippingMethodsHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Retrieve Shipping Method',
+      name: 'Retrieve Shipping Method',
       endpoint: '/wp-json/wc/v3/shipping_methods/{id}',
       category: ApiCategory.woocommerceShippingMethods,
-      subcategory: 'WooCommerce Shipping Methods',
+      subcategory: 'Shipping Methods',
       handler: RetrieveShippingMethodHandler(),
     ),
 
     // 💳 WooCommerce Payment Gateways
     ApiService(
-      name: 'WooCommerce List All Payment Gateways',
+      name: 'List All Payment Gateways',
       endpoint: '/wp-json/wc/v3/payment_gateways',
       category: ApiCategory.woocommercePaymentGateways,
-      subcategory: 'WooCommerce Payment Gateways',
+      subcategory: 'Payment Gateways',
       handler: ListAllPaymentGatewaysHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Retrieve Payment Gateway',
+      name: 'Retrieve Payment Gateway',
       endpoint: '/wp-json/wc/v3/payment_gateways/{id}',
       category: ApiCategory.woocommercePaymentGateways,
-      subcategory: 'WooCommerce Payment Gateways',
+      subcategory: 'Payment Gateways',
       handler: RetrievePaymentGatewayHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Update Payment Gateway',
+      name: 'Update Payment Gateway',
       endpoint: '/wp-json/wc/v3/payment_gateways/{id}',
       category: ApiCategory.woocommercePaymentGateways,
-      subcategory: 'WooCommerce Payment Gateways',
+      subcategory: 'Payment Gateways',
       handler: UpdatePaymentGatewayHandler(),
     ),
 
-       // ⚙️ WooCommerce Settings Handlers
+    // ⚙️ WooCommerce Settings Handlers
     ApiService(
-      name: 'WooCommerce List All Settings Groups',
+      name: 'List All Settings Groups',
       endpoint: '/wp-json/wc/v3/settings',
       category: ApiCategory.woocommerceSetting,
-      subcategory: 'WooCommerce Settings',
+      subcategory: 'Settings',
       handler: ListSettingsGroupsHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Retrieve Setting Option',
+      name: 'Retrieve Setting Option',
       endpoint: '/wp-json/wc/v3/settings/{group_id}/{option_id}',
       category: ApiCategory.woocommerceSetting,
-      subcategory: 'WooCommerce Settings',
+      subcategory: 'Settings',
       handler: RetrieveSettingOptionHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Update Setting Option',
+      name: 'Update Setting Option',
       endpoint: '/wp-json/wc/v3/settings/{group_id}/{option_id}',
       category: ApiCategory.woocommerceSetting,
-      subcategory: 'WooCommerce Settings',
+      subcategory: 'Settings',
       handler: UpdateSettingsOptionHandler(),
     ),
 
     ApiService(
-     name: 'WooCommerce List All Tax Classes',
-     endpoint: '/wp-json/wc/v3/taxes/classes', 
-     category: ApiCategory.woocommerceTaxes,
-     subcategory: 'WooCommerce Tax Classes',
+      name: 'List All Tax Classes',
+      endpoint: '/wp-json/wc/v3/taxes/classes',
+      category: ApiCategory.woocommerceTaxes,
+      subcategory: 'Tax Classes',
       handler: ListTaxClassesHandler(),
-),
+    ),
 
-ApiService(
-  name: 'WooCommerce Create Tax Class',
-  endpoint: '/wp-json/wc/v3/taxes/classes',
-  category: ApiCategory.woocommerceTaxes,
-  subcategory: 'WooCommerce Tax Classes',
-  handler: CreateTaxClassHandler(),
-),
-ApiService(
-  name: 'WooCommerce Delete Tax Class',
-  endpoint: '/wp-json/wc/v3/taxes/classes/{slug}',
-  category: ApiCategory.woocommerceTaxes,
-  subcategory: 'WooCommerce Tax Classes',
-  handler: DeleteTaxClassHandler(),
-),
+    ApiService(
+      name: 'Create Tax Class',
+      endpoint: '/wp-json/wc/v3/taxes/classes',
+      category: ApiCategory.woocommerceTaxes,
+      subcategory: 'Tax Classes',
+      handler: CreateTaxClassHandler(),
+    ),
+    ApiService(
+      name: 'Delete Tax Class',
+      endpoint: '/wp-json/wc/v3/taxes/classes/{slug}',
+      category: ApiCategory.woocommerceTaxes,
+      subcategory: 'Tax Classes',
+      handler: DeleteTaxClassHandler(),
+    ),
 
-ApiService(
-  name: 'WooCommerce Retrieve Tax Rate',
-  endpoint: '/wp-json/wc/v3/taxes/{tax_rate_id}',
-  category: ApiCategory.woocommerceTaxes,
-  subcategory: 'WooCommerce Tax Rates',
-  handler: RetrieveTaxRateHandler(),
-),
+    ApiService(
+      name: 'Retrieve Tax Rate',
+      endpoint: '/wp-json/wc/v3/taxes/{tax_rate_id}',
+      category: ApiCategory.woocommerceTaxes,
+      subcategory: 'Tax Rates',
+      handler: RetrieveTaxRateHandler(),
+    ),
 
-ApiService(
-  name: 'WooCommerce Delete Tax Rate',
-  endpoint: '/wp-json/wc/v3/taxes/{tax_rate_id}',
-  category: ApiCategory.woocommerceTaxes,
-  subcategory: 'WooCommerce Tax Rates',
-  handler: DeleteTaxRateHandler(),
-),
+    ApiService(
+      name: 'Delete Tax Rate',
+      endpoint: '/wp-json/wc/v3/taxes/{tax_rate_id}',
+      category: ApiCategory.woocommerceTaxes,
+      subcategory: 'Tax Rates',
+      handler: DeleteTaxRateHandler(),
+    ),
 
-ApiService(
-  name: 'WooCommerce Create Tax Rate',
-  endpoint: '/wp-json/wc/v3/taxes',
-  category: ApiCategory.woocommerceTaxes,
-  subcategory: 'WooCommerce Tax Rates',
-  handler: CreateTaxRateHandler(),
-),
+    ApiService(
+      name: 'Create Tax Rate',
+      endpoint: '/wp-json/wc/v3/taxes',
+      category: ApiCategory.woocommerceTaxes,
+      subcategory: 'Tax Rates',
+      handler: CreateTaxRateHandler(),
+    ),
 
-ApiService(
-  name: 'WooCommerce Update Tax Rate',
-  endpoint: '/wp-json/wc/v3/taxes/{tax_rate_id}',
-  category: ApiCategory.woocommerceTaxes,
-  subcategory: 'WooCommerce Tax Rates',
-  handler: UpdateTaxRateHandler(),
-),
+    ApiService(
+      name: 'Update Tax Rate',
+      endpoint: '/wp-json/wc/v3/taxes/{tax_rate_id}',
+      category: ApiCategory.woocommerceTaxes,
+      subcategory: 'Tax Rates',
+      handler: UpdateTaxRateHandler(),
+    ),
 
-ApiService(
-  name: 'WooCommerce List All Tax Rates',
-  endpoint: '/wp-json/wc/v3/taxes',
-  category: ApiCategory.woocommerceTaxes,
-  subcategory: 'WooCommerce Tax Rates',
-  handler: ListTaxRatesHandler(),
-),
+    ApiService(
+      name: 'List All Tax Rates',
+      endpoint: '/wp-json/wc/v3/taxes',
+      category: ApiCategory.woocommerceTaxes,
+      subcategory: 'Tax Rates',
+      handler: ListTaxRatesHandler(),
+    ),
 
+    // 🚚 WooCommerce Shipping Zones
+    ApiService(
+      name: 'List All Shipping Zones',
+      endpoint: '/wp-json/wc/v3/shipping/zones',
+      category: ApiCategory.woocommerceShippingZones,
+      subcategory: 'Shipping Zones',
+      handler: ListAllShippingZonesHandler(),
+    ),
+    ApiService(
+      name: 'Create Shipping Zone',
+      endpoint: '/wp-json/wc/v3/shipping/zones',
+      category: ApiCategory.woocommerceShippingZones,
+      subcategory: 'Shipping Zones',
+      handler: CreateShippingZoneHandler(),
+    ),
+    ApiService(
+      name: 'Retrieve Shipping Zone',
+      endpoint: '/wp-json/wc/v3/shipping/zones/{zoneId}',
+      category: ApiCategory.woocommerceShippingZones,
+      subcategory: 'Shipping Zones',
+      handler: RetrieveShippingZoneHandler(),
+    ),
+    ApiService(
+      name: 'Update Shipping Zone',
+      endpoint: '/wp-json/wc/v3/shipping/zones/{zoneId}',
+      category: ApiCategory.woocommerceShippingZones,
+      subcategory: 'Shipping Zones',
+      handler: UpdateShippingZoneHandler(),
+    ),
+    ApiService(
+      name: 'Delete Shipping Zone',
+      endpoint: '/wp-json/wc/v3/shipping/zones/{zoneId}',
+      category: ApiCategory.woocommerceShippingZones,
+      subcategory: 'Shipping Zones',
+      handler: DeleteShippingZoneHandler(),
+    ),
+    ApiService(
+      name: 'Retrieve Shipping Zone Location',
+      endpoint: '/wp-json/wc/v3/shipping/zones/{zoneId}/locations',
+      category: ApiCategory.woocommerceShippingZones,
+      subcategory: 'Shipping Zones',
+      handler: RetrieveShippingZoneLocationHandler(),
+    ),
+
+    // 🚚 WooCommerce Shipping Zone Methods
+    ApiService(
+      name: 'List All Shipping Methods from Shipping Zone',
+      endpoint: '/wp-json/wc/v3/shipping/zones/{zoneId}/methods',
+      category: ApiCategory.woocommerceShippingZoneMethods,
+      subcategory: 'Shipping Zone Methods',
+      handler: ListAllShippingMethodsFromShippingZoneHandler(),
+    ),
+    ApiService(
+      name: 'Include Shipping Method to Shipping Zone',
+      endpoint: '/wp-json/wc/v3/shipping/zones/{zoneId}/methods',
+      category: ApiCategory.woocommerceShippingZoneMethods,
+      subcategory: 'Shipping Zone Methods',
+      handler: IncludeShippingMethodToShippingZoneHandler(),
+    ),
+    ApiService(
+      name: 'Retrieve Shipping Method from Shipping Zone',
+      endpoint: '/wp-json/wc/v3/shipping/zones/{zoneId}/methods/{methodId}',
+      category: ApiCategory.woocommerceShippingZoneMethods,
+      subcategory: 'Shipping Zone Methods',
+      handler: RetrieveShippingMethodFromShippingZoneHandler(),
+    ),
+    ApiService(
+      name: 'Update Shipping Method from Shipping Zone',
+      endpoint: '/wp-json/wc/v3/shipping/zones/{zoneId}/methods/{methodId}',
+      category: ApiCategory.woocommerceShippingZoneMethods,
+      subcategory: 'Shipping Zone Methods',
+      handler: UpdateShippingMethodFromShippingZoneHandler(),
+    ),
+    ApiService(
+      name: 'Delete Shipping Method from Shipping Zone',
+      endpoint: '/wp-json/wc/v3/shipping/zones/{zoneId}/methods/{methodId}',
+      category: ApiCategory.woocommerceShippingZoneMethods,
+      subcategory: 'Shipping Zone Methods',
+      handler: DeleteShippingMethodFromShippingZoneHandler(),
+    ),
+
+    // 💳 WooCommerce Payment Gateways
+
+    // 📊 WooCommerce Data
+    ApiService(
+      name: 'List All Data',
+      endpoint: '/wp-json/wc/v3/data',
+      category: ApiCategory.woocommerceData,
+      subcategory: 'Data',
+      handler: ListAllDataHandler(),
+    ),
+
+    // 🌍 WooCommerce Continents
+    ApiService(
+      name: 'List All Continents',
+      endpoint: '/wp-json/wc/v3/data/continents',
+      category: ApiCategory.woocommerceContinents,
+      subcategory: 'Continents',
+      handler: ListAllContinentsHandler(),
+    ),
+    ApiService(
+      name: 'Retrieve Continent Data',
+      endpoint: '/wp-json/wc/v3/data/continents/{code}',
+      category: ApiCategory.woocommerceContinents,
+      subcategory: 'Continents',
+      handler: RetrieveContinentDataHandler(),
+    ),
+
+    // 🏳️ WooCommerce Countries
+    ApiService(
+      name: 'List All Countries',
+      endpoint: '/wp-json/wc/v3/data/countries',
+      category: ApiCategory.woocommerceCountries,
+      subcategory: 'Countries',
+      handler: ListAllCountriesHandler(),
+    ),
+    ApiService(
+      name: 'Retrieve Country Data',
+      endpoint: '/wp-json/wc/v3/data/countries/{code}',
+      category: ApiCategory.woocommerceCountries,
+      subcategory: 'Countries',
+      handler: RetrieveCountryDataHandler(),
+    ),
+
+    // 💰 WooCommerce Currencies
+    ApiService(
+      name: 'List All Currencies',
+      endpoint: '/wp-json/wc/v3/data/currencies',
+      category: ApiCategory.woocommerceCurrencies,
+      subcategory: 'Currencies',
+      handler: ListAllCurrenciesHandler(),
+    ),
+    ApiService(
+      name: 'Retrieve Currency Data',
+      endpoint: '/wp-json/wc/v3/data/currencies/{currency}',
+      category: ApiCategory.woocommerceCurrencies,
+      subcategory: 'Currencies',
+      handler: RetrieveCurrencyDataHandler(),
+    ),
+    ApiService(
+      name: 'Retrieve Current Currency',
+      endpoint: '/wp-json/wc/v3/data/currencies/current',
+      category: ApiCategory.woocommerceCurrencies,
+      subcategory: 'Currencies',
+      handler: RetrieveCurrentCurrencyHandler(),
+    ),
+
+    // 💸 WooCommerce Refunds
+    ApiService(
+      name: 'List All Refunds',
+      endpoint: '/wp-json/wc/v3/orders/{order_id}/refunds',
+      category: ApiCategory.woocommerceRefunds,
+      subcategory: 'Refunds',
+      handler: ListAllRefundsHandler(),
+    ),
   ];
 
   static void initialize() {}
@@ -3577,6 +3738,8 @@ ApiService(
       ApiCategory.woocommerceSystemStatus,
       ApiCategory.woocommerceReports,
       ApiCategory.woocommerceShippingMethods,
+      ApiCategory.woocommerceShippingZones,
+      ApiCategory.woocommerceShippingZoneMethods,
       ApiCategory.woocommercePaymentGateways,
       ApiCategory.woocommerceSetting,
       ApiCategory.woocommerceData,
@@ -3649,37 +3812,41 @@ ApiService(
         return 'Webhooks';
       // WooCommerce categories
       case ApiCategory.woocommerceCoupons:
-        return 'WooCommerce Coupons';
+        return 'Coupons';
       case ApiCategory.woocommerceProducts:
-        return 'WooCommerce Products';
+        return 'Products';
       case ApiCategory.woocommerceOrders:
-        return 'WooCommerce Orders';
+        return 'Orders';
       case ApiCategory.woocommerceCustomers:
-        return 'WooCommerce Customers';
+        return 'Customers';
       case ApiCategory.woocommerceWebhooks:
-        return 'WooCommerce Webhooks';
+        return 'Webhooks';
       case ApiCategory.woocommerceSystemStatus:
-        return 'WooCommerce System Status';
+        return 'System Status';
       case ApiCategory.woocommerceReports:
-        return 'WooCommerce Reports';
+        return 'Reports';
       case ApiCategory.woocommerceShippingMethods:
-        return 'WooCommerce Shipping Methods';
+        return 'Shipping Methods';
+      case ApiCategory.woocommerceShippingZones:
+        return 'Shipping Zones';
+      case ApiCategory.woocommerceShippingZoneMethods:
+        return 'Shipping Zone Methods';
       case ApiCategory.woocommercePaymentGateways:
-        return 'WooCommerce Payment Gateways';
+        return 'Payment Gateways';
       case ApiCategory.woocommerceSetting:
-        return 'WooCommerce Settings';
+        return 'Settings';
       case ApiCategory.woocommerceData:
-        return 'WooCommerce Data';
+        return 'Data';
       case ApiCategory.woocommerceContinents:
-        return 'WooCommerce Continents';
+        return 'Continents';
       case ApiCategory.woocommerceCountries:
-        return 'WooCommerce Countries';
+        return 'Countries';
       case ApiCategory.woocommerceCurrencies:
-        return 'WooCommerce Currencies';
+        return 'Currencies';
       case ApiCategory.woocommerceRefunds:
-        return 'WooCommerce Refunds';
+        return 'Refunds';
       case ApiCategory.woocommerceTaxes:
-        return 'WooCommerce Taxes';
+        return 'Taxes';
     }
   }
 }

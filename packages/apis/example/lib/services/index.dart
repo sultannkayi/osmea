@@ -455,6 +455,21 @@ export 'handlers/woocommerce/order_notes_handlers/delete_order_note_handler.dart
 export 'handlers/woocommerce/shipping_methods_handlers/list_all_shipping_methods_handler.dart';
 export 'handlers/woocommerce/shipping_methods_handlers/retrieve_shipping_method_handler.dart';
 
+// 🚚 WooCommerce Shipping Zone Methods Handlers
+export 'handlers/woocommerce/shipping_zone_methods_handlers/list_all_shipping_methods_from_shipping_zone_handler.dart';
+export 'handlers/woocommerce/shipping_zone_methods_handlers/include_shipping_method_to_shipping_zone_handler.dart';
+export 'handlers/woocommerce/shipping_zone_methods_handlers/retrieve_shipping_method_from_shipping_zone_handler.dart';
+export 'handlers/woocommerce/shipping_zone_methods_handlers/update_shipping_method_from_shipping_zone_handler.dart';
+export 'handlers/woocommerce/shipping_zone_methods_handlers/delete_shipping_method_from_shipping_zone_handler.dart';
+
+// 🚚 WooCommerce Shipping Zones Handlers
+export 'handlers/woocommerce/shipping_zones_handlers/list_all_shipping_zones_handler.dart';
+export 'handlers/woocommerce/shipping_zones_handlers/create_shipping_zone_handler.dart';
+export 'handlers/woocommerce/shipping_zones_handlers/retrieve_shipping_zone_handler.dart';
+export 'handlers/woocommerce/shipping_zones_handlers/update_shipping_zone_handler.dart';
+export 'handlers/woocommerce/shipping_zones_handlers/delete_shipping_zone_handler.dart';
+export 'handlers/woocommerce/shipping_zones_handlers/retrieve_shipping_zone_location_handler.dart';
+
 // 💳 WooCommerce Payment Gateways Handlers
 export 'handlers/woocommerce/payment_gateways_handlers/list_all_payment_gateways_handler.dart';
 export 'handlers/woocommerce/payment_gateways_handlers/retrieve_payment_gateway_handler.dart';
@@ -488,7 +503,6 @@ export 'handlers/woocommerce/reports_handlers/retrieve_product_totals_handler.da
 export 'handlers/woocommerce/reports_handlers/retrieve_customer_totals_handler.dart';
 export 'handlers/woocommerce/reports_handlers/retrieve_coupon_totals_handler.dart';
 export 'handlers/woocommerce/reports_handlers/retrieve_review_totals_handler.dart';
-
 
 // Setting handlers
 export 'package:example/services/handlers/woocommerce/settings_handlers/list_settings_groups_handler.dart';

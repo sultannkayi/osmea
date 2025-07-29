@@ -797,6 +797,10 @@ class _ModernSidebarState extends State<ModernSidebar>
         return Icons.analytics_rounded;
       case ApiCategory.woocommerceShippingMethods:
         return Icons.local_shipping_rounded;
+      case ApiCategory.woocommerceShippingZones:
+        return Icons.location_on_rounded;
+      case ApiCategory.woocommerceShippingZoneMethods:
+        return Icons.route_rounded;
       case ApiCategory.woocommercePaymentGateways:
         return Icons.payment_rounded;
       case ApiCategory.woocommerceSetting:
@@ -813,7 +817,6 @@ class _ModernSidebarState extends State<ModernSidebar>
         return Icons.money_off_rounded;
       case ApiCategory.woocommerceTaxes:
         return Icons.receipt_long_rounded;
-
     }
   }
 }
