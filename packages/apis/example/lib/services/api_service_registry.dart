@@ -2766,6 +2766,13 @@ class ApiServiceRegistry {
       subcategory: 'WooCommerce Coupons',
       handler: DeleteCouponHandler(),
     ),
+    ApiService(
+      name: 'WooCommerce Batch Update Coupons',
+      endpoint: '/wp-json/wc/v3/coupons/batch',
+      category: ApiCategory.woocommerceCoupons,
+      subcategory: 'WooCommerce Coupons',
+      handler: BatchUpdateCouponsHandler(),
+    ),
 
     // 🛍️ WooCommerce Products Services
     ApiService(
@@ -3209,6 +3216,20 @@ class ApiServiceRegistry {
       subcategory: 'WooCommerce Customers',
       handler: DeleteCustomerHandler(),
     ),
+    ApiService(
+      name: 'WooCommerce Batch Update Customers',
+      endpoint: '/wp-json/wc/v3/customers/batch',
+      category: ApiCategory.woocommerceCustomers,
+      subcategory: 'WooCommerce Customers',
+      handler: BatchUpdateCustomersHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Batch Update Customer ID',
+      endpoint: '/wp-json/wc/v3/customers/batch',
+      category: ApiCategory.woocommerceCustomers,
+      subcategory: 'WooCommerce Customers',
+      handler: BatchUpdateCustomerIdHandler(),
+    ),
 
     // 🛒 WooCommerce Orders
     ApiService(
@@ -3252,6 +3273,13 @@ class ApiServiceRegistry {
       category: ApiCategory.woocommerceOrders,
       subcategory: 'WooCommerce Orders',
       handler: SendOrderDetailsHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Batch Update Orders',
+      endpoint: '/wp-json/wc/v3/orders/batch',
+      category: ApiCategory.woocommerceOrders,
+      subcategory: 'WooCommerce Orders',
+      handler: BatchUpdateOrdersHandler(),
     ),
 
     // 📝 WooCommerce Order Notes
