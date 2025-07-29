@@ -1,6 +1,5 @@
 import 'package:apis/apis.dart';
 import 'package:apis/dio_config/api_dio_client.dart';
-import 'package:apis/dio_config/interceptors/api_interceptor_default.dart';
 import 'package:apis/network/remote/woocommerce/customers/abstract/customers_service.dart';
 import 'package:apis/network/remote/woocommerce/customers/freezed_model/response/list_all_customers_response.dart';
 import 'package:apis/network/remote/woocommerce/customers/freezed_model/response/retrieve_customer_response.dart';
@@ -8,6 +7,8 @@ import 'package:apis/network/remote/woocommerce/customers/freezed_model/request/
 import 'package:apis/network/remote/woocommerce/customers/freezed_model/response/create_customer_response.dart';
 import 'package:apis/network/remote/woocommerce/customers/freezed_model/request/update_customer_request.dart';
 import 'package:apis/network/remote/woocommerce/customers/freezed_model/response/update_customer_response.dart';
+import 'package:apis/network/remote/woocommerce/customers/freezed_model/request/batch_update_customers_request.dart';
+import 'package:apis/network/remote/woocommerce/customers/freezed_model/response/batch_update_customers_response.dart';
 import 'package:apis/network/remote/woocommerce/customers/freezed_model/response/delete_customer_response.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -80,5 +81,22 @@ abstract class CustomersServiceClient implements CustomersService {
     @Path('customer_id') required int customerId,
     @Query('force') bool? force,
     @Query('reassign') String? reassign,
+  });
+
+  /// 📦 Batch update customers in WooCommerce API
+  @override
+  @PATCH('/wp-json/wc/{api_version}/customers/batch')
+  Future<BatchUpdateCustomersResponse> batchUpdateCustomers({
+    @Path('api_version') required String apiVersion,
+    @Body() required BatchUpdateCustomersRequest batchData,
+  });
+
+  @override
+  @PATCH('/wp-json/wc/{api_version}/customers/batch')
+  Future<BatchUpdateCustomersResponse> batchUpdateCustomerId({
+    @Path('api_version') required String apiVersion,
+    @Path('customer_id') required int customerId,
+
+    @Body() required BatchUpdateCustomersRequest batchData,
   });
 }
