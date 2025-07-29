@@ -221,9 +221,9 @@ class OsmeaImage extends StatelessWidget {
   }
 
   Widget _buildImageContainer({required Widget child}) {
-    final dimensions = size.getDimensions(
-      customWidth: width,
-      customHeight: height,
+    final dimensions = Size(
+      (width ?? size.getDimensions().width)!.toDouble(),
+      (height ?? size.getDimensions().height)!.toDouble(),
     );
 
     Widget container = OsmeaContainer(

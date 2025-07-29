@@ -13,6 +13,7 @@ class ProgressState {
   final double? radius;
   final double? percentFontSize;
   final double wavePhase;
+  final List<BoxShadow>? boxShadow;
 
   // Auto progress properties
   final bool isAutoProgressEnabled;
@@ -38,6 +39,7 @@ class ProgressState {
     this.minValue = 0.0,
     this.maxValue = 1.0,
     this.isIncreasing = true,
+    this.boxShadow,
   });
 
   ProgressState copyWith({
@@ -57,6 +59,7 @@ class ProgressState {
     double? minValue,
     double? maxValue,
     bool? isIncreasing,
+    List<BoxShadow>? boxShadow,
   }) {
     return ProgressState(
       type: type ?? this.type,
@@ -76,6 +79,7 @@ class ProgressState {
       minValue: minValue ?? this.minValue,
       maxValue: maxValue ?? this.maxValue,
       isIncreasing: isIncreasing ?? this.isIncreasing,
+      boxShadow: boxShadow ?? this.boxShadow,
     );
   }
 }

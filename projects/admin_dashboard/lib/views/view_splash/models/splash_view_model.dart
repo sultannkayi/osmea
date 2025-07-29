@@ -35,9 +35,9 @@ class SplashViewModel extends BaseViewModelBloc<SplashEvent, SplashState> {
     // --- Splash Delay Simulation ---
     // Waits for 2 seconds to simulate loading or initialization.
     await Future.delayed(Duration(seconds: 2));
-    // After delay, trigger navigation to the home route if callback is provided.
+    // After delay, trigger navigation to the onboarding route if callback is provided.
     if (onNavigate != null) {
-      onNavigate('/home');
+      onNavigate('/onboarding'); // Navigate to onboarding instead of home
     }
   }
 

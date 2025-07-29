@@ -8,6 +8,8 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:admin_dashboard/views/view_onboarding/models/onboarding_view_model.dart'
+    as _i117;
 import 'package:admin_dashboard/views/view_splash/models/splash_view_model.dart'
     as _i183;
 import 'package:get_it/get_it.dart' as _i174;
@@ -25,6 +27,7 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     gh.factory<_i183.SplashViewModel>(() => _i183.SplashViewModel());
+    gh.factory<_i117.OnboardingViewModel>(() => _i117.OnboardingViewModel());
     return this;
   }
 }

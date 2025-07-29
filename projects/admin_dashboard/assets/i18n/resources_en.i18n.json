@@ -7,6 +7,33 @@
             "splash": {
                 "made_by": "Made by",
                 "mf":"MasterFabric"
+        },
+        "onboarding": {
+            "page1": {
+                "title": "Welcome to OSMEA!",
+                "description": "OSMEA Dashboard helps you manage your store efficiently from products to orders and analytics so you can stay in control and focus on growth.",
+                "button_text": "Next"
+            },
+            "page2": {
+                "title": "Manage With Ease",
+                "description": "OSMEA Dashboard streamlines store management from listings to orders giving you full control and the freedom to grow your mobile commerce business.",
+                "button_text": "Next"
+            },
+            "page3": {
+                "title": "Built for Scale and Simplicity",
+                "description": "OSMEA Dashboard scales with your business, delivering smart, secure tools to manage any number of storefronts efficiently and on brand.",
+                "button_text": "Done"
+            },
+            "skip": "Skip",
+            "back": "Back",
+            "loading": "Loading...",
+            "error_title": "Something went wrong!",
+            "done": "done",
+            "next":"next",
+            "retry": "Retry",
+            "completed": "Onboarding completed!",
+            "redirecting": "Redirecting to dashboard...",
+            "image_missing": "Image missing"
         }
     }
 }

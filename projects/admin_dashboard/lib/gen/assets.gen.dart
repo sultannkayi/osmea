@@ -25,6 +25,18 @@ class $AssetsImagesGen {
   /// File path: assets/images/mf_logo.png
   AssetGenImage get mfLogo => const AssetGenImage('assets/images/mf_logo.png');
 
+  /// File path: assets/images/onboarding_page_one.png
+  AssetGenImage get onboardingPageOne =>
+      const AssetGenImage('assets/images/onboarding_page_one.png');
+
+  /// File path: assets/images/onboarding_page_three.png
+  AssetGenImage get onboardingPageThree =>
+      const AssetGenImage('assets/images/onboarding_page_three.png');
+
+  /// File path: assets/images/onboarding_page_two.png
+  AssetGenImage get onboardingPageTwo =>
+      const AssetGenImage('assets/images/onboarding_page_two.png');
+
   /// File path: assets/images/osmea_logo_black.png
   AssetGenImage get osmeaLogoBlack =>
       const AssetGenImage('assets/images/osmea_logo_black.png');
@@ -34,7 +46,14 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/osmea_logo_white.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [mfLogo, osmeaLogoBlack, osmeaLogoWhite];
+  List<AssetGenImage> get values => [
+        mfLogo,
+        onboardingPageOne,
+        onboardingPageThree,
+        onboardingPageTwo,
+        osmeaLogoBlack,
+        osmeaLogoWhite
+      ];
 }
 
 class Assets {

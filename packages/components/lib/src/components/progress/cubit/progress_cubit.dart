@@ -28,6 +28,7 @@ class ProgressCubit extends Cubit<ProgressState> {
     double minValue = 0.0,
     double maxValue = 1.0,
     bool isIncreasing = true,
+    List<BoxShadow>? boxShadow,
   }) : super(ProgressState(
           type: type,
           value: value,
@@ -45,6 +46,7 @@ class ProgressCubit extends Cubit<ProgressState> {
           minValue: minValue,
           maxValue: maxValue,
           isIncreasing: isIncreasing,
+          boxShadow: boxShadow,
         )) {
     _currentValue = value;
     if (valueStream != null) {
@@ -200,6 +202,7 @@ class ProgressCubit extends Cubit<ProgressState> {
     double? minValue,
     double? maxValue,
     bool? isIncreasing,
+    List<BoxShadow>? boxShadow,
   }) {
     // Update current value if provided
     if (value != null) {
@@ -231,6 +234,7 @@ class ProgressCubit extends Cubit<ProgressState> {
       minValue: minValue,
       maxValue: maxValue,
       isIncreasing: isIncreasing,
+      boxShadow: boxShadow,
     );
 
     emit(newState);
@@ -239,7 +243,7 @@ class ProgressCubit extends Cubit<ProgressState> {
     if (autoProgressSettingsChanged) {
       // Cancel existing timer first
       _autoProgressTimer?.cancel();
-      
+
       // Then restart if enabled
       if (newState.isAutoProgressEnabled) {
         _startAutoProgress();

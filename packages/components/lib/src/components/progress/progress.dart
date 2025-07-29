@@ -328,6 +328,7 @@ class _OsmeaProgressStatefulState extends State<_OsmeaProgressStateful> {
           progressColor: state.color,
           size: state.size,
           showPercentage: state.showPercentage,
+          boxShadow: state.boxShadow,
         );
       case ProgressType.linearBuffer:
         return LinearBufferProgress(
@@ -336,6 +337,7 @@ class _OsmeaProgressStatefulState extends State<_OsmeaProgressStateful> {
           size: state.size,
           showPercentage: state.showPercentage,
           bufferValue: state.bufferValue,
+          boxShadow: state.boxShadow,
         );
     }
   }
@@ -1305,12 +1307,14 @@ class LinearRoundedProgress extends StatelessWidget {
   final Color? progressColor;
   final ProgressSize size;
   final bool showPercentage;
+  final List<BoxShadow>? boxShadow;
   const LinearRoundedProgress({
     Key? key,
     required this.value,
     this.progressColor,
     this.size = ProgressSize.medium,
     this.showPercentage = false,
+    this.boxShadow, //
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -1342,15 +1346,7 @@ class LinearRoundedProgress extends StatelessWidget {
                         ProgressType.linearRounded.defaultColor,
                     borderRadius:
                         BorderRadius.circular(height / 2), // Fully rounded
-                    boxShadow: [
-                      BoxShadow(
-                        color: (progressColor ??
-                                ProgressType.linearRounded.defaultColor)
-                            .withValues(alpha: 0.3),
-                        blurRadius: 4,
-                        offset: Offset(0, 2),
-                      ),
-                    ],
+                    boxShadow: boxShadow, // <-- burada parametreye bağladık
                   ),
                 ),
               ],
@@ -1376,6 +1372,7 @@ class LinearBufferProgress extends StatelessWidget {
   final ProgressSize size;
   final bool showPercentage;
   final double bufferValue;
+  final List<BoxShadow>? boxShadow; // <-- yeni parametre
   const LinearBufferProgress({
     Key? key,
     required this.value,
@@ -1383,6 +1380,7 @@ class LinearBufferProgress extends StatelessWidget {
     this.size = ProgressSize.medium,
     this.showPercentage = false,
     this.bufferValue = 0.75,
+    this.boxShadow, // <-- ekledik
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -1424,15 +1422,7 @@ class LinearBufferProgress extends StatelessWidget {
                     color:
                         progressColor ?? ProgressType.linearBuffer.defaultColor,
                     borderRadius: BorderRadius.circular(height / 2),
-                    boxShadow: [
-                      BoxShadow(
-                        color: (progressColor ??
-                                ProgressType.linearBuffer.defaultColor)
-                            .withValues(alpha: 0.3),
-                        blurRadius: 3,
-                        offset: Offset(0, 1),
-                      ),
-                    ],
+                    boxShadow: boxShadow, // <-- burada parametreye bağladık
                   ),
                 ),
               ],

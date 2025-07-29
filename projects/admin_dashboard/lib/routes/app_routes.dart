@@ -1,5 +1,6 @@
 // Define the GoRouter
 import 'package:admin_dashboard/views/view_splash/splash_view.dart';
+import 'package:admin_dashboard/views/view_onboarding/onboarding_view.dart';
 import 'package:core/core.dart';
 import 'package:flavor/flavor.dart';
 import 'package:flutter/material.dart';
@@ -10,19 +11,7 @@ final GoRouter appRouter = GoRouter(
   initialLocation: '/',
   // Global route configuration
   routes: <RouteBase>[
-    // GoRoute(
-    //   path: '/home',
-    //   builder: (BuildContext context, GoRouterState state) {
-    //     return HomeView(
-    //       arguments: {
-    //         "productTitle": "Products (Encrypted Storage)",
-    //         "cardType": "Content Card",
-    //         "description": "Home View Description"
-    //       },
-    //       currentView: MasterViewTypes.content,
-    //     );
-    //   },
-    // ),
+    // Splash Screen Route
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
@@ -34,6 +23,20 @@ final GoRouter appRouter = GoRouter(
             "title": "Splash View",
             "isDev": isDev,
             "environment": flavor.environment.toString(),
+          },
+          currentView: MasterViewTypes.content,
+        );
+      },
+    ),
+
+    // Onboarding Route
+    GoRoute(
+      path: '/onboarding',
+      builder: (BuildContext context, GoRouterState state) {
+        return OnboardingView(
+          arguments: {
+            "title": "Onboarding View",
+            "description": "Welcome to OSMEA Dashboard onboarding flow",
           },
           currentView: MasterViewTypes.content,
         );
