@@ -10,6 +10,8 @@ import 'package:apis/network/remote/woocommerce/products/product/freezed_model/r
 import 'package:apis/network/remote/woocommerce/products/product/freezed_model/response/retrieve_product_response.dart';
 import 'package:apis/network/remote/woocommerce/products/product/freezed_model/response/update_product_response.dart';
 import 'package:apis/network/remote/woocommerce/products/product/freezed_model/response/delete_product_response.dart';
+import 'package:apis/network/remote/woocommerce/products/product/freezed_model/request/batch_update_products_request.dart';
+import 'package:apis/network/remote/woocommerce/products/product/freezed_model/response/batch_update_products_response.dart';
 
 part 'api_products_service.g.dart';
 
@@ -90,4 +92,12 @@ abstract class ProductsServiceClient implements ProductsService {
   Future<List<String>> retrieveProductCustomFieldNames(
     @Path("product_id") int productId,
   );
+
+  /// 📦 Batch update products in WooCommerce API
+  @override
+  @PATCH('/wp-json/wc/{api_version}/products/batch')
+  Future<BatchUpdateProductsResponse> batchUpdateProducts({
+    @Path('api_version') required String apiVersion,
+    @Body() required BatchUpdateProductsRequest batchData,
+  });
 }

@@ -4,6 +4,8 @@ import 'package:apis/network/remote/woocommerce/products/product/freezed_model/r
 import 'package:apis/network/remote/woocommerce/products/product/freezed_model/response/retrieve_product_response.dart';
 import 'package:apis/network/remote/woocommerce/products/product/freezed_model/response/update_product_response.dart';
 import 'package:apis/network/remote/woocommerce/products/product/freezed_model/response/delete_product_response.dart';
+import 'package:apis/network/remote/woocommerce/products/product/freezed_model/request/batch_update_products_request.dart';
+import 'package:apis/network/remote/woocommerce/products/product/freezed_model/response/batch_update_products_response.dart';
 
 abstract class ProductsService {
   /// List all products
@@ -66,4 +68,10 @@ abstract class ProductsService {
   Future<List<String>> retrieveProductCustomFieldNames(
     int productId,
   );
+
+  /// 📦 Batch update products
+  Future<BatchUpdateProductsResponse> batchUpdateProducts({
+    required String apiVersion,
+    required BatchUpdateProductsRequest batchData,
+  });
 }
