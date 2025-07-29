@@ -7,6 +7,8 @@ import 'package:apis/network/remote/woocommerce/coupons/freezed_model/request/cr
 import 'package:apis/network/remote/woocommerce/coupons/freezed_model/response/create_coupon_response.dart';
 import 'package:apis/network/remote/woocommerce/coupons/freezed_model/request/update_coupon_request.dart';
 import 'package:apis/network/remote/woocommerce/coupons/freezed_model/response/update_coupon_response.dart';
+import 'package:apis/network/remote/woocommerce/coupons/freezed_model/request/batch_update_coupons_request.dart';
+import 'package:apis/network/remote/woocommerce/coupons/freezed_model/response/batch_update_coupons_response.dart';
 import 'package:apis/network/remote/woocommerce/coupons/freezed_model/response/delete_coupon_response.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -80,4 +82,13 @@ abstract class CouponsServiceClient implements CouponsService {
     @Path('coupon_id') required int couponId,
     @Query('force') bool? force,
   });
+
+  /// 📦 Batch update coupons in WooCommerce API
+  @override
+  @PATCH('/wp-json/wc/{api_version}/coupons/batch')
+  Future<BatchUpdateCouponsResponse> batchUpdateCoupons({
+    @Path('api_version') required String apiVersion,
+    @Body() required BatchUpdateCouponsRequest batchData,
+  });
+  
 }

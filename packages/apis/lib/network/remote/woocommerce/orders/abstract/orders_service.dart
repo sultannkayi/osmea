@@ -5,6 +5,8 @@ import 'package:apis/network/remote/woocommerce/orders/freezed_model/response/re
 import 'package:apis/network/remote/woocommerce/orders/freezed_model/response/update_order_response.dart';
 import 'package:apis/network/remote/woocommerce/orders/freezed_model/response/delete_order_response.dart';
 import 'package:apis/network/remote/woocommerce/orders/freezed_model/response/send_order_details_response.dart';
+import 'package:apis/network/remote/woocommerce/orders/freezed_model/request/batch_update_orders_request.dart';
+import 'package:apis/network/remote/woocommerce/orders/freezed_model/response/batch_update_orders_response.dart';
 
 /// 🔑 Abstract contract for WooCommerce Orders Service
 /// Defines the interface for all order-related operations in WooCommerce API
@@ -64,4 +66,11 @@ abstract class OrdersService {
     required int orderId,
     required Map<String, dynamic> actionData,
   });
+
+  /// 📦 Batch update orders in the WooCommerce API.
+  Future<BatchUpdateOrdersResponse> batchUpdateOrders({
+    required String apiVersion,
+    required BatchUpdateOrdersRequest batchData,
+  });
+
 }

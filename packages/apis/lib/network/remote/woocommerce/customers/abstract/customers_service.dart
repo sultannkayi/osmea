@@ -4,6 +4,8 @@ import 'package:apis/network/remote/woocommerce/customers/freezed_model/request/
 import 'package:apis/network/remote/woocommerce/customers/freezed_model/response/create_customer_response.dart';
 import 'package:apis/network/remote/woocommerce/customers/freezed_model/request/update_customer_request.dart';
 import 'package:apis/network/remote/woocommerce/customers/freezed_model/response/update_customer_response.dart';
+import 'package:apis/network/remote/woocommerce/customers/freezed_model/request/batch_update_customers_request.dart';
+import 'package:apis/network/remote/woocommerce/customers/freezed_model/response/batch_update_customers_response.dart';
 import 'package:apis/network/remote/woocommerce/customers/freezed_model/response/delete_customer_response.dart';
 
 /// 🔑 Abstract contract for WooCommerce Customers Service
@@ -51,5 +53,17 @@ abstract class CustomersService {
     required int customerId,
     bool? force,
     String? reassign,
+  });
+
+  /// 📦 Batch update customers in the WooCommerce API.
+  Future<BatchUpdateCustomersResponse> batchUpdateCustomers({
+    required String apiVersion,
+    required BatchUpdateCustomersRequest batchData,
+  });
+
+  Future<BatchUpdateCustomersResponse> batchUpdateCustomerId({
+    required String apiVersion,
+    required int customerId,
+    required BatchUpdateCustomersRequest batchData,
   });
 }

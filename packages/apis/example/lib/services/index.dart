@@ -351,6 +351,7 @@ export 'handlers/woocommerce/coupons_handlers/retrieve_coupon_handler.dart';
 export 'handlers/woocommerce/coupons_handlers/create_coupon_handler.dart';
 export 'handlers/woocommerce/coupons_handlers/update_coupon_handler.dart';
 export 'handlers/woocommerce/coupons_handlers/delete_coupon_handler.dart';
+export 'handlers/woocommerce/coupons_handlers/batch_update_coupons_handler.dart';
 
 // 👥 Customers Handlers
 export 'handlers/woocommerce/customers_handlers/list_all_customers_handler.dart';
@@ -358,6 +359,8 @@ export 'handlers/woocommerce/customers_handlers/retrieve_customer_handler.dart';
 export 'handlers/woocommerce/customers_handlers/create_customer_handler.dart';
 export 'handlers/woocommerce/customers_handlers/update_customer_handler.dart';
 export 'handlers/woocommerce/customers_handlers/delete_customer_handler.dart';
+export 'handlers/woocommerce/customers_handlers/batch_update_customers_handler.dart';
+export 'handlers/woocommerce/customers_handlers/batch_update_customer_id_handler.dart';
 
 // 🛍️ Products Handlers
 export 'handlers/woocommerce/products_handlers/list_all_products_handler.dart';
@@ -440,6 +443,7 @@ export 'handlers/woocommerce/orders_handlers/retrieve_order_handler.dart';
 export 'handlers/woocommerce/orders_handlers/update_order_handler.dart';
 export 'handlers/woocommerce/orders_handlers/delete_order_handler.dart';
 export 'handlers/woocommerce/orders_handlers/send_order_details_handler.dart';
+export 'handlers/woocommerce/orders_handlers/batch_update_orders_handler.dart';
 
 // 📝 Order Notes Handlers
 export 'handlers/woocommerce/order_notes_handlers/list_all_order_notes_handler.dart';

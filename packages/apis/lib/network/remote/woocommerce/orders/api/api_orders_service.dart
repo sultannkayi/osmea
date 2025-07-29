@@ -8,6 +8,8 @@ import 'package:apis/network/remote/woocommerce/orders/freezed_model/response/re
 import 'package:apis/network/remote/woocommerce/orders/freezed_model/response/update_order_response.dart';
 import 'package:apis/network/remote/woocommerce/orders/freezed_model/response/delete_order_response.dart';
 import 'package:apis/network/remote/woocommerce/orders/freezed_model/response/send_order_details_response.dart';
+import 'package:apis/network/remote/woocommerce/orders/freezed_model/request/batch_update_orders_request.dart';
+import 'package:apis/network/remote/woocommerce/orders/freezed_model/response/batch_update_orders_response.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -95,4 +97,13 @@ abstract class OrdersServiceClient implements OrdersService {
     @Path('order_id') required int orderId,
     @Body() required Map<String, dynamic> actionData,
   });
+
+  /// 📦 Batch update orders in WooCommerce API
+  @override
+  @PATCH('/wp-json/wc/{api_version}/orders/batch')
+  Future<BatchUpdateOrdersResponse> batchUpdateOrders({
+    @Path('api_version') required String apiVersion,
+    @Body() required BatchUpdateOrdersRequest batchData,
+  });
+
 }
