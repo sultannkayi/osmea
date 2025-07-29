@@ -429,6 +429,7 @@ export 'handlers/woocommerce/webhooks_handlers/create_webhook_handler.dart';
 export 'handlers/woocommerce/webhooks_handlers/retrieve_webhook_handler.dart';
 export 'handlers/woocommerce/webhooks_handlers/update_webhook_handler.dart';
 export 'handlers/woocommerce/webhooks_handlers/delete_webhook_handler.dart';
+export 'handlers/woocommerce/webhooks_handlers/batch_update_webhooks_handler.dart';
 
 // 🔧 WooCommerce System Status Handlers
 export 'handlers/woocommerce/system_status_handlers/get_system_status_handler.dart';

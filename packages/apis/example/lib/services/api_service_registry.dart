@@ -3152,6 +3152,13 @@ class ApiServiceRegistry {
       subcategory: 'Webhooks',
       handler: WooDeleteWebhookHandler(),
     ),
+    ApiService(
+      name: 'Batch Update Webhooks',
+      endpoint: '/wp-json/wc/v3/webhooks/batch',
+      category: ApiCategory.woocommerceWebhooks,
+      subcategory: 'Webhooks',
+      handler: BatchUpdateWebhooksHandler(),
+    ),
 
     // 🔧 WooCommerce System Status Services
     ApiService(
