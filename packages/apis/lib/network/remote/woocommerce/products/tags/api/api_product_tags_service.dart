@@ -9,6 +9,8 @@ import 'package:apis/network/remote/woocommerce/products/tags/freezed_model/resp
 import 'package:apis/network/remote/woocommerce/products/tags/freezed_model/response/retrieve_product_tag_response.dart';
 import 'package:apis/network/remote/woocommerce/products/tags/freezed_model/response/update_product_tag_response.dart';
 import 'package:apis/network/remote/woocommerce/products/tags/freezed_model/response/delete_product_tag_response.dart';
+import 'package:apis/network/remote/woocommerce/products/tags/freezed_model/request/batch_update_product_tags_request.dart';
+import 'package:apis/network/remote/woocommerce/products/tags/freezed_model/response/batch_update_product_tags_response.dart';
 
 part 'api_product_tags_service.g.dart';
 
@@ -67,5 +69,13 @@ abstract class ProductTagsServiceClient implements ProductTagsService {
     @Path('apiVersion') required String apiVersion,
     @Path('tagId') required int tagId,
     @Query('force') bool? force,
+  });
+
+  /// 📦 Batch update product tags in WooCommerce API
+  @override
+  @PATCH('/wp-json/wc/{apiVersion}/products/tags/batch')
+  Future<BatchUpdateProductTagsResponse> batchUpdateProductTags({
+    @Path('apiVersion') required String apiVersion,
+    @Body() required BatchUpdateProductTagsRequest batchData,
   });
 }

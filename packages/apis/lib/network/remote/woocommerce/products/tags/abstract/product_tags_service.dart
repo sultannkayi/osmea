@@ -3,6 +3,8 @@ import 'package:apis/network/remote/woocommerce/products/tags/freezed_model/resp
 import 'package:apis/network/remote/woocommerce/products/tags/freezed_model/response/retrieve_product_tag_response.dart';
 import 'package:apis/network/remote/woocommerce/products/tags/freezed_model/response/update_product_tag_response.dart';
 import 'package:apis/network/remote/woocommerce/products/tags/freezed_model/response/delete_product_tag_response.dart';
+import 'package:apis/network/remote/woocommerce/products/tags/freezed_model/request/batch_update_product_tags_request.dart';
+import 'package:apis/network/remote/woocommerce/products/tags/freezed_model/response/batch_update_product_tags_response.dart';
 
 /// 🏷️ Abstract service for WooCommerce Product Tags API operations
 abstract class ProductTagsService {
@@ -47,5 +49,11 @@ abstract class ProductTagsService {
     required String apiVersion,
     required int tagId,
     bool? force,
+  });
+
+  /// 📦 Batch update product tags
+  Future<BatchUpdateProductTagsResponse> batchUpdateProductTags({
+    required String apiVersion,
+    required BatchUpdateProductTagsRequest batchData,
   });
 }
