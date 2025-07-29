@@ -8,6 +8,8 @@ import 'package:apis/network/remote/woocommerce/taxes/rates/freezed_model/reques
 import 'package:apis/network/remote/woocommerce/taxes/rates/freezed_model/response/create_tax_rate_response.dart';
 import 'package:apis/network/remote/woocommerce/taxes/rates/freezed_model/request/update_tax_rate_request.dart';
 import 'package:apis/network/remote/woocommerce/taxes/rates/freezed_model/response/update_tax_rate_response.dart';
+import 'package:apis/network/remote/woocommerce/taxes/rates/freezed_model/request/batch_update_taxes_rates_request.dart';
+import 'package:apis/network/remote/woocommerce/taxes/rates/freezed_model/response/batch_update_taxes_rates_response.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -99,6 +101,14 @@ abstract class TaxesRatesServiceClient implements TaxesRatesService {
     @Query('order') String? order,
     @Query('orderby') String? orderBy,
     @Query('class') String? taxClass,
+  });
+
+  /// 📦 Batch update tax rates in WooCommerce API
+  @override
+  @PATCH('/wp-json/wc/{api_version}/taxes/batch')
+  Future<BatchUpdateTaxesRatesResponse> batchUpdateTaxRates({
+    @Path('api_version') required String apiVersion,
+    @Body() required BatchUpdateTaxesRatesRequest batchData,
   });
 
 }

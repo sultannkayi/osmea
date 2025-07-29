@@ -5,6 +5,8 @@ import 'package:apis/network/remote/woocommerce/taxes/rates/freezed_model/reques
 import 'package:apis/network/remote/woocommerce/taxes/rates/freezed_model/response/create_tax_rate_response.dart';
 import 'package:apis/network/remote/woocommerce/taxes/rates/freezed_model/request/update_tax_rate_request.dart';
 import 'package:apis/network/remote/woocommerce/taxes/rates/freezed_model/response/update_tax_rate_response.dart';
+import 'package:apis/network/remote/woocommerce/taxes/rates/freezed_model/request/batch_update_taxes_rates_request.dart';
+import 'package:apis/network/remote/woocommerce/taxes/rates/freezed_model/response/batch_update_taxes_rates_response.dart';
 
 /// 🔑 Abstract contract for WooCommerce Tax Rates Service
 /// Implement this to fetch tax rates from WooCommerce API! 🌐
@@ -68,6 +70,12 @@ abstract class TaxesRatesService {
     String? apiVersion,
     int? taxRateId,
     bool? force,
+  });
+
+  /// 📦 Batch update tax rates in the WooCommerce API.
+  Future<BatchUpdateTaxesRatesResponse> batchUpdateTaxRates({
+    required String apiVersion,
+    required BatchUpdateTaxesRatesRequest batchData,
   });
 }
 
