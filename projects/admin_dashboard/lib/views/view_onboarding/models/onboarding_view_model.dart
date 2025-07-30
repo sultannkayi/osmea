@@ -6,6 +6,7 @@
  */
 
 import 'dart:async';
+import 'package:admin_dashboard/constants/text_constants.dart';
 import 'package:admin_dashboard/views/view_onboarding/models/module/events.dart';
 import 'package:admin_dashboard/views/view_onboarding/models/module/states.dart';
 import 'package:core/core.dart';
@@ -35,7 +36,7 @@ class OnboardingViewModel
   late PageController pageController;
 
   // Total number of onboarding pages
-  static const int totalPages = 3;
+  final int totalPages = onboardingData.length;
 
   @override
   Future<void> close() {
