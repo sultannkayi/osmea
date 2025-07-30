@@ -17,6 +17,7 @@ class OnboardingPageContentWidget extends StatelessWidget {
   final String description;
   final String imagePath;
   final VoidCallback onNext;
+  final int totalPages;
 
   const OnboardingPageContentWidget({
     super.key,
@@ -25,6 +26,7 @@ class OnboardingPageContentWidget extends StatelessWidget {
     required this.description,
     required this.imagePath,
     required this.onNext,
+    required this.totalPages,
   });
 
   @override
@@ -45,7 +47,10 @@ class OnboardingPageContentWidget extends StatelessWidget {
         CoreSpacer(CoreSpacerType.content),
 
         // Progress indicator
-        OnboardingProgressWidget(currentPage: currentPage, totalPages: 3),
+        OnboardingProgressWidget(
+          currentPage: currentPage,
+          totalPages: totalPages,
+        ),
 
         CoreSpacer(CoreSpacerType.content),
 
@@ -71,7 +76,7 @@ class OnboardingPageContentWidget extends StatelessWidget {
         // Navigation button
         OnboardingNavigationWidget(
           currentPage: currentPage,
-          totalPages: 3,
+          totalPages: totalPages,
           onNext: onNext,
         ),
 
