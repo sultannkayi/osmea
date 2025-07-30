@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:osmea_components/osmea_components.dart';
 
 /// 🔍 **Searchbar Utils**
@@ -5,13 +6,18 @@ import 'package:osmea_components/osmea_components.dart';
 /// Utility functions for searchbar components.
 
 class SearchbarUtils {
+  // Static timer for debouncing
+  static Timer? _debounceTimer;
+
   /// Debounce function for search queries
   static void debounce({
     required Function() action,
     Duration delay = const Duration(milliseconds: 300),
   }) {
-    // Simple debounce implementation
-    Future.delayed(delay, action);
+    // Cancel the previous timer if it exists
+    _debounceTimer?.cancel();
+    // Create a new timer
+    _debounceTimer = Timer(delay, action);
   }
 
   /// Validate search query
