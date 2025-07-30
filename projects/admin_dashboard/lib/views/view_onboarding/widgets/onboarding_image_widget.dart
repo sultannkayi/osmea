@@ -4,7 +4,7 @@
  * Image display widget with error handling for onboarding pages
  */
 
-import 'package:admin_dashboard/resources/resources.g.dart';
+import 'package:admin_dashboard/core/resources/resources.g.dart';
 import 'package:flutter/material.dart';
 import 'package:core/core.dart';
 
@@ -30,7 +30,7 @@ class OnboardingImageWidget extends StatelessWidget {
                 height: 280,
                 decoration: BoxDecoration(
                   color: OsmeaColors.slate.withAlpha(1),
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: context.borderRadiusMaxStandard,
                   border: Border.all(
                     color: OsmeaColors.slate.withAlpha(3),
                     width: 1,

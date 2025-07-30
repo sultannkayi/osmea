@@ -76,6 +76,7 @@ class OnboardingPageContentWidget extends StatelessWidget {
         ),
 
         OsmeaComponents.sizedBox(height: 20),
+        context.emptySizedHeightBoxMedium,
       ],
     );
   }

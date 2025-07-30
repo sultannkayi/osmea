@@ -7,13 +7,13 @@
  * - UI: Displays a logo, app title, version, and credits.
  * - Navigation: Delegated to the ViewModel via a callback for testability and maintainability.
  */
+import 'package:admin_dashboard/core/resources/resources.g.dart';
 import 'package:admin_dashboard/views/view_splash/models/module/events.dart';
 import 'package:admin_dashboard/views/view_splash/models/module/states.dart';
 import 'package:admin_dashboard/views/view_splash/models/splash_view_model.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:admin_dashboard/gen/assets.gen.dart';
-import 'package:admin_dashboard/resources/resources.g.dart';
 
 /// SplashView displays the splash screen and delegates navigation logic to the ViewModel.
 ///
@@ -86,8 +86,7 @@ class SplashView extends MasterView<SplashViewModel, SplashEvent, SplashState> {
         OsmeaComponents.expanded(
           child: OsmeaComponents.center(
             child: OsmeaComponents.image(
-              width: 200,
-              height: 200,
+              size: ImageSize.extraLarge,
               assetPath: Assets.images.osmeaLogoBlack.path,
             ),
           ),

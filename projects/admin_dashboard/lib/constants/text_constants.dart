@@ -1,5 +1,5 @@
+import 'package:admin_dashboard/core/resources/resources.g.dart';
 import 'package:admin_dashboard/gen/assets.gen.dart';
-import 'package:admin_dashboard/resources/resources.g.dart';
 
 final List<Map<String, String>> onboardingData = [
       {

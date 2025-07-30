@@ -4,7 +4,7 @@
  * Navigation button widget for onboarding pages
  */
 
-import 'package:admin_dashboard/resources/resources.g.dart';
+import 'package:admin_dashboard/core/resources/resources.g.dart';
 import 'package:flutter/material.dart';
 import 'package:core/core.dart';
 
