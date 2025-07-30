@@ -20,6 +20,7 @@ import 'components/list_item_test_modular/list_items.dart';
 import 'components/counter_test_modular/showcase/unified_counter_showcase.dart';
 import 'components/container_test_modular/containers.dart';
 import 'components/footer_test_modular/showcase/unified_footer_showcase.dart';
+import 'components/carousel_test_modular/showcase/unified_carousel_showcase.dart';
 
 /// Model for component information displayed on home page and stories
 class ComponentInfo {
@@ -193,5 +194,13 @@ final List<ComponentInfo> allComponents = [
     color: Colors.blueGrey,
     storyPath: StoryConfig.buildComponentStoryName('Footers'),
     getStories: getUnifiedFooterShowcase,
+  ),
+  ComponentInfo(
+    name: 'Carousels',
+    description: 'Interactive carousel components with multiple variants and navigation',
+    icon: Icons.view_carousel,
+    color: Colors.cyan,
+    storyPath: StoryConfig.buildComponentStoryName('Carousels'),
+    getStories: getUnifiedCarouselShowcase,
   ),
 ];
