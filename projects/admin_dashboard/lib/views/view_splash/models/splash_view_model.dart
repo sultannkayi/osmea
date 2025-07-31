@@ -26,18 +26,29 @@ class SplashViewModel extends BaseViewModelBloc<SplashEvent, SplashState> {
     // Register event handlers for splash events
     on<SplashEventCheckUser>(_onCheckUser);
     on<SplashEventNavigateHome>(_onNavigateHome);
+    on<SplashEventStartSplash>(_onStartSplash);
   }
 
   /// Starts the splash logic and triggers navigation after a delay.
   ///
+  /// [context] is required to access SizerExtensions for duration
   /// [onNavigate] is a callback provided by the View to handle navigation.
-  void startSplashLogic(Function(String route)? onNavigate) async {
+  void startSplashLogic(BuildContext context, Function(String route)? onNavigate) async {
+    // Add the event to the bloc for proper state management
+    add(SplashEventStartSplash(context: context, onNavigate: onNavigate));
+  }
+
+  /// Handles the start splash event with context-dependent duration.
+  void _onStartSplash(SplashEventStartSplash event, emit) async {
+    emit(SplashStateLoading());
+    
     // --- Splash Delay Simulation ---
-    // Waits for 2 seconds to simulate loading or initialization.
-    await Future.delayed(Duration(seconds: 2));
+    // Waits for a duration from SizerExtensions to simulate loading or initialization.
+    await Future.delayed(event.context.durationLong);
+    
     // After delay, trigger navigation to the onboarding route if callback is provided.
-    if (onNavigate != null) {
-      onNavigate('/onboarding'); // Navigate to onboarding instead of home
+    if (event.onNavigate != null) {
+      event.onNavigate!('/onboarding'); // Navigate to onboarding instead of home
     }
   }
 
@@ -53,7 +64,7 @@ class SplashViewModel extends BaseViewModelBloc<SplashEvent, SplashState> {
 void _onCheckUser(SplashEventCheckUser event, emit) async {
   emit(SplashStateLoading()); // Set state to loading
   try {
-    await Future.delayed(Duration(seconds: 3)); // Simulate async operation
+    await Future.delayed(event.context.durationVeryLong); // Use context-dependent duration
     emit(
       SplashStateContent(contentValue: "Content coming from View Model logic!"),
     ); // Emit content state with a message

@@ -34,7 +34,7 @@ class SplashView extends MasterView<SplashViewModel, SplashEvent, SplashState> {
     // This method is called when the view is first built.
     // It delegates splash logic (timing, navigation) to the ViewModel.
     // The ViewModel will call the provided callback when it's time to navigate.
-    viewModel.startSplashLogic((route) {
+    viewModel.startSplashLogic(context, (route) {
       // [Callback] Navigates to the given route when ViewModel decides.
       navigateTo(context, route);
     });
