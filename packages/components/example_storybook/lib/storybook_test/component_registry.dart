@@ -21,6 +21,7 @@ import 'components/counter_test_modular/showcase/unified_counter_showcase.dart';
 import 'components/container_test_modular/containers.dart';
 import 'components/footer_test_modular/showcase/unified_footer_showcase.dart';
 import 'components/carousel_test_modular/showcase/unified_carousel_showcase.dart';
+import 'components/searchbar_test_modular/showcase/unified_searchbar_showcase.dart';
 
 /// Model for component information displayed on home page and stories
 class ComponentInfo {
@@ -202,5 +203,13 @@ final List<ComponentInfo> allComponents = [
     color: Colors.cyan,
     storyPath: StoryConfig.buildComponentStoryName('Carousels'),
     getStories: getUnifiedCarouselShowcase,
+  ),
+  ComponentInfo(
+    name: 'Searchbars',
+    description: 'Search inputs with suggestions, history, and expandable features',
+    icon: Icons.search,
+    color: Colors.teal,
+    storyPath: StoryConfig.buildComponentStoryName('Searchbars'),
+    getStories: getUnifiedSearchbarShowcase,
   ),
 ];
