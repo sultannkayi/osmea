@@ -22,6 +22,7 @@ import 'components/container_test_modular/containers.dart';
 import 'components/footer_test_modular/showcase/unified_footer_showcase.dart';
 import 'components/carousel_test_modular/showcase/unified_carousel_showcase.dart';
 import 'components/searchbar_test_modular/showcase/unified_searchbar_showcase.dart';
+import 'components/ticket_test_modular/showcase/unified_ticket_showcase.dart';
 
 /// Model for component information displayed on home page and stories
 class ComponentInfo {
@@ -211,5 +212,13 @@ final List<ComponentInfo> allComponents = [
     color: Colors.teal,
     storyPath: StoryConfig.buildComponentStoryName('Searchbars'),
     getStories: getUnifiedSearchbarShowcase,
+  ),
+  ComponentInfo(
+    name: 'Ticket Widget',
+    description: 'Dynamic form generation for support tickets with various input types',
+    icon: Icons.confirmation_number,
+    color: Colors.green,
+    storyPath: StoryConfig.buildComponentStoryName('Ticket Widget'),
+    getStories: getUnifiedTicketShowcase,
   ),
 ];

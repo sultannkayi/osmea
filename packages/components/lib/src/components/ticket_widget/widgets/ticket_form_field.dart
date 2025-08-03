@@ -159,12 +159,10 @@ class TicketFormField extends StatelessWidget {
       items: question.options?.map((option) {
             return DropdownMenuItem<String>(
               value: option.value.toString(),
-              child: Flexible(
-                child: Text(
-                  option.label,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                ),
+              child: Text(
+                option.label,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
               ),
             );
           }).toList() ??
