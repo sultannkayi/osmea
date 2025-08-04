@@ -1,6 +1,7 @@
 // Define the GoRouter
 import 'package:admin_dashboard/app/views/view_splash/splash_view.dart';
 import 'package:admin_dashboard/app/views/view_onboarding/onboarding_view.dart';
+import 'package:admin_dashboard/app/views/view_welcome/welcome_view.dart';
 import 'package:core/core.dart';
 import 'package:flavor/flavor.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,20 @@ final GoRouter appRouter = GoRouter(
           arguments: {
             "title": "Onboarding View",
             "description": "Welcome to OSMEA Dashboard onboarding flow",
+          },
+          currentView: MasterViewTypes.content,
+        );
+      },
+    ),
+
+    // Welcome Route
+    GoRoute(
+      path: '/welcome',
+      builder: (BuildContext context, GoRouterState state) {
+        return WelcomeView(
+          arguments: {
+            "title": "Welcome View",
+            "description": "Welcome to OSMEA Admin Dashboard",
           },
           currentView: MasterViewTypes.content,
         );
