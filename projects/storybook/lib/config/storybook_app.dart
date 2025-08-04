@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 import 'package:provider/provider.dart';
-import 'device_frame_test.dart';
-import 'home_page.dart';
-import 'typography_page.dart';
-import 'colors_page.dart';
+import 'device_frame_config.dart';
+import '../pages/home_page.dart';
+import '../pages/typography_page.dart';
+import '../pages/colors_page.dart';
 import 'story_config.dart';
 import 'storybook_theme_plugin.dart';
 import 'component_registry.dart';
 
 /// Main function to run the OSMEA Storybook app
 void runStorybookApp() {
-  runApp(const TableCalendarStorybookApp());
+  runApp(const OsmeaStorybookApp());
 }
 
-class TableCalendarStorybookApp extends StatelessWidget {
-  const TableCalendarStorybookApp({super.key});
+class OsmeaStorybookApp extends StatelessWidget {
+  const OsmeaStorybookApp({super.key});
 
   @override
   Widget build(BuildContext context) {
