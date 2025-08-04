@@ -45,6 +45,9 @@ class $AssetsImagesGen {
   AssetGenImage get osmeaLogoWhite =>
       const AssetGenImage('assets/images/osmea_logo_white.png');
 
+  /// File path: assets/images/welcome.png
+  AssetGenImage get welcome => const AssetGenImage('assets/images/welcome.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         mfLogo,
@@ -52,7 +55,8 @@ class $AssetsImagesGen {
         onboardingPageThree,
         onboardingPageTwo,
         osmeaLogoBlack,
-        osmeaLogoWhite
+        osmeaLogoWhite,
+        welcome
       ];
 }
 
