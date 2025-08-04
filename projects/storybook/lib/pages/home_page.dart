@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 import 'package:provider/provider.dart';
-import 'component_registry.dart';
-import 'story_config.dart';
+import '../config/config.dart';
 
 /// Home page story that shows component overview
 List<Story> getHomeStories() {
