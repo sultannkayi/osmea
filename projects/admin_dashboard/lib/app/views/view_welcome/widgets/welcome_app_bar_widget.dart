@@ -39,7 +39,7 @@ AppBar welcomeCoreAppBar(
             ? [
               OsmeaComponents.iconButton(
                 icon: const Icon(Icons.refresh, color: OsmeaColors.orange),
-                tooltip: 'Reset',
+                tooltip: resource.common.refresh,
                 onPressed: () async {
                   await viewModel?.resetOnboardingForDev(context);
                 },

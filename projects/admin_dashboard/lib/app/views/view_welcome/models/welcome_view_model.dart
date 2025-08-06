@@ -43,13 +43,13 @@ class WelcomeViewModel extends BaseViewModelBloc<WelcomeEvent, WelcomeState> {
 
         if (context.mounted) {
           context.snackbarSuccess(
-            "🔄 Onboarding reset! Restart app to test.",
+            resource.common.refresh,
             duration: context.durationSlow,
           );
         }
       } catch (e) {
         if (context.mounted) {
-          context.snackbarError("❌ Error resetting onboarding");
+          context.snackbarError(resource.common.error_message);
         }
       }
     }
