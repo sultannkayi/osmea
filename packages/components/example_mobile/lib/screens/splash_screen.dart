@@ -1,0 +1,158 @@
+import 'package:flutter/material.dart';
+import 'package:osmea_components/osmea_components.dart';
+import 'package:go_router/go_router.dart';
+
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen>
+    with TickerProviderStateMixin {
+  late AnimationController _logoController;
+  late AnimationController _textController;
+  late AnimationController _fadeController;
+
+  late Animation<double> _logoScale;
+  late Animation<double> _logoOpacity;
+  late Animation<Offset> _textSlide;
+  late Animation<double> _fadeOpacity;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _logoController = AnimationController(
+      duration: const Duration(milliseconds: 1500),
+      vsync: this,
+    );
+
+    _textController = AnimationController(
+      duration: const Duration(milliseconds: 1000),
+      vsync: this,
+    );
+
+    _fadeController = AnimationController(
+      duration: const Duration(milliseconds: 800),
+      vsync: this,
+    );
+
+    _logoScale = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: _logoController,
+      curve: Curves.elasticOut,
+    ));
+
+    _logoOpacity = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: _logoController,
+      curve: const Interval(0.0, 0.6, curve: Curves.easeOut),
+    ));
+
+    _textSlide = Tween<Offset>(
+      begin: const Offset(0, 0.5),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(
+      parent: _textController,
+      curve: Curves.easeOutCubic,
+    ));
+
+    _fadeOpacity = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: _fadeController,
+      curve: Curves.easeOut,
+    ));
+
+    _startAnimations();
+  }
+
+  void _startAnimations() async {
+    // Start logo animation
+    _logoController.forward();
+
+    // Start text animation after logo starts
+    await Future.delayed(const Duration(milliseconds: 800));
+    _textController.forward();
+
+    // Start fade animation
+    await Future.delayed(const Duration(milliseconds: 500));
+    _fadeController.forward();
+
+    // Navigate to intro screen after animations complete
+    await Future.delayed(const Duration(milliseconds: 2000));
+    if (mounted) {
+      context.go('/intro'); // Go Router ile navigation
+    }
+  }
+
+  @override
+  void dispose() {
+    _logoController.dispose();
+    _textController.dispose();
+    _fadeController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return OsmeaComponents.scaffold(
+      backgroundColor: OsmeaColors.white,
+      body: OsmeaComponents.center(
+        child: OsmeaComponents.column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Logo Animation
+            ScaleTransition(
+              scale: _logoScale,
+              child: FadeTransition(
+                opacity: _logoOpacity,
+                child: Container(
+                  width: 120,
+                  height: 120,
+                  child: Image.asset(
+                    'assets/images/osmea_logo_black.png',
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+            ),
+
+            OsmeaComponents.sizedBox(height: 32),
+
+            // Text Animation
+            SlideTransition(
+              position: _textSlide,
+              child: FadeTransition(
+                opacity: _fadeOpacity,
+                child: OsmeaComponents.column(
+                  children: [
+                    OsmeaComponents.text(
+                      'OSMEA',
+                      variant: OsmeaTextVariant.headlineLarge,
+                      color: OsmeaColors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    OsmeaComponents.sizedBox(height: 8),
+                    OsmeaComponents.text(
+                      'Enterprise Flutter Components',
+                      variant: OsmeaTextVariant.bodyMedium,
+                      color: OsmeaColors.grayMaterial,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
