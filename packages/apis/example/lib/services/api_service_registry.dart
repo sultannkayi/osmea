@@ -3,6 +3,7 @@ import 'package:example/services/index.dart';
 enum ApiCategory {
   shopify,
   woocommerce,
+  graphql,
   access,
   storefront,
   admin,
@@ -48,6 +49,8 @@ extension ApiCategoryExtension on ApiCategory {
         return 'Shopify';
       case ApiCategory.woocommerce:
         return 'WooCommerce';
+      case ApiCategory.graphql:
+        return 'GraphQL APIs';
       case ApiCategory.access:
         return 'Access APIs';
       case ApiCategory.storefront:
@@ -3015,12 +3018,12 @@ class ApiServiceRegistry {
     ),
 
     ApiService(
-  name: 'Batch Update Product Tags',
-  endpoint: '/wp-json/wc/v3/products/tags/batch',
-  category: ApiCategory.woocommerceProducts,
-  subcategory: 'Product Tags',
-  handler: BatchUpdateProductTagsHandler(),
-),
+      name: 'Batch Update Product Tags',
+      endpoint: '/wp-json/wc/v3/products/tags/batch',
+      category: ApiCategory.woocommerceProducts,
+      subcategory: 'Product Tags',
+      handler: BatchUpdateProductTagsHandler(),
+    ),
 
     ApiService(
       name: 'List All Product Variations',
@@ -3753,6 +3756,36 @@ class ApiServiceRegistry {
       subcategory: 'Refunds',
       handler: ListAllRefundsHandler(),
     ),
+
+    // 🚀 GraphQL APIs
+    ApiService(
+      name: 'GraphQL Products',
+      endpoint: '/graphql/products',
+      category: ApiCategory.graphql,
+      subcategory: 'Products',
+      handler: ProductGraphQLHandler(),
+    ),
+    ApiService(
+      name: 'GraphQL Customers',
+      endpoint: '/graphql/customers',
+      category: ApiCategory.graphql,
+      subcategory: 'Customers',
+      handler: CustomerGraphQLHandler(),
+    ),
+    ApiService(
+      name: 'GraphQL Orders',
+      endpoint: '/graphql/orders',
+      category: ApiCategory.graphql,
+      subcategory: 'Orders',
+      handler: OrderGraphQLHandler(),
+    ),
+    ApiService(
+      name: 'GraphQL Shop',
+      endpoint: '/graphql/shop',
+      category: ApiCategory.graphql,
+      subcategory: 'Shop',
+      handler: ShopGraphQLHandler(),
+    ),
   ];
 
   static void initialize() {}
@@ -3766,6 +3799,7 @@ class ApiServiceRegistry {
 
   static List<ApiCategory> getShopifyCategories() {
     return [
+      ApiCategory.graphql,
       ApiCategory.access,
       ApiCategory.storefront,
       ApiCategory.admin,
@@ -3833,6 +3867,8 @@ class ApiServiceRegistry {
         return 'Shopify';
       case ApiCategory.woocommerce:
         return 'WooCommerce';
+      case ApiCategory.graphql:
+        return 'GraphQL';
       case ApiCategory.access:
         return 'Access';
       case ApiCategory.storefront:

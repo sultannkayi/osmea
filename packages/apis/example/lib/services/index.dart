@@ -2,7 +2,13 @@
 
 export 'api_request_handler.dart';
 
-// 🔐 Access Handlers
+// � GraphQL Handlers
+export 'handlers/shopify/graphql_handlers/customer_graphql_handler.dart';
+export 'handlers/shopify/graphql_handlers/order_graphql_handler.dart';
+export 'handlers/shopify/graphql_handlers/product_graphql_handler.dart';
+export 'handlers/shopify/graphql_handlers/shop_graphql_handler.dart';
+
+// �🔐 Access Handlers
 export 'handlers/shopify/access_handlers/access_scope_handler.dart';
 export 'handlers/shopify/access_handlers/storefront_access_token_handler.dart';
 
