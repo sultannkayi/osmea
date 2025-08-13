@@ -54,4 +54,5 @@ flutter:
   uses-material-design: true       # Enable Material Design
   assets:
     - assets/images/               # Image assets directory
+    - assets/                      # All assets including screen_titles.json
 

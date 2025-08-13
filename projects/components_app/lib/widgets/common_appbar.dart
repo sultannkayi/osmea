@@ -47,9 +47,19 @@ class _OsmeaComponentsAppBarState extends State<OsmeaComponentsAppBar> {
         setState(() {
           _title = screenData['title'];
         });
+        print(
+            '✅ AppBar Title loaded: $_title for screenKey: ${widget.screenKey}');
+      } else {
+        print('⚠️ Title not found for screenKey: ${widget.screenKey}');
+        setState(() {
+          _title = _formatScreenKey(widget.screenKey);
+        });
       }
     } catch (e) {
-      // Keep default title if loading fails
+      print('❌ Error loading title for ${widget.screenKey}: $e');
+              setState(() {
+          _title = _formatScreenKey(widget.screenKey);
+        });
     }
   }
 
@@ -71,6 +81,14 @@ class _OsmeaComponentsAppBarState extends State<OsmeaComponentsAppBar> {
       centerTitle: false,
       titleSpacing: 16,
     );
+  }
+
+  String _formatScreenKey(String screenKey) {
+    return screenKey
+        .replaceAll('_', ' ')
+        .split(' ')
+        .map((word) => word.isNotEmpty ? '${word[0].toUpperCase()}${word.substring(1)}' : '')
+        .join(' ');
   }
 
   Widget _buildBackButton() {

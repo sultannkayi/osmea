@@ -1,203 +1,207 @@
 {
   "screens": {
     "info_screen": {
-      "title": "OSMEA Info",
+      "title": "Info",
       "subtitle": "Component Library Information"
     },
     "button_example": {
-      "title": "OSMEA Button Examples",
+      "title": "Button Examples",
       "subtitle": "Comprehensive button component showcase"
     },
     "card_example": {
-      "title": "OSMEA Card Examples",
+      "title": "Card Examples",
       "subtitle": "Beautiful card component variations"
     },
     "avatar_example": {
-      "title": "OSMEA Avatar Examples",
+      "title": "Avatar Examples",
       "subtitle": "User avatar component showcase"
     },
     "badge_example": {
-      "title": "OSMEA Badge Examples",
+      "title": "Badge Examples",
       "subtitle": "Notification and status badges"
     },
     "bottom_sheet_example": {
-      "title": "OSMEA Bottom Sheet Examples",
+      "title": "Bottom Sheet Examples",
       "subtitle": "Modal bottom sheet components"
     },
     "carousel_example": {
-      "title": "OSMEA Carousel Examples",
+      "title": "Carousel Examples",
       "subtitle": "Image and content carousel"
     },
     "checkbox_example": {
-      "title": "OSMEA Checkbox Examples",
+      "title": "Checkbox Examples",
       "subtitle": "Selection and form checkboxes"
     },
     "chips_example": {
-      "title": "OSMEA Chips Examples",
+      "title": "Chips Examples",
       "subtitle": "Filter and selection chips"
     },
     "colors_example": {
-      "title": "OSMEA Colors Examples",
+      "title": "Colors Examples",
       "subtitle": "Design system color palette"
     },
     "counter_example": {
-      "title": "OSMEA Counter Examples",
+      "title": "Counter Examples",
       "subtitle": "Number input and display components"
     },
     "divider_example": {
-      "title": "OSMEA Divider Examples",
+      "title": "Divider Examples",
       "subtitle": "Content separation components"
     },
     "dropdown_example": {
-      "title": "OSMEA Dropdown Examples",
+      "title": "Dropdown Examples",
       "subtitle": "Selection dropdown components"
     },
     "loading_example": {
-      "title": "OSMEA Loading Examples",
+      "title": "Loading Examples",
       "subtitle": "Loading and progress indicators"
     },
     "progress_example": {
-      "title": "OSMEA Progress Examples",
+      "title": "Progress Examples",
       "subtitle": "Progress bar and circular progress"
     },
     "radio_button_example": {
-      "title": "OSMEA Radio Button Examples",
+      "title": "Radio Button Examples",
       "subtitle": "Single selection radio buttons"
     },
     "searchbar_example": {
-      "title": "OSMEA Searchbar Examples",
+      "title": "Searchbar Examples",
       "subtitle": "Search input components"
     },
     "snackbar_example": {
-      "title": "OSMEA Snackbar Examples",
+      "title": "Snackbar Examples",
       "subtitle": "Notification and feedback messages"
     },
     "stepper_example": {
-      "title": "OSMEA Stepper Examples",
+      "title": "Stepper Examples",
       "subtitle": "Multi-step form components"
     },
     "switch_button_example": {
-      "title": "OSMEA Switch Examples",
+      "title": "Switch Examples",
       "subtitle": "Toggle switch components"
     },
     "tabbar_example": {
-      "title": "OSMEA TabBar Examples",
+      "title": "TabBar Examples",
       "subtitle": "Tab navigation components"
     },
     "text_example": {
-      "title": "OSMEA Text Examples",
+      "title": "Text Examples",
       "subtitle": "Typography and text components"
     },
     "text_field_example": {
-      "title": "OSMEA TextField Examples",
+      "title": "TextField Examples",
       "subtitle": "Input field components"
     },
     "toast_example": {
-      "title": "OSMEA Toast Examples",
+      "title": "Toast Examples",
       "subtitle": "Toast notification components"
     },
     "ticket_widget_example": {
-      "title": "OSMEA Ticket Examples",
+      "title": "Ticket Examples",
       "subtitle": "Ticket and card components"
     },
     "popup_example": {
-      "title": "OSMEA Popup Examples",
+      "title": "Popup Examples",
       "subtitle": "Modal and popup components"
     },
     "dot_indicator_example": {
-      "title": "OSMEA Dot Indicator Examples",
+      "title": "Dot Indicator Examples",
       "subtitle": "Page indicator components"
     },
     "appbar_example": {
-      "title": "OSMEA AppBar Examples",
+      "title": "AppBar Examples",
       "subtitle": "Application bar components"
     },
     "align_example": {
-      "title": "OSMEA Align Examples",
+      "title": "Align Examples",
       "subtitle": "Alignment utility components"
     },
     "center_example": {
-      "title": "OSMEA Center Examples",
+      "title": "Center Examples",
       "subtitle": "Centering utility components"
     },
     "clip_r_rect_example": {
-      "title": "OSMEA ClipRRect Examples",
+      "title": "ClipRRect Examples",
       "subtitle": "Rounded corner clipping"
     },
     "collapse_example": {
-      "title": "OSMEA Collapse Examples",
+      "title": "Collapse Examples",
       "subtitle": "Expandable content components"
     },
     "column_example": {
-      "title": "OSMEA Column Examples",
+      "title": "Column Examples",
       "subtitle": "Vertical layout components"
     },
     "container_example": {
-      "title": "OSMEA Container Examples",
+      "title": "Container Examples",
       "subtitle": "Container and box components"
     },
     "expanded_example": {
-      "title": "OSMEA Expanded Examples",
+      "title": "Expanded Examples",
       "subtitle": "Flexible space components"
     },
     "fitted_box_example": {
-      "title": "OSMEA FittedBox Examples",
+      "title": "FittedBox Examples",
       "subtitle": "Fitted content components"
     },
     "flexible_example": {
-      "title": "OSMEA Flexible Examples",
+      "title": "Flexible Examples",
       "subtitle": "Flexible layout components"
     },
     "footer_example": {
-      "title": "OSMEA Footer Examples",
+      "title": "Footer Examples",
       "subtitle": "Footer layout components"
     },
     "image_example": {
-      "title": "OSMEA Image Examples",
+      "title": "Image Examples",
       "subtitle": "Image display components"
     },
+    "hero_image_detail": {
+      "title": "Hero Image Detail",
+      "subtitle": "Full-screen image view"
+    },
     "list_item_example": {
-      "title": "OSMEA ListItem Examples",
+      "title": "ListItem Examples",
       "subtitle": "List item components"
     },
     "padding_example": {
-      "title": "OSMEA Padding Examples",
+      "title": "Padding Examples",
       "subtitle": "Spacing and padding components"
     },
     "positioned_example": {
-      "title": "OSMEA Positioned Examples",
+      "title": "Positioned Examples",
       "subtitle": "Positioned layout components"
     },
     "rich_text_example": {
-      "title": "OSMEA RichText Examples",
+      "title": "RichText Examples",
       "subtitle": "Rich text formatting components"
     },
     "row_example": {
-      "title": "OSMEA Row Examples",
+      "title": "Row Examples",
       "subtitle": "Horizontal layout components"
     },
     "scaffold_example": {
-      "title": "OSMEA Scaffold Examples",
+      "title": "Scaffold Examples",
       "subtitle": "Page structure components"
     },
     "single_child_scroll_view_example": {
-      "title": "OSMEA SingleChildScrollView Examples",
+      "title": "SingleChildScrollView Examples",
       "subtitle": "Scrollable content components"
     },
     "sized_box_example": {
-      "title": "OSMEA SizedBox Examples",
+      "title": "SizedBox Examples",
       "subtitle": "Fixed size container components"
     },
     "spacer_example": {
-      "title": "OSMEA Spacer Examples",
+      "title": "Spacer Examples",
       "subtitle": "Flexible space components"
     },
     "stack_example": {
-      "title": "OSMEA Stack Examples",
+      "title": "Stack Examples",
       "subtitle": "Layered layout components"
     },
     "wrap_example": {
-      "title": "OSMEA Wrap Examples",
+      "title": "Wrap Examples",
       "subtitle": "Wrapping layout components"
     }
   }
