@@ -18,6 +18,7 @@ class _BottomSheetExampleState extends State<BottomSheetExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
+      backgroundColor: OsmeaColors.white,
       appBar: const OsmeaComponentsAppBar(
         screenKey: 'bottom_sheet_example',
       ),

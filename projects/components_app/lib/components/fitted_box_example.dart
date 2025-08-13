@@ -50,6 +50,7 @@ class _FittedBoxExampleState extends State<FittedBoxExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
+      backgroundColor: OsmeaColors.white,
       appBar: const OsmeaComponentsAppBar(
         screenKey: 'fitted_box_example',
       ),

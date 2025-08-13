@@ -58,6 +58,7 @@ class _TicketWidgetExampleState extends State<TicketWidgetExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
+      backgroundColor: OsmeaColors.white,
       appBar: const OsmeaComponentsAppBar(
         screenKey: 'ticket_widget_example',
       ),

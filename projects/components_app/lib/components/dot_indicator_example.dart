@@ -1,5 +1,5 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:osmea_components/osmea_components.dart';
 import '../widgets/common_appbar.dart';
 
 /// 🔴 Dot Indicator Examples
@@ -26,7 +26,7 @@ class _DotIndicatorExampleState extends State<DotIndicatorExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      backgroundColor: OsmeaColors.snow,
+      backgroundColor: OsmeaColors.white,
       appBar: const OsmeaComponentsAppBar(
         screenKey: 'dot_indicator_example',
       ),

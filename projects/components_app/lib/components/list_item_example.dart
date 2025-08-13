@@ -21,6 +21,7 @@ class _ListItemExampleState extends State<ListItemExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
+      backgroundColor: OsmeaColors.white,
       appBar: const OsmeaComponentsAppBar(
         screenKey: 'list_item_example',
       ),

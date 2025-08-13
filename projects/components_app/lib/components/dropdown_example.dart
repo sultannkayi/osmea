@@ -108,6 +108,7 @@ class _DropdownExampleState extends State<DropdownExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
+      backgroundColor: OsmeaColors.white,
       appBar: const OsmeaComponentsAppBar(
         screenKey: 'dropdown_example',
       ),

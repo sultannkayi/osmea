@@ -25,6 +25,7 @@ class _CarouselExampleState extends State<CarouselExample> {
   Widget build(BuildContext context) {
     final double carouselWidth = MediaQuery.of(context).size.width * 0.9;
     return OsmeaComponents.scaffold(
+      backgroundColor: OsmeaColors.white,
       appBar: const OsmeaComponentsAppBar(
         screenKey: 'carousel_example',
       ),

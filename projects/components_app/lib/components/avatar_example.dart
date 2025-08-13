@@ -1,5 +1,5 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:osmea_components/osmea_components.dart';
 import '../widgets/common_appbar.dart';
 
 /// 👤 **OSMEA Avatar Examples**
@@ -27,6 +27,7 @@ class _AvatarExampleState extends State<AvatarExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
+      backgroundColor: OsmeaColors.white,
       appBar: const OsmeaComponentsAppBar(
         screenKey: 'avatar_example',
       ),

@@ -56,6 +56,7 @@ class _SwitchButtonExampleState extends State<SwitchButtonExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
+      backgroundColor: OsmeaColors.white,
       appBar: const OsmeaComponentsAppBar(
         screenKey: 'switch_button_example',
       ),

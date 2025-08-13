@@ -53,6 +53,7 @@ class _ClipRRectExampleState extends State<ClipRRectExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
+      backgroundColor: OsmeaColors.white,
       appBar: const OsmeaComponentsAppBar(
         screenKey: 'clip_r_rect_example',
       ),

@@ -40,6 +40,7 @@ class _PopupExampleState extends State<PopupExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
+      backgroundColor: OsmeaColors.white,
       appBar: const OsmeaComponentsAppBar(
         screenKey: 'popup_example',
       ),

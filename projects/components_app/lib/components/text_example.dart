@@ -1,5 +1,5 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:osmea_components/osmea_components.dart';
 import '../widgets/common_appbar.dart';
 
 class TextExample extends StatefulWidget {
@@ -13,6 +13,7 @@ class _TextExampleState extends State<TextExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
+      backgroundColor: OsmeaColors.white,
       appBar: const OsmeaComponentsAppBar(
         screenKey: 'text_example',
       ),

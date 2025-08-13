@@ -1,5 +1,5 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:osmea_components/osmea_components.dart';
 import '../widgets/common_appbar.dart';
 
 /// 🏷️ Badge Examples

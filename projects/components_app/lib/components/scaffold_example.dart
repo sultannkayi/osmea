@@ -21,6 +21,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
+      backgroundColor: OsmeaColors.white,
       appBar: const OsmeaComponentsAppBar(
         screenKey: 'scaffold_example',
       ),
@@ -139,6 +140,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
   // Standard scaffold example
   Widget _buildStandardScaffold() {
     return OsmeaComponents.scaffold(
+      backgroundColor: OsmeaColors.white,
       appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('Standard Scaffold'),
         backgroundColor: OsmeaColors.nordicBlue,
@@ -156,6 +158,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
   // Scaffold with bottom navigation
   Widget _buildScaffoldWithBottomNav() {
     return OsmeaComponents.scaffold(
+      backgroundColor: OsmeaColors.white,
       appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('Bottom Navigation'),
         backgroundColor: OsmeaColors.forestHeart,
@@ -196,6 +199,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
   // Scaffold with drawer
   Widget _buildScaffoldWithDrawer() {
     return OsmeaComponents.scaffold(
+      backgroundColor: OsmeaColors.white,
       key: _scaffoldKey,
       appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('With Drawer'),
@@ -253,6 +257,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
   // Scaffold with FAB
   Widget _buildScaffoldWithFab() {
     return OsmeaComponents.scaffold(
+      backgroundColor: OsmeaColors.white,
       appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('With FAB'),
         backgroundColor: OsmeaColors.deepSea,
@@ -278,6 +283,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
   // Scaffold with custom colors
   Widget _buildScaffoldWithCustomColors() {
     return OsmeaComponents.scaffold(
+      backgroundColor: OsmeaColors.white,
       appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('Custom Colors'),
         backgroundColor: OsmeaColors.amberFlame,
@@ -312,6 +318,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
   // Advanced scaffold with combined features
   Widget _buildAdvancedScaffold() {
     return OsmeaComponents.scaffold(
+      backgroundColor: OsmeaColors.white,
       appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('Complete Scaffold'),
         backgroundColor: OsmeaColors.nordicBlue,

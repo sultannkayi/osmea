@@ -144,6 +144,7 @@ class LoadingExample extends StatelessWidget {
     ];
 
     return OsmeaComponents.scaffold(
+      backgroundColor: OsmeaColors.white,
       appBar: const OsmeaComponentsAppBar(
         screenKey: 'loading_example',
       ),

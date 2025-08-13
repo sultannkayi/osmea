@@ -32,6 +32,7 @@ class _ChipsExampleState extends State<ChipsExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
+      backgroundColor: OsmeaColors.white,
       appBar: const OsmeaComponentsAppBar(
         screenKey: 'chips_example',
       ),

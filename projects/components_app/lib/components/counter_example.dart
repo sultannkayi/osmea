@@ -92,6 +92,7 @@ class _CounterExampleState extends State<CounterExample>
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
+      backgroundColor: OsmeaColors.white,
       appBar: const OsmeaComponentsAppBar(
         screenKey: 'counter_example',
       ),

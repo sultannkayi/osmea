@@ -84,6 +84,7 @@ class _ProgressExampleState extends State<ProgressExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
+      backgroundColor: OsmeaColors.white,
       appBar: const OsmeaComponentsAppBar(
         screenKey: 'progress_example',
       ),
