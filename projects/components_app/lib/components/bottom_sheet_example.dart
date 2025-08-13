@@ -84,7 +84,7 @@ class _BottomSheetExampleState extends State<BottomSheetExample> {
 
               // Custom Widget Example
               _buildExampleButton(
-                title: 'OSMEA Components Example',
+                title: 'Components App',
                 description: 'Using OSMEA Components',
                 onPressed: () => _showWithOsmeaComponents(context),
                 color: OsmeaColors.purple,
