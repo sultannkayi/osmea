@@ -143,6 +143,24 @@ class _ApiExplorerViewState extends State<ApiExplorerView>
       _selectedService = service;
       _selectedMethod = service.supportedMethods.first;
       _parameters = {};
+
+      if (service.category == ApiCategory.graphqlQueries) {
+        _parameters['operation'] = 'query';
+        _parameters['subcategory'] = 'Queries';
+      } else if (service.category == ApiCategory.graphqlMutations) {
+        _parameters['operation'] = 'mutation';
+        _parameters['subcategory'] = 'Mutations';
+      } else if (service.category == ApiCategory.graphql) {
+        if (service.subcategory.toLowerCase().contains('queries') ||
+            service.subcategory.toLowerCase().contains('query')) {
+          _parameters['operation'] = 'query';
+          _parameters['subcategory'] = 'Queries';
+        } else if (service.subcategory.toLowerCase().contains('mutations') ||
+            service.subcategory.toLowerCase().contains('mutation')) {
+          _parameters['operation'] = 'mutation';
+          _parameters['subcategory'] = 'Mutations';
+        }
+      }
       _updateApiUrl();
     });
   }

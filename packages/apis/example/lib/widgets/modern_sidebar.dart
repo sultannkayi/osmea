@@ -357,7 +357,9 @@ class _ModernSidebarState extends State<ModernSidebar>
                           _selectedMainCategory == mainCategory;
                       final subCategories = mainCategory == ApiCategory.shopify
                           ? ApiServiceRegistry.getShopifyCategories()
-                          : ApiServiceRegistry.getWooCommerceCategories();
+                          : mainCategory == ApiCategory.shopifyGraphql
+                              ? ApiServiceRegistry.getShopifyGraphqlCategories()
+                              : ApiServiceRegistry.getWooCommerceCategories();
 
                       return Column(
                         children: [
@@ -442,8 +444,8 @@ class _ModernSidebarState extends State<ModernSidebar>
                                       children: subCategories.map((category) {
                                         final isSelected =
                                             _selectedCategory == category;
-                                        final subcategories = ApiServiceRegistry
-                                            .getSubcategoriesByCategory(
+                                        final subcategories =
+                                            _getSubCategoriesForGraphQLCategory(
                                                 category);
                                         return Column(
                                           children: [
@@ -745,6 +747,40 @@ class _ModernSidebarState extends State<ModernSidebar>
         return Icons.shopping_bag_rounded;
       case ApiCategory.woocommerce:
         return Icons.shopping_cart_checkout_rounded;
+      case ApiCategory.shopifyGraphql:
+        return Icons.analytics_rounded;
+      case ApiCategory.graphql:
+        return Icons.analytics_rounded;
+      case ApiCategory.graphqlQueries:
+        return Icons.search_rounded;
+      case ApiCategory.graphqlMutations:
+        return Icons.edit_rounded;
+      // GraphQL Products and Collections
+      case ApiCategory.graphqlProductsAndCollections:
+        return Icons.inventory_2_rounded;
+      case ApiCategory.graphqlProductsAndCollectionsQueries:
+        return Icons.search_rounded;
+      case ApiCategory.graphqlProductsAndCollectionsMutations:
+        return Icons.edit_rounded;
+      // GraphQL Orders
+      case ApiCategory.graphqlOrders:
+        return Icons.shopping_basket_rounded;
+      case ApiCategory.graphqlOrdersQueries:
+        return Icons.search_rounded;
+      case ApiCategory.graphqlOrdersMutations:
+        return Icons.edit_rounded;
+      // GraphQL Customers
+      case ApiCategory.graphqlCustomers:
+        return Icons.people_alt_rounded;
+      case ApiCategory.graphqlCustomersQueries:
+        return Icons.search_rounded;
+      case ApiCategory.graphqlCustomersMutations:
+        return Icons.edit_rounded;
+      // GraphQL Shop
+      case ApiCategory.graphqlShop:
+        return Icons.store_mall_directory_rounded;
+      case ApiCategory.graphqlShopQueries:
+        return Icons.search_rounded;
       case ApiCategory.access:
         return Icons.security_rounded;
       case ApiCategory.storefront:
@@ -817,6 +853,21 @@ class _ModernSidebarState extends State<ModernSidebar>
         return Icons.money_off_rounded;
       case ApiCategory.woocommerceTaxes:
         return Icons.receipt_long_rounded;
+    }
+  }
+
+  // GraphQL kategorileri için özel subcategory logic
+  List<String> _getSubCategoriesForGraphQLCategory(ApiCategory category) {
+    // Special handling for GraphQL main categories
+    switch (category) {
+      case ApiCategory.graphqlProductsAndCollections:
+      case ApiCategory.graphqlOrders:
+      case ApiCategory.graphqlCustomers:
+      case ApiCategory.graphqlShop:
+        return ['Queries', 'Mutations'];
+      default:
+        // Use normal API Service Registry for other categories
+        return ApiServiceRegistry.getSubcategoriesByCategory(category);
     }
   }
 }

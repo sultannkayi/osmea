@@ -1,0 +1,19 @@
+mutation UpdateProduct($input: ProductUpdateInput!) {
+  productUpdate(input: $input) {
+    product {
+      id
+      title
+      description
+      handle
+      status
+      vendor
+      productType
+      tags
+      updatedAt
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}

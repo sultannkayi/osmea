@@ -1,5 +1,13 @@
 library apis;
 
+// 🌐 GraphQL Exports
+export 'dio_config/shopify_graphql_client.dart';
+export 'network/remote/shopify/graphql/services/product_graphql_service.dart';
+export 'network/remote/shopify/graphql/services/order_graphql_service.dart';
+export 'network/remote/shopify/graphql/services/customer_graphql_service.dart';
+export 'network/remote/shopify/graphql/services/shop_graphql_service.dart';
+export 'network/remote/shopify/graphql/helpers/graphql_helper.dart';
+
 // 🌐 Dependency Injection & Utilities
 import 'package:apis/di/config/config_di.dart';
 import 'package:get_it/get_it.dart';

@@ -1,0 +1,31 @@
+schema:
+  - "lib/network/remote/shopify/graphql/schema.graphql"
+
+documents:
+  - "lib/network/remote/shopify/graphql/queries/**/*.graphql"
+  - "lib/network/remote/shopify/graphql/mutations/**/*.graphql"
+  - "lib/network/remote/shopify/graphql/subscriptions/**/*.graphql"
+
+generates:
+  lib/network/remote/shopify/graphql/generated/graphql_client.dart:
+    plugins:
+      - dart
+    config:
+      client: true
+      immutable_types: true
+      enums_as_types: true
+      generate_helpers: true
+      schema_mapping:
+        DateTime: DateTime
+        Money: String
+        Decimal: String
+        URL: String
+        HTML: String
+        JSON: Map<String, dynamic>
+      scalars:
+        DateTime: DateTime
+        Money: String 
+        Decimal: String
+        URL: String
+        HTML: String
+        JSON: Map<String, dynamic>

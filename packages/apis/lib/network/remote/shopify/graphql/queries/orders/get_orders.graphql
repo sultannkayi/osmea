@@ -1,0 +1,38 @@
+query GetOrders($first: Int = 10, $after: String, $query: String) {
+  orders(first: $first, after: $after, query: $query) {
+    edges {
+      node {
+        id
+        name
+        email
+        phone
+        createdAt
+        updatedAt
+        totalPrice
+        subtotalPrice
+        totalTax
+        lineItems(first: 20) {
+          edges {
+            node {
+              id
+              title
+              quantity
+              variant {
+                id
+                title
+                sku
+              }
+            }
+          }
+        }
+      }
+      cursor
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}

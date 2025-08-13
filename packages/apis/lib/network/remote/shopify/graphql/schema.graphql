@@ -1,0 +1,298 @@
+# Shopify Admin API Schema
+# This is a placeholder schema file - you should download the actual schema from:
+# https://shopify.dev/docs/admin-api/graphql/reference
+
+type Query {
+  # Products
+  products(first: Int, after: String, query: String): ProductConnection
+  product(id: ID!): Product
+  
+  # Orders  
+  orders(first: Int, after: String, query: String): OrderConnection
+  order(id: ID!): Order
+  
+  # Customers
+  customers(first: Int, after: String, query: String): CustomerConnection
+  customer(id: ID!): Customer
+  
+  # Shop
+  shop: Shop
+}
+
+type Mutation {
+  # Product mutations
+  productCreate(input: ProductInput!): ProductCreatePayload
+  productUpdate(input: ProductUpdateInput!): ProductUpdatePayload
+  productDelete(input: ProductDeleteInput!): ProductDeletePayload
+  
+  # Order mutations
+  orderUpdate(input: OrderUpdateInput!): OrderUpdatePayload
+  
+  # Customer mutations
+  customerCreate(input: CustomerInput!): CustomerCreatePayload
+  customerUpdate(input: CustomerUpdateInput!): CustomerUpdatePayload
+}
+
+# Basic types - these should be replaced with actual Shopify schema
+type Product {
+  id: ID!
+  title: String!
+  description: String
+  handle: String!
+  status: ProductStatus!
+  vendor: String
+  productType: String
+  tags: [String!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  variants(first: Int): ProductVariantConnection!
+  images(first: Int): ImageConnection!
+}
+
+type ProductConnection {
+  edges: [ProductEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ProductEdge {
+  node: Product!
+  cursor: String!
+}
+
+type Order {
+  id: ID!
+  name: String!
+  email: String
+  phone: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  totalPrice: Money!
+  subtotalPrice: Money!
+  totalTax: Money!
+  lineItems(first: Int): OrderLineItemConnection!
+}
+
+type OrderConnection {
+  edges: [OrderEdge!]!
+  pageInfo: PageInfo!
+}
+
+type OrderEdge {
+  node: Order!
+  cursor: String!
+}
+
+type Customer {
+  id: ID!
+  firstName: String
+  lastName: String
+  email: String
+  phone: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  orders(first: Int): OrderConnection!
+}
+
+type CustomerConnection {
+  edges: [CustomerEdge!]!
+  pageInfo: PageInfo!
+}
+
+type CustomerEdge {
+  node: Customer!
+  cursor: String!
+}
+
+type Shop {
+  id: ID!
+  name: String!
+  email: String!
+  domain: String!
+  myshopifyDomain: String!
+  plan: ShopPlan!
+  currencyCode: CurrencyCode!
+}
+
+# Common types
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+# Input types
+input ProductInput {
+  title: String!
+  description: String
+  handle: String
+  vendor: String
+  productType: String
+  tags: [String!]
+}
+
+input ProductUpdateInput {
+  id: ID!
+  title: String
+  description: String
+  handle: String
+  vendor: String
+  productType: String
+  tags: [String!]
+}
+
+input ProductDeleteInput {
+  id: ID!
+}
+
+input CustomerInput {
+  firstName: String
+  lastName: String
+  email: String
+  phone: String
+}
+
+input CustomerUpdateInput {
+  id: ID!
+  firstName: String
+  lastName: String
+  email: String
+  phone: String
+}
+
+input OrderUpdateInput {
+  id: ID!
+  note: String
+}
+
+# Payload types
+type ProductCreatePayload {
+  product: Product
+  userErrors: [UserError!]!
+}
+
+type ProductUpdatePayload {
+  product: Product
+  userErrors: [UserError!]!
+}
+
+type ProductDeletePayload {
+  deletedProductId: ID
+  userErrors: [UserError!]!
+}
+
+type CustomerCreatePayload {
+  customer: Customer
+  userErrors: [UserError!]!
+}
+
+type CustomerUpdatePayload {
+  customer: Customer
+  userErrors: [UserError!]!
+}
+
+type OrderUpdatePayload {
+  order: Order
+  userErrors: [UserError!]!
+}
+
+type UserError {
+  field: [String!]
+  message: String!
+}
+
+# Enums
+enum ProductStatus {
+  ACTIVE
+  ARCHIVED
+  DRAFT
+}
+
+enum CurrencyCode {
+  USD
+  EUR
+  GBP
+  CAD
+  AUD
+  JPY
+  TRY
+}
+
+# Scalars
+scalar DateTime
+scalar Money
+scalar Decimal
+scalar URL
+scalar HTML
+scalar JSON
+
+# Additional placeholder types
+type ProductVariantConnection {
+  edges: [ProductVariantEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ProductVariantEdge {
+  node: ProductVariant!
+  cursor: String!
+}
+
+type ProductVariant {
+  id: ID!
+  title: String!
+  price: Money!
+  sku: String
+  inventoryQuantity: Int
+  weight: Float
+  weightUnit: WeightUnit!
+}
+
+type ImageConnection {
+  edges: [ImageEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ImageEdge {
+  node: Image!
+  cursor: String!
+}
+
+type Image {
+  id: ID!
+  url: URL!
+  altText: String
+  width: Int
+  height: Int
+}
+
+type OrderLineItemConnection {
+  edges: [OrderLineItemEdge!]!
+  pageInfo: PageInfo!
+}
+
+type OrderLineItemEdge {
+  node: OrderLineItem!
+  cursor: String!
+}
+
+type OrderLineItem {
+  id: ID!
+  title: String!
+  quantity: Int!
+  price: Money!
+  totalDiscount: Money!
+  variant: ProductVariant
+}
+
+type ShopPlan {
+  displayName: String!
+  partnerDevelopment: Boolean!
+  shopifyPlus: Boolean!
+}
+
+enum WeightUnit {
+  KILOGRAMS
+  GRAMS
+  POUNDS
+  OUNCES
+}

@@ -1,0 +1,13 @@
+query GetProductsCount($query: String) {
+  products(first: 1, query: $query) {
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+    }
+    edges {
+      node {
+        id
+      }
+    }
+  }
+}
