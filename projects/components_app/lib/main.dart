@@ -1,6 +1,7 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import './routes/app_routes.dart';
+import './widgets/device_frame_wrapper.dart';
 
 void main() async {
   // Ensure Flutter bindings are initialized
@@ -17,14 +18,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MasterApp(
-      router: AppRoutes.router,
-      shouldSetOrientation: true,
-      showPerformanceOverlay: false,
-      textDirection: TextDirection.ltr,
-      themeMode: ThemeMode.light,
-      devModeGrid: false,
-      devModeSpacer: false,
+    return DeviceFrameWrapper(
+      child: MasterApp(
+        router: AppRoutes.router,
+        shouldSetOrientation: true,
+        showPerformanceOverlay: false,
+        textDirection: TextDirection.ltr,
+        themeMode: ThemeMode.light,
+        devModeGrid: false,
+        devModeSpacer: false,
+      ),
     );
   }
 }
