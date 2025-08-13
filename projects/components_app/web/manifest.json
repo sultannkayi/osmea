@@ -1,11 +1,11 @@
 {
-    "name": "components_app",
-    "short_name": "components_app",
+    "name": "Components App",
+    "short_name": "Components",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Components App - A comprehensive Flutter showcase for OSMEA UI components",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
