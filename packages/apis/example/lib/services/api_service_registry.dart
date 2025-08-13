@@ -3,6 +3,7 @@ import 'package:example/services/index.dart';
 enum ApiCategory {
   shopify,
   woocommerce,
+  shopifyGraphql, // New main category
   graphql,
   access,
   storefront,
@@ -22,6 +23,29 @@ enum ApiCategory {
   storeProperties,
   tendertransaction,
   webhooks,
+  // GraphQL categories
+  graphqlQueries,
+  graphqlMutations,
+  // GraphQL Products and Collections Main Category
+  graphqlProductsAndCollections,
+  // GraphQL Products and Collections Subcategories
+  graphqlProductsAndCollectionsQueries,
+  graphqlProductsAndCollectionsMutations,
+  // GraphQL Orders Main Category
+  graphqlOrders,
+  // GraphQL Orders Subcategories
+  graphqlOrdersQueries,
+  graphqlOrdersMutations,
+  // GraphQL Customers Main Category
+  graphqlCustomers,
+  // GraphQL Customers Subcategories
+  graphqlCustomersQueries,
+  graphqlCustomersMutations,
+  // GraphQL Shop Main Category
+  graphqlShop,
+  // GraphQL Shop Subcategories
+  graphqlShopQueries,
+  // WooCommerce categories
   woocommerceCoupons,
   woocommerceProducts,
   woocommerceOrders,
@@ -49,8 +73,10 @@ extension ApiCategoryExtension on ApiCategory {
         return 'Shopify';
       case ApiCategory.woocommerce:
         return 'WooCommerce';
+      case ApiCategory.shopifyGraphql:
+        return 'Shopify GraphQL';
       case ApiCategory.graphql:
-        return 'GraphQL APIs';
+        return 'GraphQL APIs (Modern)';
       case ApiCategory.access:
         return 'Access APIs';
       case ApiCategory.storefront:
@@ -87,6 +113,36 @@ extension ApiCategoryExtension on ApiCategory {
         return 'Tender Transaction APIs';
       case ApiCategory.webhooks:
         return 'Webhooks APIs';
+      case ApiCategory.graphqlQueries:
+        return 'GraphQL Queries (Data Fetching)';
+      case ApiCategory.graphqlMutations:
+        return 'GraphQL Mutations (Data Modification)';
+      // GraphQL Products and Collections
+      case ApiCategory.graphqlProductsAndCollections:
+        return 'Products and Collections';
+      case ApiCategory.graphqlProductsAndCollectionsQueries:
+        return 'Queries';
+      case ApiCategory.graphqlProductsAndCollectionsMutations:
+        return 'Mutations';
+      // GraphQL Orders
+      case ApiCategory.graphqlOrders:
+        return 'Orders';
+      case ApiCategory.graphqlOrdersQueries:
+        return 'Queries';
+      case ApiCategory.graphqlOrdersMutations:
+        return 'Mutations';
+      // GraphQL Customers
+      case ApiCategory.graphqlCustomers:
+        return 'Customers';
+      case ApiCategory.graphqlCustomersQueries:
+        return 'Queries';
+      case ApiCategory.graphqlCustomersMutations:
+        return 'Mutations';
+      // GraphQL Shop
+      case ApiCategory.graphqlShop:
+        return 'Shop';
+      case ApiCategory.graphqlShopQueries:
+        return 'Queries';
       case ApiCategory.woocommerceCoupons:
         return 'Coupons APIs';
       case ApiCategory.woocommerceProducts:
@@ -410,6 +466,64 @@ class ApiServiceRegistry {
       subcategory: 'Customer Address',
       handler: DestroyMultipleCustomerAddressesHandler(),
     ),
+
+    // 🚀 GraphQL APIs - Product Operations
+    ApiService(
+      name: 'Get Products & Collections - GraphQL Query',
+      endpoint: '/admin/api/2023-10/graphql.json',
+      category: ApiCategory.graphqlProductsAndCollectionsQueries,
+      subcategory: 'Products',
+      handler: ProductGraphQLHandler(),
+    ),
+    ApiService(
+      name: 'Manage Products & Collections - GraphQL Mutation',
+      endpoint: '/admin/api/2023-10/graphql.json',
+      category: ApiCategory.graphqlProductsAndCollectionsMutations,
+      subcategory: 'Products',
+      handler: ProductGraphQLHandler(),
+    ),
+
+    // 🚀 GraphQL APIs - Customer Operations
+    ApiService(
+      name: 'Get Customers - GraphQL Query',
+      endpoint: '/admin/api/2023-10/graphql.json',
+      category: ApiCategory.graphqlCustomersQueries,
+      subcategory: 'Customers',
+      handler: CustomerGraphQLHandler(),
+    ),
+    ApiService(
+      name: 'Manage Customers - GraphQL Mutation',
+      endpoint: '/admin/api/2023-10/graphql.json',
+      category: ApiCategory.graphqlCustomersMutations,
+      subcategory: 'Customers',
+      handler: CustomerGraphQLHandler(),
+    ),
+
+    // 🚀 GraphQL APIs - Order Operations
+    ApiService(
+      name: 'Get Orders - GraphQL Query',
+      endpoint: '/admin/api/2023-10/graphql.json',
+      category: ApiCategory.graphqlOrdersQueries,
+      subcategory: 'Orders',
+      handler: OrderGraphQLHandler(),
+    ),
+    ApiService(
+      name: 'Manage Orders - GraphQL Mutation',
+      endpoint: '/admin/api/2023-10/graphql.json',
+      category: ApiCategory.graphqlOrdersMutations,
+      subcategory: 'Orders',
+      handler: OrderGraphQLHandler(),
+    ),
+
+    // 🚀 GraphQL APIs - Shop Operations
+    ApiService(
+      name: 'Get Shop Information - GraphQL Query',
+      endpoint: '/admin/api/2023-10/graphql.json',
+      category: ApiCategory.graphqlShopQueries,
+      subcategory: 'Shop',
+      handler: ShopGraphQLHandler(),
+    ),
+
     ApiService(
       name: 'Events List',
       endpoint: '/events',
@@ -3756,36 +3870,6 @@ class ApiServiceRegistry {
       subcategory: 'Refunds',
       handler: ListAllRefundsHandler(),
     ),
-
-    // 🚀 GraphQL APIs
-    ApiService(
-      name: 'GraphQL Products',
-      endpoint: '/graphql/products',
-      category: ApiCategory.graphql,
-      subcategory: 'Products',
-      handler: ProductGraphQLHandler(),
-    ),
-    ApiService(
-      name: 'GraphQL Customers',
-      endpoint: '/graphql/customers',
-      category: ApiCategory.graphql,
-      subcategory: 'Customers',
-      handler: CustomerGraphQLHandler(),
-    ),
-    ApiService(
-      name: 'GraphQL Orders',
-      endpoint: '/graphql/orders',
-      category: ApiCategory.graphql,
-      subcategory: 'Orders',
-      handler: OrderGraphQLHandler(),
-    ),
-    ApiService(
-      name: 'GraphQL Shop',
-      endpoint: '/graphql/shop',
-      category: ApiCategory.graphql,
-      subcategory: 'Shop',
-      handler: ShopGraphQLHandler(),
-    ),
   ];
 
   static void initialize() {}
@@ -3793,20 +3877,23 @@ class ApiServiceRegistry {
   static List<ApiService> get all => _services;
 
   static List<ApiCategory> get categories {
-    // Ana kategoriler
-    return [ApiCategory.shopify, ApiCategory.woocommerce];
+    // Main categories
+    return [
+      ApiCategory.shopify,
+      ApiCategory.woocommerce,
+      ApiCategory.shopifyGraphql
+    ];
   }
 
   static List<ApiCategory> getShopifyCategories() {
     return [
-      ApiCategory.graphql,
       ApiCategory.access,
       ApiCategory.storefront,
       ApiCategory.admin,
       ApiCategory.catalog,
-      ApiCategory.billing,
       ApiCategory.customer,
       ApiCategory.discounts,
+      ApiCategory.billing,
       ApiCategory.events,
       ApiCategory.inventory,
       ApiCategory.orders,
@@ -3816,8 +3903,50 @@ class ApiServiceRegistry {
       ApiCategory.onlineStore,
       ApiCategory.products,
       ApiCategory.storeProperties,
-      ApiCategory.tendertransaction,
+      ApiCategory.storefront,
       ApiCategory.webhooks,
+      // Removed GraphQL categories from here - now separate main category
+    ];
+  }
+
+  static List<ApiCategory> getShopifyGraphqlCategories() {
+    return [
+      ApiCategory
+          .graphqlProductsAndCollections, // Products and Collections main category
+      ApiCategory.graphqlOrders, // Orders main category
+      ApiCategory.graphqlCustomers, // Customers main category
+      ApiCategory.graphqlShop, // Shop main category
+    ];
+  }
+
+  // Products and Collections subcategories
+  static List<ApiCategory> getGraphqlProductsAndCollectionsSubCategories() {
+    return [
+      ApiCategory.graphqlProductsAndCollectionsQueries,
+      ApiCategory.graphqlProductsAndCollectionsMutations,
+    ];
+  }
+
+  // Orders subcategories
+  static List<ApiCategory> getGraphqlOrdersSubCategories() {
+    return [
+      ApiCategory.graphqlOrdersQueries,
+      ApiCategory.graphqlOrdersMutations,
+    ];
+  }
+
+  // Customers subcategories
+  static List<ApiCategory> getGraphqlCustomersSubCategories() {
+    return [
+      ApiCategory.graphqlCustomersQueries,
+      ApiCategory.graphqlCustomersMutations,
+    ];
+  }
+
+  // Shop subcategories
+  static List<ApiCategory> getGraphqlShopSubCategories() {
+    return [
+      ApiCategory.graphqlShopQueries,
     ];
   }
 
@@ -3847,19 +3976,60 @@ class ApiServiceRegistry {
   static List<ApiService> getByCategory(ApiCategory category) =>
       _services.where((s) => s.category == category).toList();
 
-  static List<String> getSubcategoriesByCategory(ApiCategory category) =>
-      _services
-          .where((s) => s.category == category)
-          .map((s) => s.subcategory)
-          .toSet()
-          .toList();
+  static List<String> getSubcategoriesByCategory(ApiCategory category) {
+    // Special handling for GraphQL main categories
+    switch (category) {
+      case ApiCategory.graphqlProductsAndCollections:
+        return ['Queries', 'Mutations'];
+      case ApiCategory.graphqlOrders:
+        return ['Queries', 'Mutations'];
+      case ApiCategory.graphqlCustomers:
+        return ['Queries', 'Mutations'];
+      case ApiCategory.graphqlShop:
+        return ['Queries'];
+      default:
+        return _services
+            .where((s) => s.category == category)
+            .map((s) => s.subcategory)
+            .toSet()
+            .toList();
+    }
+  }
 
   static List<ApiService> getBySubcategory(
-          ApiCategory category, String subcategoryName) =>
-      _services
-          .where(
-              (s) => s.category == category && s.subcategory == subcategoryName)
-          .toList();
+      ApiCategory category, String subcategoryName) {
+    // Special handling for GraphQL main categories
+    ApiCategory? targetCategory;
+
+    switch (category) {
+      case ApiCategory.graphqlProductsAndCollections:
+        targetCategory = subcategoryName == 'Queries'
+            ? ApiCategory.graphqlProductsAndCollectionsQueries
+            : ApiCategory.graphqlProductsAndCollectionsMutations;
+        break;
+      case ApiCategory.graphqlOrders:
+        targetCategory = subcategoryName == 'Queries'
+            ? ApiCategory.graphqlOrdersQueries
+            : ApiCategory.graphqlOrdersMutations;
+        break;
+      case ApiCategory.graphqlCustomers:
+        targetCategory = subcategoryName == 'Queries'
+            ? ApiCategory.graphqlCustomersQueries
+            : ApiCategory.graphqlCustomersMutations;
+        break;
+      case ApiCategory.graphqlShop:
+        targetCategory = ApiCategory.graphqlShopQueries;
+        break;
+      default:
+        // Use old logic for normal categories
+        return _services
+            .where((s) =>
+                s.category == category && s.subcategory == subcategoryName)
+            .toList();
+    }
+
+    return _services.where((s) => s.category == targetCategory).toList();
+  }
 
   static String getCategoryName(ApiCategory category) {
     switch (category) {
@@ -3867,8 +4037,40 @@ class ApiServiceRegistry {
         return 'Shopify';
       case ApiCategory.woocommerce:
         return 'WooCommerce';
+      case ApiCategory.shopifyGraphql:
+        return 'Shopify GraphQL';
       case ApiCategory.graphql:
         return 'GraphQL';
+      case ApiCategory.graphqlQueries:
+        return 'GraphQL Queries';
+      case ApiCategory.graphqlMutations:
+        return 'GraphQL Mutations';
+      // GraphQL Products and Collections
+      case ApiCategory.graphqlProductsAndCollections:
+        return 'Products and Collections';
+      case ApiCategory.graphqlProductsAndCollectionsQueries:
+        return 'Queries';
+      case ApiCategory.graphqlProductsAndCollectionsMutations:
+        return 'Mutations';
+      // GraphQL Orders
+      case ApiCategory.graphqlOrders:
+        return 'Orders';
+      case ApiCategory.graphqlOrdersQueries:
+        return 'Queries';
+      case ApiCategory.graphqlOrdersMutations:
+        return 'Mutations';
+      // GraphQL Customers
+      case ApiCategory.graphqlCustomers:
+        return 'Customers';
+      case ApiCategory.graphqlCustomersQueries:
+        return 'Queries';
+      case ApiCategory.graphqlCustomersMutations:
+        return 'Mutations';
+      // GraphQL Shop
+      case ApiCategory.graphqlShop:
+        return 'Shop';
+      case ApiCategory.graphqlShopQueries:
+        return 'Queries';
       case ApiCategory.access:
         return 'Access';
       case ApiCategory.storefront:
