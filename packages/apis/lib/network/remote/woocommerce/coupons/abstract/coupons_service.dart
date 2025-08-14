@@ -2,7 +2,6 @@ import 'package:apis/network/remote/woocommerce/coupons/freezed_model/response/l
 import 'package:apis/network/remote/woocommerce/coupons/freezed_model/response/retrieve_coupon_response.dart';
 import 'package:apis/network/remote/woocommerce/coupons/freezed_model/request/create_coupon_request.dart';
 import 'package:apis/network/remote/woocommerce/coupons/freezed_model/response/create_coupon_response.dart';
-import 'package:apis/network/remote/woocommerce/coupons/freezed_model/request/update_coupon_request.dart';
 import 'package:apis/network/remote/woocommerce/coupons/freezed_model/response/update_coupon_response.dart';
 import 'package:apis/network/remote/woocommerce/coupons/freezed_model/request/batch_update_coupons_request.dart';
 import 'package:apis/network/remote/woocommerce/coupons/freezed_model/response/batch_update_coupons_response.dart';

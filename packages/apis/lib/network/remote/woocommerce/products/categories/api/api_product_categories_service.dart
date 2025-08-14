@@ -5,7 +5,6 @@ import 'package:retrofit/retrofit.dart';
 import 'package:injectable/injectable.dart';
 import 'package:apis/network/remote/woocommerce/products/categories/abstract/product_categories_service.dart';
 import 'package:apis/network/remote/woocommerce/products/categories/freezed_model/response/list_all_product_categories_response.dart';
-import 'package:apis/network/remote/woocommerce/products/categories/freezed_model/request/create_product_category_request.dart';
 import 'package:apis/network/remote/woocommerce/products/categories/freezed_model/response/create_product_category_response.dart';
 import 'package:apis/network/remote/woocommerce/products/categories/freezed_model/response/retrieve_product_category_response.dart';
 import 'package:apis/network/remote/woocommerce/products/categories/freezed_model/response/update_product_category_response.dart';

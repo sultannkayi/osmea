@@ -1,7 +1,6 @@
 import 'package:apis/apis.dart';
 import 'package:apis/dio_config/api_dio_client.dart';
 import 'package:apis/network/remote/woocommerce/webhooks/abstract/webhooks_service.dart';
-import 'package:apis/network/remote/woocommerce/webhooks/freezed_model/request/create_webhook_request.dart';
 import 'package:apis/network/remote/woocommerce/webhooks/freezed_model/response/create_webhook_response.dart';
 import 'package:apis/network/remote/woocommerce/webhooks/freezed_model/response/delete_webhook_response.dart';
 import 'package:apis/network/remote/woocommerce/webhooks/freezed_model/response/list_all_webhooks_response.dart';

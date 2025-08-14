@@ -3,7 +3,6 @@
 //     final listAllSystemStatus = listAllSystemStatusFromJson(jsonString);
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:apis/helpers/json_config_helper.dart';
 import 'dart:convert';
 
 part 'list_all_system_status_response.freezed.dart';

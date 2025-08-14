@@ -2,7 +2,6 @@ import 'package:apis/network/remote/woocommerce/customers/freezed_model/response
 import 'package:apis/network/remote/woocommerce/customers/freezed_model/response/retrieve_customer_response.dart';
 import 'package:apis/network/remote/woocommerce/customers/freezed_model/request/create_customer_request.dart';
 import 'package:apis/network/remote/woocommerce/customers/freezed_model/response/create_customer_response.dart';
-import 'package:apis/network/remote/woocommerce/customers/freezed_model/request/update_customer_request.dart';
 import 'package:apis/network/remote/woocommerce/customers/freezed_model/response/update_customer_response.dart';
 import 'package:apis/network/remote/woocommerce/customers/freezed_model/request/batch_update_customers_request.dart';
 import 'package:apis/network/remote/woocommerce/customers/freezed_model/response/batch_update_customers_response.dart';

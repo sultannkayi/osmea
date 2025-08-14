@@ -5,10 +5,8 @@ import 'package:retrofit/retrofit.dart';
 import 'package:injectable/injectable.dart';
 import 'package:apis/network/remote/woocommerce/products/shipping_classes/abstract/product_shipping_classes_service.dart';
 import 'package:apis/network/remote/woocommerce/products/shipping_classes/freezed_model/response/list_all_product_shipping_classes_response.dart';
-import 'package:apis/network/remote/woocommerce/products/shipping_classes/freezed_model/request/create_product_shipping_class_request.dart';
 import 'package:apis/network/remote/woocommerce/products/shipping_classes/freezed_model/response/create_product_shipping_class_response.dart';
 import 'package:apis/network/remote/woocommerce/products/shipping_classes/freezed_model/response/retrieve_product_shipping_class_response.dart';
-import 'package:apis/network/remote/woocommerce/products/shipping_classes/freezed_model/request/update_product_shipping_class_request.dart';
 import 'package:apis/network/remote/woocommerce/products/shipping_classes/freezed_model/response/update_product_shipping_class_response.dart';
 import 'package:apis/network/remote/woocommerce/products/shipping_classes/freezed_model/response/delete_product_shipping_class_response.dart';
 import 'package:apis/network/remote/woocommerce/products/shipping_classes/freezed_model/request/batch_update_product_shipping_classes_request.dart';
@@ -79,7 +77,8 @@ abstract class ProductShippingClassesServiceClient
   /// 📦 Batch update product shipping classes in WooCommerce API
   @override
   @PATCH('/wp-json/wc/{apiVersion}/products/shipping_classes/batch')
-  Future<BatchUpdateProductShippingClassesResponse> batchUpdateProductShippingClasses({
+  Future<BatchUpdateProductShippingClassesResponse>
+      batchUpdateProductShippingClasses({
     @Path('apiVersion') required String apiVersion,
     @Body() required BatchUpdateProductShippingClassesRequest batchData,
   });

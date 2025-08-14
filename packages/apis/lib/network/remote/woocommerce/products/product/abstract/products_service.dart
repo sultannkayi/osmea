@@ -1,5 +1,4 @@
 import 'package:apis/network/remote/woocommerce/products/product/freezed_model/response/list_all_products_response.dart';
-import 'package:apis/network/remote/woocommerce/products/product/freezed_model/request/create_product_request.dart';
 import 'package:apis/network/remote/woocommerce/products/product/freezed_model/response/create_product_response.dart';
 import 'package:apis/network/remote/woocommerce/products/product/freezed_model/response/retrieve_product_response.dart';
 import 'package:apis/network/remote/woocommerce/products/product/freezed_model/response/update_product_response.dart';

@@ -1,4 +1,3 @@
-import 'package:apis/network/remote/woocommerce/webhooks/freezed_model/request/create_webhook_request.dart';
 import 'package:apis/network/remote/woocommerce/webhooks/freezed_model/response/create_webhook_response.dart';
 import 'package:apis/network/remote/woocommerce/webhooks/freezed_model/response/delete_webhook_response.dart';
 import 'package:apis/network/remote/woocommerce/webhooks/freezed_model/response/list_all_webhooks_response.dart';
