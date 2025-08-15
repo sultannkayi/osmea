@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
@@ -7,7 +8,8 @@ import 'package:path/path.dart';
 /// - Mobile: SQLite3 database
 /// - Web: SharedPreferences
 class CrossPlatformStorage {
-  static final CrossPlatformStorage _instance = CrossPlatformStorage._internal();
+  static final CrossPlatformStorage _instance =
+      CrossPlatformStorage._internal();
   CrossPlatformStorage._internal();
   factory CrossPlatformStorage() => _instance;
 
@@ -18,7 +20,8 @@ class CrossPlatformStorage {
   Future<void> init() async {
     if (kIsWeb) {
       _sharedPreferences = await SharedPreferences.getInstance();
-      debugPrint('🌐 Web platform detected. Using SharedPreferences for storage.');
+      debugPrint(
+          '🌐 Web platform detected. Using SharedPreferences for storage.');
     } else {
       await _initDatabase();
       debugPrint('📱 Mobile platform detected. Using SQLite3 for storage.');
@@ -41,7 +44,7 @@ class CrossPlatformStorage {
   /// Create database tables
   Future<void> _onCreate(Database db, int version) async {
     debugPrint('🛠️ Creating database tables...');
-    
+
     // Store configurations table
     await db.execute('''
       CREATE TABLE IF NOT EXISTS store_configurations (
@@ -82,7 +85,8 @@ class CrossPlatformStorage {
   /// Save store configuration
   Future<void> saveStoreConfiguration(Map<String, dynamic> config) async {
     if (kIsWeb) {
-      await _saveToSharedPreferences('store_config_${config['platform']}', config);
+      await _saveToSharedPreferences(
+          'store_config_${config['platform']}', config);
     } else {
       await _saveToDatabase(config);
     }
@@ -139,7 +143,7 @@ class CrossPlatformStorage {
 
   Future<void> _saveToDatabase(Map<String, dynamic> config) async {
     if (_database == null) await _initDatabase();
-    
+
     final data = {
       'platform': config['platform'],
       'store_name': config['storeName'],
@@ -175,7 +179,7 @@ class CrossPlatformStorage {
 
   Future<Map<String, dynamic>?> _loadFromDatabase(String platform) async {
     if (_database == null) await _initDatabase();
-    
+
     final results = await _database!.query(
       'store_configurations',
       where: 'platform = ?',
@@ -201,7 +205,7 @@ class CrossPlatformStorage {
 
   Future<void> _deleteFromDatabase(String platform) async {
     if (_database == null) await _initDatabase();
-    
+
     await _database!.delete(
       'store_configurations',
       where: 'platform = ?',
@@ -211,7 +215,7 @@ class CrossPlatformStorage {
 
   Future<void> _saveSettingToDatabase(String key, String value) async {
     if (_database == null) await _initDatabase();
-    
+
     final data = {
       'key': key,
       'value': value,
@@ -241,7 +245,7 @@ class CrossPlatformStorage {
 
   Future<String?> _loadSettingFromDatabase(String key) async {
     if (_database == null) await _initDatabase();
-    
+
     final results = await _database!.query(
       'api_settings',
       where: 'key = ?',
@@ -256,7 +260,7 @@ class CrossPlatformStorage {
 
   Future<void> _deleteSettingFromDatabase(String key) async {
     if (_database == null) await _initDatabase();
-    
+
     await _database!.delete(
       'api_settings',
       where: 'key = ?',
@@ -266,33 +270,23 @@ class CrossPlatformStorage {
 
   // ===== SharedPreferences-specific methods =====
 
-  Future<void> _saveToSharedPreferences(String key, Map<String, dynamic> data) async {
+  Future<void> _saveToSharedPreferences(
+      String key, Map<String, dynamic> data) async {
     if (_sharedPreferences == null) await init();
-    
+
     // Convert map to JSON string for storage
-    final jsonString = data.toString();
+    final jsonString = jsonEncode(data);
     await _sharedPreferences!.setString(key, jsonString);
   }
 
   Future<Map<String, dynamic>?> _loadFromSharedPreferences(String key) async {
     if (_sharedPreferences == null) await init();
-    
+
     final jsonString = _sharedPreferences!.getString(key);
     if (jsonString != null) {
       try {
-        // Parse the string representation back to Map
-        final cleanString = jsonString.replaceAll('{', '').replaceAll('}', '');
-        final Map<String, dynamic> json = {};
-        final pairs = cleanString.split(',');
-        for (final pair in pairs) {
-          final keyValue = pair.split(':');
-          if (keyValue.length == 2) {
-            final k = keyValue[0].trim().replaceAll("'", "");
-            final v = keyValue[1].trim().replaceAll("'", "");
-            json[k] = v == 'null' ? null : v;
-          }
-        }
-        return json;
+        // Parse the JSON string back to Map
+        return jsonDecode(jsonString) as Map<String, dynamic>;
       } catch (e) {
         debugPrint('Error parsing configuration from SharedPreferences: $e');
         return null;
@@ -313,10 +307,12 @@ class CrossPlatformStorage {
       };
     } else {
       if (_database == null) await _initDatabase();
-      
-      final storeConfigs = await _database!.rawQuery('SELECT COUNT(*) as count FROM store_configurations');
-      final apiSettings = await _database!.rawQuery('SELECT COUNT(*) as count FROM api_settings');
-      
+
+      final storeConfigs = await _database!
+          .rawQuery('SELECT COUNT(*) as count FROM store_configurations');
+      final apiSettings = await _database!
+          .rawQuery('SELECT COUNT(*) as count FROM api_settings');
+
       return {
         'platform': 'mobile',
         'storageType': 'SQLite3',
