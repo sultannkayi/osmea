@@ -313,13 +313,7 @@ class AppTheme {
         foregroundColor: Colors.white,
       ),
     ),
-    cardTheme: CardTheme(
-      elevation: 0,
-      shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusLg)),
-      color: lightCard,
-      shadowColor: Colors.black.withValues(alpha:.05),
-    ),
+
     appBarTheme: const AppBarTheme(
       backgroundColor: lightSurface,
       foregroundColor: Color(0xFF1A1A1A),
@@ -387,13 +381,7 @@ class AppTheme {
         foregroundColor: Colors.white,
       ),
     ),
-    cardTheme: CardTheme(
-      elevation: 0,
-      shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusLg)),
-      color: darkCard,
-      shadowColor: Colors.black.withValues(alpha:.3),
-    ),
+
     appBarTheme: const AppBarTheme(
       backgroundColor: darkSurface,
       foregroundColor: Colors.white,

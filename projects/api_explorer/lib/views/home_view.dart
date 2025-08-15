@@ -1,12 +1,11 @@
 import 'package:api_explorer/services/api_service_registry.dart';
 import 'package:api_explorer/widgets/app_header.dart';
-import 'package:api_explorer/widgets/config_popup_dialog.dart';
+import 'package:api_explorer/widgets/store_setup_wizard.dart';
+// WizardHelper artık apis paketinden geliyor
 import 'package:api_explorer/widgets/home/responsive_content.dart';
 import 'package:api_explorer/widgets/modern_sidebar.dart';
 import 'package:flutter/material.dart';
 import 'package:apis/apis.dart';
-
-import 'package:apis/helpers/json_config_helper.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -107,9 +106,9 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     // Wait widgets to be mounted
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (mounted) {
-        final shouldShow = await ConfigPopupDialog.shouldShow();
+        final shouldShow = await StoreSetupWizard.shouldShow();
         if (shouldShow && mounted) {
-          await ConfigPopupDialog.show(context);
+          await StoreSetupWizard.show(context);
         }
       }
     });
@@ -118,13 +117,13 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   // Debug function to test config loading
   Future<void> _testConfigLoading() async {
     try {
-      final configHelper = await JsonConfigHelper.load('assets/config.json');
-      final wooStoreUrl = configHelper.get('root.woocommerce.storeUrl');
-      final wooUsername = configHelper.get('root.woocommerce.username');
-
-      _showSnackBar(
-          'Config Test: storeUrl="$wooStoreUrl", username="$wooUsername"',
-          isError: false);
+      final config = await WizardHelper.loadConfiguration();
+      if (config != null) {
+        final status = await WizardHelper.getConfigurationStatus();
+        _showSnackBar('Config Test: $status', isError: false);
+      } else {
+        _showSnackBar('Config Test: No configuration found', isError: true);
+      }
     } catch (e) {
       _showSnackBar('Config Test Error: $e', isError: true);
     }
