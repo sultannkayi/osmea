@@ -597,6 +597,37 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
             _selectedStore = store;
           });
           _updateApiUrlFromStore(store);
+          
+          // Show success message with store information
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    '🎉 Store setup completed successfully!',
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    '${store.platform.toUpperCase()}: ${store.displayName}',
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                  const Text(
+                    'You can now explore APIs for this platform',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                ],
+              ),
+              backgroundColor: Colors.green,
+              duration: const Duration(seconds: 4),
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+          
+          // Refresh the UI to show the new store information
+          setState(() {});
         },
       ),
     );

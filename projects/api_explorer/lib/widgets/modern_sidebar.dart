@@ -34,6 +34,7 @@ class _ModernSidebarState extends State<ModernSidebar>
   final ScrollController _scrollController = ScrollController();
   bool _isDisposed = false; // Track disposal state
   StreamSubscription<StoreChangeEvent>? _storeChangeSubscription;
+  StoreConfiguration? _currentStore;
 
   @override
   void initState() {
@@ -49,6 +50,7 @@ class _ModernSidebarState extends State<ModernSidebar>
 
     // Listen to store changes instead of polling
     _listenToStoreChanges();
+    _loadCurrentStore();
   }
 
   @override
@@ -69,6 +71,7 @@ class _ModernSidebarState extends State<ModernSidebar>
             setState(() {
               // Force rebuild to refresh store info
             });
+            _loadCurrentStore();
           }
         },
         onError: (error) {
@@ -77,6 +80,19 @@ class _ModernSidebarState extends State<ModernSidebar>
       );
     } catch (e) {
       debugPrint('❌ Error setting up store change listener in sidebar: $e');
+    }
+  }
+
+  Future<void> _loadCurrentStore() async {
+    try {
+      final store = await WizardHelper.getCurrentStore();
+      if (mounted && !_isDisposed) {
+        setState(() {
+          _currentStore = store;
+        });
+      }
+    } catch (e) {
+      debugPrint('❌ Error loading current store in sidebar: $e');
     }
   }
 
@@ -114,6 +130,41 @@ class _ModernSidebarState extends State<ModernSidebar>
     setState(() {
       _selectedSubcategory = subcategory;
     });
+  }
+
+  // Check if current store is complete
+  bool get _isCurrentStoreComplete => _currentStore?.isComplete ?? false;
+
+  // Check if a platform has store information
+  bool _hasStoreForPlatform(ApiCategory mainCategory) {
+    if (_currentStore == null) return false;
+
+    switch (mainCategory) {
+      case ApiCategory.shopify:
+        return _currentStore!.platform == 'shopify';
+      case ApiCategory.woocommerce:
+        return _currentStore!.platform == 'woocommerce';
+      case ApiCategory.shopifyGraphql:
+        return _currentStore!.platform == 'shopify';
+      default:
+        return false;
+    }
+  }
+
+  // Get categories based on current store platform
+  List<ApiCategory> _getCategoriesForCurrentStore(ApiCategory mainCategory) {
+    if (!_hasStoreForPlatform(mainCategory)) return [];
+
+    switch (mainCategory) {
+      case ApiCategory.shopify:
+        return ApiServiceRegistry.getShopifyCategories();
+      case ApiCategory.woocommerce:
+        return ApiServiceRegistry.getWooCommerceCategories();
+      case ApiCategory.shopifyGraphql:
+        return ApiServiceRegistry.getShopifyGraphqlCategories();
+      default:
+        return [];
+    }
   }
 
   @override
@@ -202,23 +253,160 @@ class _ModernSidebarState extends State<ModernSidebar>
                       ],
                     ),
                     const SizedBox(height: 8),
-                    // Store Information Display
-                    Flexible(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(8),
+                    // Store Status Indicator
+                    if (_currentStore != null)
+                      Flexible(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          padding: const EdgeInsets.all(12),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.store,
+                                size: 16,
+                                color: Colors.white,
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      _currentStore!.platform.toUpperCase(),
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Text(
+                                      _isCurrentStoreComplete
+                                          ? 'Ready'
+                                          : 'Setup Incomplete',
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        color: _isCurrentStoreComplete
+                                            ? Colors.green[100]
+                                            : Colors.orange[100],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                        padding: const EdgeInsets.all(12),
-                        child: _buildStoreInfo(),
                       ),
-                    ),
                   ],
                 ),
               ),
 
+              // Store Info Panel (shown after wizard completion)
+              if (_currentStore != null &&
+                  _isCurrentStoreComplete &&
+                  widget.expanded)
+                Container(
+                  margin: EdgeInsets.all(isNarrow ? 12 : 16),
+                  padding: EdgeInsets.all(isNarrow ? 16 : 20),
+                  decoration: BoxDecoration(
+                    gradient: AppTheme.createGradient(
+                      AppTheme.primaryColor.withValues(alpha: 0.1),
+                      AppTheme.primaryVariant.withValues(alpha: 0.05),
+                    ),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: AppTheme.primaryColor.withValues(alpha: 0.2),
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(isNarrow ? 8 : 10),
+                            decoration: BoxDecoration(
+                              color:
+                                  AppTheme.primaryColor.withValues(alpha: 0.2),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              Icons.rocket_launch_rounded,
+                              size: isNarrow ? 16 : 18,
+                              color: AppTheme.primaryColor,
+                            ),
+                          ),
+                          SizedBox(width: isNarrow ? 8 : 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Ready to Explore!',
+                                  style: TextStyle(
+                                    fontSize: isNarrow ? 13 : 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppTheme.primaryColor,
+                                  ),
+                                ),
+                                Text(
+                                  'Your ${_currentStore!.platform.toUpperCase()} store is configured',
+                                  style: TextStyle(
+                                    fontSize: isNarrow ? 10 : 11,
+                                    color: AppTheme.primaryColor
+                                        .withValues(alpha: 0.7),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: isNarrow ? 8 : 12),
+                      Container(
+                        padding: EdgeInsets.all(isNarrow ? 8 : 10),
+                        decoration: BoxDecoration(
+                          color: AppTheme.primaryColor.withValues(alpha: 0.05),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color: AppTheme.primaryColor.withValues(alpha: 0.1),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.explore_rounded,
+                              size: isNarrow ? 14 : 16,
+                              color: AppTheme.primaryColor,
+                            ),
+                            SizedBox(width: isNarrow ? 6 : 8),
+                            Expanded(
+                              child: Text(
+                                'Select a category below to start exploring APIs',
+                                style: TextStyle(
+                                  fontSize: isNarrow ? 11 : 12,
+                                  color: AppTheme.primaryColor,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
               // Responsive Get Started Section
-              if (widget.selectedService == null && widget.expanded)
+              if (widget.selectedService == null &&
+                  widget.expanded &&
+                  (_currentStore == null || !_isCurrentStoreComplete))
                 Container(
                   margin: EdgeInsets.all(isNarrow ? 12 : 16),
                   padding: EdgeInsets.all(isNarrow ? 16 : 20),
@@ -248,7 +436,9 @@ class _ModernSidebarState extends State<ModernSidebar>
                       ),
                       SizedBox(height: isNarrow ? 8 : 12),
                       Text(
-                        'Get Started',
+                        _currentStore == null
+                            ? 'Get Started'
+                            : 'Complete Setup',
                         style: TextStyle(
                           fontSize: isNarrow ? 14 : 16,
                           fontWeight: FontWeight.w600,
@@ -259,7 +449,9 @@ class _ModernSidebarState extends State<ModernSidebar>
                       ),
                       SizedBox(height: isNarrow ? 4 : 6),
                       Text(
-                        'Select a category below to explore available APIs',
+                        _currentStore == null
+                            ? 'Complete the store setup wizard to access APIs'
+                            : 'Complete your store configuration to access APIs',
                         style: TextStyle(
                           fontSize: isNarrow ? 11 : 12,
                           color: Theme.of(context)
@@ -296,7 +488,9 @@ class _ModernSidebarState extends State<ModernSidebar>
                             ),
                             SizedBox(width: isNarrow ? 4 : 6),
                             Text(
-                              'Choose below',
+                              _currentStore == null
+                                  ? 'Setup required'
+                                  : 'Configuration needed',
                               style: TextStyle(
                                 fontSize: isNarrow ? 10 : 11,
                                 fontWeight: FontWeight.w500,
@@ -400,17 +594,22 @@ class _ModernSidebarState extends State<ModernSidebar>
                   child: ListView.builder(
                     controller: _scrollController,
                     padding: EdgeInsets.all(isNarrow ? 6 : 8),
-                    itemCount: ApiServiceRegistry.categories.length,
+                    itemCount: _currentStore != null && _isCurrentStoreComplete
+                        ? ApiServiceRegistry.categories
+                            .where((cat) => _hasStoreForPlatform(cat))
+                            .length
+                        : 0,
                     itemBuilder: (context, mainIndex) {
-                      final mainCategory =
-                          ApiServiceRegistry.categories[mainIndex];
+                      final availableCategories = ApiServiceRegistry.categories
+                          .where((cat) => _hasStoreForPlatform(cat))
+                          .toList();
+                      final mainCategory = availableCategories[mainIndex];
                       final isMainSelected =
                           _selectedMainCategory == mainCategory;
-                      final subCategories = mainCategory == ApiCategory.shopify
-                          ? ApiServiceRegistry.getShopifyCategories()
-                          : mainCategory == ApiCategory.shopifyGraphql
-                              ? ApiServiceRegistry.getShopifyGraphqlCategories()
-                              : ApiServiceRegistry.getWooCommerceCategories();
+                      final hasStore = _hasStoreForPlatform(mainCategory);
+                      final subCategories = hasStore
+                          ? _getCategoriesForCurrentStore(mainCategory)
+                          : [];
 
                       return Column(
                         children: [
@@ -435,23 +634,36 @@ class _ModernSidebarState extends State<ModernSidebar>
                               ),
                               leading: Icon(
                                 _getCategoryIcon(mainCategory),
-                                color: isMainSelected
-                                    ? Theme.of(context).colorScheme.primary
-                                    : Theme.of(context).iconTheme.color,
+                                color: hasStore && _isCurrentStoreComplete
+                                    ? (isMainSelected
+                                        ? Theme.of(context).colorScheme.primary
+                                        : Theme.of(context).iconTheme.color)
+                                    : Theme.of(context)
+                                        .iconTheme
+                                        .color
+                                        ?.withValues(alpha: 0.4),
                                 size: isNarrow ? 20 : 22,
                               ),
                               title: widget.expanded
                                   ? Text(
-                                      mainCategory.displayName,
+                                      ApiServiceRegistry.getCategoryName(
+                                          mainCategory),
                                       style: TextStyle(
-                                        color: isMainSelected
-                                            ? Theme.of(context)
-                                                .colorScheme
-                                                .primary
-                                            : Theme.of(context)
-                                                .textTheme
-                                                .bodyMedium
-                                                ?.color,
+                                        color:
+                                            hasStore && _isCurrentStoreComplete
+                                                ? (isMainSelected
+                                                    ? Theme.of(context)
+                                                        .colorScheme
+                                                        .primary
+                                                    : Theme.of(context)
+                                                        .textTheme
+                                                        .bodyMedium
+                                                        ?.color)
+                                                : Theme.of(context)
+                                                    .textTheme
+                                                    .bodyMedium
+                                                    ?.color
+                                                    ?.withValues(alpha: 0.4),
                                         fontWeight: isMainSelected
                                             ? FontWeight.w700
                                             : FontWeight.w600,
@@ -461,26 +673,71 @@ class _ModernSidebarState extends State<ModernSidebar>
                                     )
                                   : null,
                               trailing: widget.expanded
-                                  ? AnimatedRotation(
-                                      turns: isMainSelected ? 0.25 : 0,
-                                      duration:
-                                          const Duration(milliseconds: 200),
-                                      child: Icon(
-                                        Icons.chevron_right,
-                                        size: isNarrow ? 16 : 18,
-                                        color: isMainSelected
-                                            ? Theme.of(context)
-                                                .colorScheme
-                                                .primary
-                                            : Theme.of(context).iconTheme.color,
-                                      ),
+                                  ? Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        if (!hasStore ||
+                                            !_isCurrentStoreComplete)
+                                          Container(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: isNarrow ? 4 : 6,
+                                              vertical: 2,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .error
+                                                  .withValues(alpha: 0.1),
+                                              borderRadius:
+                                                  BorderRadius.circular(4),
+                                            ),
+                                            child: Text(
+                                              !hasStore
+                                                  ? 'No Store'
+                                                  : 'Incomplete',
+                                              style: TextStyle(
+                                                fontSize: isNarrow ? 8 : 9,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .error,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ),
+                                        if (hasStore &&
+                                            _isCurrentStoreComplete &&
+                                            subCategories.isNotEmpty)
+                                          AnimatedRotation(
+                                            turns: isMainSelected ? 0.25 : 0,
+                                            duration: const Duration(
+                                                milliseconds: 200),
+                                            child: Icon(
+                                              Icons.chevron_right,
+                                              size: isNarrow ? 16 : 18,
+                                              color: isMainSelected
+                                                  ? Theme.of(context)
+                                                      .colorScheme
+                                                      .primary
+                                                  : Theme.of(context)
+                                                      .iconTheme
+                                                      .color,
+                                            ),
+                                          ),
+                                      ],
                                     )
                                   : null,
-                              onTap: () => _selectMainCategory(mainCategory),
+                              onTap: hasStore &&
+                                      _isCurrentStoreComplete &&
+                                      subCategories.isNotEmpty
+                                  ? () => _selectMainCategory(mainCategory)
+                                  : null,
                             ),
                           ),
 
-                          if (isMainSelected && widget.expanded)
+                          if (isMainSelected &&
+                              widget.expanded &&
+                              hasStore &&
+                              _isCurrentStoreComplete)
                             AnimatedBuilder(
                               animation: _categoryAnimation,
                               builder: (context, child) {
@@ -920,66 +1177,5 @@ class _ModernSidebarState extends State<ModernSidebar>
         // Use normal API Service Registry for other categories
         return ApiServiceRegistry.getSubcategoriesByCategory(category);
     }
-  }
-
-  Widget _buildStoreInfo() {
-    final store = StoreManagementService().currentStore;
-    if (store == null) {
-      return Row(
-        children: [
-          Icon(
-            Icons.store_outlined,
-            size: 16,
-            color: Colors.white.withValues(alpha: 0.7),
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Text(
-              'No store selected',
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.white.withValues(alpha: 0.7),
-              ),
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-        ],
-      );
-    }
-
-    return Row(
-      children: [
-        Icon(
-          Icons.store,
-          size: 16,
-          color: Colors.white,
-        ),
-        const SizedBox(width: 8),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                store.displayName,
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
-                overflow: TextOverflow.ellipsis,
-              ),
-              Text(
-                store.platform.toUpperCase(),
-                style: TextStyle(
-                  fontSize: 10,
-                  color: Colors.white.withValues(alpha: 0.7),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
   }
 }

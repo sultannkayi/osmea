@@ -345,17 +345,36 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
         }
 
         if (mounted) {
-          // Show success message and then close
+          // Show success message with store information
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('✅ Store configuration saved successfully!'),
+            SnackBar(
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    '✅ Store configuration saved successfully!',
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    '${config.platform.toUpperCase()}: ${config.displayName}',
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                  const Text(
+                    'You can now explore APIs for this platform',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                ],
+              ),
               backgroundColor: Colors.green,
-              duration: Duration(seconds: 2),
+              duration: const Duration(seconds: 4),
+              behavior: SnackBarBehavior.floating,
             ),
           );
 
           // Wait a bit for the message to be visible, then close
-          await Future.delayed(const Duration(milliseconds: 500));
+          await Future.delayed(const Duration(milliseconds: 1000));
 
           if (mounted) {
             Navigator.of(context).pop();
