@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:apis/apis.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class StoreSetupWizard extends StatefulWidget {
   final Function(StoreConfiguration)? onStoreAdded;
@@ -56,6 +57,40 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
     _apiVersion = '2024-07';
     _initializeAnimations();
     _loadExistingConfiguration();
+    _restoreWizardStep(); // Restore previous step
+  }
+
+  // Step persistence methods
+  Future<void> _saveWizardStep() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setInt('wizard_current_step', _currentStep);
+      await prefs.setString(
+          'wizard_selected_platform', _selectedPlatform ?? '');
+      debugPrint('✅ Wizard step saved: $_currentStep');
+    } catch (e) {
+      debugPrint('❌ Error saving wizard step: $e');
+    }
+  }
+
+  Future<void> _restoreWizardStep() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final savedStep = prefs.getInt('wizard_current_step');
+      final savedPlatform = prefs.getString('wizard_selected_platform');
+
+      if (savedStep != null && savedStep >= 0 && savedStep <= 2) {
+        setState(() {
+          _currentStep = savedStep;
+          if (savedPlatform != null && savedPlatform.isNotEmpty) {
+            _selectedPlatform = savedPlatform;
+          }
+        });
+        debugPrint('✅ Wizard step restored: $_currentStep');
+      }
+    } catch (e) {
+      debugPrint('❌ Error restoring wizard step: $e');
+    }
   }
 
   void _initializeAnimations() {
@@ -100,41 +135,56 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
   final _passwordController = TextEditingController();
 
   bool _validateForm() {
+    debugPrint('🔧 _validateForm called');
+    debugPrint('🔧 Selected platform: $_selectedPlatform');
+    debugPrint('🔧 Store name: ${_storeNameController.text.trim()}');
+    debugPrint('🔧 API version: ${_apiVersionController.text.trim()}');
+
     if (_selectedPlatform == null) {
+      debugPrint('❌ Platform not selected');
       _showErrorMessage('Please select a platform first');
       return false;
     }
 
     if (_storeNameController.text.trim().isEmpty) {
+      debugPrint('❌ Store name is empty');
       _showErrorMessage('Store name is required');
       return false;
     }
 
     if (_selectedPlatform == 'shopify') {
       if (_accessTokenController.text.trim().isEmpty) {
+        debugPrint('❌ Shopify access token is empty');
         _showErrorMessage('Access token is required for Shopify');
         return false;
       }
+      debugPrint('✅ Shopify validation passed');
     } else if (_selectedPlatform == 'woocommerce') {
       if (_storeUrlController.text.trim().isEmpty) {
+        debugPrint('❌ WooCommerce store URL is empty');
         _showErrorMessage('Store URL is required for WooCommerce');
         return false;
       }
       if (_usernameController.text.trim().isEmpty) {
+        debugPrint('❌ WooCommerce username is empty');
         _showErrorMessage('Username is required for WooCommerce');
         return false;
       }
       if (_passwordController.text.trim().isEmpty) {
+        debugPrint('❌ WooCommerce password is empty');
         _showErrorMessage('Password is required for WooCommerce');
         return false;
       }
+      debugPrint('✅ WooCommerce validation passed');
     }
 
     if (_apiVersionController.text.trim().isEmpty) {
+      debugPrint('❌ API version is empty');
       _showErrorMessage('API version is required');
       return false;
     }
 
+    debugPrint('✅ Form validation passed');
     return true;
   }
 
@@ -223,16 +273,16 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
     switch (platform.toLowerCase()) {
       case 'shopify':
         return {
-          'Store Name': 'Your store name (e.g., mystore)',
-          'Access Token': 'Your Shopify private app access token',
-          'API Version': 'API version (e.g., 2024-07)',
+          'storeName': 'Your store name (e.g., mystore)',
+          'accessToken': 'Your Shopify private app access token',
+          'apiVersion': 'API version (e.g., 2024-07)',
         };
       case 'woocommerce':
         return {
-          'Store URL': 'Your WordPress site URL (e.g., https://mysite.com)',
-          'Username': 'WooCommerce REST API username',
-          'Password': 'WooCommerce REST API password',
-          'API Version': 'API version (e.g., v3)',
+          'storeUrl': 'Your WordPress site URL (e.g., https://mysite.com)',
+          'username': 'WooCommerce REST API username',
+          'password': 'WooCommerce REST API password',
+          'apiVersion': 'API version (e.g., v3)',
         };
       default:
         return {};
@@ -263,9 +313,12 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
   }
 
   void _nextStep() {
+    debugPrint('🔧 _nextStep called. Current step: $_currentStep');
+
     if (_currentStep < 2) {
       // Validate current step before proceeding
       if (_currentStep == 0 && _selectedPlatform == null) {
+        debugPrint('❌ Platform not selected');
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Please select a platform first'),
@@ -276,20 +329,33 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
       }
 
       if (_currentStep == 1 && _formKey.currentState?.validate() != true) {
+        debugPrint('❌ Form validation failed');
         return;
       }
 
+      debugPrint('✅ Moving to next step: ${_currentStep + 1}');
       setState(() {
         _currentStep++;
       });
+      _saveWizardStep(); // Save step when moving forward
+      debugPrint('✅ Current step updated to: $_currentStep');
+    } else {
+      debugPrint('⚠️ Already at last step: $_currentStep');
     }
   }
 
   void _previousStep() {
+    debugPrint('🔧 _previousStep called. Current step: $_currentStep');
+
     if (_currentStep > 0) {
+      debugPrint('✅ Moving to previous step: ${_currentStep - 1}');
       setState(() {
         _currentStep--;
       });
+      _saveWizardStep(); // Save step when moving backward
+      debugPrint('✅ Current step updated to: $_currentStep');
+    } else {
+      debugPrint('⚠️ Already at first step: $_currentStep');
     }
   }
 
@@ -483,10 +549,20 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
 
     return GestureDetector(
       onTap: () {
+        debugPrint('🔧 Platform selected: $value');
         setState(() {
           _selectedPlatform = value;
           // Set default API version
           _apiVersionController.text = _getDefaultApiVersion(value);
+        });
+
+        // Auto-advance to next step after platform selection
+        Future.delayed(const Duration(milliseconds: 300), () {
+          if (mounted && _currentStep == 0) {
+            debugPrint(
+                '🔧 Auto-advancing to next step after platform selection');
+            _nextStep();
+          }
         });
       },
       child: Container(
@@ -560,7 +636,7 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Configure ${_getPlatformDisplayName(_selectedPlatform!)}',
+            'Configure Your ${_selectedPlatform == 'shopify' ? 'Shopify' : 'WooCommerce'} Store',
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -568,92 +644,154 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
             ),
           ),
           const SizedBox(height: 20),
-          const Text(
-            'Please provide the required information for your store:',
-            style: TextStyle(
+          Text(
+            'Please fill in the required information for your store:',
+            style: const TextStyle(
               fontSize: 16,
               color: Color(0xFF6B7280),
             ),
           ),
           const SizedBox(height: 24),
-          if (_selectedPlatform == 'shopify') ...[
-            _buildTextField(
-              controller: _storeNameController,
-              label: 'Store Name',
-              hint: fieldHints['Store Name'] ?? '',
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Store name is required';
-                }
-                return null;
-              },
+
+          // Store Name Field
+          TextFormField(
+            controller: _storeNameController,
+            decoration: InputDecoration(
+              labelText: 'Store Name',
+              hintText: 'Enter your store name',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              prefixIcon: const Icon(Icons.store),
             ),
-            const SizedBox(height: 16),
-            _buildTextField(
-              controller: _accessTokenController,
-              label: 'Access Token',
-              hint: fieldHints['Access Token'] ?? '',
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Access token is required';
-                }
-                return null;
-              },
-            ),
-          ] else if (_selectedPlatform == 'woocommerce') ...[
-            _buildTextField(
-              controller: _storeUrlController,
-              label: 'Store URL',
-              hint: fieldHints['Store URL'] ?? '',
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Store URL is required';
-                }
-                final uri = Uri.tryParse(value);
-                if (uri == null || !uri.hasScheme) {
-                  return 'Please enter a valid URL with http:// or https://';
-                }
-                return null;
-              },
-            ),
-            const SizedBox(height: 16),
-            _buildTextField(
-              controller: _usernameController,
-              label: 'Username',
-              hint: fieldHints['Username'] ?? '',
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Username is required';
-                }
-                return null;
-              },
-            ),
-            const SizedBox(height: 16),
-            _buildTextField(
-              controller: _passwordController,
-              label: 'Password',
-              hint: fieldHints['Password'] ?? '',
-              obscureText: true,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Password is required';
-                }
-                return null;
-              },
-            ),
-          ],
-          const SizedBox(height: 16),
-          _buildTextField(
-            controller: _apiVersionController,
-            label: 'API Version',
-            hint: fieldHints['API Version'] ?? '',
             validator: (value) {
-              if (value == null || value.isEmpty) {
+              if (value == null || value.trim().isEmpty) {
+                return 'Store name is required';
+              }
+              return null;
+            },
+            onChanged: (value) {
+              debugPrint('🔧 Store name changed: $value');
+            },
+          ),
+
+          const SizedBox(height: 16),
+
+          // API Version Field
+          TextFormField(
+            controller: _apiVersionController,
+            decoration: InputDecoration(
+              labelText: 'API Version',
+              hintText: fieldHints['apiVersion'] ?? 'Enter API version',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              prefixIcon: const Icon(Icons.api),
+            ),
+            validator: (value) {
+              if (value == null || value.trim().isEmpty) {
                 return 'API version is required';
               }
               return null;
             },
+            onChanged: (value) {
+              debugPrint('🔧 API version changed: $value');
+            },
           ),
+
+          const SizedBox(height: 16),
+
+          // Platform-specific fields
+          if (_selectedPlatform == 'shopify') ...[
+            TextFormField(
+              controller: _accessTokenController,
+              decoration: InputDecoration(
+                labelText: 'Access Token',
+                hintText: fieldHints['accessToken'] ??
+                    'Enter your Shopify access token',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                prefixIcon: const Icon(Icons.key),
+              ),
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return 'Access token is required for Shopify';
+                }
+                return null;
+              },
+              onChanged: (value) {
+                debugPrint('🔧 Shopify access token changed: $value');
+              },
+            ),
+          ] else if (_selectedPlatform == 'woocommerce') ...[
+            TextFormField(
+              controller: _storeUrlController,
+              decoration: InputDecoration(
+                labelText: 'Store URL',
+                hintText: fieldHints['storeUrl'] ??
+                    'Enter your WooCommerce store URL',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                prefixIcon: const Icon(Icons.link),
+              ),
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return 'Store URL is required for WooCommerce';
+                }
+                return null;
+              },
+              onChanged: (value) {
+                debugPrint('🔧 WooCommerce store URL changed: $value');
+              },
+            ),
+            const SizedBox(height: 16),
+            TextFormField(
+              controller: _usernameController,
+              decoration: InputDecoration(
+                labelText: 'Username',
+                hintText:
+                    fieldHints['username'] ?? 'Enter your WooCommerce username',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                prefixIcon: const Icon(Icons.person),
+              ),
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return 'Username is required for WooCommerce';
+                }
+                return null;
+              },
+              onChanged: (value) {
+                debugPrint('🔧 WooCommerce username changed: $value');
+              },
+            ),
+            const SizedBox(height: 16),
+            TextFormField(
+              controller: _passwordController,
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: 'Password',
+                hintText:
+                    fieldHints['password'] ?? 'Enter your WooCommerce password',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                prefixIcon: const Icon(Icons.lock),
+              ),
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return 'Password is required for WooCommerce';
+                }
+                return null;
+              },
+              onChanged: (value) {
+                debugPrint('🔧 WooCommerce password changed: $value');
+              },
+            ),
+          ],
         ],
       ),
     );

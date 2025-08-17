@@ -40,8 +40,14 @@ Future<void> main() async {
     // 🔄 Continue anyway - we'll handle errors in the UI
   }
 
-  // 🔗🧬 Set up dependency injection
-  await configureDependencies();
+  // 🔗🧬 Set up dependency injection with error handling
+  try {
+    await configureDependencies();
+    debugPrint('✅ Dependency injection configured successfully');
+  } catch (e) {
+    debugPrint('❌ Error configuring dependencies: $e');
+    // 🔄 Continue anyway - we'll handle errors in the UI
+  }
 
   // 🔧 Initialize WizardHelper for store management
   try {
@@ -53,7 +59,14 @@ Future<void> main() async {
   }
 
   // 🍪📦 Prepare cookies storage if not running on web
-  if (!kIsWeb) await ApiDioClient.prepareCookiesJar();
+  if (!kIsWeb) {
+    try {
+      await ApiDioClient.prepareCookiesJar();
+    } catch (e) {
+      debugPrint('❌ Error preparing cookies jar: $e');
+    }
+  }
+
   // 🏁📲 Start the app
   runApp(const MyApp());
 }
@@ -64,13 +77,39 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       // 🏷️📛 App title
       title: 'OSMEA APIs Explorer',
       // 🚫👁️ Hide debug banner
       debugShowCheckedModeBanner: false,
+      // 🌐 Web için routing konfigürasyonu
+      initialRoute: '/',
+      onGenerateRoute: (settings) {
+        debugPrint('🔧 Route requested: ${settings.name}');
+
+        // Web refresh için route handling
+        if (settings.name == '/') {
+          return MaterialPageRoute(
+            builder: (context) => const SplashView(),
+            settings: settings,
+          );
+        }
+
+        // Bilinmeyen route'lar için splash'e yönlendir
+        return MaterialPageRoute(
+          builder: (context) => const SplashView(),
+          settings: const RouteSettings(name: '/'),
+        );
+      },
       // 🎬🖥️ Set the splash view as home
-      home: SplashView(),
+      home: const SplashView(),
+      // 🌐 Web için error handling
+      builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+          child: child!,
+        );
+      },
     );
   }
 }

@@ -1,0 +1,16 @@
+# Handle client-side routing for Flutter web
+# This file ensures that all routes are handled by the Flutter app
+# and prevents white screen issues on refresh
+
+/*    /index.html   200
+
+# Handle specific routes if needed
+/api/*    /index.html   200
+/explorer/*    /index.html   200
+/settings/*    /index.html   200
+
+# Handle static assets
+/assets/*    /assets/*   200
+/icons/*    /icons/*   200
+/favicon.png    /favicon.png   200
+/manifest.json    /manifest.json   200

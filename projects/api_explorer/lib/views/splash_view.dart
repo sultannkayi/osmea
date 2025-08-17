@@ -1,5 +1,7 @@
 import 'package:api_explorer/views/home_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:apis/apis.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -19,17 +21,76 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
   late Animation<Offset> _textSlide;
   late Animation<double> _progressValue;
 
+  bool _isInitialized = false;
+  bool _hasError = false;
+  bool _shouldSkipToHome = false;
+
   @override
   void initState() {
     super.initState();
     _initializeAnimations();
-    _startAnimationSequence();
+    _checkExistingConfiguration();
+  }
+
+  Future<void> _checkExistingConfiguration() async {
+    try {
+      debugPrint('🔧 Checking existing store configuration...');
+
+      // Check if there's already a configured store
+      final currentStore = await WizardHelper.getCurrentStore();
+
+      if (currentStore != null) {
+        debugPrint('✅ Found existing store: ${currentStore.storeName}');
+        setState(() {
+          _shouldSkipToHome = true;
+        });
+
+        // Skip animations and go directly to home
+        _navigateToHome();
+        return;
+      }
+
+      debugPrint('ℹ️ No existing store found, showing setup wizard');
+      _initializeApp();
+    } catch (e) {
+      debugPrint('❌ Error checking configuration: $e');
+      // Hata durumunda da devam et
+      _initializeApp();
+    }
+  }
+
+  Future<void> _initializeApp() async {
+    try {
+      // Web için ek initialization
+      if (kIsWeb) {
+        // Web'de DOM hazır olmasını bekle
+        await Future.delayed(const Duration(milliseconds: 100));
+      }
+
+      setState(() {
+        _isInitialized = true;
+      });
+
+      _startAnimationSequence();
+    } catch (e) {
+      debugPrint('❌ Error during app initialization: $e');
+      setState(() {
+        _hasError = true;
+      });
+
+      // Hata durumunda 3 saniye sonra home'a git
+      Future.delayed(const Duration(seconds: 3), () {
+        if (mounted) {
+          _navigateToHome();
+        }
+      });
+    }
   }
 
   void _initializeAnimations() {
-    // Logo animations
+    // Logo animations - reduced duration
     _logoController = AnimationController(
-      duration: const Duration(milliseconds: 1500),
+      duration: const Duration(milliseconds: 800),
       vsync: this,
     );
 
@@ -47,9 +108,9 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
       ),
     );
 
-    // Text animations
+    // Text animations - reduced duration
     _textController = AnimationController(
-      duration: const Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 600),
       vsync: this,
     );
 
@@ -68,9 +129,9 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
       curve: Curves.easeOutCubic,
     ));
 
-    // Progress animation
+    // Progress animation - reduced duration
     _progressController = AnimationController(
-      duration: const Duration(milliseconds: 2000),
+      duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
 
@@ -83,42 +144,57 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
   }
 
   void _startAnimationSequence() async {
-    if (!mounted) return;
-    await _logoController.forward();
+    if (!mounted || !_isInitialized) return;
 
-    if (!mounted) return;
-    await _textController.forward();
+    try {
+      debugPrint('🔧 Starting animation sequence...');
 
-    if (!mounted) return;
-    await _progressController.forward();
+      // Run animations in parallel for faster loading
+      await Future.wait([
+        _logoController.forward(),
+        _textController.forward(),
+        _progressController.forward(),
+      ]);
 
-    // Navigate to home after animations complete
-    await Future.delayed(const Duration(milliseconds: 500));
+      // Short delay before navigation
+      await Future.delayed(const Duration(milliseconds: 200));
 
-    if (mounted) {
-      Navigator.of(context).pushReplacement(
-        PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) =>
-              const HomeView(),
-          transitionDuration: const Duration(milliseconds: 800),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return FadeTransition(
-              opacity: animation,
-              child: SlideTransition(
-                position: Tween<Offset>(
-                  begin: const Offset(0.0, 0.1),
-                  end: Offset.zero,
-                ).animate(CurvedAnimation(
-                  parent: animation,
-                  curve: Curves.easeOutCubic,
-                )),
-                child: child,
-              ),
-            );
-          },
-        ),
-      );
+      if (mounted) {
+        debugPrint('🔧 Navigating to home...');
+        _navigateToHome();
+      }
+    } catch (e) {
+      debugPrint('❌ Error during animation sequence: $e');
+      // Hata durumunda da home'a git
+      _navigateToHome();
     }
+  }
+
+  void _navigateToHome() {
+    if (!mounted) return;
+
+    Navigator.of(context).pushReplacement(
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const HomeView(),
+        transitionDuration: const Duration(milliseconds: 800),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(
+            opacity: animation,
+            child: SlideTransition(
+              position: Tween<Offset>(
+                begin: const Offset(0.0, 0.1),
+                end: Offset.zero,
+              ).animate(CurvedAnimation(
+                parent: animation,
+                curve: Curves.easeOutCubic,
+              )),
+              child: child,
+            ),
+          );
+        },
+      ),
+    );
   }
 
   @override
@@ -131,6 +207,82 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    // Eğer zaten store varsa, loading göster ve home'a git
+    if (_shouldSkipToHome) {
+      return Scaffold(
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color(0xFF667EEA),
+                Color(0xFF764BA2),
+                Color(0xFF6366F1),
+              ],
+            ),
+          ),
+          child: const Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  'Loading your store...',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
+    // Hata durumunda basit loading göster
+    if (_hasError) {
+      return Scaffold(
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color(0xFF667EEA),
+                Color(0xFF764BA2),
+                Color(0xFF6366F1),
+              ],
+            ),
+          ),
+          child: const Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  'Loading...',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(

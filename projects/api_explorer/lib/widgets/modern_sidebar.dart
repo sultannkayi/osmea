@@ -777,7 +777,8 @@ class _ModernSidebarState extends State<ModernSidebar>
                                                 size: isNarrow ? 18 : 20,
                                               ),
                                               title: Text(
-                                                category.displayName,
+                                                _getCategoryDisplayName(
+                                                    category),
                                                 style: TextStyle(
                                                   color: isSelected
                                                       ? Theme.of(context)
@@ -1176,6 +1177,123 @@ class _ModernSidebarState extends State<ModernSidebar>
       default:
         // Use normal API Service Registry for other categories
         return ApiServiceRegistry.getSubcategoriesByCategory(category);
+    }
+  }
+
+  String _getCategoryDisplayName(ApiCategory category) {
+    switch (category) {
+      case ApiCategory.shopify:
+        return 'Shopify';
+      case ApiCategory.woocommerce:
+        return 'WooCommerce';
+      case ApiCategory.shopifyGraphql:
+        return 'Shopify GraphQL';
+      case ApiCategory.graphql:
+        return 'GraphQL';
+      case ApiCategory.graphqlQueries:
+        return 'GraphQL Queries';
+      case ApiCategory.graphqlMutations:
+        return 'GraphQL Mutations';
+      // GraphQL Products and Collections
+      case ApiCategory.graphqlProductsAndCollections:
+        return 'GraphQL Products & Collections';
+      case ApiCategory.graphqlProductsAndCollectionsQueries:
+        return 'GraphQL Products & Collections Queries';
+      case ApiCategory.graphqlProductsAndCollectionsMutations:
+        return 'GraphQL Products & Collections Mutations';
+      // GraphQL Orders
+      case ApiCategory.graphqlOrders:
+        return 'GraphQL Orders';
+      case ApiCategory.graphqlOrdersQueries:
+        return 'GraphQL Orders Queries';
+      case ApiCategory.graphqlOrdersMutations:
+        return 'GraphQL Orders Mutations';
+      // GraphQL Customers
+      case ApiCategory.graphqlCustomers:
+        return 'GraphQL Customers';
+      case ApiCategory.graphqlCustomersQueries:
+        return 'GraphQL Customers Queries';
+      case ApiCategory.graphqlCustomersMutations:
+        return 'GraphQL Customers Mutations';
+      // GraphQL Shop
+      case ApiCategory.graphqlShop:
+        return 'GraphQL Shop';
+      case ApiCategory.graphqlShopQueries:
+        return 'GraphQL Shop Queries';
+      case ApiCategory.access:
+        return 'Access';
+      case ApiCategory.storefront:
+        return 'Storefront';
+      case ApiCategory.admin:
+        return 'Admin';
+      case ApiCategory.catalog:
+        return 'Catalog';
+      case ApiCategory.customer:
+        return 'Customer';
+      case ApiCategory.discounts:
+        return 'Discounts';
+      case ApiCategory.billing:
+        return 'Billing';
+      case ApiCategory.events:
+        return 'Events';
+      case ApiCategory.inventory:
+        return 'Inventory';
+      case ApiCategory.orders:
+        return 'Orders';
+      case ApiCategory.marketingEvent:
+        return 'Marketing Event';
+      case ApiCategory.giftCard:
+        return 'Gift Card';
+      case ApiCategory.metafield:
+        return 'Metafield';
+      case ApiCategory.onlineStore:
+        return 'Online Store';
+      case ApiCategory.products:
+        return 'Products';
+      case ApiCategory.storeProperties:
+        return 'Store Properties';
+      case ApiCategory.tendertransaction:
+        return 'Tender Transaction';
+      case ApiCategory.webhooks:
+        return 'Webhooks';
+      case ApiCategory.woocommerceCoupons:
+        return 'WooCommerce Coupons';
+      case ApiCategory.woocommerceProducts:
+        return 'WooCommerce Products';
+      case ApiCategory.woocommerceOrders:
+        return 'WooCommerce Orders';
+      case ApiCategory.woocommerceCustomers:
+        return 'WooCommerce Customers';
+      case ApiCategory.woocommerceWebhooks:
+        return 'WooCommerce Webhooks';
+      case ApiCategory.woocommerceSystemStatus:
+        return 'WooCommerce System Status';
+      case ApiCategory.woocommerceReports:
+        return 'WooCommerce Reports';
+      case ApiCategory.woocommerceShippingMethods:
+        return 'WooCommerce Shipping Methods';
+      case ApiCategory.woocommerceShippingZones:
+        return 'WooCommerce Shipping Zones';
+      case ApiCategory.woocommerceShippingZoneMethods:
+        return 'WooCommerce Shipping Zone Methods';
+      case ApiCategory.woocommercePaymentGateways:
+        return 'WooCommerce Payment Gateways';
+      case ApiCategory.woocommerceSetting:
+        return 'WooCommerce Setting';
+      case ApiCategory.woocommerceData:
+        return 'WooCommerce Data';
+      case ApiCategory.woocommerceContinents:
+        return 'WooCommerce Continents';
+      case ApiCategory.woocommerceCountries:
+        return 'WooCommerce Countries';
+      case ApiCategory.woocommerceCurrencies:
+        return 'WooCommerce Currencies';
+      case ApiCategory.woocommerceRefunds:
+        return 'WooCommerce Refunds';
+      case ApiCategory.woocommerceTaxes:
+        return 'WooCommerce Taxes';
+      default:
+        return category.displayName;
     }
   }
 }

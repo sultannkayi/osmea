@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:apis/apis.dart';
 import 'package:apis/services/store_change_notifier.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:api_explorer/services/app_state_persistence.dart';
 import 'package:api_explorer/widgets/app_header.dart';
 import 'package:api_explorer/widgets/store_setup_wizard.dart';
 import 'package:api_explorer/widgets/store_management_dialog.dart';
@@ -48,6 +49,58 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     _checkAndShowConfigPopup();
     _loadCurrentStore();
     _listenToStoreChanges();
+    _restoreAppState(); // Restore previous state
+  }
+
+  // State persistence methods
+  Future<void> _saveAppState() async {
+    if (_selectedService != null) {
+      await AppStatePersistence.saveCurrentApiQuery(
+        query: _selectedService!.name,
+        service: _selectedService!.name,
+        method: _selectedMethod,
+        parameters: _parameters,
+        rawBody: _rawBody,
+        currentApiUrl: _currentApiUrl,
+      );
+      debugPrint(
+          '✅ App state saved: ${_selectedService!.name} - $_selectedMethod');
+    }
+  }
+
+  Future<void> _restoreAppState() async {
+    try {
+      final savedState = await AppStatePersistence.loadCurrentApiQuery();
+      if (savedState != null) {
+        setState(() {
+          _selectedMethod = savedState['method'] ?? 'GET';
+          _parameters =
+              Map<String, String>.from(savedState['parameters'] ?? {});
+          _rawBody = savedState['rawBody'];
+          _currentApiUrl = savedState['currentApiUrl'] ?? '';
+        });
+
+        // Try to restore the selected service
+        final serviceName = savedState['service'];
+        if (serviceName != null) {
+          final services = ApiServiceRegistry.all;
+          final service = services.firstWhere(
+            (s) => s.name == serviceName,
+            orElse: () => services.first,
+          );
+          if (service != null) {
+            setState(() {
+              _selectedService = service;
+            });
+            debugPrint('✅ Restored service: ${service.name}');
+          }
+        }
+
+        debugPrint('✅ App state restored successfully');
+      }
+    } catch (e) {
+      debugPrint('❌ Error restoring app state: $e');
+    }
   }
 
   void _initializeAnimations() {
@@ -241,6 +294,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
       _responseData = null;
     });
     _updateApiUrl(service, _selectedMethod, {});
+    _saveAppState(); // Save state when service changes
   }
 
   void _onMethodChanged(String method) {
@@ -252,6 +306,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     if (_selectedService != null) {
       _updateApiUrl(_selectedService!, method, {});
     }
+    _saveAppState(); // Save state when method changes
   }
 
   void _onParametersChanged(Map<String, String> parameters) {
@@ -261,12 +316,14 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     if (_selectedService != null) {
       _updateApiUrl(_selectedService!, _selectedMethod, parameters);
     }
+    _saveAppState(); // Save state when parameters change
   }
 
   void _onRawBodyChanged(String? body) {
     setState(() {
       _rawBody = body;
     });
+    _saveAppState(); // Save state when raw body changes
   }
 
   void _toggleDrawer() {
