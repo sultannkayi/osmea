@@ -2,6 +2,8 @@
 // 🌐🔧 Import for API client configuration
 import 'package:api_explorer/services/api_service_registry.dart';
 import 'package:api_explorer/views/splash_view.dart';
+import 'package:apis/apis.dart';
+import 'package:apis/services/wizard_helper.dart';
 import 'package:apis/dio_config/api_dio_client.dart';
 
 // 🧩🖼️ Import for Flutter material design widgets
@@ -40,6 +42,15 @@ Future<void> main() async {
 
   // 🔗🧬 Set up dependency injection
   await configureDependencies();
+
+  // 🔧 Initialize WizardHelper for store management
+  try {
+    await WizardHelper.init();
+    debugPrint('✅ WizardHelper initialized successfully');
+  } catch (e) {
+    debugPrint('❌ Error initializing WizardHelper: $e');
+    // 🔄 Continue anyway - we'll handle errors in the UI
+  }
 
   // 🍪📦 Prepare cookies storage if not running on web
   if (!kIsWeb) await ApiDioClient.prepareCookiesJar();

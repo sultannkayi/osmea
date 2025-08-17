@@ -1,198 +1,194 @@
+import 'package:apis/services/store_management_service.dart';
+import 'package:apis/services/store_change_notifier.dart';
+import 'package:apis/models/store_configuration.dart';
 import 'package:flutter/foundation.dart';
-import 'package:apis/services/cross_platform_storage.dart';
 
-/// Store configuration model
-class StoreConfiguration {
-  final String? storeName;
-  final String? shopifyAccessToken;
-  final String? apiVersion;
-  final String? storeUrl;
-  final String? username;
-  final String? password;
-  final String? platform; // 'shopify' or 'woocommerce'
-
-  StoreConfiguration({
-    this.storeName,
-    this.shopifyAccessToken,
-    this.apiVersion,
-    this.storeUrl,
-    this.username,
-    this.password,
-    this.platform,
-  });
-
-  Map<String, dynamic> toJson() {
-    return {
-      'storeName': storeName,
-      'shopifyAccessToken': shopifyAccessToken,
-      'apiVersion': apiVersion,
-      'storeUrl': storeUrl,
-      'username': username,
-      'password': password,
-      'platform': platform,
-    };
-  }
-
-  factory StoreConfiguration.fromJson(Map<String, dynamic> json) {
-    return StoreConfiguration(
-      storeName: json['storeName'],
-      shopifyAccessToken: json['shopifyAccessToken'],
-      apiVersion: json['apiVersion'],
-      storeUrl: json['storeUrl'],
-      username: json['username'],
-      password: json['password'],
-      platform: json['platform'],
-    );
-  }
-
-  bool get isComplete {
-    if (platform == 'shopify') {
-      return storeName != null &&
-          storeName!.isNotEmpty &&
-          shopifyAccessToken != null &&
-          shopifyAccessToken!.isNotEmpty &&
-          apiVersion != null &&
-          apiVersion!.isNotEmpty;
-    } else if (platform == 'woocommerce') {
-      return storeUrl != null &&
-          storeUrl!.isNotEmpty &&
-          username != null &&
-          username!.isNotEmpty &&
-          password != null &&
-          password!.isNotEmpty &&
-          apiVersion != null &&
-          apiVersion!.isNotEmpty;
-    }
-    return false;
-  }
-
-  String get baseUrl {
-    if (platform == 'shopify') {
-      if (storeName == null || storeName!.isEmpty) {
-        return 'https://<STORE_NAME>.myshopify.com/admin';
-      }
-      return 'https://$storeName.myshopify.com/admin';
-    } else if (platform == 'woocommerce') {
-      if (storeUrl == null || storeUrl!.isEmpty) {
-        return 'https://<YOUR_SITE>.com';
-      }
-      return storeUrl!;
-    }
-    return '';
-  }
-}
-
-/// Wizard helper service for managing store configurations
 class WizardHelper {
-  static const String _wizardCompletedKey = 'wizard_completed';
-  static final CrossPlatformStorage _storage = CrossPlatformStorage();
+  static final WizardHelper _instance = WizardHelper._internal();
+  factory WizardHelper() => _instance;
+  WizardHelper._internal();
+
+  static StoreManagementService? _storeService;
+  static StoreChangeNotifier? _changeNotifier;
+  static bool _isInitialized = false;
 
   /// Initialize the wizard helper
   static Future<void> init() async {
-    await _storage.init();
-  }
-
-  /// Check if wizard has been completed
-  static Future<bool> isWizardCompleted() async {
-    final completed = await _storage.loadApiSetting(_wizardCompletedKey);
-    return completed == 'true';
-  }
-
-  /// Mark wizard as completed
-  static Future<void> markWizardCompleted() async {
-    await _storage.saveApiSetting(_wizardCompletedKey, 'true');
-  }
-
-  /// Save store configuration
-  static Future<void> saveConfiguration(StoreConfiguration config) async {
-    await _storage.saveStoreConfiguration(config.toJson());
-  }
-
-  /// Load store configuration
-  static Future<StoreConfiguration?> loadConfiguration() async {
-    // Try to load from storage
-    var config = await _storage.loadStoreConfiguration('shopify');
-    if (config != null) {
-      return StoreConfiguration.fromJson(config);
+    if (_isInitialized) {
+      debugPrint('🔧 WizardHelper already initialized, skipping...');
+      return;
     }
 
-    // Try WooCommerce configuration
-    config = await _storage.loadStoreConfiguration('woocommerce');
-    if (config != null) {
-      return StoreConfiguration.fromJson(config);
+    try {
+      debugPrint('🔧 Initializing WizardHelper...');
+      _storeService = StoreManagementService();
+      _changeNotifier = StoreChangeNotifier();
+      await _storeService!.init();
+      _isInitialized = true;
+      debugPrint('✅ WizardHelper initialized successfully');
+    } catch (e) {
+      debugPrint('❌ Error initializing WizardHelper: $e');
+      rethrow;
     }
+  }
 
-    return null;
+  /// Get the store change notifier stream
+  static Stream<StoreChangeEvent> get storeChangeStream {
+    if (_changeNotifier == null) {
+      throw Exception('WizardHelper not initialized. Call init() first.');
+    }
+    return _changeNotifier!.stream;
+  }
+
+  /// Add a new store
+  static Future<bool> addStore(StoreConfiguration config) async {
+    if (_storeService == null) {
+      throw Exception('WizardHelper not initialized. Call init() first.');
+    }
+    return await _storeService!.addStore(config);
+  }
+
+  /// Update an existing store
+  static Future<bool> updateStore(StoreConfiguration config) async {
+    if (_storeService == null) {
+      throw Exception('WizardHelper not initialized. Call init() first.');
+    }
+    return await _storeService!.updateStore(config);
+  }
+
+  /// Get current store
+  static Future<StoreConfiguration?> getCurrentStore() async {
+    if (_storeService == null) {
+      throw Exception('WizardHelper not initialized. Call init() first.');
+    }
+    return await _storeService!.getCurrentStore();
+  }
+
+  /// Get all stores
+  static Future<List<StoreConfiguration>> getAllStores() async {
+    if (_storeService == null) {
+      throw Exception('WizardHelper not initialized. Call init() first.');
+    }
+    return await _storeService!.getAllStores();
+  }
+
+  /// Get active stores
+  static Future<List<StoreConfiguration>> getActiveStores() async {
+    if (_storeService == null) {
+      throw Exception('WizardHelper not initialized. Call init() first.');
+    }
+    return await _storeService!.getActiveStores();
+  }
+
+  /// Get stores by platform
+  static Future<List<StoreConfiguration>> getStoresByPlatform(
+      String platform) async {
+    if (_storeService == null) {
+      throw Exception('WizardHelper not initialized. Call init() first.');
+    }
+    return _storeService!.getStoresByPlatform(platform);
+  }
+
+  /// Get store profile for UI display
+  static Future<Map<String, dynamic>?> getStoreProfile() async {
+    try {
+      final currentStore = await getCurrentStore();
+      if (currentStore == null) {
+        return null;
+      }
+
+      return {
+        'id': currentStore.id,
+        'name': currentStore.displayName,
+        'platform': currentStore.platform,
+        'platformDisplayName': _getPlatformDisplayName(currentStore.platform),
+        'status': currentStore.isActive ? 'Active' : 'Inactive',
+        'icon': _getPlatformIcon(currentStore.platform),
+        'color': _getPlatformColor(currentStore.platform),
+        'baseUrl': currentStore.baseUrl,
+        'apiVersion': currentStore.apiVersion,
+      };
+    } catch (e) {
+      debugPrint('❌ Error getting store profile: $e');
+      return null;
+    }
   }
 
   /// Load configuration for specific platform
-  static Future<StoreConfiguration?> loadConfigurationForPlatform(String platform) async {
-    final config = await _storage.loadStoreConfiguration(platform);
-    if (config != null) {
-      return StoreConfiguration.fromJson(config);
+  static Future<StoreConfiguration?> loadConfiguration() async {
+    try {
+      return await getCurrentStore();
+    } catch (e) {
+      debugPrint('❌ Error loading configuration: $e');
+      return null;
     }
-    return null;
-  }
-
-  /// Clear configuration
-  static Future<void> clearConfiguration() async {
-    await _storage.deleteStoreConfiguration('shopify');
-    await _storage.deleteStoreConfiguration('woocommerce');
-    await _storage.deleteApiSetting(_wizardCompletedKey);
   }
 
   /// Get configuration status
   static Future<String> getConfigurationStatus() async {
-    final config = await loadConfiguration();
-    if (config == null) {
-      return 'No configuration found';
-    }
+    try {
+      final config = await getCurrentStore();
+      if (config == null) {
+        return 'No configuration found';
+      }
 
-    if (config.isComplete) {
-      return 'Configuration complete for ${config.platform}';
-    } else {
-      return 'Configuration incomplete for ${config.platform}';
+      if (config.isComplete) {
+        return 'Configuration complete for ${config.platform}';
+      } else {
+        return 'Configuration incomplete for ${config.platform}';
+      }
+    } catch (e) {
+      return 'Error getting configuration status: $e';
     }
   }
 
-  /// Validate configuration
-  static Future<bool> validateConfiguration(StoreConfiguration config) async {
-    if (config.platform == null) return false;
+  /// Get storage information
+  static Future<Map<String, dynamic>> getStorageInfo() async {
+    try {
+      final allStores = await getAllStores();
+      final currentStore = await getCurrentStore();
 
-    if (config.platform == 'shopify') {
-      return config.storeName != null &&
-          config.storeName!.isNotEmpty &&
-          config.shopifyAccessToken != null &&
-          config.shopifyAccessToken!.isNotEmpty &&
-          config.apiVersion != null &&
-          config.apiVersion!.isNotEmpty;
-    } else if (config.platform == 'woocommerce') {
-      return config.storeUrl != null &&
-          config.storeUrl!.isNotEmpty &&
-          config.username != null &&
-          config.username!.isNotEmpty &&
-          config.password != null &&
-          config.password!.isNotEmpty &&
-          config.apiVersion != null &&
-          config.apiVersion!.isNotEmpty;
+      return {
+        'total_stores': allStores.length,
+        'active_stores': allStores.where((s) => s.isActive).length,
+        'current_store': currentStore?.displayName ?? 'None',
+        'platforms': allStores.map((s) => s.platform).toSet().toList(),
+      };
+    } catch (e) {
+      return {
+        'error': 'Failed to get storage info: $e',
+        'total_stores': 0,
+        'active_stores': 0,
+        'current_store': 'Error',
+        'platforms': [],
+      };
     }
-
-    return false;
   }
 
-  /// Get default API version for platform
-  static String getDefaultApiVersion(String platform) {
-    if (platform == 'shopify') {
-      return '2024-01';
-    } else if (platform == 'woocommerce') {
-      return 'v3';
+  static String _getPlatformIcon(String platform) {
+    switch (platform.toLowerCase()) {
+      case 'shopify':
+        return '🛍️';
+      case 'woocommerce':
+        return '🛒';
+      default:
+        return '🏪';
     }
-    return '';
   }
 
-  /// Get platform display name
-  static String getPlatformDisplayName(String platform) {
-    switch (platform) {
+  static String _getPlatformColor(String platform) {
+    switch (platform.toLowerCase()) {
+      case 'shopify':
+        return '#96bf47';
+      case 'woocommerce':
+        return '#7f54b3';
+      default:
+        return '#666666';
+    }
+  }
+
+  static String _getPlatformDisplayName(String platform) {
+    switch (platform.toLowerCase()) {
       case 'shopify':
         return 'Shopify';
       case 'woocommerce':
@@ -200,49 +196,5 @@ class WizardHelper {
       default:
         return 'Unknown';
     }
-  }
-
-  /// Get required fields for platform
-  static List<String> getRequiredFields(String platform) {
-    if (platform == 'shopify') {
-      return ['Store Name', 'Access Token', 'API Version'];
-    } else if (platform == 'woocommerce') {
-      return ['Store URL', 'Username', 'Password', 'API Version'];
-    }
-    return [];
-  }
-
-  /// Get field hints for platform
-  static Map<String, String> getFieldHints(String platform) {
-    if (platform == 'shopify') {
-      return {
-        'Store Name': 'Your store name (e.g., mystore)',
-        'Access Token': 'Your Shopify private app access token',
-        'API Version': 'API version (e.g., 2024-01)',
-      };
-    } else if (platform == 'woocommerce') {
-      return {
-        'Store URL': 'Your WordPress site URL (e.g., https://mysite.com)',
-        'Username': 'WooCommerce REST API username',
-        'Password': 'WooCommerce REST API password',
-        'API Version': 'API version (e.g., v3)',
-      };
-    }
-    return {};
-  }
-
-  /// Get storage information
-  static Future<Map<String, dynamic>> getStorageInfo() async {
-    return await _storage.getStorageInfo();
-  }
-
-  /// Clear all data
-  static Future<void> clearAllData() async {
-    await _storage.clearAll();
-  }
-
-  /// Close storage connections
-  static Future<void> close() async {
-    await _storage.close();
   }
 }

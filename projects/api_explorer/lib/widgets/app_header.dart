@@ -1,4 +1,5 @@
 import 'package:api_explorer/styles/app_theme.dart';
+import 'package:api_explorer/widgets/store_profile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'theme_toggle_button.dart';
@@ -12,6 +13,8 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? onDrawerToggle;
   final bool isDarkMode;
   final VoidCallback? onDebugTest;
+  final VoidCallback? onProfileTap;
+  final VoidCallback? onStoreChange;
 
   const AppHeader({
     super.key,
@@ -22,6 +25,8 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
     this.onDrawerToggle,
     this.isDarkMode = false,
     this.onDebugTest,
+    this.onProfileTap,
+    this.onStoreChange,
   });
 
   @override
@@ -31,13 +36,20 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: colorScheme.surface, // Use theme surface color
+        color: colorScheme.surface,
         border: Border(
           bottom: BorderSide(
-            color: colorScheme.primary.withValues(alpha: 0.5),
-            width: 2,
+            color: colorScheme.outline.withValues(alpha: 0.2),
+            width: 1,
           ),
         ),
+        boxShadow: [
+          BoxShadow(
+            color: colorScheme.shadow.withValues(alpha: 0.05),
+            offset: const Offset(0, 2),
+            blurRadius: 8,
+          ),
+        ],
       ),
       child: AppBar(
         backgroundColor: Colors.transparent,
@@ -61,11 +73,11 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 gradient: AppTheme.createMethodGradient(
-                  'PATCH', // Use purple gradient from AppTheme
+                  'PATCH',
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
-                borderRadius: BorderRadius.circular(AppTheme.radiusSm),
+                borderRadius: BorderRadius.circular(8),
               ),
               child: const Icon(
                 Icons.api_rounded,
@@ -83,7 +95,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
-                    color: colorScheme.onSurface, // Use theme onSurface color
+                    color: colorScheme.onSurface,
                   ),
                 ),
                 Text(
@@ -101,15 +113,13 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
             if (apiUrl.isNotEmpty) ...[
               Expanded(
                 child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
-                    color: colorScheme
-                        .surfaceContainerHighest, // Use theme surface variant
-                    borderRadius: BorderRadius.circular(AppTheme.radiusXs),
+                    color: colorScheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: colorScheme.primary.withValues(alpha: 0.5),
-                      width: 1.5,
+                      color: colorScheme.outline.withValues(alpha: 0.2),
+                      width: 1,
                     ),
                   ),
                   child: Row(
@@ -136,9 +146,8 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
                         onTap: () async {
                           try {
                             if (apiUrl.isNotEmpty) {
-                              await Clipboard.setData(
-                                  ClipboardData(text: apiUrl));
-                              onUrlCopied(); // Call the callback to show success message
+                              await Clipboard.setData(ClipboardData(text: apiUrl));
+                              onUrlCopied();
                             }
                           } catch (e) {
                             debugPrint('❌ Failed to copy URL: $e');
@@ -153,8 +162,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
                           child: Icon(
                             Icons.copy_rounded,
                             size: 14,
-                            color:
-                                colorScheme.primary, // Use theme primary color
+                            color: colorScheme.primary,
                           ),
                         ),
                       ),
@@ -167,6 +175,13 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
           ],
         ),
         actions: [
+          // Store Profile Widget
+          StoreProfileWidget(
+            onProfileTap: onProfileTap,
+            onStoreChange: onStoreChange,
+          ),
+          const SizedBox(width: 8),
+          
           // Theme Toggle
           Padding(
             padding: const EdgeInsets.only(right: 16),

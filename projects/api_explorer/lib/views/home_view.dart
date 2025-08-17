@@ -1,11 +1,13 @@
+import 'package:flutter/material.dart';
+import 'package:apis/apis.dart';
+import 'package:apis/services/store_change_notifier.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
 import 'package:api_explorer/widgets/app_header.dart';
 import 'package:api_explorer/widgets/store_setup_wizard.dart';
-// WizardHelper artık apis paketinden geliyor
+import 'package:api_explorer/widgets/store_management_dialog.dart';
 import 'package:api_explorer/widgets/home/responsive_content.dart';
 import 'package:api_explorer/widgets/modern_sidebar.dart';
-import 'package:flutter/material.dart';
-import 'package:apis/apis.dart';
+import 'dart:async';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -24,6 +26,8 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   bool _loading = false;
   String _currentApiUrl = '';
   bool _isDarkMode = false;
+  StoreConfiguration? _selectedStore;
+  StreamSubscription<StoreChangeEvent>? _storeChangeSubscription;
 
   // Scaffold key for drawer control
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -42,6 +46,8 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     _initializeAnimations();
     _initializeDefaults();
     _checkAndShowConfigPopup();
+    _loadCurrentStore();
+    _listenToStoreChanges();
   }
 
   void _initializeAnimations() {
@@ -102,30 +108,32 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     });
   }
 
-  void _checkAndShowConfigPopup() async {
-    // Wait widgets to be mounted
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (mounted) {
-        final shouldShow = await StoreSetupWizard.shouldShow();
-        if (shouldShow && mounted) {
-          await StoreSetupWizard.show(context);
+  Future<void> _checkAndShowConfigPopup() async {
+    try {
+      final currentStore = await WizardHelper.getCurrentStore();
+      if (currentStore == null) {
+        // No store configuration found, show setup wizard
+        if (mounted) {
+          _showSetupWizard();
         }
       }
-    });
+    } catch (e) {
+      debugPrint('❌ Error checking configuration: $e');
+    }
   }
 
   // Debug function to test config loading
   Future<void> _testConfigLoading() async {
     try {
-      final config = await WizardHelper.loadConfiguration();
-      if (config != null) {
-        final status = await WizardHelper.getConfigurationStatus();
-        _showSnackBar('Config Test: $status', isError: false);
+      final currentStore = await WizardHelper.getCurrentStore();
+      if (currentStore != null) {
+        _showSnackBar('Store Test: ${currentStore.displayName} is active',
+            isError: false);
       } else {
-        _showSnackBar('Config Test: No configuration found', isError: true);
+        _showSnackBar('Store Test: No store found', isError: true);
       }
     } catch (e) {
-      _showSnackBar('Config Test Error: $e', isError: true);
+      _showSnackBar('Store Test Error: $e', isError: true);
     }
   }
 
@@ -134,6 +142,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     _sidebarAnimationController.dispose();
     _responseAnimationController.dispose();
     _themeAnimationController.dispose();
+    _storeChangeSubscription?.cancel();
     super.dispose();
   }
 
@@ -373,6 +382,226 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     });
   }
 
+  void _onProfileTap() {
+    // Show store profile information
+    if (_selectedStore != null) {
+      _showStoreProfileDialog();
+    } else {
+      _showSnackBar('No store selected', isError: true);
+    }
+  }
+
+  void _onStoreChange() {
+    // Show store selector or management dialog
+    _showStoreManagementDialog(context);
+  }
+
+  void _refreshStoreProfile() {
+    _loadCurrentStore();
+  }
+
+  void _onStoreChanged(StoreConfiguration store) {
+    setState(() {
+      _selectedStore = store;
+    });
+    _updateApiUrlFromStore(store);
+  }
+
+  void _updateApiUrlFromStore(StoreConfiguration store) {
+    if (store != null) {
+      String baseUrl = store.baseUrl;
+      String apiVersion = store.apiVersion;
+
+      setState(() {
+        _currentApiUrl = '$baseUrl/api/$apiVersion/';
+      });
+
+      debugPrint('🔗 API URL updated automatically: $_currentApiUrl');
+
+      // Also update the network configuration
+      _updateNetworkConfiguration(store);
+
+      // Automatically populate with default API service if none selected
+      if (_selectedService == null) {
+        _populateDefaultApiService(store);
+      }
+    }
+  }
+
+  void _updateNetworkConfiguration(StoreConfiguration store) {
+    try {
+      if (store.platform == 'shopify') {
+        // Update Shopify network configuration
+        ApiNetwork.updateStoreName(store.storeName);
+        ApiNetwork.updateShopifyAccessToken(store.shopifyAccessToken!);
+        ApiNetwork.updateApiVersion(store.apiVersion);
+
+        debugPrint('🔧 ApiNetwork updated with store: ${store.storeName}');
+        debugPrint(
+            '🔧 ApiNetwork updated with token: ${store.shopifyAccessToken}');
+        debugPrint('🔧 ApiNetwork updated with version: ${store.apiVersion}');
+      } else if (store.platform == 'woocommerce') {
+        // Update WooCommerce network configuration
+        WooNetwork.updateStoreUrl(store.storeUrl!);
+        WooNetwork.updateUsername(store.username!);
+        WooNetwork.updatePassword(store.password!);
+        WooNetwork.updateApiVersion(store.apiVersion);
+
+        debugPrint('🔧 WooNetwork updated with store URL: ${store.storeUrl}');
+      }
+
+      debugPrint('✅ Network configuration updated for ${store.platform}');
+    } catch (e) {
+      debugPrint('❌ Error updating network configuration: $e');
+    }
+  }
+
+  void _populateDefaultApiService(StoreConfiguration store) {
+    // Get available services for the platform
+    final services = ApiServiceRegistry.all;
+    final platformServices = services.where((service) {
+      if (store.platform == 'shopify') {
+        return !service.category.toString().contains('woocommerce');
+      } else if (store.platform == 'woocommerce') {
+        return service.category.toString().contains('woocommerce');
+      }
+      return false;
+    }).toList();
+
+    if (platformServices.isNotEmpty) {
+      // Select the first available service
+      final defaultService = platformServices.first;
+      setState(() {
+        _selectedService = defaultService;
+        _selectedMethod = defaultService.supportedMethods.first;
+      });
+
+      // Update the API URL with the selected service
+      _updateApiUrl(defaultService, _selectedMethod, {});
+
+      debugPrint(
+          '🔧 Auto-selected default API service: ${defaultService.name}');
+    }
+  }
+
+  Future<void> _loadCurrentStore() async {
+    try {
+      final store = await WizardHelper.getCurrentStore();
+      if (store != null) {
+        setState(() {
+          _selectedStore = store;
+        });
+        _updateApiUrlFromStore(store);
+      }
+    } catch (e) {
+      debugPrint('❌ Error loading current store: $e');
+    }
+  }
+
+  void _showStoreManagementDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => StoreManagementDialog(
+        storeService: StoreManagementService(),
+        onStoreChanged: (store) {
+          setState(() {
+            _selectedStore = store;
+          });
+          _updateApiUrlFromStore(store);
+        },
+      ),
+    );
+  }
+
+  void _showStoreProfileDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Row(
+          children: [
+            Icon(Icons.store, color: Theme.of(context).colorScheme.primary),
+            const SizedBox(width: 8),
+            const Text('Store Profile'),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Store: ${_selectedStore?.displayName ?? "Unknown"}'),
+            Text(
+                'Platform: ${_selectedStore?.platform.toUpperCase() ?? "Unknown"}'),
+            Text(
+                'Status: ${_selectedStore?.isComplete == true ? "Active" : "Incomplete"}'),
+            if (_selectedStore?.createdAt != null)
+              Text(
+                  'Created: ${_selectedStore!.createdAt.toString().split('.')[0]}'),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Close'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _listenToStoreChanges() {
+    try {
+      _storeChangeSubscription = WizardHelper.storeChangeStream.listen(
+        (event) {
+          debugPrint('🔄 HomeView: Store change detected: ${event.type}');
+          switch (event.type) {
+            case StoreChangeType.added:
+            case StoreChangeType.switched:
+              if (event.data is StoreConfiguration) {
+                final store = event.data as StoreConfiguration;
+                setState(() {
+                  _selectedStore = store;
+                });
+                _updateApiUrlFromStore(store);
+              }
+              break;
+            case StoreChangeType.updated:
+              if (event.data is StoreConfiguration) {
+                final store = event.data as StoreConfiguration;
+                if (store.id == _selectedStore?.id) {
+                  setState(() {
+                    _selectedStore = store;
+                  });
+                  _updateApiUrlFromStore(store);
+                }
+              }
+              break;
+            default:
+              break;
+          }
+        },
+        onError: (error) {
+          debugPrint('❌ Error listening to store changes in HomeView: $error');
+        },
+      );
+    } catch (e) {
+      debugPrint('❌ Error setting up store change listener in HomeView: $e');
+    }
+  }
+
+  void _showSetupWizard() {
+    showDialog(
+      context: context,
+      builder: (context) => StoreSetupWizard(
+        onStoreAdded: (store) {
+          setState(() {
+            _selectedStore = store;
+          });
+          _updateApiUrlFromStore(store);
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -395,7 +624,8 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
               onThemeToggle: _toggleTheme,
               onDrawerToggle: _toggleDrawer,
               isDarkMode: _isDarkMode,
-              onDebugTest: _testConfigLoading,
+              onProfileTap: _onProfileTap,
+              onStoreChange: _onStoreChange,
             ),
             drawer: Drawer(
               width: _calculateDrawerWidth(screenWidth),

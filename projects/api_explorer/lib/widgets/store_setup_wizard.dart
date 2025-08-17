@@ -1,26 +1,38 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:apis/apis.dart';
 import 'package:get_it/get_it.dart';
 
 class StoreSetupWizard extends StatefulWidget {
-  const StoreSetupWizard({super.key});
+  final Function(StoreConfiguration)? onStoreAdded;
+
+  const StoreSetupWizard({
+    super.key,
+    this.onStoreAdded,
+  });
 
   @override
   State<StoreSetupWizard> createState() => _StoreSetupWizardState();
 
-  static Future<void> show(BuildContext context) async {
+  static Future<void> show(BuildContext context,
+      {Function(StoreConfiguration)? onStoreAdded}) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false,
       barrierColor: Colors.transparent,
       builder: (BuildContext context) {
-        return const StoreSetupWizard();
+        return StoreSetupWizard(onStoreAdded: onStoreAdded);
       },
     );
   }
 
   static Future<bool> shouldShow() async {
-    return !(await WizardHelper.isWizardCompleted());
+    try {
+      final currentStore = await WizardHelper.getCurrentStore();
+      return currentStore == null;
+    } catch (e) {
+      return true; // Show wizard if there's an error
+    }
   }
 }
 
@@ -33,22 +45,17 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
 
   int _currentStep = 0;
   String? _selectedPlatform;
+  String _apiVersion = '2024-07';
+  bool _isLoading = false;
   final _formKey = GlobalKey<FormState>();
-
-  // Controllers for form fields
-  final _storeNameController = TextEditingController();
-  final _accessTokenController = TextEditingController();
-  final _apiVersionController = TextEditingController();
-  final _storeUrlController = TextEditingController();
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    _selectedPlatform = 'shopify';
+    _apiVersion = '2024-07';
     _initializeAnimations();
     _loadExistingConfiguration();
-    _animationController.forward();
   }
 
   void _initializeAnimations() {
@@ -80,20 +87,166 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
       parent: _animationController,
       curve: const Interval(0.2, 1.0, curve: Curves.easeOutCubic),
     ));
+
+    _animationController.forward();
+  }
+
+  // Controllers for form fields
+  final _storeNameController = TextEditingController();
+  final _accessTokenController = TextEditingController();
+  final _apiVersionController = TextEditingController();
+  final _storeUrlController = TextEditingController();
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  bool _validateForm() {
+    if (_selectedPlatform == null) {
+      _showErrorMessage('Please select a platform first');
+      return false;
+    }
+
+    if (_storeNameController.text.trim().isEmpty) {
+      _showErrorMessage('Store name is required');
+      return false;
+    }
+
+    if (_selectedPlatform == 'shopify') {
+      if (_accessTokenController.text.trim().isEmpty) {
+        _showErrorMessage('Access token is required for Shopify');
+        return false;
+      }
+    } else if (_selectedPlatform == 'woocommerce') {
+      if (_storeUrlController.text.trim().isEmpty) {
+        _showErrorMessage('Store URL is required for WooCommerce');
+        return false;
+      }
+      if (_usernameController.text.trim().isEmpty) {
+        _showErrorMessage('Username is required for WooCommerce');
+        return false;
+      }
+      if (_passwordController.text.trim().isEmpty) {
+        _showErrorMessage('Password is required for WooCommerce');
+        return false;
+      }
+    }
+
+    if (_apiVersionController.text.trim().isEmpty) {
+      _showErrorMessage('API version is required');
+      return false;
+    }
+
+    return true;
+  }
+
+  void _showSuccessMessage() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Store configuration saved successfully!'),
+        backgroundColor: Colors.green,
+      ),
+    );
+  }
+
+  void _showErrorMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: Colors.red,
+      ),
+    );
+  }
+
+  Future<void> _reinitializeNetworks(StoreConfiguration config) async {
+    try {
+      debugPrint('🔧 Reinitializing networks for ${config.platform}');
+
+      if (config.platform == 'shopify') {
+        // Initialize Shopify network with new store configuration
+        final getIt = GetIt.instance;
+
+        // Update ApiNetwork with new store info
+        ApiNetwork.updateStoreName(config.storeName);
+        ApiNetwork.updateShopifyAccessToken(config.shopifyAccessToken!);
+        ApiNetwork.updateApiVersion(config.apiVersion);
+
+        debugPrint('🔧 ApiNetwork updated with store: ${config.storeName}');
+        debugPrint(
+            '🔧 ApiNetwork updated with token: ${config.shopifyAccessToken}');
+        debugPrint('🔧 ApiNetwork updated with version: ${config.apiVersion}');
+      } else if (config.platform == 'woocommerce') {
+        // Initialize WooCommerce network with new store configuration
+        final getIt = GetIt.instance;
+
+        // Update WooNetwork with new store info
+        WooNetwork.updateStoreUrl(config.storeUrl!);
+        WooNetwork.updateUsername(config.username!);
+        WooNetwork.updatePassword(config.password!);
+        WooNetwork.updateApiVersion(config.apiVersion);
+
+        debugPrint('🔧 WooNetwork updated with store URL: ${config.storeUrl}');
+      }
+
+      debugPrint(
+          '✅ Networks reinitialized successfully for ${config.platform}');
+    } catch (e) {
+      debugPrint('🔧 Error reinitializing networks: $e');
+      rethrow;
+    }
   }
 
   Future<void> _loadExistingConfiguration() async {
-    final config = await WizardHelper.loadConfiguration();
-    if (config != null) {
-      setState(() {
-        _selectedPlatform = config.platform;
-        _storeNameController.text = config.storeName ?? '';
-        _accessTokenController.text = config.shopifyAccessToken ?? '';
-        _apiVersionController.text = config.apiVersion ?? '';
-        _storeUrlController.text = config.storeUrl ?? '';
-        _usernameController.text = config.username ?? '';
-        _passwordController.text = config.password ?? '';
-      });
+    try {
+      final currentStore = await WizardHelper.getCurrentStore();
+      if (currentStore != null) {
+        setState(() {
+          _selectedPlatform = currentStore.platform;
+          _apiVersionController.text = currentStore.apiVersion;
+        });
+      }
+    } catch (e) {
+      debugPrint('❌ Error loading existing configuration: $e');
+    }
+  }
+
+  String _getDefaultApiVersion(String platform) {
+    switch (platform.toLowerCase()) {
+      case 'shopify':
+        return '2024-07';
+      case 'woocommerce':
+        return 'v3';
+      default:
+        return '2024-07';
+    }
+  }
+
+  Map<String, String> _getFieldHints(String platform) {
+    switch (platform.toLowerCase()) {
+      case 'shopify':
+        return {
+          'Store Name': 'Your store name (e.g., mystore)',
+          'Access Token': 'Your Shopify private app access token',
+          'API Version': 'API version (e.g., 2024-07)',
+        };
+      case 'woocommerce':
+        return {
+          'Store URL': 'Your WordPress site URL (e.g., https://mysite.com)',
+          'Username': 'WooCommerce REST API username',
+          'Password': 'WooCommerce REST API password',
+          'API Version': 'API version (e.g., v3)',
+        };
+      default:
+        return {};
+    }
+  }
+
+  String _getPlatformDisplayName(String platform) {
+    switch (platform.toLowerCase()) {
+      case 'shopify':
+        return 'Shopify';
+      case 'woocommerce':
+        return 'WooCommerce';
+      default:
+        return 'Unknown';
     }
   }
 
@@ -141,73 +294,89 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
   }
 
   Future<void> _completeSetup() async {
-    print('🔧 _completeSetup called');
-    print('🔧 _selectedPlatform: $_selectedPlatform');
-
-    if (_selectedPlatform == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please select a platform first'),
-          backgroundColor: Colors.red,
-        ),
-      );
-      return;
-    }
-
-    // Validate configuration based on platform
-    final config = StoreConfiguration(
-      storeName: _storeNameController.text,
-      shopifyAccessToken: _accessTokenController.text,
-      apiVersion: _apiVersionController.text,
-      storeUrl: _storeUrlController.text,
-      username: _usernameController.text,
-      password: _passwordController.text,
-      platform: _selectedPlatform!,
-    );
-
-    if (!config.isComplete) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please fill all required fields correctly'),
-          backgroundColor: Colors.red,
-        ),
-      );
-      return;
-    }
+    if (!_validateForm()) return;
 
     try {
-      print('🔧 Config created: ${config.toJson()}');
+      setState(() {
+        _isLoading = true;
+      });
 
-      await WizardHelper.saveConfiguration(config);
-      await WizardHelper.markWizardCompleted();
+      final config = StoreConfiguration(
+        id: null,
+        storeName: _storeNameController.text.trim(),
+        displayName: _storeNameController.text.trim(),
+        platform: _selectedPlatform!,
+        shopifyAccessToken: _selectedPlatform == 'shopify'
+            ? _accessTokenController.text.trim()
+            : null,
+        apiVersion: _apiVersionController.text.trim(),
+        storeUrl: _selectedPlatform == 'woocommerce'
+            ? _storeUrlController.text.trim()
+            : null,
+        username: _selectedPlatform == 'woocommerce'
+            ? _usernameController.text.trim()
+            : null,
+        password: _selectedPlatform == 'woocommerce'
+            ? _passwordController.text.trim()
+            : null,
+        isActive: true,
+        isDefault: true,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+      );
 
-      print('🔧 Configuration saved successfully');
+      debugPrint('🔧 _completeSetup called');
+      debugPrint('🔧 _selectedPlatform: $_selectedPlatform');
+      debugPrint('🔧 Config created: ${config.toJson()}');
 
-      // Reinitialize networks after configuration
-      try {
-        await _reinitializeNetworks();
-      } catch (e) {
-        print('🔧 Network reinitialization warning: $e');
-      }
+      final success = await WizardHelper.addStore(config);
+      if (success) {
+        debugPrint('🔧 Configuration saved successfully');
 
-      if (mounted) {
-        Navigator.of(context).pop();
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Store configuration saved successfully!'),
-            backgroundColor: Colors.green,
-          ),
-        );
+        // Notify parent about the new store
+        widget.onStoreAdded?.call(config);
+
+        // Reinitialize networks after configuration
+        try {
+          await _reinitializeNetworks(config);
+        } catch (e) {
+          debugPrint('🔧 Failed to reinitialize networks: $e');
+          debugPrint('🔧 Network reinitialization warning: $e');
+        }
+
+        if (mounted) {
+          // Show success message and then close
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('✅ Store configuration saved successfully!'),
+              backgroundColor: Colors.green,
+              duration: Duration(seconds: 2),
+            ),
+          );
+
+          // Wait a bit for the message to be visible, then close
+          await Future.delayed(const Duration(milliseconds: 500));
+
+          if (mounted) {
+            Navigator.of(context).pop();
+          }
+        }
+      } else {
+        debugPrint('❌ Failed to save configuration');
+        if (mounted) {
+          _showErrorMessage('Failed to save configuration');
+        }
       }
     } catch (e) {
-      print('🔧 Error in _completeSetup: $e');
+      debugPrint('❌ Error in _completeSetup: $e');
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Error saving configuration: $e'),
-            backgroundColor: Colors.red,
-          ),
-        );
+        _showErrorMessage('Error: $e');
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
       }
     }
   }
@@ -241,20 +410,6 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
         return _buildReviewStep();
       default:
         return const SizedBox.shrink();
-    }
-  }
-
-  Future<void> _reinitializeNetworks() async {
-    try {
-      // Import GetIt
-      final getIt = GetIt.instance;
-
-      // Try to reinitialize networks from wizard configuration
-      await initNetworksFromWizard(getIt);
-      print('🔧 Networks reinitialized successfully');
-    } catch (e) {
-      print('🔧 Failed to reinitialize networks: $e');
-      rethrow;
     }
   }
 
@@ -312,7 +467,7 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
         setState(() {
           _selectedPlatform = value;
           // Set default API version
-          _apiVersionController.text = WizardHelper.getDefaultApiVersion(value);
+          _apiVersionController.text = _getDefaultApiVersion(value);
         });
       },
       child: Container(
@@ -378,7 +533,7 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
   Widget _buildConfigurationStep() {
     if (_selectedPlatform == null) return const SizedBox.shrink();
 
-    final fieldHints = WizardHelper.getFieldHints(_selectedPlatform!);
+    final fieldHints = _getFieldHints(_selectedPlatform!);
 
     return Form(
       key: _formKey,
@@ -386,7 +541,7 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Configure ${WizardHelper.getPlatformDisplayName(_selectedPlatform!)}',
+            'Configure ${_getPlatformDisplayName(_selectedPlatform!)}',
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -529,12 +684,15 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
   Widget _buildReviewStep() {
     final config = StoreConfiguration(
       storeName: _storeNameController.text,
+      displayName: _storeNameController.text, // Use store name as display name
       shopifyAccessToken: _accessTokenController.text,
       apiVersion: _apiVersionController.text,
       storeUrl: _storeUrlController.text,
       username: _usernameController.text,
       password: _passwordController.text,
-      platform: _selectedPlatform,
+      platform: _selectedPlatform ?? '',
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
     );
 
     return Column(
@@ -580,8 +738,7 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
                   ),
                   const SizedBox(width: 12),
                   Text(
-                    WizardHelper.getPlatformDisplayName(
-                        _selectedPlatform ?? ''),
+                    _getPlatformDisplayName(_selectedPlatform ?? ''),
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -605,15 +762,14 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
           ),
         ),
         const SizedBox(height: 20),
-        if (config.platform != null &&
-            !(config.platform == 'shopify'
-                ? (config.storeName?.isNotEmpty == true &&
-                    config.shopifyAccessToken?.isNotEmpty == true &&
-                    config.apiVersion?.isNotEmpty == true)
-                : (config.storeUrl?.isNotEmpty == true &&
-                    config.username?.isNotEmpty == true &&
-                    config.password?.isNotEmpty == true &&
-                    config.apiVersion?.isNotEmpty == true)))
+        if (!(config.platform == 'shopify'
+            ? (config.storeName.isNotEmpty == true &&
+                config.shopifyAccessToken?.isNotEmpty == true &&
+                config.apiVersion.isNotEmpty == true)
+            : (config.storeUrl?.isNotEmpty == true &&
+                config.username?.isNotEmpty == true &&
+                config.password?.isNotEmpty == true &&
+                config.apiVersion.isNotEmpty == true)))
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(

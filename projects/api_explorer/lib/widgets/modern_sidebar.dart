@@ -1,6 +1,10 @@
+import 'package:apis/services/store_change_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
 import 'package:api_explorer/styles/app_theme.dart';
+import 'package:api_explorer/widgets/store_selector.dart';
+import 'package:apis/apis.dart';
+import 'dart:async';
 
 class ModernSidebar extends StatefulWidget {
   final bool expanded;
@@ -29,6 +33,7 @@ class _ModernSidebarState extends State<ModernSidebar>
   late Animation<double> _categoryAnimation;
   final ScrollController _scrollController = ScrollController();
   bool _isDisposed = false; // Track disposal state
+  StreamSubscription<StoreChangeEvent>? _storeChangeSubscription;
 
   @override
   void initState() {
@@ -41,6 +46,9 @@ class _ModernSidebarState extends State<ModernSidebar>
       parent: _categoryAnimationController,
       curve: Curves.easeInOut,
     );
+
+    // Listen to store changes instead of polling
+    _listenToStoreChanges();
   }
 
   @override
@@ -48,7 +56,28 @@ class _ModernSidebarState extends State<ModernSidebar>
     _isDisposed = true; // Mark as disposed
     _categoryAnimationController.dispose();
     _scrollController.dispose();
+    _storeChangeSubscription?.cancel();
     super.dispose();
+  }
+
+  void _listenToStoreChanges() {
+    try {
+      _storeChangeSubscription = WizardHelper.storeChangeStream.listen(
+        (event) {
+          if (mounted && !_isDisposed) {
+            debugPrint('🔄 Sidebar: Store change detected: ${event.type}');
+            setState(() {
+              // Force rebuild to refresh store info
+            });
+          }
+        },
+        onError: (error) {
+          debugPrint('❌ Error listening to store changes in sidebar: $error');
+        },
+      );
+    } catch (e) {
+      debugPrint('❌ Error setting up store change listener in sidebar: $e');
+    }
   }
 
   void _selectMainCategory(ApiCategory mainCategory) {
@@ -113,7 +142,10 @@ class _ModernSidebarState extends State<ModernSidebar>
             children: [
               // Responsive Sidebar Header
               Container(
-                height: isMobile ? 60 : 80,
+                constraints: BoxConstraints(
+                  minHeight: isMobile ? 120 : 140,
+                  maxHeight: isMobile ? 160 : 180,
+                ),
                 padding: EdgeInsets.all(isNarrow ? 12 : 16),
                 decoration: BoxDecoration(
                   gradient: AppTheme.createGradient(
@@ -121,45 +153,64 @@ class _ModernSidebarState extends State<ModernSidebar>
                     AppTheme.primaryVariant,
                   ),
                 ),
-                child: Row(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      padding: EdgeInsets.all(isNarrow ? 8 : 12),
-                      decoration: BoxDecoration(
-                        // ignore: deprecated_member_use
-                        color: AppTheme.primaryColor.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Icon(
-                        Icons.explore_rounded,
-                        color: Colors.white,
-                        size: isNarrow ? 20 : 24,
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'API Explorer',
-                            style: TextStyle(
-                              fontSize: isNarrow ? 16 : 18,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.white,
-                            ),
-                            overflow: TextOverflow.ellipsis,
+                    Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(isNarrow ? 8 : 12),
+                          decoration: BoxDecoration(
+                            // ignore: deprecated_member_use
+                            color: AppTheme.primaryColor.withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(12),
                           ),
-                          if (!isNarrow)
-                            Text(
-                              'Browse and test APIs',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white.withValues(alpha: .8),
+                          child: Icon(
+                            Icons.explore_rounded,
+                            color: Colors.white,
+                            size: isNarrow ? 20 : 24,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'API Explorer',
+                                style: TextStyle(
+                                  fontSize: isNarrow ? 16 : 18,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.white,
+                                ),
+                                overflow: TextOverflow.ellipsis,
                               ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                        ],
+                              if (!isNarrow)
+                                Text(
+                                  'Browse and test APIs',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.white.withValues(alpha: .8),
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    // Store Information Display
+                    Flexible(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        padding: const EdgeInsets.all(12),
+                        child: _buildStoreInfo(),
                       ),
                     ),
                   ],
@@ -869,5 +920,66 @@ class _ModernSidebarState extends State<ModernSidebar>
         // Use normal API Service Registry for other categories
         return ApiServiceRegistry.getSubcategoriesByCategory(category);
     }
+  }
+
+  Widget _buildStoreInfo() {
+    final store = StoreManagementService().currentStore;
+    if (store == null) {
+      return Row(
+        children: [
+          Icon(
+            Icons.store_outlined,
+            size: 16,
+            color: Colors.white.withValues(alpha: 0.7),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              'No store selected',
+              style: TextStyle(
+                fontSize: 12,
+                color: Colors.white.withValues(alpha: 0.7),
+              ),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
+      );
+    }
+
+    return Row(
+      children: [
+        Icon(
+          Icons.store,
+          size: 16,
+          color: Colors.white,
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                store.displayName,
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
+              Text(
+                store.platform.toUpperCase(),
+                style: TextStyle(
+                  fontSize: 10,
+                  color: Colors.white.withValues(alpha: 0.7),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }

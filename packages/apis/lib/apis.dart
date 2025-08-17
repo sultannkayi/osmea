@@ -3,6 +3,8 @@ library apis;
 // 🧙‍♂️ Wizard Exports
 export 'services/wizard_helper.dart';
 export 'services/cross_platform_storage.dart';
+export 'services/store_management_service.dart';
+export 'models/store_configuration.dart';
 
 // 🌐 GraphQL Exports
 export 'dio_config/shopify_graphql_client.dart';
@@ -103,13 +105,13 @@ class ApiNetwork {
       await WizardHelper.init();
 
       // Load configuration from wizard
-      final config = await WizardHelper.loadConfiguration();
+      final config = await WizardHelper.getCurrentStore();
       if (config != null && config.platform == 'shopify' && config.isComplete) {
         return init(
           getIt,
-          storeName: config.storeName!,
+          storeName: config.storeName,
           shopifyAccessToken: config.shopifyAccessToken!,
-          apiVersion: config.apiVersion!,
+          apiVersion: config.apiVersion,
         );
       } else {
         throw Exception(
@@ -169,16 +171,6 @@ class ApiNetwork {
   static Future<void> initWizard() async {
     await WizardHelper.init();
   }
-
-  /// 🚀 Get wizard configuration status
-  static Future<String> getWizardStatus() async {
-    return await WizardHelper.getConfigurationStatus();
-  }
-
-  /// 🚀 Get storage information
-  static Future<Map<String, dynamic>> getStorageInfo() async {
-    return await WizardHelper.getStorageInfo();
-  }
 }
 
 class WooNetwork {
@@ -232,7 +224,7 @@ class WooNetwork {
       await WizardHelper.init();
 
       // Load configuration from wizard
-      final config = await WizardHelper.loadConfiguration();
+      final config = await WizardHelper.getCurrentStore();
       if (config != null &&
           config.platform == 'woocommerce' &&
           config.isComplete) {
@@ -241,7 +233,7 @@ class WooNetwork {
           storeUrl: config.storeUrl!,
           username: config.username!,
           password: config.password!,
-          apiVersion: config.apiVersion!,
+          apiVersion: config.apiVersion,
         );
       } else {
         throw Exception(
@@ -268,6 +260,16 @@ class WooNetwork {
     WooNetwork.username = user;
   }
 
+  /// 🚀 Get wizard configuration status
+  static Future<String> getWizardStatus() async {
+    return await WizardHelper.getConfigurationStatus();
+  }
+
+  /// 🚀 Get storage information
+  static Future<Map<String, dynamic>> getStorageInfo() async {
+    return await WizardHelper.getStorageInfo();
+  }
+
   static void updatePassword(String pass) {
     WooNetwork.password = pass;
   }
@@ -286,16 +288,6 @@ class WooNetwork {
   /// 🚀 Initialize wizard helper and storage
   static Future<void> initWizard() async {
     await WizardHelper.init();
-  }
-
-  /// 🚀 Get wizard configuration status
-  static Future<String> getWizardStatus() async {
-    return await WizardHelper.getConfigurationStatus();
-  }
-
-  /// 🚀 Get storage information
-  static Future<Map<String, dynamic>> getStorageInfo() async {
-    return await WizardHelper.getStorageInfo();
   }
 }
 
@@ -325,7 +317,7 @@ Future<void> initNetworksFromWizard(GetIt getIt) async {
     await WizardHelper.init();
 
     // Load configuration
-    final config = await WizardHelper.loadConfiguration();
+    final config = await WizardHelper.getCurrentStore();
     if (config == null || !config.isComplete) {
       throw Exception(
           'No complete configuration found. Please complete the setup wizard first.');
@@ -382,7 +374,7 @@ Future<void> detectEnabledPlatformsFromWizard() async {
   try {
     await WizardHelper.init();
 
-    final config = await WizardHelper.loadConfiguration();
+    final config = await WizardHelper.getCurrentStore();
 
     if (config != null && config.isComplete) {
       if (config.platform == 'shopify') {
