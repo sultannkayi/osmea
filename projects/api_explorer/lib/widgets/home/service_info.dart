@@ -46,14 +46,15 @@ class ServiceInfo extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.all(isVeryNarrow ? 4 : 6),
                   decoration: BoxDecoration(
-                    color: AppTheme.primaryColor
-                        .withValues(alpha: 0.1), // Use AppTheme primary color
+                    color: OsmeaAppTheme.primaryColor.withValues(
+                        alpha: 0.1), // Use OsmeaAppTheme primary color
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Icon(
                     Icons.info_outline,
                     size: isVeryNarrow ? 12 : 14,
-                    color: AppTheme.primaryColor, // Use AppTheme primary color
+                    color: OsmeaAppTheme
+                        .primaryColor, // Use OsmeaAppTheme primary color
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -66,8 +67,8 @@ class ServiceInfo extends StatelessWidget {
                         style: TextStyle(
                           fontSize: isVeryNarrow ? 10 : 12,
                           fontWeight: FontWeight.w600,
-                          color: AppTheme
-                              .primaryVariant, // Use AppTheme primary variant color
+                          color: OsmeaAppTheme
+                              .primaryVariant, // Use OsmeaAppTheme primary variant color
                         ),
                       ),
                       const SizedBox(height: 2),

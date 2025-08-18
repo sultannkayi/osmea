@@ -199,9 +199,9 @@ class _ModernSidebarState extends State<ModernSidebar>
                 ),
                 padding: EdgeInsets.all(isNarrow ? 12 : 16),
                 decoration: BoxDecoration(
-                  gradient: AppTheme.createGradient(
-                    AppTheme.primaryColor,
-                    AppTheme.primaryVariant,
+                  gradient: OsmeaAppTheme.createGradient(
+                    OsmeaAppTheme.primaryColor,
+                    OsmeaAppTheme.primaryVariant,
                   ),
                 ),
                 child: Column(
@@ -214,7 +214,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                           padding: EdgeInsets.all(isNarrow ? 8 : 12),
                           decoration: BoxDecoration(
                             // ignore: deprecated_member_use
-                            color: AppTheme.primaryColor.withOpacity(0.2),
+                            color: OsmeaAppTheme.primaryColor.withOpacity(0.2),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Icon(
@@ -314,13 +314,13 @@ class _ModernSidebarState extends State<ModernSidebar>
                   margin: EdgeInsets.all(isNarrow ? 12 : 16),
                   padding: EdgeInsets.all(isNarrow ? 16 : 20),
                   decoration: BoxDecoration(
-                    gradient: AppTheme.createGradient(
-                      AppTheme.primaryColor.withValues(alpha: 0.1),
-                      AppTheme.primaryVariant.withValues(alpha: 0.05),
+                    gradient: OsmeaAppTheme.createGradient(
+                      OsmeaAppTheme.primaryColor.withValues(alpha: 0.1),
+                      OsmeaAppTheme.primaryVariant.withValues(alpha: 0.05),
                     ),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: AppTheme.primaryColor.withValues(alpha: 0.2),
+                      color: OsmeaAppTheme.primaryColor.withValues(alpha: 0.2),
                     ),
                   ),
                   child: Column(
@@ -330,14 +330,14 @@ class _ModernSidebarState extends State<ModernSidebar>
                           Container(
                             padding: EdgeInsets.all(isNarrow ? 8 : 10),
                             decoration: BoxDecoration(
-                              color:
-                                  AppTheme.primaryColor.withValues(alpha: 0.2),
+                              color: OsmeaAppTheme.primaryColor
+                                  .withValues(alpha: 0.2),
                               shape: BoxShape.circle,
                             ),
                             child: Icon(
                               Icons.rocket_launch_rounded,
                               size: isNarrow ? 16 : 18,
-                              color: AppTheme.primaryColor,
+                              color: OsmeaAppTheme.primaryColor,
                             ),
                           ),
                           SizedBox(width: isNarrow ? 8 : 12),
@@ -350,14 +350,14 @@ class _ModernSidebarState extends State<ModernSidebar>
                                   style: TextStyle(
                                     fontSize: isNarrow ? 13 : 14,
                                     fontWeight: FontWeight.w600,
-                                    color: AppTheme.primaryColor,
+                                    color: OsmeaAppTheme.primaryColor,
                                   ),
                                 ),
                                 Text(
                                   'Your ${_currentStore!.platform.toUpperCase()} store is configured',
                                   style: TextStyle(
                                     fontSize: isNarrow ? 10 : 11,
-                                    color: AppTheme.primaryColor
+                                    color: OsmeaAppTheme.primaryColor
                                         .withValues(alpha: 0.7),
                                   ),
                                 ),
@@ -370,10 +370,12 @@ class _ModernSidebarState extends State<ModernSidebar>
                       Container(
                         padding: EdgeInsets.all(isNarrow ? 8 : 10),
                         decoration: BoxDecoration(
-                          color: AppTheme.primaryColor.withValues(alpha: 0.05),
+                          color: OsmeaAppTheme.primaryColor
+                              .withValues(alpha: 0.05),
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(
-                            color: AppTheme.primaryColor.withValues(alpha: 0.1),
+                            color: OsmeaAppTheme.primaryColor
+                                .withValues(alpha: 0.1),
                           ),
                         ),
                         child: Row(
@@ -381,7 +383,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                             Icon(
                               Icons.explore_rounded,
                               size: isNarrow ? 14 : 16,
-                              color: AppTheme.primaryColor,
+                              color: OsmeaAppTheme.primaryColor,
                             ),
                             SizedBox(width: isNarrow ? 6 : 8),
                             Expanded(
@@ -389,7 +391,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                                 'Select a category below to start exploring APIs',
                                 style: TextStyle(
                                   fontSize: isNarrow ? 11 : 12,
-                                  color: AppTheme.primaryColor,
+                                  color: OsmeaAppTheme.primaryColor,
                                   fontWeight: FontWeight.w500,
                                 ),
                                 overflow: TextOverflow.ellipsis,
@@ -411,13 +413,13 @@ class _ModernSidebarState extends State<ModernSidebar>
                   margin: EdgeInsets.all(isNarrow ? 12 : 16),
                   padding: EdgeInsets.all(isNarrow ? 16 : 20),
                   decoration: BoxDecoration(
-                    gradient: AppTheme.createGradient(
-                      AppTheme.primaryColor.withValues(alpha: 0.05),
-                      AppTheme.primaryVariant.withValues(alpha: 0.02),
+                    gradient: OsmeaAppTheme.createGradient(
+                      OsmeaAppTheme.primaryColor.withValues(alpha: 0.05),
+                      OsmeaAppTheme.primaryVariant.withValues(alpha: 0.02),
                     ),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: AppTheme.primaryColor.withValues(alpha: 0.1),
+                      color: OsmeaAppTheme.primaryColor.withValues(alpha: 0.1),
                     ),
                   ),
                   child: Column(
@@ -425,13 +427,14 @@ class _ModernSidebarState extends State<ModernSidebar>
                       Container(
                         padding: EdgeInsets.all(isNarrow ? 10 : 12),
                         decoration: BoxDecoration(
-                          color: AppTheme.primaryColor.withValues(alpha: 0.01),
+                          color: OsmeaAppTheme.primaryColor
+                              .withValues(alpha: 0.01),
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
                           Icons.touch_app_rounded,
                           size: isNarrow ? 20 : 24,
-                          color: AppTheme.primaryColor,
+                          color: OsmeaAppTheme.primaryColor,
                         ),
                       ),
                       SizedBox(height: isNarrow ? 8 : 12),
@@ -442,7 +445,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                         style: TextStyle(
                           fontSize: isNarrow ? 14 : 16,
                           fontWeight: FontWeight.w600,
-                          color: AppTheme.primaryColor,
+                          color: OsmeaAppTheme.primaryColor,
                         ),
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
@@ -472,10 +475,12 @@ class _ModernSidebarState extends State<ModernSidebar>
                           vertical: isNarrow ? 4 : 6,
                         ),
                         decoration: BoxDecoration(
-                          color: AppTheme.primaryColor.withValues(alpha: 0.1),
+                          color:
+                              OsmeaAppTheme.primaryColor.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(
-                            color: AppTheme.primaryColor.withValues(alpha: 0.2),
+                            color: OsmeaAppTheme.primaryColor
+                                .withValues(alpha: 0.2),
                           ),
                         ),
                         child: Row(
@@ -484,7 +489,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                             Icon(
                               Icons.arrow_downward_rounded,
                               size: isNarrow ? 12 : 14,
-                              color: AppTheme.primaryColor,
+                              color: OsmeaAppTheme.primaryColor,
                             ),
                             SizedBox(width: isNarrow ? 4 : 6),
                             Text(
@@ -494,7 +499,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                               style: TextStyle(
                                 fontSize: isNarrow ? 10 : 11,
                                 fontWeight: FontWeight.w500,
-                                color: AppTheme.primaryColor,
+                                color: OsmeaAppTheme.primaryColor,
                               ),
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -557,10 +562,10 @@ class _ModernSidebarState extends State<ModernSidebar>
                   margin: EdgeInsets.symmetric(horizontal: isNarrow ? 12 : 16),
                   padding: EdgeInsets.all(isNarrow ? 12 : 16),
                   decoration: BoxDecoration(
-                    color: AppTheme.successColor.withValues(alpha: 0.05),
+                    color: OsmeaAppTheme.successColor.withValues(alpha: 0.05),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: AppTheme.successColor.withValues(alpha: 0.2),
+                      color: OsmeaAppTheme.successColor.withValues(alpha: 0.2),
                     ),
                   ),
                   child: Row(
@@ -568,7 +573,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                       Icon(
                         Icons.check_circle_outline_rounded,
                         size: isNarrow ? 16 : 18,
-                        color: AppTheme.successColor,
+                        color: OsmeaAppTheme.successColor,
                       ),
                       SizedBox(width: isNarrow ? 6 : 8),
                       Expanded(
@@ -576,7 +581,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                           'Great! Now select an API service to start testing',
                           style: TextStyle(
                             fontSize: isNarrow ? 11 : 12,
-                            color: AppTheme.successColor,
+                            color: OsmeaAppTheme.successColor,
                             fontWeight: FontWeight.w500,
                           ),
                           overflow: TextOverflow.ellipsis,

@@ -1,77 +1,45 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
-class AppTheme {
-  // Modern Color Palette
-  static const Color primaryColor = Color(0xFF8B5CF6); // Indigo-500
-  static const Color primaryVariant = Color(0xFF7C3AED); // Indigo-600
-  static const Color secondaryColor = Color(0xFF06B6D4); // Cyan-500
-  static const Color surfaceColor = Color(0xFFFAFAFA);
-  static const Color errorColor = Color(0xFFEF4444);
-  static const Color successColor = Color(0xFF10B981);
-  static const Color warningColor = Color(0xFFF59E0B);
+class OsmeaAppTheme {
+  // Modern Color Palette - Using OsmeaColors
+  static Color get primaryColor => OsmeaColors.nordicBlue;
+  static Color get primaryVariant => OsmeaColors.deepSea;
+  static Color get secondaryColor => OsmeaColors.azureWave;
+  static Color get surfaceColor => OsmeaColors.paperWhite;
+  static Color get errorColor => OsmeaColors.orange;
+  static Color get successColor => OsmeaColors.forestHeart;
+  static Color get warningColor => OsmeaColors.sunsetGlow;
 
   // Glass morphism colors
-  static const Color glassBackground = Color(0x20FFFFFF);
-  static const Color glassBorder = Color(0x30FFFFFF);
+  static Color get glassBackground =>
+      OsmeaColors.white.withValues(alpha: 0.125);
+  static Color get glassBorder => OsmeaColors.white.withValues(alpha: 0.188);
 
   // Method specific gradients
-  static const List<Color> getMethodGradient = [
-    Color(0xFF10B981),
-    Color(0xFF059669)
-  ];
-  static const List<Color> postMethodGradientColors = [
-    Color(0xFF3B82F6),
-    Color(0xFF1D4ED8)
-  ];
-  static const List<Color> putMethodGradientColors = [
-    Color(0xFFF59E0B),
-    Color(0xFFD97706)
-  ];
-  static const List<Color> deleteMethodGradientColors = [
-    Color(0xFFEF4444),
-    Color(0xFFDC2626)
-  ];
-  static const List<Color> patchMethodGradientColors = [
-    Color(0xFF8B5CF6),
-    Color(0xFF7C3AED)
-  ];
-  static const List<Color> primaryGradient = [primaryColor, primaryVariant];
+  static List<Color> get getMethodGradient =>
+      [OsmeaColors.forestHeart, OsmeaColors.pineGrove];
+  static List<Color> get postMethodGradientColors =>
+      [OsmeaColors.nordicBlue, OsmeaColors.deepSea];
+  static List<Color> get putMethodGradientColors =>
+      [OsmeaColors.sunsetGlow, OsmeaColors.amberFlame];
+  static List<Color> get deleteMethodGradientColors =>
+      [OsmeaColors.orange, OsmeaColors.amberFlame];
+  static List<Color> get patchMethodGradientColors =>
+      [OsmeaColors.deepSea, OsmeaColors.nordicBlue];
+  static List<Color> get primaryGradient => [primaryColor, primaryVariant];
 
-  // Typography Scale
-  static const TextStyle displayLarge = TextStyle(
-    fontSize: 32,
-    fontWeight: FontWeight.w700,
-    letterSpacing: -0.5,
-    height: 1.2,
-  );
-
-  static const TextStyle headlineLarge = TextStyle(
-    fontSize: 28,
-    fontWeight: FontWeight.w600,
-    letterSpacing: -0.25,
-    height: 1.3,
-  );
-
-  static const TextStyle titleLarge = TextStyle(
-    fontSize: 22,
-    fontWeight: FontWeight.w600,
-    letterSpacing: 0,
-    height: 1.4,
-  );
-
-  static const TextStyle bodyLarge = TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.w400,
-    letterSpacing: 0.15,
-    height: 1.5,
-  );
-
-  static const TextStyle labelLarge = TextStyle(
-    fontSize: 14,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0.1,
-    height: 1.4,
-  );
+  // Typography Scale - Using OsmeaTextStyle
+  static TextStyle displayLarge(BuildContext context) =>
+      OsmeaTextStyle.displayLarge(context);
+  static TextStyle headlineLarge(BuildContext context) =>
+      OsmeaTextStyle.headlineLarge(context);
+  static TextStyle titleLarge(BuildContext context) =>
+      OsmeaTextStyle.titleLarge(context);
+  static TextStyle bodyLarge(BuildContext context) =>
+      OsmeaTextStyle.bodyLarge(context);
+  static TextStyle labelLarge(BuildContext context) =>
+      OsmeaTextStyle.labelLarge(context);
 
   // Spacing System
   static const double spaceXs = 4.0;
@@ -92,7 +60,7 @@ class AppTheme {
   // Shadows
   static List<BoxShadow> softShadow = [
     BoxShadow(
-      color: Colors.black.withValues(alpha: 0.05),
+      color: OsmeaColors.black.withValues(alpha: 0.05),
       offset: const Offset(0, 2),
       blurRadius: 8,
       spreadRadius: 0,
@@ -101,7 +69,7 @@ class AppTheme {
 
   static List<BoxShadow> mediumShadow = [
     BoxShadow(
-      color: Colors.black.withValues(alpha: 0.1),
+      color: OsmeaColors.black.withValues(alpha: 0.1),
       offset: const Offset(0, 4),
       blurRadius: 16,
       spreadRadius: 0,
@@ -110,7 +78,7 @@ class AppTheme {
 
   static List<BoxShadow> strongShadow = [
     BoxShadow(
-      color: Colors.black.withValues(alpha: 0.15),
+      color: OsmeaColors.black.withValues(alpha: 0.15),
       offset: const Offset(0, 8),
       blurRadius: 32,
       spreadRadius: 0,
@@ -128,8 +96,7 @@ class AppTheme {
         methodIcon = Icons.download_rounded;
         break;
       case 'POST':
-        methodColor =
-            const Color(0xFF3B82F6); // Fixed: removed primaryBlue reference
+        methodColor = primaryColor;
         methodIcon = Icons.add_circle_outline_rounded;
         break;
       case 'PUT':
@@ -141,7 +108,7 @@ class AppTheme {
         methodIcon = Icons.delete_outline_rounded;
         break;
       case 'PATCH':
-        methodColor = const Color(0xFF8B5CF6);
+        methodColor = OsmeaColors.deepSea;
         methodIcon = Icons.update_rounded;
         break;
       default:
@@ -150,7 +117,7 @@ class AppTheme {
     }
 
     return MethodStyle(
-      textColor: Colors.white,
+      textColor: OsmeaColors.white,
       backgroundColor: methodColor,
       borderColor: methodColor.withValues(alpha: 0.3),
       iconData: methodIcon,
@@ -195,6 +162,14 @@ class AppTheme {
     );
   }
 
+  static LinearGradient createDefaultGradient() {
+    return LinearGradient(
+      colors: [OsmeaColors.nordicBlue, OsmeaColors.deepSea],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    );
+  }
+
   // Glassmorphism effect
   static BoxDecoration glassDecoration({
     Color? backgroundColor,
@@ -219,7 +194,7 @@ class AppTheme {
     List<BoxShadow>? shadows,
   }) {
     return BoxDecoration(
-      color: backgroundColor ?? Colors.white,
+      color: backgroundColor ?? OsmeaColors.white,
       borderRadius: BorderRadius.circular(borderRadius),
       boxShadow: shadows ?? mediumShadow,
     );
@@ -250,32 +225,32 @@ class AppTheme {
   static const Color darkBorder = Color(0xFF333333);
 
   // Light mode specific colors
-  static const Color lightSurface = Colors.white;
-  static const Color lightBackground = Color(0xFFF5F5F5);
-  static const Color lightCard = Colors.white;
-  static const Color lightBorder = Color(0xFFE5E5E5);
+  static Color get lightSurface => OsmeaColors.white;
+  static Color get lightBackground => OsmeaColors.snow;
+  static Color get lightCard => OsmeaColors.white;
+  static Color get lightBorder => OsmeaColors.silver;
 
   // Additional colors
-  static Color get surfaceVariant => const Color(0xFFE0E0E0);
-  static Color get onSurfaceVariant => const Color(0xFF757575);
+  static Color get surfaceVariant => OsmeaColors.ash;
+  static Color get onSurfaceVariant => OsmeaColors.steel;
 
   // Enhanced theme data methods
-  static ThemeData get darkThemeData => ThemeData(
+  static ThemeData darkThemeData(BuildContext context) => ThemeData(
         useMaterial3: true,
         brightness: Brightness.dark,
-        colorScheme: const ColorScheme.dark(
+        colorScheme: ColorScheme.dark(
           primary: primaryColor,
           secondary: secondaryColor,
           surface: Color(0xFF1E1E1E),
           error: errorColor,
-          onSurface: Colors.white,
+          onSurface: OsmeaColors.white,
         ),
       );
 
-  static ThemeData get lightThemeData => ThemeData(
+  static ThemeData lightThemeData(BuildContext context) => ThemeData(
         useMaterial3: true,
         brightness: Brightness.light,
-        colorScheme: const ColorScheme.light(
+        colorScheme: ColorScheme.light(
           primary: primaryColor,
           secondary: secondaryColor,
           surface: lightSurface,
@@ -285,140 +260,143 @@ class AppTheme {
       );
 
   // Enhanced Light Theme
-  static ThemeData lightTheme = ThemeData(
-    useMaterial3: true,
-    brightness: Brightness.light,
-    colorScheme: const ColorScheme.light(
-      primary: primaryColor,
-      secondary: secondaryColor,
-      surface: lightSurface,
-      error: errorColor,
-      onSurface: Color(0xFF1A1A1A),
-    ),
-    textTheme: const TextTheme(
-      displayLarge: displayLarge,
-      headlineLarge: headlineLarge,
-      titleLarge: titleLarge,
-      bodyLarge: bodyLarge,
-      labelLarge: labelLarge,
-    ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        padding:
-            const EdgeInsets.symmetric(horizontal: spaceLg, vertical: spaceMd),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(radiusMd)),
-        elevation: 0,
-        backgroundColor: primaryColor,
-        foregroundColor: Colors.white,
-      ),
-    ),
-
-    appBarTheme: const AppBarTheme(
-      backgroundColor: lightSurface,
-      foregroundColor: Color(0xFF1A1A1A),
-      elevation: 0,
-      scrolledUnderElevation: 1,
-    ),
-  );
+  static ThemeData lightTheme(BuildContext context) => ThemeData(
+        useMaterial3: true,
+        brightness: Brightness.light,
+        colorScheme: ColorScheme.light(
+          primary: primaryColor,
+          secondary: secondaryColor,
+          surface: OsmeaColors.white,
+          error: errorColor,
+          onSurface: Color(0xFF1A1A1A),
+        ),
+        textTheme: TextTheme(
+          displayLarge: OsmeaTextStyle.displayLarge(context),
+          headlineLarge: OsmeaTextStyle.headlineLarge(context),
+          titleLarge: OsmeaTextStyle.titleLarge(context),
+          bodyLarge: OsmeaTextStyle.bodyLarge(context),
+          labelLarge: OsmeaTextStyle.labelLarge(context),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(
+                horizontal: spaceLg, vertical: spaceMd),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(radiusMd)),
+            elevation: 0,
+            backgroundColor: primaryColor,
+            foregroundColor: OsmeaColors.white,
+          ),
+        ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: lightSurface,
+          foregroundColor: const Color(0xFF1A1A1A),
+          elevation: 0,
+          scrolledUnderElevation: 1,
+        ),
+      );
 
   // Enhanced Dark Theme
-  static ThemeData darkTheme = ThemeData(
-    useMaterial3: true,
-    brightness: Brightness.dark,
-    colorScheme: const ColorScheme.dark(
-      primary: primaryColor,
-      secondary: secondaryColor,
-      surface: darkSurface,
-      error: errorColor,
-      onSurface: Colors.white,
-    ),
-    textTheme: const TextTheme(
-      displayLarge: TextStyle(
-        fontSize: 32,
-        fontWeight: FontWeight.w700,
-        letterSpacing: -0.5,
-        height: 1.2,
-        color: Colors.white,
-      ),
-      headlineLarge: TextStyle(
-        fontSize: 28,
-        fontWeight: FontWeight.w600,
-        letterSpacing: -0.25,
-        height: 1.3,
-        color: Colors.white,
-      ),
-      titleLarge: TextStyle(
-        fontSize: 22,
-        fontWeight: FontWeight.w600,
-        letterSpacing: 0,
-        height: 1.4,
-        color: Colors.white,
-      ),
-      bodyLarge: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 0.15,
-        height: 1.5,
-        color: Colors.white,
-      ),
-      labelLarge: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
-        letterSpacing: 0.1,
-        height: 1.4,
-        color: Colors.white,
-      ),
-    ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        padding:
-            const EdgeInsets.symmetric(horizontal: spaceLg, vertical: spaceMd),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(radiusMd)),
-        elevation: 0,
-        backgroundColor: primaryColor,
-        foregroundColor: Colors.white,
-      ),
-    ),
-
-    appBarTheme: const AppBarTheme(
-      backgroundColor: darkSurface,
-      foregroundColor: Colors.white,
-      elevation: 0,
-      scrolledUnderElevation: 1,
-    ),
-  );
+  static ThemeData darkTheme(BuildContext context) => ThemeData(
+        useMaterial3: true,
+        brightness: Brightness.dark,
+        colorScheme: ColorScheme.dark(
+          primary: primaryColor,
+          secondary: secondaryColor,
+          surface: darkSurface,
+          error: errorColor,
+          onSurface: OsmeaColors.white,
+        ),
+        textTheme: TextTheme(
+          displayLarge: TextStyle(
+            fontSize: 32,
+            fontWeight: FontWeight.w700,
+            letterSpacing: -0.5,
+            height: 1.2,
+            color: OsmeaColors.white,
+          ),
+          headlineLarge: TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.w600,
+            letterSpacing: -0.25,
+            height: 1.3,
+            color: OsmeaColors.white,
+          ),
+          titleLarge: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w600,
+            letterSpacing: 0,
+            height: 1.4,
+            color: OsmeaColors.white,
+          ),
+          bodyLarge: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+            letterSpacing: 0.15,
+            height: 1.5,
+            color: OsmeaColors.white,
+          ),
+          labelLarge: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            letterSpacing: 0.1,
+            height: 1.4,
+            color: OsmeaColors.white,
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(
+                horizontal: spaceLg, vertical: spaceMd),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(radiusMd)),
+            elevation: 0,
+            backgroundColor: primaryColor,
+            foregroundColor: OsmeaColors.white,
+          ),
+        ),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: darkSurface,
+          foregroundColor: OsmeaColors.white,
+          elevation: 0,
+          scrolledUnderElevation: 1,
+        ),
+      );
 
   // HTTP Method Colors
-  static Color get getColor =>
-      const Color(0xFF06B6D4); // Cyan-500 (consistent with secondaryColor)
-  static Color get postColor =>
-      const Color(0xFF6366F1); // Indigo-500 (consistent with primaryColor)
-  static Color get putColor =>
-      const Color(0xFFF59E0B); // Amber-500 (consistent with warningColor)
-  static Color get patchColor => const Color(
-      0xFF8B5CF6); // Purple-500 (consistent with patchMethodGradientColors)
-  static Color get deleteColor =>
-      const Color(0xFFEF4444); // Red-500 (consistent with errorColor)
-  static Color get defaultColor =>
-      const Color(0xFFE5E7EB); // Gray-200 (neutral fallback)
+  static Color get getColor => OsmeaColors.forestHeart;
+  static Color get postColor => OsmeaColors.nordicBlue;
+  static Color get putColor => OsmeaColors.sunsetGlow;
+  static Color get patchColor => OsmeaColors.deepSea;
+  static Color get deleteColor => OsmeaColors.orange;
+  static Color get defaultColor => OsmeaColors.silver;
   static Color getMethodColor(String method) {
     switch (method.toUpperCase()) {
       case 'GET':
-        return AppTheme.getColor; // Soft green
+        return OsmeaAppTheme.getColor; // Soft green
       case 'POST':
-        return AppTheme.postColor; // Soft blue
+        return OsmeaAppTheme.postColor; // Soft blue
       case 'PUT':
-        return AppTheme.putColor; // Soft amber
+        return OsmeaAppTheme.putColor; // Soft amber
       case 'PATCH':
-        return AppTheme.patchColor; // Soft purple
+        return OsmeaAppTheme.patchColor; // Soft purple
       case 'DELETE':
-        return AppTheme.deleteColor; // Soft red
+        return OsmeaAppTheme.deleteColor; // Soft red
       default:
-        return AppTheme.defaultColor; // Soft gray
+        return OsmeaAppTheme.defaultColor; // Soft gray
     }
   }
+
+  // ================== MATERIAL COLORS ==================
+  static MaterialColor get grey => OsmeaColors.grey;
+  static MaterialColor get green => OsmeaColors.green;
+  static MaterialColor get red => OsmeaColors.red;
+  static MaterialColor get orange => OsmeaColors.orange;
+
+  // ================== COMMON COLORS ==================
+  static Color get black54 => OsmeaColors.black54;
+  static Color get blue => OsmeaColors.blue;
+  static Color get purple => OsmeaColors.purple;
 }
 
 class MethodStyle {

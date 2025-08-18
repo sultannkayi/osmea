@@ -112,7 +112,7 @@ class _ModernApiPanelState extends State<ModernApiPanel>
             borderRadius: BorderRadius.circular(isNarrow ? 12 : 16),
             boxShadow: [
               BoxShadow(
-                color: AppTheme.primaryColor.withValues(alpha: 0.05),
+                color: OsmeaAppTheme.primaryColor.withValues(alpha: 0.05),
                 offset: const Offset(0, 4),
                 blurRadius: isNarrow ? 8 : 16,
               ),
@@ -339,7 +339,7 @@ class _ModernApiPanelState extends State<ModernApiPanel>
                   : isMobile
                       ? 44
                       : 48,
-              color: AppTheme.primaryColor.withValues(alpha: 0.5),
+              color: OsmeaAppTheme.primaryColor.withValues(alpha: 0.5),
             ),
             SizedBox(height: isNarrow ? 12 : 16),
             Text(
@@ -347,7 +347,7 @@ class _ModernApiPanelState extends State<ModernApiPanel>
               style: TextStyle(
                 fontSize: isNarrow ? 14 : 16,
                 fontWeight: FontWeight.w600,
-                color: AppTheme.primaryVariant,
+                color: OsmeaAppTheme.primaryVariant,
               ),
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
@@ -358,7 +358,7 @@ class _ModernApiPanelState extends State<ModernApiPanel>
               message,
               style: TextStyle(
                 fontSize: isNarrow ? 12 : 14,
-                color: AppTheme.primaryColor.withValues(alpha: 0.7),
+                color: OsmeaAppTheme.primaryColor.withValues(alpha: 0.7),
                 height: 1.5,
               ),
               textAlign: TextAlign.center,

@@ -138,12 +138,12 @@ class ModernHeader extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
-              color: AppTheme.primaryColor
-                  .withAlpha((0.1 * 255).toInt()), // Use AppTheme primary color
+              color: OsmeaAppTheme.primaryColor.withAlpha(
+                  (0.1 * 255).toInt()), // Use OsmeaAppTheme primary color
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                color: AppTheme.primaryColor.withAlpha(
-                    (0.3 * 255).toInt()), // Use AppTheme primary color
+                color: OsmeaAppTheme.primaryColor.withAlpha(
+                    (0.3 * 255).toInt()), // Use OsmeaAppTheme primary color
                 width: 1,
               ),
             ),
@@ -154,7 +154,8 @@ class ModernHeader extends StatelessWidget {
                   width: 8,
                   height: 8,
                   decoration: BoxDecoration(
-                    color: AppTheme.primaryColor, // Use AppTheme primary color
+                    color: OsmeaAppTheme
+                        .primaryColor, // Use OsmeaAppTheme primary color
                     shape: BoxShape.circle,
                   ),
                 ),
@@ -163,7 +164,8 @@ class ModernHeader extends StatelessWidget {
                   'Connected',
                   style: TextStyle(
                     fontSize: 12,
-                    color: AppTheme.primaryColor, // Use AppTheme primary color
+                    color: OsmeaAppTheme
+                        .primaryColor, // Use OsmeaAppTheme primary color
                     fontWeight: FontWeight.w500,
                   ),
                 ),

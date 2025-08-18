@@ -72,7 +72,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                gradient: AppTheme.createMethodGradient(
+                gradient: OsmeaAppTheme.createMethodGradient(
                   'PATCH',
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,

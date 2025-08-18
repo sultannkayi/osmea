@@ -18,7 +18,7 @@ class BeautifulGradientButton extends StatefulWidget {
     this.isLoading = false,
     this.gradient,
     this.height = 48,
-    this.borderRadius = AppTheme.radiusMd,
+    this.borderRadius = OsmeaAppTheme.radiusMd,
   });
 
   @override
@@ -75,9 +75,9 @@ class _BeautifulGradientButtonState extends State<BeautifulGradientButton>
     final colorScheme = theme.colorScheme;
     final isEnabled = widget.onPressed != null && !widget.isLoading;
 
-    final defaultGradient = AppTheme.createGradient(
-      AppTheme.primaryColor, // Use primary color from AppTheme
-      AppTheme.primaryVariant, // Use primary variant from AppTheme
+    final defaultGradient = OsmeaAppTheme.createGradient(
+      OsmeaAppTheme.primaryColor, // Use primary color from OsmeaAppTheme
+      OsmeaAppTheme.primaryVariant, // Use primary variant from OsmeaAppTheme
     );
 
     return GestureDetector(
@@ -96,7 +96,7 @@ class _BeautifulGradientButtonState extends State<BeautifulGradientButton>
               decoration: BoxDecoration(
                 gradient: isEnabled
                     ? (widget.gradient ?? defaultGradient)
-                    : AppTheme.createGradient(
+                    : OsmeaAppTheme.createGradient(
                         colorScheme
                             .surfaceContainerHighest, // Use surface variant
                         colorScheme.surface, // Use surface color
@@ -106,7 +106,7 @@ class _BeautifulGradientButtonState extends State<BeautifulGradientButton>
                     ? [
                         BoxShadow(
                           color: (widget.gradient?.colors.first ??
-                                  AppTheme.primaryColor)
+                                  OsmeaAppTheme.primaryColor)
                               .withValues(alpha: 0.3),
                           offset: const Offset(0, 4),
                           blurRadius: 12,
@@ -126,16 +126,12 @@ class _BeautifulGradientButtonState extends State<BeautifulGradientButton>
                   ),
                   child: Center(
                     child: widget.isLoading
-                        ? const SizedBox(
+                        ? SizedBox(
                             width: 20,
                             height: 20,
                             child: CircularProgressIndicator(
                               strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                AppTheme.surfaceColor, // Use surface color
-                              ),
-                            ),
-                          )
+                            ))
                         : Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             mainAxisSize: MainAxisSize.min,
@@ -143,7 +139,7 @@ class _BeautifulGradientButtonState extends State<BeautifulGradientButton>
                               if (widget.icon != null) ...[
                                 Icon(
                                   widget.icon,
-                                  color: AppTheme
+                                  color: OsmeaAppTheme
                                       .surfaceColor, // Use primary color
                                   size: 20,
                                 ),
@@ -152,7 +148,7 @@ class _BeautifulGradientButtonState extends State<BeautifulGradientButton>
                               Text(
                                 widget.text,
                                 style: TextStyle(
-                                  color: AppTheme
+                                  color: OsmeaAppTheme
                                       .surfaceColor, // Use primary color
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,

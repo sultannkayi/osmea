@@ -239,7 +239,8 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
               ? 36
               : 40,
       decoration: BoxDecoration(
-        color: _ideTheme ? AppTheme.darkSurface : AppTheme.lightSurface,
+        color:
+            _ideTheme ? OsmeaAppTheme.darkSurface : OsmeaAppTheme.lightSurface,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(isNarrow ? 8 : 12),
           topRight: Radius.circular(isNarrow ? 8 : 12),
@@ -249,11 +250,11 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
         children: [
           // IDE Traffic lights
           const SizedBox(width: 12),
-          _buildTrafficLight(AppTheme.errorColor, isNarrow),
+          _buildTrafficLight(OsmeaAppTheme.errorColor, isNarrow),
           const SizedBox(width: 6),
-          _buildTrafficLight(AppTheme.warningColor, isNarrow),
+          _buildTrafficLight(OsmeaAppTheme.warningColor, isNarrow),
           const SizedBox(width: 6),
-          _buildTrafficLight(AppTheme.successColor, isNarrow),
+          _buildTrafficLight(OsmeaAppTheme.successColor, isNarrow),
           const SizedBox(width: 16),
 
           // IDE Title with file icon
@@ -261,7 +262,9 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
             widget.responseData == null && !widget.loading
                 ? Icons.code
                 : Icons.data_object_rounded,
-            color: _ideTheme ? AppTheme.primaryColor : AppTheme.primaryColor,
+            color: _ideTheme
+                ? OsmeaAppTheme.primaryColor
+                : OsmeaAppTheme.primaryColor,
             size: isNarrow ? 14 : 16,
           ),
           const SizedBox(width: 6),
@@ -270,7 +273,9 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
                 ? 'sample_code.dart'
                 : 'response.json',
             style: TextStyle(
-              color: _ideTheme ? AppTheme.primaryColor : AppTheme.primaryColor,
+              color: _ideTheme
+                  ? OsmeaAppTheme.primaryColor
+                  : OsmeaAppTheme.primaryColor,
               fontSize: isNarrow ? 11 : 12,
               fontWeight: FontWeight.w500,
               fontFamily: 'monospace',
@@ -544,8 +549,8 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
                   Icon(
                     Icons.link,
                     color: _ideTheme
-                        ? AppTheme.primaryColor
-                        : AppTheme.primaryColor,
+                        ? OsmeaAppTheme.primaryColor
+                        : OsmeaAppTheme.primaryColor,
                     size: isNarrow ? 20 : 24,
                   ),
                   const SizedBox(width: 12),
@@ -740,8 +745,9 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
               children: [
                 Icon(
                   Icons.lightbulb,
-                  color:
-                      _ideTheme ? AppTheme.primaryColor : AppTheme.primaryColor,
+                  color: _ideTheme
+                      ? OsmeaAppTheme.primaryColor
+                      : OsmeaAppTheme.primaryColor,
                   size: isNarrow ? 20 : 24,
                 ),
                 const SizedBox(width: 12),
@@ -883,8 +889,9 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
             width: 40,
             height: 40,
             child: CircularProgressIndicator(
-              color:
-                  _ideTheme ? AppTheme.primaryColor : AppTheme.secondaryColor,
+              color: _ideTheme
+                  ? OsmeaAppTheme.primaryColor
+                  : OsmeaAppTheme.secondaryColor,
               strokeWidth: 3,
             ),
           ),
@@ -893,8 +900,8 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
             'Loading response...',
             style: TextStyle(
               color: _ideTheme
-                  ? AppTheme.onSurfaceVariant
-                  : AppTheme.surfaceVariant,
+                  ? OsmeaAppTheme.onSurfaceVariant
+                  : OsmeaAppTheme.surfaceVariant,
               fontSize: isNarrow ? 12 : 14,
             ),
           ),
@@ -911,15 +918,15 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
           Icon(
             Icons.api_rounded,
             size: isNarrow ? 48 : 64,
-            color: AppTheme.primaryColor,
+            color: OsmeaAppTheme.primaryColor,
           ),
           const SizedBox(height: 16),
           Text(
             'No response data available',
             style: TextStyle(
               color: _ideTheme
-                  ? AppTheme.onSurfaceVariant
-                  : AppTheme.surfaceVariant,
+                  ? OsmeaAppTheme.onSurfaceVariant
+                  : OsmeaAppTheme.surfaceVariant,
               fontSize: isNarrow ? 14 : 16,
               fontWeight: FontWeight.w500,
             ),
@@ -929,8 +936,8 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
             'Make a request to see the response here',
             style: TextStyle(
               color: _ideTheme
-                  ? AppTheme.surfaceVariant
-                  : AppTheme.onSurfaceVariant,
+                  ? OsmeaAppTheme.surfaceVariant
+                  : OsmeaAppTheme.onSurfaceVariant,
               fontSize: isNarrow ? 12 : 14,
             ),
           ),

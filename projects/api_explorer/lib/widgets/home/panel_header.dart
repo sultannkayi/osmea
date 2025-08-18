@@ -26,9 +26,9 @@ class PanelHeader extends StatelessWidget {
               ? 20
               : 24),
       decoration: BoxDecoration(
-        gradient: AppTheme.createGradient(
-          AppTheme.primaryColor,
-          AppTheme.primaryVariant,
+        gradient: OsmeaAppTheme.createGradient(
+          OsmeaAppTheme.primaryColor,
+          OsmeaAppTheme.primaryVariant,
         ),
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(16),

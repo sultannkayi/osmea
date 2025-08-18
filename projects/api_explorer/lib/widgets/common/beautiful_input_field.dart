@@ -182,27 +182,27 @@ class _BeautifulInputFieldState extends State<BeautifulInputField> {
               // Border styling
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(
-                    AppTheme.radiusMd), // Use AppTheme radius
+                    OsmeaAppTheme.radiusMd), // Use OsmeaAppTheme radius
                 borderSide: BorderSide(color: borderColor),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(
-                    AppTheme.radiusMd), // Use AppTheme radius
+                    OsmeaAppTheme.radiusMd), // Use OsmeaAppTheme radius
                 borderSide: BorderSide(color: borderColor, width: 1.0),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(
-                    AppTheme.radiusMd), // Use AppTheme radius
+                    OsmeaAppTheme.radiusMd), // Use OsmeaAppTheme radius
                 borderSide: BorderSide(color: colorScheme.primary, width: 2.0),
               ),
               errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(
-                    AppTheme.radiusMd), // Use AppTheme radius
+                    OsmeaAppTheme.radiusMd), // Use OsmeaAppTheme radius
                 borderSide: BorderSide(color: colorScheme.error, width: 1.5),
               ),
               focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(
-                    AppTheme.radiusMd), // Use AppTheme radius
+                    OsmeaAppTheme.radiusMd), // Use OsmeaAppTheme radius
                 borderSide: BorderSide(color: colorScheme.error, width: 2.0),
               ),
 

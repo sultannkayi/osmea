@@ -84,7 +84,7 @@ class _EmptyApiGuidanceState extends State<EmptyApiGuidance>
       child: Container(
         margin: EdgeInsets.all(isNarrow ? 8 : 16),
         decoration: BoxDecoration(
-          gradient: AppTheme.createGradient(
+          gradient: OsmeaAppTheme.createGradient(
             theme.colorScheme.primary.withValues(alpha: isDark ? 0.1 : 0.05),
             theme.colorScheme.secondary.withValues(alpha: isDark ? 0.05 : 0.02),
           ),
@@ -110,9 +110,9 @@ class _EmptyApiGuidanceState extends State<EmptyApiGuidance>
                         width: isNarrow ? 60 : 80,
                         height: isNarrow ? 60 : 80,
                         decoration: BoxDecoration(
-                          gradient: AppTheme.createGradient(
-                            AppTheme.primaryColor,
-                            AppTheme.primaryVariant,
+                          gradient: OsmeaAppTheme.createGradient(
+                            OsmeaAppTheme.primaryColor,
+                            OsmeaAppTheme.primaryVariant,
                           ),
                           shape: BoxShape.circle,
                           boxShadow: [

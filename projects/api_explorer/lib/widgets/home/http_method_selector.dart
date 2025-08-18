@@ -63,7 +63,7 @@ class HttpMethodSelector extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
-                      color: AppTheme.getMethodColor(method),
+                      color: OsmeaAppTheme.getMethodColor(method),
                       borderRadius: BorderRadius.circular(4),
                     ),
                     child: Text(
@@ -103,7 +103,7 @@ class HttpMethodSelector extends StatelessWidget {
       runSpacing: 8,
       children: methods.map((method) {
         final isSelected = selectedMethod == method;
-        final methodColor = AppTheme.getMethodColor(method);
+        final methodColor = OsmeaAppTheme.getMethodColor(method);
 
         return Material(
           color: Colors.transparent,

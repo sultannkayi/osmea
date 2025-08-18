@@ -85,16 +85,17 @@ class _ControlPanelState extends State<ControlPanel>
     final screenWidth = MediaQuery.of(context).size.width;
     final isSmallScreen = screenWidth < 500;
     final colorScheme = Theme.of(context).colorScheme;
-    final padding = isSmallScreen ? AppTheme.spaceMd : AppTheme.spaceLg;
+    final padding =
+        isSmallScreen ? OsmeaAppTheme.spaceMd : OsmeaAppTheme.spaceLg;
 
     return SlideTransition(
       position: _slideAnimation,
       child: Container(
-        margin: const EdgeInsets.all(AppTheme.spaceSm),
+        margin: const EdgeInsets.all(OsmeaAppTheme.spaceSm),
         decoration: BoxDecoration(
           color: colorScheme.surface, // Updated background color
-          borderRadius: BorderRadius.circular(AppTheme.radiusLg),
-          boxShadow: AppTheme.mediumShadow, // Use AppTheme shadows
+          borderRadius: BorderRadius.circular(OsmeaAppTheme.radiusLg),
+          boxShadow: OsmeaAppTheme.mediumShadow, // Use OsmeaAppTheme shadows
         ),
         child: Column(
           children: [
@@ -117,24 +118,24 @@ class _ControlPanelState extends State<ControlPanel>
     return Container(
       padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
-        gradient: AppTheme.createMethodGradient(
+        gradient: OsmeaAppTheme.createMethodGradient(
           'POST', // Updated gradient for better visual appeal
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(AppTheme.radiusLg),
-          topRight: Radius.circular(AppTheme.radiusLg),
+          topLeft: Radius.circular(OsmeaAppTheme.radiusLg),
+          topRight: Radius.circular(OsmeaAppTheme.radiusLg),
         ),
       ),
       child: Row(
         children: [
           // 🎯 Modern Icon
           Container(
-            padding: const EdgeInsets.all(AppTheme.spaceMd),
+            padding: const EdgeInsets.all(OsmeaAppTheme.spaceMd),
             decoration: BoxDecoration(
               color: colorScheme.secondary.withAlpha(51), // Updated color
-              borderRadius: BorderRadius.circular(AppTheme.radiusMd),
+              borderRadius: BorderRadius.circular(OsmeaAppTheme.radiusMd),
               border: Border.all(
                 color: colorScheme.secondary.withAlpha(77),
                 width: 1,
@@ -147,7 +148,7 @@ class _ControlPanelState extends State<ControlPanel>
             ),
           ),
 
-          const SizedBox(width: AppTheme.spaceLg),
+          const SizedBox(width: OsmeaAppTheme.spaceLg),
 
           // 📝 Title Section
           Expanded(
@@ -156,14 +157,12 @@ class _ControlPanelState extends State<ControlPanel>
               children: [
                 Text(
                   'API Configuration',
-                  style: AppTheme.headlineLarge.copyWith(
-                    color: colorScheme.onSecondary, // Updated text color
-                  ),
+                  style: OsmeaAppTheme.headlineLarge(context)
                 ),
-                const SizedBox(height: AppTheme.spaceXs),
+                const SizedBox(height: OsmeaAppTheme.spaceXs),
                 Text(
                   'Configure and test your API endpoints',
-                  style: AppTheme.bodyLarge.copyWith(
+                  style: OsmeaAppTheme.bodyLarge(context).copyWith(
                     color: colorScheme.onSecondary.withAlpha(230),
                   ),
                 ),
@@ -194,7 +193,7 @@ class _ControlPanelState extends State<ControlPanel>
               colorScheme: colorScheme,
             ),
 
-            const SizedBox(height: AppTheme.spaceLg),
+            const SizedBox(height: OsmeaAppTheme.spaceLg),
 
             // 📁 Subcategory Selection
             if (widget.selectedCategory != null) ...[
@@ -206,7 +205,7 @@ class _ControlPanelState extends State<ControlPanel>
                 child: _buildModernSubcategorySelector(context),
                 colorScheme: colorScheme,
               ),
-              const SizedBox(height: AppTheme.spaceLg),
+              const SizedBox(height: OsmeaAppTheme.spaceLg),
             ],
 
             // 🔌 Service Selection
@@ -220,7 +219,7 @@ class _ControlPanelState extends State<ControlPanel>
                 child: _buildModernServiceSelector(context),
                 colorScheme: colorScheme,
               ),
-              const SizedBox(height: AppTheme.spaceLg),
+              const SizedBox(height: OsmeaAppTheme.spaceLg),
             ],
 
             // 🔄 Method Selection
@@ -237,7 +236,7 @@ class _ControlPanelState extends State<ControlPanel>
                 ),
                 colorScheme: colorScheme,
               ),
-              const SizedBox(height: AppTheme.spaceLg),
+              const SizedBox(height: OsmeaAppTheme.spaceLg),
             ],
 
             // ⚙️ Parameters
@@ -253,7 +252,7 @@ class _ControlPanelState extends State<ControlPanel>
                 child: _buildModernParameterFields(context),
                 colorScheme: colorScheme,
               ),
-              const SizedBox(height: AppTheme.spaceLg),
+              const SizedBox(height: OsmeaAppTheme.spaceLg),
             ],
 
             // 🚀 Execute Button
@@ -281,10 +280,10 @@ class _ControlPanelState extends State<ControlPanel>
         Row(
           children: [
             Container(
-              padding: const EdgeInsets.all(AppTheme.spaceSm),
+              padding: const EdgeInsets.all(OsmeaAppTheme.spaceSm),
               decoration: BoxDecoration(
                 color: colorScheme.primary.withAlpha(26), // 0.1 * 255 ≈ 26
-                borderRadius: BorderRadius.circular(AppTheme.radiusMd),
+                borderRadius: BorderRadius.circular(OsmeaAppTheme.radiusMd),
               ),
               child: Icon(
                 icon,
@@ -292,30 +291,25 @@ class _ControlPanelState extends State<ControlPanel>
                 color: colorScheme.primary, // Use theme primary color
               ),
             ),
-            const SizedBox(width: AppTheme.spaceMd),
+            const SizedBox(width: OsmeaAppTheme.spaceMd),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     title,
-                    style: AppTheme.titleLarge.copyWith(
-                      color: colorScheme.onSurface, // Use theme onSurface color
-                    ),
+                      style: OsmeaAppTheme.titleLarge(context)
                   ),
                   Text(
                     subtitle,
-                    style: AppTheme.bodyLarge.copyWith(
-                      color: colorScheme
-                          .onSurfaceVariant, // Use theme onSurfaceVariant color
-                    ),
+                    style: OsmeaAppTheme.bodyLarge(context)
                   ),
                 ],
               ),
             ),
           ],
         ),
-        const SizedBox(height: AppTheme.spaceMd),
+        const SizedBox(height: OsmeaAppTheme.spaceMd),
         // Content
         child,
       ],
@@ -639,21 +633,21 @@ class _ControlPanelState extends State<ControlPanel>
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            AppTheme.successColor, // Updated button gradient
-            AppTheme.primaryColor,
+            OsmeaAppTheme.successColor, // Updated button gradient
+            OsmeaAppTheme.primaryColor,
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(AppTheme.radiusLg),
-        boxShadow: AppTheme.mediumShadow, // Use AppTheme shadows
+        borderRadius: BorderRadius.circular(OsmeaAppTheme.radiusLg),
+        boxShadow: OsmeaAppTheme.mediumShadow, // Use OsmeaAppTheme shadows
       ),
       child: Material(
         color: Colors.transparent,
-        borderRadius: BorderRadius.circular(AppTheme.radiusLg),
+        borderRadius: BorderRadius.circular(OsmeaAppTheme.radiusLg),
         child: InkWell(
           onTap: !widget.loading ? widget.onExecute : null,
-          borderRadius: BorderRadius.circular(AppTheme.radiusLg),
+          borderRadius: BorderRadius.circular(OsmeaAppTheme.radiusLg),
           child: Center(
             child: widget.loading
                 ? Row(
@@ -671,10 +665,7 @@ class _ControlPanelState extends State<ControlPanel>
                       const SizedBox(width: 12),
                       Text(
                         'Executing...',
-                        style: AppTheme.bodyLarge.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style: OsmeaAppTheme.bodyLarge(context)
                       ),
                     ],
                   )
@@ -682,11 +673,11 @@ class _ControlPanelState extends State<ControlPanel>
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(AppTheme.spaceSm),
+                        padding: const EdgeInsets.all(OsmeaAppTheme.spaceSm),
                         decoration: BoxDecoration(
                           color: Colors.white.withAlpha(51),
                           borderRadius:
-                              BorderRadius.circular(AppTheme.radiusMd),
+                              BorderRadius.circular(OsmeaAppTheme.radiusMd),
                         ),
                         child: Icon(
                           Icons.rocket_launch_rounded,
@@ -694,15 +685,12 @@ class _ControlPanelState extends State<ControlPanel>
                           size: 20,
                         ),
                       ),
-                      const SizedBox(width: AppTheme.spaceMd),
+                      const SizedBox(width: OsmeaAppTheme.spaceMd),
                       Text(
                         widget.selectedMethod != null
                             ? 'Execute ${widget.selectedMethod!} Request'
                             : 'Execute Request',
-                        style: AppTheme.bodyLarge.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style: OsmeaAppTheme.bodyLarge(context)
                       ),
                     ],
                   ),

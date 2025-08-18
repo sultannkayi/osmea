@@ -93,7 +93,7 @@ class _EmptyStateWidgetState extends State<EmptyStateWidget>
                         height: 80,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          gradient: AppTheme.createGradient(
+                          gradient: OsmeaAppTheme.createGradient(
                             theme.colorScheme.primary.withValues(alpha: 0.1),
                             theme.colorScheme.secondary.withValues(alpha: 0.05),
                           ),
