@@ -34,7 +34,7 @@ class _ApiExplorerViewState extends State<ApiExplorerView>
   void initState() {
     super.initState();
     _sidebarController = AnimationController(
-      duration: const Duration(milliseconds: 300),
+      duration: context.durationMedium,
       vsync: this,
     );
     _sidebarAnimation = CurvedAnimation(
@@ -128,8 +128,8 @@ class _ApiExplorerViewState extends State<ApiExplorerView>
     });
     _mobilePageController.animateToPage(
       page,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
+      duration: context.animationMedium,
+      curve: easeInOut,
     );
   }
 
