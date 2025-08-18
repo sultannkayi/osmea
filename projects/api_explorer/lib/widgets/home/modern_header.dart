@@ -1,7 +1,10 @@
 import 'package:api_explorer/styles/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:core/core.dart';
+import 'package:osmea_components/osmea_components.dart';
 
+/// Modern Header using Osmea components
 class ModernHeader extends StatelessWidget {
   final VoidCallback onToggleSidebar;
   final VoidCallback onToggleTheme;
@@ -21,103 +24,97 @@ class ModernHeader extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
-    return Container(
+    return OsmeaComponents.container(
       height: 70,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: EdgeInsets.symmetric(
+        horizontal: context.spacing16,
+        vertical: context.spacing8,
+      ),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
+        color: theme.colorScheme.surface,
         border: Border(
           bottom: BorderSide(
-            color: Theme.of(context).colorScheme.outline.withValues(alpha: .1),
+            color: theme.colorScheme.outline.withValues(alpha: 0.1),
             width: 1,
           ),
         ),
       ),
-      child: Row(
+      child: OsmeaComponents.row(
         children: [
           // Sidebar toggle
-          IconButton(
+          OsmeaComponents.iconButton(
             icon: AnimatedRotation(
               turns: sidebarExpanded ? 0 : 0.5,
               duration: const Duration(milliseconds: 300),
               child: Icon(
                 sidebarExpanded ? Icons.menu_open : Icons.menu,
-                color:
-                    Theme.of(context).iconTheme.color, // Use theme icon color
+                color: theme.iconTheme.color,
               ),
             ),
             onPressed: onToggleSidebar,
             tooltip: sidebarExpanded ? 'Collapse sidebar' : 'Expand sidebar',
+            variant: ButtonVariant.ghost,
+            size: ButtonSize.medium,
           ),
-          const SizedBox(width: 16),
+          OsmeaComponents.sizedBox(width: context.spacing16),
+
           // Title
-          Expanded(
-            child: Column(
+          OsmeaComponents.expanded(
+            child: OsmeaComponents.column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                OsmeaComponents.text(
                   'OSMEA API Explorer',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                    color: Theme.of(context)
-                        .textTheme
-                        .titleLarge
-                        ?.color, // Use theme title color
-                  ),
+                  variant: OsmeaTextVariant.titleLarge,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  color: theme.textTheme.titleLarge?.color,
                 ),
-                Text(
+                OsmeaComponents.text(
                   'Modern API testing interface',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Theme.of(context)
-                        .textTheme
-                        .bodyMedium
-                        ?.color
-                        ?.withAlpha(
-                            (0.7 * 255).toInt()), // Use theme body color
+                  variant: OsmeaTextVariant.bodySmall,
+                  fontSize: 12,
+                  color: theme.textTheme.bodyMedium?.color?.withAlpha(
+                    (0.7 * 255).toInt(),
                   ),
                 ),
               ],
             ),
           ),
+
           // Theme toggle
-          Container(
-            margin: const EdgeInsets.only(right: 8),
+          OsmeaComponents.container(
+            margin: EdgeInsets.only(right: context.spacing8),
             decoration: BoxDecoration(
-              color: Theme.of(context)
-                  .colorScheme
-                  .surfaceContainerHighest, // Use theme surface variant
-              borderRadius: BorderRadius.circular(12),
+              color: theme.colorScheme.surfaceContainerHighest,
+              borderRadius: context.borderRadiusMinStandard,
               border: Border.all(
-                color: Theme.of(context)
-                    .colorScheme
-                    .primary
-                    .withAlpha((0.1 * 255).toInt()), // Use theme primary color
+                color: theme.colorScheme.primary.withAlpha(
+                  (0.1 * 255).toInt(),
+                ),
               ),
             ),
-            child: IconButton(
+            child: OsmeaComponents.iconButton(
               onPressed: onToggleTheme,
               icon: Icon(
                 isDark ? Icons.light_mode_rounded : Icons.dark_mode_rounded,
-                color: Theme.of(context)
-                    .colorScheme
-                    .onSurface, // Use theme onSurface color
+                color: theme.colorScheme.onSurface,
               ),
               tooltip: isDark ? 'Switch to light mode' : 'Switch to dark mode',
+              variant: ButtonVariant.ghost,
+              size: ButtonSize.medium,
             ),
           ),
+
           // GitHub link
-          Container(
-            margin: const EdgeInsets.only(right: 16),
+          OsmeaComponents.container(
+            margin: EdgeInsets.only(right: context.spacing16),
             decoration: BoxDecoration(
-              color: Theme.of(context)
-                  .colorScheme
-                  .surfaceContainerHighest, // Use theme surface variant
-              borderRadius: BorderRadius.circular(12),
+              color: theme.colorScheme.surfaceContainerHighest,
+              borderRadius: context.borderRadiusMinStandard,
             ),
-            child: IconButton(
+            child: OsmeaComponents.iconButton(
               onPressed: () async {
                 final uri =
                     Uri.parse('https://github.com/masterfabric-mobile/osmea');
@@ -127,47 +124,50 @@ class ModernHeader extends StatelessWidget {
               },
               icon: Icon(
                 Icons.code_rounded,
-                color: Theme.of(context)
-                    .colorScheme
-                    .onSurface, // Use theme onSurface color
+                color: theme.colorScheme.onSurface,
               ),
               tooltip: 'View on GitHub',
+              variant: ButtonVariant.ghost,
+              size: ButtonSize.medium,
             ),
           ),
+
           // Status indicator
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          OsmeaComponents.container(
+            padding: EdgeInsets.symmetric(
+              horizontal: context.spacing16,
+              vertical: context.spacing8,
+            ),
             decoration: BoxDecoration(
               color: OsmeaAppTheme.primaryColor.withAlpha(
-                  (0.1 * 255).toInt()), // Use OsmeaAppTheme primary color
-              borderRadius: BorderRadius.circular(16),
+                (0.1 * 255).toInt(),
+              ),
+              borderRadius: context.borderRadiusMedium,
               border: Border.all(
                 color: OsmeaAppTheme.primaryColor.withAlpha(
-                    (0.3 * 255).toInt()), // Use OsmeaAppTheme primary color
+                  (0.3 * 255).toInt(),
+                ),
                 width: 1,
               ),
             ),
-            child: Row(
+            child: OsmeaComponents.row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Container(
+                OsmeaComponents.container(
                   width: 8,
                   height: 8,
                   decoration: BoxDecoration(
-                    color: OsmeaAppTheme
-                        .primaryColor, // Use OsmeaAppTheme primary color
+                    color: OsmeaAppTheme.primaryColor,
                     shape: BoxShape.circle,
                   ),
                 ),
-                const SizedBox(width: 8),
-                Text(
+                OsmeaComponents.sizedBox(width: context.spacing8),
+                OsmeaComponents.text(
                   'Connected',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: OsmeaAppTheme
-                        .primaryColor, // Use OsmeaAppTheme primary color
-                    fontWeight: FontWeight.w500,
-                  ),
+                  variant: OsmeaTextVariant.labelSmall,
+                  fontSize: 12,
+                  color: OsmeaAppTheme.primaryColor,
+                  fontWeight: FontWeight.w500,
                 ),
               ],
             ),

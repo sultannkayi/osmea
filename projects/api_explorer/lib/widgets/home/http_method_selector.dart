@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:api_explorer/styles/app_theme.dart';
+import 'package:core/core.dart';
+import 'package:osmea_components/osmea_components.dart';
 
+/// Modern HTTP Method Selector using Osmea components
 class HttpMethodSelector extends StatelessWidget {
   final List<String> methods;
   final String? selectedMethod;
@@ -26,144 +29,118 @@ class HttpMethodSelector extends StatelessWidget {
     }
   }
 
+  /// Build dropdown selector for narrow screens
   Widget _buildDropdownSelector(BuildContext context, bool isNarrow) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.symmetric(
-          horizontal: isNarrow ? 12 : 16, vertical: isNarrow ? 8 : 12),
-      decoration: BoxDecoration(
-        color: isDark
-            ? Theme.of(context).colorScheme.surface.withValues(alpha: 0.05)
-            : Theme.of(context).colorScheme.surface,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: isDark
-              ? Theme.of(context).colorScheme.surface.withValues(alpha: 0.1)
-              : Theme.of(context).colorScheme.outline,
-        ),
-      ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<String>(
-          value: selectedMethod,
-          isExpanded: true,
-          style: TextStyle(
-            fontFamily: 'monospace',
-            fontSize: isNarrow ? 12 : 14,
-            fontWeight: FontWeight.w600,
-          ),
-          dropdownColor: Theme.of(context).colorScheme.surfaceContainerHighest,
-          items: methods.map((method) {
-            return DropdownMenuItem<String>(
-              value: method,
-              child: Row(
-                children: [
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: OsmeaAppTheme.getMethodColor(method),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: Text(
-                      method,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 10,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    method,
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.onSurface,
-                      fontFamily: 'monospace',
-                    ),
-                  ),
-                ],
-              ),
-            );
-          }).toList(),
-          onChanged: (value) {
-            if (value != null) {
-              onMethodSelected(value);
-            }
-          },
-        ),
-      ),
+    return OsmeaComponents.dropdown<String>(
+      items: methods,
+      value: selectedMethod,
+      hint: 'Select HTTP Method',
+      onChanged: (value) {
+        if (value != null) {
+          onMethodSelected(value);
+        }
+      },
+      variant: DropdownVariant.outlined,
+      size: isNarrow ? DropdownSize.small : DropdownSize.medium,
+      fullWidth: true,
+      selectedItemBuilder: (selectedItem) {
+        if (selectedItem == null) return const SizedBox.shrink();
+        return _buildDropdownItem(selectedItem, true, isNarrow);
+      },
+      itemBuilder: (item, isSelected) {
+        return _buildDropdownItem(item, isSelected, isNarrow);
+      },
     );
   }
 
+  /// Build dropdown item with method color and styling
+  Widget _buildDropdownItem(String method, bool isSelected, bool isNarrow) {
+    final methodColor = OsmeaAppTheme.getMethodColor(method);
+
+    return OsmeaComponents.row(
+      children: [
+        // Method color indicator
+        OsmeaComponents.container(
+          padding: EdgeInsets.symmetric(
+            horizontal: isNarrow ? 6 : 8,
+            vertical: isNarrow ? 3 : 4,
+          ),
+          decoration: BoxDecoration(
+            color: methodColor,
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: OsmeaComponents.text(
+            method,
+            variant: OsmeaTextVariant.bodySmall,
+            fontSize: isNarrow ? 9 : 10,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+
+        OsmeaComponents.sizedBox(width: isNarrow ? 6 : 8),
+
+        // Method name
+        OsmeaComponents.text(
+          method,
+          variant: OsmeaTextVariant.bodyMedium,
+          fontSize: isNarrow ? 12 : 14,
+          fontFamily: 'monospace',
+          fontWeight: FontWeight.w600,
+        ),
+      ],
+    );
+  }
+
+  /// Build chip selector for wider screens
   Widget _buildChipSelector(BuildContext context, bool isMobile) {
-    return Wrap(
-      spacing: isMobile ? 8 : 12,
-      runSpacing: 8,
+    return OsmeaComponents.wrap(
+      spacing: isMobile ? 8.0 : 12.0,
+      runSpacing: 8.0,
       children: methods.map((method) {
         final isSelected = selectedMethod == method;
         final methodColor = OsmeaAppTheme.getMethodColor(method);
 
-        return Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: () => onMethodSelected(method),
-            borderRadius: BorderRadius.circular(8),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              padding: EdgeInsets.symmetric(
-                horizontal: isMobile ? 12 : 16,
-                vertical: isMobile ? 8 : 10,
-              ),
-              decoration: BoxDecoration(
-                color: isSelected
-                    ? methodColor
-                    : methodColor.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: methodColor,
-                  width: isSelected ? 2 : 1,
-                ),
-                boxShadow: isSelected
-                    ? [
-                        BoxShadow(
-                          color: methodColor.withValues(alpha: 0.3),
-                          blurRadius: 8,
-                          offset: const Offset(0, 2),
-                        ),
-                      ]
-                    : null,
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    width: 8,
-                    height: 8,
-                    decoration: BoxDecoration(
-                      color: isSelected
-                          ? Theme.of(context).colorScheme.onPrimary
-                          : methodColor,
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    method,
-                    style: TextStyle(
-                      color: isSelected
-                          ? Theme.of(context).colorScheme.onPrimary
-                          : methodColor,
-                      fontWeight: FontWeight.w600,
-                      fontSize: isMobile ? 13 : 14,
-                      fontFamily: 'monospace',
-                    ),
-                  ),
-                ],
-              ),
-            ),
+        return OsmeaComponents.chips(
+          text: method,
+          variant: ChipsVariant.custom,
+          size: isMobile ? ChipsSize.small : ChipsSize.medium,
+          style: isSelected ? ChipsStyle.normal : ChipsStyle.outlined,
+          shape: ChipsShape.rounded,
+          state: isSelected ? ChipsState.selected : ChipsState.normal,
+          selected: isSelected,
+          backgroundColor: isSelected ? methodColor : null,
+          textColor: isSelected ? Colors.white : methodColor,
+          borderColor: methodColor,
+          textStyle: TextStyle(
+            fontFamily: 'monospace',
+            fontWeight: FontWeight.w600,
+            fontSize: isMobile ? 13 : 14,
           ),
+          onTap: () => onMethodSelected(method),
+          onSelected: (selected) {
+            if (selected) {
+              onMethodSelected(method);
+            }
+          },
+          tooltip: 'Select $method method',
+          fitContent: true,
+          // Custom action widget for selection indicator
+          actionWidget: isSelected
+              ? Container(
+                  width: 16,
+                  height: 16,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.check,
+                    size: 12,
+                    color: methodColor,
+                  ),
+                )
+              : null,
         );
       }).toList(),
     );

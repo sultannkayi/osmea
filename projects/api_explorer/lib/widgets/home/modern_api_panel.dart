@@ -5,7 +5,9 @@ import 'package:api_explorer/widgets/home/panel_header.dart';
 import 'package:api_explorer/widgets/home/service_info.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
 import 'package:core/core.dart';
+import 'package:osmea_components/osmea_components.dart';
 
+/// Modern API Panel using Osmea components
 class ModernApiPanel extends StatefulWidget {
   final ApiService? selectedService;
   final String selectedMethod;
@@ -40,7 +42,7 @@ class _ModernApiPanelState extends State<ModernApiPanel>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final ScrollController _scrollController = ScrollController();
-  bool _isDisposed = false; // Track disposal state
+  bool _isDisposed = false;
   final Map<String, TextEditingController> _controllers = {};
   ApiService? _previousService;
 
@@ -55,9 +57,7 @@ class _ModernApiPanelState extends State<ModernApiPanel>
   void didUpdateWidget(ModernApiPanel oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    // Check if service has changed
     if (widget.selectedService != _previousService) {
-      // Clear all controllers when service changes
       for (var controller in _controllers.values) {
         controller.clear();
       }
@@ -68,10 +68,9 @@ class _ModernApiPanelState extends State<ModernApiPanel>
 
   @override
   void dispose() {
-    _isDisposed = true; // Mark as disposed
+    _isDisposed = true;
     _tabController.dispose();
     _scrollController.dispose();
-    // Dispose all controllers
     for (var controller in _controllers.values) {
       controller.dispose();
     }
@@ -89,7 +88,7 @@ class _ModernApiPanelState extends State<ModernApiPanel>
   @override
   Widget build(BuildContext context) {
     if (_isDisposed) {
-      return const SizedBox.shrink(); // Prevent rendering after disposal
+      return const SizedBox.shrink();
     }
 
     final theme = Theme.of(context);
@@ -228,8 +227,7 @@ class _ModernApiPanelState extends State<ModernApiPanel>
           Icons.check_circle_outline,
           isNarrow,
           isMobile,
-          false // Adding the missing isVeryNarrow parameter
-          );
+          false);
     }
 
     return OsmeaComponents.padding(
@@ -248,6 +246,7 @@ class _ModernApiPanelState extends State<ModernApiPanel>
                     OsmeaComponents.expanded(
                       child: OsmeaComponents.text(
                         field.label,
+                        variant: OsmeaTextVariant.labelMedium,
                         fontSize:
                             isNarrow ? context.spacing12 : context.spacing16,
                         fontWeight: FontWeight.w500,
@@ -257,6 +256,7 @@ class _ModernApiPanelState extends State<ModernApiPanel>
                       OsmeaComponents.sizedBox(width: context.spacing4),
                       OsmeaComponents.text(
                         '*',
+                        variant: OsmeaTextVariant.labelMedium,
                         color: const Color(0xFFEF4444),
                         fontSize:
                             isNarrow ? context.spacing12 : context.spacing16,
@@ -340,6 +340,7 @@ class _ModernApiPanelState extends State<ModernApiPanel>
                 height: isNarrow ? context.spacing12 : context.spacing16),
             OsmeaComponents.text(
               title,
+              variant: OsmeaTextVariant.titleMedium,
               fontSize: isNarrow ? context.spacing16 : context.spacing16,
               fontWeight: FontWeight.w600,
               color: OsmeaAppTheme.primaryVariant,
@@ -349,6 +350,7 @@ class _ModernApiPanelState extends State<ModernApiPanel>
                 height: isNarrow ? context.spacing6 : context.spacing8),
             OsmeaComponents.text(
               message,
+              variant: OsmeaTextVariant.bodyMedium,
               fontSize: isNarrow ? context.spacing12 : context.spacing16,
               color: OsmeaAppTheme.primaryColor.withValues(alpha: 0.7),
               textAlign: TextAlign.center,
