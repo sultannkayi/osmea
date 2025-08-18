@@ -2,9 +2,62 @@
 
 > This changelog is generated from the latest closed pull requests. For a full, always-up-to-date changelog, visit [Closed PRs on GitHub](https://github.com/masterfabric-mobile/osmea/pulls?state=closed&sort=updated&direction=desc).  
 
+
+
+## v1.28.13
+
+### 🆕 Added & Improvements
+
+- **[#132 – OSMEA - Components - Storybook → Renaming](https://github.com/masterfabric-mobile/osmea/pull/132)**
+  Renamed all storybook component files from legacy `*_test_modular` to the new `*_storybook` naming pattern for better clarity and future structure. Updated all import statements and improved project naming consistency.
+
+- **[#133 – OSMEA - Projects - Storybook → Move Storybook to Projects](https://github.com/masterfabric-mobile/osmea/pull/133)**  
+  Major reorganization: moved Storybook to a dedicated `projects/storybook` Flutter app, centralized configuration, standardized naming, updated dependencies, improved structure, and fixed import paths.
+
+- **[#135 – OSMEA - Projects → Admin Dashboard - Welcome View](https://github.com/masterfabric-mobile/osmea/pull/135)**  
+  Introduced major improvements and structural changes to the onboarding flow: new `WelcomeView`, onboarding helper, splash event, developer mode, navigation enhancements, better translations, and UI consistency.
+
+- **[#137 – Components App – UI Improvements](https://github.com/masterfabric-mobile/osmea/pull/137)**  
+  Transforms the example mobile app into a polished Osmea Components UI Kit demo. Adds Splash + Onboarding flows, minimalist modern design, component showcase, detail views, new navigation, and refactors for maintainability and scalability.
+
+- **[#138 – Components App – App Display Name](https://github.com/masterfabric-mobile/osmea/pull/138)**  
+  Updates the display name and package identifiers across all platforms to "Components App", ensuring consistency and clarity.
+
+- **[#139 – Components App – Web View Device Frame](https://github.com/masterfabric-mobile/osmea/pull/139)**  
+  Adds a mobile device frame (iPhone 16 Pro Max) to the web view using the `device_frame` package, making the showcase more professional and realistic for mobile developers.
+
+- **[#140 – Api Example → Moving and Renaming](https://github.com/masterfabric-mobile/osmea/pull/140)**  
+  Moves and renames the `example/` directory to `projects/api_explorer/`, updates all references and import paths, and improves project structure.
+
+- **[#141 – Package – API → Add Shop Wizard and Sample Code](https://github.com/masterfabric-mobile/osmea/pull/141)**  
+  Adds a wizard-based configuration for WooCommerce and Shopify, improves API Explorer UI, refactors store management logic, and includes sample code for easier integration.
+
+---
+
+### 🐞 Bug Fixes
+
+- **[#136 – OSMEA - Fix → WooCommerce API Batch Registry](https://github.com/masterfabric-mobile/osmea/pull/136)**  
+  Bug fixes, minor optimizations, and code improvements in the WooCommerce batch API registry and services.
+
+---
+
+### 📚 Documentation
+
+- **[#134 – OSMEA - Projects - Rules for IDEs](https://github.com/masterfabric-mobile/osmea/pull/134)**  
+  Documentation for IDE rules and configuration.
+
+---
+
+### ⚠️ Known Issues
+
+_No explicit known issues found in these pull requests._
+
+---
+
+
 ## v1.20.11
 
-## 🆕 Added & Improvements
+### 🆕 Added & Improvements
 
 - **#122 – OSMEA - Package - API → Network woocommerce shipping zone**  
   [PR #122](https://github.com/masterfabric-mobile/osmea/pull/122)  
@@ -24,7 +77,7 @@
 
 ---
 
-## 🐞 Bug Fixes
+### 🐞 Bug Fixes
 
 - **#125 – OSMEA - Projects → Admin Dashboard - Onboarding View**  
   [PR #125](https://github.com/masterfabric-mobile/osmea/pull/125)  
@@ -36,7 +89,7 @@
 
 ---
 
-## 📚 Documentation
+### 📚 Documentation
 
 - **#127 – OSMEA - Components - Storybook → Carousel**  
   [PR #127](https://github.com/masterfabric-mobile/osmea/pull/127)  
@@ -52,7 +105,7 @@
 
 ---
 
-## ⚠️ Known Issues
+### ⚠️ Known Issues
 
 _No explicit known issues listed in the provided closed pull requests._
 
@@ -98,11 +151,11 @@ _No explicit known issues listed in the provided closed pull requests._
 
 ---
 
-## ⚠️ Known Issues
+### ⚠️ Known Issues
 
 - No explicitly stated known issues are present in this PR list.
 
----
+
 
 ## v1.0.0
 ### 🆕 Added & Improvements
@@ -311,6 +364,3 @@ _No explicit known issues listed in the provided closed pull requests._
 - Some edge cases remain in Slider and Calendar components; further manual testing recommended.
 - Modal customization options may require UI validation for complex use cases.
 - Ensure notification system does not conflict with legacy alert mechanisms in older screens.
-
-
----
