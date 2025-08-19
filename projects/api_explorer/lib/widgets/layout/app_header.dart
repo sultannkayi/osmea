@@ -32,7 +32,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: OsmeaColors.white,
       elevation: 0,
       leading: onDrawerToggle != null
           ? OsmeaComponents.iconButton(
@@ -197,7 +197,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
           return OsmeaComponents.container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surfaceContainerHighest,
+              color: OsmeaColors.white,
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color: Theme.of(context)
@@ -238,7 +238,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
           return OsmeaComponents.container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surfaceContainerHighest,
+              color: OsmeaColors.white,
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color: Theme.of(context)
@@ -285,7 +285,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
         return OsmeaComponents.container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surfaceContainerHighest,
+            color: OsmeaColors.white,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
               color: platformColor.withValues(alpha: 0.3),
@@ -379,80 +379,22 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
               OsmeaComponents.sizedBox(width: 8),
 
               // Actions
-              PopupMenuButton<String>(
-                icon: Icon(
-                  Icons.more_vert,
-                  size: 18,
-                  color: Theme.of(context)
-                      .colorScheme
-                      .onSurface
-                      .withValues(alpha: 0.7),
-                ),
-                padding: EdgeInsets.zero,
-                constraints: const BoxConstraints(
-                  minWidth: 24,
-                  minHeight: 24,
-                ),
-                tooltip: 'Store actions',
-                onSelected: (value) {
-                  switch (value) {
-                    case 'refresh':
-                      // Trigger refresh if needed
-                      break;
-                    case 'change':
-                      onStoreChange?.call();
-                      break;
-                    case 'profile':
-                      onProfileTap?.call();
-                      break;
-                  }
-                },
-                itemBuilder: (context) => [
-                  PopupMenuItem(
-                    value: 'refresh',
-                    child: OsmeaComponents.row(
-                      children: [
-                        Icon(Icons.refresh, size: 16),
-                        OsmeaComponents.sizedBox(width: 8),
-                        OsmeaComponents.text(
-                          'Refresh',
-                          textStyle: OsmeaTextStyle.bodyMedium(context),
-                        ),
-                      ],
-                    ),
-                  ),
-                  PopupMenuItem(
-                    value: 'change',
-                    child: OsmeaComponents.row(
-                      children: [
-                        Icon(Icons.swap_horiz, size: 16),
-                        OsmeaComponents.sizedBox(width: 8),
-                        OsmeaComponents.text(
-                          'Change Store',
-                          textStyle: OsmeaTextStyle.bodyMedium(context),
-                        ),
-                      ],
-                    ),
-                  ),
-                  PopupMenuItem(
-                    value: 'profile',
-                    child: OsmeaComponents.row(
-                      children: [
-                        Icon(Icons.person, size: 16),
-                        OsmeaComponents.sizedBox(width: 8),
-                        OsmeaComponents.text(
-                          'Store Profile',
-                          textStyle: OsmeaTextStyle.bodyMedium(context),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+              _buildActionMenu(context),
             ],
           ),
         );
       },
+    );
+  }
+
+  /// Build the custom action menu for the store profile
+  Widget _buildActionMenu(BuildContext context) {
+    return _ActionMenuWidget(
+      onRefresh: () {
+        // Trigger refresh if needed
+      },
+      onChangeStore: onStoreChange,
+      onProfileTap: onProfileTap,
     );
   }
 
@@ -470,4 +412,120 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(64);
+}
+
+/// Custom action menu widget using OSMEA components
+class _ActionMenuWidget extends StatefulWidget {
+  final VoidCallback? onRefresh;
+  final VoidCallback? onChangeStore;
+  final VoidCallback? onProfileTap;
+
+  const _ActionMenuWidget({
+    this.onRefresh,
+    this.onChangeStore,
+    this.onProfileTap,
+  });
+
+  @override
+  State<_ActionMenuWidget> createState() => _ActionMenuWidgetState();
+}
+
+class _ActionMenuWidgetState extends State<_ActionMenuWidget> {
+  bool _isMenuOpen = false;
+  final LayerLink _layerLink = LayerLink();
+
+  @override
+  Widget build(BuildContext context) {
+    return CompositedTransformTarget(
+      link: _layerLink,
+      child: OsmeaComponents.iconButton(
+        icon: Icon(
+          Icons.more_vert,
+          size: 18,
+          color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+        ),
+        onPressed: () {
+          setState(() {
+            _isMenuOpen = !_isMenuOpen;
+          });
+          if (_isMenuOpen) {
+            _showMenu(context);
+          }
+        },
+        variant: ButtonVariant.ghost,
+        size: ButtonSize.small,
+        tooltip: 'Store actions',
+      ),
+    );
+  }
+
+  void _showMenu(BuildContext context) {
+    final RenderBox renderBox = context.findRenderObject() as RenderBox;
+    final size = renderBox.size;
+    final offset = renderBox.localToGlobal(Offset.zero);
+
+    showMenu<String>(
+      context: context,
+      position: RelativeRect.fromLTRB(
+        offset.dx + size.width - 200, // Align to right
+        offset.dy + size.height + 8, // Below the button
+        offset.dx + size.width,
+        offset.dy + size.height + 8,
+      ),
+      items: [
+        _buildMenuItem(
+          context,
+          'refresh',
+          Icons.refresh,
+          'Refresh',
+          widget.onRefresh,
+        ),
+        _buildMenuItem(
+          context,
+          'change',
+          Icons.swap_horiz,
+          'Change Store',
+          widget.onChangeStore,
+        ),
+        _buildMenuItem(
+          context,
+          'profile',
+          Icons.person,
+          'Store Profile',
+          widget.onProfileTap,
+        ),
+      ],
+    ).then((_) {
+      setState(() {
+        _isMenuOpen = false;
+      });
+    });
+  }
+
+  PopupMenuEntry<String> _buildMenuItem(
+    BuildContext context,
+    String value,
+    IconData icon,
+    String label,
+    VoidCallback? onTap,
+  ) {
+    return PopupMenuItem<String>(
+      value: value,
+      onTap: onTap,
+      child: OsmeaComponents.listItem(
+        title: OsmeaComponents.text(
+          label,
+          textStyle: OsmeaTextStyle.bodyMedium(context),
+        ),
+        leading: Icon(
+          icon,
+          size: 16,
+          color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.8),
+        ),
+        variant: ListItemVariant.standard,
+        size: ListItemSize.small,
+        onTap: onTap,
+      ),
+    );
+  }
 }
