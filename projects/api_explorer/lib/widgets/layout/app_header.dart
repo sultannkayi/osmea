@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:api_explorer/widgets/store_management/store_profile_widget.dart';
 import 'package:api_explorer/styles/app_theme.dart';
 import 'package:flutter/services.dart';
 import 'package:core/core.dart';
+import 'package:apis/apis.dart';
 
 /// Modern IDE-style application header using Osmea components
 class AppHeader extends StatelessWidget implements PreferredSizeWidget {
@@ -31,10 +31,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OsmeaComponents.appBar(
-      variant: AppBarVariant.surface,
-      size: AppBarSize.comfortable,
-      type: AppBarType.fixed,
+    return AppBar(
       backgroundColor: Theme.of(context).colorScheme.surface,
       elevation: 0,
       leading: onDrawerToggle != null
@@ -172,113 +169,290 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
   }
 
   /// Build the actions section
-  List<AppBarAction> _buildActions(BuildContext context) {
+  List<Widget> _buildActions(BuildContext context) {
     return [
-      // Store Profile Widget - Show in expandable dropdown
-      AppBarAction(
-        icon: Icon(Icons.store, size: 20),
-        onPressed: () => _showStoreProfileDropdown(context),
-        type: AppBarActionType.profile,
-        tooltip: 'Store Profile',
-      ),
+      // Compact Store Profile Component - Show directly in header
+      _buildCompactStoreProfile(context),
 
       // Theme Toggle Button
-      AppBarAction(
+      OsmeaComponents.iconButton(
         icon: Icon(
           isDarkMode ? Icons.light_mode : Icons.dark_mode,
           size: 20,
         ),
         onPressed: onThemeToggle,
-        type: AppBarActionType.settings,
+        variant: ButtonVariant.ghost,
+        size: ButtonSize.medium,
         tooltip: isDarkMode ? 'Switch to light mode' : 'Switch to dark mode',
       ),
     ];
   }
 
-  /// Show store profile expandable dropdown
-  void _showStoreProfileDropdown(BuildContext context) {
-    final RenderBox button = context.findRenderObject() as RenderBox;
-    final Offset position = button.localToGlobal(Offset.zero);
-
-    showMenu(
-      context: context,
-      position: RelativeRect.fromLTRB(
-        position.dx,
-        position.dy + button.size.height,
-        position.dx + button.size.width,
-        position.dy + button.size.height + 10,
-      ),
-      items: [
-        PopupMenuItem(
-          enabled: false,
-          child: _buildStoreProfileDropdownContent(context),
-        ),
-      ],
-    );
-  }
-
-  /// Build the store profile dropdown content
-  Widget _buildStoreProfileDropdownContent(BuildContext context) {
-    return OsmeaComponents.container(
-      constraints: BoxConstraints(
-        minWidth: 350,
-        maxWidth: 400,
-        maxHeight: 500,
-      ),
-      child: OsmeaComponents.column(
-        mainAxisSize: min,
-        children: [
-          // Header
-          OsmeaComponents.container(
-            padding: context.paddingNormal,
+  /// Build the compact store profile widget for the header
+  Widget _buildCompactStoreProfile(BuildContext context) {
+    return FutureBuilder<Map<String, dynamic>?>(
+      future: WizardHelper.getStoreProfile(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return OsmeaComponents.container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surfaceContainerHighest,
-              borderRadius: context.borderRadiusMinStandard,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: Theme.of(context)
+                    .colorScheme
+                    .outline
+                    .withValues(alpha: 0.2),
+                width: 1,
+              ),
             ),
             child: OsmeaComponents.row(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(
-                  Icons.store,
-                  color: Theme.of(context).colorScheme.primary,
-                  size: context.iconSizeMedium,
-                ),
-                OsmeaComponents.sizedBox(width: context.spacing12),
-                OsmeaComponents.text(
-                  'Store Profile',
-                  textStyle: OsmeaTextStyle.titleMedium(context).copyWith(
-                    fontWeight: FontWeight.w600,
+                SizedBox(
+                  width: 16,
+                  height: 16,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    valueColor:
+                        AlwaysStoppedAnimation<Color>(OsmeaColors.nordicBlue),
                   ),
                 ),
-                OsmeaComponents.spacer(),
-                IconButton(
-                  icon: Icon(Icons.close, size: context.iconSizeMedium),
-                  onPressed: () => Navigator.of(context).pop(),
-                  tooltip: 'Close',
-                  padding: context.paddingZero,
-                  constraints: const BoxConstraints(
-                    minWidth: 24,
-                    minHeight: 24,
+                OsmeaComponents.sizedBox(width: 8),
+                OsmeaComponents.text(
+                  'Loading...',
+                  textStyle: OsmeaTextStyle.bodySmall(context).copyWith(
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onSurface
+                        .withValues(alpha: 0.7),
                   ),
                 ),
               ],
             ),
-          ),
+          );
+        }
 
-          // Store Profile Widget
-          OsmeaComponents.flexible(
-            child: StoreProfileWidget(
-              onProfileTap: () {
-                Navigator.of(context).pop();
-                onProfileTap?.call();
-              },
-              onStoreChange: () {
-                Navigator.of(context).pop();
-                onStoreChange?.call();
-              },
+        if (snapshot.hasError || !snapshot.hasData) {
+          return OsmeaComponents.container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surfaceContainerHighest,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: Theme.of(context)
+                    .colorScheme
+                    .outline
+                    .withValues(alpha: 0.3),
+                width: 1,
+              ),
             ),
+            child: OsmeaComponents.row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.store_outlined,
+                  size: 16,
+                  color: Theme.of(context).colorScheme.outline,
+                ),
+                OsmeaComponents.sizedBox(width: 6),
+                OsmeaComponents.text(
+                  'No Store',
+                  textStyle: OsmeaTextStyle.bodySmall(context).copyWith(
+                    color: Theme.of(context).colorScheme.outline,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                OsmeaComponents.sizedBox(width: 4),
+                OsmeaComponents.button(
+                  text: 'Add Store',
+                  variant: ButtonVariant.outlined,
+                  size: ButtonSize.small,
+                  onPressed: () {
+                    onStoreChange?.call();
+                  },
+                ),
+              ],
+            ),
+          );
+        }
+
+        final profile = snapshot.data!;
+        final platformColor =
+            Color(int.parse(profile['color'].replaceAll('#', '0xFF')));
+
+        return OsmeaComponents.container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surfaceContainerHighest,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: platformColor.withValues(alpha: 0.3),
+              width: 1,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: platformColor.withValues(alpha: 0.1),
+                offset: const Offset(0, 2),
+                blurRadius: 8,
+              ),
+            ],
           ),
-        ],
-      ),
+          child: OsmeaComponents.row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Platform Icon
+              OsmeaComponents.container(
+                padding: const EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                  color: platformColor.withValues(alpha: 0.15),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: OsmeaComponents.text(
+                  profile['icon'],
+                  textStyle: OsmeaTextStyle.bodySmall(context).copyWith(
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+              OsmeaComponents.sizedBox(width: 10),
+
+              // Store Info
+              OsmeaComponents.column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  OsmeaComponents.text(
+                    profile['name'] ?? 'Unknown Store',
+                    textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  OsmeaComponents.text(
+                    profile['platformDisplayName'] ?? 'Unknown',
+                    textStyle: OsmeaTextStyle.bodySmall(context).copyWith(
+                      fontSize: 11,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withValues(alpha: 0.7),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+
+              OsmeaComponents.sizedBox(width: 10),
+
+              // Status Indicator
+              OsmeaComponents.container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                decoration: BoxDecoration(
+                  color: (profile['status'] ?? 'Unknown') == 'Active'
+                      ? OsmeaColors.forestHeart.withValues(alpha: 0.15)
+                      : OsmeaColors.amberFlame.withValues(alpha: 0.15),
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(
+                    color: (profile['status'] ?? 'Unknown') == 'Active'
+                        ? OsmeaColors.forestHeart.withValues(alpha: 0.3)
+                        : OsmeaColors.amberFlame.withValues(alpha: 0.3),
+                    width: 1,
+                  ),
+                ),
+                child: OsmeaComponents.text(
+                  profile['status'] ?? 'Unknown',
+                  textStyle: OsmeaTextStyle.captionSmall(context).copyWith(
+                    fontSize: 10,
+                    color: (profile['status'] ?? 'Unknown') == 'Active'
+                        ? OsmeaColors.forestHeart
+                        : OsmeaColors.amberFlame,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+
+              OsmeaComponents.sizedBox(width: 8),
+
+              // Actions
+              PopupMenuButton<String>(
+                icon: Icon(
+                  Icons.more_vert,
+                  size: 18,
+                  color: Theme.of(context)
+                      .colorScheme
+                      .onSurface
+                      .withValues(alpha: 0.7),
+                ),
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(
+                  minWidth: 24,
+                  minHeight: 24,
+                ),
+                tooltip: 'Store actions',
+                onSelected: (value) {
+                  switch (value) {
+                    case 'refresh':
+                      // Trigger refresh if needed
+                      break;
+                    case 'change':
+                      onStoreChange?.call();
+                      break;
+                    case 'profile':
+                      onProfileTap?.call();
+                      break;
+                  }
+                },
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    value: 'refresh',
+                    child: OsmeaComponents.row(
+                      children: [
+                        Icon(Icons.refresh, size: 16),
+                        OsmeaComponents.sizedBox(width: 8),
+                        OsmeaComponents.text(
+                          'Refresh',
+                          textStyle: OsmeaTextStyle.bodyMedium(context),
+                        ),
+                      ],
+                    ),
+                  ),
+                  PopupMenuItem(
+                    value: 'change',
+                    child: OsmeaComponents.row(
+                      children: [
+                        Icon(Icons.swap_horiz, size: 16),
+                        OsmeaComponents.sizedBox(width: 8),
+                        OsmeaComponents.text(
+                          'Change Store',
+                          textStyle: OsmeaTextStyle.bodyMedium(context),
+                        ),
+                      ],
+                    ),
+                  ),
+                  PopupMenuItem(
+                    value: 'profile',
+                    child: OsmeaComponents.row(
+                      children: [
+                        Icon(Icons.person, size: 16),
+                        OsmeaComponents.sizedBox(width: 8),
+                        OsmeaComponents.text(
+                          'Store Profile',
+                          textStyle: OsmeaTextStyle.bodyMedium(context),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 

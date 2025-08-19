@@ -3,7 +3,6 @@ import 'package:apis/apis.dart';
 import 'package:apis/services/store_change_notifier.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
 import 'package:api_explorer/styles/app_theme.dart';
-import 'package:api_explorer/widgets/store_management/store_selector.dart';
 import 'package:core/core.dart';
 import 'package:osmea_components/osmea_components.dart';
 import 'dart:async';
