@@ -317,7 +317,7 @@ class _ControlPanelState extends State<ControlPanel>
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Material(
-      color: Colors.transparent,
+      color: OsmeaColors.transparent,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
         onTap: onTap,
@@ -329,23 +329,23 @@ class _ControlPanelState extends State<ControlPanel>
             gradient: isSelected
                 ? LinearGradient(
                     colors: [
-                      const Color(0xFF667EEA).withValues(alpha: 0.2),
-                      const Color(0xFF764BA2).withValues(alpha: 0.1),
+                      OsmeaColors.nordicBlue.withValues(alpha: 0.2),
+                      OsmeaColors.deepSea.withValues(alpha: 0.1),
                     ],
                   )
                 : null,
             color: !isSelected
                 ? (isDarkMode
-                    ? Colors.white.withValues(alpha: 0.05)
-                    : Colors.grey.shade50)
+                    ? OsmeaColors.white.withValues(alpha: 0.05)
+                    : OsmeaColors.ash)
                 : null,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
               color: isSelected
-                  ? const Color(0xFF667EEA)
+                  ? OsmeaColors.nordicBlue
                   : (isDarkMode
-                      ? Colors.white.withValues(alpha: 0.1)
-                      : Colors.grey.shade200),
+                      ? OsmeaColors.white.withValues(alpha: 0.1)
+                      : OsmeaColors.silver),
               width: isSelected ? 2 : 1,
             ),
           ),
@@ -353,8 +353,8 @@ class _ControlPanelState extends State<ControlPanel>
             text,
             style: TextStyle(
               color: isSelected
-                  ? const Color(0xFF667EEA)
-                  : (isDarkMode ? Colors.white : Colors.grey.shade700),
+                  ? OsmeaColors.nordicBlue
+                  : (isDarkMode ? OsmeaColors.white : OsmeaColors.pewter),
               fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
               fontSize: 14,
             ),
@@ -411,13 +411,13 @@ class _ControlPanelState extends State<ControlPanel>
     return OsmeaComponents.container(
       decoration: BoxDecoration(
         color: isDarkMode
-            ? Colors.white.withValues(alpha: 0.03)
-            : Colors.grey.shade50,
+            ? OsmeaColors.white.withValues(alpha: 0.03)
+            : OsmeaColors.ash,
         borderRadius: context.borderRadiusMaxStandard,
         border: Border.all(
           color: isDarkMode
-              ? Colors.white.withValues(alpha: 0.1)
-              : Colors.grey.shade200,
+              ? OsmeaColors.white.withValues(alpha: 0.1)
+              : OsmeaColors.silver,
           width: 1,
         ),
       ),
@@ -429,7 +429,7 @@ class _ControlPanelState extends State<ControlPanel>
           final isLast = index == services.length - 1;
 
           return Material(
-            color: Colors.transparent,
+            color: OsmeaColors.transparent,
             child: InkWell(
               onTap: () => widget.onServiceSelected(service),
               borderRadius: BorderRadius.vertical(
@@ -444,14 +444,14 @@ class _ControlPanelState extends State<ControlPanel>
                 padding: EdgeInsets.all(context.spacing20),
                 decoration: BoxDecoration(
                   color: isSelected
-                      ? const Color(0xFF667EEA).withValues(alpha: 0.1)
-                      : Colors.transparent,
+                      ? OsmeaColors.nordicBlue.withValues(alpha: 0.1)
+                      : OsmeaColors.transparent,
                   border: !isLast
                       ? Border(
                           bottom: BorderSide(
                             color: isDarkMode
-                                ? Colors.white.withValues(alpha: 0.1)
-                                : Colors.grey.shade200,
+                                ? OsmeaColors.white.withValues(alpha: 0.1)
+                                : OsmeaColors.silver,
                             width: 1,
                           ),
                         )
@@ -464,20 +464,20 @@ class _ControlPanelState extends State<ControlPanel>
                       padding: EdgeInsets.all(context.spacing12),
                       decoration: BoxDecoration(
                         color: isSelected
-                            ? const Color(0xFF667EEA).withValues(alpha: 0.2)
+                            ? OsmeaColors.nordicBlue.withValues(alpha: 0.2)
                             : (isDarkMode
-                                ? Colors.white.withValues(alpha: 0.1)
-                                : Colors.grey.shade100),
+                                ? OsmeaColors.white.withValues(alpha: 0.1)
+                                : OsmeaColors.ash),
                         borderRadius: context.borderRadiusMinStandard,
                       ),
                       child: Icon(
                         Icons.api_outlined,
                         size: 20,
                         color: isSelected
-                            ? const Color(0xFF667EEA)
+                            ? OsmeaColors.nordicBlue
                             : (isDarkMode
-                                ? Colors.white60
-                                : Colors.grey.shade600),
+                                ? OsmeaColors.white.withValues(alpha: 0.6)
+                                : OsmeaColors.steel),
                       ),
                     ),
 
@@ -493,10 +493,10 @@ class _ControlPanelState extends State<ControlPanel>
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                             color: isSelected
-                                ? const Color(0xFF667EEA)
+                                ? OsmeaColors.nordicBlue
                                 : (isDarkMode
-                                    ? Colors.white
-                                    : Colors.grey.shade800),
+                                    ? OsmeaColors.white
+                                    : OsmeaColors.slate),
                           ),
                           OsmeaComponents.sizedBox(height: context.spacing4),
                           OsmeaComponents.text(
@@ -504,8 +504,8 @@ class _ControlPanelState extends State<ControlPanel>
                             fontSize: 13,
                             textStyle: const TextStyle(fontFamily: 'monospace'),
                             color: isDarkMode
-                                ? Colors.white60
-                                : Colors.grey.shade600,
+                                ? OsmeaColors.white.withValues(alpha: 0.6)
+                                : OsmeaColors.steel,
                           ),
                         ],
                       ),
@@ -516,13 +516,13 @@ class _ControlPanelState extends State<ControlPanel>
                       OsmeaComponents.container(
                         padding: EdgeInsets.all(context.spacing6),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF667EEA),
+                          color: OsmeaColors.nordicBlue,
                           borderRadius: context.borderRadiusMinStandard,
                         ),
                         child: const Icon(
                           Icons.check_rounded,
                           size: 16,
-                          color: Colors.white,
+                          color: OsmeaColors.white,
                         ),
                       ),
                   ],
@@ -545,13 +545,13 @@ class _ControlPanelState extends State<ControlPanel>
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Colors.green.withValues(alpha: 0.1),
-              Colors.green.withValues(alpha: 0.05),
+              OsmeaColors.forestHeart.withValues(alpha: 0.1),
+              OsmeaColors.forestHeart.withValues(alpha: 0.05),
             ],
           ),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: Colors.green.withValues(alpha: 0.3),
+            color: OsmeaColors.forestHeart.withValues(alpha: 0.3),
             width: 1,
           ),
         ),
@@ -560,12 +560,12 @@ class _ControlPanelState extends State<ControlPanel>
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.green.withValues(alpha: 0.2),
+                color: OsmeaColors.forestHeart.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(
                 Icons.check_circle_outline,
-                color: Colors.green,
+                color: OsmeaColors.forestHeart,
                 size: 24,
               ),
             ),
@@ -579,14 +579,14 @@ class _ControlPanelState extends State<ControlPanel>
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: Colors.green.shade700,
+                      color: OsmeaColors.forestHeart,
                     ),
                   ),
                   Text(
                     'No parameters required for this endpoint',
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.green.shade600,
+                      color: OsmeaColors.meadow,
                     ),
                   ),
                 ],
@@ -637,7 +637,7 @@ class _ControlPanelState extends State<ControlPanel>
         boxShadow: OsmeaAppTheme.mediumShadow, // Use OsmeaAppTheme shadows
       ),
       child: Material(
-        color: Colors.transparent,
+        color: OsmeaColors.transparent,
         borderRadius: BorderRadius.circular(OsmeaAppTheme.radiusLg),
         child: InkWell(
           onTap: !widget.loading ? widget.onExecute : null,
@@ -653,7 +653,7 @@ class _ControlPanelState extends State<ControlPanel>
                         child: CircularProgressIndicator(
                           strokeWidth: 2.5,
                           valueColor:
-                              AlwaysStoppedAnimation<Color>(Colors.white),
+                              AlwaysStoppedAnimation<Color>(OsmeaColors.white),
                         ),
                       ),
                       const SizedBox(width: 12),
@@ -667,13 +667,13 @@ class _ControlPanelState extends State<ControlPanel>
                       Container(
                         padding: const EdgeInsets.all(OsmeaAppTheme.spaceSm),
                         decoration: BoxDecoration(
-                          color: Colors.white.withAlpha(51),
+                          color: OsmeaColors.white.withValues(alpha: 0.2),
                           borderRadius:
                               BorderRadius.circular(OsmeaAppTheme.radiusMd),
                         ),
                         child: Icon(
                           Icons.rocket_launch_rounded,
-                          color: Colors.white,
+                          color: OsmeaColors.white,
                           size: 20,
                         ),
                       ),

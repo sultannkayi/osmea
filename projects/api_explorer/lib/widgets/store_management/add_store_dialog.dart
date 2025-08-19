@@ -270,8 +270,11 @@ class _AddStoreDialogState extends State<AddStoreDialog>
                         width: double.infinity,
                         padding: const EdgeInsets.all(24),
                         decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            colors: [Color(0xFF1B80BF), Color(0xFF1F3B73)],
+                          gradient: LinearGradient(
+                            colors: [
+                              OsmeaColors.nordicBlue,
+                              OsmeaColors.eclipse
+                            ],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),

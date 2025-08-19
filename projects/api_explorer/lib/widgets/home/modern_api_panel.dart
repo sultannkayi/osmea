@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:api_explorer/styles/app_theme.dart';
 import 'package:api_explorer/widgets/home/http_method_selector.dart';
 import 'package:api_explorer/widgets/home/panel_header.dart';
 import 'package:api_explorer/widgets/home/service_info.dart';
@@ -111,7 +110,7 @@ class _ModernApiPanelState extends State<ModernApiPanel>
             borderRadius: context.borderRadiusMedium,
             boxShadow: [
               BoxShadow(
-                color: OsmeaAppTheme.primaryColor.withValues(alpha: 0.05),
+                color: OsmeaColors.nordicBlue.withValues(alpha: 0.05),
                 offset: const Offset(0, 4),
                 blurRadius: isNarrow ? context.spacing8 : context.spacing16,
               ),
@@ -257,7 +256,7 @@ class _ModernApiPanelState extends State<ModernApiPanel>
                       OsmeaComponents.text(
                         '*',
                         variant: OsmeaTextVariant.labelMedium,
-                        color: const Color(0xFFEF4444),
+                        color: OsmeaColors.amberFlame,
                         fontSize:
                             isNarrow ? context.spacing12 : context.spacing16,
                         fontWeight: FontWeight.w600,
@@ -334,7 +333,7 @@ class _ModernApiPanelState extends State<ModernApiPanel>
                   : isMobile
                       ? 44
                       : context.spacing48,
-              color: OsmeaAppTheme.primaryColor.withValues(alpha: 0.5),
+              color: OsmeaColors.nordicBlue.withValues(alpha: 0.5),
             ),
             OsmeaComponents.sizedBox(
                 height: isNarrow ? context.spacing12 : context.spacing16),
@@ -343,7 +342,7 @@ class _ModernApiPanelState extends State<ModernApiPanel>
               variant: OsmeaTextVariant.titleMedium,
               fontSize: isNarrow ? context.spacing16 : context.spacing16,
               fontWeight: FontWeight.w600,
-              color: OsmeaAppTheme.primaryVariant,
+              color: OsmeaColors.eclipse,
               textAlign: TextAlign.center,
             ),
             OsmeaComponents.sizedBox(
@@ -352,7 +351,7 @@ class _ModernApiPanelState extends State<ModernApiPanel>
               message,
               variant: OsmeaTextVariant.bodyMedium,
               fontSize: isNarrow ? context.spacing12 : context.spacing16,
-              color: OsmeaAppTheme.primaryColor.withValues(alpha: 0.7),
+              color: OsmeaColors.nordicBlue.withValues(alpha: 0.7),
               textAlign: TextAlign.center,
             ),
           ],

@@ -195,16 +195,15 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
               : isMobile
                   ? 8
                   : 12),
-          color: _ideTheme ? const Color(0xFF1E1E1E) : const Color(0xFFF8F9FA),
+          color: _ideTheme ? OsmeaColors.eclipse : OsmeaColors.snow,
           borderRadius: BorderRadius.circular(isNarrow ? 8 : 12),
           border: Border.all(
-            color:
-                _ideTheme ? const Color(0xFF374151) : const Color(0xFFE5E7EB),
+            color: _ideTheme ? OsmeaColors.thunder : OsmeaColors.silver,
             width: 1,
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(
+              color: OsmeaColors.black.withValues(
                   alpha: Theme.of(context).brightness == Brightness.dark
                       ? 0.4
                       : 0.08),
@@ -338,10 +337,10 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
 
     return OsmeaComponents.container(
       height: isNarrow ? 28 : 32,
-      color: _ideTheme ? const Color(0xFF252526) : const Color(0xFFE8E9EA),
+      color: _ideTheme ? OsmeaColors.shark : OsmeaColors.ash,
       border: Border(
         bottom: BorderSide(
-          color: _ideTheme ? const Color(0xFF3E3E42) : const Color(0xFFD1D5DB),
+          color: _ideTheme ? OsmeaColors.thunder : OsmeaColors.platinum,
         ),
       ),
       child: OsmeaComponents.row(
@@ -372,7 +371,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
           horizontal: isNarrow ? 8 : 12,
           vertical: isNarrow ? 4 : 6,
         ),
-        color: isSelected ? OsmeaColors.nordicBlue : Colors.transparent,
+        color: isSelected ? OsmeaColors.nordicBlue : OsmeaColors.transparent,
         borderRadius: BorderRadius.circular(4),
         child: OsmeaComponents.row(
           mainAxisSize: MainAxisSize.min,
@@ -381,10 +380,8 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
               icon,
               size: isNarrow ? 12 : 14,
               color: isSelected
-                  ? Colors.white
-                  : (isDark
-                      ? const Color(0xFFCCCCCC)
-                      : const Color(0xFF6B7280)),
+                  ? OsmeaColors.white
+                  : (isDark ? OsmeaColors.steel : OsmeaColors.pewter),
             ),
             if (!isNarrow) ...[
               const SizedBox(width: 6),
@@ -392,10 +389,8 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
                 title,
                 variant: OsmeaTextVariant.bodyMedium,
                 color: isSelected
-                    ? Colors.white
-                    : (isDark
-                        ? const Color(0xFFCCCCCC)
-                        : const Color(0xFF6B7280)),
+                    ? OsmeaColors.white
+                    : (isDark ? OsmeaColors.steel : OsmeaColors.pewter),
                 fontSize: isNarrow ? 10 : 11,
                 fontWeight: FontWeight.w500,
               ),
@@ -426,19 +421,16 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
   Widget _buildResponsiveCodeEditor(
       bool isTablet, bool isMobile, bool isNarrow) {
     return OsmeaComponents.container(
-      color: _ideTheme ? const Color(0xFF1E1E1E) : const Color(0xFFF8F9FA),
+      color: _ideTheme ? OsmeaColors.eclipse : OsmeaColors.snow,
       child: OsmeaComponents.row(
         children: [
           // Line numbers
           OsmeaComponents.container(
             width: isNarrow ? 40 : 50,
-            color:
-                _ideTheme ? const Color(0xFF252526) : const Color(0xFFE8E9EA),
+            color: _ideTheme ? OsmeaColors.shark : OsmeaColors.ash,
             border: Border(
               right: BorderSide(
-                color: _ideTheme
-                    ? const Color(0xFF3E3E42)
-                    : const Color(0xFFD1D5DB),
+                color: _ideTheme ? OsmeaColors.thunder : OsmeaColors.platinum,
               ),
             ),
             child: ListView.builder(
@@ -452,9 +444,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
                   child: OsmeaComponents.text(
                     '${index + 1}',
                     variant: OsmeaTextVariant.bodySmall,
-                    color: _ideTheme
-                        ? const Color(0xFF858585)
-                        : const Color(0xFF6B7280),
+                    color: _ideTheme ? OsmeaColors.steel : OsmeaColors.pewter,
                     fontSize: isNarrow ? 10 : 11,
                     fontFamily: 'monospace',
                   ),
@@ -477,9 +467,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
                   child: SelectableText(
                     line,
                     style: TextStyle(
-                      color: _ideTheme
-                          ? const Color(0xFFD4D4D4)
-                          : const Color(0xFF2D2D2D),
+                      color: _ideTheme ? OsmeaColors.ash : OsmeaColors.shark,
                       fontSize: isNarrow ? 11 : 12,
                       fontFamily: 'monospace',
                       height: 1.2,
@@ -508,10 +496,9 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
               content: 'https://github.com/masterfabric-mobile/osmea',
               size: ComponentSize.medium,
               variant: ComponentAppearance.elevated,
-              backgroundColor:
-                  _ideTheme ? const Color(0xFF2D2D30) : const Color(0xFFE8E9EA),
+              backgroundColor: _ideTheme ? OsmeaColors.shark : OsmeaColors.ash,
               borderColor:
-                  _ideTheme ? const Color(0xFF3E3E42) : const Color(0xFFD1D5DB),
+                  _ideTheme ? OsmeaColors.thunder : OsmeaColors.platinum,
               customContent: OsmeaComponents.row(
                 children: [
                   Icon(
@@ -527,7 +514,8 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
                         OsmeaComponents.text(
                           'OSMEA Repository',
                           variant: OsmeaTextVariant.titleLarge,
-                          color: _ideTheme ? Colors.white : Colors.black87,
+                          color:
+                              _ideTheme ? OsmeaColors.white : OsmeaColors.shark,
                           fontSize: isNarrow ? 16 : 18,
                           fontWeight: FontWeight.w700,
                         ),
@@ -556,9 +544,9 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
               size: ComponentSize.medium,
               variant: ComponentAppearance.elevated,
               backgroundColor:
-                  _ideTheme ? const Color(0xFF1E1E1E) : const Color(0xFFF8F9FA),
+                  _ideTheme ? OsmeaColors.eclipse : OsmeaColors.snow,
               borderColor:
-                  _ideTheme ? const Color(0xFF3E3E42) : const Color(0xFFD1D5DB),
+                  _ideTheme ? OsmeaColors.thunder : OsmeaColors.platinum,
             ),
 
             SizedBox(height: isNarrow ? 16 : 24),
@@ -570,9 +558,9 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
               size: ComponentSize.medium,
               variant: ComponentAppearance.elevated,
               backgroundColor:
-                  _ideTheme ? const Color(0xFF1E1E1E) : const Color(0xFFF8F9FA),
+                  _ideTheme ? OsmeaColors.eclipse : OsmeaColors.snow,
               borderColor:
-                  _ideTheme ? const Color(0xFF3E3E42) : const Color(0xFFD1D5DB),
+                  _ideTheme ? OsmeaColors.thunder : OsmeaColors.platinum,
               customContent: OsmeaComponents.column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -609,7 +597,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
             borderRadius: BorderRadius.circular(4),
             child: const Icon(
               Icons.check,
-              color: Colors.white,
+              color: OsmeaColors.white,
               size: 12,
             ),
           ),
@@ -621,16 +609,14 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
                 OsmeaComponents.text(
                   title,
                   variant: OsmeaTextVariant.bodyMedium,
-                  color: _ideTheme ? Colors.white : Colors.black87,
+                  color: _ideTheme ? OsmeaColors.white : OsmeaColors.shark,
                   fontSize: isNarrow ? 12 : 14,
                   fontWeight: FontWeight.w500,
                 ),
                 OsmeaComponents.text(
                   description,
                   variant: OsmeaTextVariant.bodySmall,
-                  color: _ideTheme
-                      ? const Color(0xFF999999)
-                      : const Color(0xFF6B7280),
+                  color: _ideTheme ? OsmeaColors.steel : OsmeaColors.pewter,
                   fontSize: isNarrow ? 11 : 12,
                 ),
               ],
@@ -653,10 +639,8 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
                 'Examples for Access Scope Handler and other API handlers will be displayed here.',
             size: ComponentSize.medium,
             variant: ComponentAppearance.elevated,
-            backgroundColor:
-                _ideTheme ? const Color(0xFF2D2D30) : const Color(0xFFE8E9EA),
-            borderColor:
-                _ideTheme ? const Color(0xFF3E3E42) : const Color(0xFFD1D5DB),
+            backgroundColor: _ideTheme ? OsmeaColors.shark : OsmeaColors.ash,
+            borderColor: _ideTheme ? OsmeaColors.thunder : OsmeaColors.platinum,
             customContent: OsmeaComponents.row(
               children: [
                 Icon(
@@ -668,7 +652,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
                 OsmeaComponents.text(
                   'Examples Coming Soon',
                   variant: OsmeaTextVariant.titleMedium,
-                  color: _ideTheme ? Colors.white : Colors.black87,
+                  color: _ideTheme ? OsmeaColors.white : OsmeaColors.shark,
                   fontSize: isNarrow ? 16 : 18,
                   fontWeight: FontWeight.w600,
                 ),
@@ -679,8 +663,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
           OsmeaComponents.text(
             'Examples for Access Scope Handler and other API handlers will be displayed here.',
             variant: OsmeaTextVariant.bodyMedium,
-            color:
-                _ideTheme ? const Color(0xFFCCCCCC) : const Color(0xFF4B5563),
+            color: _ideTheme ? OsmeaColors.steel : OsmeaColors.slate,
             fontSize: isNarrow ? 12 : 14,
             lineHeight: 1.5,
           ),
@@ -700,7 +683,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
 
     // Show response data in JSON format
     return OsmeaComponents.container(
-      color: _ideTheme ? const Color(0xFF1E1E1E) : const Color(0xFFFAFBFC),
+      color: _ideTheme ? OsmeaColors.eclipse : OsmeaColors.paperWhite,
       child: LayoutBuilder(
         builder: (context, constraints) {
           final showLineNumbers = constraints.maxWidth > 300;
@@ -728,7 +711,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
 
     return OsmeaComponents.container(
       width: isNarrow ? 35 : 45,
-      color: _ideTheme ? const Color(0xFF252526) : const Color(0xFFF0F1F2),
+      color: _ideTheme ? OsmeaColors.shark : OsmeaColors.ash,
       child: ListView.builder(
         itemCount: lines.length,
         itemBuilder: (context, index) {
@@ -739,8 +722,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
             child: OsmeaComponents.text(
               '${index + 1}',
               variant: OsmeaTextVariant.bodySmall,
-              color:
-                  _ideTheme ? const Color(0xFF858585) : const Color(0xFF999999),
+              color: _ideTheme ? OsmeaColors.steel : OsmeaColors.steel,
               fontSize: isNarrow ? 9 : 10,
               fontFamily: 'monospace',
               lineHeight: 1.4,
@@ -768,9 +750,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
             child: SelectableText(
               line,
               style: TextStyle(
-                color: _ideTheme
-                    ? const Color(0xFFD4D4D4)
-                    : const Color(0xFF333333),
+                color: _ideTheme ? OsmeaColors.ash : OsmeaColors.shark,
                 fontFamily: 'monospace',
                 fontSize: isNarrow ? 9 : 11,
                 height: 1.4,
@@ -849,7 +829,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
       bool isTablet, bool isMobile, bool isNarrow) {
     return OsmeaComponents.container(
       height: isNarrow ? 20 : 24,
-      color: _ideTheme ? const Color(0xFF007ACC) : const Color(0xFFE8E9EA),
+      color: _ideTheme ? OsmeaColors.nordicBlue : OsmeaColors.ash,
       borderRadius: BorderRadius.only(
         bottomLeft: Radius.circular(isNarrow ? 8 : 12),
         bottomRight: Radius.circular(isNarrow ? 8 : 12),
@@ -859,7 +839,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
           const SizedBox(width: 12),
           Icon(
             Icons.info_outline,
-            color: Colors.white,
+            color: OsmeaColors.white,
             size: isNarrow ? 12 : 14,
           ),
           const SizedBox(width: 6),
@@ -872,7 +852,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
                         : 'Examples - Coming Soon')
                 : 'Response Data - ${_formatResponseData().split('\n').length} lines',
             variant: OsmeaTextVariant.bodyMedium,
-            color: Colors.white,
+            color: OsmeaColors.white,
             fontSize: isNarrow ? 10 : 11,
             fontWeight: FontWeight.w500,
           ),
@@ -881,7 +861,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
             OsmeaComponents.text(
               widget.responseData == null && !widget.loading ? 'Dart' : 'JSON',
               variant: OsmeaTextVariant.bodyMedium,
-              color: Colors.white.withValues(alpha: 0.8),
+              color: OsmeaColors.white.withValues(alpha: 0.8),
               fontSize: isNarrow ? 10 : 11,
               fontWeight: FontWeight.w500,
             ),
