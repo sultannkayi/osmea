@@ -60,7 +60,7 @@ class CreateTransactionHandler implements ApiRequestHandler {
           };
         }
 
-        final bool? test = testStr?.toLowerCase() == 'true';
+        final bool test = testStr?.toLowerCase() == 'true';
 
         final model = CreateTransactionRequest(
           transaction: Transaction(

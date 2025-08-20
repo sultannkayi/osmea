@@ -27,7 +27,7 @@ class CreateDraftOrderWithDiscountHandler implements ApiRequestHandler {
         final int? customerId = params['customer_id'] != null
             ? int.tryParse(params['customer_id']!)
             : null;
-        final bool? useCustomerDefaultAddress =
+        final bool useCustomerDefaultAddress =
             params['use_customer_default_address']?.toLowerCase() == 'true';
 
         if (lineItemTitle == null ||
@@ -66,7 +66,7 @@ class CreateDraftOrderWithDiscountHandler implements ApiRequestHandler {
                 value: discountValue,
               ),
               customer: create_request.Customer(id: customerId),
-              useCustomerDefaultAddress: useCustomerDefaultAddress ?? false,
+              useCustomerDefaultAddress: useCustomerDefaultAddress,
             ),
           );
 

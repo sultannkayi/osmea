@@ -96,7 +96,7 @@ class CreateRefundCalculateHandler implements ApiRequestHandler {
           index++;
         }
 
-        final bool? fullRefund = fullRefundStr?.toLowerCase() == 'true';
+        final bool fullRefund = fullRefundStr?.toLowerCase() == 'true';
 
         final model = CreateRefundCalculateRequest(
           refund: Refund(

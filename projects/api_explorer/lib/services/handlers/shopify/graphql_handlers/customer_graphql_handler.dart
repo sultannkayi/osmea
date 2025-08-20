@@ -2,6 +2,7 @@ import 'package:apis/network/remote/shopify/graphql/services/customer_graphql_se
 import 'package:apis/network/remote/shopify/graphql/helpers/graphql_helper.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 ///*******************************************************************
@@ -32,12 +33,12 @@ class CustomerGraphQLHandler implements ApiRequestHandler {
     try {
       final id = params['id'] ?? params['customer_id'];
 
-      print('DEBUG - Customer Handler - ID parameter: $id'); // Debug log
+      debugPrint('DEBUG - Customer Handler - ID parameter: $id'); // Debug log
 
       if (id != null && id.isNotEmpty) {
         // Get single customer using customers query with specific ID filter
         final formattedId = GraphQLHelper.formatId(id, 'Customer');
-        print(
+        debugPrint(
             'DEBUG - Customer Handler - Formatted ID: $formattedId'); // Debug log
 
         final result = await service.getCustomers(
@@ -47,10 +48,10 @@ class CustomerGraphQLHandler implements ApiRequestHandler {
 
         if (GraphQLHelper.isSuccess(result)) {
           final data = GraphQLHelper.extractData(result);
-          print('DEBUG - Single customer raw data: $data'); // Debug log
+          debugPrint('DEBUG - Single customer raw data: $data'); // Debug log
           final customers = data?['customers'];
           final nodes = GraphQLHelper.extractNodes(customers ?? {});
-          print('DEBUG - Single customer nodes: $nodes'); // Debug log
+          debugPrint('DEBUG - Single customer nodes: $nodes'); // Debug log
 
           if (nodes.isNotEmpty) {
             return {
@@ -80,7 +81,7 @@ class CustomerGraphQLHandler implements ApiRequestHandler {
         final after = params['after'];
         final query = params['query'];
 
-        print(
+        debugPrint(
             'DEBUG - Parameters: first=$first, after=$after, query=$query'); // Debug log
 
         final result = await service.getCustomers(
@@ -89,19 +90,19 @@ class CustomerGraphQLHandler implements ApiRequestHandler {
           query: query,
         );
 
-        print(
+        debugPrint(
             'DEBUG - GraphQL result hasException: ${result.hasException}'); // Debug log
-        print('DEBUG - GraphQL result data: ${result.data}'); // Debug log
+        debugPrint('DEBUG - GraphQL result data: ${result.data}'); // Debug log
 
         if (GraphQLHelper.isSuccess(result)) {
           final data = GraphQLHelper.extractData(result);
-          print('DEBUG - Raw GraphQL data: $data'); // Debug log
+          debugPrint('DEBUG - Raw GraphQL data: $data'); // Debug log
           final customers = data?['customers'];
-          print('DEBUG - Customers data: $customers'); // Debug log
+          debugPrint('DEBUG - Customers data: $customers'); // Debug log
           final nodes = GraphQLHelper.extractNodes(customers ?? {});
           final pageInfo = GraphQLHelper.extractPageInfo(customers ?? {});
-          print('DEBUG - Extracted nodes: $nodes'); // Debug log
-          print('DEBUG - Page info: $pageInfo'); // Debug log
+          debugPrint('DEBUG - Extracted nodes: $nodes'); // Debug log
+          debugPrint('DEBUG - Page info: $pageInfo'); // Debug log
 
           return {
             "status": "success",
@@ -158,8 +159,9 @@ class CustomerGraphQLHandler implements ApiRequestHandler {
 
       final input = <String, dynamic>{};
 
-      if (firstName != null && firstName.isNotEmpty)
+      if (firstName != null && firstName.isNotEmpty) {
         input['firstName'] = firstName;
+      }
       if (lastName != null && lastName.isNotEmpty) input['lastName'] = lastName;
       if (email != null && email.isNotEmpty) input['email'] = email;
       if (phone != null && phone.isNotEmpty) input['phone'] = phone;

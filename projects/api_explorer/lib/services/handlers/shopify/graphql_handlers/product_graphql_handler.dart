@@ -323,8 +323,9 @@ class ProductGraphQLHandler implements ApiRequestHandler {
       final input = <String, dynamic>{};
 
       if (params['title'] != null) input['title'] = params['title'];
-      if (params['description'] != null)
+      if (params['description'] != null) {
         input['description'] = params['description'];
+      }
       if (params['handle'] != null) input['handle'] = params['handle'];
       if (params['vendor'] != null) input['vendor'] = params['vendor'];
       if (params['productType'] != null || params['product_type'] != null) {

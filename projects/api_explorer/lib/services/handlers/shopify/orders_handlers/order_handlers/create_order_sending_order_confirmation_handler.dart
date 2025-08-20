@@ -47,8 +47,8 @@ class CreateOrderSendingOrderConfirmationHandler implements ApiRequestHandler {
         }
 
         try {
-          final bool? sendReceipt = sendReceiptStr?.toLowerCase() == 'true';
-          final bool? sendFulfillmentReceipt =
+          final bool sendReceipt = sendReceiptStr?.toLowerCase() == 'true';
+          final bool sendFulfillmentReceipt =
               sendFulfillmentReceiptStr?.toLowerCase() == 'true';
 
           final model = CreateOrderSendingOrderConfirmationRequest(

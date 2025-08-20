@@ -2,6 +2,7 @@ import 'package:apis/network/remote/shopify/graphql/services/order_graphql_servi
 import 'package:apis/network/remote/shopify/graphql/helpers/graphql_helper.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 
 ///*******************************************************************
@@ -56,10 +57,10 @@ class OrderGraphQLHandler implements ApiRequestHandler {
 
         if (GraphQLHelper.isSuccess(result)) {
           final data = GraphQLHelper.extractData(result);
-          print('DEBUG - Single order raw data: $data'); // Debug log
+          debugPrint('DEBUG - Single order raw data: $data'); // Debug log
           final orders = data?['orders'];
           final nodes = GraphQLHelper.extractNodes(orders ?? {});
-          print('DEBUG - Single order nodes: $nodes'); // Debug log
+          debugPrint('DEBUG - Single order nodes: $nodes'); // Debug log
 
           if (nodes.isNotEmpty) {
             return {
@@ -89,7 +90,7 @@ class OrderGraphQLHandler implements ApiRequestHandler {
         final after = params['after'];
         final query = params['query'];
 
-        print(
+        debugPrint(
             'DEBUG - Order parameters: first=$first, after=$after, query=$query'); // Debug log
 
         final result = await service.getOrders(
@@ -98,19 +99,19 @@ class OrderGraphQLHandler implements ApiRequestHandler {
           query: query,
         );
 
-        print(
+        debugPrint(
             'DEBUG - Order GraphQL result hasException: ${result.hasException}'); // Debug log
-        print('DEBUG - Order GraphQL result data: ${result.data}'); // Debug log
+        debugPrint('DEBUG - Order GraphQL result data: ${result.data}'); // Debug log
 
         if (GraphQLHelper.isSuccess(result)) {
           final data = GraphQLHelper.extractData(result);
-          print('DEBUG - Order raw GraphQL data: $data'); // Debug log
+          debugPrint('DEBUG - Order raw GraphQL data: $data'); // Debug log
           final orders = data?['orders'];
-          print('DEBUG - Orders data: $orders'); // Debug log
+          debugPrint('DEBUG - Orders data: $orders'); // Debug log
           final nodes = GraphQLHelper.extractNodes(orders ?? {});
           final pageInfo = GraphQLHelper.extractPageInfo(orders ?? {});
-          print('DEBUG - Order extracted nodes: $nodes'); // Debug log
-          print('DEBUG - Order page info: $pageInfo'); // Debug log
+          debugPrint('DEBUG - Order extracted nodes: $nodes'); // Debug log
+          debugPrint('DEBUG - Order page info: $pageInfo'); // Debug log
 
           return {
             "status": "success",
