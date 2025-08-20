@@ -623,6 +623,7 @@ class CrossPlatformStorage {
       }
 
       // Force SharedPreferences to persist changes
+      // ignore: deprecated_member_use
       await _sharedPreferences!.commit();
 
       debugPrint('✅ Data saved to SharedPreferences successfully');
