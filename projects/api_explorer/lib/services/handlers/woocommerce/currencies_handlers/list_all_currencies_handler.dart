@@ -2,7 +2,7 @@ import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/datas/currencies/abstract/currencies_service.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
-import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 class ListAllCurrenciesHandler implements ApiRequestHandler {
   @override
@@ -21,33 +21,39 @@ class ListAllCurrenciesHandler implements ApiRequestHandler {
     try {
       final apiVersion = params['api_version'] ?? 'v3';
 
-      print('🔍 Listing all currencies with API version: $apiVersion');
+      debugPrint('🔍 Listing all currencies with API version: $apiVersion');
 
       final service = WooNetwork.getIt.get<CurrenciesService>();
       final response = await service.listAllCurrencies(
         apiVersion: apiVersion,
       );
 
-      print('✅ Successfully retrieved ${response.length} currencies');
+      debugPrint('✅ Successfully retrieved ${response.length} currencies');
 
       return {
         'success': true,
         'data': response.map((item) => item.toJson()).toList(),
         'message': 'Currencies list retrieved successfully',
       };
-    } on DioException catch (e) {
-      print('❌ DioException: ${e.message}');
-      return {
-        'success': false,
-        'error': e.toString(),
-        'message': 'Failed to retrieve currencies list: ${e.message}',
-      };
     } catch (e) {
-      print('❌ Unexpected error: $e');
+      debugPrint('❌ Error: $e');
+
+      String errorMessage = 'Failed to retrieve currencies list';
+      Map<String, dynamic> errorDetails = {};
+      
+      // Extract more specific error information if possible
+      if (e.toString().contains('DioException') || e.toString().contains('DioError')) {
+        errorMessage = 'Network error occurred while retrieving currencies';
+        errorDetails['type'] = 'network_error';
+      } else {
+        errorDetails['type'] = 'unknown_error';
+      }
+      
       return {
         'success': false,
         'error': e.toString(),
-        'message': 'Unexpected error: $e',
+        'error_details': errorDetails,
+        'message': '$errorMessage: $e',
       };
     }
   }

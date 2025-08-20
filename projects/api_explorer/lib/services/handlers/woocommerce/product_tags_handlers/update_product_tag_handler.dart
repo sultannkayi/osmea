@@ -1,8 +1,8 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/products/tags/abstract/product_tags_service.dart';
-import 'package:dio/dio.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class UpdateProductTagHandler implements ApiRequestHandler {
   @override
@@ -82,13 +82,13 @@ class UpdateProductTagHandler implements ApiRequestHandler {
         updateData['description'] = description;
       }
 
-      print('✏️ Update Product Tag Parameters:');
-      print('  API Version: $apiVersion');
-      print('  Tag ID: $tagId');
-      print('  Name: $name');
-      print('  Slug: $slug');
-      print('  Description: $description');
-      print('  Request body: $updateData');
+      debugPrint('✏️ Update Product Tag Parameters:');
+      debugPrint('  API Version: $apiVersion');
+      debugPrint('  Tag ID: $tagId');
+      debugPrint('  Name: $name');
+      debugPrint('  Slug: $slug');
+      debugPrint('  Description: $description');
+      debugPrint('  Request body: $updateData');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<ProductTagsService>();
@@ -98,42 +98,19 @@ class UpdateProductTagHandler implements ApiRequestHandler {
         tagData: updateData,
       );
 
-      print('✅ Update Product Tag Success: ${response.toJson()}');
+      debugPrint('✅ Update Product Tag Success: ${response.toJson()}');
 
       return {
         'success': true,
         'message': 'Product tag updated successfully',
         'data': response.toJson(),
       };
-    } on DioException catch (e) {
-      String errorMessage = 'Failed to update product tag';
-
-      if (e.response?.statusCode == 404) {
-        errorMessage = 'Product tag not found';
-      } else if (e.response?.statusCode == 400) {
-        errorMessage = 'Invalid tag data provided';
-      } else if (e.response?.statusCode == 409) {
-        errorMessage = 'Tag with this name or slug already exists';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      print('❌ Update Product Tag Error: $errorMessage');
-      print('🔍 Full error: ${e.toString()}');
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print('❌ Update Product Tag Unexpected Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message': 'Unexpected error occurred while updating product tag',
+        'message': 'Failed to update product tag: $e',
         'error_details': e.toString(),
       };
     }

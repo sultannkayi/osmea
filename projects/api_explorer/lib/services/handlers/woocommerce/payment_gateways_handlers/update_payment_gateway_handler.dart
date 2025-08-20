@@ -3,7 +3,7 @@ import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/payment_gateways/abstract/payment_gateways_service.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
-import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 class UpdatePaymentGatewayHandler implements ApiRequestHandler {
   @override
@@ -71,14 +71,14 @@ class UpdatePaymentGatewayHandler implements ApiRequestHandler {
         try {
           gatewayData['settings'] = json.decode(params['settings']!);
         } catch (e) {
-          print(
+          debugPrint(
               '⚠️ Warning: Invalid JSON in settings parameter: ${params['settings']}');
         }
       }
 
-      print(
+      debugPrint(
           '🔍 Updating payment gateway with ID: $id, API version: $apiVersion');
-      print('📝 Gateway data: $gatewayData');
+      debugPrint('📝 Gateway data: $gatewayData');
 
       final service = WooNetwork.getIt.get<PaymentGatewaysService>();
       final response = await service.updatePaymentGateway(
@@ -87,26 +87,19 @@ class UpdatePaymentGatewayHandler implements ApiRequestHandler {
         apiVersion: apiVersion,
       );
 
-      print('✅ Successfully updated payment gateway: ${response.title}');
+      debugPrint('✅ Successfully updated payment gateway: ${response.title}');
 
       return {
         'success': true,
         'data': response.toJson(),
         'message': 'Payment gateway updated successfully',
       };
-    } on DioException catch (e) {
-      print('❌ DioException: ${e.message}');
-      return {
-        'success': false,
-        'error': e.toString(),
-        'message': 'Failed to update payment gateway: ${e.message}',
-      };
     } catch (e) {
-      print('❌ Unexpected error: $e');
+      debugPrint('❌ Error: $e');
       return {
         'success': false,
         'error': e.toString(),
-        'message': 'Unexpected error: $e',
+        'message': 'Failed to update payment gateway: $e',
       };
     }
   }

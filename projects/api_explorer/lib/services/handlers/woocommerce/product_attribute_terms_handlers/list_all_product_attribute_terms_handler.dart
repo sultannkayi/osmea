@@ -1,8 +1,8 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/products/attribute_terms/abstract/product_attribute_terms_service.dart';
-import 'package:dio/dio.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class ListAllProductAttributeTermsHandler implements ApiRequestHandler {
   @override
@@ -186,22 +186,22 @@ class ListAllProductAttributeTermsHandler implements ApiRequestHandler {
             .toList();
       }
 
-      print('📋 List All Product Attribute Terms Parameters:');
-      print('  API Version: $apiVersion');
-      print('  Attribute ID: $attributeId');
-      print('  Context: $context');
-      print('  Page: $page');
-      print('  Per Page: $perPage');
-      print('  Search: $search');
-      print('  Exclude: $exclude');
-      print('  Include: $include');
-      print('  Offset: $offset');
-      print('  Order: $order');
-      print('  Order By: $orderby');
-      print('  Hide Empty: $hideEmpty');
-      print('  Parent: $parent');
-      print('  Product: $product');
-      print('  Slug: $slug');
+      debugPrint('📋 List All Product Attribute Terms Parameters:');
+      debugPrint('  API Version: $apiVersion');
+      debugPrint('  Attribute ID: $attributeId');
+      debugPrint('  Context: $context');
+      debugPrint('  Page: $page');
+      debugPrint('  Per Page: $perPage');
+      debugPrint('  Search: $search');
+      debugPrint('  Exclude: $exclude');
+      debugPrint('  Include: $include');
+      debugPrint('  Offset: $offset');
+      debugPrint('  Order: $order');
+      debugPrint('  Order By: $orderby');
+      debugPrint('  Hide Empty: $hideEmpty');
+      debugPrint('  Parent: $parent');
+      debugPrint('  Product: $product');
+      debugPrint('  Slug: $slug');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<ProductAttributeTermsService>();
@@ -223,7 +223,7 @@ class ListAllProductAttributeTermsHandler implements ApiRequestHandler {
         slug: slug,
       );
 
-      print(
+      debugPrint(
           '✅ List All Product Attribute Terms Success: Found ${response.length} terms');
 
       return {
@@ -232,33 +232,12 @@ class ListAllProductAttributeTermsHandler implements ApiRequestHandler {
         'message': 'Product attribute terms retrieved successfully',
         'count': response.length,
       };
-    } on DioException catch (e) {
-      String errorMessage = 'Failed to retrieve product attribute terms';
-
-      if (e.response?.statusCode == 404) {
-        errorMessage = 'Attribute not found';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      print('❌ List All Product Attribute Terms Error: $errorMessage');
-      print('🔍 Full error: ${e.toString()}');
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print(
-          '❌ List All Product Attribute Terms Unexpected Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message':
-            'Unexpected error occurred while retrieving product attribute terms',
+        'message': 'Failed to retrieve product attribute terms: $e',
         'error_details': e.toString(),
       };
     }

@@ -1,8 +1,8 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/products/tags/abstract/product_tags_service.dart';
-import 'package:dio/dio.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class RetrieveProductTagHandler implements ApiRequestHandler {
   @override
@@ -46,9 +46,9 @@ class RetrieveProductTagHandler implements ApiRequestHandler {
       // Parse API version
       final apiVersion = params['api_version']?.toString() ?? 'v3';
 
-      print('🔍 Retrieve Product Tag Parameters:');
-      print('  API Version: $apiVersion');
-      print('  Tag ID: $tagId');
+      debugPrint('🔍 Retrieve Product Tag Parameters:');
+      debugPrint('  API Version: $apiVersion');
+      debugPrint('  Tag ID: $tagId');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<ProductTagsService>();
@@ -57,39 +57,49 @@ class RetrieveProductTagHandler implements ApiRequestHandler {
         tagId: tagId,
       );
 
-      print('✅ Retrieve Product Tag Success: ${response.toJson()}');
+      debugPrint('✅ Retrieve Product Tag Success: ${response.toJson()}');
 
       return {
         'success': true,
         'message': 'Product tag retrieved successfully',
         'data': response.toJson(),
       };
-    } on DioException catch (e) {
+    } catch (e) {
       String errorMessage = 'Failed to retrieve product tag';
+      Map<String, dynamic> errorDetails = {};
 
-      if (e.response?.statusCode == 404) {
-        errorMessage = 'Product tag not found';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
+      // Check if it's a network/HTTP related error
+      if (e.toString().contains('DioException') || e.toString().contains('DioError')) {
+        errorDetails['type'] = 'network_error';
+        
+        // Try to extract status code information from error string
+        if (e.toString().contains('404')) {
+          errorMessage = 'Product tag not found';
+          errorDetails['status_code'] = 404;
+        } else if (e.toString().contains('400')) {
+          errorMessage = 'Bad request - invalid parameters';
+          errorDetails['status_code'] = 400;
+        } else if (e.toString().contains('401')) {
+          errorMessage = 'Unauthorized - check your credentials';
+          errorDetails['status_code'] = 401;
+        } else if (e.toString().contains('500')) {
+          errorMessage = 'Server error occurred';
+          errorDetails['status_code'] = 500;
+        } else {
+          errorMessage = 'Network error occurred while retrieving product tag';
         }
+      } else {
+        errorDetails['type'] = 'unknown_error';
       }
 
-      print('❌ Retrieve Product Tag Error: $errorMessage');
-      print('🔍 Full error: ${e.toString()}');
+      debugPrint('❌ Retrieve Product Tag Error: $errorMessage');
+      debugPrint('🔍 Full error: ${e.toString()}');
 
       return {
         'success': false,
         'message': errorMessage,
-        'error_details': e.toString(),
-      };
-    } catch (e) {
-      print('❌ Retrieve Product Tag Unexpected Error: ${e.toString()}');
-      return {
-        'success': false,
-        'message': 'Unexpected error occurred while retrieving product tag',
-        'error_details': e.toString(),
+        'error_details': errorDetails,
+        'raw_error': e.toString(),
       };
     }
   }

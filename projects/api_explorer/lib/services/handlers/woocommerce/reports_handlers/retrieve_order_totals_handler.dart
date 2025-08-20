@@ -1,9 +1,9 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/reports/abstract/reports_service.dart';
 import 'package:apis/network/remote/woocommerce/reports/freezed_model/response/retrieve_order_totals_response.dart';
-import 'package:dio/dio.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class RetrieveOrderTotalsHandler implements ApiRequestHandler {
   @override
@@ -30,8 +30,8 @@ class RetrieveOrderTotalsHandler implements ApiRequestHandler {
       // Parse API version
       final apiVersion = params['api_version']?.toString() ?? 'v3';
 
-      print('📦 Retrieve Order Totals Parameters:');
-      print('  API Version: $apiVersion');
+      debugPrint('📦 Retrieve Order Totals Parameters:');
+      debugPrint('  API Version: $apiVersion');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<ReportsService>();
@@ -40,7 +40,7 @@ class RetrieveOrderTotalsHandler implements ApiRequestHandler {
         apiVersion: apiVersion,
       );
 
-      print(
+      debugPrint(
           '✅ Retrieve Order Totals Success: Found ${response.length} order totals');
 
       return {
@@ -49,31 +49,12 @@ class RetrieveOrderTotalsHandler implements ApiRequestHandler {
         'message': 'Order totals retrieved successfully',
         'count': response.length,
       };
-    } on DioException catch (e) {
-      String errorMessage = 'Failed to retrieve order totals';
-
-      if (e.response?.statusCode == 404) {
-        errorMessage = 'Order totals not found';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      print('❌ Retrieve Order Totals Error: $errorMessage');
-      print('🔍 Full error: ${e.toString()}');
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print('❌ Retrieve Order Totals Unexpected Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message': 'Unexpected error occurred while retrieving order totals',
+        'message': 'Failed to retrieve order totals: $e',
         'error_details': e.toString(),
       };
     }

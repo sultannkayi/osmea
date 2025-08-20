@@ -2,7 +2,7 @@ import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/datas/data/abstract/data_service.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
-import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 class ListAllDataHandler implements ApiRequestHandler {
   @override
@@ -21,33 +21,26 @@ class ListAllDataHandler implements ApiRequestHandler {
     try {
       final apiVersion = params['api_version'] ?? 'v3';
 
-      print('🔍 Listing all data with API version: $apiVersion');
+      debugPrint('🔍 Listing all data with API version: $apiVersion');
 
       final service = WooNetwork.getIt.get<DataService>();
       final response = await service.listAllData(
         apiVersion: apiVersion,
       );
 
-      print('✅ Successfully retrieved ${response.length} data endpoints');
+      debugPrint('✅ Successfully retrieved ${response.length} data endpoints');
 
       return {
         'success': true,
         'data': response.map((item) => item.toJson()).toList(),
         'message': 'Data list retrieved successfully',
       };
-    } on DioException catch (e) {
-      print('❌ DioException: ${e.message}');
-      return {
-        'success': false,
-        'error': e.toString(),
-        'message': 'Failed to retrieve data list: ${e.message}',
-      };
     } catch (e) {
-      print('❌ Unexpected error: $e');
+      debugPrint('❌ Error: $e');
       return {
         'success': false,
         'error': e.toString(),
-        'message': 'Unexpected error: $e',
+        'message': 'Failed to retrieve data list: $e',
       };
     }
   }

@@ -2,6 +2,7 @@ import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/products/tags/abstract/product_tags_service.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class ListAllProductTagsHandler implements ApiRequestHandler {
   @override
@@ -163,20 +164,20 @@ class ListAllProductTagsHandler implements ApiRequestHandler {
             .toList();
       }
 
-      print('🔍 List All Product Tags Parameters:');
-      print('  API Version: $apiVersion');
-      print('  Context: $context');
-      print('  Page: $page');
-      print('  Per Page: $perPage');
-      print('  Search: $search');
-      print('  Exclude: $exclude');
-      print('  Include: $include');
-      print('  Offset: $offset');
-      print('  Order: $order');
-      print('  Order By: $orderby');
-      print('  Hide Empty: $hideEmpty');
-      print('  Product: $product');
-      print('  Slug: $slug');
+      debugPrint('🔍 List All Product Tags Parameters:');
+      debugPrint('  API Version: $apiVersion');
+      debugPrint('  Context: $context');
+      debugPrint('  Page: $page');
+      debugPrint('  Per Page: $perPage');
+      debugPrint('  Search: $search');
+      debugPrint('  Exclude: $exclude');
+      debugPrint('  Include: $include');
+      debugPrint('  Offset: $offset');
+      debugPrint('  Order: $order');
+      debugPrint('  Order By: $orderby');
+      debugPrint('  Hide Empty: $hideEmpty');
+      debugPrint('  Product: $product');
+      debugPrint('  Slug: $slug');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<ProductTagsService>();
@@ -196,7 +197,7 @@ class ListAllProductTagsHandler implements ApiRequestHandler {
         slug: slug,
       );
 
-      print('✅ List All Product Tags Success: Found ${response.length} tags');
+      debugPrint('✅ List All Product Tags Success: Found ${response.length} tags');
 
       return {
         'success': true,
@@ -205,7 +206,7 @@ class ListAllProductTagsHandler implements ApiRequestHandler {
         'count': response.length,
       };
     } catch (e) {
-      print('❌ List All Product Tags Error: ${e.toString()}');
+      debugPrint('❌ List All Product Tags Error: ${e.toString()}');
       return {
         'success': false,
         'error': e.toString(),

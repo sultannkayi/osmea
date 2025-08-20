@@ -1,8 +1,8 @@
 import 'package:apis/apis.dart';
-import 'package:dio/dio.dart';
 import 'package:apis/network/remote/woocommerce/products/reviews/abstract/product_reviews_service.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class RetrieveProductReviewHandler implements ApiRequestHandler {
   @override
@@ -46,9 +46,9 @@ class RetrieveProductReviewHandler implements ApiRequestHandler {
       // Parse API version
       final apiVersion = params['api_version']?.toString() ?? 'v3';
 
-      print('🔍 Retrieve Product Review Parameters:');
-      print('  Review ID: $reviewId');
-      print('  API Version: $apiVersion');
+      debugPrint('🔍 Retrieve Product Review Parameters:');
+      debugPrint('  Review ID: $reviewId');
+      debugPrint('  API Version: $apiVersion');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<ProductReviewsService>();
@@ -57,39 +57,19 @@ class RetrieveProductReviewHandler implements ApiRequestHandler {
         reviewId: reviewId,
       );
 
-      print('✅ Retrieve Product Review Success: ${response.toJson()}');
+      debugPrint('✅ Retrieve Product Review Success: ${response.toJson()}');
 
       return {
         'success': true,
         'message': 'Product review retrieved successfully',
         'data': response.toJson(),
       };
-    } on DioException catch (e) {
-      print('❌ Retrieve Product Review DioException: ${e.toString()}');
-      print('🔍 Status Code: ${e.response?.statusCode}');
-      print('🔍 Response Data: ${e.response?.data}');
-      print('🔍 Response Headers: ${e.response?.headers}');
-
-      String errorMessage = 'Failed to retrieve product review';
-      if (e.response?.statusCode == 404) {
-        errorMessage = 'Product review not found';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print('❌ Retrieve Product Review Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message': 'Unexpected error occurred while retrieving product review',
+        'message': 'Failed to retrieve product review: $e',
         'error_details': e.toString(),
       };
     }

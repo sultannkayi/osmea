@@ -1,8 +1,8 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/webhooks/abstract/webhooks_service.dart';
-import 'package:dio/dio.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class ListAllWebhooksHandler implements ApiRequestHandler {
   @override
@@ -126,17 +126,17 @@ class ListAllWebhooksHandler implements ApiRequestHandler {
             .toList();
       }
 
-      print('📋 List All Webhooks Parameters:');
-      print('  API Version: $apiVersion');
-      print('  Context: $context');
-      print('  Page: $page');
-      print('  Per Page: $perPage');
-      print('  Search: $search');
-      print('  Exclude: $exclude');
-      print('  Include: $include');
-      print('  Order: $order');
-      print('  Order By: $orderby');
-      print('  Status: $status');
+      debugPrint('📋 List All Webhooks Parameters:');
+      debugPrint('  API Version: $apiVersion');
+      debugPrint('  Context: $context');
+      debugPrint('  Page: $page');
+      debugPrint('  Per Page: $perPage');
+      debugPrint('  Search: $search');
+      debugPrint('  Exclude: $exclude');
+      debugPrint('  Include: $include');
+      debugPrint('  Order: $order');
+      debugPrint('  Order By: $orderby');
+      debugPrint('  Status: $status');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<WebhooksService>();
@@ -153,7 +153,7 @@ class ListAllWebhooksHandler implements ApiRequestHandler {
         status: status,
       );
 
-      print('✅ List All Webhooks Success: Found ${response.length} webhooks');
+      debugPrint('✅ List All Webhooks Success: Found ${response.length} webhooks');
 
       return {
         'success': true,
@@ -161,31 +161,12 @@ class ListAllWebhooksHandler implements ApiRequestHandler {
         'message': 'Webhooks retrieved successfully',
         'count': response.length,
       };
-    } on DioException catch (e) {
-      String errorMessage = 'Failed to retrieve webhooks';
-
-      if (e.response?.statusCode == 400) {
-        errorMessage = 'Invalid parameters provided';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      print('❌ List All Webhooks Error: $errorMessage');
-      print('🔍 Full error: ${e.toString()}');
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print('❌ List All Webhooks Unexpected Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message': 'Unexpected error occurred while retrieving webhooks',
+        'message': 'Failed to retrieve webhooks: $e',
         'error_details': e.toString(),
       };
     }

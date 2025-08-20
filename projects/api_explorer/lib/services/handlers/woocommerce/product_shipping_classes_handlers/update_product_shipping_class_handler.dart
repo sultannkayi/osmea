@@ -1,9 +1,9 @@
 import 'package:apis/apis.dart';
-import 'package:dio/dio.dart';
 import 'package:apis/network/remote/woocommerce/products/shipping_classes/abstract/product_shipping_classes_service.dart';
 import 'package:apis/network/remote/woocommerce/products/shipping_classes/freezed_model/request/update_product_shipping_class_request.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class UpdateProductShippingClassHandler implements ApiRequestHandler {
   @override
@@ -70,12 +70,12 @@ class UpdateProductShippingClassHandler implements ApiRequestHandler {
       final slug = params['slug']?.toString();
       final description = params['description']?.toString();
 
-      print('🔍 Update Product Shipping Class Parameters:');
-      print('  Shipping Class ID: $shippingClassId');
-      print('  Name: $name');
-      print('  Slug: $slug');
-      print('  Description: $description');
-      print('  API Version: $apiVersion');
+      debugPrint('🔍 Update Product Shipping Class Parameters:');
+      debugPrint('  Shipping Class ID: $shippingClassId');
+      debugPrint('  Name: $name');
+      debugPrint('  Slug: $slug');
+      debugPrint('  Description: $description');
+      debugPrint('  API Version: $apiVersion');
 
       // Create request object
       final updateRequest = UpdateProductShippingClassRequest(
@@ -84,7 +84,7 @@ class UpdateProductShippingClassHandler implements ApiRequestHandler {
         description: description?.trim(),
       );
 
-      print('📋 Request Body: ${updateRequest.toJson()}');
+      debugPrint('📋 Request Body: ${updateRequest.toJson()}');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<ProductShippingClassesService>();
@@ -94,44 +94,19 @@ class UpdateProductShippingClassHandler implements ApiRequestHandler {
         shippingClassData: updateRequest.toJson(),
       );
 
-      print('✅ Update Product Shipping Class Success: ${response.toJson()}');
+      debugPrint('✅ Update Product Shipping Class Success: ${response.toJson()}');
 
       return {
         'success': true,
         'message': 'Product shipping class updated successfully',
         'data': response.toJson(),
       };
-    } on DioException catch (e) {
-      print('❌ Update Product Shipping Class DioException: ${e.toString()}');
-      print('🔍 Status Code: ${e.response?.statusCode}');
-      print('🔍 Response Data: ${e.response?.data}');
-      print('🔍 Response Headers: ${e.response?.headers}');
-
-      String errorMessage = 'Failed to update product shipping class';
-      if (e.response?.statusCode == 404) {
-        errorMessage = 'Product shipping class not found';
-      } else if (e.response?.statusCode == 400) {
-        errorMessage = 'Invalid shipping class data provided';
-      } else if (e.response?.statusCode == 409) {
-        errorMessage = 'Shipping class with this name or slug already exists';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print('❌ Update Product Shipping Class Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message':
-            'Unexpected error occurred while updating product shipping class',
+        'message': 'Failed to update product shipping class: $e',
         'error_details': e.toString(),
       };
     }

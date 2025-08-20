@@ -1,8 +1,8 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/products/attributes/abstract/product_attributes_service.dart';
-import 'package:dio/dio.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class CreateProductAttributeHandler implements ApiRequestHandler {
   @override
@@ -104,14 +104,14 @@ class CreateProductAttributeHandler implements ApiRequestHandler {
         attributeData['has_archives'] = hasArchives;
       }
 
-      print('➕ Create Product Attribute Parameters:');
-      print('  API Version: $apiVersion');
-      print('  Name: $name');
-      print('  Slug: $slug');
-      print('  Type: $type');
-      print('  Order By: $orderBy');
-      print('  Has Archives: $hasArchives');
-      print('  Request body: $attributeData');
+      debugPrint('➕ Create Product Attribute Parameters:');
+      debugPrint('  API Version: $apiVersion');
+      debugPrint('  Name: $name');
+      debugPrint('  Slug: $slug');
+      debugPrint('  Type: $type');
+      debugPrint('  Order By: $orderBy');
+      debugPrint('  Has Archives: $hasArchives');
+      debugPrint('  Request body: $attributeData');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<ProductAttributesService>();
@@ -120,40 +120,19 @@ class CreateProductAttributeHandler implements ApiRequestHandler {
         attributeData: attributeData,
       );
 
-      print('✅ Create Product Attribute Success: ${response.toJson()}');
+      debugPrint('✅ Create Product Attribute Success: ${response.toJson()}');
 
       return {
         'success': true,
         'message': 'Product attribute created successfully',
         'data': response.toJson(),
       };
-    } on DioException catch (e) {
-      String errorMessage = 'Failed to create product attribute';
-
-      if (e.response?.statusCode == 400) {
-        errorMessage = 'Invalid attribute data provided';
-      } else if (e.response?.statusCode == 409) {
-        errorMessage = 'Attribute with this name or slug already exists';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      print('❌ Create Product Attribute Error: $errorMessage');
-      print('🔍 Full error: ${e.toString()}');
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print('❌ Create Product Attribute Unexpected Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message': 'Unexpected error occurred while creating product attribute',
+        'message': 'Failed to create product attribute: $e',
         'error_details': e.toString(),
       };
     }

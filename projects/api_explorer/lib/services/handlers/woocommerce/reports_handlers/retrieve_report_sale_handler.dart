@@ -1,9 +1,9 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/reports/abstract/reports_service.dart';
 import 'package:apis/network/remote/woocommerce/reports/freezed_model/response/retrieve_report_sale_response.dart';
-import 'package:dio/dio.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class RetrieveSalesReportHandler implements ApiRequestHandler {
   @override
@@ -51,11 +51,11 @@ class RetrieveSalesReportHandler implements ApiRequestHandler {
       final dateMax = params['date_max']?.toString();
       final period = params['period']?.toString();
 
-      print('💰 Retrieve Sales Report Parameters:');
-      print('  API Version: $apiVersion');
-      print('  Date Min: $dateMin');
-      print('  Date Max: $dateMax');
-      print('  Period: $period');
+      debugPrint('💰 Retrieve Sales Report Parameters:');
+      debugPrint('  API Version: $apiVersion');
+      debugPrint('  Date Min: $dateMin');
+      debugPrint('  Date Max: $dateMax');
+      debugPrint('  Period: $period');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<ReportsService>();
@@ -67,7 +67,7 @@ class RetrieveSalesReportHandler implements ApiRequestHandler {
         period: period,
       );
 
-      print(
+      debugPrint(
           '✅ Retrieve Sales Report Success: Found ${response.length} sales reports');
 
       return {
@@ -76,31 +76,12 @@ class RetrieveSalesReportHandler implements ApiRequestHandler {
         'message': 'Sales report retrieved successfully',
         'count': response.length,
       };
-    } on DioException catch (e) {
-      String errorMessage = 'Failed to retrieve sales report';
-
-      if (e.response?.statusCode == 404) {
-        errorMessage = 'Sales report not found';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      print('❌ Retrieve Sales Report Error: $errorMessage');
-      print('🔍 Full error: ${e.toString()}');
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print('❌ Retrieve Sales Report Unexpected Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message': 'Unexpected error occurred while retrieving sales report',
+        'message': 'Failed to retrieve sales report: $e',
         'error_details': e.toString(),
       };
     }

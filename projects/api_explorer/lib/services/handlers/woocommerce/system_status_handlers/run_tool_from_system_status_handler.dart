@@ -1,8 +1,8 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/system_status/abstract/system_status_service.dart';
-import 'package:dio/dio.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class RunToolFromSystemStatusHandler implements ApiRequestHandler {
   @override
@@ -44,9 +44,9 @@ class RunToolFromSystemStatusHandler implements ApiRequestHandler {
       // Parse API version
       final apiVersion = params['api_version']?.toString() ?? 'v3';
 
-      print('🔧 Run Tool From System Status Parameters:');
-      print('  API Version: $apiVersion');
-      print('  Tool ID: $toolId');
+      debugPrint('🔧 Run Tool From System Status Parameters:');
+      debugPrint('  API Version: $apiVersion');
+      debugPrint('  Tool ID: $toolId');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<SystemStatusService>();
@@ -55,7 +55,7 @@ class RunToolFromSystemStatusHandler implements ApiRequestHandler {
         toolId: toolId,
       );
 
-      print('✅ Run Tool From System Status Success: ${response.toJson()}');
+      debugPrint('✅ Run Tool From System Status Success: ${response.toJson()}');
 
       // Provide appropriate message based on success status
       String successMessage = 'System status tool executed successfully';
@@ -72,33 +72,12 @@ class RunToolFromSystemStatusHandler implements ApiRequestHandler {
         'tool_success': response.success,
         'tool_message': response.message,
       };
-    } on DioException catch (e) {
-      String errorMessage = 'Failed to run system status tool';
-
-      if (e.response?.statusCode == 404) {
-        errorMessage = 'System status tool not found';
-      } else if (e.response?.statusCode == 400) {
-        errorMessage = 'Invalid tool ID or tool cannot be executed';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      print('❌ Run Tool From System Status Error: $errorMessage');
-      print('🔍 Full error: ${e.toString()}');
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print('❌ Run Tool From System Status Unexpected Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message': 'Unexpected error occurred while running system status tool',
+        'message': 'Failed to run system status tool: $e',
         'error_details': e.toString(),
       };
     }

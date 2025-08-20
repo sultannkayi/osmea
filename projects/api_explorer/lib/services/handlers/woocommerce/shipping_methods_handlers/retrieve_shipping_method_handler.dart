@@ -2,7 +2,7 @@ import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/shipping_methods/abstract/shipping_methods_service.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
-import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 class RetrieveShippingMethodHandler implements ApiRequestHandler {
   @override
@@ -31,7 +31,7 @@ class RetrieveShippingMethodHandler implements ApiRequestHandler {
 
       final apiVersion = params['api_version'] ?? 'v3';
 
-      print(
+      debugPrint(
           '🔍 Fetching shipping method with ID: $id, API version: $apiVersion');
 
       final service = WooNetwork.getIt.get<ShippingMethodsService>();
@@ -40,26 +40,19 @@ class RetrieveShippingMethodHandler implements ApiRequestHandler {
         apiVersion: apiVersion,
       );
 
-      print('✅ Successfully fetched shipping method: ${response.title}');
+      debugPrint('✅ Successfully fetched shipping method: ${response.title}');
 
       return {
         'success': true,
         'data': response.toJson(),
         'message': 'Shipping method retrieved successfully',
       };
-    } on DioException catch (e) {
-      print('❌ DioException: ${e.message}');
-      return {
-        'success': false,
-        'error': e.toString(),
-        'message': 'Failed to fetch shipping method: ${e.message}',
-      };
     } catch (e) {
-      print('❌ Unexpected error: $e');
+      debugPrint('❌ Error: $e');
       return {
         'success': false,
         'error': e.toString(),
-        'message': 'Unexpected error: $e',
+        'message': 'Failed to fetch shipping method: $e',
       };
     }
   }

@@ -1,8 +1,8 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/products/reviews/abstract/product_reviews_service.dart';
-import 'package:dio/dio.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class ListAllProductReviewsHandler implements ApiRequestHandler {
   @override
@@ -144,18 +144,18 @@ class ListAllProductReviewsHandler implements ApiRequestHandler {
             .toList();
       }
 
-      print('📋 List All Product Reviews Parameters:');
-      print('  API Version: $apiVersion');
-      print('  Context: $context');
-      print('  Page: $page');
-      print('  Per Page: $perPage');
-      print('  Search: $search');
-      print('  Exclude: $exclude');
-      print('  Include: $include');
-      print('  Order: $order');
-      print('  Order By: $orderby');
-      print('  Product: $product');
-      print('  Status: $status');
+      debugPrint('📋 List All Product Reviews Parameters:');
+      debugPrint('  API Version: $apiVersion');
+      debugPrint('  Context: $context');
+      debugPrint('  Page: $page');
+      debugPrint('  Per Page: $perPage');
+      debugPrint('  Search: $search');
+      debugPrint('  Exclude: $exclude');
+      debugPrint('  Include: $include');
+      debugPrint('  Order: $order');
+      debugPrint('  Order By: $orderby');
+      debugPrint('  Product: $product');
+      debugPrint('  Status: $status');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<ProductReviewsService>();
@@ -173,7 +173,7 @@ class ListAllProductReviewsHandler implements ApiRequestHandler {
         status: status,
       );
 
-      print(
+      debugPrint(
           '✅ List All Product Reviews Success: Found ${response.length} reviews');
 
       return {
@@ -182,31 +182,12 @@ class ListAllProductReviewsHandler implements ApiRequestHandler {
         'message': 'Product reviews retrieved successfully',
         'count': response.length,
       };
-    } on DioException catch (e) {
-      String errorMessage = 'Failed to retrieve product reviews';
-
-      if (e.response?.statusCode == 400) {
-        errorMessage = 'Invalid parameters provided';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      print('❌ List All Product Reviews Error: $errorMessage');
-      print('🔍 Full error: ${e.toString()}');
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print('❌ List All Product Reviews Unexpected Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message': 'Unexpected error occurred while retrieving product reviews',
+        'message': 'Failed to retrieve product reviews: $e',
         'error_details': e.toString(),
       };
     }

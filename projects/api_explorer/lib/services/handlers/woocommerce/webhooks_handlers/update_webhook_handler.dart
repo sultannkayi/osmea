@@ -1,9 +1,10 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/webhooks/abstract/webhooks_service.dart';
-import 'package:dio/dio.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
 import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 
 class WooUpdateWebhookHandler implements ApiRequestHandler {
   @override
@@ -109,7 +110,7 @@ class WooUpdateWebhookHandler implements ApiRequestHandler {
           final hooksList = json.decode(hooksJson) as List;
           hooks = hooksList.cast<String>();
         } catch (e) {
-          print('⚠️ Warning: Invalid hooks JSON format: ${e.toString()}');
+          debugPrint('⚠️ Warning: Invalid hooks JSON format: ${e.toString()}');
         }
       }
 
@@ -136,17 +137,17 @@ class WooUpdateWebhookHandler implements ApiRequestHandler {
         webhookData['hooks'] = hooks;
       }
 
-      print('✏️ Update Webhook Parameters:');
-      print('  API Version: $apiVersion');
-      print('  Webhook ID: $webhookId');
-      print('  Name: $name');
-      print('  Topic: $topic');
-      print('  Delivery URL: $deliveryUrl');
-      print('  Status: $status');
-      print('  Resource: $resource');
-      print('  Event: $event');
-      print('  Hooks: $hooks');
-      print('  Request body: $webhookData');
+      debugPrint('✏️ Update Webhook Parameters:');
+      debugPrint('  API Version: $apiVersion');
+      debugPrint('  Webhook ID: $webhookId');
+      debugPrint('  Name: $name');
+      debugPrint('  Topic: $topic');
+      debugPrint('  Delivery URL: $deliveryUrl');
+      debugPrint('  Status: $status');
+      debugPrint('  Resource: $resource');
+      debugPrint('  Event: $event');
+      debugPrint('  Hooks: $hooks');
+      debugPrint('  Request body: $webhookData');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<WebhooksService>();
@@ -156,42 +157,19 @@ class WooUpdateWebhookHandler implements ApiRequestHandler {
         webhookData: webhookData,
       );
 
-      print('✅ Update Webhook Success: ${response.toJson()}');
+      debugPrint('✅ Update Webhook Success: ${response.toJson()}');
 
       return {
         'success': true,
         'message': 'Webhook updated successfully',
         'data': response.toJson(),
       };
-    } on DioException catch (e) {
-      String errorMessage = 'Failed to update webhook';
-
-      if (e.response?.statusCode == 400) {
-        errorMessage = 'Invalid webhook data provided';
-      } else if (e.response?.statusCode == 404) {
-        errorMessage = 'Webhook not found';
-      } else if (e.response?.statusCode == 409) {
-        errorMessage = 'Webhook with this name or delivery URL already exists';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      print('❌ Update Webhook Error: $errorMessage');
-      print('🔍 Full error: ${e.toString()}');
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print('❌ Update Webhook Unexpected Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message': 'Unexpected error occurred while updating webhook',
+        'message': 'Failed to update webhook: $e',
         'error_details': e.toString(),
       };
     }

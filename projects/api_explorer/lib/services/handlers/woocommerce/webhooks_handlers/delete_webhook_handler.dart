@@ -1,8 +1,8 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/webhooks/abstract/webhooks_service.dart';
-import 'package:dio/dio.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class WooDeleteWebhookHandler implements ApiRequestHandler {
   @override
@@ -64,10 +64,10 @@ class WooDeleteWebhookHandler implements ApiRequestHandler {
         }
       }
 
-      print('🗑️ Delete Webhook Parameters:');
-      print('  API Version: $apiVersion');
-      print('  Webhook ID: $webhookId');
-      print('  Force Delete: $force');
+      debugPrint('🗑️ Delete Webhook Parameters:');
+      debugPrint('  API Version: $apiVersion');
+      debugPrint('  Webhook ID: $webhookId');
+      debugPrint('  Force Delete: $force');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<WebhooksService>();
@@ -77,7 +77,7 @@ class WooDeleteWebhookHandler implements ApiRequestHandler {
         force: force,
       );
 
-      print('✅ Delete Webhook Success: ${response.toJson()}');
+      debugPrint('✅ Delete Webhook Success: ${response.toJson()}');
 
       // Provide appropriate message based on force parameter
       String successMessage = 'Webhook deleted successfully';
@@ -92,35 +92,12 @@ class WooDeleteWebhookHandler implements ApiRequestHandler {
         'message': successMessage,
         'data': response.toJson(),
       };
-    } on DioException catch (e) {
-      String errorMessage = 'Failed to delete webhook';
-
-      if (e.response?.statusCode == 404) {
-        errorMessage = 'Webhook not found';
-      } else if (e.response?.statusCode == 410) {
-        errorMessage = 'Webhook already deleted';
-      } else if (e.response?.statusCode == 409) {
-        errorMessage = 'Cannot delete webhook - it may be in use';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      print('❌ Delete Webhook Error: $errorMessage');
-      print('🔍 Full error: ${e.toString()}');
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print('❌ Delete Webhook Unexpected Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message': 'Unexpected error occurred while deleting webhook',
+        'message': 'Failed to delete webhook: $e',
         'error_details': e.toString(),
       };
     }

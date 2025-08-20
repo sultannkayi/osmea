@@ -1,8 +1,8 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/products/tags/abstract/product_tags_service.dart';
-import 'package:dio/dio.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class DeleteProductTagHandler implements ApiRequestHandler {
   @override
@@ -63,10 +63,10 @@ class DeleteProductTagHandler implements ApiRequestHandler {
         }
       }
 
-      print('🗑️ Delete Product Tag Parameters:');
-      print('  API Version: $apiVersion');
-      print('  Tag ID: $tagId');
-      print('  Force Delete: $force');
+      debugPrint('🗑️ Delete Product Tag Parameters:');
+      debugPrint('  API Version: $apiVersion');
+      debugPrint('  Tag ID: $tagId');
+      debugPrint('  Force Delete: $force');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<ProductTagsService>();
@@ -76,7 +76,7 @@ class DeleteProductTagHandler implements ApiRequestHandler {
         force: force,
       );
 
-      print('✅ Delete Product Tag Success: ${response.toJson()}');
+      debugPrint('✅ Delete Product Tag Success: ${response.toJson()}');
 
       // Provide different messages based on force parameter
       final deletionType =
@@ -87,35 +87,12 @@ class DeleteProductTagHandler implements ApiRequestHandler {
         'message': 'Product tag $deletionType successfully',
         'data': response.toJson(),
       };
-    } on DioException catch (e) {
-      String errorMessage = 'Failed to delete product tag';
-
-      if (e.response?.statusCode == 404) {
-        errorMessage = 'Product tag not found';
-      } else if (e.response?.statusCode == 410) {
-        errorMessage = 'Product tag already deleted';
-      } else if (e.response?.statusCode == 409) {
-        errorMessage = 'Cannot delete product tag that is assigned to products';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      print('❌ Delete Product Tag Error: $errorMessage');
-      print('🔍 Full error: ${e.toString()}');
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print('❌ Delete Product Tag Unexpected Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message': 'Unexpected error occurred while deleting product tag',
+        'message': 'Failed to delete product tag: $e',
         'error_details': e.toString(),
       };
     }

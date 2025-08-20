@@ -1,9 +1,10 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/products/variations/abstract/product_variations_service.dart';
-import 'package:dio/dio.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
-import 'dart:convert'; // Added for json.decode
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart'; // Added for json.decode
 
 class CreateProductVariationHandler implements ApiRequestHandler {
   @override
@@ -224,7 +225,7 @@ class CreateProductVariationHandler implements ApiRequestHandler {
           final attributesList = json.decode(attributesJson) as List;
           attributes = attributesList.cast<Map<String, dynamic>>();
         } catch (e) {
-          print('⚠️ Warning: Invalid attributes JSON format: ${e.toString()}');
+          debugPrint('⚠️ Warning: Invalid attributes JSON format: ${e.toString()}');
         }
       }
 
@@ -235,7 +236,7 @@ class CreateProductVariationHandler implements ApiRequestHandler {
           final metaDataList = json.decode(metaDataJson) as List;
           metaData = metaDataList.cast<Map<String, dynamic>>();
         } catch (e) {
-          print('⚠️ Warning: Invalid meta_data JSON format: ${e.toString()}');
+          debugPrint('⚠️ Warning: Invalid meta_data JSON format: ${e.toString()}');
         }
       }
 
@@ -286,26 +287,26 @@ class CreateProductVariationHandler implements ApiRequestHandler {
         variationData['dimensions'] = dimensions;
       }
 
-      print('➕ Create Product Variation Parameters:');
-      print('  API Version: $apiVersion');
-      print('  Product ID: $productId');
-      print('  Regular Price: $regularPrice');
-      print('  Description: $description');
-      print('  SKU: $sku');
-      print('  Manage Stock: $manageStock');
-      print('  Stock Quantity: $stockQuantity');
-      print('  Stock Status: $stockStatus');
-      print('  Backorders: $backorders');
-      print('  Weight: $weight');
-      print('  Length: $length');
-      print('  Width: $width');
-      print('  Height: $height');
-      print('  Shipping Class: $shippingClass');
-      print('  Image ID: $imageId');
-      print('  Menu Order: $menuOrder');
-      print('  Attributes: $attributes');
-      print('  Meta Data: $metaData');
-      print('  Request body: $variationData');
+      debugPrint('➕ Create Product Variation Parameters:');
+      debugPrint('  API Version: $apiVersion');
+      debugPrint('  Product ID: $productId');
+      debugPrint('  Regular Price: $regularPrice');
+      debugPrint('  Description: $description');
+      debugPrint('  SKU: $sku');
+      debugPrint('  Manage Stock: $manageStock');
+      debugPrint('  Stock Quantity: $stockQuantity');
+      debugPrint('  Stock Status: $stockStatus');
+      debugPrint('  Backorders: $backorders');
+      debugPrint('  Weight: $weight');
+      debugPrint('  Length: $length');
+      debugPrint('  Width: $width');
+      debugPrint('  Height: $height');
+      debugPrint('  Shipping Class: $shippingClass');
+      debugPrint('  Image ID: $imageId');
+      debugPrint('  Menu Order: $menuOrder');
+      debugPrint('  Attributes: $attributes');
+      debugPrint('  Meta Data: $metaData');
+      debugPrint('  Request body: $variationData');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<ProductVariationsService>();
@@ -315,42 +316,19 @@ class CreateProductVariationHandler implements ApiRequestHandler {
         variationData: variationData,
       );
 
-      print('✅ Create Product Variation Success: ${response.toJson()}');
+      debugPrint('✅ Create Product Variation Success: ${response.toJson()}');
 
       return {
         'success': true,
         'message': 'Product variation created successfully',
         'data': response.toJson(),
       };
-    } on DioException catch (e) {
-      String errorMessage = 'Failed to create product variation';
-
-      if (e.response?.statusCode == 400) {
-        errorMessage = 'Invalid variation data provided';
-      } else if (e.response?.statusCode == 404) {
-        errorMessage = 'Product not found';
-      } else if (e.response?.statusCode == 409) {
-        errorMessage = 'Variation with this SKU already exists';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      print('❌ Create Product Variation Error: $errorMessage');
-      print('🔍 Full error: ${e.toString()}');
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print('❌ Create Product Variation Unexpected Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message': 'Unexpected error occurred while creating product variation',
+        'message': 'Failed to create product variation: $e',
         'error_details': e.toString(),
       };
     }

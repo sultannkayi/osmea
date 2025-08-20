@@ -2,7 +2,7 @@ import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/datas/countries/abstract/countries_service.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
-import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 class ListAllCountriesHandler implements ApiRequestHandler {
   @override
@@ -21,33 +21,26 @@ class ListAllCountriesHandler implements ApiRequestHandler {
     try {
       final apiVersion = params['api_version'] ?? 'v3';
 
-      print('🔍 Listing all countries with API version: $apiVersion');
+      debugPrint('🔍 Listing all countries with API version: $apiVersion');
 
       final service = WooNetwork.getIt.get<CountriesService>();
       final response = await service.listAllCountries(
         apiVersion: apiVersion,
       );
 
-      print('✅ Successfully retrieved ${response.length} countries');
+      debugPrint('✅ Successfully retrieved ${response.length} countries');
 
       return {
         'success': true,
         'data': response.map((item) => item.toJson()).toList(),
         'message': 'Countries list retrieved successfully',
       };
-    } on DioException catch (e) {
-      print('❌ DioException: ${e.message}');
-      return {
-        'success': false,
-        'error': e.toString(),
-        'message': 'Failed to retrieve countries list: ${e.message}',
-      };
     } catch (e) {
-      print('❌ Unexpected error: $e');
+      debugPrint('❌ Error: $e');
       return {
         'success': false,
         'error': e.toString(),
-        'message': 'Unexpected error: $e',
+        'message': 'Failed to retrieve countries list: $e',
       };
     }
   }

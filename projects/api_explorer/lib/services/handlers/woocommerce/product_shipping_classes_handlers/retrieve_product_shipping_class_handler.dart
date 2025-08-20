@@ -1,8 +1,8 @@
 import 'package:apis/apis.dart';
-import 'package:dio/dio.dart';
 import 'package:apis/network/remote/woocommerce/products/shipping_classes/abstract/product_shipping_classes_service.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class RetrieveProductShippingClassHandler implements ApiRequestHandler {
   @override
@@ -46,9 +46,9 @@ class RetrieveProductShippingClassHandler implements ApiRequestHandler {
       // Parse API version
       final apiVersion = params['api_version']?.toString() ?? 'v3';
 
-      print('🔍 Retrieve Product Shipping Class Parameters:');
-      print('  Shipping Class ID: $shippingClassId');
-      print('  API Version: $apiVersion');
+      debugPrint('🔍 Retrieve Product Shipping Class Parameters:');
+      debugPrint('  Shipping Class ID: $shippingClassId');
+      debugPrint('  API Version: $apiVersion');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<ProductShippingClassesService>();
@@ -57,40 +57,19 @@ class RetrieveProductShippingClassHandler implements ApiRequestHandler {
         shippingClassId: shippingClassId,
       );
 
-      print('✅ Retrieve Product Shipping Class Success: ${response.toJson()}');
+      debugPrint('✅ Retrieve Product Shipping Class Success: ${response.toJson()}');
 
       return {
         'success': true,
         'message': 'Product shipping class retrieved successfully',
         'data': response.toJson(),
       };
-    } on DioException catch (e) {
-      print('❌ Retrieve Product Shipping Class DioException: ${e.toString()}');
-      print('🔍 Status Code: ${e.response?.statusCode}');
-      print('🔍 Response Data: ${e.response?.data}');
-      print('🔍 Response Headers: ${e.response?.headers}');
-
-      String errorMessage = 'Failed to retrieve product shipping class';
-      if (e.response?.statusCode == 404) {
-        errorMessage = 'Product shipping class not found';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print('❌ Retrieve Product Shipping Class Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message':
-            'Unexpected error occurred while retrieving product shipping class',
+        'message': 'Failed to retrieve product shipping class: $e',
         'error_details': e.toString(),
       };
     }

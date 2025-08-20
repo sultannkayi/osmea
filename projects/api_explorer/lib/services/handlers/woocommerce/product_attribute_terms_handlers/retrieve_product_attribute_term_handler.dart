@@ -1,8 +1,8 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/products/attribute_terms/abstract/product_attribute_terms_service.dart';
-import 'package:dio/dio.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class RetrieveProductAttributeTermHandler implements ApiRequestHandler {
   @override
@@ -64,10 +64,10 @@ class RetrieveProductAttributeTermHandler implements ApiRequestHandler {
       // Parse API version
       final apiVersion = params['api_version']?.toString() ?? 'v3';
 
-      print('🔍 Retrieve Product Attribute Term Parameters:');
-      print('  API Version: $apiVersion');
-      print('  Attribute ID: $attributeId');
-      print('  Term ID: $termId');
+      debugPrint('🔍 Retrieve Product Attribute Term Parameters:');
+      debugPrint('  API Version: $apiVersion');
+      debugPrint('  Attribute ID: $attributeId');
+      debugPrint('  Term ID: $termId');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<ProductAttributeTermsService>();
@@ -77,40 +77,19 @@ class RetrieveProductAttributeTermHandler implements ApiRequestHandler {
         termId: termId,
       );
 
-      print('✅ Retrieve Product Attribute Term Success: ${response.toJson()}');
+      debugPrint('✅ Retrieve Product Attribute Term Success: ${response.toJson()}');
 
       return {
         'success': true,
         'message': 'Product attribute term retrieved successfully',
         'data': response.toJson(),
       };
-    } on DioException catch (e) {
-      String errorMessage = 'Failed to retrieve product attribute term';
-
-      if (e.response?.statusCode == 404) {
-        errorMessage = 'Attribute or term not found';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      print('❌ Retrieve Product Attribute Term Error: $errorMessage');
-      print('🔍 Full error: ${e.toString()}');
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print(
-          '❌ Retrieve Product Attribute Term Unexpected Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message':
-            'Unexpected error occurred while retrieving product attribute term',
+        'message': 'Failed to retrieve product attribute term: $e',
         'error_details': e.toString(),
       };
     }

@@ -1,9 +1,9 @@
 import 'package:apis/apis.dart';
-import 'package:dio/dio.dart';
 import 'package:apis/network/remote/woocommerce/products/reviews/abstract/product_reviews_service.dart';
 import 'package:apis/network/remote/woocommerce/products/reviews/freezed_model/request/create_product_review_request.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class CreateProductReviewHandler implements ApiRequestHandler {
   @override
@@ -97,14 +97,14 @@ class CreateProductReviewHandler implements ApiRequestHandler {
       // Parse status (optional)
       final status = params['status']?.toString();
 
-      print('🔍 Create Product Review Parameters:');
-      print('  Product ID: $productId');
-      print('  Review: $review');
-      print('  Reviewer: $reviewer');
-      print('  Reviewer Email: $reviewerEmail');
-      print('  Rating: $rating');
-      print('  Status: $status');
-      print('  API Version: $apiVersion');
+      debugPrint('🔍 Create Product Review Parameters:');
+      debugPrint('  Product ID: $productId');
+      debugPrint('  Review: $review');
+      debugPrint('  Reviewer: $reviewer');
+      debugPrint('  Reviewer Email: $reviewerEmail');
+      debugPrint('  Rating: $rating');
+      debugPrint('  Status: $status');
+      debugPrint('  API Version: $apiVersion');
 
       // Create request object
       final createRequest = CreateProductReviewRequest(
@@ -116,7 +116,7 @@ class CreateProductReviewHandler implements ApiRequestHandler {
         status: status,
       );
 
-      print('📋 Request Body: ${createRequest.toJson()}');
+      debugPrint('📋 Request Body: ${createRequest.toJson()}');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<ProductReviewsService>();
@@ -125,37 +125,19 @@ class CreateProductReviewHandler implements ApiRequestHandler {
         reviewData: createRequest.toJson(),
       );
 
-      print('✅ Create Product Review Success: ${response.toJson()}');
+      debugPrint('✅ Create Product Review Success: ${response.toJson()}');
 
       return {
         'success': true,
         'message': 'Product review created successfully',
         'data': response.toJson(),
       };
-    } on DioException catch (e) {
-      print('❌ Create Product Review DioException: ${e.toString()}');
-      print('🔍 Status Code: ${e.response?.statusCode}');
-      print('🔍 Response Data: ${e.response?.data}');
-      print('🔍 Response Headers: ${e.response?.headers}');
-
-      String errorMessage = 'Failed to create product review';
-      if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print('❌ Create Product Review Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message': 'Unexpected error occurred while creating product review',
+        'message': 'Failed to create product review: $e',
         'error_details': e.toString(),
       };
     }

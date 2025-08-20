@@ -2,6 +2,7 @@ import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/products/categories/abstract/product_categories_service.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class UpdateProductCategoryHandler implements ApiRequestHandler {
   @override
@@ -55,7 +56,7 @@ class UpdateProductCategoryHandler implements ApiRequestHandler {
     }
 
     try {
-      print('🐛 Update Product Category - Received params: $params');
+      debugPrint('🐛 Update Product Category - Received params: $params');
 
       // Validate required parameters
       final categoryIdStr = params['category_id'];
@@ -82,12 +83,14 @@ class UpdateProductCategoryHandler implements ApiRequestHandler {
       if (name != null && name.isNotEmpty) categoryData['name'] = name;
       if (slug != null && slug.isNotEmpty) categoryData['slug'] = slug;
       if (parentId != null) categoryData['parent'] = parentId;
-      if (description != null && description.isNotEmpty)
+      if (description != null && description.isNotEmpty) {
         categoryData['description'] = description;
-      if (display != null && display.isNotEmpty)
+      }
+      if (display != null && display.isNotEmpty) {
         categoryData['display'] = display;
+      }
 
-      print('🐛 Update Product Category - Request data: $categoryData');
+      debugPrint('🐛 Update Product Category - Request data: $categoryData');
 
       // Get the service and make the API call
       final service = WooNetwork.getIt.get<ProductCategoriesService>();

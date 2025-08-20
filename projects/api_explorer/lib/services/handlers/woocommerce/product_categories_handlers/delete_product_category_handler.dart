@@ -2,6 +2,7 @@ import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/products/categories/abstract/product_categories_service.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class DeleteProductCategoryHandler implements ApiRequestHandler {
   @override
@@ -34,7 +35,7 @@ class DeleteProductCategoryHandler implements ApiRequestHandler {
     }
 
     try {
-      print('🐛 Delete Product Category - Received params: $params');
+      debugPrint('🐛 Delete Product Category - Received params: $params');
 
       // Validate required parameters
       final categoryIdStr = params['category_id'];
@@ -51,7 +52,7 @@ class DeleteProductCategoryHandler implements ApiRequestHandler {
       final forceStr = params['force'];
       final force = forceStr?.toLowerCase() == 'true' ? true : null;
 
-      print(
+      debugPrint(
           '🐛 Delete Product Category - Category ID: $categoryId, Force: $force');
 
       // Get the service and make the API call

@@ -1,9 +1,9 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/customers/abstract/customers_service.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
+import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
-import 'package:dio/dio.dart';
 
 ///*******************************************************************
 ///******************* 🗑️ DELETE CUSTOMER HANDLER ******************
@@ -62,25 +62,35 @@ class DeleteCustomerHandler implements ApiRequestHandler {
         "timestamp": DateTime.now().toIso8601String(),
       };
     } catch (e) {
-      print("🚨 Delete Customer Error Details: $e");
+      debugPrint("🚨 Delete Customer Error Details: $e");
 
       String errorMessage = "Failed to delete customer: ${e.toString()}";
       Map<String, dynamic> errorDetails = {};
 
-      if (e is DioException) {
-        print("🔍 DioException Type: ${e.type}");
-        print("🔍 Status Code: ${e.response?.statusCode}");
-        print("🔍 Response Data: ${e.response?.data}");
-
-        if (e.response?.data != null) {
-          errorDetails['response_data'] = e.response?.data;
-          errorDetails['status_code'] = e.response?.statusCode;
-
-          // WooCommerce error message'ını al
-          if (e.response?.data is Map && e.response?.data['message'] != null) {
-            errorMessage = "WooCommerce Error: ${e.response?.data['message']}";
-          }
+      // Check if it's a network/HTTP related error by examining error string
+      if (e.toString().contains('DioException') || e.toString().contains('DioError')) {
+        debugPrint("🔍 Network Error detected");
+        
+        // Try to extract status code information from error string
+        if (e.toString().contains('404')) {
+          errorDetails['status_code'] = 404;
+          errorMessage = "Customer not found";
+        } else if (e.toString().contains('400')) {
+          errorDetails['status_code'] = 400;
+          errorMessage = "Bad request - invalid customer ID";
+        } else if (e.toString().contains('401')) {
+          errorDetails['status_code'] = 401;
+          errorMessage = "Unauthorized - check your credentials";
+        } else if (e.toString().contains('403')) {
+          errorDetails['status_code'] = 403;
+          errorMessage = "Forbidden - insufficient permissions to delete customer";
+        } else {
+          errorMessage = "Network error occurred while deleting customer";
         }
+        
+        errorDetails['type'] = 'network_error';
+      } else {
+        errorDetails['type'] = 'unknown_error';
       }
 
       return {

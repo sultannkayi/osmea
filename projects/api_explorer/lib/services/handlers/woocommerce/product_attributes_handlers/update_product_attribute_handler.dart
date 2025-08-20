@@ -1,8 +1,8 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/products/attributes/abstract/product_attributes_service.dart';
-import 'package:dio/dio.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class UpdateProductAttributeHandler implements ApiRequestHandler {
   @override
@@ -114,15 +114,15 @@ class UpdateProductAttributeHandler implements ApiRequestHandler {
         attributeData['has_archives'] = hasArchives;
       }
 
-      print('✏️ Update Product Attribute Parameters:');
-      print('  API Version: $apiVersion');
-      print('  Attribute ID: $attributeId');
-      print('  Name: $name');
-      print('  Slug: $slug');
-      print('  Type: $type');
-      print('  Order By: $orderBy');
-      print('  Has Archives: $hasArchives');
-      print('  Request body: $attributeData');
+      debugPrint('✏️ Update Product Attribute Parameters:');
+      debugPrint('  API Version: $apiVersion');
+      debugPrint('  Attribute ID: $attributeId');
+      debugPrint('  Name: $name');
+      debugPrint('  Slug: $slug');
+      debugPrint('  Type: $type');
+      debugPrint('  Order By: $orderBy');
+      debugPrint('  Has Archives: $hasArchives');
+      debugPrint('  Request body: $attributeData');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<ProductAttributesService>();
@@ -132,42 +132,19 @@ class UpdateProductAttributeHandler implements ApiRequestHandler {
         attributeData: attributeData,
       );
 
-      print('✅ Update Product Attribute Success: ${response.toJson()}');
+      debugPrint('✅ Update Product Attribute Success: ${response.toJson()}');
 
       return {
         'success': true,
         'message': 'Product attribute updated successfully',
         'data': response.toJson(),
       };
-    } on DioException catch (e) {
-      String errorMessage = 'Failed to update product attribute';
-
-      if (e.response?.statusCode == 400) {
-        errorMessage = 'Invalid attribute data provided';
-      } else if (e.response?.statusCode == 404) {
-        errorMessage = 'Product attribute not found';
-      } else if (e.response?.statusCode == 409) {
-        errorMessage = 'Attribute with this name or slug already exists';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      print('❌ Update Product Attribute Error: $errorMessage');
-      print('🔍 Full error: ${e.toString()}');
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print('❌ Update Product Attribute Unexpected Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message': 'Unexpected error occurred while updating product attribute',
+        'message': 'Failed to update product attribute: $e',
         'error_details': e.toString(),
       };
     }

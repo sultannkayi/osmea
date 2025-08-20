@@ -2,7 +2,7 @@ import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/payment_gateways/abstract/payment_gateways_service.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
-import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 class RetrievePaymentGatewayHandler implements ApiRequestHandler {
   @override
@@ -31,7 +31,7 @@ class RetrievePaymentGatewayHandler implements ApiRequestHandler {
 
       final apiVersion = params['api_version'] ?? 'v3';
 
-      print(
+      debugPrint(
           '🔍 Fetching payment gateway with ID: $id, API version: $apiVersion');
 
       final service = WooNetwork.getIt.get<PaymentGatewaysService>();
@@ -40,26 +40,19 @@ class RetrievePaymentGatewayHandler implements ApiRequestHandler {
         apiVersion: apiVersion,
       );
 
-      print('✅ Successfully fetched payment gateway: ${response.title}');
+      debugPrint('✅ Successfully fetched payment gateway: ${response.title}');
 
       return {
         'success': true,
         'data': response.toJson(),
         'message': 'Payment gateway retrieved successfully',
       };
-    } on DioException catch (e) {
-      print('❌ DioException: ${e.message}');
-      return {
-        'success': false,
-        'error': e.toString(),
-        'message': 'Failed to fetch payment gateway: ${e.message}',
-      };
     } catch (e) {
-      print('❌ Unexpected error: $e');
+      debugPrint('❌ Error: $e');
       return {
         'success': false,
         'error': e.toString(),
-        'message': 'Unexpected error: $e',
+        'message': 'Failed to fetch payment gateway: $e',
       };
     }
   }

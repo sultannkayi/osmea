@@ -81,7 +81,7 @@ class BatchUpdateProductCategoriesHandler implements ApiRequestHandler {
         .split(',')
         .map((operation) {
           final parts = operation.split(':');
-          if (parts.length >= 1) {
+          if (parts.isNotEmpty) {
             return Creat(
               name: parts[0].trim(),
               slug: parts.length > 1 ? parts[1].trim() : null,

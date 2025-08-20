@@ -1,8 +1,8 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/products/attributes/abstract/product_attributes_service.dart';
-import 'package:dio/dio.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class DeleteProductAttributeHandler implements ApiRequestHandler {
   @override
@@ -64,10 +64,10 @@ class DeleteProductAttributeHandler implements ApiRequestHandler {
         }
       }
 
-      print('🗑️ Delete Product Attribute Parameters:');
-      print('  API Version: $apiVersion');
-      print('  Attribute ID: $attributeId');
-      print('  Force Delete: $force');
+      debugPrint('🗑️ Delete Product Attribute Parameters:');
+      debugPrint('  API Version: $apiVersion');
+      debugPrint('  Attribute ID: $attributeId');
+      debugPrint('  Force Delete: $force');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<ProductAttributesService>();
@@ -77,7 +77,7 @@ class DeleteProductAttributeHandler implements ApiRequestHandler {
         force: force,
       );
 
-      print('✅ Delete Product Attribute Success: ${response.toJson()}');
+      debugPrint('✅ Delete Product Attribute Success: ${response.toJson()}');
 
       // Provide appropriate message based on force parameter
       String successMessage = 'Product attribute deleted successfully';
@@ -92,35 +92,12 @@ class DeleteProductAttributeHandler implements ApiRequestHandler {
         'message': successMessage,
         'data': response.toJson(),
       };
-    } on DioException catch (e) {
-      String errorMessage = 'Failed to delete product attribute';
-
-      if (e.response?.statusCode == 404) {
-        errorMessage = 'Product attribute not found';
-      } else if (e.response?.statusCode == 410) {
-        errorMessage = 'Product attribute already deleted';
-      } else if (e.response?.statusCode == 409) {
-        errorMessage = 'Cannot delete attribute - it may be in use';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      print('❌ Delete Product Attribute Error: $errorMessage');
-      print('🔍 Full error: ${e.toString()}');
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print('❌ Delete Product Attribute Unexpected Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message': 'Unexpected error occurred while deleting product attribute',
+        'message': 'Failed to delete product attribute: $e',
         'error_details': e.toString(),
       };
     }

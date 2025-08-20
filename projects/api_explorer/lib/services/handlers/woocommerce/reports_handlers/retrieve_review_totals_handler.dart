@@ -1,9 +1,9 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/reports/abstract/reports_service.dart';
 import 'package:apis/network/remote/woocommerce/reports/freezed_model/response/retrieve_review_totals_response.dart';
-import 'package:dio/dio.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class RetrieveReviewTotalsHandler implements ApiRequestHandler {
   @override
@@ -30,8 +30,8 @@ class RetrieveReviewTotalsHandler implements ApiRequestHandler {
       // Parse API version
       final apiVersion = params['api_version']?.toString() ?? 'v3';
 
-      print('⭐ Retrieve Review Totals Parameters:');
-      print('  API Version: $apiVersion');
+      debugPrint('⭐ Retrieve Review Totals Parameters:');
+      debugPrint('  API Version: $apiVersion');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<ReportsService>();
@@ -40,7 +40,7 @@ class RetrieveReviewTotalsHandler implements ApiRequestHandler {
         apiVersion: apiVersion,
       );
 
-      print(
+      debugPrint(
           '✅ Retrieve Review Totals Success: Found ${response.length} review totals');
 
       return {
@@ -49,31 +49,12 @@ class RetrieveReviewTotalsHandler implements ApiRequestHandler {
         'message': 'Review totals retrieved successfully',
         'count': response.length,
       };
-    } on DioException catch (e) {
-      String errorMessage = 'Failed to retrieve review totals';
-
-      if (e.response?.statusCode == 404) {
-        errorMessage = 'Review totals not found';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      print('❌ Retrieve Review Totals Error: $errorMessage');
-      print('🔍 Full error: ${e.toString()}');
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print('❌ Retrieve Review Totals Unexpected Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message': 'Unexpected error occurred while retrieving review totals',
+        'message': 'Failed to retrieve review totals: $e',
         'error_details': e.toString(),
       };
     }

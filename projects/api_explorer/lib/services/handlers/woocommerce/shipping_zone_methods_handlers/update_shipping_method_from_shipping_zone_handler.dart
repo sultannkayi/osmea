@@ -3,7 +3,6 @@ import 'package:apis/network/remote/woocommerce/shipping_zones/method/abstract/s
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:get_it/get_it.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
-import 'package:dio/dio.dart';
 import 'dart:convert';
 
 ///*******************************************************************
@@ -69,12 +68,6 @@ class UpdateShippingMethodFromShippingZoneHandler implements ApiRequestHandler {
         "params": params,
         "timestamp": DateTime.now().toIso8601String(),
       };
-    } on DioException catch (e) {
-      return {
-        "status": "error",
-        "message": _handleDioException(e),
-        "timestamp": DateTime.now().toIso8601String(),
-      };
     } catch (e) {
       return {
         "status": "error",
@@ -122,23 +115,4 @@ class UpdateShippingMethodFromShippingZoneHandler implements ApiRequestHandler {
           ),
         ],
       };
-
-  String _handleDioException(DioException e) {
-    switch (e.response?.statusCode) {
-      case 400:
-        return 'Bad request: Invalid parameters provided';
-      case 401:
-        return 'Unauthorized: Check your authentication credentials';
-      case 403:
-        return 'Forbidden: You do not have permission to access this resource';
-      case 404:
-        return 'Not found: Shipping zone or method not found';
-      case 409:
-        return 'Conflict: Shipping method configuration conflict';
-      case 500:
-        return 'Internal server error: WooCommerce server error';
-      default:
-        return 'Network error: ${e.message}';
-    }
-  }
 }

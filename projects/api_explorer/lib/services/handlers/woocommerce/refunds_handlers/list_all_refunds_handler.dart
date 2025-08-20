@@ -2,7 +2,7 @@ import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/refunds/abstract/refunds_service.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
-import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 class ListAllRefundsHandler implements ApiRequestHandler {
   @override
@@ -39,7 +39,7 @@ class ListAllRefundsHandler implements ApiRequestHandler {
 
       final apiVersion = params['api_version'] ?? 'v3';
 
-      print(
+      debugPrint(
           '🔍 Listing all refunds for order ID: $orderId, API version: $apiVersion');
 
       final service = WooNetwork.getIt.get<RefundsService>();
@@ -48,26 +48,19 @@ class ListAllRefundsHandler implements ApiRequestHandler {
         apiVersion: apiVersion,
       );
 
-      print('✅ Successfully retrieved ${response.length} refunds');
+      debugPrint('✅ Successfully retrieved ${response.length} refunds');
 
       return {
         'success': true,
         'data': response.map((item) => item.toJson()).toList(),
         'message': 'Refunds list retrieved successfully',
       };
-    } on DioException catch (e) {
-      print('❌ DioException: ${e.message}');
-      return {
-        'success': false,
-        'error': e.toString(),
-        'message': 'Failed to retrieve refunds list: ${e.message}',
-      };
     } catch (e) {
-      print('❌ Unexpected error: $e');
+      debugPrint('❌ Error: $e');
       return {
         'success': false,
         'error': e.toString(),
-        'message': 'Unexpected error: $e',
+        'message': 'Failed to retrieve refunds list: $e',
       };
     }
   }

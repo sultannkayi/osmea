@@ -1,8 +1,8 @@
 import 'package:apis/apis.dart';
-import 'package:dio/dio.dart';
 import 'package:apis/network/remote/woocommerce/products/shipping_classes/abstract/product_shipping_classes_service.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class DeleteProductShippingClassHandler implements ApiRequestHandler {
   @override
@@ -63,10 +63,10 @@ class DeleteProductShippingClassHandler implements ApiRequestHandler {
         }
       }
 
-      print('🔍 Delete Product Shipping Class Parameters:');
-      print('  Shipping Class ID: $shippingClassId');
-      print('  Force: $force');
-      print('  API Version: $apiVersion');
+      debugPrint('🔍 Delete Product Shipping Class Parameters:');
+      debugPrint('  Shipping Class ID: $shippingClassId');
+      debugPrint('  Force: $force');
+      debugPrint('  API Version: $apiVersion');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<ProductShippingClassesService>();
@@ -76,7 +76,7 @@ class DeleteProductShippingClassHandler implements ApiRequestHandler {
         force: force,
       );
 
-      print('✅ Delete Product Shipping Class Success: ${response.toJson()}');
+      debugPrint('✅ Delete Product Shipping Class Success: ${response.toJson()}');
 
       final deletionType =
           force == true ? 'permanently deleted' : 'moved to trash';
@@ -85,38 +85,12 @@ class DeleteProductShippingClassHandler implements ApiRequestHandler {
         'message': 'Product shipping class $deletionType successfully',
         'data': response.toJson(),
       };
-    } on DioException catch (e) {
-      print('❌ Delete Product Shipping Class DioException: ${e.toString()}');
-      print('🔍 Status Code: ${e.response?.statusCode}');
-      print('🔍 Response Data: ${e.response?.data}');
-      print('🔍 Response Headers: ${e.response?.headers}');
-
-      String errorMessage = 'Failed to delete product shipping class';
-      if (e.response?.statusCode == 404) {
-        errorMessage = 'Product shipping class not found';
-      } else if (e.response?.statusCode == 410) {
-        errorMessage = 'Product shipping class already deleted';
-      } else if (e.response?.statusCode == 409) {
-        errorMessage =
-            'Cannot delete shipping class that is assigned to products';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print('❌ Delete Product Shipping Class Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message':
-            'Unexpected error occurred while deleting product shipping class',
+        'message': 'Failed to delete product shipping class: $e',
         'error_details': e.toString(),
       };
     }

@@ -1,8 +1,8 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/products/attribute_terms/abstract/product_attribute_terms_service.dart';
-import 'package:dio/dio.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class CreateProductAttributeTermHandler implements ApiRequestHandler {
   @override
@@ -107,14 +107,14 @@ class CreateProductAttributeTermHandler implements ApiRequestHandler {
         termData['menu_order'] = menuOrder;
       }
 
-      print('➕ Create Product Attribute Term Parameters:');
-      print('  API Version: $apiVersion');
-      print('  Attribute ID: $attributeId');
-      print('  Name: $name');
-      print('  Slug: $slug');
-      print('  Description: $description');
-      print('  Menu Order: $menuOrder');
-      print('  Request body: $termData');
+      debugPrint('➕ Create Product Attribute Term Parameters:');
+      debugPrint('  API Version: $apiVersion');
+      debugPrint('  Attribute ID: $attributeId');
+      debugPrint('  Name: $name');
+      debugPrint('  Slug: $slug');
+      debugPrint('  Description: $description');
+      debugPrint('  Menu Order: $menuOrder');
+      debugPrint('  Request body: $termData');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<ProductAttributeTermsService>();
@@ -124,44 +124,19 @@ class CreateProductAttributeTermHandler implements ApiRequestHandler {
         termData: termData,
       );
 
-      print('✅ Create Product Attribute Term Success: ${response.toJson()}');
+      debugPrint('✅ Create Product Attribute Term Success: ${response.toJson()}');
 
       return {
         'success': true,
         'message': 'Product attribute term created successfully',
         'data': response.toJson(),
       };
-    } on DioException catch (e) {
-      String errorMessage = 'Failed to create product attribute term';
-
-      if (e.response?.statusCode == 400) {
-        errorMessage = 'Invalid term data provided';
-      } else if (e.response?.statusCode == 404) {
-        errorMessage = 'Attribute not found';
-      } else if (e.response?.statusCode == 409) {
-        errorMessage = 'Term with this name or slug already exists';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      print('❌ Create Product Attribute Term Error: $errorMessage');
-      print('🔍 Full error: ${e.toString()}');
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print(
-          '❌ Create Product Attribute Term Unexpected Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message':
-            'Unexpected error occurred while creating product attribute term',
+        'message': 'Failed to create product attribute term: $e',
         'error_details': e.toString(),
       };
     }

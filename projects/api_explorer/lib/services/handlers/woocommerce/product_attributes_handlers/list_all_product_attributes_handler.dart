@@ -1,8 +1,8 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/products/attributes/abstract/product_attributes_service.dart';
-import 'package:dio/dio.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class ListAllProductAttributesHandler implements ApiRequestHandler {
   @override
@@ -136,18 +136,18 @@ class ListAllProductAttributesHandler implements ApiRequestHandler {
             .toList();
       }
 
-      print('📋 List All Product Attributes Parameters:');
-      print('  API Version: $apiVersion');
-      print('  Context: $context');
-      print('  Page: $page');
-      print('  Per Page: $perPage');
-      print('  Search: $search');
-      print('  Exclude: $exclude');
-      print('  Include: $include');
-      print('  Offset: $offset');
-      print('  Order: $order');
-      print('  Order By: $orderby');
-      print('  Slug: $slug');
+      debugPrint('📋 List All Product Attributes Parameters:');
+      debugPrint('  API Version: $apiVersion');
+      debugPrint('  Context: $context');
+      debugPrint('  Page: $page');
+      debugPrint('  Per Page: $perPage');
+      debugPrint('  Search: $search');
+      debugPrint('  Exclude: $exclude');
+      debugPrint('  Include: $include');
+      debugPrint('  Offset: $offset');
+      debugPrint('  Order: $order');
+      debugPrint('  Order By: $orderby');
+      debugPrint('  Slug: $slug');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<ProductAttributesService>();
@@ -165,7 +165,7 @@ class ListAllProductAttributesHandler implements ApiRequestHandler {
         slug: slug,
       );
 
-      print(
+      debugPrint(
           '✅ List All Product Attributes Success: Found ${response.length} attributes');
 
       return {
@@ -174,30 +174,12 @@ class ListAllProductAttributesHandler implements ApiRequestHandler {
         'message': 'Product attributes retrieved successfully',
         'count': response.length,
       };
-    } on DioException catch (e) {
-      String errorMessage = 'Failed to retrieve product attributes';
-
-      if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      print('❌ List All Product Attributes Error: $errorMessage');
-      print('🔍 Full error: ${e.toString()}');
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print('❌ List All Product Attributes Unexpected Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message':
-            'Unexpected error occurred while retrieving product attributes',
+        'message': 'Failed to retrieve product attributes: $e',
         'error_details': e.toString(),
       };
     }

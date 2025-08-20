@@ -1,9 +1,9 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/orders/order_id/notes/abstract/order_notes_service.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
-import 'package:dio/dio.dart';
 
 ///*******************************************************************
 ///**************** 📋 LIST ALL ORDER NOTES HANDLER ****************
@@ -66,32 +66,11 @@ class ListAllOrderNotesHandler implements ApiRequestHandler {
         "timestamp": DateTime.now().toIso8601String(),
       };
     } catch (e) {
-      print("🚨 List All Order Notes Error Details: $e");
-
-      String errorMessage = "Failed to fetch order notes: ${e.toString()}";
-      Map<String, dynamic> errorDetails = {};
-
-      if (e is DioException) {
-        print("🔍 DioException Type: ${e.type}");
-        print("🔍 Status Code: ${e.response?.statusCode}");
-        print("🔍 Response Data: ${e.response?.data}");
-
-        if (e.response?.data != null) {
-          errorDetails['response_data'] = e.response?.data;
-          errorDetails['status_code'] = e.response?.statusCode;
-
-          // WooCommerce error message'ını al
-          if (e.response?.data is Map && e.response?.data['message'] != null) {
-            errorMessage = "WooCommerce Error: ${e.response?.data['message']}";
-          }
-        }
-      }
+      debugPrint("❌ Error: $e");
 
       return {
         "status": "error",
-        "message": errorMessage,
-        "error_details": errorDetails,
-        "full_error": e.toString(),
+        "message": "Failed to fetch order notes: ${e.toString()}",
         "params": params,
         "timestamp": DateTime.now().toIso8601String(),
       };

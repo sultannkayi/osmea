@@ -1,8 +1,8 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/products/variations/abstract/product_variations_service.dart';
-import 'package:dio/dio.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class UpdateProductVariationHandler implements ApiRequestHandler {
   @override
@@ -420,26 +420,26 @@ class UpdateProductVariationHandler implements ApiRequestHandler {
         variationData['dimensions'] = dimensions;
       }
 
-      print('✏️ Update Product Variation Parameters:');
-      print('  API Version: $apiVersion');
-      print('  Product ID: $productId');
-      print('  Variation ID: $variationId');
-      print('  Description: $description');
-      print('  SKU: $sku');
-      print('  Price: $price');
-      print('  Regular Price: $regularPrice');
-      print('  Sale Price: $salePrice');
-      print('  Status: $status');
-      print('  Purchasable: $purchasable');
-      print('  Virtual: $virtual');
-      print('  Downloadable: $downloadable');
-      print('  Manage Stock: $manageStock');
-      print('  Stock Quantity: $stockQuantity');
-      print('  Stock Status: $stockStatus');
-      print('  Weight: $weight');
-      print(
+      debugPrint('✏️ Update Product Variation Parameters:');
+      debugPrint('  API Version: $apiVersion');
+      debugPrint('  Product ID: $productId');
+      debugPrint('  Variation ID: $variationId');
+      debugPrint('  Description: $description');
+      debugPrint('  SKU: $sku');
+      debugPrint('  Price: $price');
+      debugPrint('  Regular Price: $regularPrice');
+      debugPrint('  Sale Price: $salePrice');
+      debugPrint('  Status: $status');
+      debugPrint('  Purchasable: $purchasable');
+      debugPrint('  Virtual: $virtual');
+      debugPrint('  Downloadable: $downloadable');
+      debugPrint('  Manage Stock: $manageStock');
+      debugPrint('  Stock Quantity: $stockQuantity');
+      debugPrint('  Stock Status: $stockStatus');
+      debugPrint('  Weight: $weight');
+      debugPrint(
           '  Dimensions: ${length != null || width != null || height != null ? 'Length: $length, Width: $width, Height: $height' : 'Not provided'}');
-      print('  Request body: $variationData');
+      debugPrint('  Request body: $variationData');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<ProductVariationsService>();
@@ -450,42 +450,19 @@ class UpdateProductVariationHandler implements ApiRequestHandler {
         variationData: variationData,
       );
 
-      print('✅ Update Product Variation Success: ${response.toJson()}');
+      debugPrint('✅ Update Product Variation Success: ${response.toJson()}');
 
       return {
         'success': true,
         'message': 'Product variation updated successfully',
         'data': response.toJson(),
       };
-    } on DioException catch (e) {
-      String errorMessage = 'Failed to update product variation';
-
-      if (e.response?.statusCode == 400) {
-        errorMessage = 'Invalid variation data provided';
-      } else if (e.response?.statusCode == 404) {
-        errorMessage = 'Product variation not found';
-      } else if (e.response?.statusCode == 409) {
-        errorMessage = 'Variation with this SKU already exists';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      print('❌ Update Product Variation Error: $errorMessage');
-      print('🔍 Full error: ${e.toString()}');
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print('❌ Update Product Variation Unexpected Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message': 'Unexpected error occurred while updating product variation',
+        'message': 'Failed to update product variation: $e',
         'error_details': e.toString(),
       };
     }

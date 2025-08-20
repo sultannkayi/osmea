@@ -1,8 +1,8 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/products/variations/abstract/product_variations_service.dart';
-import 'package:dio/dio.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class ListAllProductVariationsHandler implements ApiRequestHandler {
   @override
@@ -300,36 +300,36 @@ class ListAllProductVariationsHandler implements ApiRequestHandler {
             .toList();
       }
 
-      print('🔄 List All Product Variations Parameters:');
-      print('  API Version: $apiVersion');
-      print('  Product ID: $productId');
-      print('  Context: $context');
-      print('  Page: $page');
-      print('  Per Page: $perPage');
-      print('  Search: $search');
-      print('  After: $after');
-      print('  Before: $before');
-      print('  Exclude: $exclude');
-      print('  Include: $include');
-      print('  Offset: $offset');
-      print('  Order: $order');
-      print('  Order By: $orderby');
-      print('  Parent: $parent');
-      print('  Parent Exclude: $parentExclude');
-      print('  Slug: $slug');
-      print('  Status: $status');
-      print('  SKU: $sku');
-      print('  Featured: $featured');
-      print('  Category: $category');
-      print('  Tag: $tag');
-      print('  Shipping Class: $shippingClass');
-      print('  Attribute: $attribute');
-      print('  Attribute Term: $attributeTerm');
-      print('  Tax Class: $taxClass');
-      print('  On Sale: $onSale');
-      print('  Min Price: $minPrice');
-      print('  Max Price: $maxPrice');
-      print('  Stock Status: $stockStatus');
+      debugPrint('🔄 List All Product Variations Parameters:');
+      debugPrint('  API Version: $apiVersion');
+      debugPrint('  Product ID: $productId');
+      debugPrint('  Context: $context');
+      debugPrint('  Page: $page');
+      debugPrint('  Per Page: $perPage');
+      debugPrint('  Search: $search');
+      debugPrint('  After: $after');
+      debugPrint('  Before: $before');
+      debugPrint('  Exclude: $exclude');
+      debugPrint('  Include: $include');
+      debugPrint('  Offset: $offset');
+      debugPrint('  Order: $order');
+      debugPrint('  Order By: $orderby');
+      debugPrint('  Parent: $parent');
+      debugPrint('  Parent Exclude: $parentExclude');
+      debugPrint('  Slug: $slug');
+      debugPrint('  Status: $status');
+      debugPrint('  SKU: $sku');
+      debugPrint('  Featured: $featured');
+      debugPrint('  Category: $category');
+      debugPrint('  Tag: $tag');
+      debugPrint('  Shipping Class: $shippingClass');
+      debugPrint('  Attribute: $attribute');
+      debugPrint('  Attribute Term: $attributeTerm');
+      debugPrint('  Tax Class: $taxClass');
+      debugPrint('  On Sale: $onSale');
+      debugPrint('  Min Price: $minPrice');
+      debugPrint('  Max Price: $maxPrice');
+      debugPrint('  Stock Status: $stockStatus');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<ProductVariationsService>();
@@ -365,7 +365,7 @@ class ListAllProductVariationsHandler implements ApiRequestHandler {
         stockStatus: stockStatus,
       );
 
-      print(
+      debugPrint(
           '✅ List All Product Variations Success: Found ${response.length} variations for product $productId');
 
       return {
@@ -375,32 +375,12 @@ class ListAllProductVariationsHandler implements ApiRequestHandler {
         'count': response.length,
         'product_id': productId,
       };
-    } on DioException catch (e) {
-      String errorMessage = 'Failed to retrieve product variations';
-
-      if (e.response?.statusCode == 404) {
-        errorMessage = 'Product not found or no variations available';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      print('❌ List All Product Variations Error: $errorMessage');
-      print('🔍 Full error: ${e.toString()}');
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print('❌ List All Product Variations Unexpected Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message':
-            'Unexpected error occurred while retrieving product variations',
+        'message': 'Failed to retrieve product variations: $e',
         'error_details': e.toString(),
       };
     }

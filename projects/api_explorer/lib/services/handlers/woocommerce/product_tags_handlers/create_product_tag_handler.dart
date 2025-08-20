@@ -1,9 +1,9 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/products/tags/abstract/product_tags_service.dart';
 import 'package:apis/network/remote/woocommerce/products/tags/freezed_model/request/create_product_tag_request.dart';
-import 'package:dio/dio.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class CreateProductTagHandler implements ApiRequestHandler {
   @override
@@ -68,12 +68,12 @@ class CreateProductTagHandler implements ApiRequestHandler {
         description: description?.isNotEmpty == true ? description : null,
       );
 
-      print('🏷️ Create Product Tag Parameters:');
-      print('  API Version: $apiVersion');
-      print('  Name: $name');
-      print('  Slug: $slug');
-      print('  Description: $description');
-      print('  Request body: ${createRequest.toJson()}');
+      debugPrint('🏷️ Create Product Tag Parameters:');
+      debugPrint('  API Version: $apiVersion');
+      debugPrint('  Name: $name');
+      debugPrint('  Slug: $slug');
+      debugPrint('  Description: $description');
+      debugPrint('  Request body: ${createRequest.toJson()}');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<ProductTagsService>();
@@ -82,40 +82,19 @@ class CreateProductTagHandler implements ApiRequestHandler {
         tagData: createRequest.toJson(),
       );
 
-      print('✅ Create Product Tag Success: ${response.toJson()}');
+      debugPrint('✅ Create Product Tag Success: ${response.toJson()}');
 
       return {
         'success': true,
         'message': 'Product tag created successfully',
         'data': response.toJson(),
       };
-    } on DioException catch (e) {
-      String errorMessage = 'Failed to create product tag';
-
-      if (e.response?.statusCode == 400) {
-        errorMessage = 'Invalid tag data provided';
-      } else if (e.response?.statusCode == 409) {
-        errorMessage = 'Tag with this name or slug already exists';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      print('❌ Create Product Tag Error: $errorMessage');
-      print('🔍 Full error: ${e.toString()}');
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print('❌ Create Product Tag Unexpected Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message': 'Unexpected error occurred while creating product tag',
+        'message': 'Failed to create product tag: $e',
         'error_details': e.toString(),
       };
     }

@@ -1,9 +1,9 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/reports/abstract/reports_service.dart';
 import 'package:apis/network/remote/woocommerce/reports/freezed_model/response/list_all_reports_response.dart';
-import 'package:dio/dio.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
 
 class ListAllReportsHandler implements ApiRequestHandler {
   @override
@@ -30,8 +30,8 @@ class ListAllReportsHandler implements ApiRequestHandler {
       // Parse API version
       final apiVersion = params['api_version']?.toString() ?? 'v3';
 
-      print('📊 List All Reports Parameters:');
-      print('  API Version: $apiVersion');
+      debugPrint('📊 List All Reports Parameters:');
+      debugPrint('  API Version: $apiVersion');
 
       // Get service and call API
       final service = WooNetwork.getIt.get<ReportsService>();
@@ -40,7 +40,7 @@ class ListAllReportsHandler implements ApiRequestHandler {
         apiVersion: apiVersion,
       );
 
-      print('✅ List All Reports Success: Found ${response.length} reports');
+      debugPrint('✅ List All Reports Success: Found ${response.length} reports');
 
       return {
         'success': true,
@@ -48,31 +48,12 @@ class ListAllReportsHandler implements ApiRequestHandler {
         'message': 'Reports retrieved successfully',
         'count': response.length,
       };
-    } on DioException catch (e) {
-      String errorMessage = 'Failed to retrieve reports';
-
-      if (e.response?.statusCode == 404) {
-        errorMessage = 'Reports not found';
-      } else if (e.response?.data != null) {
-        final responseData = e.response!.data;
-        if (responseData is Map && responseData.containsKey('message')) {
-          errorMessage = responseData['message']?.toString() ?? errorMessage;
-        }
-      }
-
-      print('❌ List All Reports Error: $errorMessage');
-      print('🔍 Full error: ${e.toString()}');
-
-      return {
-        'success': false,
-        'message': errorMessage,
-        'error_details': e.toString(),
-      };
     } catch (e) {
-      print('❌ List All Reports Unexpected Error: ${e.toString()}');
+      debugPrint('❌ Error: $e');
+
       return {
         'success': false,
-        'message': 'Unexpected error occurred while retrieving reports',
+        'message': 'Failed to retrieve reports: $e',
         'error_details': e.toString(),
       };
     }

@@ -2,7 +2,7 @@ import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/datas/countries/abstract/countries_service.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
-import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 class RetrieveCountryDataHandler implements ApiRequestHandler {
   @override
@@ -30,7 +30,7 @@ class RetrieveCountryDataHandler implements ApiRequestHandler {
 
       final apiVersion = params['api_version'] ?? 'v3';
 
-      print(
+      debugPrint(
           '🔍 Retrieving country data for code: $code, API version: $apiVersion');
 
       final service = WooNetwork.getIt.get<CountriesService>();
@@ -39,26 +39,19 @@ class RetrieveCountryDataHandler implements ApiRequestHandler {
         apiVersion: apiVersion,
       );
 
-      print('✅ Successfully retrieved country data: ${response.name}');
+      debugPrint('✅ Successfully retrieved country data: ${response.name}');
 
       return {
         'success': true,
         'data': response.toJson(),
         'message': 'Country data retrieved successfully',
       };
-    } on DioException catch (e) {
-      print('❌ DioException: ${e.message}');
-      return {
-        'success': false,
-        'error': e.toString(),
-        'message': 'Failed to retrieve country data: ${e.message}',
-      };
     } catch (e) {
-      print('❌ Unexpected error: $e');
+      debugPrint('❌ Error: $e');
       return {
         'success': false,
         'error': e.toString(),
-        'message': 'Unexpected error: $e',
+        'message': 'Failed to retrieve country data: $e',
       };
     }
   }
