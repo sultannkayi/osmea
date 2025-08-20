@@ -2,7 +2,6 @@ import 'package:apis/services/store_change_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
 import 'package:api_explorer/styles/app_theme.dart';
-import 'package:api_explorer/widgets/store_selector.dart';
 import 'package:apis/apis.dart';
 import 'dart:async';
 
@@ -258,7 +257,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                       Flexible(
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.1),
+                            color: Colors.white.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           padding: const EdgeInsets.all(12),
@@ -1292,8 +1291,6 @@ class _ModernSidebarState extends State<ModernSidebar>
         return 'WooCommerce Refunds';
       case ApiCategory.woocommerceTaxes:
         return 'WooCommerce Taxes';
-      default:
-        return category.displayName;
-    }
+      }
   }
 }

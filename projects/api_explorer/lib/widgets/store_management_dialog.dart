@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:apis/apis.dart';
 import 'package:api_explorer/widgets/add_store_dialog.dart';
@@ -180,7 +182,7 @@ class _StoreManagementDialogState extends State<StoreManagementDialog> {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: _getPlatformColor(store.platform).withOpacity(0.1),
+                color: _getPlatformColor(store.platform).withValues(alpha:0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(
@@ -353,7 +355,6 @@ class _StoreManagementDialogState extends State<StoreManagementDialog> {
   }
 
   void _editStore(StoreConfiguration store) {
-    // TODO: Implement edit store functionality
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Edit store functionality coming soon!'),

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:apis/apis.dart';
 import 'package:get_it/get_it.dart';
@@ -46,7 +45,7 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
 
   int _currentStep = 0;
   String? _selectedPlatform;
-  String _apiVersion = '2024-07';
+  // ignore: unused_field
   bool _isLoading = false;
   final _formKey = GlobalKey<FormState>();
 
@@ -54,7 +53,6 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
   void initState() {
     super.initState();
     _selectedPlatform = 'shopify';
-    _apiVersion = '2024-07';
     _initializeAnimations();
     _loadExistingConfiguration();
     _restoreWizardStep(); // Restore previous step
@@ -188,6 +186,7 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
     return true;
   }
 
+  // ignore: unused_element
   void _showSuccessMessage() {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
@@ -212,7 +211,6 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
 
       if (config.platform == 'shopify') {
         // Initialize Shopify network with new store configuration
-        final getIt = GetIt.instance;
 
         // Update ApiNetwork with new store info
         ApiNetwork.updateStoreName(config.storeName);
@@ -225,6 +223,7 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
         debugPrint('🔧 ApiNetwork updated with version: ${config.apiVersion}');
       } else if (config.platform == 'woocommerce') {
         // Initialize WooCommerce network with new store configuration
+        // ignore: unused_local_variable
         final getIt = GetIt.instance;
 
         // Update WooNetwork with new store info
@@ -797,46 +796,6 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
     );
   }
 
-  Widget _buildTextField({
-    required TextEditingController controller,
-    required String label,
-    required String hint,
-    bool obscureText = false,
-    String? Function(String?)? validator,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-            color: Color(0xFF374151),
-          ),
-        ),
-        const SizedBox(height: 8),
-        TextFormField(
-          controller: controller,
-          obscureText: obscureText,
-          validator: validator,
-          decoration: InputDecoration(
-            hintText: hint,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Colors.grey[300]!),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(color: Color(0xFF667EEA)),
-            ),
-            filled: true,
-            fillColor: Colors.grey[50],
-          ),
-        ),
-      ],
-    );
-  }
 
   Widget _buildReviewStep() {
     final config = StoreConfiguration(

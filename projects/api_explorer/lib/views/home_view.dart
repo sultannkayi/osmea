@@ -88,13 +88,11 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
             (s) => s.name == serviceName,
             orElse: () => services.first,
           );
-          if (service != null) {
-            setState(() {
-              _selectedService = service;
-            });
-            debugPrint('✅ Restored service: ${service.name}');
-          }
-        }
+          setState(() {
+            _selectedService = service;
+          });
+          debugPrint('✅ Restored service: ${service.name}');
+                }
 
         debugPrint('✅ App state restored successfully');
       }

@@ -1,3 +1,5 @@
+// ignore_for_file: await_only_futures
+
 import 'package:apis/apis.dart';
 import 'package:apis/di/config/config_di.config.dart';
 import 'package:flutter/material.dart';
