@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import '../widgets/common_appbar.dart';
@@ -13,12 +15,12 @@ class SnackbarExample extends StatelessWidget {
         screenKey: 'snackbar_example',
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: context.paddingNormal,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _buildSectionTitle('Snackbars with Actions'),
-            const SizedBox(height: 16),
+            context.emptySizedHeightBoxNormal,
             OsmeaComponents.button(
               text: 'Show Undo Snackbar',
               onPressed: () => _showSnackbarWithProgress(
@@ -34,7 +36,7 @@ class SnackbarExample extends StatelessWidget {
                 },
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: context.spacing12),
             OsmeaComponents.button(
               text: 'Show Retry Snackbar',
               onPressed: () => _showSnackbarWithProgress(
@@ -49,7 +51,7 @@ class SnackbarExample extends StatelessWidget {
                 },
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: context.spacing12),
             OsmeaComponents.button(
               text: 'Show Dismiss Snackbar',
               onPressed: () => _showSnackbarWithProgress(
@@ -64,9 +66,9 @@ class SnackbarExample extends StatelessWidget {
                 },
               ),
             ),
-            const SizedBox(height: 32),
+            SizedBox(height: context.spacing32),
             _buildSectionTitle('Custom Snackbars'),
-            const SizedBox(height: 16),
+            context.emptySizedHeightBoxNormal,
             OsmeaComponents.button(
               text: 'Top Position Snackbar',
               onPressed: () => _showSnackbarWithProgress(
@@ -74,10 +76,10 @@ class SnackbarExample extends StatelessWidget {
                 message: 'This snackbar appears at the top!',
                 type: SnackbarType.info,
                 position: SnackbarPosition.top,
-                duration: const Duration(seconds: 5),
+                duration: context.durationLong,
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: context.spacing12),
             OsmeaComponents.button(
               text: 'Long Duration Snackbar',
               onPressed: () => _showSnackbarWithProgress(
@@ -87,19 +89,19 @@ class SnackbarExample extends StatelessWidget {
                 duration: const Duration(seconds: 8),
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: context.spacing12),
             OsmeaComponents.button(
               text: 'Quick Snackbar (2s)',
               onPressed: () => _showSnackbarWithProgress(
                 context,
                 message: 'Copied to clipboard!',
                 type: SnackbarType.info,
-                duration: const Duration(seconds: 2),
+                duration: context.durationLong,
               ),
             ),
-            const SizedBox(height: 32),
+            SizedBox(height: context.spacing32),
             _buildSectionTitle('Multiple Snackbars'),
-            const SizedBox(height: 16),
+            context.emptySizedHeightBoxNormal,
             OsmeaComponents.button(
               text: 'Show Multiple Snackbars',
               onPressed: () {
@@ -124,7 +126,7 @@ class SnackbarExample extends StatelessWidget {
                 });
               },
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: context.spacing12),
             OsmeaComponents.button(
               text: 'Quick Stack Example (5 snackbars)',
               onPressed: () {
@@ -134,13 +136,13 @@ class SnackbarExample extends StatelessWidget {
                       context,
                       message: 'Snackbar $i',
                       type: SnackbarType.values[i % SnackbarType.values.length],
-                      duration: const Duration(seconds: 3),
+                      duration: context.durationVeryLong,
                     );
                   });
                 }
               },
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: context.spacing12),
             OsmeaComponents.button(
               text: 'Top Position Stack Example',
               onPressed: () {
@@ -151,26 +153,26 @@ class SnackbarExample extends StatelessWidget {
                       message: 'Top Snackbar $i',
                       type: SnackbarType.values[i % SnackbarType.values.length],
                       position: SnackbarPosition.top,
-                      duration: const Duration(seconds: 4),
+                      duration: context.timeoutQuick,
                     );
                   });
                 }
               },
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: context.spacing12),
             OsmeaComponents.button(
               text: 'Hide All Snackbars',
               onPressed: () => context.hideAllSnackbars(),
               variant: ButtonVariant.secondary,
             ),
-            const SizedBox(height: 32),
+            SizedBox(height: context.spacing32),
             _buildSectionTitle('Features Overview'),
-            const SizedBox(height: 16),
+            context.emptySizedHeightBoxNormal,
             OsmeaComponents.container(
-              padding: const EdgeInsets.all(16),
+              padding: context.paddingNormal,
               decoration: BoxDecoration(
                 color: OsmeaColors.snow,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: context.borderRadiusLow,
                 border: Border.all(color: OsmeaColors.platinum),
               ),
               child: Column(
@@ -181,7 +183,7 @@ class SnackbarExample extends StatelessWidget {
                     variant: OsmeaTextVariant.titleMedium,
                     fontWeight: FontWeight.bold,
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: context.spacing8),
                   _buildFeatureItem('• Action buttons (Undo, Retry, etc.)'),
                   _buildFeatureItem('• Progress bar showing remaining time'),
                   _buildFeatureItem('• Swipe to dismiss (horizontal)'),

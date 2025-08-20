@@ -398,6 +398,7 @@ class _SearchbarShowcaseWidgetState extends State<SearchbarShowcaseWidget> {
       _searchResults = mockResults;
     });
 
+    // ignore: use_build_context_synchronously
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Search completed for: $query'),

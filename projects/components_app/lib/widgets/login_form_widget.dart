@@ -74,13 +74,16 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
         child: InkWell(
           borderRadius: BorderRadius.circular(12),
           onTap: () async {
+            // Capture context before async operation
+            final scaffoldMessenger = ScaffoldMessenger.of(context);
+            
             final result = await _authService.login(
               _usernameController.text,
               _passwordController.text,
             );
             
             if (result.success) {
-              ScaffoldMessenger.of(context).showSnackBar(
+              scaffoldMessenger.showSnackBar(
                 SnackBar(
                   content: OsmeaComponents.text('Login successful!'),
                   backgroundColor: OsmeaColors.black,
@@ -91,7 +94,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                 ),
               );
             } else {
-              ScaffoldMessenger.of(context).showSnackBar(
+              scaffoldMessenger.showSnackBar(
                 SnackBar(
                   content: OsmeaComponents.text('Login failed.'),
                   backgroundColor: OsmeaColors.slate,
