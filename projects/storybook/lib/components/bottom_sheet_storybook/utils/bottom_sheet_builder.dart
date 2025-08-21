@@ -19,6 +19,13 @@ class BottomSheetBuilder {
     Color? borderColor,
     required double spacing,
     VoidCallback? onClose,
+    // Footer button colors
+    Color? primaryButtonBackground,
+    Color? primaryButtonText,
+    Color? secondaryButtonBackground,
+    Color? secondaryButtonText,
+    // Text colors
+    Color? hintTextColor,
   }) {
     return OsmeaComponents.bottomSheet(
       size: size,
@@ -29,8 +36,16 @@ class BottomSheetBuilder {
       showActionBorder: showActionBorder,
       actionBarBackgroundColor: actionBarBackgroundColor,
       actionBarBorderColor: borderColor,
-      child: _buildContent(contentType, size, variant),
-      footer: _buildFooter(contentType, size, variant),
+      child: _buildContent(contentType, size, variant, hintTextColor: hintTextColor),
+      footer: _buildFooter(
+        contentType, 
+        size, 
+        variant,
+        primaryButtonBackground: primaryButtonBackground,
+        primaryButtonText: primaryButtonText,
+        secondaryButtonBackground: secondaryButtonBackground,
+        secondaryButtonText: secondaryButtonText,
+      ),
       headerActions: _buildHeaderActions(contentType, onClose),
       leftAction: _buildLeftAction(variant, contentType, onClose),
       rightAction: _buildRightAction(variant, contentType),
@@ -38,7 +53,7 @@ class BottomSheetBuilder {
   }
 
   /// Build content based on content type
-  static Widget _buildContent(String contentType, BottomSheetSize size, BottomSheetVariant variant) {
+  static Widget _buildContent(String contentType, BottomSheetSize size, BottomSheetVariant variant, {Color? hintTextColor}) {
     switch (contentType) {
       case 'Quick Actions':
         return _buildQuickActionsContent();
@@ -49,19 +64,33 @@ class BottomSheetBuilder {
       case 'Components Showcase':
         return _buildComponentsShowcaseContent();
       case 'Multi-Step Form':
-        return _buildMultiStepFormContent();
+        return _buildMultiStepFormContent(hintTextColor: hintTextColor);
       default:
         return _buildQuickActionsContent();
     }
   }
 
   /// Build footer based on content type
-  static Widget? _buildFooter(String contentType, BottomSheetSize size, BottomSheetVariant variant) {
+  static Widget? _buildFooter(
+    String contentType, 
+    BottomSheetSize size, 
+    BottomSheetVariant variant, {
+    Color? primaryButtonBackground,
+    Color? primaryButtonText,
+    Color? secondaryButtonBackground, 
+    Color? secondaryButtonText,
+  }) {
     switch (contentType) {
       case 'Settings':
-        return _buildSettingsFooter();
+        return _buildSettingsFooter(
+          backgroundColor: primaryButtonBackground ?? OsmeaColors.nordicBlue,
+          textColor: primaryButtonText ?? OsmeaColors.white,
+        );
       case 'Form':
-        return _buildFormFooter();
+        return _buildFormFooter(
+          submitButtonBackgroundColor: secondaryButtonBackground ?? OsmeaColors.forestHeart,
+          submitButtonTextColor: secondaryButtonText ?? OsmeaColors.white,
+        );
       case 'Multi-Step Form':
         return _buildMultiStepFormFooter();
       default:
@@ -314,7 +343,7 @@ class BottomSheetBuilder {
   }
 
   /// Multi-Step Form Content
-  static Widget _buildMultiStepFormContent() {
+  static Widget _buildMultiStepFormContent({Color? hintTextColor}) {
     return OsmeaComponents.padding(
       padding: const EdgeInsets.all(20),
       child: OsmeaComponents.column(
@@ -356,7 +385,7 @@ class BottomSheetBuilder {
           OsmeaComponents.text(
             'Please fill in all required fields to continue to the next step.',
             variant: OsmeaTextVariant.bodySmall,
-            color: OsmeaColors.grey.shade600,
+            color: hintTextColor ?? OsmeaColors.grey.shade600,
           ),
         ],
       ),
@@ -364,7 +393,10 @@ class BottomSheetBuilder {
   }
 
   /// Settings Footer
-  static Widget _buildSettingsFooter() {
+  static Widget _buildSettingsFooter({
+    Color? backgroundColor,
+    Color? textColor,
+  }) {
     return OsmeaComponents.padding(
       padding: const EdgeInsets.all(16),
       child: OsmeaComponents.button(
@@ -372,15 +404,18 @@ class BottomSheetBuilder {
         onPressed: () {},
         variant: ButtonVariant.primary,
         size: ButtonSize.large,
-        backgroundColor: OsmeaColors.nordicBlue,
-        textColor: OsmeaColors.white,
+        backgroundColor: backgroundColor ?? OsmeaColors.nordicBlue,
+        textColor: textColor ?? OsmeaColors.white,
         fullWidth: true,
       ),
     );
   }
 
   /// Form Footer
-  static Widget _buildFormFooter() {
+  static Widget _buildFormFooter({
+    Color? submitButtonBackgroundColor,
+    Color? submitButtonTextColor,
+  }) {
     return OsmeaComponents.padding(
       padding: const EdgeInsets.all(16),
       child: OsmeaComponents.row(
@@ -400,8 +435,8 @@ class BottomSheetBuilder {
               onPressed: () {},
               variant: ButtonVariant.primary,
               size: ButtonSize.medium,
-              backgroundColor: OsmeaColors.forestHeart,
-              textColor: OsmeaColors.white,
+              backgroundColor: submitButtonBackgroundColor ?? OsmeaColors.forestHeart,
+              textColor: submitButtonTextColor ?? OsmeaColors.white,
             ),
           ),
         ],

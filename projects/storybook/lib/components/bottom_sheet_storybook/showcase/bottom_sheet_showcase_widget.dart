@@ -192,6 +192,12 @@ class _UnifiedBottomSheetShowcaseWidgetState extends State<UnifiedBottomSheetSho
                         borderColor: widget.borderColor,
                         spacing: widget.spacing,
                         onClose: _toggleBottomSheet,
+                        // Pass configurable colors from the widget properties
+                        primaryButtonBackground: widget.backgroundColor,
+                        primaryButtonText: Colors.white,
+                        secondaryButtonBackground: widget.borderColor ?? OsmeaColors.forestHeart,
+                        secondaryButtonText: Colors.white,
+                        hintTextColor: Colors.grey.shade600,
                       ),
                     ),
                   ),
