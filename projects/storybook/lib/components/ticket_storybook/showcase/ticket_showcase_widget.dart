@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:osmea_components/osmea_components.dart';
-import 'package:osmea_components/src/components/ticket_widget/models/ticket_models.dart';
 
 import '../sections/header_section.dart';
 import '../widgets/section_container_widget.dart';
