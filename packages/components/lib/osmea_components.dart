@@ -101,3 +101,4 @@ export 'src/components/rich_text/text_span.dart';
 export 'src/utils/image_extensions.dart';
 
 export 'src/components/stepper/stepper.dart';
+export 'src/components/ticket_widget/models/ticket_models.dart';
