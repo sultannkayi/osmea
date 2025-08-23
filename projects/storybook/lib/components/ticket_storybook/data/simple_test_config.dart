@@ -1,5 +1,5 @@
-import 'package:osmea_components/src/components/ticket_widget/models/ticket_models.dart';
-import 'package:osmea_components/src/enums/ticket_enums.dart';
+import 'package:osmea_components/osmea_components.dart';
+
 
 /// 🧪 **Simple Test Configuration**
 ///
