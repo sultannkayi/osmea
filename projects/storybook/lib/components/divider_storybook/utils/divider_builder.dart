@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:osmea_components/src/components/divider/divider.dart';
-import 'package:osmea_components/src/enums/divider_enums.dart';
+import 'package:osmea_components/osmea_components.dart';
 
 /// 📏 **Divider Builder - Utility Layer**
 /// 
@@ -33,7 +32,7 @@ class DividerBuilder {
   }) {
     final thickness = sizeThickness[size] ?? 2.0;
     
-      return OsmeaDivider(
+      return OsmeaComponents.divider(
       variant: variant,
       color: color ?? Colors.grey.shade400,
       thickness: thickness,
